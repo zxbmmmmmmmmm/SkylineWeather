@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace QGeoApi.Bases
+namespace FluentWeather.QGeoApi.Bases
 {
     public class QGeolocationResponseBase
     {

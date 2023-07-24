@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
-using QGeoApi.Bases;
+using FluentWeather.QGeoApi.Bases;
 
-namespace QGeoApi.ApiContracts
+namespace FluentWeather.QGeoApi.ApiContracts
 {
     public class GeolocationApi
     {
