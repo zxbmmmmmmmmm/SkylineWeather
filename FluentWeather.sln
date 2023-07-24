@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QWeatherApi",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QGeoProvider", "FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj", "{EB061B33-C7DC-4DEC-9398-0CC2C4ABD619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QGeoApi", "QGeoApi\FluentWeather.QGeoApi.csproj", "{97F8F447-074B-4F68-A8FE-EC222714AAA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QGeoApi", "FluentWeather.QGeoApi\FluentWeather.QGeoApi.csproj", "{97F8F447-074B-4F68-A8FE-EC222714AAA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
