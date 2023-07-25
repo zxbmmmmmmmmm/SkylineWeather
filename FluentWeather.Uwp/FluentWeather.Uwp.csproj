@@ -182,6 +182,16 @@
     <Folder Include="Pages\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj">
+      <Project>{0627214c-2da0-4b49-bb12-dc8c44014eee}</Project>
+      <Name>FluentWeather.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
+      <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>
+      <Name>FluentWeather.QWeatherProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

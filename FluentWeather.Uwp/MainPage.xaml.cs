@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FluentWeather.Abstraction;
+using FluentWeather.Abstraction.Interfaces.Weather;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +28,15 @@ namespace FluentWeather.Uwp
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        public async void GetWeather()
+        {
+            var provider = new QWeatherProvider.QWeatherProvider("b18d888d25b4437cbae4bbf36990092e");
+            var jj = await provider.GetCurrentWeather(116, 39);
+            var u = jj as ITemperature;
+            Activator.CreateInstance(typeof(MainPage), "sss");
+            var sc = new ServiceCollection();
+            var sp = sc.BuildServiceProvider();
         }
     }
 }

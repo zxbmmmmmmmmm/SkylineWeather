@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherNowApi:ApiContractBase<WeatherNowResponse>
+public class WeatherNowApi: QApiContractBase<WeatherNowResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Url => ApiConstants.Weather.Now;

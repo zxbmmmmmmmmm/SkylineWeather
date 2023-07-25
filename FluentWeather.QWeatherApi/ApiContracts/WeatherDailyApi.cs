@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherDailyApi:ApiContractBase<WeatherDailyResponse>
+public class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Url => ApiConstants.Weather.DailyForecast7D;

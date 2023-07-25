@@ -5,7 +5,7 @@ using FluentWeather.QWeatherApi.Bases;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherWarningApi:ApiContractBase<WeatherWarningResponse>
+public class WeatherWarningApi: QApiContractBase<WeatherWarningResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Url => ApiConstants.Weather.WarningNow;
