@@ -1,0 +1,26 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.Settings.QWeatherSettingSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <lab:SettingsExpander Header="和风天气设置">
+            <lab:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE621;"/>
+            </lab:SettingsExpander.HeaderIcon>
+            <lab:SettingsExpander.Items>
+                <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，你可以在控制台中找到" HeaderIcon="Permissions">
+                    <TextBox Text="{x:Bind Token,Mode=TwoWay}"/>
+                </lab:SettingsCard>
+            </lab:SettingsExpander.Items>
+
+        </lab:SettingsExpander>
+    </Grid>
+</UserControl>

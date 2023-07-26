@@ -5,15 +5,17 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Uwp", "FluentWeather.Uwp\FluentWeather.Uwp.csproj", "{990F1A08-8B42-4B0D-8042-DAF2644481AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Abstraction", "FluentWeather.Abstraction\FluentWeather.Abstraction.csproj", "{0627214C-2DA0-4B49-BB12-DC8C44014EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.Abstraction", "FluentWeather.Abstraction\FluentWeather.Abstraction.csproj", "{0627214C-2DA0-4B49-BB12-DC8C44014EEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QWeatherProvider", "FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj", "{89720EBB-0489-4147-A200-753747F4BCB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.QWeatherProvider", "FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj", "{89720EBB-0489-4147-A200-753747F4BCB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QWeatherApi", "FluentWeather.QWeatherApi\FluentWeather.QWeatherApi.csproj", "{9FA028DA-9AB6-405E-8EDD-846F1D41868E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.QWeatherApi", "FluentWeather.QWeatherApi\FluentWeather.QWeatherApi.csproj", "{9FA028DA-9AB6-405E-8EDD-846F1D41868E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QGeoProvider", "FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj", "{EB061B33-C7DC-4DEC-9398-0CC2C4ABD619}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.QGeoProvider", "FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj", "{EB061B33-C7DC-4DEC-9398-0CC2C4ABD619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.QGeoApi", "FluentWeather.QGeoApi\FluentWeather.QGeoApi.csproj", "{97F8F447-074B-4F68-A8FE-EC222714AAA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.QGeoApi", "FluentWeather.QGeoApi\FluentWeather.QGeoApi.csproj", "{97F8F447-074B-4F68-A8FE-EC222714AAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.DIContainer", "FluentWeather.DIContainer\FluentWeather.DIContainer.csproj", "{15E289D2-4104-4889-B968-60D2C2EFD806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,26 @@ Global
 		{97F8F447-074B-4F68-A8FE-EC222714AAA0}.Release|x64.Build.0 = Release|Any CPU
 		{97F8F447-074B-4F68-A8FE-EC222714AAA0}.Release|x86.ActiveCfg = Release|Any CPU
 		{97F8F447-074B-4F68-A8FE-EC222714AAA0}.Release|x86.Build.0 = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|ARM.Build.0 = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|x64.Build.0 = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Debug|x86.Build.0 = Debug|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|ARM.ActiveCfg = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|ARM.Build.0 = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|ARM64.Build.0 = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|x64.ActiveCfg = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|x64.Build.0 = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|x86.ActiveCfg = Release|Any CPU
+		{15E289D2-4104-4889-B968-60D2C2EFD806}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

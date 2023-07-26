@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,6 +10,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj" />
+    <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj" />
     <ProjectReference Include="..\FluentWeather.QWeatherApi\FluentWeather.QWeatherApi.csproj" />
   </ItemGroup>
   

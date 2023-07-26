@@ -15,6 +15,8 @@ public static class WeatherNowMapper
             Humidity = int.Parse(item.Humidity),
             Pressure = int.Parse(item.Pressure),
             Visibility = int.Parse(item.Vis),
+            ApparentTemperature = int.Parse(item.FeelsLike),
+            Temperature = int.Parse(item.Temp),
             Description = item.Text,
         }; 
     }

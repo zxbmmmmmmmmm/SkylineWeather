@@ -8,8 +8,8 @@
 
   <Identity
     Name="e8978919-c1a6-4c72-9b26-531ca3232be5"
-    Publisher="CN=zxbmm"
-    Version="1.0.0.0" />
+    Publisher="CN=Betta_Fish"
+    Version="0.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="e8978919-c1a6-4c72-9b26-531ca3232be5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -32,18 +32,23 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="FluentWeather.Uwp.App">
       <uap:VisualElements
-        DisplayName="FluentWeather.Uwp"
+        DisplayName="FluentWeather"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="FluentWeather.Uwp"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="portrait"/>
+          <uap:Rotation Preference="landscapeFlipped"/>
+          <uap:Rotation Preference="portraitFlipped"/></uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="location"/>
   </Capabilities>
 </Package>

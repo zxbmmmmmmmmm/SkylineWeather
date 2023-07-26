@@ -1,0 +1,67 @@
+﻿<Page
+    x:Class="FluentWeather.Uwp.Pages.RootPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"  
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
+
+    <Grid Margin="0,0,0,0">
+        <Grid x:Name="TitleGrid" VerticalAlignment="Top" Canvas.ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{ThemeResource PaneToggleButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{x:Bind ViewModel.TogglePaneCommand}"/>
+            <Grid  Grid.Column="1" x:Name="Title">
+                <TextBlock Text="丽水市，莲都区" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                <Grid Width="1024" Height="45" Background="Transparent"/>
+            </Grid>
+        </Grid>
+        <SplitView x:Name="MainSplitView" IsPaneOpen="{x:Bind ViewModel.IsPaneOpen,Mode=OneWay}" DisplayMode="Overlay" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
+            <SplitView.Pane>
+                <Grid Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <local:CitiesPage Margin="0,45,0,0"/>
+                    <CommandBar Grid.Row="1" VerticalAlignment="Bottom" DefaultLabelPosition="Right">
+                        <AppBarButton Icon="Setting" Label="设置"/>
+                        <AppBarButton Label="关于">
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="&#xE946;"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                    </CommandBar>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid Background="{ThemeResource NavigationViewContentBackground}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <local:MainPage Grid.Row="1"/>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="Inline"/>
+                        <Setter Target="MainSplitView.PaneBackground" Value="#0000"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

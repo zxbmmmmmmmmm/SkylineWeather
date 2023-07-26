@@ -1,11 +1,17 @@
 ﻿using FluentWeather.Abstraction;
+using FluentWeather.Abstraction.Interfaces.Helpers;
+using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.DIContainer;
 using FluentWeather.QWeatherApi;
 using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherApi.Bases;
 using FluentWeather.QWeatherProvider.Mappers;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,19 +21,35 @@ public class QWeatherProvider : ProviderBase,
     ICurrentWeatherProvider,
     IDailyForecastProvider,
     IHourlyForecastProvider,
-    IWeatherWarningProvider
+    IWeatherWarningProvider,
+    ISetting
 {
     public override string Name => "和风天气";
 
     public override string Id => "qweather";
-
-    public ApiHandlerOption Option { get; set; }
-
+    public Enum Settings => new QWeatherSettings();
+    public ApiHandlerOption Option { get; set; } = new();
+    
     public static QWeatherProvider Instance = null;
-    public QWeatherProvider(string token)
+    public QWeatherProvider()
     {
         Instance = this;
-        Option = new ApiHandlerOption { Token = token };
+        GetSettings();
+
+    }
+    public static void RegisterRequiredServices()
+    {
+        Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider),typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider));
+    }
+    public void GetSettings()
+    {
+        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
+        settingsHelper.DeleteLocalSetting(Id + "." + QWeatherSettings.Token);
+        Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
     }
 
     public async Task<WeatherBase> GetCurrentWeather(double lon,double lat)
@@ -63,4 +85,8 @@ public class QWeatherProvider : ProviderBase,
         return await handler.RequestAsync(contract, request, Option);
     }
 
+}
+public enum QWeatherSettings
+{
+    Token,
 }

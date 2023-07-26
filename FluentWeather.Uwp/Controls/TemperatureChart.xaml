@@ -1,0 +1,76 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.TemperatureChart"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:valueConverters1="using:ValueConverters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter"/>
+        <valueConverters1:AddConverter x:Key="AddConverter"/>
+        <DataTemplate x:Key="PointTemplate">
+            <Ellipse Width="8" Height="8" Fill="{Binding Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="White"  StrokeThickness="2"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid >
+        <chart:RadCartesianChart PaletteName="DefaultLight">
+            <chart:RadCartesianChart.HorizontalAxis>
+                <chart:CategoricalAxis Visibility="Collapsed" BorderBrush="Transparent" Foreground="Transparent" PlotMode="BetweenTicks" >
+                    <chart:CategoricalAxis.LineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                        </Style>
+
+                    </chart:CategoricalAxis.LineStyle>
+                    <chart:CategoricalAxis.MajorTickStyle>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                        </Style>
+                    </chart:CategoricalAxis.MajorTickStyle>
+                </chart:CategoricalAxis>
+
+            </chart:RadCartesianChart.HorizontalAxis>
+            <chart:RadCartesianChart.VerticalAxis>
+                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-0.3,Mode=OneWay}" Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=2.5,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
+                    <chart:LinearAxis.LineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                        </Style>
+                    </chart:LinearAxis.LineStyle>
+                    <chart:LinearAxis.MajorTickStyle>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                        </Style>
+                    </chart:LinearAxis.MajorTickStyle>
+                </chart:LinearAxis>
+            </chart:RadCartesianChart.VerticalAxis>
+            <chart:RadCartesianChart.Grid>
+                <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed"/>
+            </chart:RadCartesianChart.Grid>
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#CCFDFF31" ShowLabels="True"  ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+                <chart:LineSeries.CategoryBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time"/>
+                </chart:LineSeries.CategoryBinding>
+                <chart:LineSeries.ValueBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature"/>
+                </chart:LineSeries.ValueBinding>
+            </chart:LineSeries>
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#CC31A7FF" ShowLabels="True" 
+                                       CombineMode="Cluster" ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+                <chart:LineSeries.CategoryBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time"/>
+                </chart:LineSeries.CategoryBinding>
+                <chart:LineSeries.ValueBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MinTemperature"/>
+                </chart:LineSeries.ValueBinding>
+            </chart:LineSeries>
+        </chart:RadCartesianChart>
+
+    </Grid>
+</UserControl>

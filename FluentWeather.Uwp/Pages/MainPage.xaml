@@ -1,0 +1,171 @@
+﻿<Page
+    x:Class="FluentWeather.Uwp.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
+    xmlns:controls1="using:FluentWeather.Uwp.Controls"
+    xmlns:interfaces="using:FluentWeather.Abstraction.Interfaces.Weather"
+    xmlns:interop="using:Windows.UI.Xaml.Interop" xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels" 
+    mc:Ignorable="d"
+    d:RequestedTheme="Dark">
+    <Grid>
+        <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,0,32,32" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--当前天气-->
+                <Grid Margin="0,0,0,0" x:DefaultBindMode="OneWay">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding WeatherNow.Temperature}" Style="{ThemeResource TitleTextBlockStyle}" FontSize="80"/>
+                            <TextBlock Text="℃" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" FontSize="32" Margin="0,24,0,0" />
+                        </StackPanel>
+                        <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+
+                <!--预警-->
+                <Grid Grid.Row="1" Visibility="Collapsed" Margin="0,24,0,0">
+                    <muxc:InfoBar Title="高温橙色预警" IsOpen="True" Severity="Warning" IsClosable="False">
+                        <TextBlock Visibility="Collapsed" Text="丽水市气象台2023年07月15日10时30分发布高温橙色预警信号：受副热带高压控制，预计今天白天我市除高海拔山区以外，所有镇（乡、街道）最高气温可达38℃以上，请各有关方面做好防暑降温工作，注意防范高温对农业、交通、电力、用水等的不利影响。" TextWrapping="Wrap" Margin="0,0,24,24"/>
+                    </muxc:InfoBar>
+                </Grid>
+
+                <!--15天天气预报-->
+                <Grid Grid.Row="2"  Margin="0,24,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}"
+                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                          OneRowModeEnabled="True"
+                                          ItemHeight="128"
+                                          DesiredWidth="120"
+                                          SelectionMode="None"
+                                          Margin="-32,16,-32,0">
+                        <toolkit:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:WeatherBase">
+                                <Grid>
+                                    <controls1:WeatherForecastItem WeatherInfo="{x:Bind}" />
+                                </Grid>
+                            </DataTemplate>
+                        </toolkit:AdaptiveGridView.ItemTemplate>
+
+                    </toolkit:AdaptiveGridView>
+                    <controls1:TemperatureChart x:Name="TemperatureChart" Visibility="Collapsed"  Grid.Row="1" WeatherForecasts="{Binding DailyForecasts}"  Margin="-32,0,-28,32" Height="200"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="0,24,0,0">
+                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
+                                              HorizontalAlignment="Stretch"
+                                              HorizontalContentAlignment="Stretch"
+                                              OneRowModeEnabled="True"
+                                              ItemHeight="128"
+                                              DesiredWidth="100"
+                                              SelectionMode="None"
+                                              Margin="0,16,0,0">
+                        <toolkit:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:WeatherBase">
+                                <Grid>
+                                    <controls1:WeatherHourlyForecastItem WeatherInfo="{x:Bind}" />
+                                </Grid>
+                            </DataTemplate>
+                        </toolkit:AdaptiveGridView.ItemTemplate>
+
+                    </toolkit:AdaptiveGridView>
+                </Grid>
+
+                <!--其他信息-->
+                <Grid Grid.Row="4" Margin="0,24,0,0">
+                    <controls:AdaptiveGridView SelectionMode="None"
+                                              HorizontalAlignment="Stretch"
+                                              HorizontalContentAlignment="Stretch"
+                                              DesiredWidth="200"
+                                              x:DefaultBindMode="OneWay"
+                                              ItemHeight="90">
+                        <controls:AdaptiveGridView.Items>
+                            <StackPanel x:Name="WindInfoPanel" Margin="12" HorizontalAlignment="Left">
+                                <TextBlock Text="风"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.WindDirection}"/>
+                                    <Run Text="{Binding WeatherNow.WindSpeed}" FontSize="25"/>
+                                    <Run Text="km/h" FontSize="16"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="12" HorizontalAlignment="Left">
+                                <TextBlock Text="体感温度"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.ApparentTemperature}" FontSize="25"/><Run Text="°"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="12" HorizontalAlignment="Left">
+                                <TextBlock Text="湿度"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.Humidity}" FontSize="25"/>
+                                    <Run Text="%" FontSize="16"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="12"  HorizontalAlignment="Left">
+                                <TextBlock Text="气压"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.Pressure}" FontSize="25"/>
+                                    <Run Text="hPa"  FontSize="16"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="12" HorizontalAlignment="Left">
+                                <TextBlock Text="能见度"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.Visibility}" FontSize="25"/>
+                                    <Run Text="km"  FontSize="16"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </controls:AdaptiveGridView.Items>
+                    </controls:AdaptiveGridView>
+
+                </Grid>
+            </Grid>
+
+
+        </ScrollViewer>
+        <!--内容区-->
+        <ParallaxView Source="{Binding ElementName=MainScrollViewer}" VerticalShift="32" Visibility="Collapsed">
+            <Grid>
+                <Image Source="https://cn.bing.com/th?id=OHR.HammockDay_EN-CN4013328833_1920x1080.jpg&amp;rf=LaDigue_1920x1080.jpg" Stretch="UniformToFill"/>
+                <Border>
+                    <Border.Background>
+                        <media:BackdropBlurBrush Amount="5" />
+                    </Border.Background>
+                </Border>
+                <Border Background="#80000000"/>
+
+            </Grid>
+        </ParallaxView>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TemperatureChart.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+
+</Page>

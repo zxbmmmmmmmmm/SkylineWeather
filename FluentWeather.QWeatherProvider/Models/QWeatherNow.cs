@@ -4,7 +4,7 @@ using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherNow : WeatherBase, IWind,ITemperature, IPressure, IHumidity, IVisibility
+public class QWeatherNow : WeatherBase, IWind,ITemperature, IPressure, IHumidity, IVisibility,IApparentTemperature
 {
     public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
     public int Humidity { get; set; }
@@ -14,4 +14,5 @@ public class QWeatherNow : WeatherBase, IWind,ITemperature, IPressure, IHumidity
     public string WindScale { get; set; }
     public int WindSpeed { get; set; }
     public int Temperature { get ; set ; }
+    public int ApparentTemperature { get ; set; }
 }

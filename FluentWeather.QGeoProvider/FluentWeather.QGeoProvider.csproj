@@ -3,7 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+    <LangVersion>latestMajor</LangVersion>
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj" />
     <ProjectReference Include="..\FluentWeather.QGeoApi\FluentWeather.QGeoApi.csproj" />
