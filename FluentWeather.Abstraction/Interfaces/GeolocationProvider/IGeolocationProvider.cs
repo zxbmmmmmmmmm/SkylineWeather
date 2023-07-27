@@ -12,4 +12,6 @@ public interface IGeolocationProvider
     /// <param name="name">城市名称</param>
     /// <returns></returns>
     Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name);
+    Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon);
+
 }

@@ -28,6 +28,7 @@ public class QWeatherProvider : ProviderBase,
 
     public override string Id => "qweather";
     public Enum Settings => new QWeatherSettings();
+
     public ApiHandlerOption Option { get; set; } = new();
     
     public static QWeatherProvider Instance = null;
