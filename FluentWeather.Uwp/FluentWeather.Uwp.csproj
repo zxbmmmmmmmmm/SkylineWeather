@@ -133,6 +133,9 @@
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dialogs\AboutDialog.xaml.cs">
+      <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings\QWeatherSettingSection.xaml.cs">
       <DependentUpon>QWeatherSettingSection.xaml</DependentUpon>
     </Compile>
@@ -267,6 +270,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Dialogs\AboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Settings\QWeatherSettingSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +385,7 @@
       <Name>FluentWeather.QWeatherProvider</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

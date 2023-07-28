@@ -33,8 +33,8 @@
                     </Grid.RowDefinitions>
                     <local:CitiesPage Margin="0,45,0,0"/>
                     <CommandBar Grid.Row="1" VerticalAlignment="Bottom" DefaultLabelPosition="Right">
-                        <AppBarButton Icon="Setting" Label="设置"/>
-                        <AppBarButton Label="关于">
+                        <AppBarButton Icon="Setting" Label="设置" Visibility="Collapsed"/>
+                        <AppBarButton Label="关于" Command="{x:Bind ViewModel.OpenAboutDialogCommand}">
                             <AppBarButton.Icon>
                                 <FontIcon Glyph="&#xE946;"/>
                             </AppBarButton.Icon>

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Pages;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,10 @@ public partial class RootPageViewModel:ObservableObject
     {
         IsPaneOpen = !IsPaneOpen;
     }
-    
+    [RelayCommand]
+    public void OpenAboutDialog()
+    {
+        new AboutDialog().ShowAsync();
+    }
 
 }

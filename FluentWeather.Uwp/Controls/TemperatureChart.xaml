@@ -15,7 +15,7 @@
         <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter"/>
         <valueConverters1:AddConverter x:Key="AddConverter"/>
         <DataTemplate x:Key="PointTemplate">
-            <Ellipse Width="8" Height="8" Fill="{Binding Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="White"  StrokeThickness="2"/>
+            <Ellipse Width="8" Height="8" Fill="{Binding Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"  StrokeThickness="2"/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid >
@@ -53,7 +53,7 @@
             <chart:RadCartesianChart.Grid>
                 <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed"/>
             </chart:RadCartesianChart.Grid>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#CCFDFF31" ShowLabels="True"  ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#B3FFB900" ShowLabels="True"  ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time"/>
                 </chart:LineSeries.CategoryBinding>
@@ -61,7 +61,7 @@
                     <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature"/>
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#CC31A7FF" ShowLabels="True" 
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#B300BFFF" ShowLabels="True" 
                                        CombineMode="Cluster" ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time"/>

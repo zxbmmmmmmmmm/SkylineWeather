@@ -11,7 +11,7 @@
     <Grid  Margin="4,12,12,12" x:DefaultBindMode="OneWay">
         <StackPanel>
             <TextBlock Text="{x:Bind Location.Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
-            <TextBlock Text="{x:Bind Location.AdmDistrict}" Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}" />
+            <TextBlock Text="{x:Bind Location.AdmDistrict}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
         </StackPanel>
 
         <TextBlock Text="30°" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource SubtitleTextBlockStyle}"  Canvas.ZIndex="2"  Visibility="Collapsed"/>

@@ -24,7 +24,7 @@ public class SeverityColorToColorConverter : IValueConverter
             case SeverityColor.White:
                 return new SolidColorBrush(Colors.White);
             case SeverityColor.Yellow:
-                return new SolidColorBrush(Colors.Yellow);
+                return new SolidColorBrush(Colors.Gold);
             case SeverityColor.Black:
                 return new SolidColorBrush(Colors.Black);
         }
