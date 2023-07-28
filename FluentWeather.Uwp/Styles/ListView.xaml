@@ -28,7 +28,8 @@
         <Setter Property="AllowDrop" Value="False" />
         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
         <Setter Property="FocusVisualMargin" Value="0" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="CornerRadius" Value="4" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
@@ -38,6 +39,7 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Control.IsTemplateFocusTarget="True"
+                        Margin="4,2"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                         RenderTransformOrigin="0.5,0.5">
@@ -47,7 +49,6 @@
 
                         <Border
                             x:Name="BorderBackground"
-                            Margin="0"
                             Background="{ThemeResource SystemAccentColorDark1}"
                             Control.IsTemplateFocusTarget="True"
                             CornerRadius="{TemplateBinding CornerRadius}"
@@ -56,7 +57,7 @@
                         <Border
                             x:Name="BorderSelected"
                             Width="3"
-                            Margin="0,24"
+                            Margin="0,20"
                             HorizontalAlignment="Left"
                             Background="Transparent"
                             Control.IsTemplateFocusTarget="True"
@@ -224,7 +225,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColorLight2}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
@@ -256,7 +257,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColorLight2}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
@@ -288,7 +289,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderSelected" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColorLight2}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
