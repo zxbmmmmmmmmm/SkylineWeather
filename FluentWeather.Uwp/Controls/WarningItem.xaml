@@ -6,14 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <converters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter"/>
+    </UserControl.Resources>
     <muxc:Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" x:DefaultBindMode="OneWay">
         <muxc:Expander.Header>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Spacing="12" >
-                <Ellipse Fill="Red" Height="5" Width="5"/>
+                <Ellipse Fill="{x:Bind Warning.SeverityColor,Converter={StaticResource SeverityColorToColorConverter}}" Height="5" Width="5"/>
                 <FontIcon Glyph="&#xE7BA;"/>
                 <TextBlock Text="{x:Bind Warning.Title}"/>
             </StackPanel>

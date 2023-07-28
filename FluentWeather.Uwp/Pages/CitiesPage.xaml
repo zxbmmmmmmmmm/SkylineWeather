@@ -9,6 +9,7 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     mc:Ignorable="d">
     <Page.Resources>
@@ -57,14 +58,17 @@
         <ListView x:Name="CitiesListView" Grid.Row="2" ItemsSource="{x:Bind ViewModel.Cities,Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.Selection,Mode=TwoWay}" CanDragItems="True" CanReorderItems="True" AllowDrop="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
-                    <controls:CityItem Location="{x:Bind Mode=OneWay}"/>
+                    <controls:CityItem Location="{x:Bind Mode=OneWay}">
+                        <controls:CityItem.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="删除" Icon="Delete"
+                                                Command="{x:Bind vm:CitiesPageViewModel.Instance.DeleteCityCommand}" 
+                                                CommandParameter="{x:Bind }"/>
+                            </MenuFlyout>
+                        </controls:CityItem.ContextFlyout>
+                    </controls:CityItem>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <i:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction />
-                </core:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
         </ListView>
             
     </Grid>

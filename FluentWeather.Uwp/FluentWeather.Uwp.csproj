@@ -155,6 +155,7 @@
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TypeConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\SeverityColorToColorConverter.cs" />
     <Compile Include="Helpers\ValueConverters\WeatherTypeToIconConverter.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>

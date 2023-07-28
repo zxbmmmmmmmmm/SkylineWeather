@@ -15,17 +15,20 @@ using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.ViewModels;
 
 public partial class CitiesPageViewModel:ObservableObject
 {
+    public static CitiesPageViewModel Instance { get; private set; }
     public CitiesPageViewModel()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Cities = settingsHelper.ReadLocalSetting(AppSettings.Cities.ToString(),new ObservableCollection<GeolocationBase>());
         PropertyChanged += OnPropertyChanged;
         GetCurrentCity();
+        Instance = this;
         Cities.CollectionChanged += (s, e) => OnPropertyChanged(nameof(Cities));
     }
     public async void GetCurrentCity()
@@ -77,6 +80,11 @@ public partial class CitiesPageViewModel:ObservableObject
     {
         Cities.Add(city);
         Query = city.Name;
+    }
+    [RelayCommand]
+    public void DeleteCity(GeolocationBase item)
+    {
+        Cities.Remove(item);
     }
 
     [ObservableProperty]
