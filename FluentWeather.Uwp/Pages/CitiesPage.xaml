@@ -3,31 +3,68 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FluentWeather.Uwp.Pages"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <converters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <AutoSuggestBox PlaceholderText="添加城市..." QueryIcon="Find" Margin="8,4,8,8" IsEnabled="False"/>
-
-        <ListView Grid.Row="1" SelectedIndex="0">
-            <ListView.Items>
-                <controls:CityItem Location="{x:Bind ViewModel.CurrentCity}"/>
-            </ListView.Items>
+        <AutoSuggestBox x:Name="SearchBox"
+                        PlaceholderText="添加城市..." 
+                        Text="{x:Bind ViewModel.Query,Mode=TwoWay}"
+                        QueryIcon="Find" Margin="8,4,8,8" 
+                        ItemsSource="{x:Bind ViewModel.SuggestedCities,Mode=OneWay}" UpdateTextOnSelect="False">
+            <AutoSuggestBox.ItemTemplate>
+                <DataTemplate x:DataType="models:GeolocationBase">
+                    <Grid>
+                        <TextBlock Text="{x:Bind Name}"/>
+                        <TextBlock Text="{x:Bind AdmDistrict}" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Grid>
+                </DataTemplate>
+            </AutoSuggestBox.ItemTemplate>
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="QuerySubmitted">
+                    <core:InvokeCommandAction Command="{x:Bind ViewModel.GetCitiesCommand}" CommandParameter="{x:Bind SearchBox.Text,Mode=OneWay}"/>
+                </core:EventTriggerBehavior>
+                <core:EventTriggerBehavior EventName="SuggestionChosen" >
+                    <core:InvokeCommandAction Command="{x:Bind ViewModel.SaveCityCommand}" InputConverter="{StaticResource AutoSuggestSuggestionParameterConverter}" />
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+        </AutoSuggestBox>
+        <ListView x:Name="CurrentCityView" Grid.Row="1" SelectedIndex="{x:Bind ViewModel.CurrentViewSelection,Mode=TwoWay}">
+            <controls:CityItem Location="{x:Bind ViewModel.CurrentCity,Mode=OneWay}"/>
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction />
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
         </ListView>
-        <ListView Grid.Row="2" ItemsSource="{x:Bind ViewModel.Cities}">
+        <TextBlock Grid.Row="1" Margin="12,12,16,12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Visibility="{x:Bind IsCurrent}">
+            <Run Text="&#xE81B;" FontSize="11" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+            <Run Text="当前位置"/>
+        </TextBlock>
+        <ListView x:Name="CitiesListView" Grid.Row="2" ItemsSource="{x:Bind ViewModel.Cities,Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.Selection,Mode=TwoWay}" CanDragItems="True" CanReorderItems="True" AllowDrop="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
-                    <controls:CityItem Location="{x:Bind}"/>
+                    <controls:CityItem Location="{x:Bind Mode=OneWay}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction />
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
         </ListView>
             
     </Grid>

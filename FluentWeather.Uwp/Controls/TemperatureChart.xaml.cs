@@ -39,10 +39,13 @@ public sealed partial class TemperatureChart : UserControl
         set => SetValue(WeatherForecastsProperty, value.ConvertAll(p => (WeatherBase)p));
     }
     public static readonly DependencyProperty WeatherForecastsProperty =
-        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherBase>), typeof(TemperatureChart), new PropertyMetadata(default));
+        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherBase>), typeof(TemperatureChart), new PropertyMetadata(default,OnPropertyChanged));
 
-
-
+    private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var chart = (TemperatureChart)d;
+        chart.Bindings.Update();   
+    }
     public (List<CategoricalDataPoint> tempMax, List<CategoricalDataPoint> tempMin) GetDataPoints(IList<ITemperatureRange> weatherDailyForecasts)
     {
         var tempMax = new List<CategoricalDataPoint>();

@@ -10,6 +10,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj" />
+    <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj" />
     <ProjectReference Include="..\FluentWeather.QGeoApi\FluentWeather.QGeoApi.csproj" />
   </ItemGroup>
 

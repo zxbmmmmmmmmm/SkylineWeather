@@ -62,21 +62,21 @@ public class QWeatherProvider : ProviderBase,
     public async Task<List<WeatherBase>> GetDailyForecasts(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherDailyApi, new QWeatherRequest(lon, lat));
-        var res = result.DailyForecasts.ConvertAll(p => (WeatherBase)p.MapToQWeatherDailyForecast());
+        var res = result.DailyForecasts?.ConvertAll(p => (WeatherBase)p.MapToQWeatherDailyForecast());
         return res;
     }
 
     public async Task<List<WeatherBase>> GetHourlyForecasts(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherHourlyApi, new QWeatherRequest(lon, lat));
-        var res = result.HourlyForecasts.ConvertAll(p => (WeatherBase)p.MapToQWeatherHourlyForecast());
+        var res = result.HourlyForecasts?.ConvertAll(p => (WeatherBase)p.MapToQWeatherHourlyForecast());
         return res;
     }
 
     public async Task<List<WeatherWarningBase>> GetWeatherWarnings(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherWarningApi, new QWeatherRequest(lon, lat));
-        var res = result.Warnings.ConvertAll(p => (WeatherWarningBase)p.MapToQWeatherWarning());
+        var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToQWeatherWarning());
         return res;
     }
     public async Task<TResponse> RequestAsync<TRequest, TResponse>(

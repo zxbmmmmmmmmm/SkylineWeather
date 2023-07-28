@@ -139,6 +139,9 @@
     <Compile Include="Controls\TemperatureChart.xaml.cs">
       <DependentUpon>TemperatureChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WarningItem.xaml.cs">
+      <DependentUpon>WarningItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\WeatherForecastItem.xaml.cs">
       <DependentUpon>WeatherForecastItem.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TypeConverter.cs" />
@@ -270,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\WarningItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WeatherForecastItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -338,6 +346,9 @@
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.8.5</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
       <Version>1.0.2.11</Version>
     </PackageReference>
@@ -356,6 +367,10 @@
     <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj">
       <Project>{15e289d2-4104-4889-b968-60d2c2efd806}</Project>
       <Name>FluentWeather.DIContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj">
+      <Project>{eb061b33-c7dc-4dec-9398-0cc2c4abd619}</Project>
+      <Name>FluentWeather.QGeoProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
       <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>

@@ -8,11 +8,12 @@
     mc:Ignorable="d"
     d:DesignHeight="70"
     d:DesignWidth="400" d:RequestedTheme="Dark">
-    <Grid  Margin="4,12,12,12">
+    <Grid  Margin="4,12,12,12" x:DefaultBindMode="OneWay">
         <StackPanel>
             <TextBlock Text="{x:Bind Location.Name}" Style="{StaticResource SubtitleTextBlockStyle}"/>
-            <TextBlock Text="阴 25° / 35°" Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}" Visibility="Collapsed"/>
+            <TextBlock Text="{x:Bind Location.AdmDistrict}" Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}" />
         </StackPanel>
+
         <TextBlock Text="30°" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource SubtitleTextBlockStyle}"  Canvas.ZIndex="2"  Visibility="Collapsed"/>
         <Image Source="ms-appx:///Assets/Weather/Day/Cloudy.png" HorizontalAlignment="Right" VerticalAlignment="Center" Height="45" Opacity="0.4"  Visibility="Collapsed"/>
     </Grid>

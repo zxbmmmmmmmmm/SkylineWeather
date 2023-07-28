@@ -13,12 +13,12 @@ public static class QGeolocationMapper
         return new QGeolocation
         {
             AdmDistrict = item.AdministrativeDistrict1,
-            IsDaylightSavingTime = bool.Parse(item.IsDaylightSavingTime) ,
-            Latitude = int.Parse(item.Lat),
-            Longitude = int.Parse(item.Lon),
+            IsDaylightSavingTime = item.IsDaylightSavingTime is "1",
+            Latitude = double.Parse(item.Lat),
+            Longitude = double.Parse(item.Lon),
             Name = item.Name,
             TimeZone = item.TimeZone,
-            UtcOffset = TimeSpan.Parse(item.UtcOffset),
+            //UtcOffset = TimeSpan.Parse(item.UtcOffset),
         };
     }
 }

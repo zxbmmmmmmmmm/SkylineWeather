@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"  
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid Margin="0,0,0,0">
@@ -17,7 +18,9 @@
             </Grid.ColumnDefinitions>
             <Button Style="{ThemeResource PaneToggleButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Command="{x:Bind ViewModel.TogglePaneCommand}"/>
             <Grid  Grid.Column="1" x:Name="Title">
-                <TextBlock Text="丽水市，莲都区" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" >
+                    <Run  Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name,Mode=OneWay}"/>
+                </TextBlock>
                 <Grid Width="1024" Height="45" Background="Transparent"/>
             </Grid>
         </Grid>

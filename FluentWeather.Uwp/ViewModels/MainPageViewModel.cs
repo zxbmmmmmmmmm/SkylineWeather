@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
@@ -6,8 +8,10 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
 using FluentWeather.QWeatherProvider.Models;
 using FluentWeather.Uwp.Helpers;
+using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -18,6 +22,8 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private List<WeatherBase> hourlyForecasts = new();
+    [ObservableProperty]
+    private List<WeatherWarningBase> warnings = new();
 
     [ObservableProperty]
     private WeatherBase weatherNow;
@@ -27,30 +33,35 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private GeolocationBase currentLocation;
+    
     public static MainPageViewModel Instance{ get; private set; }
 
     public MainPageViewModel()
     {
-        GetWeather();
         Instance = this;
     }
 
-    private async void GetWeather()
+    partial void OnCurrentLocationChanged(GeolocationBase oldValue, GeolocationBase newValue)
     {
-        await LocationHelper.GetLocation();
-        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-        var lon = settingsHelper.ReadLocalSetting(AppSettings.Longitude.ToString(), 116.0);
-        var lat = settingsHelper.ReadLocalSetting(AppSettings.Latitude.ToString(), 40.0);
-
+        GetWeather(CurrentLocation);
+    }
+    public async void GetWeather(GeolocationBase geo)
+    {
+        IsLoading = true;
         var dailyProvider = Locator.ServiceProvider.GetService<IDailyForecastProvider>();
-        DailyForecasts = await dailyProvider.GetDailyForecasts(lon, lat);
+        DailyForecasts = await dailyProvider.GetDailyForecasts(geo.Longitude, geo.Latitude);
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
-        HourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
+        HourlyForecasts = await hourlyProvider.GetHourlyForecasts(geo.Longitude, geo.Latitude);
         var nowProvider = Locator.ServiceProvider.GetService<ICurrentWeatherProvider>();
-        WeatherNow = await nowProvider.GetCurrentWeather(lon,lat);
-        if(DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
+        WeatherNow = await nowProvider.GetCurrentWeather(geo.Longitude, geo.Latitude);
+        var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
+        Warnings = await warningProvider.GetWeatherWarnings(geo.Longitude,geo.Latitude);
+        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
         }
+        IsLoading = false;
     }
+    [ObservableProperty]
+    private bool isLoading;
 }

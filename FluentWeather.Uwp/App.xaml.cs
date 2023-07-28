@@ -37,12 +37,17 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
+#if RELEASE
         AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics),typeof(Crashes));
+#endif
     }
 
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         e.Handled = true;
+#if RELEASE
+        Crashes.TrackError(e.Exception);
+#endif
     }
 
     /// <summary>

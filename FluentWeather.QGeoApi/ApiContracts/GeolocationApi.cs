@@ -21,11 +21,11 @@ namespace FluentWeather.QGeoApi.ApiContracts
             string query = string.Empty;
             if(Request is QGeolocationRequestByLocation byLocation)
             {
-                query = $"?key={option.Token}&location={byLocation.Lon},{byLocation.Lat}";
+                query = $"?key={option.Token}&location={byLocation.Lat},{byLocation.Lon}";
             }
             else if(Request is QGeolocationRequestByName byName)
             {
-                query = $"?key={option.Token}&location={byName}";
+                query = $"?key={option.Token}&location={byName.Name}";
             }
             var requestMessage = new HttpRequestMessage(Method, Url + query);
 

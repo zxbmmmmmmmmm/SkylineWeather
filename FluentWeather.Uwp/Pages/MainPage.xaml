@@ -16,7 +16,7 @@
     mc:Ignorable="d"
     d:RequestedTheme="Dark">
     <Grid>
-        <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto" IsEnabled="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationConverter}}">
             <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,0,32,32" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
