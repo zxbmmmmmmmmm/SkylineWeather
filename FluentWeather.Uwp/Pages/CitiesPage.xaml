@@ -55,7 +55,10 @@
             <Run Text="&#xE81B;" FontSize="11" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
             <Run Text="当前位置"/>
         </TextBlock>
-        <ListView x:Name="CitiesListView" Grid.Row="2" ItemsSource="{x:Bind ViewModel.Cities,Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.Selection,Mode=TwoWay}" CanDragItems="True" CanReorderItems="True" AllowDrop="True">
+        <ListView x:Name="CitiesListView" Grid.Row="2" 
+                  ItemsSource="{x:Bind ViewModel.Cities,Mode=OneWay}" SelectedIndex="{x:Bind ViewModel.Selection,Mode=TwoWay}" CanDragItems="True" 
+                  CanReorderItems="True" AllowDrop="True"
+                  ItemContainerStyle="{StaticResource ListViewItemNewStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
                     <controls:CityItem Location="{x:Bind Mode=OneWay}">

@@ -50,11 +50,11 @@
                 </Grid>
 
                 <!--预警-->
-                <Grid Grid.Row="1"  Margin="0,24,0,0" >
+                <Grid Grid.Row="1"  Margin="-12,24,-12,0" >
                     <ListView ItemsSource="{x:Bind ViewModel.Warnings,Mode=OneWay}" SelectionMode="None" HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherWarningBase">
-                                <controls1:WarningItem Warning="{x:Bind Mode=OneWay}" Margin="-16,0,0,8" />
+                                <controls1:WarningItem Warning="{x:Bind Mode=OneWay}" Margin="0,4"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.ItemContainerStyle >
