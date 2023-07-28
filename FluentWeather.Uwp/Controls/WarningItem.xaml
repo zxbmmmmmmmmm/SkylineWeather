@@ -5,11 +5,27 @@
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-
-    </Grid>
+    <muxc:Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" x:DefaultBindMode="OneWay">
+        <muxc:Expander.Header>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Spacing="12" >
+                <Ellipse Fill="Red" Height="5" Width="5"/>
+                <FontIcon Glyph="&#xE7BA;"/>
+                <TextBlock Text="{x:Bind Warning.Title}"/>
+            </StackPanel>
+        </muxc:Expander.Header>
+        <muxc:Expander.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{x:Bind Warning.Description}"  TextWrapping="Wrap" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            </Grid>
+        </muxc:Expander.Content>
+    </muxc:Expander>
 </UserControl>

@@ -50,7 +50,7 @@
                 </core:EventTriggerBehavior>
             </i:Interaction.Behaviors>
         </ListView>
-        <TextBlock Grid.Row="1" Margin="12,12,16,12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Visibility="{x:Bind IsCurrent}">
+        <TextBlock Grid.Row="1" Margin="12,12,16,12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
             <Run Text="&#xE81B;" FontSize="11" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
             <Run Text="当前位置"/>
         </TextBlock>

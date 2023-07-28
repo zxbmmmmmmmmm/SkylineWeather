@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentWeather.Abstraction.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,5 +24,21 @@ namespace FluentWeather.Uwp.Controls
         {
             this.InitializeComponent();
         }
+
+
+
+
+        public WeatherWarningBase Warning
+        {
+            get => (WeatherWarningBase)GetValue(WarningProperty);
+            set => SetValue(WarningProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Warning.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WarningProperty =
+            DependencyProperty.Register(nameof(Warning), typeof(WeatherWarningBase), typeof(WarningItem), new PropertyMetadata(default));
+
+
+
     }
 }

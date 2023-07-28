@@ -24,6 +24,7 @@ public sealed partial class WeatherHourlyForecastItem : UserControl
     {
         this.InitializeComponent();
         DataContext = this;
+        this.DataContextChanged += (s, e) => Bindings.Update();
     }
     public WeatherBase WeatherInfo
     {
