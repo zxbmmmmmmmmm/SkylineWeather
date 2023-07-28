@@ -35,8 +35,8 @@ public sealed partial class TemperatureChart : UserControl
 
     public List<ITemperatureRange> WeatherForecasts
     {
-        get => ((List<WeatherBase>)GetValue(WeatherForecastsProperty)).ConvertAll(p => (ITemperatureRange)p);
-        set => SetValue(WeatherForecastsProperty, value.ConvertAll(p => (WeatherBase)p));
+        get => ((List<WeatherBase>)GetValue(WeatherForecastsProperty))?.ConvertAll(p => (ITemperatureRange)p);
+        set => SetValue(WeatherForecastsProperty, value?.ConvertAll(p => (WeatherBase)p));
     }
     public static readonly DependencyProperty WeatherForecastsProperty =
         DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherBase>), typeof(TemperatureChart), new PropertyMetadata(default,OnPropertyChanged));

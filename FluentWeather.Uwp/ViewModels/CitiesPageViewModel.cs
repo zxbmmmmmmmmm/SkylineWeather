@@ -27,22 +27,11 @@ public partial class CitiesPageViewModel:ObservableObject
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Cities = settingsHelper.ReadLocalSetting(AppSettings.Cities.ToString(),new ObservableCollection<GeolocationBase>());
         PropertyChanged += OnPropertyChanged;
-        GetCurrentCity();
         Instance = this;
+        GetCurrentCity();
         Cities.CollectionChanged += (s, e) => OnPropertyChanged(nameof(Cities));
     }
-    public async void GetCurrentCity()
-    {
-        await LocationHelper.GetLocation();
-        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-        var lon = settingsHelper.ReadLocalSetting(AppSettings.Longitude.ToString(),116.0);
-        var lat = settingsHelper.ReadLocalSetting(AppSettings.Latitude.ToString(), 40.0);
 
-        var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        var city = await service.GetCitiesGeolocationByLocation(lon, lat);
-        CurrentCity = city.First();
-        MainPageViewModel.Instance.CurrentLocation = CurrentCity;
-    }
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
@@ -67,13 +56,20 @@ public partial class CitiesPageViewModel:ObservableObject
         if (newValue == -1) return;
         CurrentViewSelection = -1;
         MainPageViewModel.Instance.CurrentLocation = Cities[newValue];
-        return;
+        if(MainPageViewModel.Instance.CurrentLocation is null)
+        {
+            GetCurrentCity();
+        }
     }
-    partial void OnCurrentViewSelectionChanging(int oldValue, int newValue)
+    partial void OnCurrentViewSelectionChanged(int oldValue, int newValue)
     {
         if (newValue != 0) return;
         MainPageViewModel.Instance.CurrentLocation = CurrentCity;
         Selection = -1;
+        if (MainPageViewModel.Instance.CurrentLocation is null)
+        {
+            GetCurrentCity();
+        }
     }
     [RelayCommand]
     public void SaveCity(GeolocationBase city)
@@ -85,6 +81,19 @@ public partial class CitiesPageViewModel:ObservableObject
     public void DeleteCity(GeolocationBase item)
     {
         Cities.Remove(item);
+    }
+
+    public async void GetCurrentCity()
+    {
+        await LocationHelper.GetLocation();
+        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
+        var lon = settingsHelper.ReadLocalSetting(AppSettings.Longitude.ToString(), 116.0);
+        var lat = settingsHelper.ReadLocalSetting(AppSettings.Latitude.ToString(), 40.0);
+
+        var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
+        var city = await service.GetCitiesGeolocationByLocation(lon, lat);
+        CitiesPageViewModel.Instance.CurrentCity = city.First();
+        MainPageViewModel.Instance.CurrentLocation = city.First();
     }
 
     [ObservableProperty]

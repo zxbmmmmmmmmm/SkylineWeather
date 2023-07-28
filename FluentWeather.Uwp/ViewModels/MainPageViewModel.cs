@@ -19,12 +19,12 @@ namespace FluentWeather.Uwp.ViewModels;
 public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
-    private List<WeatherBase> dailyForecasts = new();
+    private List<WeatherBase> dailyForecasts =new();
 
     [ObservableProperty]
-    private List<WeatherBase> hourlyForecasts = new();
+    private List<WeatherBase> hourlyForecasts ;
     [ObservableProperty]
-    private List<WeatherWarningBase> warnings = new();
+    private List<WeatherWarningBase> warnings ;
 
     [ObservableProperty]
     private WeatherBase weatherNow;
@@ -73,5 +73,5 @@ public partial class MainPageViewModel : ObservableObject
         IsLoading = false;
     }
     [ObservableProperty]
-    private bool isLoading;
+    private bool isLoading = true;
 }

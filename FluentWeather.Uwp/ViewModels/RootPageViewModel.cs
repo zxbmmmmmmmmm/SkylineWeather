@@ -1,5 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Controls.Dialogs;
@@ -24,5 +26,4 @@ public partial class RootPageViewModel:ObservableObject
     {
         new AboutDialog().ShowAsync();
     }
-
 }

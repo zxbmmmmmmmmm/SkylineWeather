@@ -13,6 +13,10 @@
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter"/>
             <valueConverters:TypeConverter x:Key="TypeConverter"/>
             <valueConverters2:BoolNegationConverter x:Key="BoolNegationConverter"/>
+            <valueConverters2:ValueConverterGroup x:Name="NullToVisibilityConverter">
+                <valueConverters2:NullToBoolConverter IsInverted="True"/>
+                <valueConverters2:BoolToVisibilityConverter/>
+            </valueConverters2:ValueConverterGroup>
             <Style x:Name="RepositionControlStyle" TargetType="FrameworkElement">
                 <Setter Property="Transitions">
                     <Setter.Value>

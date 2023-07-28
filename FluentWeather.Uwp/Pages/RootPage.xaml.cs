@@ -26,10 +26,11 @@ namespace FluentWeather.Uwp.Pages;
 public sealed partial class RootPage : Page
 {
     public RootPageViewModel ViewModel { get; set; } = new();
-
+    public static RootPage Instance { get; private set; }
     public RootPage()
     {
         this.InitializeComponent();
+        Instance = this;
         SetTitleBar();
     }
     public void SetTitleBar()
@@ -43,4 +44,5 @@ public sealed partial class RootPage : Page
         titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
     }
+
 }
