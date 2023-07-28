@@ -24,6 +24,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!--当前天气-->
@@ -39,23 +40,36 @@
 
                 <!--预警-->
                 <Grid Grid.Row="1"  Margin="0,24,0,0" >
-                    <ListView ItemsSource="{x:Bind ViewModel.Warnings,Mode=OneWay}" SelectionMode="None">
+                    <ListView ItemsSource="{x:Bind ViewModel.Warnings,Mode=OneWay}" SelectionMode="None" HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherWarningBase">
                                 <controls1:WarningItem Warning="{x:Bind Mode=OneWay}" Margin="-16,0,0,8" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle >
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Transitions">
+                                    <Setter.Value>
+                                        <TransitionCollection>
+                                            <RepositionThemeTransition IsStaggeringEnabled="False" />
+                                        </TransitionCollection>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
+                    
                 </Grid>
 
                 <!--15天天气预报-->
-                <Grid Grid.Row="2"  Margin="0,24,0,0">
+                <Grid Grid.Row="2"  Margin="0,24,0,0" Style="{StaticResource RepositionControlStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}"
-                                          HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
+                                              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                           OneRowModeEnabled="True"
                                           ItemHeight="128"
                                           DesiredWidth="120"
@@ -73,7 +87,7 @@
                     <controls1:TemperatureChart x:Name="TemperatureChart" Visibility="Collapsed"  Grid.Row="1" WeatherForecasts="{Binding DailyForecasts}"  Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
 
-                <Grid Grid.Row="3" Margin="0,24,0,0">
+                <Grid Grid.Row="3" Margin="0,24,0,0"  Style="{StaticResource RepositionControlStyle}">
                     <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
@@ -94,7 +108,7 @@
                 </Grid>
 
                 <!--其他信息-->
-                <Grid Grid.Row="4" Margin="0,24,0,0">
+                <Grid Grid.Row="4" Margin="0,24,0,0"  Style="{StaticResource RepositionControlStyle}">
                     <controls:AdaptiveGridView SelectionMode="None"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
@@ -141,6 +155,22 @@
                     </controls:AdaptiveGridView>
 
                 </Grid>
+                <controls:AdaptiveGridView Grid.Row="5" SelectionMode="None"
+                                           HorizontalAlignment="Stretch"
+                                           HorizontalContentAlignment="Stretch"
+                                           DesiredWidth="200"
+                                           x:DefaultBindMode="OneWay"
+                                           ItemsSource="{x:Bind ViewModel.Indices}"  Style="{StaticResource RepositionControlStyle}"
+                                           ItemHeight="90">
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate x:DataType="models:IndicesBase">
+                            <StackPanel x:Name="WindInfoPanel" Margin="12" HorizontalAlignment="Left">
+                                <TextBlock Text="{x:Bind Name}"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25" Text="{x:Bind Category}" ToolTipService.ToolTip="{x:Bind Description}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
+                </controls:AdaptiveGridView>
             </Grid>
 
 

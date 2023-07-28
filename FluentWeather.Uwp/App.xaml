@@ -13,6 +13,15 @@
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter"/>
             <valueConverters:TypeConverter x:Key="TypeConverter"/>
             <valueConverters2:BoolNegationConverter x:Key="BoolNegationConverter"/>
+            <Style x:Name="RepositionControlStyle" TargetType="FrameworkElement">
+                <Setter Property="Transitions">
+                    <Setter.Value>
+                        <TransitionCollection>
+                            <RepositionThemeTransition IsStaggeringEnabled="False" />
+                        </TransitionCollection>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

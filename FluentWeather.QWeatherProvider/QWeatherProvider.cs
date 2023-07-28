@@ -22,6 +22,7 @@ public class QWeatherProvider : ProviderBase,
     IDailyForecastProvider,
     IHourlyForecastProvider,
     IWeatherWarningProvider,
+    IIndicesProvider,
     ISetting
 {
     public override string Name => "和风天气";
@@ -44,6 +45,7 @@ public class QWeatherProvider : ProviderBase,
         Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider));
     }
     public void GetSettings()
@@ -77,6 +79,12 @@ public class QWeatherProvider : ProviderBase,
     {
         var result = await RequestAsync(QWeatherApis.WeatherWarningApi, new QWeatherRequest(lon, lat));
         var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToQWeatherWarning());
+        return res;
+    }
+    public async Task<List<IndicesBase>> GetIndices(double lon, double lat)
+    {
+        var result = await RequestAsync(QWeatherApis.WeatherIndicesApi, new QWeatherRequest(lon, lat));
+        var res = result.Indices?.ConvertAll(p => (IndicesBase)p.MapToQWeatherIndices());
         return res;
     }
     public async Task<TResponse> RequestAsync<TRequest, TResponse>(

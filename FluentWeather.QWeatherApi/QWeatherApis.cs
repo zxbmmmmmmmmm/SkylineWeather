@@ -8,4 +8,6 @@ public static class QWeatherApis
     public static WeatherHourlyApi WeatherHourlyApi => new ();
     public static WeatherNowApi WeatherNowApi => new ();
     public static WeatherWarningApi WeatherWarningApi => new ();
+    public static WeatherIndicesApi WeatherIndicesApi => new();
+
 }

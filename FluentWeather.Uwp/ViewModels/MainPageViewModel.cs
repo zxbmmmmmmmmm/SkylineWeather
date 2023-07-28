@@ -11,6 +11,7 @@ using FluentWeather.Uwp.Helpers;
 using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FluentWeather.Uwp.ViewModels;
@@ -33,6 +34,8 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private GeolocationBase currentLocation;
+    [ObservableProperty]
+    private List<IndicesBase> indices;
     
     public static MainPageViewModel Instance{ get; private set; }
 
@@ -56,6 +59,13 @@ public partial class MainPageViewModel : ObservableObject
         WeatherNow = await nowProvider.GetCurrentWeather(geo.Longitude, geo.Latitude);
         var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
         Warnings = await warningProvider.GetWeatherWarnings(geo.Longitude,geo.Latitude);
+        var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
+        var i = await indicesProvider.GetIndices(geo.Longitude, geo.Latitude);
+        foreach(var item in i)
+        {
+            item.Name = item.Name.Replace("指数", "");
+        }
+        Indices = i;
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";

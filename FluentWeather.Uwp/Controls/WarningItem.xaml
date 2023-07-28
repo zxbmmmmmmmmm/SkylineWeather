@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <converters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter"/>
     </UserControl.Resources>
-    <muxc:Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" x:DefaultBindMode="OneWay">
+    <muxc:Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" x:DefaultBindMode="OneWay" >
         <muxc:Expander.Header>
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Spacing="12" >
                 <Ellipse Fill="{x:Bind Warning.SeverityColor,Converter={StaticResource SeverityColorToColorConverter}}" Height="5" Width="5"/>

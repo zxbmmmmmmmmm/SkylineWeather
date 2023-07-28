@@ -16,6 +16,7 @@ public static class ApiConstants
         public const string HourlyForecast72H = ApiBase + "/v7/weather/72h";
         public const string HourlyForecast168H = ApiBase + "/v7/weather/168h";
         public const string WarningNow = ApiBase + "/v7/warning/now";
-
+        public const string WeatherIndices1D = ApiBase + "/v7/indices/1d";
+        public const string WeatherIndices3D = ApiBase + "/v7/indices/3d";
     }
 }
