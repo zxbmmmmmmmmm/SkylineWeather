@@ -26,10 +26,13 @@
         <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto" IsEnabled="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationConverter}}">
             <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,0,32,32" >
                 <Grid.ChildrenTransitions>
-                    <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
-                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </TransitionCollection>
                 </Grid.ChildrenTransitions>
                     <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -48,9 +51,16 @@
                         <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
                     </StackPanel>
                 </Grid>
-
+                
+                <!--降水概率-->
+                <Grid Grid.Row="1">
+                    <muxc:Expander Margin="0,12,0,0" Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
+                        <!--TODO:添加降水图表控件-->
+                    </muxc:Expander>
+                </Grid>
+                
                 <!--预警-->
-                <Grid Grid.Row="1"  Margin="-12,24,-12,0" >
+                <Grid Grid.Row="2"  Margin="-12,4,-12,24" >
                     <ListView ItemsSource="{x:Bind ViewModel.Warnings,Mode=OneWay}" SelectionMode="None" HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherWarningBase">
@@ -74,7 +84,7 @@
                 </Grid>
 
                 <!--15天天气预报-->
-                <Grid Grid.Row="2"  Margin="0,24,0,0" >
+                <Grid Grid.Row="3"  Margin="0,0,0,0" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -85,7 +95,7 @@
                                           ItemHeight="128"
                                           DesiredWidth="120"
                                           SelectionMode="None"
-                                          Margin="-32,16,-32,0">
+                                          Margin="-32,0,-32,0">
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
                                 <Grid>
@@ -101,7 +111,7 @@
                                                 Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
 
-                <Grid Grid.Row="3" Margin="0,24,0,0">
+                <Grid Grid.Row="4" Margin="0,24,0,0">
                     <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
@@ -122,7 +132,7 @@
                 </Grid>
 
                 <!--其他信息-->
-                <Grid Grid.Row="4" Margin="0,24,0,0">
+                <Grid Grid.Row="5" Margin="0,24,0,0">
                     <controls:AdaptiveGridView SelectionMode="None"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
@@ -169,7 +179,7 @@
                     </controls:AdaptiveGridView>
 
                 </Grid>
-                <controls:AdaptiveGridView Grid.Row="5" SelectionMode="None"
+                <controls:AdaptiveGridView Grid.Row="6" SelectionMode="None"
                                            HorizontalAlignment="Stretch"
                                            HorizontalContentAlignment="Stretch"
                                            DesiredWidth="200"

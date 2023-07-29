@@ -36,6 +36,8 @@ public partial class MainPageViewModel : ObservableObject
     private GeolocationBase currentLocation;
     [ObservableProperty]
     private List<IndicesBase> indices;
+    [ObservableProperty]
+    private PrecipitationBase precipitation;
     
     public static MainPageViewModel Instance{ get; private set; }
 
@@ -53,19 +55,27 @@ public partial class MainPageViewModel : ObservableObject
         IsLoading = true;
         var dailyProvider = Locator.ServiceProvider.GetService<IDailyForecastProvider>();
         DailyForecasts = await dailyProvider.GetDailyForecasts(geo.Longitude, geo.Latitude);
+
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
         HourlyForecasts = await hourlyProvider.GetHourlyForecasts(geo.Longitude, geo.Latitude);
+
         var nowProvider = Locator.ServiceProvider.GetService<ICurrentWeatherProvider>();
         WeatherNow = await nowProvider.GetCurrentWeather(geo.Longitude, geo.Latitude);
+
         var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
         Warnings = await warningProvider.GetWeatherWarnings(geo.Longitude,geo.Latitude);
-        var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
+
+        var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();      
         var i = await indicesProvider.GetIndices(geo.Longitude, geo.Latitude);
         foreach(var item in i)
         {
             item.Name = item.Name.Replace("指数", "");
         }
         Indices = i;
+
+        var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
+        Precipitation = await precipProvider.GetPrecipitations(geo.Longitude, geo.Latitude);
+
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";

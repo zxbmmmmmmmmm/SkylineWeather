@@ -23,6 +23,7 @@ public class QWeatherProvider : ProviderBase,
     IHourlyForecastProvider,
     IWeatherWarningProvider,
     IIndicesProvider,
+    IPrecipitationProvider,
     ISetting
 {
     public override string Name => "和风天气";
@@ -46,6 +47,7 @@ public class QWeatherProvider : ProviderBase,
         Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider));
     }
     public void GetSettings()
@@ -94,6 +96,12 @@ public class QWeatherProvider : ProviderBase,
         return await handler.RequestAsync(contract, request, Option);
     }
 
+    public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)
+    {
+        var result = await RequestAsync(QWeatherApis.PrecipitationApi, new QWeatherRequest(lon, lat));
+        var res = result.MapToQweatherPrecipitation();
+        return res;
+    }
 }
 public enum QWeatherSettings
 {
