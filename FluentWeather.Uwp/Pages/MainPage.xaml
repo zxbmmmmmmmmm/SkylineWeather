@@ -106,7 +106,7 @@
 
                     </toolkit:AdaptiveGridView>
                     <controls1:TemperatureChart x:Name="TemperatureChart"
-                                                Visibility="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationToVisibilityConverter}}"  
+                                                Visibility="Collapsed"  
                                                 Grid.Row="1" WeatherForecasts="{Binding DailyForecasts}" 
                                                 Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
@@ -216,7 +216,7 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1100"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TemperatureChart.Visibility" Value="Visible"/>
