@@ -10,6 +10,7 @@ using FluentWeather.QWeatherProvider.Models;
 using FluentWeather.Uwp.Helpers;
 using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +32,10 @@ public partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private string weatherDescription;
+    [ObservableProperty]
+    private DateTime sunRise;
+    [ObservableProperty]
+    private DateTime sunSet;
 
     [ObservableProperty]
     private GeolocationBase currentLocation;
@@ -79,6 +84,11 @@ public partial class MainPageViewModel : ObservableObject
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+        }
+        if (DailyForecasts[0] is IAstronomic astronomic)
+        {
+            SunRise = astronomic.SunRise;
+            SunSet = astronomic.SunSet;
         }
         IsLoading = false;
     }

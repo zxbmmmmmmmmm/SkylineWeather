@@ -20,6 +20,8 @@ public static class DailyForecastItemMapper
             Pressure = int.Parse(item.Pressure),
             Time = DateTime.Parse(item.FxDate),
             Visibility = int.Parse(item.Vis),
+            SunRise = DateTime.Parse(item.Sunrise),
+            SunSet = DateTime.Parse(item.Sunset),
 
             WeatherNight = new QWeatherNight
             {

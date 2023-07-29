@@ -6,7 +6,7 @@ using FluentWeather.QWeatherProvider.Helpers;
 namespace FluentWeather.QWeatherProvider.Models;
 
 public class QWeatherDailyForecast : WeatherBase, IWeatherNight, ITemperatureRange, IWind, ITime, IHumidity, IPressure,
-    IVisibility
+    IVisibility,IAstronomic
 {
     public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
     public int Humidity { get; set; }
@@ -19,4 +19,6 @@ public class QWeatherDailyForecast : WeatherBase, IWeatherNight, ITemperatureRan
     public string WindDirection { get; set; }
     public string WindScale { get; set; }
     public int WindSpeed { get; set; }
+    public DateTime SunRise { get ; set ; }
+    public DateTime SunSet { get ; set ; }
 }
