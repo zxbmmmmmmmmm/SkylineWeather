@@ -137,14 +137,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel>
-                        <TextBlock Margin="12,0,0,0" FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                    <TextBlock Margin="12,0,0,0" FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                             <Run Text="&#xE018; " FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/><Run Text="日出"/>
                             <Run Text="{x:Bind ViewModel.SunRise.ToShortTimeString(),Mode=OneWay}"/>
                             <Run Text="  &#xE099; " FontSize="14" FontFamily="{ThemeResource SymbolThemeFontFamily}"/><Run Text="日落"/>
                             <Run Text="{x:Bind ViewModel.SunSet.ToShortTimeString(),Mode=OneWay}"/>
-                        </TextBlock>
-                    </StackPanel>
+                    </TextBlock>
                     <controls:AdaptiveGridView Grid.Row="1" SelectionMode="None"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"

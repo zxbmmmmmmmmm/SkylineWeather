@@ -19,6 +19,7 @@ public static class ApiConstants
         public const string WeatherIndices1D = ApiBase + "/v7/indices/1d";
         public const string WeatherIndices3D = ApiBase + "/v7/indices/3d";
         public const string MinutelyPrecipitation = ApiBase + "/v7/minutely/5m";
+        public const string AirCondition = ApiBase + "/v7/air/now";
 
     }
 }
