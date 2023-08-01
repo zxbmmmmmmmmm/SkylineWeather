@@ -1,18 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
-using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
-using FluentWeather.QWeatherProvider.Models;
-using FluentWeather.Uwp.Helpers;
-using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FluentWeather.Uwp.ViewModels;
@@ -56,7 +49,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         GetWeather(CurrentLocation);
     }
-    public async void GetDailyForecast(double lon, double lat)
+    public async Task GetDailyForecast(double lon, double lat)
     {
         var dailyProvider = Locator.ServiceProvider.GetService<IDailyForecastProvider>();
         DailyForecasts = await dailyProvider.GetDailyForecasts(lon, lat);
@@ -65,29 +58,26 @@ public partial class MainPageViewModel : ObservableObject
             SunRise = astronomic.SunRise;
             SunSet = astronomic.SunSet;
         }
-        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
-        {
-            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
-        }
+
     }
-    public async void GetHourlyForecast(double lon,double lat)
+    public async Task GetHourlyForecast(double lon,double lat)
     {
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
         HourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
     }
-    public async void GetWeatherNow(double lon, double lat)
+    public async Task GetWeatherNow(double lon, double lat)
     {
         IsLoading = true;
         var nowProvider = Locator.ServiceProvider.GetService<ICurrentWeatherProvider>();
         WeatherNow = await nowProvider.GetCurrentWeather(lon, lat);
         IsLoading = false;
     }
-    public async void GetWeatherWarnings(double lon, double lat)
+    public async Task GetWeatherWarnings(double lon, double lat)
     {
         var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
         Warnings = await warningProvider.GetWeatherWarnings(lon, lat);
     }
-    public async void GetIndices(double lon, double lat)
+    public async Task GetIndices(double lon, double lat)
     {
         var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
         var i = await indicesProvider.GetIndices(lon, lat);
@@ -97,31 +87,46 @@ public partial class MainPageViewModel : ObservableObject
         }
         Indices = i;
     }
-    public async void GetWeatherPrecipitations(double lon, double lat)
+    public async Task GetWeatherPrecipitations(double lon, double lat)
     {
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
         Precipitation = await precipProvider.GetPrecipitations(lon, lat);
     }
-    public async void GetAirCondition(double lon, double lat)
+    public async Task GetAirCondition(double lon, double lat)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
         AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
-        if (AirCondition is not null)
-        {
-            WeatherDescription += $"  空气质量-{AirCondition.AqiCategory}";
-        }
     }
-    public void GetWeather(GeolocationBase geo)
+    public async void GetWeather(GeolocationBase geo)
     {
         var lon = geo.Longitude;
         var lat = geo.Latitude;
-        GetWeatherNow(lon, lat);
-        GetWeatherWarnings(lon, lat);
-        GetDailyForecast(lon, lat);
-        GetHourlyForecast(lon, lat);
-        GetWeatherPrecipitations(lon, lat);
-        GetAirCondition(lon, lat);
-        GetIndices(lon, lat);     
+        //await Task.Run(() => GetTasks(lon, lat));
+        List<Task> tasks = new()
+        {
+            GetWeatherNow(lon, lat),
+            GetWeatherWarnings(lon, lat),
+            GetDailyForecast(lon, lat),
+            GetHourlyForecast(lon, lat),
+            GetWeatherPrecipitations(lon, lat),
+            GetAirCondition(lon, lat),
+            GetIndices(lon, lat),
+        };
+        await Task.WhenAll(tasks.ToArray());
+        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
+        {
+            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°  空气质量-{AirCondition.AqiCategory}";
+        }
+    }
+    private void GetTasks(double lon,double lat)
+    {
+        Task.Run(() => GetWeatherNow(lat, lon));
+        Task.Run(() => GetWeatherWarnings(lon, lat));
+        Task.Run(() => GetDailyForecast(lon, lat));
+        Task.Run(() => GetHourlyForecast(lon, lat));
+        Task.Run(() => GetWeatherPrecipitations(lon, lat));
+        Task.Run(() => GetAirCondition(lon, lat));
+        Task.Run(() => GetIndices(lon, lat));
     }
     [ObservableProperty]
     private bool isLoading = true;
