@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Sources;
 
 namespace FluentWeather.QWeatherProvider;
 
@@ -25,6 +26,7 @@ public class QWeatherProvider : ProviderBase,
     IIndicesProvider,
     IPrecipitationProvider,
     IAirConditionProvider,
+    ITyphoonProvider,
     ISetting
 {
     public override string Name => "和风天气";
@@ -50,6 +52,7 @@ public class QWeatherProvider : ProviderBase,
         Locator.ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(QWeatherProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider));
     }
     public void GetSettings()
@@ -112,8 +115,28 @@ public class QWeatherProvider : ProviderBase,
         return res;
     }
 
-
-
+    public async Task<List<TyphoonBase>> GetActiveTyphoons()
+    {
+        var list = await RequestAsync(QWeatherApis.TyphoonListApi, new RequestBase());
+        var active = list.Typhoons.Where(p => p.IsActive == "1").ToList();
+        List<Task> tasks = new List<Task>();
+        foreach (var item in active)
+        {
+            tasks.Add(GetTyphoon(item.Id, item.Name));         
+        }
+        await Task.WhenAll(tasks);
+        return tasks.ConvertAll(p => ((Task<TyphoonBase>)p).Result);
+    }
+    public async Task<TyphoonBase> GetTyphoon (string id,string name)
+    {
+        var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
+        var qtyp = typ.MapToQTyphoon();
+        var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
+        var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
+        qtyp.Forecast = qfor;
+        qtyp.Name = name;
+        return qtyp;
+    }
 }
 public enum QWeatherSettings
 {

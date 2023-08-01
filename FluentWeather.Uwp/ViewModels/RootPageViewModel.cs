@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
@@ -22,8 +24,13 @@ public partial class RootPageViewModel:ObservableObject
         IsPaneOpen = !IsPaneOpen;
     }
     [RelayCommand]
-    public void OpenAboutDialog()
+    public async Task OpenAboutDialog()
     {
-        new AboutDialog().ShowAsync();
+        await new AboutDialog().ShowAsync();
+    }
+    [RelayCommand]
+    public async Task OpenTyphoonDialog()
+    {
+        await new TyphoonDialog().ShowAsync();
     }
 }

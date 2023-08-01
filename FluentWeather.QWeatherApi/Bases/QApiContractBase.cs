@@ -4,14 +4,25 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Runtime.CompilerServices;
+using FluentWeather.QWeatherApi.Helpers;
 
 namespace FluentWeather.QWeatherApi.Bases;
 
-public abstract class QApiContractBase<TResponse> : ApiContractBase<QWeatherRequest, TResponse>
+public abstract class QApiContractBase<TResponse>:QApiContractBase<QWeatherRequest,TResponse>
+{
+    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    {
+        return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&location={Request.Lon},{Request.Lat}");
+    }
+}
+
+public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TResquest, TResponse>
 {
     public override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
-        var requestMessage = new HttpRequestMessage(Method, Url + $"?key={option.Token}&location={Request.Lon},{Request.Lat}");
+        var requestMessage = new HttpRequestMessage(Method, Url + $"?key={option.Token}");
 
         var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
         foreach (var keyValuePair in Cookies)
@@ -34,6 +45,7 @@ public abstract class QApiContractBase<TResponse> : ApiContractBase<QWeatherRequ
         if (ret is null) throw new JsonException("返回 JSON 解析为空");
         return ret;
     }
+
 }
 public class QWeatherRequest : RequestBase
 {

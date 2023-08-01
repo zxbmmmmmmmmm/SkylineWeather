@@ -20,6 +20,8 @@ public static class ApiConstants
         public const string WeatherIndices3D = ApiBase + "/v7/indices/3d";
         public const string MinutelyPrecipitation = ApiBase + "/v7/minutely/5m";
         public const string AirCondition = ApiBase + "/v7/air/now";
-
+        public const string TyphoonTrack = ApiBase + "/v7/tropical/storm-track";
+        public const string TyphoonList = ApiBase + "/v7/tropical/storm-list";
+        public const string TyphoonForecast = ApiBase + "/v7/tropical/storm-forecast";
     }
 }

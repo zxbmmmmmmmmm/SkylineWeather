@@ -11,5 +11,9 @@ public static class QWeatherApis
     public static WeatherIndicesApi WeatherIndicesApi => new();
     public static PrecipitationApi PrecipitationApi => new();
     public static AirConditionApi AirConditionApi => new();
+    public static TyphoonListApi TyphoonListApi => new();
+    public static TyphoonTrackApi TyphoonTrackApi => new();
+    public static TyphoonForecastApi TyphoonForecastApi => new();
+
 
 }
