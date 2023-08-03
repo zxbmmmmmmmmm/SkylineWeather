@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <chart:RadCartesianChart PaletteName="DefaultLight" Margin="-4,0,-40,0">
+        <chart:RadCartesianChart PaletteName="DefaultLight" >
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis BorderBrush="Transparent" PlotMode="BetweenTicks" Visibility="Collapsed">
                     <chart:CategoricalAxis.LineStyle>
