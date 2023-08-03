@@ -5,9 +5,115 @@
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
+    xmlns:geolocation="using:Windows.Devices.Geolocation"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    FullSizeDesired="True"
     mc:Ignorable="d"
+    MinWidth="600"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Style="{ThemeResource DefaultContentDialogStyle}">
-    <Grid>
-        
+    <ContentDialog.Resources>
+        <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter"/>
+        <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter"/>
+    </ContentDialog.Resources>
+    <Grid Width="480">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button Canvas.ZIndex="1" Command="{x:Bind CloseCommand}" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <FontIcon Glyph="&#xE10A;"/>
+        </Button>
+        <Button Grid.Row="0" Background="Transparent" BorderBrush="Transparent">
+            <StackPanel Orientation="Horizontal" Spacing="12" >
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
+                    <Run Text="{x:Bind Typhoons.Count,Mode=OneWay}"/>
+                    <Run Text="个台风"/>
+                </TextBlock>
+                <FontIcon Glyph="&#xE011;" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            </StackPanel>
+            <Button.Flyout>
+                <Flyout Placement="BottomEdgeAlignedLeft">
+                    <Grid>
+                        <ListView ItemsSource="{x:Bind Typhoons,Mode=OneWay}" SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:TyphoonBase">
+                                    <Grid>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind Name}" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock  Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}">
+                                                <Run Text="{x:Bind Now.Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}"/>
+                                                <Run Text="{x:Bind Now.WindSpeed}"/>
+                                                <Run Text="m/s"/>
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        <Grid Grid.Row="1" CornerRadius="8">
+            <maps:MapControl x:Name="TyphoonMap" Grid.Row="1"
+                         MapServiceToken="6iY6JneJPV7AFhir2V6U~8UMtoXGEqONtfgaNlwbBFQ~AjYXGzbTvKUcQK5QKcI3--6uWd0k03mMqMJP8jmYxuYzdd0CrLmhFaQWggXaAggO"
+                         LandmarksVisible="False"
+                         Style="Aerial"
+                         PedestrianFeaturesVisible="False"
+                         TrafficFlowVisible="False">
+                <maps:MapItemsControl x:Name="MapItems" ItemsSource="{x:Bind Tracks,Mode=OneWay}">
+                    <maps:MapItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:TyphoonTrackBase">
+                            <Button x:Name="mapItemButton" Margin="-10,-10,0,0" 
+                                    Background="Transparent" Height="20" Width="20" 
+                                    Padding="0" BorderBrush="Transparent"
+                                    maps:MapControl.Location="{x:Bind Converter={StaticResource TyphoonTrackToGeopointConverter}}"
+                                    ToolTipService.ToolTip="{x:Bind Time}">
+                                <Ellipse Fill="#CCFFFFFF" Height="5" Width="5"/>
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <StackPanel>
+                                            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
+                                            <Run Text="{x:Bind Type}"/>
+                                            <Run Text="("/><Run Text="{x:Bind Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}"/><Run Text=")"/>
+                                            </TextBlock>
+                                            <TextBlock Text="{x:Bind Time}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                            <TextBlock Margin="0,4,0,0">
+                                            <Run Text="最大风速:"/>
+                                            <Run Text="{x:Bind WindSpeed}"/>
+                                            <Run Text="m/s"/>
+                                            </TextBlock>
+                                            <TextBlock Visibility="{x:Bind MoveSpeed,Converter={StaticResource NullToVisibilityConverter}}">
+                                            <Run Text="移动速度:"/>
+                                            <Run Text="{x:Bind MoveSpeed}"/>
+                                            <Run Text="km/h"/>
+                                            </TextBlock>
+                                            <TextBlock >
+                                            <Run Text="气压:"/>
+                                            <Run Text="{x:Bind Pressure}"/>
+                                            <Run Text="kPa"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </Button.Flyout>
+                                <Button.Transitions>
+                                    <TransitionCollection>
+                                        <EntranceThemeTransition/>
+                                    </TransitionCollection>
+                                </Button.Transitions>
+                            </Button>
+                        </DataTemplate>
+                    </maps:MapItemsControl.ItemTemplate>
+                </maps:MapItemsControl>
+            </maps:MapControl>
+
+        </Grid>
     </Grid>
 </ContentDialog>

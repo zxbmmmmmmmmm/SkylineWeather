@@ -32,6 +32,7 @@ public static class TyphoonMapper
             WindRadius10 = item.WindRadius10?.MapToWindRadius(),
             WindRadius12 = item.WindRadius12?.MapToWindRadius(),
             Type = (TyphoonType)Enum.Parse(typeof(TyphoonType), item.Type),
+            Time = (item.Time is null)? DateTime.Now: DateTime.Parse(item.Time)
         };
     }
     public static TyphoonTrackBase MapToQTyphoonTrack(this TyphoonForecastResponse.TyphoonForecastItem item)
@@ -44,6 +45,7 @@ public static class TyphoonMapper
             WindSpeed = int.Parse(item.WindSpeed),
             Pressure = int.Parse(item.Pressure),
             Type = (TyphoonType)Enum.Parse(typeof(TyphoonType), item.Type),
+            Time = DateTime.Parse(item.FxTime),
         };
     }
     public static WindRadius MapToWindRadius(this WindRadiusItem item)

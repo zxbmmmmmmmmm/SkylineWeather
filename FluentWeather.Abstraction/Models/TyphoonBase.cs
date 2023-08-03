@@ -14,7 +14,7 @@ public class TyphoonBase
     public TyphoonTrackBase Now { get; set; }
     public List<TyphoonTrackBase> Forecast { get; set; }
 }
-public class TyphoonTrackBase:IPressure
+public class TyphoonTrackBase:IPressure,ITime
 {
     /// <summary>
     /// 经度
@@ -28,6 +28,7 @@ public class TyphoonTrackBase:IPressure
     public int Pressure { get ; set; }
     public int WindSpeed { get; set; }
     public int? MoveSpeed { get; set; }
+    public DateTime Time { get; set; }
 }
 
 /// <summary>
