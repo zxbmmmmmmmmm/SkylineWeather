@@ -140,6 +140,9 @@
     <Compile Include="Controls\Dialogs\TyphoonDialog.xaml.cs">
       <DependentUpon>TyphoonDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PrecipitationChart.xaml.cs">
+      <DependentUpon>PrecipitationChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings\QWeatherSettingSection.xaml.cs">
       <DependentUpon>QWeatherSettingSection.xaml</DependentUpon>
     </Compile>
@@ -281,6 +284,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\TyphoonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PrecipitationChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
