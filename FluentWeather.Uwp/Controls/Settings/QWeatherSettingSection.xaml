@@ -11,16 +11,15 @@
     d:DesignWidth="400">
 
     <Grid>
-        <lab:SettingsExpander Header="和风天气设置">
+        <lab:SettingsExpander Header="和风天气">
             <lab:SettingsExpander.HeaderIcon>
                 <FontIcon Glyph="&#xE621;"/>
             </lab:SettingsExpander.HeaderIcon>
             <lab:SettingsExpander.Items>
-                <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，你可以在控制台中找到" HeaderIcon="Permissions">
+                <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，你可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
                     <TextBox Text="{x:Bind Token,Mode=TwoWay}"/>
                 </lab:SettingsCard>
             </lab:SettingsExpander.Items>
-
         </lab:SettingsExpander>
     </Grid>
 </UserControl>

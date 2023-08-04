@@ -1,4 +1,5 @@
-﻿using FluentWeather.Uwp.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FluentWeather.Uwp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace FluentWeather.Uwp.Pages;
 /// <summary>
 /// 可用于自身或导航至 Frame 内部的空白页。
 /// </summary>
+[ObservableObject]
 public sealed partial class RootPage : Page
 {
     public RootPageViewModel ViewModel { get; set; } = new();
@@ -43,6 +45,20 @@ public sealed partial class RootPage : Page
         titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
+        PaneFrame.Navigate(typeof(CitiesPage));
+    }
+    [ObservableProperty]
+    public bool canGoBack;
+
+    private void BackButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (!CanGoBack) return;
+        CanGoBack = PaneFrame.CanGoBack;
+        PaneFrame.GoBack();
     }
 
+    private void PaneFrame_Navigated(object sender, NavigationEventArgs e)
+    {
+        CanGoBack = PaneFrame.CanGoBack;
+    }
 }

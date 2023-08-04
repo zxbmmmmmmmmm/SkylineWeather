@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -24,5 +25,11 @@ public sealed partial class CitiesPage : Page
     {
         this.InitializeComponent();
         this.DataContext = this;
+        this.NavigationCacheMode = NavigationCacheMode.Required;
+    }
+
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null, new SlideNavigationTransitionInfo(){Effect = SlideNavigationTransitionEffect.FromRight});
     }
 }

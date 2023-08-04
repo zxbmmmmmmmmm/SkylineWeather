@@ -26,4 +26,5 @@ public sealed partial class SettingsPage : Page
     {
         this.InitializeComponent();
     }
+
 }

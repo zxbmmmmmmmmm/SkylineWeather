@@ -23,14 +23,5 @@ public partial class RootPageViewModel:ObservableObject
     {
         IsPaneOpen = !IsPaneOpen;
     }
-    [RelayCommand]
-    public async Task OpenAboutDialog()
-    {
-        await new AboutDialog().ShowAsync();
-    }
-    [RelayCommand]
-    public async Task OpenTyphoonDialog()
-    {
-        await new TyphoonDialog().ShowAsync();
-    }
+
 }

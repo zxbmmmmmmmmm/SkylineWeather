@@ -5,10 +5,17 @@
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
+    mc:Ignorable="d">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel Margin="12" Spacing="4">
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
+                <RepositionThemeTransition IsStaggeringEnabled="False" />
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+        <settings:QWeatherSettingSection/>
+    </StackPanel>
 </Page>

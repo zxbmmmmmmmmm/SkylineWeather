@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <AutoSuggestBox
@@ -101,6 +102,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <CommandBar Grid.Row="3" VerticalAlignment="Bottom" DefaultLabelPosition="Right">
+            <AppBarButton Label="台风" Command="{x:Bind ViewModel.OpenTyphoonDialogCommand}"/>
+            <AppBarButton x:Name="SettingsButton" Icon="Setting" Label="设置" Click="SettingsButton_Click"/>
+            <AppBarButton Label="关于" Command="{x:Bind ViewModel.OpenAboutDialogCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE946;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
     </Grid>
 </Page>

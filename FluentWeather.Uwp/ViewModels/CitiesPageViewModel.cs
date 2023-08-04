@@ -12,6 +12,7 @@ using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
@@ -82,7 +83,17 @@ public partial class CitiesPageViewModel:ObservableObject
     {
         Cities.Remove(item);
     }
-
+    [RelayCommand]
+    public async Task OpenAboutDialog()
+    {
+        await new AboutDialog().ShowAsync();
+    }
+    [RelayCommand]
+    public async Task OpenTyphoonDialog()
+    {
+        await new TyphoonDialog().ShowAsync();
+    }
+    
     public async void GetCurrentCity()
     {
         await LocationHelper.GetLocation();
