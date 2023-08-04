@@ -7,19 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:lab="using:CommunityToolkit.Labs.WinUI"
     mc:Ignorable="d"
+    xmlns:app="using:FluentWeather.Uwp.Helpers"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-        <lab:SettingsExpander Header="和风天气">
-            <lab:SettingsExpander.HeaderIcon>
-                <FontIcon Glyph="&#xE621;"/>
-            </lab:SettingsExpander.HeaderIcon>
-            <lab:SettingsExpander.Items>
-                <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，你可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
-                    <TextBox Text="{x:Bind Token,Mode=TwoWay}"/>
-                </lab:SettingsCard>
-            </lab:SettingsExpander.Items>
-        </lab:SettingsExpander>
-    </Grid>
+    <lab:SettingsExpander Header="和风天气" IsExpanded="True">
+        <lab:SettingsExpander.HeaderIcon>
+            <FontIcon Glyph="&#xE621;"/>
+        </lab:SettingsExpander.HeaderIcon>
+        <lab:SettingsExpander.Items>
+            <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
+                <TextBox Text="{x:Bind app:Common.Settings.QWeatherToken,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="GeoApi Token" Description="QGeoApi的Token，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
+                <TextBox Text="{x:Bind app:Common.Settings.QGeolocationToken,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+        </lab:SettingsExpander.Items>
+    </lab:SettingsExpander>
 </UserControl>

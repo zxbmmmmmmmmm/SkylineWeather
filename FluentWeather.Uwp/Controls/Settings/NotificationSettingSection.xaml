@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.Settings.NotificationSettingSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    xmlns:app="using:FluentWeather.Uwp.Helpers"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+
+    <lab:SettingsExpander Header="通知" IsExpanded="True">
+        <lab:SettingsExpander.HeaderIcon>
+            <FontIcon Glyph="&#xEA8F;"/>
+        </lab:SettingsExpander.HeaderIcon>
+        <lab:SettingsExpander.Items>
+            <lab:SettingsCard Header="预警" Description="定时检查并推送预警"  Padding="12">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE7BA;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsWarningNotificationEnabled,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="每日天气" Description="推送每日天气预报"  Padding="12" HeaderIcon="Calendar">
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="磁贴" Description="在磁贴上显示每日天气(仅Win10)"  Padding="12">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xECA5;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationTileEnabled,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+        </lab:SettingsExpander.Items>
+    </lab:SettingsExpander>
+</UserControl>

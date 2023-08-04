@@ -30,28 +30,28 @@ public sealed partial class QWeatherSettingSection : UserControl
     public QWeatherSettingSection()
     {
         this.InitializeComponent();
-        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-        var settings = Locator.ServiceProvider.GetService<ISetting>();
-        Token = settingsHelper.ReadLocalSetting(settings.Id + "." + nameof(Token),"");
-        PropertyChanged += OnPropertyChanged; 
+        //var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
+        //var settings = Locator.ServiceProvider.GetService<ISetting>();
+        //Token = settingsHelper.ReadLocalSetting(settings.Id + "." + nameof(Token),"");
+        //PropertyChanged += OnPropertyChanged; 
     }
 
-    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-        var settings = Locator.ServiceProvider.GetService<ISetting>();
-        //Token = settingsHelper.ReadLocalSetting(settings.Id + "." + nameof(Token), "");
+    //private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    //{
+    //    var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
+    //    var settings = Locator.ServiceProvider.GetService<ISetting>();
+    //    //Token = settingsHelper.ReadLocalSetting(settings.Id + "." + nameof(Token), "");
 
-        switch (e.PropertyName)
-        {
-            case nameof(Token):
-                settingsHelper.WriteLocalSetting(settings.Id + "." + nameof(Token), Token);
-                break;
-        }
-    }
+    //    switch (e.PropertyName)
+    //    {
+    //        case nameof(Token):
+    //            settingsHelper.WriteLocalSetting(settings.Id + "." + nameof(Token), Token);
+    //            break;
+    //    }
+    //}
 
-    [ObservableProperty]
-    private string _token;
+    //[ObservableProperty]
+    //private string _token;
 
 
 }

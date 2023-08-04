@@ -7,15 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:app="using:FluentWeather.Uwp.Helpers"
     mc:Ignorable="d">
 
-    <StackPanel Margin="12" Spacing="4">
-        <StackPanel.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
-                <RepositionThemeTransition IsStaggeringEnabled="False" />
-            </TransitionCollection>
-        </StackPanel.ChildrenTransitions>
-        <settings:QWeatherSettingSection/>
-    </StackPanel>
+    <ScrollViewer>
+        <StackPanel Margin="12" Spacing="4">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+            <settings:QWeatherSettingSection/>
+            <settings:NotificationSettingSection/>
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>
