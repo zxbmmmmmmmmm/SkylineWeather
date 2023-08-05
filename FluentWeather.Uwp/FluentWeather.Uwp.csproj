@@ -413,6 +413,10 @@
       <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>
       <Name>FluentWeather.QWeatherProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.Tasks\FluentWeather.Tasks.csproj">
+      <Project>{1d5d0620-541d-44ae-8206-90cb899ccf8c}</Project>
+      <Name>FluentWeather.Tasks</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

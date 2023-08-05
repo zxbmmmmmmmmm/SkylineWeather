@@ -19,6 +19,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Analytics;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using Windows.Storage;
 
 namespace FluentWeather.Uwp;
 
@@ -39,13 +42,32 @@ sealed partial class App : Application
         DIFactory.RegisterRequiredServices();
         AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics),typeof(Crashes));
     }
+    public static async void RegisterBackgroundTask()
+    {
+        var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+        if (backgroundAccessStatus is BackgroundAccessStatus.AllowedSubjectToSystemPolicy or BackgroundAccessStatus.AlwaysAllowed)
+        {
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
+            {
+                if (task.Value.Name == "NotifyTask")
+                {
+                    task.Value.Unregister(true);
+                }
+            }
+            var settingContainer = ApplicationData.Current.LocalSettings;
 
+            BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+            taskBuilder.Name = "NotifyTask";
+            taskBuilder.TaskEntryPoint = "FluentWeather.Tasks.NotifyTask";
+            taskBuilder.SetTrigger(new TimeTrigger(60, false));
+            var registration = taskBuilder.Register();
+        }
+    }
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         e.Handled = true;
         Crashes.TrackError(e.Exception);
-    }  
-
+    }
     /// <summary>
     /// 在应用程序由最终用户正常启动时进行调用。
     /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -54,7 +76,7 @@ sealed partial class App : Application
     protected override void OnLaunched(LaunchActivatedEventArgs e)
     {
         Frame rootFrame = Window.Current.Content as Frame;
-
+        RegisterBackgroundTask();
         // 不要在窗口已包含内容时重复应用程序初始化，
         // 只需确保窗口处于活动状态
         if (rootFrame == null)

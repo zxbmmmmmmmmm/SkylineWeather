@@ -41,7 +41,11 @@ public class QWeatherProvider : ProviderBase,
     {
         Instance = this;
         GetSettings();
-
+    }
+    public QWeatherProvider(string token)
+    {
+        Instance = this;
+        Option.Token = token;
     }
     public static void RegisterRequiredServices()
     {
