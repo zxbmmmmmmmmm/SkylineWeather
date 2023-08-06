@@ -21,7 +21,7 @@
             </StackPanel.ChildrenTransitions>
             <settings:LocationSettingSection/>
             <settings:NotificationSettingSection/>
-            <settings:QWeatherSettingSection/>
+            <settings:QWeatherSettingSection Visibility="Collapsed"/>
 
         </StackPanel>
     </ScrollViewer>
