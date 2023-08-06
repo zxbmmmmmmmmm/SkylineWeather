@@ -2,6 +2,7 @@
 using FluentWeather.QGeoProvider;
 using FluentWeather.QGeoProvider.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -56,7 +57,7 @@ internal class Settings:INotifyPropertyChanged
     }
     public double Latitude
     {
-        get => GetSettings(nameof(Latitude), 116);
+        get => GetSettings(nameof(Latitude), -1);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(Latitude)] = value;
@@ -65,7 +66,7 @@ internal class Settings:INotifyPropertyChanged
     }
     public double Longitude
     {
-        get => GetSettings(nameof(Longitude), 45);
+        get => GetSettings(nameof(Longitude), -1);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(Longitude)] = value;
@@ -96,6 +97,24 @@ internal class Settings:INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "Token"] = value;
+            OnPropertyChanged();
+        }
+    }
+    public Dictionary<string,DateTime> PushedWarnings
+    {
+        get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
+            OnPropertyChanged();
+        }
+    }
+    public string LastPushedTime
+    {
+        get => GetSettings(nameof(LastPushedTime), DateTime.Now.ToLongDateString());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTime)] = value;
             OnPropertyChanged();
         }
     }

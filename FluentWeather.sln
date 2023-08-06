@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.DIContainer",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Tasks", "FluentWeather.Tasks\FluentWeather.Tasks.csproj", "{1D5D0620-541D-44AE-8206-90CB899CCF8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Uwp.Shared", "FluentWeather.Uwp.Shared\FluentWeather.Uwp.Shared.csproj", "{23269C7B-0343-48B6-9909-505D667B0DBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +205,26 @@ Global
 		{1D5D0620-541D-44AE-8206-90CB899CCF8C}.Release|x64.Build.0 = Release|x64
 		{1D5D0620-541D-44AE-8206-90CB899CCF8C}.Release|x86.ActiveCfg = Release|x86
 		{1D5D0620-541D-44AE-8206-90CB899CCF8C}.Release|x86.Build.0 = Release|x86
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|ARM.ActiveCfg = Debug|ARM
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|ARM.Build.0 = Debug|ARM
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|ARM64.Build.0 = Debug|ARM64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|x64.ActiveCfg = Debug|x64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|x64.Build.0 = Debug|x64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|x86.ActiveCfg = Debug|x86
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Debug|x86.Build.0 = Debug|x86
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|ARM.ActiveCfg = Release|ARM
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|ARM.Build.0 = Release|ARM
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|ARM64.ActiveCfg = Release|ARM64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|ARM64.Build.0 = Release|ARM64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x64.ActiveCfg = Release|x64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x64.Build.0 = Release|x64
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x86.ActiveCfg = Release|x86
+		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

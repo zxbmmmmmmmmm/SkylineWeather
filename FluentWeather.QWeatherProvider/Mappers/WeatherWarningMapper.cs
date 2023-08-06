@@ -11,6 +11,7 @@ public static class WeatherWarningMapper
     {
         return new QWeatherWarning
         {
+            Id = item.Id,
             Description = item.Text,
             Sender = item.Sender,
             Severity = item.Severity,

@@ -136,6 +136,8 @@ public partial class CitiesPageViewModel:ObservableObject
         var location = await GetGeolocation();
         if (Common.Settings.DefaultGeolocation.Name is null)
             Common.Settings.DefaultGeolocation = location;
+        Common.Settings.Latitude = location.Latitude;
+        Common.Settings.Longitude = location.Longitude;
         CitiesPageViewModel.Instance.CurrentCity = location;
         MainPageViewModel.Instance.CurrentLocation = location;
     }
