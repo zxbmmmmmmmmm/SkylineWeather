@@ -1,23 +1,14 @@
-﻿using System;
-using Windows.ApplicationModel.Background;
-using Microsoft.Toolkit.Uwp.Notifications;
-using FluentWeather.DIContainer;
-using FluentWeather.Abstraction.Interfaces.WeatherProvider;
-using Microsoft.Extensions.DependencyInjection;
-using FluentWeather.Abstraction.Interfaces.Helpers;
-using Windows.Storage;
-using FluentWeather.Abstraction.Interfaces.Weather;
-using FluentWeather.Abstraction.Models;
-using System.Globalization;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Windows.UI.Notifications;
-using System.Linq;
-using System.Text.Json;
-using static FluentWeather.Tasks.NotifyTask;
-using static FluentWeather.Uwp.Shared.TileHelper;
+﻿using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Uwp.Shared;
-using System.Security.AccessControl;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using Windows.Storage;
+using Windows.UI.Notifications;
+using static FluentWeather.Uwp.Shared.TileHelper;
 
 namespace FluentWeather.Tasks
 {
@@ -30,8 +21,8 @@ namespace FluentWeather.Tasks
             var settingContainer = ApplicationData.Current.LocalSettings;
             var token = settingContainer.Values["qWeather.Token"].ToString();
             var provider = new QWeatherProvider.QWeatherProvider(token);
-            var lat = (double)settingContainer.Values["Latitude"];
-            var lon = (double)settingContainer.Values["Longitude"];
+            var lat = Common.Settings.Latitude;
+            var lon = Common.Settings.Longitude;
             if(lat is -1 || lon is -1)
             {
                 deferral.Complete();
@@ -92,10 +83,5 @@ namespace FluentWeather.Tasks
                 updater.Update(new TileNotification(GenerateTileContent(daily).GetXml()));
             
         }
-
-
-
-
-
     }
 }
