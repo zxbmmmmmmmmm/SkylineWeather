@@ -11,13 +11,13 @@ using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
 
-namespace FluentWeather.Uwp.Helpers;
+namespace FluentWeather.Uwp.Shared;
 #nullable enable
-internal static class Common
+public static class Common
 {
     public static Settings Settings = new();
 }
-internal class Settings:INotifyPropertyChanged
+public class Settings:INotifyPropertyChanged
 {
     public bool IsWarningNotificationEnabled
     {

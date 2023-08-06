@@ -18,6 +18,7 @@ using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using Windows.UI.Xaml;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.ViewModels;
 

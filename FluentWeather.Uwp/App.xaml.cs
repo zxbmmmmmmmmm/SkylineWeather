@@ -22,6 +22,8 @@ using Microsoft.AppCenter.Analytics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.System;
 
 namespace FluentWeather.Uwp;
 
@@ -67,6 +69,27 @@ sealed partial class App : Application
     {
         e.Handled = true;
         Crashes.TrackError(e.Exception);
+    }
+    protected override async void OnActivated(IActivatedEventArgs e)
+    {
+        Frame rootFrame = Window.Current.Content as Frame;
+        RegisterBackgroundTask();
+        if (rootFrame == null)
+        {
+            // 创建要充当导航上下文的框架，并导航到第一页
+            rootFrame = new Frame();
+            rootFrame.NavigationFailed += OnNavigationFailed;
+            // 将框架放在当前窗口中
+            Window.Current.Content = rootFrame;
+        }
+        if (rootFrame.Content == null)
+        {
+            // 当导航堆栈尚未还原时，导航到第一页，
+            // 并通过将所需信息作为导航参数传入来配置
+            rootFrame.Navigate(typeof(RootPage));
+        }
+        // 确保当前窗口处于活动状态
+        Window.Current.Activate();
     }
     /// <summary>
     /// 在应用程序由最终用户正常启动时进行调用。

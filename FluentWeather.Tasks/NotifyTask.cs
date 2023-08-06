@@ -16,7 +16,8 @@ using System.Linq;
 using System.Text.Json;
 using static FluentWeather.Tasks.NotifyTask;
 using static FluentWeather.Uwp.Shared.TileHelper;
-
+using FluentWeather.Uwp.Shared;
+using System.Security.AccessControl;
 
 namespace FluentWeather.Tasks
 {
@@ -25,11 +26,7 @@ namespace FluentWeather.Tasks
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-
-            //
-            // Call asynchronous method(s) using the await keyword.
-            //
-            //TODO:推送通知
+            
             var settingContainer = ApplicationData.Current.LocalSettings;
             var token = settingContainer.Values["qWeather.Token"].ToString();
             var provider = new QWeatherProvider.QWeatherProvider(token);
@@ -50,7 +47,7 @@ namespace FluentWeather.Tasks
         private async Task PushWarnings(double lon, double lat)
         {
             var settingContainer = ApplicationData.Current.LocalSettings;
-            var isWarningNotificationEnabled = (bool)settingContainer.Values["IsWarningNotificationEnabled"];
+            var isWarningNotificationEnabled = Common.Settings.IsWarningNotificationEnabled;
             if (!isWarningNotificationEnabled) return;
 
             var warnings = await QWeatherProvider.QWeatherProvider.Instance.GetWeatherWarnings(lon, lat);
@@ -73,13 +70,11 @@ namespace FluentWeather.Tasks
         private async Task PushDaily(double lon,double lat)
         {
             var settingContainer = ApplicationData.Current.LocalSettings;
-            settingContainer.Values["LastPushedTime"] ??= DateTime.Now.ToLongDateString();
-
-            var isDailyNotificationTileEnabled = (bool)settingContainer.Values["IsDailyNotificationTileEnabled"];
-            var isDailyNotificationEnabled = (bool)settingContainer.Values["IsDailyNotificationEnabled"];
+            var isDailyNotificationTileEnabled = Common.Settings.IsDailyNotificationTileEnabled;
+            var isDailyNotificationEnabled = Common.Settings.IsDailyNotificationEnabled;
             if (!isDailyNotificationEnabled && !isDailyNotificationTileEnabled) return;
 
-            if ((string)settingContainer.Values["LastPushedTime"] == DateTime.Now.ToLongDateString())
+            if (Common.Settings.LastPushedTime == DateTime.Now.ToLongDateString())
                 return;
 
             var daily = await QWeatherProvider.QWeatherProvider.Instance.GetDailyForecasts(lon, lat);

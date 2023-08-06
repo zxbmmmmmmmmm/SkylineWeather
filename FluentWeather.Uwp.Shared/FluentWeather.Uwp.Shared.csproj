@@ -2,6 +2,9 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latestMajor</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{23269C7B-0343-48B6-9909-505D667B0DBF}</ProjectGuid>
@@ -120,6 +123,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Settings.cs" />
     <Compile Include="TileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\FluentWeather.Uwp.Shared.rd.xml" />
@@ -131,11 +135,22 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.3</Version>
     </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>7.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj">
       <Project>{0627214c-2da0-4b49-bb12-dc8c44014eee}</Project>
       <Name>FluentWeather.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj">
+      <Project>{eb061b33-c7dc-4dec-9398-0cc2c4abd619}</Project>
+      <Name>FluentWeather.QGeoProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
+      <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>
+      <Name>FluentWeather.QWeatherProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -169,7 +169,6 @@
     </Compile>
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
@@ -430,6 +429,10 @@
     <ProjectReference Include="..\FluentWeather.Tasks\FluentWeather.Tasks.csproj">
       <Project>{1d5d0620-541d-44ae-8206-90cb899ccf8c}</Project>
       <Name>FluentWeather.Tasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.Uwp.Shared\FluentWeather.Uwp.Shared.csproj">
+      <Project>{23269c7b-0343-48b6-9909-505d667b0dbf}</Project>
+      <Name>FluentWeather.Uwp.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
