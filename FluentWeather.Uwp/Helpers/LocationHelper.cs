@@ -11,7 +11,7 @@ namespace FluentWeather.Uwp.Helpers;
 
 public class LocationHelper
 {
-    public static async Task GetLocation()
+    public static async Task<(double lon,double lat)> GetLocation()
     {
         var accessStatus = await Geolocator.RequestAccessAsync();
         switch (accessStatus)
@@ -20,10 +20,12 @@ public class LocationHelper
 
                 Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = 100 };
                 Geoposition pos = await geolocator.GetGeopositionAsync();
-                var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-                settingsHelper.WriteLocalSetting(AppSettings.Longitude.ToString(),pos.Coordinate.Point.Position.Longitude);
-                settingsHelper.WriteLocalSetting(AppSettings.Latitude.ToString(), pos.Coordinate.Point.Position.Latitude);
-                break;
+                return (pos.Coordinate.Point.Position.Longitude, pos.Coordinate.Point.Position.Latitude);
+
+            case GeolocationAccessStatus.Unspecified:
+            case GeolocationAccessStatus.Denied:
+            default:
+                return (-1, -1);
         }
     }
 }

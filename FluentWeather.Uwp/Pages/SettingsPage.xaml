@@ -11,7 +11,7 @@
     xmlns:app="using:FluentWeather.Uwp.Helpers"
     mc:Ignorable="d">
 
-    <ScrollViewer>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <StackPanel Margin="12" Spacing="4">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
@@ -19,8 +19,10 @@
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
-            <settings:QWeatherSettingSection/>
+            <settings:LocationSettingSection/>
             <settings:NotificationSettingSection/>
+            <settings:QWeatherSettingSection/>
+
         </StackPanel>
     </ScrollViewer>
 

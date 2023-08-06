@@ -17,6 +17,8 @@
                 <valueConverters2:NullToBoolConverter IsInverted="True"/>
                 <valueConverters2:BoolToVisibilityConverter/>
             </valueConverters2:ValueConverterGroup>
+            <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True"/>
+            <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <Style x:Name="RepositionControlStyle" TargetType="FrameworkElement">
                 <Setter Property="Transitions">
                     <Setter.Value>

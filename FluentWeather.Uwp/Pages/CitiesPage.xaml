@@ -12,9 +12,6 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     mc:Ignorable="d">
-    <Page.Resources>
-        <converters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

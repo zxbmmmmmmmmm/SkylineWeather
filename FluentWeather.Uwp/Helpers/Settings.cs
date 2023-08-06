@@ -1,4 +1,5 @@
-﻿using FluentWeather.QGeoProvider;
+﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.QGeoProvider;
 using FluentWeather.QGeoProvider.Models;
 using System;
 using System.ComponentModel;
@@ -41,6 +42,42 @@ internal class Settings:INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsDailyNotificationTileEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool UpdateLocationOnStartup
+    {
+        get => GetSettings(nameof(UpdateLocationOnStartup), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(UpdateLocationOnStartup)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public double Latitude
+    {
+        get => GetSettings(nameof(Latitude), 116);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(Latitude)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public double Longitude
+    {
+        get => GetSettings(nameof(Longitude), 45);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(Longitude)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public GeolocationBase DefaultGeolocation
+    {
+        get => GetSettingsWithClass(nameof(DefaultGeolocation), new GeolocationBase());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(DefaultGeolocation)] = JsonSerializer.Serialize(value);
             OnPropertyChanged();
         }
     }
