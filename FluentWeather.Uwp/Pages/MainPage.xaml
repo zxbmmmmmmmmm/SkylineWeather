@@ -51,7 +51,23 @@
                             <TextBlock Text="{Binding WeatherNow.Temperature}" Style="{ThemeResource TitleTextBlockStyle}" FontSize="80"/>
                             <TextBlock Text="℃" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" FontSize="32" Margin="0,24,0,0" />
                         </StackPanel>
-                        <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Margin="0,4,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+
+                            <HyperlinkButton NavigateUri="{Binding AirCondition.Link}" Background="Transparent" BorderBrush="Transparent" Margin="12,0,0,0" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="15">
+                                        <Run Text="空气质量 -"/>
+                                        <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}"/>
+                                    </TextBlock>
+                                    <FontIcon Glyph="&#xE00F;" FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                </StackPanel>
+                                <i:Interaction.Behaviors>
+                                    <behaviors:ButtonContentSnapBehavior SnapType="Left"/>
+                                </i:Interaction.Behaviors>
+                            </HyperlinkButton>
+                        </StackPanel>
+
                     </StackPanel>
                 </Grid>
                 

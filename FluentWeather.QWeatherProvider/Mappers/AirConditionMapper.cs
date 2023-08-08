@@ -15,7 +15,7 @@ namespace FluentWeather.QWeatherProvider.Mappers
             {
                 Aqi = int.Parse(item.Aqi),
                 AqiCategory = item.Category,
-                AqiLevel = int.Parse(item.Level)
+                AqiLevel = int.Parse(item.Level),
             };
         }
     }

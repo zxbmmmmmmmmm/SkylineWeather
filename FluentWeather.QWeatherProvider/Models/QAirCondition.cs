@@ -7,5 +7,6 @@ namespace FluentWeather.QWeatherProvider.Models
 {
     public class QAirCondition:AirConditionBase
     {
+        public string Link{ get; set; }
     }
 }

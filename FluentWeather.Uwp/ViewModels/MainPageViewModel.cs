@@ -115,7 +115,7 @@ public partial class MainPageViewModel : ObservableObject
         await Task.WhenAll(tasks.ToArray());
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
-            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°  空气质量-{AirCondition.AqiCategory}";
+            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
         }
     }
     private void GetTasks(double lon,double lat)

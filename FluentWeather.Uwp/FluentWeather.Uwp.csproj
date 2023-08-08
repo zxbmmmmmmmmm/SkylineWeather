@@ -131,6 +131,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
