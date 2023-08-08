@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="/Styles/ListView.xaml"/>
+                <ResourceDictionary Source="/Styles/Button.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter"/>
             <valueConverters:TypeConverter x:Key="TypeConverter"/>

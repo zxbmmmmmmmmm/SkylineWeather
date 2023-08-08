@@ -131,6 +131,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
+    <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>
@@ -345,6 +347,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

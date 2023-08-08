@@ -14,6 +14,9 @@
     xmlns:interfaces="using:FluentWeather.Abstraction.Interfaces.Weather"
     xmlns:interop="using:Windows.UI.Xaml.Interop" xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels" 
     xmlns:converters="using:ValueConverters"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     d:RequestedTheme="Dark">
     <Page.Resources>
@@ -89,13 +92,13 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
+                    <toolkit:AdaptiveGridView x:Name="DailyGridView" ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
                                               HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                           OneRowModeEnabled="True"
                                           ItemHeight="128"
                                           DesiredWidth="120"
                                           SelectionMode="None"
-                                          Margin="-32,0,-32,0">
+                                          Margin="0,0,0,0">
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
                                 <Grid>
@@ -103,16 +106,42 @@
                                 </Grid>
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
-
+                        <i:Interaction.Behaviors >
+                            <behaviors:ListViewScrollBehavior/>
+                        </i:Interaction.Behaviors>
                     </toolkit:AdaptiveGridView>
+                    <Button Grid.Row="0" Margin="-20,0,0,0" CornerRadius="50" Height="40" Width="40" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
+                        <FontIcon Glyph="&#xE00E;" Margin="-3,0,0,0"/>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind DailyGridView}"/>
+                        </i:Interaction.Behaviors>
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000"/>
+                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000"/>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
+                    <Button Grid.Row="0"  Margin="0,0,-20,0" CornerRadius="50" Height="40" Width="40" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" >
+                        <FontIcon Glyph="&#xE00F;" Margin="-1,0,0,0"/>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind DailyGridView}"/>
+                        </i:Interaction.Behaviors>
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000"/>
+                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000"/>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
                     <controls1:TemperatureChart x:Name="TemperatureChart"
                                                 Visibility="Collapsed"  
                                                 Grid.Row="1" WeatherForecasts="{Binding DailyForecasts}" 
                                                 Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
-
+                <!--每小时预报-->
                 <Grid Grid.Row="4" Margin="0,24,0,0">
-                    <toolkit:AdaptiveGridView ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
+                    <toolkit:AdaptiveGridView x:Name="HourlyGridView" ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
                                               OneRowModeEnabled="True"
@@ -127,8 +156,35 @@
                                 </Grid>
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
-
+                        <i:Interaction.Behaviors >
+                            <behaviors:ListViewScrollBehavior/>
+                        </i:Interaction.Behaviors>
                     </toolkit:AdaptiveGridView>
+                    <Button Margin="-20,0,0,0" CornerRadius="50" Height="40" Width="40" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
+                        <FontIcon Glyph="&#xE00E;" Margin="-3,0,0,0"/>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind HourlyGridView}"/>
+                        </i:Interaction.Behaviors>
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000"/>
+                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000"/>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
+                    <Button Margin="0,0,-20,0" CornerRadius="50" Height="40" Width="40" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" >
+                        <FontIcon Glyph="&#xE00F;" Margin="-1,0,0,0"/>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind HourlyGridView}"/>
+                        </i:Interaction.Behaviors>
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000"/>
+                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000"/>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
+                    
                 </Grid>
 
                 <!--其他信息-->
@@ -226,10 +282,11 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1100"/>
+                        <AdaptiveTrigger MinWindowWidth="1102"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TemperatureChart.Visibility" Value="Visible"/>
+                        <Setter Target="DailyGridView.Margin" Value="-32,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
