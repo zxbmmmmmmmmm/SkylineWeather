@@ -132,6 +132,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
+    <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
@@ -145,6 +146,9 @@
     </Compile>
     <Compile Include="Controls\Dialogs\TyphoonDialog.xaml.cs">
       <DependentUpon>TyphoonDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Popups\ContentPopup.xaml.cs">
+      <DependentUpon>ContentPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PrecipitationChart.xaml.cs">
       <DependentUpon>PrecipitationChart.xaml</DependentUpon>
@@ -300,6 +304,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\TyphoonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Popups\ContentPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
