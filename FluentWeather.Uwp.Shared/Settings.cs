@@ -84,7 +84,7 @@ public class Settings:INotifyPropertyChanged
     }
     public double Latitude
     {
-        get => GetSettings(nameof(Latitude), -1);
+        get => GetSettings(nameof(Latitude), -1.0);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(Latitude)] = value;
@@ -93,7 +93,7 @@ public class Settings:INotifyPropertyChanged
     }
     public double Longitude
     {
-        get => GetSettings(nameof(Longitude), -1);
+        get => GetSettings(nameof(Longitude), -1.0);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(Longitude)] = value;
