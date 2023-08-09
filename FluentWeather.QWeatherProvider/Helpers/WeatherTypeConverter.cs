@@ -22,6 +22,14 @@ public static class WeatherTypeConverter
         {
             return WeatherType.HeavyRain;
         }
+        if (description.Contains("大雪"))
+        {
+            return WeatherType.HeavySnow;
+        }
+        if (description.Contains("雪"))
+        {
+            return WeatherType.LightSnow;
+        }
         if (description.Contains("雷"))
         {
             return WeatherType.ThunderyHeavyRain;
@@ -50,6 +58,7 @@ public static class WeatherTypeConverter
         {
             return WeatherType.Clear;
         }
+
 
         return WeatherType.Unknown;
     }
