@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.Settings.PersonalizationSettingSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:converters2="using:ValueConverters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <lab:SettingsExpander Header="个性化" IsExpanded="True">
+        <lab:SettingsExpander.HeaderIcon>
+            <FontIcon Glyph="&#xE771;"/>
+        </lab:SettingsExpander.HeaderIcon>
+        <lab:SettingsExpander.Items>
+            <lab:SettingsCard Header="亚克力" Description="Win11下将覆盖Mica，会增加一定占用">
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+                              
+            <lab:SettingsCard Header="背景图片" Description="应用背景设置"  Padding="12">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE8B9;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="选取" Command="{x:Bind SetBackgroundCommand}" CommandParameter="All"/>
+                    <Button Content="打开背景文件夹" Command="{x:Bind OpenBackgroundsFolderCommand}" CommandParameter="All"/>
+                </StackPanel>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="背景模糊半径" Padding="12" >
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE794;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Slider x:Name="BlurAmountSlider" Value="{x:Bind app:Common.Settings.BackgroundBlurAmount,Mode=TwoWay}" Maximum="32"/>
+                    <TextBlock Text="{x:Bind BlurAmountSlider.Value,Mode=OneWay}" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                </StackPanel>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="背景透明度" Padding="12">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE7A1;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Slider x:Name="TransparencySlider" Value="{x:Bind app:Common.Settings.BackgroundTransparency,Mode=TwoWay}"/>
+                    <TextBlock VerticalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                        <Run Text="{x:Bind TransparencySlider.Value,Mode=OneWay}"/><Run Text="%"/>
+                    </TextBlock>
+                </StackPanel>
+            </lab:SettingsCard>
+        </lab:SettingsExpander.Items>
+    </lab:SettingsExpander>
+</UserControl>

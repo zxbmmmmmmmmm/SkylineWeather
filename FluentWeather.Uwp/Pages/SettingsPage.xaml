@@ -19,6 +19,7 @@
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
+            <settings:PersonalizationSettingSection/>
             <settings:LocationSettingSection/>
             <settings:NotificationSettingSection/>
             <settings:QWeatherSettingSection Visibility="Collapsed"/>

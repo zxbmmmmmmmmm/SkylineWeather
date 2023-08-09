@@ -16,6 +16,7 @@
     xmlns:converters="using:ValueConverters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     d:RequestedTheme="Dark">
@@ -27,7 +28,7 @@
     </Page.Resources>
     <Grid>
         <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto" IsEnabled="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationConverter}}">
-            <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,0,32,32" >
+            <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,40,32,32" >
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True"/>
@@ -282,16 +283,18 @@
 
         </ScrollViewer>
         <!--内容区-->
-        <ParallaxView Source="{Binding ElementName=MainScrollViewer}" VerticalShift="32" Visibility="Collapsed">
-            <Grid>
-                <Image Source="https://cn.bing.com/th?id=OHR.HammockDay_EN-CN4013328833_1920x1080.jpg&amp;rf=LaDigue_1920x1080.jpg" Stretch="UniformToFill"/>
+        <ParallaxView Source="{Binding ElementName=MainScrollViewer}" VerticalShift="32">
+            <Grid >
+                <controls:ImageEx Stretch="UniformToFill" Opacity="{x:Bind app:Common.Settings.BackgroundTransparency,Converter={StaticResource TransparencyConverter},Mode=OneWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind ViewModel.WeatherNow.WeatherType,Mode=OneWay}"/>
+                    </i:Interaction.Behaviors>
+                </controls:ImageEx>
                 <Border>
                     <Border.Background>
-                        <media:BackdropBlurBrush Amount="5" />
+                        <media:BackdropBlurBrush Amount="{x:Bind app:Common.Settings.BackgroundBlurAmount,Mode=OneWay}" />
                     </Border.Background>
                 </Border>
-                <Border Background="#80000000"/>
-
             </Grid>
         </ParallaxView>
         <VisualStateManager.VisualStateGroups>

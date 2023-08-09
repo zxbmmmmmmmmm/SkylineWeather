@@ -135,6 +135,7 @@
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
+    <Compile Include="Behaviors\LoadLocalBackgroundBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>
@@ -159,6 +160,9 @@
     <Compile Include="Controls\Settings\NotificationSettingSection.xaml.cs">
       <DependentUpon>NotificationSettingSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Settings\PersonalizationSettingSection.xaml.cs">
+      <DependentUpon>PersonalizationSettingSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings\QWeatherSettingSection.xaml.cs">
       <DependentUpon>QWeatherSettingSection.xaml</DependentUpon>
     </Compile>
@@ -180,6 +184,7 @@
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\TransparencyConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TypeConverter.cs" />
     <Compile Include="Helpers\ValueConverters\SeverityColorToColorConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TyphoonTrackToGeopointConverter.cs" />
@@ -320,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Settings\NotificationSettingSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\PersonalizationSettingSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

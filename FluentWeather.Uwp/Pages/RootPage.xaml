@@ -8,9 +8,11 @@
     mc:Ignorable="d"  
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid Margin="0,0,0,0">
+        <Border Background="{ThemeResource SystemControlAcrylicWindowBrush}" Visibility="{x:Bind app:Common.Settings.IsAcrylicEnabled,Mode=OneWay}"/>
         <Grid x:Name="TitleGrid" VerticalAlignment="Top" Canvas.ZIndex="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -37,7 +39,7 @@
 
 
 
-            <Grid  Grid.Column="2" x:Name="Title">
+            <Grid  Grid.Column="2" x:Name="Title" >
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" >
                     <Run  Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name,Mode=OneWay}"/>
                 </TextBlock>
@@ -53,13 +55,13 @@
             <SplitView.Pane >
                 <Frame x:Name="PaneFrame" Navigated="PaneFrame_Navigated" Margin="0,45,0,0" />
             </SplitView.Pane>
-            <SplitView.Content>
+            <SplitView.Content >
                 <Grid Background="{ThemeResource NavigationViewContentBackground}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <local:MainPage Grid.Row="1"/>
+                    <local:MainPage Grid.Row="0" Grid.RowSpan="2"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>

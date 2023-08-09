@@ -55,6 +55,33 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public int BackgroundBlurAmount
+    {
+        get => GetSettings(nameof(BackgroundBlurAmount), 8);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(BackgroundBlurAmount)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public int BackgroundTransparency
+    {
+        get => GetSettings(nameof(BackgroundTransparency), 50);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(BackgroundTransparency)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool IsAcrylicEnabled
+    {
+        get => GetSettings(nameof(IsAcrylicEnabled), Environment.OSVersion.Version.Build < 21996);//Win10下默认开启
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(IsAcrylicEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
     public double Latitude
     {
         get => GetSettings(nameof(Latitude), -1);
@@ -100,6 +127,7 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    
     public Dictionary<string,DateTime> PushedWarnings
     {
         get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());
