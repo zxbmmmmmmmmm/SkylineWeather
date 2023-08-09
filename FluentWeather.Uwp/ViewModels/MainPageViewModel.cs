@@ -95,7 +95,14 @@ public partial class MainPageViewModel : ObservableObject
     public async Task GetAirCondition(double lon, double lat)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
-        AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
+        try
+        {
+            AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
+        }
+        catch
+        {
+            AirCondition = new AirConditionBase();
+        }
     }
     public async void GetWeather(GeolocationBase geo)
     {

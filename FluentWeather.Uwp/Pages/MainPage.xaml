@@ -55,7 +55,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Margin="0,4,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
 
-                            <HyperlinkButton NavigateUri="{Binding AirCondition.Link}" Background="Transparent" BorderBrush="Transparent" Margin="12,0,0,0" >
+                            <HyperlinkButton NavigateUri="{Binding AirCondition.Link}" Visibility="{x:Bind ViewModel.AirCondition.AqiCategory,Converter={StaticResource NullToVisibilityConverter}}" Background="Transparent" BorderBrush="Transparent" Margin="12,0,0,0" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="15">
                                         <Run Text="空气质量 -"/>
@@ -73,8 +73,8 @@
                 </Grid>
                 
                 <!--降水概率-->
-                <Grid Grid.Row="1">
-                    <muxc:Expander Margin="0,12,0,0" Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
+                <Grid Grid.Row="1"  Margin="0,12,0,0">
+                    <muxc:Expander Visibility="{x:Bind ViewModel.Precipitation.Precipitations,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
                         <controls1:PrecipitationChart Precipitations="{x:Bind ViewModel.Precipitation.Precipitations,Mode=OneWay}" Height="200"/>
                     </muxc:Expander>
                 </Grid>
