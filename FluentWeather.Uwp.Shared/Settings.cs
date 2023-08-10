@@ -134,16 +134,16 @@ public class Settings:INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
-            OnPropertyChanged();
+            //OnPropertyChanged();
         }
     }
-    public string LastPushedTime
+    public int LastPushedTime
     {
-        get => GetSettings(nameof(LastPushedTime), DateTime.Now.ToLongDateString());
+        get => GetSettings(nameof(LastPushedTime), DateTime.Now.DayOfYear);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTime)] = value;
-            OnPropertyChanged();
+            //OnPropertyChanged();
         }
     }
 

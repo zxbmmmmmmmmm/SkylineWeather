@@ -65,7 +65,7 @@ namespace FluentWeather.Tasks
             var isDailyNotificationEnabled = Common.Settings.IsDailyNotificationEnabled;
             if (!isDailyNotificationEnabled && !isDailyNotificationTileEnabled) return;
 
-            if (Common.Settings.LastPushedTime == DateTime.Now.ToLongDateString())
+            if (Common.Settings.LastPushedTime == DateTime.Now.Date.DayOfYear)
                 return;
 
             var daily = await QWeatherProvider.QWeatherProvider.Instance.GetDailyForecasts(lon, lat);
@@ -81,7 +81,9 @@ namespace FluentWeather.Tasks
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             if(isDailyNotificationTileEnabled)
                 updater.Update(new TileNotification(GenerateTileContent(daily).GetXml()));
-            
+            Common.Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+
+
         }
     }
 }
