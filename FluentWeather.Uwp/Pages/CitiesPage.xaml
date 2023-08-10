@@ -56,11 +56,6 @@
             ItemContainerStyle="{StaticResource ListViewItemNewStyle}"
             SelectedIndex="{x:Bind ViewModel.CurrentViewSelection, Mode=TwoWay}">
             <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" />
-            <i:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="SelectionChanged">
-                    <core:InvokeCommandAction />
-                </core:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
         </ListView>
         <TextBlock
             Grid.Row="1"

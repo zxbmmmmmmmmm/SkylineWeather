@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
+    <Compile Include="Behaviors\ListViewOpenFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
     <Compile Include="Behaviors\LoadLocalBackgroundBehavior.cs" />

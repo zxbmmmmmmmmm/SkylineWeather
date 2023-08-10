@@ -80,7 +80,7 @@
                 </Grid>
                 
                 <!--预警-->
-                <Grid Grid.Row="2"  Margin="-12,4,-12,24" >
+                <Grid Grid.Row="2"  Margin="-12,4,-12,0" >
                     <ListView ItemsSource="{x:Bind ViewModel.Warnings,Mode=OneWay}" SelectionMode="None" HorizontalContentAlignment="Stretch">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherWarningBase">
@@ -112,14 +112,14 @@
                     <toolkit:AdaptiveGridView x:Name="DailyGridView" ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
                                               HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                           OneRowModeEnabled="True"
-                                          ItemHeight="128"
+                                          ItemHeight="150"
                                           DesiredWidth="120"
                                           SelectionMode="None"
                                           Margin="0,0,0,0">
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
                                 <Grid>
-                                    <controls1:WeatherForecastItem WeatherInfo="{x:Bind}" />
+                                    <controls1:WeatherForecastItem WeatherInfo="{x:Bind}" VerticalAlignment="Center"/>
                                 </Grid>
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
@@ -267,16 +267,32 @@
                                            HorizontalContentAlignment="Stretch"
                                            DesiredWidth="200"
                                            x:DefaultBindMode="OneWay"
+                                           IsItemClickEnabled="True"
                                            ItemsSource="{x:Bind ViewModel.Indices}" 
                                            ItemHeight="90">
                     <controls:AdaptiveGridView.ItemTemplate>
                         <DataTemplate x:DataType="models:IndicesBase">
-                            <StackPanel x:Name="WindInfoPanel" Margin="12" HorizontalAlignment="Left">
+                            <StackPanel Margin="12" HorizontalAlignment="Stretch">
                                 <TextBlock Text="{x:Bind Name}"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
-                                <TextBlock  FontSize="25" Text="{x:Bind Category}" ToolTipService.ToolTip="{x:Bind Description}"/>
+                                <TextBlock  FontSize="25" Text="{x:Bind Category}" />
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout Placement="Top">
+                                        <StackPanel MaxWidth="256" Spacing="4">
+                                            <TextBlock   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18">
+                                                <Run  Text="{x:Bind Name}"/>
+                                                <Run  Text="-"/>
+                                                <Run  Text="{x:Bind Category}"/>
+                                            </TextBlock>
+                                            <TextBlock Text="{x:Bind Description}" IsTextSelectionEnabled="True" TextWrapping="Wrap" FontSize="16"/>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
                         </DataTemplate>
                     </controls:AdaptiveGridView.ItemTemplate>
+                    <i:Interaction.Behaviors>
+                        <behaviors:ListViewOpenFlyoutBehavior/>
+                    </i:Interaction.Behaviors>
                 </controls:AdaptiveGridView>
             </Grid>
 
