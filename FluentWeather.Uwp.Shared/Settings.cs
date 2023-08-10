@@ -39,7 +39,7 @@ public class Settings:INotifyPropertyChanged
     }
     public bool IsDailyNotificationTileEnabled
     {
-        get => GetSettings(nameof(IsDailyNotificationTileEnabled), true);
+        get => GetSettings(nameof(IsDailyNotificationTileEnabled), Environment.OSVersion.Version.Build < 21996);//Win10下默认开启
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsDailyNotificationTileEnabled)] = value;
