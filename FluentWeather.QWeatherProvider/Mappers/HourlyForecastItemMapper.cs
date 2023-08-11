@@ -18,6 +18,7 @@ public static class HourlyForecastItemMapper
             Pressure = int.Parse(item.Pressure),
             Temperature = int.Parse(item.Temp),
             Time = DateTime.Parse(item.FxTime),
+            PrecipitationProbability = item.Pop is null or "" ? null : int.Parse(item.Pop),
         };
     }
 }

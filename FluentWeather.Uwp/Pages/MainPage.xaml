@@ -178,10 +178,16 @@
                                                 <TextBlock  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18">
                                                     <Run Text="{Binding Time.Hour}"/><Run Text=":00"/>
                                                 </TextBlock>
-                                                <TextBlock FontSize="16">
-                                                    <Run Text="{x:Bind Description}" />
-                                                    <Run Text="{Binding Temperature}"/><Run Text="°"/>
-                                                </TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock FontSize="16">
+                                                        <Run Text="{x:Bind Description}" />
+                                                        <Run Text="{Binding Temperature}"/><Run Text="°"/>
+                                                    </TextBlock>
+                                                    <FontIcon Glyph="&#xEB42;" Margin="8,2,0,0" FontSize="12" Visibility="{Binding PrecipitationProbability,Converter={StaticResource NullToVisibilityConverter}}"/>
+                                                    <TextBlock  FontSize="16" Margin="2,0,0,0" Visibility="{Binding PrecipitationProbability,Converter={StaticResource NullToVisibilityConverter}}">
+                                                        <Run Text="{Binding PrecipitationProbability}"/><Run Text="%"/>
+                                                    </TextBlock>
+                                                </StackPanel>
                                                 <TextBlock FontSize="16">
                                                     <Run Text="{Binding WindDirection}" />
                                                     <Run Text="{Binding WindSpeed}"/>
