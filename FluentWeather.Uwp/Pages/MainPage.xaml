@@ -12,12 +12,14 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:controls1="using:FluentWeather.Uwp.Controls"
     xmlns:interfaces="using:FluentWeather.Abstraction.Interfaces.Weather"
-    xmlns:interop="using:Windows.UI.Xaml.Interop" xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels" 
+    xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels" 
     xmlns:converters="using:ValueConverters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"
     mc:Ignorable="d"
     d:RequestedTheme="Dark">
     <Page.Resources>
@@ -146,7 +148,7 @@
                     
                 </Grid>
 
-                <!--15天天气预报-->
+                <!--7天天气预报-->
                 <Grid Grid.Row="3"  Margin="0,0,0,0" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -154,6 +156,7 @@
                     </Grid.RowDefinitions>
                     <toolkit:AdaptiveGridView x:Name="DailyGridView" ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
                                               HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                              IsItemClickEnabled="True"
                                           OneRowModeEnabled="True"
                                           ItemHeight="150"
                                           DesiredWidth="120"
@@ -168,6 +171,7 @@
                         </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors >
                             <behaviors:ListViewScrollBehavior/>
+                            <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog"/>
                         </i:Interaction.Behaviors>
                     </toolkit:AdaptiveGridView>
                     <Button Grid.Row="0" Margin="-20,0,0,0" CornerRadius="50" Height="40" Width="40" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">

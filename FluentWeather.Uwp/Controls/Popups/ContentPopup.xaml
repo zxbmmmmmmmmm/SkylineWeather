@@ -10,18 +10,24 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <Grid Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="BackButton" VerticalAlignment="Top" Grid.Column="0" Margin="4,4,0,0" Background="Transparent" BorderThickness="0"  Height="36" Width="42">
-                <FontIcon FontSize="14" Glyph="&#xE112;"/>
-            </Button>
-            <TextBlock VerticalAlignment="Center" Margin="4,2,0,0"/>
-        </StackPanel>
-        
+    <Grid Name="MainGrid" Background="#80000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid
+              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              BorderThickness="{ThemeResource ContentDialogBorderWidth}"
+              BorderBrush="{ThemeResource ContentDialogBorderBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Button Canvas.ZIndex="1" x:Name="BackButton" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Margin="4" Background="Transparent" BorderThickness="0"  Height="36" Width="42">
+                    <FontIcon FontSize="14" Glyph="&#xE0A6;"/>
+                </Button>
+                <TextBlock x:Name="TitleTextBlock"/>
+            </StackPanel>
+
+            <Frame Grid.Row="1" x:Name="ContentFrame"/>
+        </Grid>
         
     </Grid>
 </UserControl>

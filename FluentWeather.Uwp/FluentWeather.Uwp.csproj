@@ -131,7 +131,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\ButtonCloseContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
+    <Compile Include="Behaviors\ListViewOpenContentDialogBehavior.cs" />
+    <Compile Include="Behaviors\ListViewOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
@@ -142,6 +145,9 @@
     </Compile>
     <Compile Include="Controls\Dialogs\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dialogs\DailyForecastDialog.xaml.cs">
+      <DependentUpon>DailyForecastDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Dialogs\SetLocationDialog.xaml.cs">
       <DependentUpon>SetLocationDialog.xaml</DependentUpon>
@@ -305,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Dialogs\DailyForecastDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Dialogs\SetLocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -370,6 +380,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

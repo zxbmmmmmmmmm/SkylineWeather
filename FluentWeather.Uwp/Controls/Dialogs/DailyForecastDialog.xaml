@@ -1,0 +1,30 @@
+﻿<ContentDialog
+    x:Class="FluentWeather.Uwp.Controls.Dialogs.DailyForecastDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    mc:Ignorable="d"
+    FullSizeDesired="True"
+    Style="{StaticResource ContentDialogFullStyle}">
+    <Grid Margin="-32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid  Height="128"/>
+        <Grid Background="{ThemeResource ContentDialogSmokeFill}" Grid.Row="1"
+              BorderThickness="{ThemeResource ContentDialogSeparatorThickness}" 
+              BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" >
+        </Grid>
+        <Button HorizontalAlignment="Right" Grid.Row="2"  Content="关闭" Margin="16,12,20,18" Padding="64,6">
+            <i:Interaction.Behaviors>
+                <behaviors:ButtonCloseContentDialogBehavior/>
+            </i:Interaction.Behaviors>
+        </Button>
+    </Grid>
+</ContentDialog>

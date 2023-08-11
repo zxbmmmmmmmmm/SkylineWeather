@@ -29,16 +29,15 @@ namespace FluentWeather.Uwp.Controls.Popups
                 ShouldConstrainToRootBounds = true,
             };
         }
-        public void Show(FrameworkElement content,string title = "")
+        public void Show(Type pageType,object parameter= null,string title = "")
         {
             this.Width = Window.Current.Bounds.Width;
             this.Height = Window.Current.Bounds.Height;
             Window.Current.SizeChanged += WindowSizeChanged;
             _popup.IsOpen = true;
+            TitleTextBlock.Text = title;
             BackButton.Click += BackButton_Click;
-            if (content is null) return;
-            MainGrid.Children.Add(content);
-            Grid.SetRow(content, 1);
+            ContentFrame.Navigate(pageType, parameter);
         }
 
         private void WindowSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
@@ -54,7 +53,6 @@ namespace FluentWeather.Uwp.Controls.Popups
             _popup = null;
             Window.Current.SizeChanged -= WindowSizeChanged;
             BackButton.Click -= BackButton_Click;
-            MainGrid.Children.Clear();
         }
     }
 }

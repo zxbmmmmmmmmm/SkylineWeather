@@ -7,14 +7,14 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonOpenContentPopupBehavior:Behavior<ButtonBase>
+public class ListViewOpenContentPopupBehavior:Behavior<ListViewBase>
 {
     protected override void OnAttached()
     {
         base.OnAttached();
-        AssociatedObject.Click += ButtonClicked;
+        AssociatedObject.ItemClick += ListItemClicked;
     }
-    
+
     public Type PageType
     {
         get => (Type)GetValue(PageTypeProperty);
@@ -25,14 +25,14 @@ public class ButtonOpenContentPopupBehavior:Behavior<ButtonBase>
     public static readonly DependencyProperty PageTypeProperty =
         DependencyProperty.Register(nameof(PageType), typeof(Type), typeof(ButtonOpenContentPopupBehavior), new PropertyMetadata(typeof(Page)));
 
-
     protected override void OnDetaching()
     {
         base.OnDetaching();
-        AssociatedObject.Click -= ButtonClicked;
+        AssociatedObject.ItemClick -= ListItemClicked;
     }
-    private void ButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+    private void ListItemClicked(object sender, ItemClickEventArgs e)
     {
         new ContentPopup().Show(PageType);
     }
+
 }
