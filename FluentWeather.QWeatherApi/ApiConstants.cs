@@ -12,6 +12,7 @@ public static class ApiConstants
         public const string DailyForecast7D = ApiBase + "/v7/weather/7d";
         public const string DailyForecast10D = ApiBase + "/v7/weather/10d";
         public const string DailyForecast15D = ApiBase + "/v7/weather/15d";
+        public const string DailyForecast30D = ApiBase + "/v7/weather/30d";
         public const string HourlyForecast24H = ApiBase + "/v7/weather/24h";
         public const string HourlyForecast72H = ApiBase + "/v7/weather/72h";
         public const string HourlyForecast168H = ApiBase + "/v7/weather/168h";

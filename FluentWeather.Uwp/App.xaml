@@ -22,6 +22,8 @@
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True"/>
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <valueConverters:TransparencyConverter x:Key="TransparencyConverter"/>
+            <valueConverters:DateConverter x:Key="DateConverter"/>
+            <valueConverters:ShortDateConverter x:Key="ShortDateConverter"/>
             <Style x:Name="RepositionControlStyle" TargetType="FrameworkElement">
                 <Setter Property="Transitions">
                     <Setter.Value>

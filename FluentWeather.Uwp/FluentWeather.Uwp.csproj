@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CitiesPageViewModel.cs" />
+    <Compile Include="ViewModels\DailyForecastDialogViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\RootPageViewModel.cs" />
   </ItemGroup>

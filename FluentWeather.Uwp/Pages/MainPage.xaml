@@ -154,7 +154,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <toolkit:AdaptiveGridView x:Name="DailyGridView" ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
+                    <toolkit:AdaptiveGridView x:Name="DailyGridView" ItemsSource="{x:Bind ViewModel.DailyForecasts7D,Mode=OneWay}" 
                                               HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                               IsItemClickEnabled="True"
                                           OneRowModeEnabled="True"
@@ -171,7 +171,7 @@
                         </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors >
                             <behaviors:ListViewScrollBehavior/>
-                            <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog"/>
+                            <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog" UseArguments="True"/>
                         </i:Interaction.Behaviors>
                     </toolkit:AdaptiveGridView>
                     <Button Grid.Row="0" Margin="-20,0,0,0" CornerRadius="50" Height="40" Width="40" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
@@ -200,7 +200,7 @@
                     </Button>
                     <controls1:TemperatureChart x:Name="TemperatureChart"
                                                 Visibility="Collapsed"  
-                                                Grid.Row="1" WeatherForecasts="{Binding DailyForecasts}" 
+                                                Grid.Row="1" WeatherForecasts="{Binding DailyForecasts7D}" 
                                                 Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
                 <!--每小时预报-->

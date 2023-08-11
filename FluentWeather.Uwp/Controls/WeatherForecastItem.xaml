@@ -5,15 +5,10 @@
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:interfaces="using:FluentWeather.Abstraction.Interfaces.Weather"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    <UserControl.Resources>
-        <valueConverters:DateConverter x:Key="DateConverter"/>
-        <valueConverters:ShortDateConverter x:Key="ShortDateConverter"/>
-    </UserControl.Resources>
     <Grid>
         <StackPanel Spacing="4" x:DefaultBindMode="OneWay">
             <TextBlock d:Text="今天"  Text="{Binding WeatherInfo.Time,Converter={StaticResource DateConverter}}" FontSize="17" HorizontalAlignment="Center"/>

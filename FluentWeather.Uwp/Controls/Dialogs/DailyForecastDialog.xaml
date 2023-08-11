@@ -7,20 +7,128 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls2="using:FluentWeather.Uwp.Controls"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d"
     FullSizeDesired="True"
     Style="{StaticResource ContentDialogFullStyle}">
-    <Grid Margin="-32">
+    <Grid x:Name="ContentGrid" Margin="-32">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <RepositionThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="ForecastRow" Height="Auto"/>
+            <RowDefinition x:Name="DetailsRow" Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid  Height="128"/>
+        <Grid >
+            <controls:AdaptiveGridView x:Name="ForecastGridView" Margin="16,14,16,-6" ItemHeight="100" 
+                                       DesiredWidth="160" 
+                                       SelectedItem="{x:Bind ViewModel.Selected,Mode=TwoWay}"
+                                       ItemsSource="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}" 
+                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                       VerticalAlignment="Center" 
+                                       DoubleTapped="ForecastGridView_DoubleTapped"
+                                       OneRowModeEnabled="True">
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:WeatherBase">
+                        <Grid RowSpacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{Binding Time,Converter={StaticResource DateConverter}}"  HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Time,Converter={StaticResource ShortDateConverter}}"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+                                <Image Source="{x:Bind WeatherType,Converter={StaticResource WeatherTypeToIconConverter}}"  Height="45" Stretch="Uniform" />
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock d:Text="晴" FontWeight="SemiBold" Text="{x:Bind Description}" FontSize="18" />
+                                    <TextBlock  >
+                                        <Run  Text="{Binding MinTemperature}"/><Run Text="°"/>
+                                        <Run Text="/"/>
+                                        <Run  Text="{Binding MaxTemperature}"/><Run Text="°"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+            </controls:AdaptiveGridView>
+        </Grid>
         <Grid Background="{ThemeResource ContentDialogSmokeFill}" Grid.Row="1"
               BorderThickness="{ThemeResource ContentDialogSeparatorThickness}" 
-              BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" >
+              BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" x:DefaultBindMode="OneWay" Padding="24">
+            <StackPanel Spacing="4">
+                <TextBlock 
+                    Style="{ThemeResource TitleTextBlockStyle}" >
+                    <Run Text="{Binding Selected.Time,Converter={StaticResource DateConverter}}"/>
+                    <Run Text="{Binding Selected.Time,Converter={StaticResource ShortDateConverter}}"  />
+                </TextBlock>
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">
+                    <Run Text="{Binding Selected.MinTemperature}"/><Run Text="°"/>
+                    <Run Text="/"/>
+                    <Run Text="{Binding Selected.MaxTemperature}"/><Run Text="°"/>
+                    <Run Text="{x:Bind ViewModel.Selected.Description}"/>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Spacing="24">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Selected.WindDirection}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <TextBlock FontSize="16">
+                            <Run Text="{Binding Selected.WindSpeed}" FontSize="32"/>
+                            <Run Text="km/h"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="湿度" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <TextBlock FontSize="16">
+                            <Run Text="{Binding Selected.Humidity}" FontSize="32"/>
+                            <Run Text="%"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="能见度" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <TextBlock FontSize="16">
+                            <Run Text="{Binding Selected.Visibility}" FontSize="32"/>
+                            <Run Text="km"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="日出" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <TextBlock FontSize="16">
+                            <Run Text="{x:Bind ViewModel.SunRise.ToShortTimeString()}" FontSize="32"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="日落" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
+                        <TextBlock FontSize="16">
+                            <Run Text="{x:Bind ViewModel.SunSet.ToShortTimeString()}" FontSize="32"/>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            
         </Grid>
+        <Button Grid.Row="1" x:Name="ExpandBtn" 
+                Click="ExpandForecastBtnClicked" 
+                HorizontalAlignment="Right" 
+                Margin="0,0,24,0" 
+                BorderThickness="1,0,1,1"
+                VerticalAlignment="Top" 
+                Padding="24,4"
+                CornerRadius="0,0,4,4">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <FontIcon x:Name="ExpandIcon" Glyph="&#xE011;" FontSize="16"/>
+                <TextBlock x:Name="ExpandText" Text="展开" FontSize="16"/>
+            </StackPanel>
+        </Button>
         <Button HorizontalAlignment="Right" Grid.Row="2"  Content="关闭" Margin="16,12,20,18" Padding="64,6">
             <i:Interaction.Behaviors>
                 <behaviors:ButtonCloseContentDialogBehavior/>

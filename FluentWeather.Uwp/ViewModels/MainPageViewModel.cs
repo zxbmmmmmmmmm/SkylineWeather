@@ -13,7 +13,9 @@ namespace FluentWeather.Uwp.ViewModels;
 public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
     private List<WeatherBase> dailyForecasts =new();
+    public List<WeatherBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
     private List<WeatherBase> hourlyForecasts ;

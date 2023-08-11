@@ -48,7 +48,7 @@ public class ListViewOpenContentDialogBehavior:Behavior<ListViewBase>
 
         if(UseArguments)
         {
-            var dialog = Activator.CreateInstance(DialogType,e.ClickedItem) as ContentDialog;
+            var dialog = Activator.CreateInstance(DialogType,AssociatedObject,e.ClickedItem) as ContentDialog;
             await dialog?.ShowAsync();
         }
         else
