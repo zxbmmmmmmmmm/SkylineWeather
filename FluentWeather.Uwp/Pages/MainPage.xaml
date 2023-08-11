@@ -157,8 +157,10 @@
                                                 Margin="-32,0,-28,32" Height="200"/>
                 </Grid>
                 <!--每小时预报-->
-                <Grid Grid.Row="4" Margin="0,24,0,0">
-                    <toolkit:AdaptiveGridView x:Name="HourlyGridView" ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
+                <Grid Grid.Row="4" Margin="0,12,0,0">
+                    <toolkit:AdaptiveGridView x:Name="HourlyGridView" 
+                                              ItemsSource="{x:Bind ViewModel.HourlyForecasts,Mode=OneWay}"
+                                              IsItemClickEnabled="True"
                                               HorizontalAlignment="Stretch"
                                               HorizontalContentAlignment="Stretch"
                                               OneRowModeEnabled="True"
@@ -169,12 +171,42 @@
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
                                 <Grid>
-                                    <controls1:WeatherHourlyForecastItem WeatherInfo="{x:Bind}" />
+                                    <controls1:WeatherHourlyForecastItem WeatherInfo="{x:Bind}" VerticalAlignment="Center"/>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <Flyout>
+                                            <StackPanel MaxWidth="256" Spacing="4">
+                                                <TextBlock  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18">
+                                                    <Run Text="{Binding Time.Hour}"/><Run Text=":00"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="16">
+                                                    <Run Text="{x:Bind Description}" />
+                                                    <Run Text="{Binding Temperature}"/><Run Text="°"/>
+                                                </TextBlock>
+                                                <TextBlock FontSize="16">
+                                                    <Run Text="{Binding WindDirection}" />
+                                                    <Run Text="{Binding WindSpeed}"/>
+                                                    <Run Text="km/h"/>
+                                                </TextBlock>
+                                                <StackPanel Margin="0,4,0,0" Spacing="4" HorizontalAlignment="Left" Orientation="Horizontal">
+                                                    <TextBlock Text="湿度:"/>
+                                                    <TextBlock >
+                                                        <Run Text="{Binding Humidity}"/><Run Text="%"/>
+                                                    </TextBlock>
+                                                    <TextBlock Text="气压:"/>
+                                                    <TextBlock >
+                                                        <Run Text="{Binding Pressure}"/>
+                                                        <Run Text="kPa"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Flyout>
+                                    </FlyoutBase.AttachedFlyout>
                                 </Grid>
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors >
                             <behaviors:ListViewScrollBehavior/>
+                            <behaviors:ListViewOpenFlyoutBehavior/>
                         </i:Interaction.Behaviors>
                     </toolkit:AdaptiveGridView>
                     <Button Margin="-20,0,0,0" CornerRadius="50" Height="40" Width="40" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
