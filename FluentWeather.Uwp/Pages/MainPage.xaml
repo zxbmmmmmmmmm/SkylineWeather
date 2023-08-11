@@ -55,7 +55,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind ViewModel.WeatherDescription}" Margin="0,4,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="16"/>
 
-                            <HyperlinkButton NavigateUri="{Binding AirCondition.Link}" Visibility="{x:Bind ViewModel.AirCondition.AqiCategory,Converter={StaticResource NullToVisibilityConverter}}" Background="Transparent" BorderBrush="Transparent" Margin="12,0,0,0" >
+                            <Button  Visibility="{x:Bind ViewModel.AirCondition.AqiCategory,Converter={StaticResource NullToVisibilityConverter}}" Background="Transparent" BorderBrush="Transparent" Margin="12,0,0,0" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="15">
                                         <Run Text="空气质量 -"/>
@@ -66,7 +66,50 @@
                                 <i:Interaction.Behaviors>
                                     <behaviors:ButtonContentSnapBehavior SnapType="Left"/>
                                 </i:Interaction.Behaviors>
-                            </HyperlinkButton>
+                                <Button.Flyout>
+                                    <Flyout Placement="BottomEdgeAlignedLeft">
+                                        <Grid>
+                                            <HyperlinkButton NavigateUri="{Binding AirCondition.Link}" ToolTipService.ToolTip="查看详细信息" HorizontalAlignment="Right" VerticalAlignment="Top" Canvas.ZIndex="1">
+                                                <FontIcon Glyph="&#xE2B4;" FontSize="16"/>
+                                            </HyperlinkButton>
+                                            <StackPanel Spacing="8">
+                                                <TextBlock>
+                                                    <Run Text="{x:Bind ViewModel.AirCondition.Aqi}" FontSize="34" FontWeight="SemiBold"/>
+                                                    <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" FontSize="16"/>
+                                                </TextBlock>
+                                                <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,8,0">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.PM25}"  FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="PM2.5" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.PM10}"   FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="PM10" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.SO2}"  Margin="0,0,4,0" FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="SO₂" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.NO2}"  Margin="0,0,4,0" FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="NO₂" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.O3}"  Margin="0,0,4,0" FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="O₃" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding AirCondition.CO}" FontSize="26" HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="CO" HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <TextBlock Text="单位:μg/m³" HorizontalAlignment="Right" Margin="0,0,4,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+
+                                            </StackPanel>
+                                        </Grid>
+                                    </Flyout>
+                                </Button.Flyout>
+                            </Button>
                         </StackPanel>
 
                     </StackPanel>

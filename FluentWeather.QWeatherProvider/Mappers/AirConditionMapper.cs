@@ -16,6 +16,12 @@ namespace FluentWeather.QWeatherProvider.Mappers
                 Aqi = int.Parse(item.Aqi),
                 AqiCategory = item.Category,
                 AqiLevel = int.Parse(item.Level),
+                CO= double.Parse(item.Co),
+                SO2 = double.Parse(item.So2),
+                NO2 = double.Parse(item.No2),
+                O3 = double.Parse(item.O3),
+                PM10 = double.Parse(item.Pm10),
+                PM25 = double.Parse(item.Pm2p5),
             };
         }
     }
