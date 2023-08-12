@@ -9,7 +9,7 @@
   <Identity
     Name="e8978919-c1a6-4c72-9b26-531ca3232be5"
     Publisher="CN=Betta_Fish"
-    Version="0.0.6.0" />
+    Version="0.0.8.0" />
 
   <mp:PhoneIdentity PhoneProductId="e8978919-c1a6-4c72-9b26-531ca3232be5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
