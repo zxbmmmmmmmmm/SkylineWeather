@@ -155,6 +155,9 @@
     <Compile Include="Controls\Dialogs\TyphoonDialog.xaml.cs">
       <DependentUpon>TyphoonDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\HourlyTemperatureChart.xaml.cs">
+      <DependentUpon>HourlyTemperatureChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Popups\ContentPopup.xaml.cs">
       <DependentUpon>ContentPopup.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,7 @@
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\HourlyForecastSelectConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TransparencyConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TypeConverter.cs" />
     <Compile Include="Helpers\ValueConverters\SeverityColorToColorConverter.cs" />
@@ -321,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\TyphoonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HourlyTemperatureChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

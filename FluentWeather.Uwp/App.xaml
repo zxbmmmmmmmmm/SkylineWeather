@@ -19,6 +19,8 @@
                 <valueConverters2:NullToBoolConverter IsInverted="True"/>
                 <valueConverters2:BoolToVisibilityConverter/>
             </valueConverters2:ValueConverterGroup>
+            <valueConverters2:VisibilityInverter x:Name="VisibilityInverter"/>
+
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True"/>
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <valueConverters:TransparencyConverter x:Key="TransparencyConverter"/>

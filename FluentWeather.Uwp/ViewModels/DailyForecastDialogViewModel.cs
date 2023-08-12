@@ -10,6 +10,7 @@ public partial class DailyForecastDialogViewModel:ObservableObject
 {
     [ObservableProperty]
     ObservableCollection<WeatherBase> _dailyForecasts = new();
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SunRise))]
     [NotifyPropertyChangedFor(nameof(SunSet))]
@@ -18,5 +19,8 @@ public partial class DailyForecastDialogViewModel:ObservableObject
     public DateTime SunRise => ((IAstronomic)Selected).SunRise;
 
     public DateTime SunSet => ((IAstronomic)Selected).SunSet;
+
+    [ObservableProperty]
+    ObservableCollection<WeatherBase> _hourlyForecasts = new();
 
 }

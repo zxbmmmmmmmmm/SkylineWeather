@@ -1,11 +1,14 @@
-﻿using FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Interfaces.Weather;
+using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.ViewModels;
 using Microsoft.Toolkit.Uwp.UI;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -33,6 +36,8 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             ViewModel.Selected = (WeatherBase)clicked;
             foreach (var item in MainPageViewModel.Instance.DailyForecasts)
                 ViewModel.DailyForecasts.Add(item);
+            foreach(var item in MainPageViewModel.Instance.HourlyForecasts)
+                ViewModel.HourlyForecasts.Add(item);
         }
         private bool _isExpanded = false;
         private void ExpandForecastBtnClicked(object sender, RoutedEventArgs e)
@@ -75,7 +80,31 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             await Task.Delay(10);
             await ForecastGridView.SmoothScrollIntoViewWithItemAsync(ViewModel.Selected,itemPlacement:ScrollItemPlacement.Left);
         }
+        private List<ITemperature> GetHourly(ObservableCollection<WeatherBase> weatherList, WeatherBase selected)
+        {
+            var list = new List<ITime>();
+            foreach (var item in weatherList)
+            {
+                list.Add(item as ITime);
+            }
+            var time = (ITime)selected;
+            var res = list.Where(p => p.Time.Date == time.Time.Date).ToList().ConvertAll(p => (ITemperature)p);
+            FullText.Visibility = res.Count is 24 ? Visibility.Visible : Visibility.Collapsed;
+            FirstText.Visibility = FullText.Visibility is Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            TemperatureChart.Visibility = res.Count is 0 ? Visibility.Collapsed: Visibility.Visible;
+            return res;
 
+        }
+        private string GetTextFirst(List<ITemperature> weatherList)
+        {
+            if (weatherList is null) return null;
+            return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().First().Time.ToShortTimeString();
+        }
+        private string GetTextLast(List<ITemperature> weatherList)
+        {
+            if (weatherList is null) return null;
+            return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().Last().Time.ToShortTimeString();
+        }
         private void ForecastGridView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if (_isExpanded)

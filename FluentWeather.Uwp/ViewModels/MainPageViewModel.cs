@@ -18,7 +18,10 @@ public partial class MainPageViewModel : ObservableObject
     public List<WeatherBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
-    private List<WeatherBase> hourlyForecasts ;
+    [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
+    private List<WeatherBase> hourlyForecasts = new();
+    public List<WeatherBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
+
     [ObservableProperty]
     private List<WeatherWarningBase> warnings ;
 

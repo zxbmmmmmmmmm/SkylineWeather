@@ -9,10 +9,14 @@
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls2="using:FluentWeather.Uwp.Controls"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d"
     FullSizeDesired="True"
     Style="{StaticResource ContentDialogFullStyle}">
+    <ContentDialog.Resources>
+        <converters:HourlyForecastSelectConverter x:Key="HourlyForecastSelectConverter"/>
+    </ContentDialog.Resources>
     <Grid x:Name="ContentGrid" Margin="-32">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -64,7 +68,11 @@
         </Grid>
         <Grid Background="{ThemeResource ContentDialogSmokeFill}" Grid.Row="1"
               BorderThickness="{ThemeResource ContentDialogSeparatorThickness}" 
-              BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" x:DefaultBindMode="OneWay" Padding="24">
+              BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" x:DefaultBindMode="OneWay" Padding="32,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <StackPanel Spacing="4">
                 <TextBlock 
                     Style="{ThemeResource TitleTextBlockStyle}" >
@@ -113,8 +121,35 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-
-            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <controls2:HourlyTemperatureChart x:Name="TemperatureChart" WeatherForecasts="{x:Bind GetHourly(ViewModel.HourlyForecasts,ViewModel.Selected)}"/>
+                <Grid Grid.Row="1" Margin="0,64,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="FullText" Grid.Column="0" HorizontalAlignment="Center" Text="1:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="1" HorizontalAlignment="Center"  Text="4:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="2" HorizontalAlignment="Center"  Text="7:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="3" HorizontalAlignment="Center"  Text="10:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="4" HorizontalAlignment="Center"  Text="13:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="5" HorizontalAlignment="Center"  Text="16:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="6" HorizontalAlignment="Center"  Text="19:00"/>
+                    <TextBlock Visibility="{x:Bind FullText.Visibility}" Grid.Column="7" HorizontalAlignment="Center"  Text="22:00"/>
+                    <TextBlock x:Name="FirstText"  Text="{x:Bind GetTextFirst(TemperatureChart.WeatherForecasts)}" Grid.Column="0" HorizontalAlignment="Center" />
+                    <TextBlock Visibility="{x:Bind FirstText.Visibility}" Text="{x:Bind GetTextLast(TemperatureChart.WeatherForecasts)}" Grid.Column="7" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
         </Grid>
         <Button Grid.Row="1" x:Name="ExpandBtn" 
                 Click="ExpandForecastBtnClicked" 
