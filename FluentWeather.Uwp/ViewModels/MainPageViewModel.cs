@@ -3,6 +3,7 @@ using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -111,6 +112,8 @@ public partial class MainPageViewModel : ObservableObject
     }
     public async void GetWeather(GeolocationBase geo)
     {
+        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
+            return;
         var lon = geo.Longitude;
         var lat = geo.Latitude;
         //await Task.Run(() => GetTasks(lon, lat));

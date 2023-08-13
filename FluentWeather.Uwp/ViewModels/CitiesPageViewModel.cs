@@ -134,6 +134,8 @@ public partial class CitiesPageViewModel:ObservableObject
     }
     public async void GetCurrentCity()
     {
+        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
+            return;
         var location = await GetGeolocation();
         if (Common.Settings.DefaultGeolocation.Name is null)
             Common.Settings.DefaultGeolocation = location;
