@@ -9,7 +9,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts;
 public class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
-    public override string Url => ApiConstants.Weather.DailyForecast30D;
+    public override string Url => ApiConstants.Weather.DailyForecast7D;
 }
 
 public class WeatherDailyResponse : QWeatherResponseBase

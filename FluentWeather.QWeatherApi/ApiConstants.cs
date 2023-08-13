@@ -2,8 +2,8 @@
 
 public static class ApiConstants
 {
-    public const string ApiBase = "https://api.qweather.com";
-    public const string Domain = "api.qweather.com";
+    public const string ApiBase = "https://devapi.qweather.com";
+    public const string Domain = "devapi.qweather.com";
 
     public static class Weather
     {
