@@ -62,7 +62,6 @@ public class QWeatherProvider : ProviderBase,
     public void GetSettings()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-        settingsHelper.DeleteLocalSetting(Id + "." + QWeatherSettings.Token);
         Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
     }
 

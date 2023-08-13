@@ -22,8 +22,7 @@
             <settings:PersonalizationSettingSection/>
             <settings:LocationSettingSection/>
             <settings:NotificationSettingSection/>
-            <settings:QWeatherSettingSection Visibility="Collapsed"/>
-
+            <settings:QWeatherSettingSection/>
         </StackPanel>
     </ScrollViewer>
 

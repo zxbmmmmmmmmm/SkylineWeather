@@ -34,7 +34,6 @@ namespace FluentWeather.QGeoProvider
         public void GetSettings()
         {
             var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-            settingsHelper.DeleteLocalSetting(Id + "." + QGeoSettings.Token);
             Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QGeoSettings.Token, "");
         }
         public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
