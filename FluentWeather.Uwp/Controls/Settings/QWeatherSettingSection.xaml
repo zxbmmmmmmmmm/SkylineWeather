@@ -16,10 +16,13 @@
             <FontIcon Glyph="&#xE621;"/>
         </lab:SettingsExpander.HeaderIcon>
         <lab:SettingsExpander.Items>
-            <lab:SettingsCard Header="用户凭据" Description="和风天气的Token，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
+            <lab:SettingsCard Header="域名" Description="和风天气Api请求的域名，若使用付费KEY请更改此选项为api.qweather.com" HeaderIcon="home" Padding="12">
+                <TextBox Text="{x:Bind app:Common.Settings.QWeatherDomain,Mode=TwoWay}"/>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="KEY" Description="和风天气的KEY，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
                 <TextBox Text="{x:Bind app:Common.Settings.QWeatherToken,Mode=TwoWay}"/>
             </lab:SettingsCard>
-            <lab:SettingsCard Header="GeoApi Token" Description="QGeoApi的Token，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
+            <lab:SettingsCard Header="GeoApi KEY" Description="QGeoApi的KEY，可以在控制台中找到" HeaderIcon="Permissions" Padding="12">
                 <TextBox Text="{x:Bind app:Common.Settings.QGeolocationToken,Mode=TwoWay}"/>
             </lab:SettingsCard>
         </lab:SettingsExpander.Items>

@@ -127,7 +127,17 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    
+
+    public string QWeatherDomain
+    {
+        get => GetSettings("qweather." + "Domain", "devapi.qweather.com");
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values["qweather." + "Domain"] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public Dictionary<string,DateTime> PushedWarnings
     {
         get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());

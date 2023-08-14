@@ -17,7 +17,7 @@ public class TyphoonTrackApi : QApiContractBase<TyphoonTrackRequest, TyphoonTrac
 {
     public override HttpMethod Method => HttpMethod.Get;
 
-    public override string Url => ApiConstants.Weather.TyphoonTrack;
+    public override string Path => ApiConstants.Weather.TyphoonTrack;
     public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
         return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&stormid={Request.TyphoonId}");

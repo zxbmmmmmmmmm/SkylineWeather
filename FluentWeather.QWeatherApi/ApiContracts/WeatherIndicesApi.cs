@@ -9,7 +9,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts;
 public class WeatherIndicesApi : QApiContractBase<WeatherIndicesResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
-    public override string Url => ApiConstants.Weather.WeatherIndices1D;
+    public override string Path => ApiConstants.Weather.WeatherIndices1D;
     public override async Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
         var res = await base.GenerateRequestMessageAsync(option);

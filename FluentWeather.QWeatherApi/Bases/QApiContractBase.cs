@@ -22,7 +22,7 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
 {
     public override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
-        var requestMessage = new HttpRequestMessage(Method, Url + $"?key={option.Token}");
+        var requestMessage = new HttpRequestMessage(Method, "https://" + option.Domain + Path + $"?key={option.Token}");
 
         var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
         foreach (var keyValuePair in Cookies)

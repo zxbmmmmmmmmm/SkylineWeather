@@ -16,4 +16,5 @@ public class ApiHandlerOption
                              JsonNumberHandling.AllowReadingFromString,
             AllowTrailingCommas = true,
         };
+    public string Domain{ get; set; }
 }

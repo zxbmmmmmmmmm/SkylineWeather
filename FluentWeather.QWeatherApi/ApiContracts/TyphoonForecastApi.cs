@@ -13,7 +13,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts
     {
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override string Url => ApiConstants.Weather.TyphoonForecast;
+        public override string Path => ApiConstants.Weather.TyphoonForecast;
         public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
         {
             return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&stormid={Request.TyphoonId}");

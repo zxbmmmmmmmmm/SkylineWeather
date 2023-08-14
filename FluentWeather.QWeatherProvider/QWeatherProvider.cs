@@ -63,6 +63,7 @@ public class QWeatherProvider : ProviderBase,
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
+        Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
     }
 
     public async Task<WeatherBase> GetCurrentWeather(double lon,double lat)
@@ -145,4 +146,5 @@ public class QWeatherProvider : ProviderBase,
 public enum QWeatherSettings
 {
     Token,
+    Domain,
 }

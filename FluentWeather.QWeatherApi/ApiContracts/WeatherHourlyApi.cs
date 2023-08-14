@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
 public class WeatherHourlyApi: QApiContractBase<WeatherHourlyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
-    public override string Url => ApiConstants.Weather.HourlyForecast24H;
+    public override string Path => ApiConstants.Weather.HourlyForecast24H;
+    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    {
+        var res = await base.GenerateRequestMessageAsync(option);
+        if (option.Domain is "api.qweather.com")
+        {
+            var str = res.RequestUri.ToString();
+            res.RequestUri = new System.Uri(str.Replace(Path, ApiConstants.Weather.HourlyForecast168H));
+        }
+        return res;
+    }
 }
 public class WeatherHourlyResponse : QWeatherResponseBase
 {

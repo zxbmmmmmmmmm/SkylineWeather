@@ -11,7 +11,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts
     {
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override string Url => ApiConstants.Weather.MinutelyPrecipitation;
+        public override string Path => ApiConstants.Weather.MinutelyPrecipitation;
     }
     public class PrecipitationResponse:QWeatherResponseBase
     {
