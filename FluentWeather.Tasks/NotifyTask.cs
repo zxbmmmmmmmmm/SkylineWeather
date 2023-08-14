@@ -20,7 +20,7 @@ namespace FluentWeather.Tasks
             
             var settingContainer = ApplicationData.Current.LocalSettings;
             var token = settingContainer.Values["qWeather.Token"].ToString();
-            var provider = new QWeatherProvider.QWeatherProvider(token);
+            var provider = new QWeatherProvider.QWeatherProvider(token,Common.Settings.QWeatherDomain);
             var lat = Common.Settings.Latitude;
             var lon = Common.Settings.Longitude;
             if(lat is -1 || lon is -1)
@@ -69,9 +69,13 @@ namespace FluentWeather.Tasks
                 return;
 
             var daily = await QWeatherProvider.QWeatherProvider.Instance.GetDailyForecasts(lon, lat);
+            if (daily is null) return;
+            daily = (daily.Count >= 7)?daily.GetRange(0, 7) :daily;//去除多余部分
+
             //推送通知
             var dailyBuilder = new ToastContentBuilder();
             dailyBuilder.AddText($"{daily[0].Description}  最高{((ITemperatureRange)daily[0]).MaxTemperature}°,最低{((ITemperatureRange)daily[0]).MinTemperature}°");
+            
             var group = new AdaptiveGroup();
             GetGroupChildren(group, daily);
             dailyBuilder.AddVisualChild(group);
