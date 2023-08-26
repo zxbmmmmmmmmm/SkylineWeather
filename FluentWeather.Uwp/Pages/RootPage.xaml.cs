@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -45,6 +47,8 @@ public sealed partial class RootPage : Page
         titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
+        titleBar.ButtonHoverBackgroundColor = Color.FromArgb(40,128,128,128);
+        ThemeHelper.SetTitleBarColor(Common.Settings.ApplicationTheme);
         PaneFrame.Navigate(typeof(CitiesPage));
     }
     [ObservableProperty]

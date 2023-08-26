@@ -7,8 +7,10 @@
     Style="{ThemeResource DefaultContentDialogStyle}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     mc:Ignorable="d"
     Title="关于"
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     SecondaryButtonText="关闭"
     PrimaryButtonCommand="{x:Bind CloseCommand}">
 

@@ -11,9 +11,11 @@
     xmlns:controls2="using:FluentWeather.Uwp.Controls"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:models="using:FluentWeather.Abstraction.Models"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     mc:Ignorable="d"
     FullSizeDesired="True"
-    Style="{StaticResource ContentDialogFullStyle}">
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
+    Style="{ThemeResource ContentDialogFullStyle}">
     <ContentDialog.Resources>
         <converters:HourlyForecastSelectConverter x:Key="HourlyForecastSelectConverter"/>
     </ContentDialog.Resources>
@@ -28,7 +30,7 @@
             <RowDefinition x:Name="DetailsRow" Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid >
+        <Grid  Background="{ThemeResource ContentDialogBackground}">
             <controls:AdaptiveGridView x:Name="ForecastGridView" Margin="16,14,16,-6" ItemHeight="100" 
                                        DesiredWidth="160" 
                                        SelectedItem="{x:Bind ViewModel.Selected,Mode=TwoWay}"
@@ -66,7 +68,7 @@
                 </controls:AdaptiveGridView.ItemTemplate>
             </controls:AdaptiveGridView>
         </Grid>
-        <Grid Background="{ThemeResource ContentDialogSmokeFill}" Grid.Row="1"
+        <Grid Grid.Row="1"
               BorderThickness="{ThemeResource ContentDialogSeparatorThickness}" 
               BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}" x:DefaultBindMode="OneWay" Padding="32,16">
             <Grid.RowDefinitions>
@@ -154,8 +156,10 @@
         <Button Grid.Row="1" x:Name="ExpandBtn" 
                 Click="ExpandForecastBtnClicked" 
                 HorizontalAlignment="Right" 
-                Margin="0,0,24,0" 
+                Margin="0,0,24,0"
+                Background="{ThemeResource ContentDialogBackground}"
                 BorderThickness="1,0,1,1"
+                BorderBrush="{ThemeResource ContentDialogBackground}"
                 VerticalAlignment="Top" 
                 Padding="24,4"
                 CornerRadius="0,0,4,4">
@@ -164,6 +168,7 @@
                 <TextBlock x:Name="ExpandText" Text="展开" FontSize="16"/>
             </StackPanel>
         </Button>
+        <Border Grid.Row="2" Background="{ThemeResource ContentDialogBackground}"/>
         <Button HorizontalAlignment="Right" Grid.Row="2"  Content="关闭" Margin="16,12,20,18" Padding="64,6">
             <i:Interaction.Behaviors>
                 <behaviors:ButtonCloseContentDialogBehavior/>

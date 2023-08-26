@@ -9,6 +9,7 @@
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:converters2="using:ValueConverters"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -17,7 +18,25 @@
             <FontIcon Glyph="&#xE771;"/>
         </lab:SettingsExpander.HeaderIcon>
         <lab:SettingsExpander.Items>
-            <lab:SettingsCard Header="亚克力" Description="Win11下将覆盖Mica，会增加一定占用">
+            <lab:SettingsCard Header="颜色" Description="设置主题颜色" Padding="12" >
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE7A1;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <muxc:RadioButtons>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Light}">明亮</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Dark}">黑暗</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Default}">跟随系统</RadioButton>
+                </muxc:RadioButtons>
+            </lab:SettingsCard>
+            <lab:SettingsCard Header="亚克力" Padding="12">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE727;"/>
+                </lab:SettingsCard.HeaderIcon>
+                <lab:SettingsCard.Description>
+                    <TextBlock>
+                        <Run Text="Win11下将覆盖Mica"/><LineBreak/><Run Text="会增加一定占用"/>
+                    </TextBlock>
+                </lab:SettingsCard.Description>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled,Mode=TwoWay}"/>
             </lab:SettingsCard>
                               

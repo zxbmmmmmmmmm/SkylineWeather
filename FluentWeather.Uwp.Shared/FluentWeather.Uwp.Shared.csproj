@@ -124,6 +124,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Settings.cs" />
+    <Compile Include="ThemeHelper.cs" />
     <Compile Include="TileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\FluentWeather.Uwp.Shared.rd.xml" />

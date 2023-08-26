@@ -24,6 +24,7 @@ using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.System;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp;
 
@@ -42,6 +43,15 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
+        switch (Common.Settings.ApplicationTheme)
+        {
+            case ElementTheme.Light:
+                RequestedTheme = ApplicationTheme.Light;
+                break;
+            case ElementTheme.Dark:
+                RequestedTheme = ApplicationTheme.Dark;
+                break;
+        }
 #if (!DEBUG)
         AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics),typeof(Crashes));
 #endif

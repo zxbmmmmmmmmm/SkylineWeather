@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -34,6 +35,16 @@ public class Settings:INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsDailyNotificationEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public ElementTheme ApplicationTheme
+    {
+        get => GetSettings(nameof(ApplicationTheme), ElementTheme.Dark);
+        set
+        {
+            ThemeHelper.SetRequestTheme(value);
+            ApplicationData.Current.LocalSettings.Values[nameof(ApplicationTheme)] = value.ToString(); 
             OnPropertyChanged();
         }
     }

@@ -10,10 +10,12 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:geolocation="using:Windows.Devices.Geolocation"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     FullSizeDesired="True"
     mc:Ignorable="d"
     MinWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     Style="{ThemeResource DefaultContentDialogStyle}">
     <ContentDialog.Resources>
         <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter"/>
