@@ -225,6 +225,16 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\All.png" />
+    <Content Include="Assets\Backgrounds\Clear.png" />
+    <Content Include="Assets\Backgrounds\Cloudy.png" />
+    <Content Include="Assets\Backgrounds\Fog.png" />
+    <Content Include="Assets\Backgrounds\HeavyRain.png" />
+    <Content Include="Assets\Backgrounds\HeavySnow.png" />
+    <Content Include="Assets\Backgrounds\LightRain.png" />
+    <Content Include="Assets\Backgrounds\LightSnow.png" />
+    <Content Include="Assets\Backgrounds\PartlyCloudy.png" />
+    <Content Include="Assets\Backgrounds\ThunderyShowers.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
