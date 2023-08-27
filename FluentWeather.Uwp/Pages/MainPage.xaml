@@ -29,7 +29,7 @@
         </converters:ValueConverterGroup>
     </Page.Resources>
     <Grid>
-        <ScrollViewer x:Name="MainScrollViewer" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto" IsEnabled="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationConverter}}">
+        <ScrollViewer x:Name="MainScrollViewer" x:FieldModifier="Public" Canvas.ZIndex="1" VerticalScrollBarVisibility="Auto" IsEnabled="{x:Bind ViewModel.IsLoading,Mode=OneWay,Converter={StaticResource BoolNegationConverter}}">
             <Grid x:Name="ContentGrid" MaxWidth="1024" Margin="32,40,32,32" >
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
@@ -384,20 +384,7 @@
 
         </ScrollViewer>
         <!--内容区-->
-        <ParallaxView Source="{Binding ElementName=MainScrollViewer}" VerticalShift="32">
-            <Grid >
-                <controls:ImageEx Stretch="UniformToFill" Opacity="{x:Bind app:Common.Settings.BackgroundTransparency,Converter={StaticResource TransparencyConverter},Mode=OneWay}">
-                    <i:Interaction.Behaviors>
-                        <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind ViewModel.WeatherNow.WeatherType,Mode=OneWay}"/>
-                    </i:Interaction.Behaviors>
-                </controls:ImageEx>
-                <Border>
-                    <Border.Background>
-                        <media:BackdropBlurBrush Amount="{x:Bind app:Common.Settings.BackgroundBlurAmount,Mode=OneWay}" />
-                    </Border.Background>
-                </Border>
-            </Grid>
-        </ParallaxView>
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>

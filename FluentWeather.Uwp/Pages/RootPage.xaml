@@ -9,11 +9,15 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True">
 
     <Grid Margin="0,0,0,0">
         <Border Background="{ThemeResource SystemControlAcrylicWindowBrush}" Visibility="{x:Bind app:Common.Settings.IsAcrylicEnabled,Mode=OneWay}"/>
-        <Grid x:Name="TitleGrid" VerticalAlignment="Top" Canvas.ZIndex="1">
+        <Grid x:Name="TitleGrid" VerticalAlignment="Top" Canvas.ZIndex="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -51,7 +55,7 @@
                 </Grid.Transitions>
             </Grid>
         </Grid>
-        <SplitView x:Name="MainSplitView" IsPaneOpen="{x:Bind ViewModel.IsPaneOpen,Mode=OneWay}" DisplayMode="Overlay" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
+        <SplitView Canvas.ZIndex="1" x:Name="MainSplitView" IsPaneOpen="{x:Bind ViewModel.IsPaneOpen,Mode=OneWay}" DisplayMode="Overlay" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
             <SplitView.Pane >
                 <Frame x:Name="PaneFrame" Navigated="PaneFrame_Navigated" Margin="0,45,0,0" />
             </SplitView.Pane>
@@ -65,7 +69,22 @@
                 </Grid>
             </SplitView.Content>
         </SplitView>
-        
+
+        <ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="32">
+            <Grid >
+                <controls:ImageEx Stretch="UniformToFill" Opacity="{x:Bind app:Common.Settings.BackgroundTransparency,Converter={StaticResource TransparencyConverter},Mode=OneWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType,Mode=OneWay}"/>
+                    </i:Interaction.Behaviors>
+                </controls:ImageEx>
+                <Border>
+                    <Border.Background>
+                        <media:BackdropBlurBrush Amount="{x:Bind app:Common.Settings.BackgroundBlurAmount,Mode=OneWay}" />
+                    </Border.Background>
+                </Border>
+            </Grid>
+        </ParallaxView>
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
@@ -24,9 +25,11 @@ namespace FluentWeather.Uwp.Pages;
 public sealed partial class MainPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
+    public static MainPage Instance ;
     public MainPage()
     {
         this.InitializeComponent();
         this.DataContext = ViewModel;
+        Instance = this;
     }
 }
