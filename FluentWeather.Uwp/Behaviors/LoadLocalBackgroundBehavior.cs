@@ -47,7 +47,15 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     private WeatherType _weatherType = WeatherType.Unknown;
     public async void LoadImage()
     {
-        var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
+        StorageFolder folder;
+        try
+        {
+            folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
+        }
+        catch
+        {
+            folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
+        }
         var items = await folder.GetItemsAsync();
         if (items.Count is 0)
         {
