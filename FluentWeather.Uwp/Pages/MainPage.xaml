@@ -158,15 +158,35 @@
                                               HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                               IsItemClickEnabled="True"
                                           OneRowModeEnabled="True"
-                                          ItemHeight="150"
+                                          ItemHeight="165"
                                           DesiredWidth="120"
                                           SelectionMode="None"
                                           Margin="0,0,0,0">
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
-                                <Grid>
-                                    <controls1:WeatherForecastItem WeatherInfo="{x:Bind}" VerticalAlignment="Center"/>
-                                </Grid>
+                                <UserControl>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <controls1:WeatherForecastItem WeatherInfo="{x:Bind}" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TemperatureText" HorizontalAlignment="Center" Margin="0,4,0,0" FontSize="16">
+                                            <Run Text="{Binding MinTemperature}"/><Run Text="°"/>
+                                            <Run Text="/"/>
+                                            <Run Text="{Binding MaxTemperature}"/><Run Text="°"/>
+                                        </TextBlock>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <VisualState>
+                                                    <VisualState.StateTriggers>
+                                                        <AdaptiveTrigger MinWindowWidth="1102"/>
+                                                    </VisualState.StateTriggers>
+                                                    <VisualState.Setters>
+                                                        <Setter Target="TemperatureText.Visibility"  Value="Collapsed"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </StackPanel>
+                                </UserControl>
+
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors >
@@ -394,6 +414,8 @@
                     <VisualState.Setters>
                         <Setter Target="TemperatureChart.Visibility" Value="Visible"/>
                         <Setter Target="DailyGridView.Margin" Value="-32,0"/>
+                        <Setter Target="DailyGridView.ItemHeight" Value="150"/>
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
