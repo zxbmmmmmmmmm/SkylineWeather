@@ -8,6 +8,7 @@ using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
+using Windows.ApplicationModel;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -47,7 +48,16 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     public async void LoadImage()
     {
         var item = await ApplicationData.Current.LocalFolder.TryGetItemAsync("Backgrounds");
-        if (item is not StorageFolder folder) return;
+        if (item is not StorageFolder folder)
+        {
+            folder = await Package.Current.InstalledLocation.GetFolderAsync("Backgrounds");//无内容直接使用Assets
+        }
+        var items = await folder.GetItemsAsync();
+        if (items.Count is 0)
+        {
+            folder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");//无内容直接使用Assets
+            folder = await folder.GetFolderAsync("Backgrounds");//无内容直接使用Assets
+        }
         var image = await GetImage(folder, WeatherType.ToString());
         image ??= await GetImage(folder, "All");
         AssociatedObject.Source = image;
