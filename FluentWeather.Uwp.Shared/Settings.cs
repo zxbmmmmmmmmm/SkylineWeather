@@ -68,7 +68,7 @@ public class Settings:INotifyPropertyChanged
     }
     public int BackgroundBlurAmount
     {
-        get => GetSettings(nameof(BackgroundBlurAmount), 8);
+        get => GetSettings(nameof(BackgroundBlurAmount), 2);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(BackgroundBlurAmount)] = value;
