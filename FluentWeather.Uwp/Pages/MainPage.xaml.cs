@@ -1,4 +1,5 @@
-﻿using FluentWeather.Uwp.ViewModels;
+﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.Uwp.ViewModels;
 using Microsoft.Toolkit.Uwp.UI;
 using System;
 using System.Collections.Generic;
@@ -31,5 +32,11 @@ public sealed partial class MainPage : Page
         this.InitializeComponent();
         this.DataContext = ViewModel;
         Instance = this;
+    }
+
+    private Visibility GetPrecipChartVisibility(List<PrecipitationItemBase> precipList)
+    {
+        if (precipList is null) return Visibility.Collapsed;
+        return precipList.Sum(p => p.Precipitation) == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 }

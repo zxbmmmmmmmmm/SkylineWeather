@@ -202,6 +202,7 @@
     <Compile Include="Helpers\ValueConverters\SeverityColorToColorConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TyphoonTrackToGeopointConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TyphoonTypeToDescriptionConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Helpers\ValueConverters\WeatherTypeToIconConverter.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>

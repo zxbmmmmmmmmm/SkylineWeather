@@ -48,7 +48,7 @@
                 </Grid.RowDefinitions>
 
                 <!--当前天气-->
-                <Grid Margin="0,0,0,0" x:DefaultBindMode="OneWay">
+                <Grid Margin="0,0,0,12" x:DefaultBindMode="OneWay">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding WeatherNow.Temperature}" Style="{ThemeResource TitleTextBlockStyle}" FontSize="80"/>
@@ -113,13 +113,13 @@
                                 </Button.Flyout>
                             </Button>
                         </StackPanel>
-
+                        <TextBlock Visibility="{x:Bind PrecipGrid.Visibility,Converter={StaticResource VisibilityInverter}}" FontSize="16" Text="{Binding Precipitation.Summary}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                     </StackPanel>
                 </Grid>
                 
                 <!--降水概率-->
-                <Grid Grid.Row="1"  Margin="0,12,0,0">
-                    <muxc:Expander Visibility="{x:Bind ViewModel.Precipitation.Precipitations,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
+                <Grid x:Name="PrecipGrid" Grid.Row="1"  Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation.Precipitations),Mode=OneWay}">
+                    <muxc:Expander Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
                         <controls1:PrecipitationChart Precipitations="{x:Bind ViewModel.Precipitation.Precipitations,Mode=OneWay}" Height="200"/>
                     </muxc:Expander>
                 </Grid>
