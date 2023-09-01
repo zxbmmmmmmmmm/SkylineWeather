@@ -14,6 +14,8 @@
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     FullSizeDesired="True"
     mc:Ignorable="d"
     MinWidth="600"
