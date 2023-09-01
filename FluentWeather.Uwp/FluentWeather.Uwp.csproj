@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Behaviors\ButtonCloseContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
+    <Compile Include="Behaviors\ButtonOpenContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />

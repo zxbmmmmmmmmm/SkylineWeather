@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -15,11 +18,41 @@
     </UserControl.Resources>
     <muxc:Expander HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" x:DefaultBindMode="OneWay" >
         <muxc:Expander.Header>
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Spacing="12" >
-                <Ellipse Fill="{x:Bind Warning.SeverityColor,Converter={StaticResource SeverityColorToColorConverter}}" Height="5" Width="5"/>
-                <FontIcon Glyph="&#xE7BA;"/>
-                <TextBlock Text="{x:Bind Warning.Title}"/>
-            </StackPanel>
+            <Grid>
+                <StackPanel x:Name="HeaderPanel" Orientation="Vertical" Margin="4,12,12,12">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Spacing="12" >
+                        <Ellipse Fill="{x:Bind Warning.SeverityColor,Converter={StaticResource SeverityColorToColorConverter}}" Height="5" Width="5"/>
+                        <FontIcon Glyph="&#xE7BA;"/>
+                        <TextBlock Text="{x:Bind Warning.Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel x:Name="ActionButtons" Visibility="{x:Bind GetActionButtonsVisibility(Warning)}" HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,0,0,-8">
+                        <HyperlinkButton Background="Transparent" BorderBrush="Transparent"  >
+                            <StackPanel Spacing="4" Orientation="Horizontal">
+                                <TextBlock Text="追踪"/>
+                                <FontIcon  Glyph="&#xE00F;" FontSize="12"/>
+                            </StackPanel>
+                            <i:Interaction.Behaviors>
+                                <behaviors:ButtonContentSnapBehavior SnapType="Left"/>
+                                <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:TyphoonDialog"/>
+                            </i:Interaction.Behaviors>
+                        </HyperlinkButton>
+                        <HyperlinkButton Visibility="Collapsed" Background="Transparent" BorderBrush="Transparent"  >
+                            <StackPanel Spacing="4" Orientation="Horizontal">
+                                <TextBlock Text="了解详情"/>
+                                <FontIcon  Glyph="&#xE00F;" FontSize="12"/>
+                            </StackPanel>
+                            <i:Interaction.Behaviors>
+                                <behaviors:ButtonContentSnapBehavior SnapType="Left"/>
+                            </i:Interaction.Behaviors>
+                        </HyperlinkButton>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </Grid>
+
+
         </muxc:Expander.Header>
         <muxc:Expander.Content>
             <Grid>
@@ -30,5 +63,19 @@
                 <TextBlock Text="{x:Bind Warning.Description}" TextWrapping="Wrap" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" IsTextSelectionEnabled="True"/>
             </Grid>
         </muxc:Expander.Content>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="580"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HeaderPanel.Orientation" Value="Horizontal"/>
+                        <Setter Target="HeaderPanel.Margin" Value="0"/>
+                        <Setter Target="ActionButtons.Margin" Value=" 12,3,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </muxc:Expander>
 </UserControl>

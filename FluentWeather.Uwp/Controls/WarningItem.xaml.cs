@@ -26,7 +26,11 @@ namespace FluentWeather.Uwp.Controls
         }
 
 
-
+        private Visibility GetActionButtonsVisibility(WeatherWarningBase warning)
+        {
+            if (warning is null) return Visibility.Collapsed;
+            return warning.Title.Contains("台风") ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public WeatherWarningBase Warning
         {
@@ -34,7 +38,6 @@ namespace FluentWeather.Uwp.Controls
             set => SetValue(WarningProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Warning.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WarningProperty =
             DependencyProperty.Register(nameof(Warning), typeof(WeatherWarningBase), typeof(WarningItem), new PropertyMetadata(default));
 

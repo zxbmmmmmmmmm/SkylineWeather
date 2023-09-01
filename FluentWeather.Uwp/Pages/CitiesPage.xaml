@@ -11,6 +11,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -95,12 +97,19 @@
             </ListView.ItemTemplate>
         </ListView>
         <CommandBar Grid.Row="3" VerticalAlignment="Bottom" DefaultLabelPosition="Right">
-            <AppBarButton Label="台风" Command="{x:Bind ViewModel.OpenTyphoonDialogCommand}"/>
+            <AppBarButton Label="台风">
+                <i:Interaction.Behaviors>
+                    <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:TyphoonDialog"/>
+                </i:Interaction.Behaviors>
+            </AppBarButton>
             <AppBarButton x:Name="SettingsButton" Icon="Setting" Label="设置" Click="SettingsButton_Click"/>
-            <AppBarButton Label="关于" Command="{x:Bind ViewModel.OpenAboutDialogCommand}">
+            <AppBarButton Label="关于">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE946;"/>
                 </AppBarButton.Icon>
+                <i:Interaction.Behaviors>
+                    <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:AboutDialog"/>
+                </i:Interaction.Behaviors>
             </AppBarButton>
         </CommandBar>
     </Grid>

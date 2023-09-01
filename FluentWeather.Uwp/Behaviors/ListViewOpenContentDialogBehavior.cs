@@ -17,15 +17,12 @@ public class ListViewOpenContentDialogBehavior:Behavior<ListViewBase>
 
     public Type DialogType
     {
-        get => (Type)GetValue(PageTypeProperty);
-        set => SetValue(PageTypeProperty, value);
+        get => (Type)GetValue(DialogTypeProperty);
+        set => SetValue(DialogTypeProperty, value);
     }
 
-    // Using a DependencyProperty as the backing store for PageType.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty PageTypeProperty =
+    public static readonly DependencyProperty DialogTypeProperty =
         DependencyProperty.Register(nameof(DialogType), typeof(Type), typeof(ListViewOpenContentDialogBehavior), new PropertyMetadata(typeof(Page)));
-
-
 
     public bool UseArguments
     {
