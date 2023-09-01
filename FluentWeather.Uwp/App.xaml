@@ -19,6 +19,10 @@
                 <valueConverters2:NullToBoolConverter IsInverted="True"/>
                 <valueConverters2:BoolToVisibilityConverter/>
             </valueConverters2:ValueConverterGroup>
+            <valueConverters2:ValueConverterGroup x:Name="NullToVisibilityInvertedConverter">
+                <valueConverters2:NullToBoolConverter/>
+                <valueConverters2:BoolToVisibilityConverter/>
+            </valueConverters2:ValueConverterGroup>
             <valueConverters2:VisibilityInverter x:Name="VisibilityInverter"/>
             <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter"/>
 

@@ -37,7 +37,10 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         {
             this.InitializeComponent();
             GetTyphoons();
+            ShowWarningLines();
+            DataContext = this;
         }
+        public const string MapStyleSheetJson = "{\"version\":\"1.*\",\"settings\":{},\"elements\":{\"transportation\":{\"visible\":false},\"road\":{\"labelVisible\":false}}}";
         [ObservableProperty]
         private ObservableCollection<TyphoonTrackBase> tracks = new();
         [ObservableProperty]
@@ -51,28 +54,43 @@ namespace FluentWeather.Uwp.Controls.Dialogs
                 Typhoons.Add(p);
                 SetMap(p);
             });
+            var maxValue = Typhoons.Max(p => p.Now.WindSpeed);
+            var max = Typhoons?.Where(p => p.Now.WindSpeed == maxValue).FirstOrDefault();
+            SegmentedControl.SelectedItem = max;
+
+            TyphoonMap.ZoomLevel = 6;
         }
         public void SetMap(TyphoonBase typ)
         {
+            TyphoonMap.StyleSheet = MapStyleSheet.Combine(new List<MapStyleSheet>
+            {
+                MapStyleSheet.AerialWithOverlay(),
+                MapStyleSheet.ParseFromJson(MapStyleSheetJson)
+            });
             var basic = new BasicGeoposition { Latitude = typ.Now.Latitude, Longitude = typ.Now.Longitude };
             var typhoonCenter = new Geopoint(basic);
 
             typ.History.ForEach(Tracks.Add);
             Tracks.Add(typ.Now);
             typ.Forecast.ForEach(Tracks.Add);
+            
 
-            TyphoonMap.Center = typhoonCenter;
-            TyphoonMap.ZoomLevel = 5;
             ShowTrackRoute(typ);
             ShowForecastRoute(typ);
             ShowTyphoon(typ);
+        }
+        public void MoveToTyphoonCenter(TyphoonBase typhoon)
+        {
+            var basic = new BasicGeoposition { Latitude = typhoon.Now.Latitude, Longitude = typhoon.Now.Longitude };
+            var typhoonCenter = new Geopoint(basic);
+            TyphoonMap.Center = typhoonCenter;
         }
         public void ShowTyphoon(TyphoonBase typhoon)
         {
             var now = new BasicGeoposition { Latitude = typhoon.Now.Latitude, Longitude = typhoon.Now.Longitude };
             
             if (((IWindRadius)typhoon.Now).WindRadius7 is { } radius7)
-                TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius7), Color.FromArgb(64,0,0,255), Colors.Blue));
+                TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius7), Color.FromArgb(64,0,128,255), Color.FromArgb(100, 0, 128, 255)));
 
             if (((IWindRadius)typhoon.Now).WindRadius10 is { } radius10)
                 TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius10), Color.FromArgb(32, 255, 255, 0), Colors.Yellow));
@@ -153,10 +171,55 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             return retVal;
         }
 
+        public void ShowWarningLines()
+        {
+            var locations24 = new List<BasicGeoposition>
+            {
+                new (){ Longitude=105,Latitude = 0 },
+                new (){ Longitude=113,Latitude = 4.5 },
+                new (){ Longitude=119,Latitude = 11 },
+                new (){ Longitude=119,Latitude = 18 },
+                new (){ Longitude=127,Latitude = 22 },
+                new (){ Longitude=127,Latitude = 34 },
+            };
+            var locations48 = new List<BasicGeoposition>
+            {
+                new (){ Longitude=105,Latitude = 0 },
+                new (){ Longitude=120,Latitude = 0 },
+                new (){ Longitude=132,Latitude = 15 },
+                new (){ Longitude=132,Latitude = 34 },
+            };
+            var line24 = new MapPolyline()
+            {
+                Path = new Geopath(locations24),
+                StrokeThickness = 2,
+                StrokeColor = Color.FromArgb(180, 255, 255, 0),
+            }; var line48 = new MapPolyline()
+            {
+                Path = new Geopath(locations48),
+                StrokeThickness = 2,
+                StrokeDashed = true,
+                StrokeColor = Color.FromArgb(160, 255, 255, 0),
+            };
+            var text24 = new TextBlock { TextWrapping = TextWrapping.Wrap,  Text = "24小时警戒线" ,Foreground = new SolidColorBrush(Color.FromArgb(180, 255, 255, 0)) };
+            var text48 = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = "48小时警戒线", Foreground = new SolidColorBrush(Color.FromArgb(160, 255, 255, 0)) };
+
+            TyphoonMap.MapElements.Add(line24);
+            TyphoonMap.MapElements.Add(line48);
+        }
+        private readonly Geopoint point24 = new Geopoint(new BasicGeoposition { Longitude = 127, Latitude = 34 });
+        private readonly Geopoint point48 = new Geopoint(new BasicGeoposition { Longitude = 132, Latitude = 34 });
+
         [RelayCommand]
         public void Close()
         {
             Hide();
+        }
+
+        private void SegmentedControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var items = e.AddedItems;
+            MoveToTyphoonCenter(items[0] as TyphoonBase);
         }
     }
 }

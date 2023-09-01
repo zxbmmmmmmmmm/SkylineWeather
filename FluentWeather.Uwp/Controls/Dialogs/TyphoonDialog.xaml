@@ -9,67 +9,38 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:geolocation="using:Windows.Devices.Geolocation"
+    xmlns:geo="Windows.Devices.Geolocation"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     FullSizeDesired="True"
     mc:Ignorable="d"
     MinWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    Style="{ThemeResource DefaultContentDialogStyle}">
+    Style="{ThemeResource ContentDialogFullStyle}">
     <ContentDialog.Resources>
         <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter"/>
         <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter"/>
+        <media:AcrylicBrush x:Key="ButtonAcrylic" BackgroundSource="Backdrop"
+                            TintOpacity="0.4"  TintColor="{ThemeResource SystemAltHighColor}" FallbackColor="{ThemeResource SystemColorButtonFaceColor}" />
     </ContentDialog.Resources>
-    <Grid Width="480">
+    <Grid Margin="-28">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Canvas.ZIndex="1" Command="{x:Bind CloseCommand}" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <FontIcon Glyph="&#xE10A;"/>
-        </Button>
-        <Button Grid.Row="0" Background="Transparent" BorderBrush="Transparent">
-            <StackPanel Orientation="Horizontal" Spacing="12" >
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
-                    <Run Text="{x:Bind Typhoons.Count,Mode=OneWay}"/>
-                    <Run Text="个台风"/>
-                </TextBlock>
-                <FontIcon Glyph="&#xE011;" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-            </StackPanel>
-            <Button.Flyout>
-                <Flyout Placement="BottomEdgeAlignedLeft">
-                    <Grid>
-                        <ListView ItemsSource="{x:Bind Typhoons,Mode=OneWay}" SelectionMode="None">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:TyphoonBase">
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Text="{x:Bind Name}" Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                                            <TextBlock  Foreground="{StaticResource SystemControlForegroundBaseMediumBrush}">
-                                                <Run Text="{x:Bind Now.Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}"/>
-                                                <Run Text="{x:Bind Now.WindSpeed}"/>
-                                                <Run Text="m/s"/>
-
-                                            </TextBlock>
-                                        </StackPanel>
-                                        
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </Flyout>
-            </Button.Flyout>
-        </Button>
-        <Grid Grid.Row="1" CornerRadius="8">
-            <maps:MapControl x:Name="TyphoonMap" Grid.Row="1"
+        <Grid CornerRadius="8">
+            <maps:MapControl x:Name="TyphoonMap"
                          MapServiceToken="6iY6JneJPV7AFhir2V6U~8UMtoXGEqONtfgaNlwbBFQ~AjYXGzbTvKUcQK5QKcI3--6uWd0k03mMqMJP8jmYxuYzdd0CrLmhFaQWggXaAggO"
                          LandmarksVisible="False"
-                         Style="Aerial"
+                         Style="AerialWithRoads" TransitFeaturesVisible="False" 
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False">
+                <maps:MapItemsControl x:Name="MapItemsText" >
+                    <TextBlock Text="24小时警戒线" Foreground="#CCFFFF00" Margin="4,4,0,0" TextWrapping="Wrap" Width="20" maps:MapControl.Location="{x:Bind point24}" />
+                    <TextBlock Text="48小时警戒线" Foreground="#99FFFF00" Margin="4,4,0,0" TextWrapping="Wrap" Width="20" maps:MapControl.Location="{x:Bind point48}"/>
+                </maps:MapItemsControl>
                 <maps:MapItemsControl x:Name="MapItems" ItemsSource="{x:Bind Tracks,Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonTrackBase">
@@ -115,6 +86,65 @@
                     </maps:MapItemsControl.ItemTemplate>
                 </maps:MapItemsControl>
             </maps:MapControl>
+            <Grid VerticalAlignment="Bottom" Margin="32">
+                <StackPanel Spacing="12" >
+                    <labs:Segmented Name="SegmentedControl" 
+                                    ItemsSource="{x:Bind Typhoons,Mode=OneWay}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    Background="{ThemeResource ButtonAcrylic}"
+                                    SelectionChanged="SegmentedControl_SelectionChanged">
+                        <labs:Segmented.ItemTemplate>
+                            <DataTemplate x:DataType="models:TyphoonBase">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </labs:Segmented.ItemTemplate>
+                    </labs:Segmented>
+
+                    <Grid  Visibility="{x:Bind SegmentedControl.SelectedItem,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
+                           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                           BorderThickness="1" HorizontalAlignment="Left" CornerRadius="4"
+                           Background="{ThemeResource ButtonAcrylic}" Padding="24,16">
+                        <StackPanel Spacing="4" Visibility="{x:Bind SegmentedControl.SelectedItem,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}">
+                            <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
+                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Name}"/>
+                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}" FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal" Spacing="16">
+                                <TextBlock>
+                                    <Run Text="最大风速"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.WindSpeed}" FontSize="16"/>
+                                    <Run Text="m/s"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="移动速度" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.MoveSpeed}" FontSize="16"/>
+                                    <Run Text="km/h"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="气压" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Pressure}" FontSize="16"/>
+                                    <Run Text="kPa"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Rectangle Fill="Red" Height="10" Width="10"/>
+                                <TextBlock Text="12级风圈"/>
+                                <Rectangle Fill="Yellow" Height="10" Width="10" Margin="4,0,0,0"/>
+                                <TextBlock Text="10级风圈"/>
+                                <Rectangle Fill="#0080FF" Height="10" Width="10" Margin="4,0,0,0"/>
+                                <TextBlock Text="7级风圈"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <Grid Visibility="{x:Bind Typhoons,Converter={StaticResource NullToVisibilityInvertedConverter},Mode=OneWay}"
+                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                      BorderThickness="1" HorizontalAlignment="Left" CornerRadius="4"
+                      Background="{ThemeResource ButtonAcrylic}" Padding="24,16">
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="无台风" />
+                </Grid>
+                <Button VerticalAlignment="Bottom" Background="{ThemeResource ButtonAcrylic}" Canvas.ZIndex="1" Command="{x:Bind CloseCommand}" FontSize="16" Padding="64,8" HorizontalAlignment="Right" Content="关闭"/>
+            </Grid>
 
         </Grid>
     </Grid>
