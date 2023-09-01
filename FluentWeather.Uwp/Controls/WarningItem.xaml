@@ -72,7 +72,7 @@
                     <VisualState.Setters>
                         <Setter Target="HeaderPanel.Orientation" Value="Horizontal"/>
                         <Setter Target="HeaderPanel.Margin" Value="0"/>
-                        <Setter Target="ActionButtons.Margin" Value=" 12,3,0,0"/>
+                        <Setter Target="ActionButtons.Margin" Value=" 12,2,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
