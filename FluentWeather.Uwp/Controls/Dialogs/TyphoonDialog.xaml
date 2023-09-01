@@ -24,7 +24,8 @@
         <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter"/>
         <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter"/>
         <media:AcrylicBrush x:Key="ButtonAcrylic" BackgroundSource="Backdrop"
-                            TintOpacity="0.4"  TintColor="{ThemeResource SystemAltHighColor}" FallbackColor="{ThemeResource SystemColorButtonFaceColor}" />
+                            TintOpacity="0.4"  TintColor="{ThemeResource SystemAltHighColor}" 
+                            FallbackColor="{ThemeResource SystemAltHighColor}" />
     </ContentDialog.Resources>
     <Grid Margin="-28">
         <Grid.RowDefinitions>
