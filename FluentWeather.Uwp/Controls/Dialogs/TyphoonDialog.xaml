@@ -16,6 +16,7 @@
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     FullSizeDesired="True"
     mc:Ignorable="d"
     MinWidth="600"
@@ -41,10 +42,52 @@
                          PedestrianFeaturesVisible="False"
                          TrafficFlowVisible="False">
                 <maps:MapItemsControl x:Name="MapItemsText" >
-                    <TextBlock Text="24小时警戒线" Foreground="#CCFFFF00" Margin="4,4,0,0" TextWrapping="Wrap" Width="20" maps:MapControl.Location="{x:Bind point24}" />
-                    <TextBlock Text="48小时警戒线" Foreground="#99FFFF00" Margin="4,4,0,0" TextWrapping="Wrap" Width="20" maps:MapControl.Location="{x:Bind point48}"/>
+                    <TextBlock Text="24小时警戒线"
+                               Foreground="#CCFFFF00"
+                               Margin="4,4,0,0"
+                               TextWrapping="Wrap" Width="20"
+                               maps:MapControl.Location="{x:Bind point24}"/>
+                    <TextBlock Text="48小时警戒线"
+                               Foreground="#99FFFF00"
+                               Margin="4,4,0,0"
+                               TextWrapping="Wrap" Width="20"
+                               maps:MapControl.Location="{x:Bind point48}"/>
                 </maps:MapItemsControl>
-                <maps:MapItemsControl x:Name="MapItems" ItemsSource="{x:Bind Tracks,Mode=OneWay}">
+                <maps:MapItemsControl x:Name="MapItemsTyphoonNow" ItemsSource="{x:Bind Typhoons,Mode=OneWay}" >
+                    <maps:MapItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:TyphoonBase">
+                            <Grid maps:MapControl.Location="{x:Bind Now, Converter={StaticResource TyphoonTrackToGeopointConverter}}" Margin="-19,-32,0,0">
+                                <controls:DropShadowPanel BlurRadius="12"
+                                                          OffsetX="2"
+                                                          OffsetY="2"
+                                                          Color="Black"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          IsMasked="True"
+                                                          Margin="0,-16,0,0">
+                                    <TextBlock 
+                                        Style="{ThemeResource SubtitleTextBlockStyle}" 
+                                        Text="{x:Bind Name}"/>
+                                </controls:DropShadowPanel>
+
+                                <controls:DropShadowPanel BlurRadius="24"
+                                                          ShadowOpacity="0.5"
+                                                          OffsetX="0"
+                                                          OffsetY="2"
+                                                          Color="Black"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          IsMasked="True"
+                                                          Margin="-2,24,0,0">
+                                    <PathIcon Data="M9.21 1.491c-3.757-.066-6.613 2.537-6.88 5.705-.292 3.494 2.107 4.947 2.428 5.232C2.853 12.4.585 10.28.204 8.296a.104.104 0 0 0-.1-.085.103.103 0 0 0-.103.114c.403 3.526 3.405 6.2 6.79 6.186 3.604-.016 6.518-2.147 6.89-5.646.35-3.295-2.108-5.008-2.424-5.292 2.023.02 4.162 2.15 4.54 4.133.008.048.05.084.098.085a.102.102 0 0 0 .1-.071.103.103 0 0 0 .004-.043c-.406-3.521-3.405-6.126-6.788-6.185ZM8 9.503A1.502 1.502 0 1 1 8 6.5a1.502 1.502 0 0 1 0 3.004Z"/>
+
+                                </controls:DropShadowPanel>
+                            </Grid>
+
+                        </DataTemplate>
+                    </maps:MapItemsControl.ItemTemplate>
+                </maps:MapItemsControl>
+                <maps:MapItemsControl x:Name="MapItemsTyphoonTrack" ItemsSource="{x:Bind Tracks,Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonTrackBase">
                             <Button x:Name="mapItemButton" Margin="-10,-10,0,0" 
@@ -54,7 +97,7 @@
                                     ToolTipService.ToolTip="{x:Bind Time}">
                                 <Ellipse Fill="#CCFFFFFF" Height="5" Width="5"/>
                                 <Button.Flyout>
-                                    <Flyout>
+                                    <Flyout AllowFocusOnInteraction="True">
                                         <StackPanel>
                                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
                                             <Run Text="{x:Bind Type}"/>
