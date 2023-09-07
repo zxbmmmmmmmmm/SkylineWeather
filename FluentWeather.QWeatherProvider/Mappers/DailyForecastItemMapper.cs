@@ -22,6 +22,7 @@ public static class DailyForecastItemMapper
             Visibility = int.Parse(item.Vis),
             SunRise = DateTime.Parse(item.Sunrise),
             SunSet = DateTime.Parse(item.Sunset),
+            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null,
 
             WeatherNight = new QWeatherNight
             {

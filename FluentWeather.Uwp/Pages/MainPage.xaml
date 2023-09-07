@@ -351,18 +351,13 @@
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Margin="12" HorizontalAlignment="Left">
-                                <TextBlock Text="体感温度"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
-                                <TextBlock  FontSize="25">
-                                    <Run Text="{Binding WeatherNow.ApparentTemperature}" FontSize="25"/><Run Text="°"/>
-                                </TextBlock>
-                            </StackPanel>
-                            <StackPanel Margin="12" HorizontalAlignment="Left">
                                 <TextBlock Text="湿度"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
                                 <TextBlock  FontSize="25">
                                     <Run Text="{Binding WeatherNow.Humidity}" FontSize="25"/>
                                     <Run Text="%" FontSize="16"/>
                                 </TextBlock>
                             </StackPanel>
+
                             <StackPanel Margin="12"  HorizontalAlignment="Left">
                                 <TextBlock Text="气压"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
                                 <TextBlock  FontSize="25">
@@ -375,6 +370,13 @@
                                 <TextBlock  FontSize="25">
                                     <Run Text="{Binding WeatherNow.Visibility}" FontSize="25"/>
                                     <Run Text="km"  FontSize="16"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="12" HorizontalAlignment="Left" Visibility="{Binding WeatherNow.CloudAmount,Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="云量"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18"/>
+                                <TextBlock  FontSize="25">
+                                    <Run Text="{Binding WeatherNow.CloudAmount}" FontSize="25"/>
+                                    <Run Text="%"  FontSize="16"/>
                                 </TextBlock>
                             </StackPanel>
                         </controls:AdaptiveGridView.Items>
