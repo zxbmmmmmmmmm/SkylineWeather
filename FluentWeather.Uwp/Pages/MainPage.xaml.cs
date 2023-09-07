@@ -34,9 +34,11 @@ public sealed partial class MainPage : Page
         Instance = this;
     }
 
-    private Visibility GetPrecipChartVisibility(List<PrecipitationItemBase> precipList)
+    private Visibility GetPrecipChartVisibility(PrecipitationBase precip)
     {
+        var precipList = precip?.Precipitations;
         if (precipList is null) return Visibility.Collapsed;
+        if (precipList.Count is 0) return Visibility.Collapsed;
         return precipList.Sum(p => p.Precipitation) == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 }

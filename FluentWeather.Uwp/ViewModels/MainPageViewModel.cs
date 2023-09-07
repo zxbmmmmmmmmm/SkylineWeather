@@ -101,19 +101,15 @@ public partial class MainPageViewModel : ObservableObject
     public async Task GetAirCondition(double lon, double lat)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
-        try
-        {
-            AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
-        }
-        catch
-        {
-            AirCondition = new AirConditionBase();
-        }
+
+        AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
+
     }
     public async void GetWeather(GeolocationBase geo)
     {
         if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
             return;
+
         var lon = geo.Longitude;
         var lat = geo.Latitude;
         //await Task.Run(() => GetTasks(lon, lat));

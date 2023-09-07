@@ -53,8 +53,8 @@
                         <StackPanel Orientation="Horizontal"  Opacity="0.95">
                             <TextBlock Text="{Binding WeatherNow.Temperature}" Style="{ThemeResource TitleTextBlockStyle}" FontSize="90"/>
                             <Grid  Margin="4,26,0,0">
-                                <TextBlock Text="°" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" FontSize="64" Margin="0,-16,0,0"/>
-                                <TextBlock Text="{x:Bind ViewModel.WeatherNow.Description}" FontWeight="SemiBold"  FontSize="32" VerticalAlignment="Bottom" Margin="2,0,0,20"/>
+                                <TextBlock Text="°" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold" FontSize="64" Margin="2,-16,0,0"/>
+                                <TextBlock Text="{x:Bind ViewModel.WeatherNow.Description}" FontWeight="SemiBold"  FontSize="32" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
                             </Grid>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -121,12 +121,18 @@
                                 </Button.Flyout>
                             </Button>
                         </StackPanel>
-                        <TextBlock Visibility="{x:Bind PrecipGrid.Visibility,Converter={StaticResource VisibilityInverter}}" FontSize="17" Text="{Binding Precipitation.Summary}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <Border Visibility="{x:Bind ViewModel.Precipitation.Precipitations,Converter={StaticResource NullToVisibilityConverter}}">
+                            <TextBlock Visibility="{x:Bind PrecipGrid.Visibility,Converter={StaticResource VisibilityInverter}}"
+                                       FontSize="17" 
+                                       Text="{Binding Precipitation.Summary}"
+                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        </Border>
+
                     </StackPanel>
                 </Grid>
                 
                 <!--降水概率-->
-                <Grid x:Name="PrecipGrid" Grid.Row="1"  Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation.Precipitations),Mode=OneWay}">
+                <Grid x:Name="PrecipGrid" Grid.Row="1" Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation),Mode=OneWay}">
                     <muxc:Expander Header="{Binding Precipitation.Summary}" HorizontalAlignment="Stretch">
                         <controls1:PrecipitationChart Precipitations="{x:Bind ViewModel.Precipitation.Precipitations,Mode=OneWay}" Height="200"/>
                     </muxc:Expander>

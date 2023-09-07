@@ -116,8 +116,8 @@ public class QWeatherProvider : ProviderBase,
     public async Task<AirConditionBase> GetAirCondition(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.AirConditionApi, new QWeatherRequest(lon, lat));
-        var res = result.AirConditionNow.MapToQAirCondition();
-        res.Link = result.FxLink;
+        var res = result.AirConditionNow?.MapToQAirCondition();
+        if(res is not null)res.Link = result.FxLink;
         return res;
     }
 
