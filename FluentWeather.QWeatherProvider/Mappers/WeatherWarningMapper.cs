@@ -15,7 +15,7 @@ public static class WeatherWarningMapper
             Description = item.Text,
             Sender = item.Sender,
             Severity = item.Severity,
-            SeverityColor = (SeverityColor)Enum.Parse(typeof(SeverityColor),item.SeverityColor),//可能出问题
+            SeverityColor = item.SeverityColor is not "" ?(SeverityColor)Enum.Parse(typeof(SeverityColor),item.SeverityColor) : null,
             StartTime = DateTime.Parse(item.StartTime),
             EndTime = DateTime.Parse(item.EndTime),
             PublishTime = DateTime.Parse(item.PubTime),
