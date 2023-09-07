@@ -18,8 +18,8 @@
             <Image Source="{x:Bind WeatherInfo.WeatherType,Converter={StaticResource WeatherTypeToIconConverter}}"  Height="32" Stretch="Uniform" />
             <TextBlock d:Text="晴" Text="{x:Bind WeatherInfo.Description}" FontSize="17" HorizontalAlignment="Center"/>
             <StackPanel>
-                <TextBlock d:Text="晴"  FontSize="17" HorizontalAlignment="Center">
-                    <Run Text="{Binding WeatherInfo.Temperature}"/><Run Text="°"/>
+                <TextBlock d:Text="晴"  FontSize="17" HorizontalAlignment="Center" Margin="6,0,0,0">
+                    <Run Text="{Binding WeatherInfo.Temperature}" FontWeight="SemiBold"/><Run Text="°"/>
                 </TextBlock>
             </StackPanel>
         </StackPanel>

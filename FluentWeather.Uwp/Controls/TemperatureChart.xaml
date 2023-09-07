@@ -8,14 +8,15 @@
     xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
+    xmlns:charting="using:Telerik.Charting"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <UserControl.Resources>
         <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter"/>
         <valueConverters1:AddConverter x:Key="AddConverter"/>
-        <DataTemplate x:Key="PointTemplate">
-            <Ellipse Width="8" Height="8" Fill="{Binding Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"  StrokeThickness="2"/>
+        <DataTemplate x:Key="PointTemplate" x:DataType="charting:DataPoint">
+            <Ellipse Width="8" Height="8" Fill="{x:Bind Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"  StrokeThickness="2"/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid >
@@ -37,8 +38,8 @@
 
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-2.5,Mode=OneWay}" 
-                                  Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=2.5,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
+                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-4,Mode=OneWay}" 
+                                  Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=4,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent"></Setter>
@@ -60,7 +61,9 @@
                     <chart:ChartSeriesLabelDefinition Margin="12,0"  VerticalAlignment="Top" HorizontalAlignment="Center">
                         <chart:ChartSeriesLabelDefinition.Template>
                             <DataTemplate>
-                                <TextBlock Text="{Binding DataItem.MaxTemperature}" FontSize="20" FontWeight="SemiBold" Margin="-6,-18,-18,0"/>
+                                <TextBlock  FontSize="20" HorizontalAlignment="Center" Margin="-12,-26,-18,0">
+                                    <Run Text="{Binding DataItem.MaxTemperature}" FontWeight="SemiBold"/><Run Text="°" />
+                                </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
                     </chart:ChartSeriesLabelDefinition>
@@ -78,7 +81,9 @@
                     <chart:ChartSeriesLabelDefinition Margin="12,0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                         <chart:ChartSeriesLabelDefinition.Template>
                             <DataTemplate>
-                                <TextBlock Text="{Binding DataItem.MinTemperature}" FontSize="20" FontWeight="SemiBold" Margin="-4,0,-16,-24"/>
+                                <TextBlock  FontSize="20" HorizontalAlignment="Center" Margin="-11,0,-18,-24">
+                                    <Run Text="{Binding DataItem.MinTemperature}" FontWeight="SemiBold"/><Run Text="°"/>
+                                </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
                     </chart:ChartSeriesLabelDefinition>
