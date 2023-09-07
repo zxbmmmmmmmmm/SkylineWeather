@@ -37,7 +37,8 @@
 
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-0.3,Mode=OneWay}" Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=2.5,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
+                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-2.5,Mode=OneWay}" 
+                                  Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=2.5,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent"></Setter>
@@ -53,7 +54,17 @@
             <chart:RadCartesianChart.Grid>
                 <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed"/>
             </chart:RadCartesianChart.Grid>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#B3FFB900" ShowLabels="True"  ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#B3FFB900" ShowLabels="True" 
+                               ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+                <chart:LineSeries.LabelDefinitions>
+                    <chart:ChartSeriesLabelDefinition Margin="12,0"  VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <chart:ChartSeriesLabelDefinition.Template>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataItem.MaxTemperature}" FontSize="20" FontWeight="SemiBold" Margin="-6,-18,-18,0"/>
+                            </DataTemplate>
+                        </chart:ChartSeriesLabelDefinition.Template>
+                    </chart:ChartSeriesLabelDefinition>
+                </chart:LineSeries.LabelDefinitions>
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time"/>
                 </chart:LineSeries.CategoryBinding>
@@ -61,8 +72,17 @@
                     <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature"/>
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#B300BFFF" ShowLabels="True" 
+            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#B300BFFF" ShowLabels="True"
                                        CombineMode="Cluster" ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+                <chart:LineSeries.LabelDefinitions>
+                    <chart:ChartSeriesLabelDefinition Margin="12,0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <chart:ChartSeriesLabelDefinition.Template>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataItem.MinTemperature}" FontSize="20" FontWeight="SemiBold" Margin="-4,0,-16,-24"/>
+                            </DataTemplate>
+                        </chart:ChartSeriesLabelDefinition.Template>
+                    </chart:ChartSeriesLabelDefinition>
+                </chart:LineSeries.LabelDefinitions>
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time"/>
                 </chart:LineSeries.CategoryBinding>
