@@ -35,11 +35,11 @@
                 <ControlTemplate TargetType="ListViewItem">
                     <Grid
                         x:Name="ContentBorder"
+                        Margin="4,2"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Control.IsTemplateFocusTarget="True"
-                        Margin="4,2"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                         RenderTransformOrigin="0.5,0.5">

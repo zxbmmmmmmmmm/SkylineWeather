@@ -2,70 +2,88 @@
     x:Class="FluentWeather.Uwp.Controls.Settings.PersonalizationSettingSection"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:converters2="using:ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d">
     <lab:SettingsExpander Header="个性化" IsExpanded="True">
         <lab:SettingsExpander.HeaderIcon>
-            <FontIcon Glyph="&#xE771;"/>
+            <FontIcon Glyph="&#xE771;" />
         </lab:SettingsExpander.HeaderIcon>
         <lab:SettingsExpander.Items>
-            <lab:SettingsCard Header="颜色" Description="设置主题颜色" Padding="12" >
+            <lab:SettingsCard
+                Padding="12"
+                Description="设置主题颜色"
+                Header="颜色">
                 <lab:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE7A1;"/>
+                    <FontIcon Glyph="&#xE7A1;" />
                 </lab:SettingsCard.HeaderIcon>
                 <muxc:RadioButtons>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Light}">明亮</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Dark}">黑暗</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme,Mode=TwoWay,Converter={StaticResource EnumToBoolConverter},ConverterParameter=Default}">跟随系统</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Light}">明亮</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Dark}">黑暗</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">跟随系统</RadioButton>
                 </muxc:RadioButtons>
             </lab:SettingsCard>
-            <lab:SettingsCard Header="亚克力" Padding="12">
+            <lab:SettingsCard Padding="12" Header="亚克力">
                 <lab:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE727;"/>
+                    <FontIcon Glyph="&#xE727;" />
                 </lab:SettingsCard.HeaderIcon>
                 <lab:SettingsCard.Description>
                     <TextBlock>
-                        <Run Text="Win11下将覆盖Mica"/><LineBreak/><Run Text="会增加一定占用"/>
+                        <Run Text="Win11下将覆盖Mica" /><LineBreak /><Run Text="会增加一定占用" />
                     </TextBlock>
                 </lab:SettingsCard.Description>
-                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled,Mode=TwoWay}"/>
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=TwoWay}" />
             </lab:SettingsCard>
-                              
-            <lab:SettingsCard Header="背景图片" Description="应用背景设置"  Padding="12">
+
+            <lab:SettingsCard
+                Padding="12"
+                Description="应用背景设置"
+                Header="背景图片">
                 <lab:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE8B9;"/>
+                    <FontIcon Glyph="&#xE8B9;" />
                 </lab:SettingsCard.HeaderIcon>
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <Button Content="选取" Command="{x:Bind SetBackgroundCommand}" CommandParameter="All"/>
-                    <Button Content="打开背景文件夹" Command="{x:Bind OpenBackgroundsFolderCommand}" CommandParameter="All"/>
+                    <Button
+                        Command="{x:Bind SetBackgroundCommand}"
+                        CommandParameter="All"
+                        Content="选取" />
+                    <Button
+                        Command="{x:Bind OpenBackgroundsFolderCommand}"
+                        CommandParameter="All"
+                        Content="打开背景文件夹" />
                 </StackPanel>
             </lab:SettingsCard>
-            <lab:SettingsCard Header="背景模糊半径" Padding="12" >
+            <lab:SettingsCard Padding="12" Header="背景模糊半径">
                 <lab:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE794;"/>
+                    <FontIcon Glyph="&#xE794;" />
                 </lab:SettingsCard.HeaderIcon>
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <Slider x:Name="BlurAmountSlider" Value="{x:Bind app:Common.Settings.BackgroundBlurAmount,Mode=TwoWay}" Maximum="32"/>
-                    <TextBlock Text="{x:Bind BlurAmountSlider.Value,Mode=OneWay}" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    <Slider
+                        x:Name="BlurAmountSlider"
+                        Maximum="32"
+                        Value="{x:Bind app:Common.Settings.BackgroundBlurAmount, Mode=TwoWay}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                        Text="{x:Bind BlurAmountSlider.Value, Mode=OneWay}" />
                 </StackPanel>
             </lab:SettingsCard>
-            <lab:SettingsCard Header="背景透明度" Padding="12">
+            <lab:SettingsCard Padding="12" Header="背景透明度">
                 <lab:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE7A1;"/>
+                    <FontIcon Glyph="&#xE7A1;" />
                 </lab:SettingsCard.HeaderIcon>
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <Slider x:Name="TransparencySlider" Value="{x:Bind app:Common.Settings.BackgroundTransparency,Mode=TwoWay}"/>
+                    <Slider x:Name="TransparencySlider" Value="{x:Bind app:Common.Settings.BackgroundTransparency, Mode=TwoWay}" />
                     <TextBlock VerticalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                        <Run Text="{x:Bind TransparencySlider.Value,Mode=OneWay}"/><Run Text="%"/>
+                        <Run Text="{x:Bind TransparencySlider.Value, Mode=OneWay}" /><Run Text="%" />
                     </TextBlock>
                 </StackPanel>
             </lab:SettingsCard>

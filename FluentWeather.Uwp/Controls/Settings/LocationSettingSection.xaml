@@ -2,26 +2,36 @@
     x:Class="FluentWeather.Uwp.Controls.Settings.LocationSettingSection"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    mc:Ignorable="d"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d">
 
     <Grid>
-        <labs:SettingsExpander Header="位置" IsExpanded="True" Description="{x:Bind app:Common.Settings.DefaultGeolocation.Name,Mode=OneWay}">
+        <labs:SettingsExpander
+            Description="{x:Bind app:Common.Settings.DefaultGeolocation.Name, Mode=OneWay}"
+            Header="位置"
+            IsExpanded="True">
             <labs:SettingsExpander.Items>
-                <labs:SettingsCard Header="默认位置" HeaderIcon="Pin" Description="使用此位置作为当前位置(重启生效)"  Padding="12">
-                    <Button Content="更改" Command="{x:Bind OpenLocationDialogCommand}"/>
+                <labs:SettingsCard
+                    Padding="12"
+                    Description="使用此位置作为当前位置(重启生效)"
+                    Header="默认位置"
+                    HeaderIcon="Pin">
+                    <Button Command="{x:Bind OpenLocationDialogCommand}" Content="更改" />
                 </labs:SettingsCard>
-                <labs:SettingsCard  Header="启动时更新位置" Description="需要定位权限，可能会减慢启动速度，台式机不建议开启"  Padding="12">
+                <labs:SettingsCard
+                    Padding="12"
+                    Description="需要定位权限，可能会减慢启动速度，台式机不建议开启"
+                    Header="启动时更新位置">
                     <labs:SettingsCard.HeaderIcon>
-                        <FontIcon Glyph="&#xE81D;"/>
+                        <FontIcon Glyph="&#xE81D;" />
                     </labs:SettingsCard.HeaderIcon>
-                    <ToggleSwitch IsOn="{x:Bind app:Common.Settings.UpdateLocationOnStartup,Mode=TwoWay}"/>
+                    <ToggleSwitch IsOn="{x:Bind app:Common.Settings.UpdateLocationOnStartup, Mode=TwoWay}" />
                 </labs:SettingsCard>
             </labs:SettingsExpander.Items>
 

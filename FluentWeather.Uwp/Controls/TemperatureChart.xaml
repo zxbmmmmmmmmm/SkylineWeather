@@ -2,97 +2,129 @@
     x:Class="FluentWeather.Uwp.Controls.TemperatureChart"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:charting="using:Telerik.Charting"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FluentWeather.Uwp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
-    xmlns:charting="using:Telerik.Charting"
-    mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter"/>
-        <valueConverters1:AddConverter x:Key="AddConverter"/>
+        <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter" />
+        <valueConverters1:AddConverter x:Key="AddConverter" />
         <DataTemplate x:Key="PointTemplate" x:DataType="charting:DataPoint">
-            <Ellipse Width="8" Height="8" Fill="{x:Bind Converter={StaticResource DataPointToBrushConverter},Mode=OneWay}" Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"  StrokeThickness="2"/>
+            <Ellipse
+                Width="8"
+                Height="8"
+                Fill="{x:Bind Converter={StaticResource DataPointToBrushConverter}, Mode=OneWay}"
+                Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
+                StrokeThickness="2" />
         </DataTemplate>
     </UserControl.Resources>
-    <Grid >
+    <Grid>
         <chart:RadCartesianChart PaletteName="DefaultLight">
             <chart:RadCartesianChart.HorizontalAxis>
-                <chart:CategoricalAxis Visibility="Collapsed" BorderBrush="Transparent" Foreground="Transparent" PlotMode="BetweenTicks" >
+                <chart:CategoricalAxis
+                    BorderBrush="Transparent"
+                    Foreground="Transparent"
+                    PlotMode="BetweenTicks"
+                    Visibility="Collapsed">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                            <Setter Property="Stroke" Value="Transparent" />
                         </Style>
 
                     </chart:CategoricalAxis.LineStyle>
                     <chart:CategoricalAxis.MajorTickStyle>
                         <Style TargetType="Rectangle">
-                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                            <Setter Property="Stroke" Value="Transparent" />
                         </Style>
                     </chart:CategoricalAxis.MajorTickStyle>
                 </chart:CategoricalAxis>
 
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis Minimum="{x:Bind MinTemperature,Converter={StaticResource AddConverter},ConverterParameter=-4,Mode=OneWay}" 
-                                  Maximum="{x:Bind MaxTemperature,Converter={StaticResource AddConverter},ConverterParameter=4,Mode=OneWay}" ShowLabels="False" Visibility="Collapsed" >
+                <chart:LinearAxis
+                    Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=4, Mode=OneWay}"
+                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-4, Mode=OneWay}"
+                    ShowLabels="False"
+                    Visibility="Collapsed">
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
-                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                            <Setter Property="Stroke" Value="Transparent" />
                         </Style>
                     </chart:LinearAxis.LineStyle>
                     <chart:LinearAxis.MajorTickStyle>
                         <Style TargetType="Rectangle">
-                            <Setter Property="Stroke" Value="Transparent"></Setter>
+                            <Setter Property="Stroke" Value="Transparent" />
                         </Style>
                     </chart:LinearAxis.MajorTickStyle>
                 </chart:LinearAxis>
             </chart:RadCartesianChart.VerticalAxis>
             <chart:RadCartesianChart.Grid>
-                <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed"/>
+                <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed" />
             </chart:RadCartesianChart.Grid>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" CombineMode="Cluster" Stroke="#B3FFB900" ShowLabels="True" 
-                               ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+            <chart:LineSeries
+                CombineMode="Cluster"
+                ItemsSource="{x:Bind WeatherForecasts, Mode=OneWay}"
+                PointTemplate="{StaticResource PointTemplate}"
+                ShowLabels="True"
+                Stroke="#B3FFB900">
                 <chart:LineSeries.LabelDefinitions>
-                    <chart:ChartSeriesLabelDefinition Margin="12,0"  VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <chart:ChartSeriesLabelDefinition
+                        Margin="12,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
                         <chart:ChartSeriesLabelDefinition.Template>
                             <DataTemplate>
-                                <TextBlock  FontSize="20" HorizontalAlignment="Center" Margin="-12,-26,-18,0">
-                                    <Run Text="{Binding DataItem.MaxTemperature}" FontWeight="SemiBold"/><Run Text="°" />
+                                <TextBlock
+                                    Margin="-12,-26,-18,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="20">
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
                     </chart:ChartSeriesLabelDefinition>
                 </chart:LineSeries.LabelDefinitions>
                 <chart:LineSeries.CategoryBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="Time"/>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:LineSeries.CategoryBinding>
                 <chart:LineSeries.ValueBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature"/>
+                    <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature" />
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
-            <chart:LineSeries  PointTemplate="{StaticResource PointTemplate}" Stroke="#B300BFFF" ShowLabels="True"
-                                       CombineMode="Cluster" ItemsSource="{x:Bind WeatherForecasts,Mode=OneWay}">
+            <chart:LineSeries
+                CombineMode="Cluster"
+                ItemsSource="{x:Bind WeatherForecasts, Mode=OneWay}"
+                PointTemplate="{StaticResource PointTemplate}"
+                ShowLabels="True"
+                Stroke="#B300BFFF">
                 <chart:LineSeries.LabelDefinitions>
-                    <chart:ChartSeriesLabelDefinition Margin="12,0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                    <chart:ChartSeriesLabelDefinition
+                        Margin="12,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom">
                         <chart:ChartSeriesLabelDefinition.Template>
                             <DataTemplate>
-                                <TextBlock  FontSize="20" HorizontalAlignment="Center" Margin="-11,0,-18,-24">
-                                    <Run Text="{Binding DataItem.MinTemperature}" FontWeight="SemiBold"/><Run Text="°"/>
+                                <TextBlock
+                                    Margin="-11,0,-18,-24"
+                                    HorizontalAlignment="Center"
+                                    FontSize="20">
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
                     </chart:ChartSeriesLabelDefinition>
                 </chart:LineSeries.LabelDefinitions>
                 <chart:LineSeries.CategoryBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="Time"/>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:LineSeries.CategoryBinding>
                 <chart:LineSeries.ValueBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="MinTemperature"/>
+                    <chart:PropertyNameDataPointBinding PropertyName="MinTemperature" />
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
         </chart:RadCartesianChart>

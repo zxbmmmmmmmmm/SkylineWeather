@@ -2,84 +2,93 @@
     x:Class="FluentWeather.Uwp.Controls.Dialogs.TyphoonDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:models="using:FluentWeather.Abstraction.Models"
-    xmlns:geolocation="using:Windows.Devices.Geolocation"
-    xmlns:geo="Windows.Devices.Geolocation"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    xmlns:media="using:Microsoft.UI.Xaml.Media"
-    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    FullSizeDesired="True"
-    mc:Ignorable="d"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:geo="Windows.Devices.Geolocation"
+    xmlns:geolocation="using:Windows.Devices.Geolocation"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     MinWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    FullSizeDesired="True"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    Style="{ThemeResource ContentDialogFullStyle}">
+    Style="{ThemeResource ContentDialogFullStyle}"
+    mc:Ignorable="d">
     <ContentDialog.Resources>
-        <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter"/>
-        <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter"/>
-        <media:AcrylicBrush x:Key="ButtonAcrylic" BackgroundSource="Backdrop"
-                            TintOpacity="0.4"  TintColor="{ThemeResource SystemAltHighColor}" 
-                            FallbackColor="{ThemeResource SystemAltHighColor}" />
+        <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter" />
+        <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter" />
+        <media:AcrylicBrush
+            x:Key="ButtonAcrylic"
+            BackgroundSource="Backdrop"
+            FallbackColor="{ThemeResource SystemAltHighColor}"
+            TintColor="{ThemeResource SystemAltHighColor}"
+            TintOpacity="0.4" />
     </ContentDialog.Resources>
     <Grid Margin="-28">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid CornerRadius="8">
-            <maps:MapControl x:Name="TyphoonMap"
-                         MapServiceToken="6iY6JneJPV7AFhir2V6U~8UMtoXGEqONtfgaNlwbBFQ~AjYXGzbTvKUcQK5QKcI3--6uWd0k03mMqMJP8jmYxuYzdd0CrLmhFaQWggXaAggO"
-                         LandmarksVisible="False"
-                         Style="AerialWithRoads" TransitFeaturesVisible="False" 
-                         PedestrianFeaturesVisible="False"
-                         TrafficFlowVisible="False">
-                <maps:MapItemsControl x:Name="MapItemsText" >
-                    <TextBlock Text="24小时警戒线"
-                               Foreground="#CCFFFF00"
-                               Margin="4,4,0,0"
-                               TextWrapping="Wrap" Width="20"
-                               maps:MapControl.Location="{x:Bind point24}"/>
-                    <TextBlock Text="48小时警戒线"
-                               Foreground="#99FFFF00"
-                               Margin="4,4,0,0"
-                               TextWrapping="Wrap" Width="20"
-                               maps:MapControl.Location="{x:Bind point48}"/>
+            <maps:MapControl
+                x:Name="TyphoonMap"
+                LandmarksVisible="False"
+                MapServiceToken="6iY6JneJPV7AFhir2V6U~8UMtoXGEqONtfgaNlwbBFQ~AjYXGzbTvKUcQK5QKcI3--6uWd0k03mMqMJP8jmYxuYzdd0CrLmhFaQWggXaAggO"
+                PedestrianFeaturesVisible="False"
+                Style="AerialWithRoads"
+                TrafficFlowVisible="False"
+                TransitFeaturesVisible="False">
+                <maps:MapItemsControl x:Name="MapItemsText">
+                    <TextBlock
+                        Width="20"
+                        Margin="4,4,0,0"
+                        maps:MapControl.Location="{x:Bind point24}"
+                        Foreground="#CCFFFF00"
+                        Text="24小时警戒线"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Width="20"
+                        Margin="4,4,0,0"
+                        maps:MapControl.Location="{x:Bind point48}"
+                        Foreground="#99FFFF00"
+                        Text="48小时警戒线"
+                        TextWrapping="Wrap" />
                 </maps:MapItemsControl>
-                <maps:MapItemsControl x:Name="MapItemsTyphoonNow" ItemsSource="{x:Bind Typhoons,Mode=OneWay}" >
+                <maps:MapItemsControl x:Name="MapItemsTyphoonNow" ItemsSource="{x:Bind Typhoons, Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonBase">
-                            <Grid maps:MapControl.Location="{x:Bind Now, Converter={StaticResource TyphoonTrackToGeopointConverter}}" Margin="-19,-32,0,0">
-                                <controls:DropShadowPanel BlurRadius="12"
-                                                          OffsetX="2"
-                                                          OffsetY="2"
-                                                          Color="Black"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          IsMasked="True"
-                                                          Margin="0,-16,0,0">
-                                    <TextBlock 
-                                        Style="{ThemeResource SubtitleTextBlockStyle}" 
-                                        Text="{x:Bind Name}"/>
+                            <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind Now, Converter={StaticResource TyphoonTrackToGeopointConverter}}">
+                                <controls:DropShadowPanel
+                                    Margin="0,-16,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    BlurRadius="12"
+                                    IsMasked="True"
+                                    OffsetX="2"
+                                    OffsetY="2"
+                                    Color="Black">
+                                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" />
                                 </controls:DropShadowPanel>
 
-                                <controls:DropShadowPanel BlurRadius="24"
-                                                          ShadowOpacity="0.5"
-                                                          OffsetX="0"
-                                                          OffsetY="2"
-                                                          Color="Black"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"
-                                                          IsMasked="True"
-                                                          Margin="-2,24,0,0">
-                                    <PathIcon Data="M9.21 1.491c-3.757-.066-6.613 2.537-6.88 5.705-.292 3.494 2.107 4.947 2.428 5.232C2.853 12.4.585 10.28.204 8.296a.104.104 0 0 0-.1-.085.103.103 0 0 0-.103.114c.403 3.526 3.405 6.2 6.79 6.186 3.604-.016 6.518-2.147 6.89-5.646.35-3.295-2.108-5.008-2.424-5.292 2.023.02 4.162 2.15 4.54 4.133.008.048.05.084.098.085a.102.102 0 0 0 .1-.071.103.103 0 0 0 .004-.043c-.406-3.521-3.405-6.126-6.788-6.185ZM8 9.503A1.502 1.502 0 1 1 8 6.5a1.502 1.502 0 0 1 0 3.004Z"/>
+                                <controls:DropShadowPanel
+                                    Margin="-2,24,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    BlurRadius="24"
+                                    IsMasked="True"
+                                    OffsetX="0"
+                                    OffsetY="2"
+                                    ShadowOpacity="0.5"
+                                    Color="Black">
+                                    <PathIcon Data="M9.21 1.491c-3.757-.066-6.613 2.537-6.88 5.705-.292 3.494 2.107 4.947 2.428 5.232C2.853 12.4.585 10.28.204 8.296a.104.104 0 0 0-.1-.085.103.103 0 0 0-.103.114c.403 3.526 3.405 6.2 6.79 6.186 3.604-.016 6.518-2.147 6.89-5.646.35-3.295-2.108-5.008-2.424-5.292 2.023.02 4.162 2.15 4.54 4.133.008.048.05.084.098.085a.102.102 0 0 0 .1-.071.103.103 0 0 0 .004-.043c-.406-3.521-3.405-6.126-6.788-6.185ZM8 9.503A1.502 1.502 0 1 1 8 6.5a1.502 1.502 0 0 1 0 3.004Z" />
 
                                 </controls:DropShadowPanel>
                             </Grid>
@@ -87,44 +96,52 @@
                         </DataTemplate>
                     </maps:MapItemsControl.ItemTemplate>
                 </maps:MapItemsControl>
-                <maps:MapItemsControl x:Name="MapItemsTyphoonTrack" ItemsSource="{x:Bind Tracks,Mode=OneWay}">
+                <maps:MapItemsControl x:Name="MapItemsTyphoonTrack" ItemsSource="{x:Bind Tracks, Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonTrackBase">
-                            <Button x:Name="mapItemButton" Margin="-10,-10,0,0" 
-                                    Background="Transparent" Height="20" Width="20" 
-                                    Padding="0" BorderBrush="Transparent"
-                                    maps:MapControl.Location="{x:Bind Converter={StaticResource TyphoonTrackToGeopointConverter}}"
-                                    ToolTipService.ToolTip="{x:Bind Time}">
-                                <Ellipse Fill="#CCFFFFFF" Height="5" Width="5"/>
+                            <Button
+                                x:Name="mapItemButton"
+                                Width="20"
+                                Height="20"
+                                Margin="-10,-10,0,0"
+                                Padding="0"
+                                maps:MapControl.Location="{x:Bind Converter={StaticResource TyphoonTrackToGeopointConverter}}"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                ToolTipService.ToolTip="{x:Bind Time}">
+                                <Ellipse
+                                    Width="5"
+                                    Height="5"
+                                    Fill="#CCFFFFFF" />
                                 <Button.Flyout>
                                     <Flyout AllowFocusOnInteraction="True">
                                         <StackPanel>
                                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
-                                            <Run Text="{x:Bind Type}"/>
-                                            <Run Text="("/><Run Text="{x:Bind Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}"/><Run Text=")"/>
+                                                <Run Text="{x:Bind Type}" />
+                                                <Run Text="(" /><Run Text="{x:Bind Type, Converter={StaticResource TyphoonTypeToDescriptionConverter}}" /><Run Text=")" />
                                             </TextBlock>
-                                            <TextBlock Text="{x:Bind Time}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Time}" />
                                             <TextBlock Margin="0,4,0,0">
-                                            <Run Text="最大风速:"/>
-                                            <Run Text="{x:Bind WindSpeed}"/>
-                                            <Run Text="m/s"/>
+                                                <Run Text="最大风速:" />
+                                                <Run Text="{x:Bind WindSpeed}" />
+                                                <Run Text="m/s" />
                                             </TextBlock>
-                                            <TextBlock Visibility="{x:Bind MoveSpeed,Converter={StaticResource NullToVisibilityConverter}}">
-                                            <Run Text="移动速度:"/>
-                                            <Run Text="{x:Bind MoveSpeed}"/>
-                                            <Run Text="km/h"/>
+                                            <TextBlock Visibility="{x:Bind MoveSpeed, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <Run Text="移动速度:" />
+                                                <Run Text="{x:Bind MoveSpeed}" />
+                                                <Run Text="km/h" />
                                             </TextBlock>
-                                            <TextBlock >
-                                            <Run Text="气压:"/>
-                                            <Run Text="{x:Bind Pressure}"/>
-                                            <Run Text="kPa"/>
+                                            <TextBlock>
+                                                <Run Text="气压:" />
+                                                <Run Text="{x:Bind Pressure}" />
+                                                <Run Text="kPa" />
                                             </TextBlock>
                                         </StackPanel>
                                     </Flyout>
                                 </Button.Flyout>
                                 <Button.Transitions>
                                     <TransitionCollection>
-                                        <EntranceThemeTransition/>
+                                        <EntranceThemeTransition />
                                     </TransitionCollection>
                                 </Button.Transitions>
                             </Button>
@@ -132,64 +149,95 @@
                     </maps:MapItemsControl.ItemTemplate>
                 </maps:MapItemsControl>
             </maps:MapControl>
-            <Grid VerticalAlignment="Bottom" Margin="32">
-                <StackPanel Spacing="12" >
-                    <labs:Segmented Name="SegmentedControl" 
-                                    ItemsSource="{x:Bind Typhoons,Mode=OneWay}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    Background="{ThemeResource ButtonAcrylic}"
-                                    SelectionChanged="SegmentedControl_SelectionChanged">
+            <Grid Margin="32" VerticalAlignment="Bottom">
+                <StackPanel Spacing="12">
+                    <labs:Segmented
+                        Name="SegmentedControl"
+                        Background="{ThemeResource ButtonAcrylic}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        ItemsSource="{x:Bind Typhoons, Mode=OneWay}"
+                        SelectionChanged="SegmentedControl_SelectionChanged">
                         <labs:Segmented.ItemTemplate>
                             <DataTemplate x:DataType="models:TyphoonBase">
-                                <TextBlock Text="{x:Bind Name}"/>
+                                <TextBlock Text="{x:Bind Name}" />
                             </DataTemplate>
                         </labs:Segmented.ItemTemplate>
                     </labs:Segmented>
 
-                    <Grid  Visibility="{x:Bind SegmentedControl.SelectedItem,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}"
-                           BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                           BorderThickness="1" HorizontalAlignment="Left" CornerRadius="4"
-                           Background="{ThemeResource ButtonAcrylic}" Padding="24,16">
-                        <StackPanel Spacing="4" Visibility="{x:Bind SegmentedControl.SelectedItem,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}">
+                    <Grid
+                        Padding="24,16"
+                        HorizontalAlignment="Left"
+                        Background="{ThemeResource ButtonAcrylic}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
+                        <StackPanel Spacing="4" Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                             <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
-                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Name}"/>
-                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Type,Converter={StaticResource TyphoonTypeToDescriptionConverter}}" FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Name}" />
+                                <Run
+                                    FontSize="16"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Type, Converter={StaticResource TyphoonTypeToDescriptionConverter}}" />
                             </TextBlock>
                             <StackPanel Orientation="Horizontal" Spacing="16">
                                 <TextBlock>
-                                    <Run Text="最大风速"  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.WindSpeed}" FontSize="16"/>
-                                    <Run Text="m/s"/>
+                                    <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="最大风速" />
+                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.WindSpeed}" />
+                                    <Run Text="m/s" />
                                 </TextBlock>
                                 <TextBlock>
-                                    <Run Text="移动速度" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.MoveSpeed}" FontSize="16"/>
-                                    <Run Text="km/h"/>
+                                    <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="移动速度" />
+                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.MoveSpeed}" />
+                                    <Run Text="km/h" />
                                 </TextBlock>
                                 <TextBlock>
-                                    <Run Text="气压" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-                                    <LineBreak/><Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Pressure}" FontSize="16"/>
-                                    <Run Text="kPa"/>
+                                    <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="气压" />
+                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Pressure}" />
+                                    <Run Text="kPa" />
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <Rectangle Fill="Red" Height="10" Width="10"/>
-                                <TextBlock Text="12级风圈"/>
-                                <Rectangle Fill="Yellow" Height="10" Width="10" Margin="4,0,0,0"/>
-                                <TextBlock Text="10级风圈"/>
-                                <Rectangle Fill="#0080FF" Height="10" Width="10" Margin="4,0,0,0"/>
-                                <TextBlock Text="7级风圈"/>
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="Red" />
+                                <TextBlock Text="12级风圈" />
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Margin="4,0,0,0"
+                                    Fill="Yellow" />
+                                <TextBlock Text="10级风圈" />
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Margin="4,0,0,0"
+                                    Fill="#0080FF" />
+                                <TextBlock Text="7级风圈" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-                <Grid Visibility="{x:Bind Typhoons,Converter={StaticResource NullToVisibilityInvertedConverter},Mode=OneWay}"
-                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                      BorderThickness="1" HorizontalAlignment="Left" CornerRadius="4"
-                      Background="{ThemeResource ButtonAcrylic}" Padding="24,16">
+                <Grid
+                    Padding="24,16"
+                    HorizontalAlignment="Left"
+                    Background="{ThemeResource ButtonAcrylic}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Visibility="{x:Bind Typhoons, Converter={StaticResource NullToVisibilityInvertedConverter}, Mode=OneWay}">
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="无台风" />
                 </Grid>
-                <Button VerticalAlignment="Bottom" Background="{ThemeResource ButtonAcrylic}" Canvas.ZIndex="1" Command="{x:Bind CloseCommand}" FontSize="16" Padding="64,8" HorizontalAlignment="Right" Content="关闭"/>
+                <Button
+                    Padding="64,8"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Background="{ThemeResource ButtonAcrylic}"
+                    Canvas.ZIndex="1"
+                    Command="{x:Bind CloseCommand}"
+                    Content="关闭"
+                    FontSize="16" />
             </Grid>
 
         </Grid>

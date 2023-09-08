@@ -2,24 +2,24 @@
     x:Class="FluentWeather.Uwp.Controls.Dialogs.SetLocationDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:models="using:FluentWeather.Abstraction.Models"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    mc:Ignorable="d"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Title="设置默认位置"
-    PrimaryButtonText="确定"
-    Style="{ThemeResource DefaultContentDialogStyle}"
+    DefaultButton="Primary"
+    IsPrimaryButtonEnabled="{x:Bind ChosenGeolocation, Converter={StaticResource NullToBoolConverter}, Mode=OneWay}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     PrimaryButtonStyle="{ThemeResource HandwritingViewCandidateStyle}"
-    IsPrimaryButtonEnabled="{x:Bind ChosenGeolocation,Converter={StaticResource NullToBoolConverter},Mode=OneWay}"
+    PrimaryButtonText="确定"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    DefaultButton="Primary">
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    mc:Ignorable="d">
 
     <Grid>
         <StackPanel Spacing="12">
@@ -47,20 +47,20 @@
                     </DataTemplate>
                 </AutoSuggestBox.ItemTemplate>
             </AutoSuggestBox>
-            <StackPanel x:DefaultBindMode="OneWay" Visibility="{x:Bind ChosenGeolocation,Converter={StaticResource NullToVisibilityConverter}}">
+            <StackPanel x:DefaultBindMode="OneWay" Visibility="{x:Bind ChosenGeolocation, Converter={StaticResource NullToVisibilityConverter}}">
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
-                    <Run Text="{x:Bind ChosenGeolocation.Name}"/>
-                    <Run Text="-"/>
-                    <Run Text="{x:Bind ChosenGeolocation.AdmDistrict}"/>
+                    <Run Text="{x:Bind ChosenGeolocation.Name}" />
+                    <Run Text="-" />
+                    <Run Text="{x:Bind ChosenGeolocation.AdmDistrict}" />
                 </TextBlock>
                 <TextBlock>
-                    <Run Text="经度:"/>
-                    <Run Text="{x:Bind ChosenGeolocation.Longitude}"/>
-                    <Run Text="纬度:"/>
-                    <Run Text="{x:Bind ChosenGeolocation.Latitude}"/>
+                    <Run Text="经度:" />
+                    <Run Text="{x:Bind ChosenGeolocation.Longitude}" />
+                    <Run Text="纬度:" />
+                    <Run Text="{x:Bind ChosenGeolocation.Latitude}" />
                 </TextBlock>
             </StackPanel>
         </StackPanel>
-        
+
     </Grid>
 </ContentDialog>

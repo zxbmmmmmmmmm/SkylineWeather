@@ -472,6 +472,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentWeather.Uwp_TemporaryKey.pfx" />
+    <None Include="settings.xamlstyler" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj">

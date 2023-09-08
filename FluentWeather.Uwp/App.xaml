@@ -2,35 +2,36 @@
     x:Class="FluentWeather.Uwp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp"    xmlns:valueConverters2="using:ValueConverters"
-    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters">
+    xmlns:local="using:FluentWeather.Uwp"
+    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:valueConverters2="using:ValueConverters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <ResourceDictionary Source="/Styles/ListView.xaml"/>
-                <ResourceDictionary Source="/Styles/Button.xaml"/>
-                <ResourceDictionary Source="/Styles/ContentDialog.xaml"/>
+                <ResourceDictionary Source="/Styles/ListView.xaml" />
+                <ResourceDictionary Source="/Styles/Button.xaml" />
+                <ResourceDictionary Source="/Styles/ContentDialog.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter"/>
-            <valueConverters:TypeConverter x:Key="TypeConverter"/>
-            <valueConverters2:BoolNegationConverter x:Key="BoolNegationConverter"/>
+            <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter" />
+            <valueConverters:TypeConverter x:Key="TypeConverter" />
+            <valueConverters2:BoolNegationConverter x:Key="BoolNegationConverter" />
             <valueConverters2:ValueConverterGroup x:Name="NullToVisibilityConverter">
-                <valueConverters2:NullToBoolConverter IsInverted="True"/>
-                <valueConverters2:BoolToVisibilityConverter/>
+                <valueConverters2:NullToBoolConverter IsInverted="True" />
+                <valueConverters2:BoolToVisibilityConverter />
             </valueConverters2:ValueConverterGroup>
             <valueConverters2:ValueConverterGroup x:Name="NullToVisibilityInvertedConverter">
-                <valueConverters2:NullToBoolConverter/>
-                <valueConverters2:BoolToVisibilityConverter/>
+                <valueConverters2:NullToBoolConverter />
+                <valueConverters2:BoolToVisibilityConverter />
             </valueConverters2:ValueConverterGroup>
-            <valueConverters:VisibilityInverter x:Name="VisibilityInverter"/>
-            <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter"/>
+            <valueConverters:VisibilityInverter x:Name="VisibilityInverter" />
+            <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter" />
 
-            <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True"/>
+            <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True" />
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
-            <valueConverters:TransparencyConverter x:Key="TransparencyConverter"/>
-            <valueConverters:DateConverter x:Key="DateConverter"/>
-            <valueConverters:ShortDateConverter x:Key="ShortDateConverter"/>
+            <valueConverters:TransparencyConverter x:Key="TransparencyConverter" />
+            <valueConverters:DateConverter x:Key="DateConverter" />
+            <valueConverters:ShortDateConverter x:Key="ShortDateConverter" />
             <Style x:Name="RepositionControlStyle" TargetType="FrameworkElement">
                 <Setter Property="Transitions">
                     <Setter.Value>
@@ -40,7 +41,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
