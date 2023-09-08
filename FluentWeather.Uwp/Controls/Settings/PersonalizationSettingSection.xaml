@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:converters2="using:ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,6 +11,7 @@
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -43,13 +45,54 @@
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=TwoWay}" />
             </lab:SettingsCard>
 
-            <lab:SettingsCard
-                Padding="12"
-                Description="应用背景设置"
-                Header="背景图片">
+            <lab:SettingsCard Padding="12" Description="应用背景设置">
                 <lab:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE8B9;" />
                 </lab:SettingsCard.HeaderIcon>
+                <lab:SettingsCard.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="背景图片" />
+                        <Button
+                            Margin="4,0,0,0"
+                            Padding="0"
+                            Background="Transparent"
+                            BorderThickness="0">
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE946;" />
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel  Width="400">
+                                        <controls:MarkdownTextBlock Text="{x:Bind backgroundImageSettingInfo}" Background="Transparent" TextWrapping="Wrap">
+                                            
+                                        </controls:MarkdownTextBlock>
+                                        <TextBlock TextWrapping="Wrap" Visibility="Collapsed">
+                                            <Run>你也可以根据不同天气自定义不同的背景</Run><LineBreak /><Run>
+                                                点击"打开背景文件夹"，将背景图片
+                                            </Run><Bold>(PNG格式)</Bold><Run>复制到此文件夹内，将图片按照以下格式重命名:</Run>
+                                            <LineBreak />
+                                            <LineBreak /><Run Text="晴: Clear" />
+                                            <LineBreak /><Run Text="多云: PartlyCloudy" />
+                                            <LineBreak /><Run Text="阴: Cloudy" />
+                                            <LineBreak /><Run Text="大雨: HeavyRain" />
+                                            <LineBreak /><Run Text="小雨/中雨: LightRain" />
+                                            <LineBreak /><Run Text="大雪: HeavySnow" />
+                                            <LineBreak /><Run Text="小雪/中雪: LightSnow" />
+                                            <LineBreak /><Run Text="雷阵雨: ThunderyShowers" />
+                                            <LineBreak /><Run Text="雷电: ThunderyHeavyRain" />
+                                            <LineBreak /><Run Text="雾/霾: Fog" />
+                                            <LineBreak /><Run Text="冰雹: Hail" />
+                                            <LineBreak /><Run Text="其他天气: All" />
+
+                                        </TextBlock>
+
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+                </lab:SettingsCard.Header>
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <Button
                         Command="{x:Bind SetBackgroundCommand}"
