@@ -61,19 +61,19 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
         {
             folder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");//无内容直接使用Assets
             folder = await folder.GetFolderAsync("Backgrounds");//无内容直接使用Assets
-        }
+        } 
         var image = await GetImage(folder, WeatherType.ToString());
         image ??= await GetImage(folder, "All");
         AssociatedObject.Source = image;
     }
-
-    private async Task<BitmapImage> GetImage(StorageFolder folder,string name)
+    
+    private async Task<BitmapImage> GetImage(StorageFolder folder, string name)
     {
-        var item  = await folder.TryGetItemAsync(name +".png");
+        var item = await folder.TryGetItemAsync(name + ".png");
         if (item is not StorageFile file) return null;
-        using var ir = await file.OpenAsync(FileAccessMode.Read);
-        var image = new BitmapImage();
-        await image.SetSourceAsync(ir);
+        //using var ir = await file.OpenAsync(FileAccessMode.Read);
+        var image = new BitmapImage(new Uri(file.Path));
+        //await image.SetSourceAsync(ir);
         return image;
     }
 }
