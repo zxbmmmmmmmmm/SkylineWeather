@@ -102,6 +102,12 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Glyph="&#xE00F;" />
                                 </StackPanel>
+                                <Button.Resources>
+                                    <ResourceDictionary>
+                                        <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
+                                    </ResourceDictionary>
+                                </Button.Resources>
                                 <i:Interaction.Behaviors>
                                     <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                                 </i:Interaction.Behaviors>

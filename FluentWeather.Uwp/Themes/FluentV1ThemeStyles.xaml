@@ -1,0 +1,36 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
+    <Thickness x:Key="TextControlBorderThemeThickness">0,0,0,1</Thickness>
+    <Thickness x:Key="ListItemMargin">0</Thickness>
+    <Thickness x:Key="ListViewItemRevealBorderThemeThickness">0</Thickness>
+    <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
+    <Visibility x:Key="ListSelectedBorderVisibility">Collapsed</Visibility>
+    <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
+
+    <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style TargetType="AppBarButton" BasedOn="{StaticResource AppBarButtonRevealStyle}">
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonRevealStyle}">
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonRevealStyle}">
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style TargetType="FontIcon">
+        <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
+    </Style>
+    <Style TargetType="ListViewItem" x:Key="ListViewItemNewStyle" BasedOn="{StaticResource ListViewItemRevealStyle}">
+        <Setter Property="Margin" Value="-4,-2"/>
+        <Setter Property="Padding" Value="16,4"/>
+    </Style>
+    <Style TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemRevealStyle}"/>
+</ResourceDictionary>

@@ -28,14 +28,14 @@
         <Setter Property="AllowDrop" Value="False" />
         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
         <Setter Property="FocusVisualMargin" Value="0" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
                     <Grid
                         x:Name="ContentBorder"
-                        Margin="4,2"
+                        Margin="{ThemeResource ListItemMargin}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -55,7 +55,8 @@
                             IsHitTestVisible="False"
                             Opacity="0" />
                         <Border
-                            x:Name="BorderSelected"
+                            x:Name="BorderSelected" 
+                            Visibility="{ThemeResource ListSelectedBorderVisibility}"
                             Width="3"
                             Margin="0,20"
                             HorizontalAlignment="Left"
