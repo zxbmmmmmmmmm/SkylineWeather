@@ -68,13 +68,14 @@ sealed partial class App : Application
                     task.Value.Unregister(true);
                 }
             }
-            var settingContainer = ApplicationData.Current.LocalSettings;
 
-            BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
-            taskBuilder.Name = "NotifyTask";
-            taskBuilder.TaskEntryPoint = "FluentWeather.Tasks.NotifyTask";
-            taskBuilder.SetTrigger(new TimeTrigger(60, false));
-            var registration = taskBuilder.Register();
+            var taskBuilder = new BackgroundTaskBuilder
+            {
+                Name = "NotifyTask",
+                TaskEntryPoint = "FluentWeather.Tasks.NotifyTask"
+            };
+            taskBuilder.SetTrigger(new TimeTrigger(120, false));
+            taskBuilder.Register();
         }
     }
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
