@@ -12,6 +12,12 @@
     <Visibility x:Key="ListSelectedBorderVisibility">Collapsed</Visibility>
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
 
+    <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SystemControlHighlightListLowBrush"/>
+    <StaticResource x:Key="ListViewItemBackgroundSelectedPressed" ResourceKey="SystemControlHighlightListMediumBrush"/>
+
+    <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver" ResourceKey="SystemControlHighlightListMediumBrush"/>
+    <StaticResource x:Key="ListViewItemForegroundSelected" ResourceKey="DefaultTextForegroundThemeBrush"/>
+
     <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
         <Setter Property="CornerRadius" Value="0"/>
     </Style>
@@ -28,9 +34,10 @@
     <Style TargetType="FontIcon">
         <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
     </Style>
-    <Style TargetType="ListViewItem" x:Key="ListViewItemNewStyle" BasedOn="{StaticResource ListViewItemRevealStyle}">
+    <Style x:Key="ListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}">
         <Setter Property="Margin" Value="-4,-2"/>
         <Setter Property="Padding" Value="16,4"/>
+        
     </Style>
-    <Style TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemRevealStyle}"/>
+    <Style x:Key="GridViewItemStyle" TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemRevealStyle}"/>
 </ResourceDictionary>

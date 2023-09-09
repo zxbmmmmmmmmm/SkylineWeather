@@ -191,6 +191,7 @@
       <DependentUpon>WeatherHourlyForecastItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DIFactory.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
@@ -217,6 +218,9 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\Theme.xaml.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CitiesPageViewModel.cs" />
     <Compile Include="ViewModels\DailyForecastDialogViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -416,16 +420,23 @@
     <Page Include="Themes\ClassicThemeStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
-    <Page Include="Themes\DefaultThemeStyle.xaml">
+    <Page Include="Themes\DefaultThemeStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\FluentV1ThemeStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Theme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

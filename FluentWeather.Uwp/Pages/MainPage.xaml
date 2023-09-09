@@ -69,8 +69,8 @@
                                     Style="{ThemeResource TemperatureUnitTextStyle}"
                                     Text="°" />
                                 <TextBlock
-                                    Style="{StaticResource WeatherNowDescriptionTextStyle}"
                                     VerticalAlignment="Bottom"
+                                    Style="{StaticResource WeatherNowDescriptionTextStyle}"
                                     Text="{x:Bind ViewModel.WeatherNow.Description}" />
                             </Grid>
                         </StackPanel>
@@ -265,6 +265,7 @@
                         HorizontalContentAlignment="Stretch"
                         DesiredWidth="120"
                         IsItemClickEnabled="True"
+                        ItemContainerStyle="{ThemeResource GridViewItemStyle}"
                         ItemHeight="165"
                         ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                         OneRowModeEnabled="True"
@@ -365,6 +366,7 @@
                         HorizontalContentAlignment="Stretch"
                         DesiredWidth="100"
                         IsItemClickEnabled="True"
+                        ItemContainerStyle="{ThemeResource GridViewItemStyle}"
                         ItemHeight="128"
                         ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
                         OneRowModeEnabled="True"
@@ -498,6 +500,7 @@
                         HorizontalContentAlignment="Stretch"
                         x:DefaultBindMode="OneWay"
                         DesiredWidth="200"
+                        ItemContainerStyle="{ThemeResource GridViewItemStyle}"
                         ItemHeight="90"
                         SelectionMode="None">
                         <controls:AdaptiveGridView.Items>
@@ -570,6 +573,7 @@
                     x:DefaultBindMode="OneWay"
                     DesiredWidth="200"
                     IsItemClickEnabled="True"
+                    ItemContainerStyle="{ThemeResource GridViewItemStyle}"
                     ItemHeight="90"
                     ItemsSource="{x:Bind ViewModel.Indices}"
                     SelectionMode="None">

@@ -167,6 +167,15 @@ public class Settings:INotifyPropertyChanged
             //OnPropertyChanged();
         }
     }
+    public AppTheme Theme
+    {
+        get => GetSettings(nameof(Theme), (Environment.OSVersion.Version.Build < 21996)?AppTheme.Fluent2017 : AppTheme.Fluent);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(Theme)] = value.ToString();
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public async void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -243,4 +252,10 @@ public class Settings:INotifyPropertyChanged
             return defaultValue;
         }
     }
+}
+public enum AppTheme
+{
+    Fluent,
+    Fluent2017,
+    Classic
 }

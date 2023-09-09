@@ -1,16 +1,13 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <!--  Override system shape defaults  -->
-    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
-
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:windows11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 13)">
     <Thickness x:Key="CityViewMargin">8,0</Thickness>
     <Thickness x:Key="ControlBorderThickness">1</Thickness>
     <x:Double x:Key="FontListFlyoutHeight">0</x:Double>
     <Thickness x:Key="ListItemMargin">0</Thickness>
     <Visibility x:Key="ListSelectedBorderVisibility">Visible</Visibility>
     <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
+
     <StaticResource x:Key="TextControlBorderBrush" ResourceKey="SystemControlForegroundBaseMediumLowBrush" />
     <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumHighBrush" />
     <StaticResource x:Key="ButtonBorderBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
@@ -19,6 +16,10 @@
     <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
     <StaticResource x:Key="ExpanderHeaderBorderPointerOverBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
     <StaticResource x:Key="ExpanderHeaderBorderPressedBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
 
     <x:Double x:Key="WeatherDescriptionFontSize">22</x:Double>
@@ -116,7 +117,69 @@
         <Setter Property="FontStyle" Value="Italic" />
         <Setter Property="OpticalMarginAlignment" Value="None" />
     </Style>
-    <Style x:Key="ListViewItemNewStyle" TargetType="ListViewItem">
+
+    <Style x:Key="GridViewItemStyle" TargetType="GridViewItem" BasedOn="{StaticResource GridViewItemExpanded}">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Background" Value="{ThemeResource GridViewItemBackground}" />
+        <Setter Property="Foreground" Value="{ThemeResource GridViewItemForeground}" />
+        <Setter Property="TabNavigation" Value="Local" />
+        <Setter Property="IsHoldingEnabled" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,4,4" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}" />
+        <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}" />
+        <Setter Property="AllowDrop" Value="False" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+        <Setter Property="FocusVisualMargin" Value="-2" />
+        <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource GridViewItemFocusVisualPrimaryBrush}" />
+        <Setter Property="FocusVisualPrimaryThickness" Value="2" />
+        <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource GridViewItemFocusVisualSecondaryBrush}" />
+        <Setter Property="FocusVisualSecondaryThickness" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewItem">
+                    <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                        x:Name="Root"
+                        Control.IsTemplateFocusTarget="True"
+                        FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                        FocusVisualPrimaryBrush="{TemplateBinding FocusVisualPrimaryBrush}"
+                        FocusVisualPrimaryThickness="{TemplateBinding FocusVisualPrimaryThickness}"
+                        FocusVisualSecondaryBrush="{TemplateBinding FocusVisualSecondaryBrush}"
+                        FocusVisualSecondaryThickness="{TemplateBinding FocusVisualSecondaryThickness}"
+                        SelectionCheckMarkVisualEnabled="{ThemeResource GridViewItemSelectionCheckMarkVisualEnabled}"
+                        windows11:PointerOverBorderBrush="{StaticResource SystemControlHighlightBaseMediumBrush}"
+                        windows11:SelectedPressedBorderBrush="{StaticResource SystemControlHighlightBaseLowBrush}"
+                        CheckBrush="{ThemeResource GridViewItemCheckBrush}"
+                        CheckBoxBrush="{ThemeResource GridViewItemCheckBoxBrush}"
+                        DragBackground="{ThemeResource GridViewItemDragBackground}"
+                        DragForeground="{ThemeResource GridViewItemDragForeground}"
+                        FocusBorderBrush="{ThemeResource GridViewItemFocusBorderBrush}"
+                        FocusSecondaryBorderBrush="{ThemeResource GridViewItemFocusSecondaryBorderBrush}"
+                        PlaceholderBackground="{ThemeResource GridViewItemPlaceholderBackground}"
+                        PointerOverBackground="{ThemeResource GridViewItemBackgroundPointerOver}"
+                        PointerOverForeground="{ThemeResource GridViewItemForegroundPointerOver}"
+                        SelectedBackground="{ThemeResource GridViewItemBackgroundSelected}"
+                        SelectedForeground="{ThemeResource GridViewItemForegroundSelected}"
+                        SelectedPointerOverBackground="{ThemeResource GridViewItemBackgroundSelectedPointerOver}"
+                        PressedBackground="{ThemeResource GridViewItemBackgroundPressed}"
+                        SelectedPressedBackground="{ThemeResource GridViewItemBackgroundSelectedPressed}"
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                        ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentMargin="{TemplateBinding Padding}"
+                        CheckMode="{ThemeResource GridViewItemCheckMode}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />

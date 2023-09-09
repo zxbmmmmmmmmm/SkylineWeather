@@ -22,6 +22,20 @@
         <lab:SettingsExpander.Items>
             <lab:SettingsCard
                 Padding="12"
+                Description="设置应用主题(需要重启)"
+                Header="主题">
+                <lab:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE771;" />
+                </lab:SettingsCard.HeaderIcon>
+                <muxc:RadioButtons>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent}">Windows 11</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent2017}">Windows 10</RadioButton>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Classic}">经典</RadioButton>
+                </muxc:RadioButtons>
+            </lab:SettingsCard>
+
+            <lab:SettingsCard
+                Padding="12"
                 Description="设置主题颜色"
                 Header="颜色">
                 <lab:SettingsCard.HeaderIcon>
@@ -33,6 +47,7 @@
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">跟随系统</RadioButton>
                 </muxc:RadioButtons>
             </lab:SettingsCard>
+            
             <lab:SettingsCard Padding="12" Header="亚克力">
                 <lab:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF156;" />
@@ -63,31 +78,7 @@
                                 Glyph="&#xE946;" />
                             <Button.Flyout>
                                 <Flyout>
-                                    <StackPanel  Width="400">
-                                        <controls:MarkdownTextBlock Text="{x:Bind backgroundImageSettingInfo}" Background="Transparent" TextWrapping="Wrap">
-                                            
-                                        </controls:MarkdownTextBlock>
-                                        <TextBlock TextWrapping="Wrap" Visibility="Collapsed">
-                                            <Run>你也可以根据不同天气自定义不同的背景</Run><LineBreak /><Run>
-                                                点击"打开背景文件夹"，将背景图片
-                                            </Run><Bold>(PNG格式)</Bold><Run>复制到此文件夹内，将图片按照以下格式重命名:</Run>
-                                            <LineBreak />
-                                            <LineBreak /><Run Text="晴: Clear" />
-                                            <LineBreak /><Run Text="多云: PartlyCloudy" />
-                                            <LineBreak /><Run Text="阴: Cloudy" />
-                                            <LineBreak /><Run Text="大雨: HeavyRain" />
-                                            <LineBreak /><Run Text="小雨/中雨: LightRain" />
-                                            <LineBreak /><Run Text="大雪: HeavySnow" />
-                                            <LineBreak /><Run Text="小雪/中雪: LightSnow" />
-                                            <LineBreak /><Run Text="雷阵雨: ThunderyShowers" />
-                                            <LineBreak /><Run Text="雷电: ThunderyHeavyRain" />
-                                            <LineBreak /><Run Text="雾/霾: Fog" />
-                                            <LineBreak /><Run Text="冰雹: Hail" />
-                                            <LineBreak /><Run Text="其他天气: All" />
-
-                                        </TextBlock>
-
-                                    </StackPanel>
+                                    <controls:MarkdownTextBlock  Width="400" Text="{x:Bind backgroundImageSettingInfo}" Background="Transparent" TextWrapping="Wrap"/>
                                 </Flyout>
                             </Button.Flyout>
                         </Button>

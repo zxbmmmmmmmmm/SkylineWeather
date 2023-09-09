@@ -111,6 +111,8 @@ sealed partial class App : Application
     /// <param name="e">有关启动请求和过程的详细信息。</param>
     protected override void OnLaunched(LaunchActivatedEventArgs e)
     {
+
+
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
         // 不要在窗口已包含内容时重复应用程序初始化，
@@ -143,6 +145,8 @@ sealed partial class App : Application
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
+
+
     }
 
     /// <summary>
