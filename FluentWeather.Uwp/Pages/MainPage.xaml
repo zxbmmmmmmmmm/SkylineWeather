@@ -61,21 +61,16 @@
                         <StackPanel Opacity="0.95" Orientation="Horizontal">
                             <TextBlock
                                 x:Name="TemperatureText"
-                                FontSize="90"
-                                Style="{ThemeResource TitleTextBlockStyle}"
+                                Style="{ThemeResource TemperatureTextStyle}"
                                 Text="{Binding WeatherNow.Temperature}" />
                             <Grid Margin="4,26,0,0">
                                 <TextBlock
                                     Margin="2,-16,0,0"
-                                    FontSize="64"
-                                    FontWeight="Bold"
-                                    Style="{ThemeResource TitleTextBlockStyle}"
+                                    Style="{ThemeResource TemperatureUnitTextStyle}"
                                     Text="°" />
                                 <TextBlock
-                                    Margin="0,0,0,20"
+                                    Style="{StaticResource WeatherNowDescriptionTextStyle}"
                                     VerticalAlignment="Bottom"
-                                    FontSize="32"
-                                    FontWeight="SemiBold"
                                     Text="{x:Bind ViewModel.WeatherNow.Description}" />
                             </Grid>
                         </StackPanel>

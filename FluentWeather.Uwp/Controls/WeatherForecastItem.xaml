@@ -28,7 +28,7 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 d:Text="晴"
-                FontSize="17"
+                FontSize="{StaticResource WeatherDescriptionFontSize}"
                 Text="{x:Bind WeatherInfo.Description}" />
         </StackPanel>
     </Grid>

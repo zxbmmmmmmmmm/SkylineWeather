@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Thickness x:Key="CityViewMargin">0</Thickness>
+    <Style TargetType="TextBlock" x:Key="TemperatureTextStyle" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="FontSize" Value="90"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="TemperatureUnitTextStyle" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="FontSize" Value="64"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="WeatherNowDescriptionTextStyle" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="0,0,0,20"/>
+    </Style>
+    <x:Double x:Key="WeatherDescriptionFontSize">18</x:Double>
+
+</ResourceDictionary>

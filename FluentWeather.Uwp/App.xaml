@@ -12,7 +12,8 @@
                 <ResourceDictionary Source="/Styles/ListView.xaml" />
                 <ResourceDictionary Source="/Styles/Button.xaml" />
                 <ResourceDictionary Source="/Styles/ContentDialog.xaml" />
-                <ResourceDictionary Source="/Themes/FluentV1ThemeStyles.xaml" />
+                <ResourceDictionary Source="/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Themes/ClassicThemeStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter" />
             <valueConverters:TypeConverter x:Key="TypeConverter" />
