@@ -55,30 +55,35 @@
         <ListView
             x:Name="CurrentCityView"
             Grid.Row="1"
-            ItemContainerStyle="{StaticResource ListViewItemNewStyle}"
+            Margin="{ThemeResource CityViewMargin}"
+            ItemContainerStyle="{ThemeResource ListViewItemStyle}"
             SelectedIndex="{x:Bind ViewModel.CurrentViewSelection, Mode=TwoWay}">
             <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" />
         </ListView>
-        <TextBlock
-            Grid.Row="1"
-            Margin="12,12,16,12"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-            <Run
-                FontFamily="{StaticResource SymbolThemeFontFamily}"
-                FontSize="11"
-                Text="&#xE81B;" />
-            <Run Text="当前位置" />
-        </TextBlock>
+        <Border Grid.Row="1" Padding="{ThemeResource CityViewMargin}">
+            <TextBlock
+                Margin="12,12,16,12"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                <Run
+                    FontFamily="{StaticResource SymbolThemeFontFamily}"
+                    FontSize="11"
+                    Text="&#xE81B;" />
+                <Run Text="当前位置" />
+            </TextBlock>
+
+        </Border>
+
         <ListView
             x:Name="CitiesListView"
             Grid.Row="2"
+            Margin="{ThemeResource CityViewMargin}"
             AllowDrop="True"
             CanDragItems="True"
             CanReorderItems="True"
-            ItemContainerStyle="{StaticResource ListViewItemNewStyle}"
             ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}"
+            ItemContainerStyle="{ThemeResource ListViewItemStyle}"
             SelectedIndex="{x:Bind ViewModel.Selection, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
