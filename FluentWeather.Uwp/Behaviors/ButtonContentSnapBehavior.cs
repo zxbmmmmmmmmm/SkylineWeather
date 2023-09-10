@@ -167,6 +167,8 @@ public class ButtonContentSnapBehavior : Behavior<ButtonBase>
     {
         base.OnAttached();
 
+        if (Environment.OSVersion.Version.Build < 21996) return;
+
         AssociatedObject.Loaded += AssociatedObject_Loaded;
         AssociatedObject.Unloaded += AssociatedObject_Unloaded;
 
@@ -176,6 +178,8 @@ public class ButtonContentSnapBehavior : Behavior<ButtonBase>
     protected override void OnDetaching()
     {
         base.OnDetaching();
+
+        if (Environment.OSVersion.Version.Build < 21996) return;
 
         AssociatedObject.Loaded -= AssociatedObject_Loaded;
         AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
