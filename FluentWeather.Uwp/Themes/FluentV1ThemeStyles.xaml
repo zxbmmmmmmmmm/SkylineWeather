@@ -34,6 +34,7 @@
     <Style TargetType="FontIcon">
         <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
     </Style>
+    <Style TargetType="CommandBar" BasedOn="{StaticResource CommandBarRevealStyle}"/>
     <Style x:Key="ListViewItemStyle" TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}">
         <Setter Property="Margin" Value="-4,-2"/>
         <Setter Property="Padding" Value="16,4"/>

@@ -104,6 +104,7 @@
         <CommandBar
             Grid.Row="3"
             VerticalAlignment="Bottom"
+            Background="Transparent"
             DefaultLabelPosition="Right">
             <AppBarButton Label="台风">
                 <i:Interaction.Behaviors>

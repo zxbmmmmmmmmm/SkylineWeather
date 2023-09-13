@@ -42,9 +42,9 @@
                     <FontIcon Glyph="&#xE790;" />
                 </lab:SettingsCard.HeaderIcon>
                 <muxc:RadioButtons>
+                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">跟随系统</RadioButton>
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Light}">明亮</RadioButton>
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Dark}">黑暗</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">跟随系统</RadioButton>
                 </muxc:RadioButtons>
             </lab:SettingsCard>
             

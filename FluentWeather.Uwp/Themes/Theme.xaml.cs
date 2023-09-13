@@ -16,12 +16,15 @@ public partial class Theme:ResourceDictionary
         switch (Common.Settings.Theme)
         {
             case AppTheme.Fluent:
+                dic.MergeMUXC(ControlsResourcesVersion.Version2);
                 dic.Merge("ms-appx:///Themes/DefaultThemeStyles.xaml");
                 break;
             case AppTheme.Fluent2017:
+                dic.MergeMUXC(ControlsResourcesVersion.Version1);
                 dic.Merge("ms-appx:///Themes/FluentV1ThemeStyles.xaml");
                 break;
             case AppTheme.Classic:
+                dic.MergeMUXC(ControlsResourcesVersion.Version1);
                 dic.Merge("ms-appx:///Themes/ClassicThemeStyles.xaml");
                 break;
         }
