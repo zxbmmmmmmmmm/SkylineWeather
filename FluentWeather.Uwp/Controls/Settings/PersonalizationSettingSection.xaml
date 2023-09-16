@@ -12,6 +12,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    Loaded="UserControl_Loaded"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -41,11 +44,12 @@
                 <lab:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE790;" />
                 </lab:SettingsCard.HeaderIcon>
-                <muxc:RadioButtons>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">跟随系统</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Light}">明亮</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.ApplicationTheme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Dark}">黑暗</RadioButton>
+                <muxc:RadioButtons x:Name="ThemeButtons" SelectionChanged="ThemeButtons_SelectionChanged">
+                    <RadioButton Tag="Default">跟随系统</RadioButton>
+                    <RadioButton Tag="Light">明亮</RadioButton>
+                    <RadioButton Tag="Dark">黑暗</RadioButton>
                 </muxc:RadioButtons>
+
             </lab:SettingsCard>
             
             <lab:SettingsCard Padding="12" Header="亚克力">

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Uwp.Behaviors;
+using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -73,6 +74,24 @@ namespace FluentWeather.Uwp.Controls.Settings
             StorageFile file = await picker.PickSingleFileAsync();
             
             return file;
+        }
+
+        private void ThemeButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = ((RadioButton)e.AddedItems[0])?.Tag?.ToString();
+            if (selected is null) return;
+            Common.Settings.ApplicationTheme = Enum.Parse<ElementTheme>(selected);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ThemeButtons.SelectedIndex = Common.Settings.ApplicationTheme switch
+            {
+                ElementTheme.Default => 0,
+                ElementTheme.Light => 1,
+                ElementTheme.Dark => 2,
+                _ => ThemeButtons.SelectedIndex
+            };
         }
     }
 }
