@@ -28,10 +28,17 @@
             </lab:SettingsCard>
             <lab:SettingsCard
                 Padding="12"
-                Description="推送每日天气预报"
-                Header="每日天气"
+                Description="在早晨推送今日天气预报"
+                Header="今日天气"
                 HeaderIcon="Calendar">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" />
+            </lab:SettingsCard>
+            <lab:SettingsCard
+                Padding="12"
+                Description="在晚间推送明日天气预报"
+                Header="明日天气"
+                HeaderIcon="Calendar">
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" />
             </lab:SettingsCard>
             <lab:SettingsCard
                 Padding="12"

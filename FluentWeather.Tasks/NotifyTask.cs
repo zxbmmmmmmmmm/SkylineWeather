@@ -84,20 +84,28 @@ namespace FluentWeather.Tasks
                 Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
             }
         }
-        private void PushTomorrow(List<WeatherBase> data)
-        {
-            var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
-            var builder = new ToastContentBuilder()
-                .AddText("今日天气")
-                .AddAttributionText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°");
-            builder.Show();
-        }
         private void PushToday(List<WeatherBase> data)
         {
-            var trimmed = (data.Count >= 7) ? data.GetRange(1, 7) : data;
+            var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
+            var group = new AdaptiveGroup();
+            GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
-                .AddText("明日天气")
-                .AddAttributionText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°");
+                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType +".png"))
+                .AddAttributionText("今日天气")
+                .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddVisualChild(group);
+            builder.Show();
+        }
+        private void PushTomorrow(List<WeatherBase> data)
+        {
+            var trimmed = (data.Count >= 7) ? data.GetRange(1, 6) : data;
+            var group = new AdaptiveGroup();
+            GetGroupChildren(group, trimmed);
+            var builder = new ToastContentBuilder()
+                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType + ".png"))
+                .AddAttributionText("明日天气")
+                .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddVisualChild(group);
             builder.Show();
         }
         private void UpdateTiles(List<WeatherBase> data)

@@ -29,7 +29,7 @@ namespace FluentWeather.Uwp.Shared
                     new AdaptiveImage()
                     {
                         Source = img,
-                        HintRemoveMargin = true,
+                        HintAlign = AdaptiveImageAlign.Center,
                     },
 
                     // High temp
@@ -55,7 +55,7 @@ namespace FluentWeather.Uwp.Shared
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Resized/32/" + GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Day/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static TileContent GenerateTileContent(List<WeatherBase> daily)
