@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.UI.Notifications;
-using FluentWeather.Abstraction.Interfaces.Weather;
+﻿using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace FluentWeather.Uwp.Shared
@@ -59,7 +55,7 @@ namespace FluentWeather.Uwp.Shared
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), $"{GetImageName(item.WeatherType)}", ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Resized/32/" + GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static TileContent GenerateTileContent(List<WeatherBase> daily)
@@ -68,26 +64,37 @@ namespace FluentWeather.Uwp.Shared
 
             // Small Tile
             builder.AddTile(TileSize.Small)
-                .SetTextStacking(TileTextStacking.Center, TileSize.Small)
-                .AddText(daily[0].Description, TileSize.Small, hintStyle: AdaptiveTextStyle.Body, hintAlign: AdaptiveTextAlign.Center)
-                .AddText($"{((ITemperatureRange)daily[0]).MaxTemperature}/{((ITemperatureRange)daily[0]).MinTemperature}°", TileSize.Small, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintAlign: AdaptiveTextAlign.Center);
+                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/24/"+ GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
+                .SetTextStacking(TileTextStacking.Center);
 
-            var mediumGroup = new AdaptiveGroup();
-            GetGroupChildren(mediumGroup, daily.GetRange(0, 2));
 
-            // Medium Tile
+            //var mediumGroup = new AdaptiveGroup();
+            //GetGroupChildren(mediumGroup, daily.GetRange(0, 2));
+
+            //// Medium Tile
+            //builder.AddTile(TileSize.Medium)
+            //    .AddAdaptiveTileVisualChild(mediumGroup, TileSize.Medium);
+
             builder.AddTile(TileSize.Medium)
-                .AddAdaptiveTileVisualChild(mediumGroup, TileSize.Medium);
+                .AddText("")
+                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/32/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
+                .SetTextStacking(TileTextStacking.Center)
+                .SetBranding(TileBranding.Name);
 
             var wideGroup = new AdaptiveGroup();
             GetGroupChildren(wideGroup, daily.GetRange(0, 5));
 
             // Wide Tile
             builder.AddTile(TileSize.Wide)
-                .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide);
+                .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide)
+                .SetBranding(TileBranding.Name)
+                .SetTextStacking(TileTextStacking.Center);
 
             // Large tile
-            builder.AddTile(TileSize.Large, GenerateLargeTileContent(daily));
+            builder.AddTile(TileSize.Large, GenerateLargeTileContent(daily))
+                .SetBranding(TileBranding.Name)
+                .SetTextStacking(TileTextStacking.Center);
+
 
             // Set the base URI for the images, so we don't redundantly specify the entire path
             builder.Content.Visual.BaseUri = new Uri("Assets/Weather/Day/", UriKind.Relative);
@@ -99,7 +106,7 @@ namespace FluentWeather.Uwp.Shared
             var content = new TileBindingContentAdaptive()
             {
                 Children =
-            {
+                {
             new AdaptiveGroup()
             {
                 Children =
