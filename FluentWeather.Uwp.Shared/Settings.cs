@@ -38,6 +38,15 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public bool IsTomorrowNotificationEnabled
+    {
+        get => GetSettings(nameof(IsTomorrowNotificationEnabled), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(IsTomorrowNotificationEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
     public ElementTheme ApplicationTheme
     {
         get => GetSettings(nameof(ApplicationTheme), ElementTheme.Dark);
@@ -152,20 +161,17 @@ public class Settings:INotifyPropertyChanged
     public Dictionary<string,DateTime> PushedWarnings
     {
         get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());
-        set
-        {
-            ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
-            //OnPropertyChanged();
-        }
+        set => ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
     }
     public int LastPushedTime
     {
         get => GetSettings(nameof(LastPushedTime), DateTime.Now.DayOfYear);
-        set
-        {
-            ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTime)] = value;
-            //OnPropertyChanged();
-        }
+        set => ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTime)] = value;
+    }
+    public int LastPushedTimeTomorrow
+    {
+        get => GetSettings(nameof(LastPushedTimeTomorrow), DateTime.Now.DayOfYear);
+        set => ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTimeTomorrow)] = value;
     }
     public AppTheme Theme
     {

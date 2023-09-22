@@ -1,5 +1,5 @@
 ﻿using FluentWeather.Abstraction.Interfaces.Weather;
-using FluentWeather.Uwp.Shared;
+using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using static FluentWeather.Uwp.Shared.TileHelper;
+using static FluentWeather.Uwp.Shared.Common;
 
 namespace FluentWeather.Tasks
 {
@@ -20,9 +21,9 @@ namespace FluentWeather.Tasks
             
             var settingContainer = ApplicationData.Current.LocalSettings;
             var token = settingContainer.Values["qWeather.Token"].ToString();
-            var provider = new QWeatherProvider.QWeatherProvider(token,Common.Settings.QWeatherDomain);
-            var lat = Common.Settings.Latitude;
-            var lon = Common.Settings.Longitude;
+            var provider = new QWeatherProvider.QWeatherProvider(token,Settings.QWeatherDomain);
+            var lat = Settings.Latitude;
+            var lon = Settings.Longitude;
             if(lat is -1 || lon is -1)
             {
                 deferral.Complete();
@@ -38,7 +39,7 @@ namespace FluentWeather.Tasks
         private async Task PushWarnings(double lon, double lat)
         {
             var settingContainer = ApplicationData.Current.LocalSettings;
-            var isWarningNotificationEnabled = Common.Settings.IsWarningNotificationEnabled;
+            var isWarningNotificationEnabled = Settings.IsWarningNotificationEnabled;
             if (!isWarningNotificationEnabled) return;
 
             var warnings = await QWeatherProvider.QWeatherProvider.Instance.GetWeatherWarnings(lon, lat);
@@ -58,36 +59,51 @@ namespace FluentWeather.Tasks
             }
             settingContainer.Values["PushedWarnings"] = JsonSerializer.Serialize(pushed);
         }
-        private async Task PushDaily(double lon,double lat)
+        private async Task PushDaily(double lon, double lat)
         {
-            var settingContainer = ApplicationData.Current.LocalSettings;
-            var isDailyNotificationTileEnabled = Common.Settings.IsDailyNotificationTileEnabled;
-            var isDailyNotificationEnabled = Common.Settings.IsDailyNotificationEnabled;
-            if (!isDailyNotificationEnabled && !isDailyNotificationTileEnabled) return;
+            var isPushTodayAvailable = Settings.IsDailyNotificationEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
+            var isPushTomorrowAvailable = Settings.IsTomorrowNotificationEnabled && Settings.LastPushedTimeTomorrow != DateTime.Now.Date.DayOfYear;
+            var isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
+            if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
 
-            if (Common.Settings.LastPushedTime == DateTime.Now.Date.DayOfYear)
-                return;
-
-            var daily = await QWeatherProvider.QWeatherProvider.Instance.GetDailyForecasts(lon, lat);
-            if (daily is null) return;
-            daily = (daily.Count >= 7)?daily.GetRange(0, 7) :daily;//去除多余部分
-
-            //推送通知
-            var dailyBuilder = new ToastContentBuilder();
-            dailyBuilder.AddText($"{daily[0].Description}  最高{((ITemperatureRange)daily[0]).MaxTemperature}°,最低{((ITemperatureRange)daily[0]).MinTemperature}°");
-            
-            var group = new AdaptiveGroup();
-            GetGroupChildren(group, daily);
-            dailyBuilder.AddVisualChild(group);
-            dailyBuilder.Content.Visual.BaseUri = new Uri("Assets/Weather/Day/", UriKind.Relative);
-            if(isDailyNotificationEnabled)
-                dailyBuilder.Show();
+            var data = await QWeatherProvider.QWeatherProvider.Instance.GetDailyForecasts(lon, lat);
+            if (isTileAvailable)
+            {
+                UpdateTiles(data);
+            }
+            if (DateTime.Now.Hour < 18)
+            {
+                if (!isPushTodayAvailable) return;
+                PushToday(data);
+                Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+            }
+            else
+            {
+                if (!isPushTomorrowAvailable) return;
+                PushTomorrow(data);
+                Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
+            }
+        }
+        private void PushTomorrow(List<WeatherBase> data)
+        {
+            var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
+            var builder = new ToastContentBuilder()
+                .AddText("今日天气")
+                .AddAttributionText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°");
+            builder.Show();
+        }
+        private void PushToday(List<WeatherBase> data)
+        {
+            var trimmed = (data.Count >= 7) ? data.GetRange(1, 7) : data;
+            var builder = new ToastContentBuilder()
+                .AddText("明日天气")
+                .AddAttributionText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°");
+            builder.Show();
+        }
+        private void UpdateTiles(List<WeatherBase> data)
+        {
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-            if(isDailyNotificationTileEnabled)
-                updater.Update(new TileNotification(GenerateTileContent(daily).GetXml()));
-            Common.Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
-
-
+            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()));
         }
     }
 }
