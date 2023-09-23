@@ -136,7 +136,6 @@ namespace FluentWeather.Uwp.Shared
             // Wide Tile
             builder.AddTile(TileSize.Wide)
                 .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide)
-                .SetBranding(TileBranding.Name)
                 .SetTextStacking(TileTextStacking.Center);
 
             // Large tile
