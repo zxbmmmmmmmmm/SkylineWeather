@@ -11,7 +11,7 @@ public partial class Theme:ResourceDictionary
     public Theme()
     {
         this.InitializeComponent();
-        var dic = new XamlControlsResources { ControlsResourcesVersion = ControlsResourcesVersion.Version2 };
+        var dic = new ResourceDictionary();
 
         switch (Common.Settings.Theme)
         {

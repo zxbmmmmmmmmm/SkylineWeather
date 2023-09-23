@@ -11,7 +11,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ListView.xaml" />
-                <ResourceDictionary Source="/Styles/Button.xaml" />
                 <ResourceDictionary Source="/Styles/ContentDialog.xaml" />
                 <ResourceDictionary Source="/Themes/Generic.xaml" />
                 <ResourceDictionary Source="/Themes/DefaultThemeStyles.xaml"/>
