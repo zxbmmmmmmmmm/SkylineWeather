@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
@@ -24,21 +24,21 @@
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE7BA;" />
                 </controls:SettingsCard.HeaderIcon>
-                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsWarningNotificationEnabled, Mode=TwoWay}" />
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsWarningNotificationEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
             <controls:SettingsCard
                 Padding="12"
                 Description="在早晨推送今日天气预报"
                 Header="今日天气"
                 HeaderIcon="Calendar">
-                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" />
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
             <controls:SettingsCard
                 Padding="12"
                 Description="在晚间推送明日天气预报"
                 Header="明日天气"
                 HeaderIcon="Calendar">
-                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" />
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
             <controls:SettingsCard
                 Padding="12"
@@ -47,7 +47,7 @@
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xECA5;" />
                 </controls:SettingsCard.HeaderIcon>
-                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationTileEnabled, Mode=TwoWay}" />
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationTileEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>
