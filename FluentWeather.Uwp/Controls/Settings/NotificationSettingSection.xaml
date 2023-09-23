@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
@@ -12,43 +12,43 @@
     mc:Ignorable="d">
 
 
-    <lab:SettingsExpander Header="通知" IsExpanded="True">
-        <lab:SettingsExpander.HeaderIcon>
+    <controls:SettingsExpander Header="通知" IsExpanded="True">
+        <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xEA8F;" />
-        </lab:SettingsExpander.HeaderIcon>
-        <lab:SettingsExpander.Items>
-            <lab:SettingsCard
+        </controls:SettingsExpander.HeaderIcon>
+        <controls:SettingsExpander.Items>
+            <controls:SettingsCard
                 Padding="12"
                 Description="定时检查并推送预警"
                 Header="预警">
-                <lab:SettingsCard.HeaderIcon>
+                <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE7BA;" />
-                </lab:SettingsCard.HeaderIcon>
+                </controls:SettingsCard.HeaderIcon>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsWarningNotificationEnabled, Mode=TwoWay}" />
-            </lab:SettingsCard>
-            <lab:SettingsCard
+            </controls:SettingsCard>
+            <controls:SettingsCard
                 Padding="12"
                 Description="在早晨推送今日天气预报"
                 Header="今日天气"
                 HeaderIcon="Calendar">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" />
-            </lab:SettingsCard>
-            <lab:SettingsCard
+            </controls:SettingsCard>
+            <controls:SettingsCard
                 Padding="12"
                 Description="在晚间推送明日天气预报"
                 Header="明日天气"
                 HeaderIcon="Calendar">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" />
-            </lab:SettingsCard>
-            <lab:SettingsCard
+            </controls:SettingsCard>
+            <controls:SettingsCard
                 Padding="12"
                 Description="在磁贴上显示每日天气(仅Win10)"
                 Header="磁贴">
-                <lab:SettingsCard.HeaderIcon>
+                <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xECA5;" />
-                </lab:SettingsCard.HeaderIcon>
+                </controls:SettingsCard.HeaderIcon>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationTileEnabled, Mode=TwoWay}" />
-            </lab:SettingsCard>
-        </lab:SettingsExpander.Items>
-    </lab:SettingsExpander>
+            </controls:SettingsCard>
+        </controls:SettingsExpander.Items>
+    </controls:SettingsExpander>
 </UserControl>

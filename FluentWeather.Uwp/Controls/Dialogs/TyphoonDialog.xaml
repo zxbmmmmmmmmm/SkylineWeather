@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:geo="Windows.Devices.Geolocation"
     xmlns:geolocation="using:Windows.Devices.Geolocation"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -66,7 +66,7 @@
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonBase">
                             <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind Now, Converter={StaticResource TyphoonTrackToGeopointConverter}}">
-                                <controls:DropShadowPanel
+                                <controls1:DropShadowPanel
                                     Margin="0,-16,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -76,9 +76,9 @@
                                     OffsetY="2"
                                     Color="Black">
                                     <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" />
-                                </controls:DropShadowPanel>
+                                </controls1:DropShadowPanel>
 
-                                <controls:DropShadowPanel
+                                <controls1:DropShadowPanel
                                     Margin="-2,24,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -90,7 +90,7 @@
                                     Color="Black">
                                     <PathIcon Data="M9.21 1.491c-3.757-.066-6.613 2.537-6.88 5.705-.292 3.494 2.107 4.947 2.428 5.232C2.853 12.4.585 10.28.204 8.296a.104.104 0 0 0-.1-.085.103.103 0 0 0-.103.114c.403 3.526 3.405 6.2 6.79 6.186 3.604-.016 6.518-2.147 6.89-5.646.35-3.295-2.108-5.008-2.424-5.292 2.023.02 4.162 2.15 4.54 4.133.008.048.05.084.098.085a.102.102 0 0 0 .1-.071.103.103 0 0 0 .004-.043c-.406-3.521-3.405-6.126-6.788-6.185ZM8 9.503A1.502 1.502 0 1 1 8 6.5a1.502 1.502 0 0 1 0 3.004Z" />
 
-                                </controls:DropShadowPanel>
+                                </controls1:DropShadowPanel>
                             </Grid>
 
                         </DataTemplate>
@@ -151,18 +151,18 @@
             </maps:MapControl>
             <Grid Margin="32" VerticalAlignment="Bottom">
                 <StackPanel Spacing="12">
-                    <labs:Segmented
+                    <controls:Segmented
                         Name="SegmentedControl"
                         Background="{ThemeResource ButtonAcrylic}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         ItemsSource="{x:Bind Typhoons, Mode=OneWay}"
                         SelectionChanged="SegmentedControl_SelectionChanged">
-                        <labs:Segmented.ItemTemplate>
+                        <controls:Segmented.ItemTemplate>
                             <DataTemplate x:DataType="models:TyphoonBase">
                                 <TextBlock Text="{x:Bind Name}" />
                             </DataTemplate>
-                        </labs:Segmented.ItemTemplate>
-                    </labs:Segmented>
+                        </controls:Segmented.ItemTemplate>
+                    </controls:Segmented>
 
                     <Grid
                         Padding="24,16"

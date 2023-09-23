@@ -4,39 +4,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:lab="using:CommunityToolkit.Labs.WinUI"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
 
-    <lab:SettingsExpander Header="和风天气" IsExpanded="True">
-        <lab:SettingsExpander.HeaderIcon>
+    <controls:SettingsExpander Header="和风天气" IsExpanded="True">
+        <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE621;" />
-        </lab:SettingsExpander.HeaderIcon>
-        <lab:SettingsExpander.Items>
-            <lab:SettingsCard
+        </controls:SettingsExpander.HeaderIcon>
+        <controls:SettingsExpander.Items>
+            <controls:SettingsCard
                 Padding="12"
                 Description="和风天气Api请求的域名，若使用付费KEY请更改此选项为api.qweather.com"
                 Header="域名"
                 HeaderIcon="home">
                 <TextBox Text="{x:Bind app:Common.Settings.QWeatherDomain, Mode=TwoWay}" />
-            </lab:SettingsCard>
-            <lab:SettingsCard
+            </controls:SettingsCard>
+            <controls:SettingsCard
                 Padding="12"
                 Description="和风天气的KEY，可以在控制台中找到"
                 Header="KEY"
                 HeaderIcon="Permissions">
                 <TextBox Text="{x:Bind app:Common.Settings.QWeatherToken, Mode=TwoWay}" />
-            </lab:SettingsCard>
-            <lab:SettingsCard
+            </controls:SettingsCard>
+            <controls:SettingsCard
                 Padding="12"
                 Description="QGeoApi的KEY，可以在控制台中找到"
                 Header="GeoApi KEY"
                 HeaderIcon="Permissions">
                 <TextBox Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
-            </lab:SettingsCard>
-        </lab:SettingsExpander.Items>
-    </lab:SettingsExpander>
+            </controls:SettingsCard>
+        </controls:SettingsExpander.Items>
+    </controls:SettingsExpander>
 </UserControl>
