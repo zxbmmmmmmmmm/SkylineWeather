@@ -32,7 +32,7 @@
                 Grid.Column="0"
                 Width="42"
                 Height="36"
-                Margin="4,0,0,0"
+                Margin="8,0,-8,0"
                 Background="Transparent"
                 BorderThickness="0"
                 Click="BackButton_Click"
@@ -82,7 +82,6 @@
                     <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
                 </TextBlock>
                 <Grid
-                    Width="1024"
                     Height="45"
                     Background="Transparent" />
                 <Grid.Transitions>
