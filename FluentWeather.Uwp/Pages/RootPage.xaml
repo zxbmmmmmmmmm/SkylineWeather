@@ -10,6 +10,7 @@
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
@@ -46,11 +47,27 @@
 
             <Button
                 Grid.Column="1"
-                Width="50"
+                Width="44"
+                Height="36"
+                Margin="8"
+                Background="Transparent"
+                BorderBrush="Transparent"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Command="{x:Bind ViewModel.TogglePaneCommand}"
-                Style="{ThemeResource PaneToggleButtonStyle}">
+                Command="{x:Bind ViewModel.TogglePaneCommand}">
+                <muxc:AnimatedIcon x:Name="Icon"
+                                    Width="16"
+                                    Height="16"
+                                    HorizontalAlignment="Center"
+                                    AutomationProperties.AccessibilityView="Raw"
+                                    muxc:AnimatedIcon.State="Normal">
+                    <animatedvisuals:AnimatedGlobalNavigationButtonVisualSource/>
+                    <muxc:AnimatedIcon.FallbackIconSource>
+                        <muxc:FontIconSource
+                            Glyph="&#xE700;"
+                            FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize }"/>
+                    </muxc:AnimatedIcon.FallbackIconSource>
+                </muxc:AnimatedIcon>
                 <Button.Transitions>
                     <TransitionCollection>
                         <RepositionThemeTransition />
@@ -61,7 +78,7 @@
 
 
             <Grid x:Name="Title" Grid.Column="2">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15">
                     <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
                 </TextBlock>
                 <Grid
