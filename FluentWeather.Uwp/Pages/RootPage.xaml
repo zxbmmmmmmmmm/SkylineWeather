@@ -2,6 +2,7 @@
     x:Class="FluentWeather.Uwp.Pages.RootPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -10,7 +11,6 @@
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
@@ -25,19 +25,28 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
-                Width="42"
+                Width="44"
                 Height="36"
                 Margin="8,0,-8,0"
                 Background="Transparent"
                 BorderThickness="0"
                 Click="BackButton_Click"
                 Visibility="{x:Bind CanGoBack, Mode=OneWay}">
-                <FontIcon FontSize="14" Glyph="&#xE112;" />
+                <muxc:AnimatedIcon
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Center"
+                    muxc:AnimatedIcon.State="Normal"
+                    AutomationProperties.AccessibilityView="Raw">
+                    <animatedvisuals:AnimatedBackVisualSource />
+                    <muxc:AnimatedIcon.FallbackIconSource>
+                        <muxc:FontIconSource FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize}" Glyph="&#xE700;" />
+                    </muxc:AnimatedIcon.FallbackIconSource>
+                </muxc:AnimatedIcon>             
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition IsStaggeringEnabled="True" />
@@ -50,22 +59,21 @@
                 Width="44"
                 Height="36"
                 Margin="8"
-                Background="Transparent"
-                BorderBrush="Transparent"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                BorderThickness="0"
                 Command="{x:Bind ViewModel.TogglePaneCommand}">
-                <muxc:AnimatedIcon x:Name="Icon"
-                                    Width="16"
-                                    Height="16"
-                                    HorizontalAlignment="Center"
-                                    AutomationProperties.AccessibilityView="Raw"
-                                    muxc:AnimatedIcon.State="Normal">
-                    <animatedvisuals:AnimatedGlobalNavigationButtonVisualSource/>
+                <muxc:AnimatedIcon
+                    Width="16"
+                    Height="16"
+                    HorizontalAlignment="Center"
+                    muxc:AnimatedIcon.State="Normal"
+                    AutomationProperties.AccessibilityView="Raw">
+                    <animatedvisuals:AnimatedGlobalNavigationButtonVisualSource />
                     <muxc:AnimatedIcon.FallbackIconSource>
-                        <muxc:FontIconSource
-                            Glyph="&#xE700;"
-                            FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize }"/>
+                        <muxc:FontIconSource FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize}" Glyph="&#xE700;" />
                     </muxc:AnimatedIcon.FallbackIconSource>
                 </muxc:AnimatedIcon>
                 <Button.Transitions>
@@ -78,12 +86,13 @@
 
 
             <Grid x:Name="Title" Grid.Column="2">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15">
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="15">
                     <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
                 </TextBlock>
-                <Grid
-                    Height="45"
-                    Background="Transparent" />
+                <Grid Height="45" Background="Transparent" />
                 <Grid.Transitions>
                     <TransitionCollection>
                         <RepositionThemeTransition />
