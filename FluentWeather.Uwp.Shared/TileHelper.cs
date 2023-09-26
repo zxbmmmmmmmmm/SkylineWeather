@@ -51,11 +51,60 @@ namespace FluentWeather.Uwp.Shared
             };
         }
 
+        public static AdaptiveSubgroup GenerateTileSubgroup(string day, string img, int tempHi, int tempLo)
+        {
+            return new AdaptiveSubgroup()
+            {
+                HintWeight = 1,
+
+
+                Children =
+                {
+                    // Day
+                    new AdaptiveText()
+                    {
+                        Text = day,
+                        HintAlign = AdaptiveTextAlign.Center,
+                    },
+
+                    // Image
+                    new AdaptiveImage()
+                    {
+                        Source = img,
+                        HintRemoveMargin = true,
+                    },
+
+                    // High temp
+                    new AdaptiveText()
+                    {
+                        Text = tempHi + "°",
+                        HintAlign = AdaptiveTextAlign.Center
+                    },
+
+                    // Low temp
+                    new AdaptiveText()
+                    {
+                        Text = tempLo + "°",
+                        HintAlign = AdaptiveTextAlign.Center,
+                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                    }
+
+                }
+            };
+        }
+
         public static void GetGroupChildren(AdaptiveGroup group, List<WeatherBase> daily)
         {
             foreach (var item in daily)
             {
                 group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Day/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+            }
+        }
+        public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherBase> daily)
+        {
+            foreach (var item in daily)
+            {
+                group.Children.Add(GenerateTileSubgroup(GetWeek(((ITime)item).Time), "Resized/32/" + GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static TileContent GenerateTileContent(List<WeatherBase> daily)
@@ -82,7 +131,7 @@ namespace FluentWeather.Uwp.Shared
                 .SetBranding(TileBranding.Name);
 
             var wideGroup = new AdaptiveGroup();
-            GetGroupChildren(wideGroup, daily.GetRange(0, 5));
+            GetGroupChildrenForTile(wideGroup, daily.GetRange(0, 5));
 
             // Wide Tile
             builder.AddTile(TileSize.Wide)
@@ -164,7 +213,7 @@ namespace FluentWeather.Uwp.Shared
         public static AdaptiveSubgroup GenerateLargeSubgroup(string day, string image, int high, int low)
         {
             // Generate the normal subgroup
-            var subgroup = GenerateSubgroup(day, image, high, low);
+            var subgroup = GenerateTileSubgroup(day, image, high, low);
 
             // Allow there to be padding around the image
             (subgroup.Children[1] as AdaptiveImage).HintRemoveMargin = null;
