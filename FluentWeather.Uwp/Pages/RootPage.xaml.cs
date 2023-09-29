@@ -35,8 +35,15 @@ public sealed partial class RootPage : Page
     {
         this.InitializeComponent();
         Instance = this;
+        this.Loaded += OnLoaded;
         SetTitleBar();
     }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        PaneFrame.Navigate(typeof(CitiesPage));
+    }
+
     public void SetTitleBar()
     {
         var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -49,7 +56,6 @@ public sealed partial class RootPage : Page
         titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonHoverBackgroundColor = Color.FromArgb(40,128,128,128);
         ThemeHelper.SetTitleBarColor(Common.Settings.ApplicationTheme);
-        PaneFrame.Navigate(typeof(CitiesPage));
     }
     [ObservableProperty]
     public bool canGoBack;
