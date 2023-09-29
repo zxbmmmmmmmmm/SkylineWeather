@@ -25,8 +25,13 @@
         <controls:SettingsExpander.Items>
             <controls:SettingsCard
                 Padding="12"
-                Description="设置应用主题(需要重启)"
-                Header="主题">
+                Description="设置应用主题(需要重启)">
+                <controls:SettingsCard.Header>
+                    <TextBlock>
+                        <Run Text="主题"/>
+                        <Run Text="Beta" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                    </TextBlock>
+                </controls:SettingsCard.Header>
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE771;" />
                 </controls:SettingsCard.HeaderIcon>

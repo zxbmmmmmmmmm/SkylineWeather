@@ -45,16 +45,6 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
-        switch (Common.Settings.ApplicationTheme)
-        {
-            case ElementTheme.Light:
-                RequestedTheme = ApplicationTheme.Light;
-                break;
-            case ElementTheme.Dark:
-                RequestedTheme = ApplicationTheme.Dark;
-                break;
-        }
-
     }
     public static async void RegisterBackgroundTask()
     {
@@ -145,7 +135,8 @@ sealed partial class App : Application
             Window.Current.Activate();
         }
 
-
+        ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
+        
     }
 
     /// <summary>
