@@ -4,11 +4,17 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Windows.UI.Notifications;
 
 namespace FluentWeather.Uwp.Shared
 {
     public class TileHelper
     {
+        public static void UpdateTiles(List<WeatherBase> data)
+        {
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()));
+        }
         public static AdaptiveSubgroup GenerateSubgroup(string day, string img, int tempHi, int tempLo)
         {
             return new AdaptiveSubgroup()
@@ -104,7 +110,7 @@ namespace FluentWeather.Uwp.Shared
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateTileSubgroup(GetWeek(((ITime)item).Time), "Resized/32/" + GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+                group.Children.Add(GenerateTileSubgroup(GetWeek(((ITime)item).Time), GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static TileContent GenerateTileContent(List<WeatherBase> daily)
@@ -128,7 +134,8 @@ namespace FluentWeather.Uwp.Shared
                 .AddText("")
                 .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/32/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
                 .SetTextStacking(TileTextStacking.Center)
-                .SetBranding(TileBranding.Name);
+                .SetBranding(TileBranding.Name)
+                .SetDisplayName(daily[0].Description,TileSize.Medium);
 
             var wideGroup = new AdaptiveGroup();
             GetGroupChildrenForTile(wideGroup, daily.GetRange(0, 5));
@@ -136,6 +143,7 @@ namespace FluentWeather.Uwp.Shared
             // Wide Tile
             builder.AddTile(TileSize.Wide)
                 .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide)
+                .SetBranding(TileBranding.None,TileSize.Wide)
                 .SetTextStacking(TileTextStacking.Center);
 
             // Large tile

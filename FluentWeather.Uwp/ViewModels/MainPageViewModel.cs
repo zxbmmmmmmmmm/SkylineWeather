@@ -3,6 +3,7 @@ using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.Tasks;
 using FluentWeather.Uwp.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -127,6 +128,10 @@ public partial class MainPageViewModel : ObservableObject
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+        }
+        if(CurrentLocation.Name == Common.Settings.DefaultGeolocation.Name)
+        {
+            TileHelper.UpdateTiles(DailyForecasts);
         }
     }
     private void GetTasks(double lon,double lat)

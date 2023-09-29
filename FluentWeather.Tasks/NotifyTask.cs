@@ -108,10 +108,6 @@ namespace FluentWeather.Tasks
                 .AddVisualChild(group);
             builder.Show();
         }
-        private void UpdateTiles(List<WeatherBase> data)
-        {
-            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()));
-        }
+
     }
 }
