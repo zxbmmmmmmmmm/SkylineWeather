@@ -25,6 +25,8 @@ using Windows.Storage;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.System;
 using FluentWeather.Uwp.Shared;
+using MetroLog;
+using MetroLog.Targets;
 
 namespace FluentWeather.Uwp;
 
@@ -52,9 +54,7 @@ sealed partial class App : Application
                 RequestedTheme = ApplicationTheme.Dark;
                 break;
         }
-#if (!DEBUG)
-        AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics),typeof(Crashes));
-#endif
+
     }
     public static async void RegisterBackgroundTask()
     {
@@ -82,8 +82,9 @@ sealed partial class App : Application
     {
         e.Handled = true;
         Crashes.TrackError(e.Exception);
+        Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
     }
-    protected override async void OnActivated(IActivatedEventArgs e)
+    protected override void OnActivated(IActivatedEventArgs e)
     {
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
@@ -111,8 +112,6 @@ sealed partial class App : Application
     /// <param name="e">有关启动请求和过程的详细信息。</param>
     protected override void OnLaunched(LaunchActivatedEventArgs e)
     {
-
-
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
         // 不要在窗口已包含内容时重复应用程序初始化，

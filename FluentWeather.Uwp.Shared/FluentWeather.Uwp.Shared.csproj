@@ -130,6 +130,9 @@
     <EmbeddedResource Include="Properties\FluentWeather.Uwp.Shared.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MetroLog">
+      <Version>1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>

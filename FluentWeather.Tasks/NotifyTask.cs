@@ -18,7 +18,9 @@ namespace FluentWeather.Tasks
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-            
+
+            LogManager.GetLogger(nameof(NotifyTask)).Info("NotifyTask Started");
+
             var settingContainer = ApplicationData.Current.LocalSettings;
             var token = settingContainer.Values["qWeather.Token"].ToString();
             var provider = new QWeatherProvider.QWeatherProvider(token,Settings.QWeatherDomain);
@@ -70,6 +72,7 @@ namespace FluentWeather.Tasks
             if (isTileAvailable)
             {
                 UpdateTiles(data);
+                LogManager.GetLogger(nameof(NotifyTask)).Info("Tile Updated");
             }
             if (DateTime.Now.Hour < 18)
             {
@@ -95,6 +98,7 @@ namespace FluentWeather.Tasks
                 .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
+            LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Today)");
         }
         private void PushTomorrow(List<WeatherBase> data)
         {
@@ -107,6 +111,8 @@ namespace FluentWeather.Tasks
                 .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
+            LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
+
         }
 
     }

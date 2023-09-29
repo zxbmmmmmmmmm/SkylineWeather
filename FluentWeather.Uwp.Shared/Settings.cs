@@ -5,18 +5,31 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using MetroLog;
+using MetroLog.Targets;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
 public static class Common
-{
+{ 
+    static Common()
+    {
+#if DEBUG
+        LogManagerFactory.DefaultConfiguration.AddTarget(MetroLog.LogLevel.Trace, MetroLog.LogLevel.Fatal, new StreamingFileTarget());
+#else
+	    LogManagerFactory.DefaultConfiguration.AddTarget(LogLevel.Error, LogLevel.Fatal, new FileStreamingTarget());
+#endif
+        LogManager = LogManagerFactory.CreateLogManager();
+    }
     public static Settings Settings = new();
+    public static readonly ILogManager LogManager;
 }
 public class Settings:INotifyPropertyChanged
 {

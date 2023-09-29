@@ -467,6 +467,9 @@
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
       <Version>8.0.230907</Version>
     </PackageReference>
+    <PackageReference Include="MetroLog">
+      <Version>1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AppCenter">
       <Version>5.0.2</Version>
     </PackageReference>
