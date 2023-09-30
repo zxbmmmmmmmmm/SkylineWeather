@@ -21,9 +21,7 @@ namespace FluentWeather.Tasks
 
             LogManager.GetLogger(nameof(NotifyTask)).Info("NotifyTask Started");
 
-            var settingContainer = ApplicationData.Current.LocalSettings;
-            var token = settingContainer.Values["qWeather.Token"].ToString();
-            var provider = new QWeatherProvider.QWeatherProvider(token,Settings.QWeatherDomain);
+            var provider = new QWeatherProvider.QWeatherProvider(Settings.QWeatherToken,Settings.QWeatherDomain);
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
             if(lat is -1 || lon is -1)
