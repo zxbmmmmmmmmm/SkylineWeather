@@ -56,7 +56,7 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             });
             var maxValue = Typhoons.Max(p => p.Now.WindSpeed);
             var max = Typhoons?.Where(p => p.Now.WindSpeed == maxValue).FirstOrDefault();
-            SegmentedControl.SelectedItem = max;
+            //SegmentedControl.SelectedItem = max;
 
             TyphoonMap.ZoomLevel = 6;
         }

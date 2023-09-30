@@ -10,17 +10,18 @@
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter" />
     </UserControl.Resources>
-    <muxc:Expander
+    <controls:Expander
         HorizontalAlignment="Stretch"
         HorizontalContentAlignment="Stretch"
         x:DefaultBindMode="OneWay">
-        <muxc:Expander.Header>
+        <controls:Expander.Header>
             <Grid>
                 <StackPanel
                     x:Name="HeaderPanel"
@@ -47,7 +48,7 @@
                         Orientation="Horizontal"
                         Visibility="{x:Bind GetActionButtonsVisibility(Warning)}">
                         <HyperlinkButton Background="Transparent" BorderBrush="Transparent">
-                            <StackPanel Orientation="Horizontal" Spacing="4">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="追踪" />
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
@@ -60,7 +61,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Visibility="Collapsed">
-                            <StackPanel Orientation="Horizontal" Spacing="4">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="了解详情" />
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
@@ -76,8 +77,8 @@
             </Grid>
 
 
-        </muxc:Expander.Header>
-        <muxc:Expander.Content>
+        </controls:Expander.Header>
+        <controls:Expander.Content>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -89,7 +90,7 @@
                     Text="{x:Bind Warning.Description}"
                     TextWrapping="Wrap" />
             </Grid>
-        </muxc:Expander.Content>
+        </controls:Expander.Content>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -104,5 +105,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </muxc:Expander>
+    </controls:Expander>
 </UserControl>

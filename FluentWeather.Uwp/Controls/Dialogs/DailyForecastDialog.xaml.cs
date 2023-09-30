@@ -61,7 +61,6 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             ForecastGridView.MaxWidth = 1120;
             ExpandBtn.VerticalAlignment = VerticalAlignment.Bottom;
             ExpandIcon.Glyph = "\uE010";
-            ExpandBtn.CornerRadius = new CornerRadius(4);
             ExpandBtn.BorderThickness = new Thickness(1);
             ExpandText.Text = "折叠";
         }
@@ -74,11 +73,10 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             ForecastGridView.MaxWidth = double.MaxValue;
             ExpandBtn.VerticalAlignment = VerticalAlignment.Top;
             ExpandIcon.Glyph = "\uE011";
-            ExpandBtn.CornerRadius = new CornerRadius(0, 0, 4, 4);
             ExpandBtn.BorderThickness = new Thickness(1, 0, 1, 1);
             ExpandText.Text = "展开";
             await Task.Delay(10);
-            await ForecastGridView.SmoothScrollIntoViewWithItemAsync(ViewModel.Selected,itemPlacement:ScrollItemPlacement.Left);
+            //await ForecastGridView.SmoothScrollIntoViewWithItemAsync(ViewModel.Selected,itemPlacement:ScrollItemPlacement.Left);
         }
         private List<ITemperature> GetHourly(ObservableCollection<WeatherBase> weatherList, WeatherBase selected)
         {

@@ -10,7 +10,6 @@
     xmlns:geo="Windows.Devices.Geolocation"
     xmlns:geolocation="using:Windows.Devices.Geolocation"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -37,7 +36,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid CornerRadius="8">
+        <Grid>
             <maps:MapControl
                 x:Name="TyphoonMap"
                 LandmarksVisible="False"
@@ -71,7 +70,6 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     BlurRadius="12"
-                                    IsMasked="True"
                                     OffsetX="2"
                                     OffsetY="2"
                                     Color="Black">
@@ -83,7 +81,6 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     BlurRadius="24"
-                                    IsMasked="True"
                                     OffsetX="0"
                                     OffsetY="2"
                                     ShadowOpacity="0.5"
@@ -150,8 +147,8 @@
                 </maps:MapItemsControl>
             </maps:MapControl>
             <Grid Margin="32" VerticalAlignment="Bottom">
-                <StackPanel Spacing="12">
-                    <controls:Segmented
+                <StackPanel>
+                    <!--<controls:Segmented
                         Name="SegmentedControl"
                         Background="{ThemeResource ButtonAcrylic}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -162,17 +159,15 @@
                                 <TextBlock Text="{x:Bind Name}" />
                             </DataTemplate>
                         </controls:Segmented.ItemTemplate>
-                    </controls:Segmented>
+                    </controls:Segmented>-->
 
                     <Grid
                         Padding="24,16"
                         HorizontalAlignment="Left"
                         Background="{ThemeResource ButtonAcrylic}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4"
-                        Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
-                        <StackPanel Spacing="4" Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
+                        BorderThickness="1">
+                        <StackPanel>
                             <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
                                 <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Name}" />
                                 <Run
@@ -180,7 +175,7 @@
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                     Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Type, Converter={StaticResource TyphoonTypeToDescriptionConverter}}" />
                             </TextBlock>
-                            <StackPanel Orientation="Horizontal" Spacing="16">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock>
                                     <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="最大风速" />
                                     <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.WindSpeed}" />
@@ -197,7 +192,7 @@
                                     <Run Text="kPa" />
                                 </TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Spacing="4">
+                            <StackPanel Orientation="Horizontal">
                                 <Rectangle
                                     Width="10"
                                     Height="10"
@@ -225,7 +220,6 @@
                     Background="{ThemeResource ButtonAcrylic}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
-                    CornerRadius="4"
                     Visibility="{x:Bind Typhoons, Converter={StaticResource NullToVisibilityInvertedConverter}, Mode=OneWay}">
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="无台风" />
                 </Grid>

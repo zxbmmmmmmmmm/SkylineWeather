@@ -4,14 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
 
-    <controls:SettingsExpander Header="和风天气" IsExpanded="True">
+    <!--<controls:SettingsExpander Header="和风天气" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE621;" />
         </controls:SettingsExpander.HeaderIcon>
@@ -38,5 +37,11 @@
                 <TextBox Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
             </controls:SettingsCard>
         </controls:SettingsExpander.Items>
-    </controls:SettingsExpander>
+    </controls:SettingsExpander>-->
+    <StackPanel>
+        <TextBox Header="域名" Text="{x:Bind app:Common.Settings.QWeatherDomain, Mode=TwoWay}" />
+        <TextBox Header="和风天气KEY" Text="{x:Bind app:Common.Settings.QWeatherToken, Mode=TwoWay}" />
+
+        <TextBox Header="QGeoApi KEY" Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
+    </StackPanel>
 </UserControl>

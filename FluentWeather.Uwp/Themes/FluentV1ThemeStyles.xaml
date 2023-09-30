@@ -3,9 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     
-    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
+
     <Thickness x:Key="TextControlBorderThemeThickness">0,0,0,1</Thickness>
     <Thickness x:Key="ListItemMargin">0</Thickness>
     <Thickness x:Key="ListViewItemRevealBorderThemeThickness">0</Thickness>
@@ -21,18 +19,14 @@
 
 
     <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
-        <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
     <Style TargetType="AppBarButton" BasedOn="{StaticResource AppBarButtonRevealStyle}">
-        <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
     <Style TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonRevealStyle}">
-        <Setter Property="CornerRadius" Value="0"/>
     </Style>
     <Style TargetType="RepeatButton" BasedOn="{StaticResource RepeatButtonRevealStyle}">
-        <Setter Property="CornerRadius" Value="0"/>
     </Style>
     <Style TargetType="FontIcon">
         <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>

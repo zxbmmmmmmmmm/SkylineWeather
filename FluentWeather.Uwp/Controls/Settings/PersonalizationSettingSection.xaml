@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:converters2="using:ValueConverters"
@@ -18,7 +17,7 @@
     d:DesignWidth="400"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
-    <controls:SettingsExpander Header="个性化" IsExpanded="True">
+    <!--<controls:SettingsExpander Header="个性化" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE771;" />
         </controls:SettingsExpander.HeaderIcon>
@@ -138,5 +137,5 @@
                 </StackPanel>
             </controls:SettingsCard>
         </controls:SettingsExpander.Items>
-    </controls:SettingsExpander>
+    </controls:SettingsExpander>-->
 </UserControl>

@@ -16,9 +16,6 @@
     <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
     <StaticResource x:Key="ExpanderHeaderBorderPointerOverBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
     <StaticResource x:Key="ExpanderHeaderBorderPressedBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
-    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
-    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
 
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
 
@@ -197,7 +194,6 @@
         <Setter Property="AllowDrop" Value="False" />
         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
         <Setter Property="FocusVisualMargin" Value="0" />
-        <Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
 
 
         <Setter Property="Template">
@@ -210,7 +206,6 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Control.IsTemplateFocusTarget="True"
-                        CornerRadius="{TemplateBinding CornerRadius}"
                         FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
                         RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
@@ -221,7 +216,6 @@
                             x:Name="BorderBackground"
                             Background="Transparent"
                             Control.IsTemplateFocusTarget="True"
-                            CornerRadius="{TemplateBinding CornerRadius}"
                             IsHitTestVisible="False"
                             Opacity="0" />
                         <Border

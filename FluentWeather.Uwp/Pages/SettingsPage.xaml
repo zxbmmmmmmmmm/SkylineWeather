@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <StackPanel Margin="8,12" Spacing="4">
+        <StackPanel Margin="8,12">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />

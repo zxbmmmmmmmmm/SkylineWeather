@@ -117,7 +117,7 @@
                                                 ToolTipService.ToolTip="查看详细信息">
                                                 <FontIcon FontSize="16" Glyph="&#xE2B4;" />
                                             </HyperlinkButton>
-                                            <StackPanel Spacing="8">
+                                            <StackPanel>
                                                 <TextBlock>
                                                     <Run
                                                         FontSize="34"
@@ -127,8 +127,7 @@
                                                 </TextBlock>
                                                 <StackPanel
                                                     Margin="0,0,8,0"
-                                                    Orientation="Horizontal"
-                                                    Spacing="20">
+                                                    Orientation="Horizontal">
                                                     <StackPanel>
                                                         <TextBlock
                                                             HorizontalAlignment="Center"
@@ -220,9 +219,9 @@
                     x:Name="PrecipGrid"
                     Grid.Row="1"
                     Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                    <muxc:Expander HorizontalAlignment="Stretch" Header="{Binding Precipitation.Summary}">
+                    <controls:Expander HorizontalAlignment="Stretch" Header="{Binding Precipitation.Summary}">
                         <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
-                    </muxc:Expander>
+                    </controls:Expander>
                 </Grid>
 
                 <!--  预警  -->
@@ -314,8 +313,7 @@
                         VerticalAlignment="Center"
                         HorizontalContentAlignment="Stretch"
                         Background="Transparent"
-                        BorderBrush="Transparent"
-                        CornerRadius="50">
+                        BorderBrush="Transparent">
                         <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind DailyGridView}" />
@@ -335,8 +333,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="Transparent"
-                        BorderBrush="Transparent"
-                        CornerRadius="50">
+                        BorderBrush="Transparent">
                         <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind DailyGridView}" />
@@ -375,7 +372,7 @@
                                     <controls1:WeatherHourlyForecastItem VerticalAlignment="Center" WeatherInfo="{x:Bind}" />
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256" Spacing="4">
+                                            <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
                                                 </TextBlock>
@@ -404,8 +401,7 @@
                                                 <StackPanel
                                                     Margin="0,4,0,0"
                                                     HorizontalAlignment="Left"
-                                                    Orientation="Horizontal"
-                                                    Spacing="4">
+                                                    Orientation="Horizontal">
                                                     <TextBlock Text="湿度:" />
                                                     <TextBlock>
                                                         <Run Text="{Binding Humidity}" /><Run Text="%" />
@@ -435,8 +431,7 @@
                         VerticalAlignment="Center"
                         HorizontalContentAlignment="Stretch"
                         Background="Transparent"
-                        BorderBrush="Transparent"
-                        CornerRadius="50">
+                        BorderBrush="Transparent">
                         <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind HourlyGridView}" />
@@ -455,8 +450,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="Transparent"
-                        BorderBrush="Transparent"
-                        CornerRadius="50">
+                        BorderBrush="Transparent">
                         <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind HourlyGridView}" />
@@ -583,7 +577,7 @@
                                 <TextBlock FontSize="25" Text="{x:Bind Category}" />
                                 <FlyoutBase.AttachedFlyout>
                                     <Flyout Placement="Top">
-                                        <StackPanel MaxWidth="256" Spacing="4">
+                                        <StackPanel MaxWidth="256">
                                             <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                 <Run Text="{x:Bind Name}" />
                                                 <Run Text="-" />

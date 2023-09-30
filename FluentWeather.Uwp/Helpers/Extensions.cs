@@ -16,9 +16,9 @@ public static class Extensions
         dictionary.MergedDictionaries.Add(new() { Source = new Uri(source) });
         return dictionary;
     }
-    public static T MergeMUXC<T>(this T dictionary, ControlsResourcesVersion version) where T : ResourceDictionary
-    {
-        dictionary.MergedDictionaries.Add(new XamlControlsResources { ControlsResourcesVersion = version });
-        return dictionary;
-    }
+    //public static T MergeMUXC<T>(this T dictionary, ControlsResourcesVersion version) where T : ResourceDictionary
+    //{
+    //    dictionary.MergedDictionaries.Add(new XamlControlsResources { ControlsResourcesVersion = version });
+    //    return dictionary;
+    //}
 }

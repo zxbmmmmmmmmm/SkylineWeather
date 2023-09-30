@@ -18,11 +18,10 @@
     PrimaryButtonText="确定"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
-    Style="{ThemeResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Spacing="12">
+        <StackPanel>
             <AutoSuggestBox
                 x:Name="SearchBox"
                 ItemsSource="{x:Bind SuggestedCities, Mode=OneWay}"

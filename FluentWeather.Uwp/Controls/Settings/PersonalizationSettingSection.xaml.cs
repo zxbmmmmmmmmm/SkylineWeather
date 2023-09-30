@@ -85,13 +85,13 @@ namespace FluentWeather.Uwp.Controls.Settings
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ThemeButtons.SelectedIndex = Common.Settings.ApplicationTheme switch
-            {
-                ElementTheme.Default => 0,
-                ElementTheme.Light => 1,
-                ElementTheme.Dark => 2,
-                _ => ThemeButtons.SelectedIndex
-            };
+            //ThemeButtons.SelectedIndex = Common.Settings.ApplicationTheme switch
+            //{
+            //    ElementTheme.Default => 0,
+            //    ElementTheme.Light => 1,
+            //    ElementTheme.Dark => 2,
+            //    _ => ThemeButtons.SelectedIndex
+            //};
         }
     }
 }

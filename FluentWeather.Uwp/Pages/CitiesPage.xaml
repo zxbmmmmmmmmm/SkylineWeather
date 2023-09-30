@@ -30,7 +30,7 @@
             Text="{x:Bind ViewModel.Query, Mode=TwoWay}"
             UpdateTextOnSelect="False">
             <AutoSuggestBox.Resources>
-                <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem" />
+                <Style TargetType="ListViewItem" />
             </AutoSuggestBox.Resources>
             <AutoSuggestBox.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">

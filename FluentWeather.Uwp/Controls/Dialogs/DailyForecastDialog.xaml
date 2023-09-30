@@ -14,7 +14,6 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     FullSizeDesired="True"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    Style="{ThemeResource ContentDialogFullStyle}"
     mc:Ignorable="d">
     <ContentDialog.Resources>
         <converters:HourlyForecastSelectConverter x:Key="HourlyForecastSelectConverter" />
@@ -52,7 +51,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal" Spacing="8">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Time, Converter={StaticResource DateConverter}}" />
                                 <TextBlock
                                     HorizontalAlignment="Center"
@@ -61,8 +60,7 @@
                             </StackPanel>
                             <StackPanel
                                 Grid.Row="1"
-                                Orientation="Horizontal"
-                                Spacing="8">
+                                Orientation="Horizontal">
                                 <Image
                                     Height="45"
                                     Source="{x:Bind WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
@@ -90,14 +88,12 @@
         <Grid
             Grid.Row="1"
             Padding="32,16"
-            x:DefaultBindMode="OneWay"
-            BorderBrush="{ThemeResource ContentDialogSeparatorBorderBrush}"
-            BorderThickness="{ThemeResource ContentDialogSeparatorThickness}">
+            x:DefaultBindMode="OneWay">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Spacing="4">
+            <StackPanel>
                 <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
                     <Run Text="{Binding Selected.Time, Converter={StaticResource DateConverter}}" />
                     <Run Text="{Binding Selected.Time, Converter={StaticResource ShortDateConverter}}" />
@@ -110,8 +106,7 @@
                 </TextBlock>
                 <StackPanel
                     Margin="0,12,0,0"
-                    Orientation="Horizontal"
-                    Spacing="24">
+                    Orientation="Horizontal">
                     <StackPanel>
                         <TextBlock
                             FontSize="16"
@@ -242,9 +237,8 @@
             Background="{ThemeResource ContentDialogBackground}"
             BorderBrush="{ThemeResource ContentDialogBackground}"
             BorderThickness="1,0,1,1"
-            Click="ExpandForecastBtnClicked"
-            CornerRadius="0,0,4,4">
-            <StackPanel Orientation="Horizontal" Spacing="8">
+            Click="ExpandForecastBtnClicked">
+            <StackPanel Orientation="Horizontal">
                 <FontIcon
                     x:Name="ExpandIcon"
                     FontSize="16"
