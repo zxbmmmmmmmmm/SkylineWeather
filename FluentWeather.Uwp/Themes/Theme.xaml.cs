@@ -25,10 +25,7 @@ public partial class Theme:ResourceDictionary
         //        dic.MergeMUXC(ControlsResourcesVersion.Version1);
         //        break;
         //}
-        dic.MergedDictionaries.Add(new XamlControlsResources());
-        dic.Merge("ms-appx:///Styles/ListView.xaml");
-        dic.Merge("ms-appx:///Styles/ContentDialog.xaml");
-        dic.Merge("ms-appx:///Themes/Generic.xaml");
+
 
         //switch (Common.Settings.Theme)
         //{

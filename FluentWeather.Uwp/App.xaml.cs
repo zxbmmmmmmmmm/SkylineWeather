@@ -70,10 +70,12 @@ sealed partial class App : Application
     }
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
+        Common.Settings.CrashCount += 1;
         e.Handled = true;
         Crashes.TrackError(e.Exception);
-        Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
+        Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message+ "\n\n StackTrace:" + e.Exception.StackTrace + "\n\n Source:" + e.Exception.Source + "\n\n Data:" + e.Exception.Data, e.Exception);
     }
+    
     protected override void OnActivated(IActivatedEventArgs e)
     {
         Frame rootFrame = Window.Current.Content as Frame;
@@ -90,7 +92,7 @@ sealed partial class App : Application
         {
             // 当导航堆栈尚未还原时，导航到第一页，
             // 并通过将所需信息作为导航参数传入来配置
-            rootFrame.Navigate(typeof(RootPage));
+            rootFrame.Navigate(Common.Settings.DeveloperMode ? typeof(TestPage) : typeof(RootPage));
         }
         // 确保当前窗口处于活动状态
         Window.Current.Activate();
@@ -129,14 +131,17 @@ sealed partial class App : Application
                 // 当导航堆栈尚未还原时，导航到第一页，
                 // 并通过将所需信息作为导航参数传入来配置
                 // 参数
-                rootFrame.Navigate(typeof(RootPage), e.Arguments);
+                rootFrame.Navigate(Common.Settings.DeveloperMode ? typeof(TestPage) : typeof(RootPage), e.Arguments);
             }
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
+        Common.LogManager.GetLogger("Application").Info("应用已启动");
 
-        ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
-        
+        //ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
+#if (!DEBUG)
+        AppCenter.Start("ae2c8e55-429a-4eb9-a43e-59676cadfa24", typeof(Analytics), typeof(Crashes));
+#endif
     }
 
     /// <summary>

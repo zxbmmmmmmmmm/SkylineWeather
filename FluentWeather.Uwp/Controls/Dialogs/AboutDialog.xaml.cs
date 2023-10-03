@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.Uwp.Pages;
+using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +28,7 @@ public sealed partial class AboutDialog : ContentDialog
     public AboutDialog()
     {
         this.InitializeComponent();
+        Common.LogManager.GetLogger("Application").Info("打开对话框:关于");
     }
     [RelayCommand]
     public void Close()
@@ -37,4 +40,18 @@ public sealed partial class AboutDialog : ContentDialog
         Package.Current.Id.Version.Minor,
         Package.Current.Id.Version.Build,
         Package.Current.Id.Version.Revision);
+    
+
+    private void AboutImage_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+    {
+        DevCheckBox.Visibility = Visibility.Visible;
+    }
+
+    private void DevButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Hide();
+        var frame = Window.Current.Content as Frame;
+        if (frame is null) return;
+        frame.Content = new TestPage();
+    }
 }

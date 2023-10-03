@@ -138,4 +138,22 @@
             </controls:SettingsCard>
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>-->
+    <StackPanel>
+        <TextBlock Text="个性化" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+        <TextBlock Text="背景" Margin="0,8,0,0"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+            <Button
+                Command="{x:Bind SetBackgroundCommand}"
+                CommandParameter="All"
+                Content="选取" />
+            <Button
+                Command="{x:Bind OpenBackgroundsFolderCommand}"
+                Margin="8,0,0,0"
+                CommandParameter="All"
+                Content="打开背景文件夹" />
+        </StackPanel>
+        <Slider Header="背景透明度" Margin="0,8,0,0" x:Name="TransparencySlider" Value="{x:Bind app:Common.Settings.BackgroundTransparency, Mode=TwoWay}" />
+        <Slider Header="背景模糊半径" Margin="0,8,0,0" Value="{x:Bind app:Common.Settings.BackgroundBlurAmount, Mode=TwoWay}" />
+    </StackPanel>
 </UserControl>

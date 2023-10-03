@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
 using Microsoft.Toolkit.Uwp.UI;
 using System;
@@ -32,6 +33,7 @@ public sealed partial class MainPage : Page
         this.InitializeComponent();
         this.DataContext = ViewModel;
         Instance = this;
+        Common.LogManager.GetLogger("Application").Info("打开页面:主页");
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)

@@ -32,7 +32,8 @@ public sealed partial class SetLocationDialog : ContentDialog
     public SetLocationDialog()
     {
         this.InitializeComponent();
-        if(Common.Settings.DefaultGeolocation.Name is not null)
+        Common.LogManager.GetLogger("Application").Info("打开对话框:设置默认位置");
+        if (Common.Settings.DefaultGeolocation.Name is not null)
         {
             SecondaryButtonText = "取消";
         }

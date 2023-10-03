@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:vm="using:FluentWeather.Uwp.ViewModels"     
     mc:Ignorable="d">
 
     <Grid Margin="0,0,0,0">
@@ -39,32 +39,33 @@
 
             <Button
                 Grid.Column="1"
-                Width="44"
-                Height="36"
-                Margin="8"
+                Height="45"
+                Margin="-2"
+                Padding="20,10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Background="Transparent"
                 BorderBrush="Transparent"
                 BorderThickness="0"
                 Command="{x:Bind ViewModel.TogglePaneCommand}">
-                <FontIcon Glyph="&#xE700;" FontSize="14"/>
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE700;" FontSize="14" VerticalAlignment="Center"/>
+                    <TextBlock
+                               Margin="16,0,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="14">
+                        <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
+                    </TextBlock>
+
+                </StackPanel>
                 <Button.Transitions>
                     <TransitionCollection>
                         <RepositionThemeTransition />
                     </TransitionCollection>
                 </Button.Transitions>
             </Button>
-
-
-
-            <Grid x:Name="Title" Grid.Column="2">
-                <TextBlock
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="15">
-                    <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
-                </TextBlock>
+            <Grid Grid.Column="2" x:Name="Title">
                 <Grid Height="45" Background="Transparent" />
                 <Grid.Transitions>
                     <TransitionCollection>
@@ -72,6 +73,9 @@
                     </TransitionCollection>
                 </Grid.Transitions>
             </Grid>
+
+
+
         </Grid>
         <SplitView
             x:Name="MainSplitView"
@@ -81,8 +85,9 @@
             <SplitView.Pane>
                 <Frame
                     x:Name="PaneFrame"
-                    Margin="0,45,0,0"
-                    Navigated="PaneFrame_Navigated" />
+                    Margin="0,0,0,0"
+                    Padding="0,45,0,0"
+                    Navigated="PaneFrame_Navigated" Background="#331A1A1A" />
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
@@ -90,12 +95,12 @@
                         <RowDefinition Height="45" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <local:MainPage Grid.Row="0" Grid.RowSpan="2" />
+                    <local:MainPage Grid.Row="1"  />
                 </Grid>
             </SplitView.Content>
         </SplitView>
 
-        <ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="32">
+        <muxc:ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="80">
             <Grid>
                 <controls:ImageEx Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
@@ -108,9 +113,9 @@
                     </Border.Background>
                 </Border>
             </Grid>
-        </ParallaxView>
+    </muxc:ParallaxView> 
 
-        <VisualStateManager.VisualStateGroups>
+    <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>

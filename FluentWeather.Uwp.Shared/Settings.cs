@@ -60,6 +60,15 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public bool DeveloperMode
+    {
+        get => GetSettings(nameof(DeveloperMode), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(DeveloperMode)] = value;
+            OnPropertyChanged();
+        }
+    }
     public ElementTheme ApplicationTheme
     {
         get => GetSettings(nameof(ApplicationTheme), ElementTheme.Dark);
@@ -112,6 +121,15 @@ public class Settings:INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsAcrylicEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
+    public int CrashCount
+    {
+        get => GetSettings(nameof(CrashCount), 0);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(CrashCount)] = value;
             OnPropertyChanged();
         }
     }

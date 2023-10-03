@@ -20,17 +20,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     FullSizeDesired="True"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    Style="{ThemeResource ContentDialogFullStyle}"
     mc:Ignorable="d">
     <ContentDialog.Resources>
         <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter" />
         <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter" />
-        <media:AcrylicBrush
-            x:Key="ButtonAcrylic"
-            BackgroundSource="Backdrop"
-            FallbackColor="{ThemeResource SystemAltHighColor}"
-            TintColor="{ThemeResource SystemAltHighColor}"
-            TintOpacity="0.4" />
     </ContentDialog.Resources>
     <Grid Margin="-28">
         <Grid.RowDefinitions>
@@ -110,7 +103,11 @@
                                     Width="5"
                                     Height="5"
                                     Fill="#CCFFFFFF" />
-                                <Button.Flyout>
+                                <i:Interaction.Behaviors>
+                                    <behaviors:ButtonOpenAttachedFlyoutBehavior/>
+                                </i:Interaction.Behaviors>
+
+                                <FlyoutBase.AttachedFlyout>
                                     <Flyout AllowFocusOnInteraction="True">
                                         <StackPanel>
                                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
@@ -135,7 +132,7 @@
                                             </TextBlock>
                                         </StackPanel>
                                     </Flyout>
-                                </Button.Flyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <Button.Transitions>
                                     <TransitionCollection>
                                         <EntranceThemeTransition />
@@ -164,8 +161,6 @@
                     <Grid
                         Padding="24,16"
                         HorizontalAlignment="Left"
-                        Background="{ThemeResource ButtonAcrylic}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1">
                         <StackPanel>
                             <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
@@ -217,8 +212,6 @@
                 <Grid
                     Padding="24,16"
                     HorizontalAlignment="Left"
-                    Background="{ThemeResource ButtonAcrylic}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     Visibility="{x:Bind Typhoons, Converter={StaticResource NullToVisibilityInvertedConverter}, Mode=OneWay}">
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="无台风" />
@@ -227,7 +220,6 @@
                     Padding="64,8"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Background="{ThemeResource ButtonAcrylic}"
                     Canvas.ZIndex="1"
                     Command="{x:Bind CloseCommand}"
                     Content="关闭"

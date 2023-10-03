@@ -9,12 +9,16 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
+using Windows.System.Profile;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -37,11 +41,40 @@ public sealed partial class RootPage : Page
         Instance = this;
         this.Loaded += OnLoaded;
         SetTitleBar();
+
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         PaneFrame.Navigate(typeof(CitiesPage));
+        if (AnalyticsInfo.VersionInfo.DeviceFamily is "Windows.Mobile")//自动与边界对齐
+        {
+            MainSplitView.OpenPaneLength = Window.Current.Bounds.Width;
+            MainSplitView.DisplayMode = SplitViewDisplayMode.Inline;
+            HardwareButtons.BackPressed += OnBackPressed; ;//win10m注册返回事件
+        }
+        if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            statusBar.HideAsync();
+        }
+    }
+
+    private void OnBackPressed(object sender, BackPressedEventArgs e)
+    {
+        if(MainSplitView.IsPaneOpen)
+        {
+            if (PaneFrame.CanGoBack)
+            {
+                PaneFrame.GoBack();
+            }
+            else
+            {
+                ViewModel.IsPaneOpen = false;
+            }
+        }
+        e.Handled = true;
+
     }
 
     public void SetTitleBar()

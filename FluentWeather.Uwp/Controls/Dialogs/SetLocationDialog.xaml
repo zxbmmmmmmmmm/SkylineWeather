@@ -14,7 +14,6 @@
     DefaultButton="Primary"
     IsPrimaryButtonEnabled="{x:Bind ChosenGeolocation, Converter={StaticResource NullToBoolConverter}, Mode=OneWay}"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    PrimaryButtonStyle="{ThemeResource HandwritingViewCandidateStyle}"
     PrimaryButtonText="确定"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
@@ -32,17 +31,18 @@
                 Text="{x:Bind Query, Mode=TwoWay}"
                 UpdateTextOnSelect="False">
                 <AutoSuggestBox.Resources>
-                    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem" />
+                    <Style TargetType="ListViewItem" />
                 </AutoSuggestBox.Resources>
                 <AutoSuggestBox.ItemTemplate>
                     <DataTemplate x:DataType="models:GeolocationBase">
-                        <Grid>
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{x:Bind Name}" />
                             <TextBlock
                                 HorizontalAlignment="Right"
+                                Margin="8,0,0,0"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                 Text="{x:Bind AdmDistrict}" />
-                        </Grid>
+                        </StackPanel>
                     </DataTemplate>
                 </AutoSuggestBox.ItemTemplate>
             </AutoSuggestBox>

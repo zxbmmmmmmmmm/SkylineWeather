@@ -19,7 +19,6 @@
 
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
 
-    <x:Double x:Key="WeatherDescriptionFontSize">22</x:Double>
 
     <!--  Override system generated accent colors  -->
     <Color x:Key="SystemAccentColorLight1">#FF1D85D7</Color>

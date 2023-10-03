@@ -82,9 +82,9 @@
                             <DataTemplate>
                                 <TextBlock
                                     Margin="-12,-26,-18,0"
-                                    HorizontalAlignment="Center"
-                                    FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature}" /><Run Text="°" />
+                                    HorizontalAlignment="Center" FontWeight="SemiBold"
+                                    FontSize="16">
+                                    <Run Text="{Binding DataItem.MaxTemperature}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
@@ -112,9 +112,10 @@
                             <DataTemplate>
                                 <TextBlock
                                     Margin="-11,0,-18,-24"
-                                    HorizontalAlignment="Center"
-                                    FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature}" /><Run Text="°" />
+                                    HorizontalAlignment="Center"       
+                                    FontWeight="SemiBold"
+                                    FontSize="16">
+                                    <Run Text="{Binding DataItem.MinTemperature}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>

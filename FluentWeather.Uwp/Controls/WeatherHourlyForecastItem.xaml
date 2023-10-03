@@ -11,22 +11,29 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel x:DefaultBindMode="OneWay" Spacing="4">
+        <StackPanel x:DefaultBindMode="OneWay">
             <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                 <Run Text="{Binding WeatherInfo.Time.Hour}" /><Run Text=":00" />
             </TextBlock>
             <Image
                 Height="32"
+                Margin="0,2,0,0"
                 Source="{x:Bind WeatherInfo.WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
-                Stretch="Uniform" />
+                Stretch="Uniform"
+                Visibility="Collapsed" />
+            <FontIcon
+                Margin="0,2,0,0"
+                FontFamily="{StaticResource WeatherIconFont}"
+                FontSize="28"
+                Glyph="{x:Bind WeatherInfo.WeatherType, Converter={StaticResource WeatherTypeToFontIconConverter}}" />
             <TextBlock
+                Margin="0,2,0,0"
                 HorizontalAlignment="Center"
                 d:Text="晴"
-                FontSize="{StaticResource WeatherDescriptionFontSize}"
                 Text="{x:Bind WeatherInfo.Description}" />
             <StackPanel>
                 <TextBlock
-                    Margin="6,0,0,0"
+                    Margin="6,2,0,0"
                     HorizontalAlignment="Center"
                     d:Text="晴"
                     FontSize="17">

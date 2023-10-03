@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentWeather.Uwp.Shared;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         this.InitializeComponent();
+        Common.LogManager.GetLogger("Application").Info("打开页面:设置");
     }
 
 }

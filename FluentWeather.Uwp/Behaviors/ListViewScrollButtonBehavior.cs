@@ -4,6 +4,7 @@ using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml.Media;
 using System.ServiceModel.Channels;
 using Microsoft.Toolkit.Uwp.UI.Converters;
+using Windows.System.Profile;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -32,6 +33,11 @@ public class ListViewScrollButtonBehavior: Behavior<Button>
     protected override void OnAttached()
     {
         base.OnAttached();
+        if(AnalyticsInfo.VersionInfo.DeviceFamily is "Windows.Mobile")
+        {
+            AssociatedObject.Visibility = Visibility.Collapsed;
+            return;
+        }
         AssociatedObject.Click += ButtonClicked;
         AssociatedObject.Loaded += OnLoaded;
 
@@ -59,6 +65,7 @@ public class ListViewScrollButtonBehavior: Behavior<Button>
 
     private void OnScrollViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
     {
+        if (AssociatedObject is null) return;
         AssociatedObject.Visibility = (_listScrollViewer.ScrollableWidth > 0) ? Visibility.Visible : Visibility.Collapsed;
 
         AssociatedObject.IsEnabled = CanScroll(_listScrollViewer);

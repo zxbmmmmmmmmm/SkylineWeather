@@ -13,6 +13,7 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateKeyFile />
     <AppxPackageDir>G:\source\FluentWeather\FluentWeather.Uwp\AppPackages\Lite\</AppxPackageDir>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -134,6 +135,7 @@
     </Compile>
     <Compile Include="Behaviors\ButtonCloseContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
+    <Compile Include="Behaviors\ButtonOpenAttachedFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonPointerOpenFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenContentDialogBehavior.cs" />
@@ -218,6 +220,9 @@
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\Theme.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
@@ -233,6 +238,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\About.jpg" />
     <Content Include="Assets\Backgrounds\All.png" />
     <Content Include="Assets\Backgrounds\Clear.png" />
     <Content Include="Assets\Backgrounds\Cloudy.png" />
@@ -426,6 +432,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\TestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,25 +443,6 @@
     <Page Include="Styles\ListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ClassicThemeStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Themes\DefaultThemeStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Themes\FluentV1ThemeStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Theme.xaml">
       <SubType>Designer</SubType>
@@ -484,7 +475,7 @@
       <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.13</Version>
+      <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
       <Version>4.0.0</Version>
@@ -506,6 +497,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\WeatherColorIcons.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="FluentWeather.Uwp_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
   </ItemGroup>
@@ -534,6 +528,11 @@
       <Project>{23269c7b-0343-48b6-9909-505d667b0dbf}</Project>
       <Name>FluentWeather.Uwp.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.22621.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

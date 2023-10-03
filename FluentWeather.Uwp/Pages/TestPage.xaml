@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="FluentWeather.Uwp.Pages.TestPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:storage="using:Windows.Storage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,64">
+            <TextBlock Text="Developer Menu" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0" HorizontalAlignment="Center">
+                <Button x:Name="ToRootPage" Content="RootPage" Style="{ThemeResource AccentButtonStyle}" Click="ToRoot_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="ToMainPage" Content="MainPage" Click="ToMainPage_Click" HorizontalAlignment="Center" Margin="8,0,0,0"/>
+                <Button x:Name="ToCitiesPage" Content="CitiesPage" Click="ToCitiesPage_Click" HorizontalAlignment="Center" Margin="8,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Center">
+                <Button x:Name="AppFolderBtn" Content="获取日志" Click="AppFolderBtn_Click" HorizontalAlignment="Center" />
+                <Button x:Name="CleanLogsBtn" Content="清除日志" Click="CleanLogsBtn_Click" HorizontalAlignment="Center" Margin="8,0,0,0"/>
+                <Button x:Name="GetLogBtn1" Click="GetLogBtn1_Click" Content="强制获取日志" Margin="8,0,0,0"/>
+            </StackPanel>
+
+            <ListView x:Name="LogsView" SelectionChanged="LogsView_SelectionChanged" Margin="0,12,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="storage:IStorageItem">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="LogText" Text="" TextWrapping="Wrap" Margin="0,12,0,0" IsTextSelectionEnabled="True"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

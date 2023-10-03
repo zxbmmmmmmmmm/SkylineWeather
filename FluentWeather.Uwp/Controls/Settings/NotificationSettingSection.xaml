@@ -50,4 +50,12 @@
             </controls:SettingsCard>
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>-->
+    <StackPanel>
+        <TextBlock Text="通知" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+        <TextBlock Text="未测试，部分设置可能无效" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Margin="0,8,0,0"/>
+        <ToggleSwitch Header="定时检查并推送预警" Margin="0,8,0,0" IsOn="{x:Bind app:Common.Settings.IsWarningNotificationEnabled, Mode=TwoWay}" />
+        <ToggleSwitch Header="在早晨推送今日天气预报" Margin="0,12,0,0" IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" />
+        <ToggleSwitch Header="在晚间推送明日天气预报" Margin="0,12,0,0" IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" />
+        <ToggleSwitch Header="在磁贴上显示每日天气" Margin="0,12,0,0" IsOn="{x:Bind app:Common.Settings.IsDailyNotificationTileEnabled, Mode=TwoWay}"  />
+    </StackPanel>
 </UserControl>

@@ -10,25 +10,32 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <Grid>
-        <StackPanel x:DefaultBindMode="OneWay" Spacing="4">
+        <StackPanel x:DefaultBindMode="OneWay" >
             <TextBlock
                 HorizontalAlignment="Center"
                 d:Text="今天"
-                FontSize="17"
                 Text="{Binding WeatherInfo.Time, Converter={StaticResource DateConverter}}" />
             <TextBlock
                 HorizontalAlignment="Center"
+                Margin="0,2,0,0"
+
                 d:Text=" 7月15日"
                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                 Text="{Binding WeatherInfo.Time, Converter={StaticResource ShortDateConverter}}" />
             <Image
-                Height="45"
+                Height="36"
+                Margin="0,2,0,0"
                 Source="{x:Bind WeatherInfo.WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
-                Stretch="Uniform" />
+                Stretch="Uniform" Visibility="Collapsed"/>
+            <FontIcon
+                Margin="0,2,0,0"
+                FontFamily="{StaticResource WeatherIconFont}"
+                FontSize="36"
+                Glyph="{x:Bind WeatherInfo.WeatherType, Converter={StaticResource WeatherTypeToFontIconConverter}}" />      
             <TextBlock
                 HorizontalAlignment="Center"
+                Margin="0,2,0,0"
                 d:Text="晴"
-                FontSize="{StaticResource WeatherDescriptionFontSize}"
                 Text="{x:Bind WeatherInfo.Description}" />
         </StackPanel>
     </Grid>

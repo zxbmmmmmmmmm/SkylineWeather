@@ -20,12 +20,12 @@
     <controls:Expander
         HorizontalAlignment="Stretch"
         HorizontalContentAlignment="Stretch"
+        Background="{ThemeResource ButtonBackgroundThemeBrush}"
         x:DefaultBindMode="OneWay">
         <controls:Expander.Header>
             <Grid>
                 <StackPanel
                     x:Name="HeaderPanel"
-                    Margin="4,12,12,12"
                     Orientation="Vertical">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <Ellipse
@@ -53,7 +53,6 @@
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
                             <i:Interaction.Behaviors>
-                                <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                                 <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:TyphoonDialog" />
                             </i:Interaction.Behaviors>
                         </HyperlinkButton>
@@ -65,9 +64,6 @@
                                 <TextBlock Text="了解详情" />
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonContentSnapBehavior SnapType="Left" />
-                            </i:Interaction.Behaviors>
                         </HyperlinkButton>
                     </StackPanel>
 
@@ -79,7 +75,7 @@
 
         </controls:Expander.Header>
         <controls:Expander.Content>
-            <Grid>
+            <Grid  Margin="12">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />

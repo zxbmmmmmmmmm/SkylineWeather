@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Telerik.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,14 @@ public sealed partial class CitiesPage : Page
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
-        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null, new SlideNavigationTransitionInfo(){Effect = SlideNavigationTransitionEffect.FromRight});
+        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null);
     }
-}
+
+    private void CommandBar_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (ApiInformation.IsPropertyPresent("Windows.UI.Xaml.Controls.CommandBar", "DefaultLabelPosition"))
+        {
+            BottomCommandBar.DefaultLabelPosition = CommandBarDefaultLabelPosition.Right;
+        }
+    }
+}  

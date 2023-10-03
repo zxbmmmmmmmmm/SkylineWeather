@@ -20,6 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <AutoSuggestBox
             x:Name="SearchBox"
@@ -28,19 +29,19 @@
             PlaceholderText="添加城市..."
             QueryIcon="Find"
             Text="{x:Bind ViewModel.Query, Mode=TwoWay}"
+            IsTabStop="True"
             UpdateTextOnSelect="False">
             <AutoSuggestBox.Resources>
                 <Style TargetType="ListViewItem" />
             </AutoSuggestBox.Resources>
             <AutoSuggestBox.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
-                    <Grid>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind Name}" />
                         <TextBlock
-                            HorizontalAlignment="Right"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Text="{x:Bind AdmDistrict}" />
-                    </Grid>
+                            Text="{x:Bind AdmDistrict}" Margin="4,0,0,0"/>
+                    </StackPanel>
                 </DataTemplate>
             </AutoSuggestBox.ItemTemplate>
             <i:Interaction.Behaviors>
@@ -55,11 +56,10 @@
         <ListView
             x:Name="CurrentCityView"
             Grid.Row="1"
-            Margin="{ThemeResource CityViewMargin}"
             SelectedIndex="{x:Bind ViewModel.CurrentViewSelection, Mode=TwoWay}">
             <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" />
         </ListView>
-        <Border Grid.Row="1" Padding="{ThemeResource CityViewMargin}">
+        <Border Grid.Row="1">
             <TextBlock
                 Margin="12,12,16,12"
                 HorizontalAlignment="Right"
@@ -77,12 +77,17 @@
         <ListView
             x:Name="CitiesListView"
             Grid.Row="2"
-            Margin="{ThemeResource CityViewMargin}"
             AllowDrop="True"
             CanDragItems="True"
             CanReorderItems="True"
             ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.Selection, Mode=TwoWay}">
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
+                    <RepositionThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </ListView.ItemContainerTransitions>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
                     <controls:CityItem Location="{x:Bind Mode=OneWay}">
@@ -100,11 +105,12 @@
             </ListView.ItemTemplate>
         </ListView>
         <CommandBar
+            x:Name="BottomCommandBar"
             Grid.Row="3"
             VerticalAlignment="Bottom"
-            Background="Transparent"
-            DefaultLabelPosition="Right">
-            <AppBarButton Label="台风">
+            Loaded="CommandBar_Loaded"
+            Background="Transparent" OverflowButtonVisibility="Collapsed">
+            <AppBarButton Label="台风"  Visibility="Collapsed">
                 <i:Interaction.Behaviors>
                     <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:TyphoonDialog" />
                 </i:Interaction.Behaviors>
@@ -123,5 +129,11 @@
                 </i:Interaction.Behaviors>
             </AppBarButton>
         </CommandBar>
+        <Button Visibility="Collapsed" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="4" Padding="12,8">
+            <Grid>
+                <TextBlock Text="使用 FluentWeather"/>
+                <FontIcon Glyph="&#xE00F;" HorizontalAlignment="Right" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="14"/>
+            </Grid>
+        </Button>
     </Grid>
 </Page>

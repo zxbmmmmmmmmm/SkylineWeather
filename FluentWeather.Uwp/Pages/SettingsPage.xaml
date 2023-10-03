@@ -10,18 +10,18 @@
     xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
     mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <StackPanel Margin="8,12">
+    <ScrollViewer>
+        <StackPanel Margin="24,12,24,32">
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
                     <RepositionThemeTransition IsStaggeringEnabled="False" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
-            <settings:PersonalizationSettingSection />
-            <settings:LocationSettingSection />
-            <settings:NotificationSettingSection />
-            <settings:QWeatherSettingSection />
+            <settings:LocationSettingSection/>
+            <settings:NotificationSettingSection Margin="0,20,0,0"/>
+            <settings:PersonalizationSettingSection   Margin="0,20,0,0" />
+            <settings:QWeatherSettingSection Margin="0,24,0,0"/>
         </StackPanel>
     </ScrollViewer>
 

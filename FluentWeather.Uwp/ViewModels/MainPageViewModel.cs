@@ -16,8 +16,10 @@ public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
+    [NotifyPropertyChangedFor(nameof(DailyForecasts5D))]
     private List<WeatherBase> dailyForecasts =new();
-    public List<WeatherBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
+    public List<WeatherBase> DailyForecasts7D => (DailyForecasts.Count < 7) ? DailyForecasts.GetRange(0, DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
+    public List<WeatherBase> DailyForecasts5D => (DailyForecasts.Count < 5) ? DailyForecasts.GetRange(0, DailyForecasts.Count) : DailyForecasts.GetRange(0, 5);
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
@@ -125,6 +127,7 @@ public partial class MainPageViewModel : ObservableObject
             GetIndices(lon, lat),
         };
         await Task.WhenAll(tasks.ToArray());
+        Common.LogManager.GetLogger("Application").Info("主页数据加载完成");
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";

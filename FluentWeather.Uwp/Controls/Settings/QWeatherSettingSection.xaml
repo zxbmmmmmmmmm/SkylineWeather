@@ -39,9 +39,9 @@
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>-->
     <StackPanel>
-        <TextBox Header="域名" Text="{x:Bind app:Common.Settings.QWeatherDomain, Mode=TwoWay}" />
-        <TextBox Header="和风天气KEY" Text="{x:Bind app:Common.Settings.QWeatherToken, Mode=TwoWay}" />
-
-        <TextBox Header="QGeoApi KEY" Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
+        <TextBlock Text="和风天气" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+        <TextBox Margin="0,4,0,0" Header="域名" Text="{x:Bind app:Common.Settings.QWeatherDomain, Mode=TwoWay}" />
+        <TextBox Margin="0,12,0,0" Header="和风天气KEY" Text="{x:Bind app:Common.Settings.QWeatherToken, Mode=TwoWay}" />
+        <TextBox Margin="0,12,0,0" Header="QGeoApi KEY" Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

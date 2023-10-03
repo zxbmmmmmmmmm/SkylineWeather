@@ -30,8 +30,16 @@ namespace FluentWeather.Tasks
                 return;
             }
 
-            await PushDaily(lon,lat);
-            await PushWarnings(lon, lat);
+            try
+            {
+                await PushDaily(lon, lat);
+                await PushWarnings(lon, lat);
+            }
+            catch(Exception e)
+            {
+                LogManager.GetLogger(nameof(NotifyTask)).Error(e.Message + "\n\n StackTrace:" + e.StackTrace + "\n\n Source:" + e.Source + "\n\n Data:" + e.Data, e);
+            }
+
 
 
             deferral.Complete();
@@ -91,7 +99,7 @@ namespace FluentWeather.Tasks
             var group = new AdaptiveGroup();
             GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
-                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType +".png"))
+                //.AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType +".png"))
                 .AddAttributionText("今日天气")
                 .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
@@ -104,7 +112,7 @@ namespace FluentWeather.Tasks
             var group = new AdaptiveGroup();
             GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
-                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType + ".png"))
+                //.AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType + ".png"))
                 .AddAttributionText("明日天气")
                 .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);

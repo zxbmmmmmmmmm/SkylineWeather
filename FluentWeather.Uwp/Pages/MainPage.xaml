@@ -38,7 +38,7 @@
             <Grid
                 x:Name="ContentGrid"
                 MaxWidth="1024"
-                Margin="32,40,32,32">
+                Margin="20,40,20,32">
                 <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
@@ -56,25 +56,36 @@
                 </Grid.RowDefinitions>
 
                 <!--  当前天气  -->
-                <Grid Margin="0,0,0,12" x:DefaultBindMode="OneWay">
-                    <StackPanel>
-                        <StackPanel Opacity="0.95" Orientation="Horizontal">
+                <Grid Margin="0,16,0,12" x:DefaultBindMode="OneWay">
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Opacity="0.95"
+                            Orientation="Horizontal">
                             <TextBlock
                                 x:Name="TemperatureText"
-                                Style="{ThemeResource TemperatureTextStyle}"
+                                FontSize="100"
+                                Style="{ThemeResource TitleTextBlockStyle}"
                                 Text="{Binding WeatherNow.Temperature}" />
                             <Grid Margin="4,26,0,0">
                                 <TextBlock
-                                    Margin="2,-16,0,0"
-                                    Style="{ThemeResource TemperatureUnitTextStyle}"
+                                    Margin="2,-12,0,0"
+                                    FontSize="64"
+                                    FontWeight="Bold"
+                                    Style="{ThemeResource TitleTextBlockStyle}"
                                     Text="°" />
                                 <TextBlock
+                                    Margin="0,0,0,20"
                                     VerticalAlignment="Bottom"
-                                    Style="{StaticResource WeatherNowDescriptionTextStyle}"
+                                    FontSize="32"
+                                    Style="{ThemeResource TitleTextBlockStyle}"
                                     Text="{x:Bind ViewModel.WeatherNow.Description}" />
                             </Grid>
                         </StackPanel>
-                        <StackPanel Margin="0,-8,0,0" Orientation="Horizontal">
+                        <StackPanel
+                            Margin="0,-8,0,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <TextBlock
                                 Margin="0,6,0,0"
                                 FontSize="18"
@@ -83,19 +94,20 @@
                                 <Run Text="{Binding WeatherNow.ApparentTemperature}" /><Run Text="°" />
                             </TextBlock>
                             <Button
-                                Margin="12,0,0,0"
+                                Margin="12,0,-12,0"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Visibility="{x:Bind ViewModel.AirCondition.AqiCategory, Converter={StaticResource NullToVisibilityConverter}}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                        <Run Text="空气质量 -" />
+                                        <Run Text="空气质量 - " />
                                         <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                     </TextBlock>
                                     <FontIcon
+                                        Margin="4,0,0,0"
                                         FontSize="14"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Glyph="&#xE00F;" />
+                                        Glyph="&#xE011;" />
                                 </StackPanel>
                                 <Button.Resources>
                                     <ResourceDictionary>
@@ -104,10 +116,10 @@
                                     </ResourceDictionary>
                                 </Button.Resources>
                                 <i:Interaction.Behaviors>
-                                    <behaviors:ButtonContentSnapBehavior SnapType="Left" />
+                                    <behaviors:ButtonOpenAttachedFlyoutBehavior />
                                 </i:Interaction.Behaviors>
-                                <Button.Flyout>
-                                    <Flyout Placement="BottomEdgeAlignedLeft">
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout Placement="Bottom">
                                         <Grid>
                                             <HyperlinkButton
                                                 HorizontalAlignment="Right"
@@ -118,17 +130,12 @@
                                                 <FontIcon FontSize="16" Glyph="&#xE2B4;" />
                                             </HyperlinkButton>
                                             <StackPanel>
-                                                <TextBlock>
-                                                    <Run
-                                                        FontSize="34"
-                                                        FontWeight="SemiBold"
-                                                        Text="{x:Bind ViewModel.AirCondition.Aqi}" />
+                                                <TextBlock Margin="4,0,0,4" Style="{ThemeResource TitleTextBlockStyle}">
+                                                    <Run FontSize="34" Text="{x:Bind ViewModel.AirCondition.Aqi}" />
                                                     <Run FontSize="16" Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                                 </TextBlock>
-                                                <StackPanel
-                                                    Margin="0,0,8,0"
-                                                    Orientation="Horizontal">
-                                                    <StackPanel>
+                                                <StackPanel Margin="0,0,8,0" Orientation="Horizontal">
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             HorizontalAlignment="Center"
                                                             FontSize="26"
@@ -138,7 +145,7 @@
                                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                             Text="PM2.5" />
                                                     </StackPanel>
-                                                    <StackPanel>
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             HorizontalAlignment="Center"
                                                             FontSize="26"
@@ -148,7 +155,7 @@
                                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                             Text="PM10" />
                                                     </StackPanel>
-                                                    <StackPanel>
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             Margin="0,0,4,0"
                                                             HorizontalAlignment="Center"
@@ -159,7 +166,7 @@
                                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                             Text="SO₂" />
                                                     </StackPanel>
-                                                    <StackPanel>
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             Margin="0,0,4,0"
                                                             HorizontalAlignment="Center"
@@ -170,7 +177,7 @@
                                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                             Text="NO₂" />
                                                     </StackPanel>
-                                                    <StackPanel>
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             Margin="0,0,4,0"
                                                             HorizontalAlignment="Center"
@@ -181,7 +188,7 @@
                                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                             Text="O₃" />
                                                     </StackPanel>
-                                                    <StackPanel>
+                                                    <StackPanel Margin="4,0">
                                                         <TextBlock
                                                             HorizontalAlignment="Center"
                                                             FontSize="26"
@@ -201,10 +208,10 @@
                                             </StackPanel>
                                         </Grid>
                                     </Flyout>
-                                </Button.Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </Button>
                         </StackPanel>
-                        <Border Visibility="{x:Bind ViewModel.Precipitation.Precipitations, Converter={StaticResource NullToVisibilityConverter}}">
+                        <Border HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.Precipitation.Precipitations, Converter={StaticResource NullToVisibilityConverter}}">
                             <TextBlock
                                 FontSize="17"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -219,8 +226,14 @@
                     x:Name="PrecipGrid"
                     Grid.Row="1"
                     Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                    <controls:Expander HorizontalAlignment="Stretch" Header="{Binding Precipitation.Summary}">
-                        <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
+                    <controls:Expander
+                        HorizontalAlignment="Stretch"
+                        Background="{ThemeResource ButtonBackgroundThemeBrush}"
+                        Header="{Binding Precipitation.Summary}">
+                        <controls1:PrecipitationChart
+                            Height="200"
+                            Margin="12"
+                            Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
                     </controls:Expander>
                 </Grid>
 
@@ -252,51 +265,26 @@
                 </Grid>
 
                 <!--  7天天气预报  -->
-                <Grid Grid.Row="3" Margin="0,0,0,0">
+                <Grid x:Name="DailyGridDesktop" Grid.Row="3" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <toolkit:AdaptiveGridView
                         x:Name="DailyGridView"
-                        Margin="0,0,0,0"
+                        Margin="0,24,0,0"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Stretch"
-                        DesiredWidth="120"
-                        IsItemClickEnabled="True"
-                        ItemHeight="165"
+                        DesiredWidth="70"
+                        ItemHeight="120"
                         ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                         OneRowModeEnabled="True"
                         SelectionMode="None">
                         <toolkit:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:WeatherBase">
                                 <UserControl>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <controls1:WeatherForecastItem VerticalAlignment="Center" WeatherInfo="{x:Bind}" />
-                                        <TextBlock
-                                            x:Name="TemperatureText"
-                                            Margin="0,4,0,0"
-                                            HorizontalAlignment="Center"
-                                            FontSize="16">
-                                            <Run FontWeight="SemiBold" Text="{Binding MinTemperature}" /><Run Text="°" />
-                                            <Run Text="/" />
-                                            <Run FontWeight="SemiBold" Text="{Binding MaxTemperature}" /><Run Text="°" />
-                                        </TextBlock>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup>
-                                                <VisualState>
-                                                    <VisualState.StateTriggers>
-                                                        <AdaptiveTrigger MinWindowWidth="1102" />
-                                                    </VisualState.StateTriggers>
-                                                    <VisualState.Setters>
-                                                        <Setter Target="TemperatureText.Visibility" Value="Collapsed" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                    </StackPanel>
+                                    <controls1:WeatherForecastItem VerticalAlignment="Center" WeatherInfo="{x:Bind}" />
                                 </UserControl>
-
                             </DataTemplate>
                         </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors>
@@ -348,21 +336,60 @@
                     <controls1:TemperatureChart
                         x:Name="TemperatureChart"
                         Grid.Row="1"
-                        Height="200"
-                        Margin="-32,0,-28,0"
-                        Visibility="Collapsed"
+                        Height="150"
+                        Margin="-2,-12,0,0"
                         WeatherForecasts="{Binding DailyForecasts7D}" />
+                </Grid>
+                <Grid x:Name="DailyGridPhone" Grid.Row="3">
+                    <ListView ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:WeatherBase">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image
+                                            Height="32"
+                                            Visibility="Collapsed"
+                                            VerticalAlignment="Center"
+                                            Source="{x:Bind WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}" />
+                                        <FontIcon
+                                            FontFamily="{StaticResource WeatherIconFont}"
+                                            FontSize="28"
+                                            Glyph="{x:Bind WeatherType, Converter={StaticResource WeatherTypeToFontIconConverter}}" />
+                                        <TextBlock
+                                            Margin="12,0,0,0"
+                                            VerticalAlignment="Center"
+                                            d:Text=" 7月15日"
+                                            FontSize="15"
+                                            Text="{Binding Time, Converter={StaticResource DateConverter}}" />
+                                        <TextBlock
+                                            Margin="8,0,0,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="SemiBold"
+                                            Text="{x:Bind Description}" />
+                                    </StackPanel>
+                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <TextBlock FontWeight="SemiBold" FontSize="17">
+                                            <Run Text="{Binding MinTemperature}"/><Run Text="° /"/>
+                                            <Run Text="{Binding MaxTemperature}"/><Run Text="°"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <Grid Width="1000"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
                 <!--  每小时预报  -->
                 <Grid Grid.Row="4" Margin="0,12,0,0">
                     <toolkit:AdaptiveGridView
                         x:Name="HourlyGridView"
-                        Margin="0,16,0,0"
+                        Margin="0,0,0,0"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Stretch"
-                        DesiredWidth="100"
+                        DesiredWidth="70"
                         IsItemClickEnabled="True"
-                        ItemHeight="128"
+                        ItemHeight="110"
                         ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
                         OneRowModeEnabled="True"
                         SelectionMode="None">
@@ -393,20 +420,20 @@
                                                         <Run Text="{Binding PrecipitationProbability}" /><Run Text="%" />
                                                     </TextBlock>
                                                 </StackPanel>
-                                                <TextBlock FontSize="16">
+                                                <TextBlock Margin="0,4,0,0" FontSize="16">
                                                     <Run Text="{Binding WindDirection}" />
                                                     <Run Text="{Binding WindSpeed}" />
                                                     <Run Text="km/h" />
                                                 </TextBlock>
                                                 <StackPanel
-                                                    Margin="0,4,0,0"
+                                                    Margin="0,8,0,0"
                                                     HorizontalAlignment="Left"
                                                     Orientation="Horizontal">
                                                     <TextBlock Text="湿度:" />
                                                     <TextBlock>
                                                         <Run Text="{Binding Humidity}" /><Run Text="%" />
                                                     </TextBlock>
-                                                    <TextBlock Text="气压:" />
+                                                    <TextBlock Margin="4,0,0,0" Text="气压:" />
                                                     <TextBlock>
                                                         <Run Text="{Binding Pressure}" />
                                                         <Run Text="kPa" />
@@ -466,7 +493,7 @@
                 </Grid>
 
                 <!--  其他信息  -->
-                <Grid Grid.Row="5" Margin="0,24,0,0">
+                <Grid Grid.Row="5" Margin="0,12,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -608,10 +635,23 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="550" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TemperatureChart.Height" Value="180" />
+                        <Setter Target="DailyGridDesktop.Visibility" Value="Visible" />
+                        <Setter Target="DailyGridPhone.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1102" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
+                        <Setter Target="DailyGridDesktop.Visibility" Value="Visible" />
+                        <Setter Target="DailyGridPhone.Visibility" Value="Collapsed" />
+                        <Setter Target="TemperatureChart.Margin" Value="-32,0" />
+                        <Setter Target="TemperatureChart.Height" Value="200" />
                         <Setter Target="DailyGridView.Margin" Value="-32,0" />
                         <Setter Target="DailyGridView.ItemHeight" Value="150" />
                     </VisualState.Setters>
@@ -621,8 +661,11 @@
                         <AdaptiveTrigger MinWindowWidth="1600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="DailyGridDesktop.Visibility" Value="Visible" />
+                        <Setter Target="DailyGridPhone.Visibility" Value="Collapsed" />
                         <Setter Target="ContentGrid.Margin" Value="32,80,32,32" />
-                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
+                        <Setter Target="TemperatureChart.Margin" Value="-32,0" />
+                        <Setter Target="TemperatureChart.Height" Value="200" />
                         <Setter Target="DailyGridView.Margin" Value="-32,0" />
                         <Setter Target="DailyGridView.ItemHeight" Value="150" />
                     </VisualState.Setters>
