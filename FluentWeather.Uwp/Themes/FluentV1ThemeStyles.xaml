@@ -12,6 +12,9 @@
     <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
     <Visibility x:Key="ListSelectedBorderVisibility">Collapsed</Visibility>
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
+    <SolidColorBrush x:Key="ButtonRevealBackgroundDisabled" Color="#0000" />
 
     <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="SystemControlHighlightListLowBrush"/>
     <StaticResource x:Key="ListViewItemBackgroundSelectedPressed" ResourceKey="SystemControlHighlightListMediumBrush"/>
