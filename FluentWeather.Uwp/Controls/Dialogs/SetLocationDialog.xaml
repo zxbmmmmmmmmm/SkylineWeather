@@ -14,7 +14,6 @@
     DefaultButton="Primary"
     IsPrimaryButtonEnabled="{x:Bind ChosenGeolocation, Converter={StaticResource NullToBoolConverter}, Mode=OneWay}"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    PrimaryButtonStyle="{ThemeResource HandwritingViewCandidateStyle}"
     PrimaryButtonText="确定"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
