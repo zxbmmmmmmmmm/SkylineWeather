@@ -76,7 +76,7 @@
                         </StackPanel>
                         <StackPanel Margin="0,-8,0,0" Orientation="Horizontal">
                             <TextBlock
-                                Margin="0,6,0,0"
+                                VerticalAlignment="Center"
                                 FontSize="18"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                 <Run Text="体感" />
