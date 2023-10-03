@@ -46,7 +46,7 @@
         x:Key="GridViewItemStyle"
         BasedOn="{StaticResource DefaultGridViewItemStyle}"
         TargetType="GridViewItem" />
-    <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+    <Style TargetType="ListViewItem">
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
