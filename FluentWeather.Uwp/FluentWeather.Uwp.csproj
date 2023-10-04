@@ -472,6 +472,9 @@
     <PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls">
       <Version>8.0.230907</Version>
     </PackageReference>
+    <PackageReference Include="CommunityToolkit.Uwp.Controls.Sizers">
+      <Version>8.0.230907</Version>
+    </PackageReference>
     <PackageReference Include="MetroLog">
       <Version>1.0.1</Version>
     </PackageReference>

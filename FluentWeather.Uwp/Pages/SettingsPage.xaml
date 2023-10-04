@@ -2,7 +2,8 @@
     x:Class="FluentWeather.Uwp.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:app="using:FluentWeather.Uwp.Helpers"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,19 +11,34 @@
     xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
     mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <StackPanel Margin="8,12" Spacing="4">
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
-                    <RepositionThemeTransition IsStaggeringEnabled="False" />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
-            <settings:PersonalizationSettingSection />
-            <settings:LocationSettingSection />
-            <settings:NotificationSettingSection />
-            <settings:QWeatherSettingSection />
-        </StackPanel>
-    </ScrollViewer>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel Margin="8,12" Spacing="4">
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
+                        <RepositionThemeTransition IsStaggeringEnabled="False" />
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+                <settings:PersonalizationSettingSection />
+                <settings:LocationSettingSection />
+                <settings:NotificationSettingSection />
+                <settings:QWeatherSettingSection />
+            </StackPanel>
+        </ScrollViewer>
+        <controls:PropertySizer
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Binding="{x:Bind app:Common.Settings.SplitViewOpenPaneLength, Mode=TwoWay}"
+            Canvas.ZIndex="15"
+            Maximum="500"
+            Minimum="256" />
+    </Grid>
+
 
 </Page>

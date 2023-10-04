@@ -5,7 +5,7 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
@@ -14,6 +14,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     mc:Ignorable="d">
 
@@ -105,6 +106,7 @@
             x:Name="MainSplitView"
             Canvas.ZIndex="1"
             DisplayMode="Overlay"
+            OpenPaneLength="{x:Bind app:Common.Settings.SplitViewOpenPaneLength,Mode=OneWay}"
             IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=OneWay}"
             PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
             <SplitView.Pane>
@@ -123,11 +125,11 @@
 
         <ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="32">
             <Grid>
-                <controls:ImageEx Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Stretch="UniformToFill">
+                <controls1:ImageEx Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
                         <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType, Mode=OneWay}" />
                     </i:Interaction.Behaviors>
-                </controls:ImageEx>
+                </controls1:ImageEx>
                 <Border>
                     <Border.Background>
                         <media:BackdropBlurBrush Amount="{x:Bind app:Common.Settings.BackgroundBlurAmount, Mode=OneWay}" />

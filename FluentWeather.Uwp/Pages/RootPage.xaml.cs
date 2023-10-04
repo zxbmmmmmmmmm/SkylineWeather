@@ -10,6 +10,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -59,7 +60,7 @@ public sealed partial class RootPage : Page
     }
     [ObservableProperty]
     public bool canGoBack;
-
+    
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
         if (!CanGoBack) return;

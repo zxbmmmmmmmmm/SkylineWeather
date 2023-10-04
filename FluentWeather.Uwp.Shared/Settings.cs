@@ -106,6 +106,16 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    public int SplitViewOpenPaneLength
+    {
+        get => GetSettings(nameof(SplitViewOpenPaneLength), 296);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(SplitViewOpenPaneLength)] = value;
+            OnPropertyChanged();
+        }
+    }
     public bool IsAcrylicEnabled
     {
         get => GetSettings(nameof(IsAcrylicEnabled), Environment.OSVersion.Version.Build < 21996);//Win10下默认开启
