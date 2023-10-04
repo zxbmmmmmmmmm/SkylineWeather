@@ -12,6 +12,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     mc:Ignorable="d">
@@ -46,7 +47,7 @@
                     <muxc:AnimatedIcon.FallbackIconSource>
                         <muxc:FontIconSource FontSize="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FontSize}" Glyph="&#xE700;" />
                     </muxc:AnimatedIcon.FallbackIconSource>
-                </muxc:AnimatedIcon>             
+                </muxc:AnimatedIcon>
                 <Button.Transitions>
                     <TransitionCollection>
                         <EntranceThemeTransition IsStaggeringEnabled="True" />
@@ -107,10 +108,7 @@
             IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=OneWay}"
             PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
             <SplitView.Pane>
-                <Frame
-                    x:Name="PaneFrame"
-                    Margin="0,45,0,0"
-                    Navigated="PaneFrame_Navigated" />
+                <Frame Margin="0,45,0,0" x:Name="PaneFrame" Navigated="PaneFrame_Navigated" />
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid Background="{ThemeResource NavigationViewContentBackground}">
@@ -146,7 +144,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MainSplitView.DisplayMode" Value="Inline" />
-                        <Setter Target="MainSplitView.PaneBackground" Value="#0000" />
+                        <Setter Target="MainSplitView.PaneBackground" Value="{StaticResource SplitViewPaneOpenedBackground}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
