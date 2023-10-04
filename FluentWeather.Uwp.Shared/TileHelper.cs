@@ -155,6 +155,10 @@ namespace FluentWeather.Uwp.Shared
             // Set the base URI for the images, so we don't redundantly specify the entire path
             builder.Content.Visual.BaseUri = new Uri("Assets/Weather/Day/", UriKind.Relative);
 
+            builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
+            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirection} {((IWind)daily[0]).WindScale}级";
+
+
             return builder.Content;
         }
         public static TileBindingContentAdaptive GenerateLargeTileContent(List<WeatherBase> daily)
