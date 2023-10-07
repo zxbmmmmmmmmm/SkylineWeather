@@ -118,7 +118,7 @@ public class Settings:INotifyPropertyChanged
     }
     public bool IsAcrylicEnabled
     {
-        get => GetSettings(nameof(IsAcrylicEnabled), Environment.OSVersion.Version.Build < 21996);//Win10下默认开启
+        get => GetSettings(nameof(IsAcrylicEnabled), false);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsAcrylicEnabled)] = value;

@@ -57,13 +57,13 @@
 
             </controls:SettingsCard>
 
-            <controls:SettingsCard Padding="12" Header="亚克力">
+            <controls:SettingsCard Padding="12" Header="窗口亚克力">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF156;" />
                 </controls:SettingsCard.HeaderIcon>
                 <controls:SettingsCard.Description>
                     <TextBlock>
-                        <Run Text="Win11下将覆盖Mica" /><LineBreak /><Run Text="会增加一定占用" />
+                        <Run Text="Win11下将覆盖Mica" /><LineBreak /><Run Text="将背景透明度设置为100%以查看效果" />
                     </TextBlock>
                 </controls:SettingsCard.Description>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
