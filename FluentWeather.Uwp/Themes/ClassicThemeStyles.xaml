@@ -1,6 +1,28 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:windows11="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 13)">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <StaticResource x:Key="TextControlBorderBrush" ResourceKey="SystemControlForegroundBaseMediumLowBrush" />
+            <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumHighBrush" />
+            <StaticResource x:Key="ButtonBorderBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+            <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumBrush" />
+            <StaticResource x:Key="ExpanderContentBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderPointerOverBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderPressedBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <StaticResource x:Key="TextControlBorderBrush" ResourceKey="SystemControlForegroundBaseMediumLowBrush" />
+            <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumHighBrush" />
+            <StaticResource x:Key="ButtonBorderBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+            <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumBrush" />
+            <StaticResource x:Key="ExpanderContentBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderPointerOverBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
+            <StaticResource x:Key="ExpanderHeaderBorderPressedBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
     <Thickness x:Key="CityViewMargin">8,0</Thickness>
     <Thickness x:Key="ControlBorderThickness">1</Thickness>
     <x:Double x:Key="FontListFlyoutHeight">0</x:Double>
@@ -8,14 +30,7 @@
     <Visibility x:Key="ListSelectedBorderVisibility">Visible</Visibility>
     <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
 
-    <StaticResource x:Key="TextControlBorderBrush" ResourceKey="SystemControlForegroundBaseMediumLowBrush" />
-    <StaticResource x:Key="TextControlBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumHighBrush" />
-    <StaticResource x:Key="ButtonBorderBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
-    <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="SystemControlHighlightBaseMediumBrush" />
-    <StaticResource x:Key="ExpanderContentBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
-    <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
-    <StaticResource x:Key="ExpanderHeaderBorderPointerOverBrush" ResourceKey="SystemControlHighlightBaseMediumLowBrush" />
-    <StaticResource x:Key="ExpanderHeaderBorderPressedBrush" ResourceKey="SystemControlHighlightBaseLowBrush" />
+
     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="ButtonControlCornerRadius">0</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>

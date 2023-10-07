@@ -14,7 +14,6 @@
             <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Location.Name}" />
             <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Location.AdmDistrict}" />
         </StackPanel>
-
         <TextBlock
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
@@ -30,5 +29,6 @@
             Opacity="0.4"
             Source="ms-appx:///Assets/Weather/Day/Cloudy.png"
             Visibility="Collapsed" />
+        <Grid Width="1000"/>
     </Grid>
 </UserControl>
