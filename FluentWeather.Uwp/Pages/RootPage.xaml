@@ -104,7 +104,7 @@
             x:Name="MainSplitView"
             Canvas.ZIndex="1"
             DisplayMode="Overlay"
-            IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=OneWay}"
+            IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
             OpenPaneLength="{x:Bind app:Common.Settings.SplitViewOpenPaneLength, Mode=OneWay}"
             PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
             <SplitView.Pane>
