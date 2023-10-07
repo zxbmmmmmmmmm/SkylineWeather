@@ -22,20 +22,32 @@
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE771;" />
         </controls:SettingsExpander.HeaderIcon>
+        <controls:SettingsExpander.ItemsHeader>
+            <muxc:InfoBar
+                x:Name="RestartInfoBar"
+                Title="重启以应用主题"
+                BorderThickness="0"
+                CornerRadius="0"
+                IsClosable="False"
+                IsOpen="False"
+                Severity="Success">
+                <muxc:InfoBar.ActionButton>
+                    <Button x:Name="RestartButton" Click="RestartButton_Click" CornerRadius="{StaticResource ControlCornerRadius}" Content="重启应用"/>
+                </muxc:InfoBar.ActionButton>
+            </muxc:InfoBar>
+        </controls:SettingsExpander.ItemsHeader>
         <controls:SettingsExpander.Items>
-            <controls:SettingsCard
-                Padding="12"
-                Description="设置应用主题(需要重启)">
+            <controls:SettingsCard Padding="12" Description="设置应用主题(需要重启)">
                 <controls:SettingsCard.Header>
                     <TextBlock>
-                        <Run Text="主题"/>
-                        <Run Text="Beta" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <Run Text="主题" />
+                        <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="Beta" />
                     </TextBlock>
                 </controls:SettingsCard.Header>
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE771;" />
                 </controls:SettingsCard.HeaderIcon>
-                <muxc:RadioButtons>
+                <muxc:RadioButtons x:Name="ThemeStyleButtons" SelectionChanged="ThemeStyleButtons_SelectionChanged">
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent}">Windows 11</RadioButton>
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent2017}">Windows 10</RadioButton>
                     <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Classic}">经典</RadioButton>

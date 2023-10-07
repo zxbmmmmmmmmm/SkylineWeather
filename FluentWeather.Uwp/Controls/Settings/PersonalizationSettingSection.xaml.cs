@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Imaging;
@@ -92,6 +93,16 @@ namespace FluentWeather.Uwp.Controls.Settings
                 ElementTheme.Dark => 2,
                 _ => ThemeButtons.SelectedIndex
             };
+        }
+
+        private async void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            await CoreApplication.RequestRestartAsync(String.Empty);
+        }
+
+        private void ThemeStyleButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {             
+            RestartInfoBar.IsOpen = true;
         }
     }
 }
