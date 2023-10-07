@@ -29,11 +29,14 @@
         </converters:ValueConverterGroup>
     </Page.Resources>
     <Grid>
+        <Border Background="#40404040" Canvas.ZIndex="2" Visibility="{x:Bind ViewModel.IsLoading,Mode=OneWay}">
+            <muxc:ProgressRing Height="100" Width="100"/>
+        </Border>
+
         <ScrollViewer
             x:Name="MainScrollViewer"
             x:FieldModifier="Public"
             Canvas.ZIndex="1"
-            IsEnabled="{x:Bind ViewModel.IsLoading, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
             VerticalScrollBarVisibility="Auto">
             <Grid
                 x:Name="ContentGrid"
