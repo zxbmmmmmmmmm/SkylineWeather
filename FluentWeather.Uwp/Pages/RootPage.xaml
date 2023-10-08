@@ -81,7 +81,7 @@
             x:Name="MainSplitView"
             Canvas.ZIndex="1"
             DisplayMode="Overlay"
-            IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=OneWay}">
+            IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}">
             <SplitView.Pane>
                 <Frame
                     x:Name="PaneFrame"
