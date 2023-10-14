@@ -26,10 +26,35 @@ public sealed partial class CitiesPage : Page
         this.InitializeComponent();
         this.DataContext = this;
         this.NavigationCacheMode = NavigationCacheMode.Required;
+        CurrentCityView.SelectedIndex = 0;
+        CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
+        CitiesView.SelectionChanged += CitiesView_SelectionChanged;
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         ((Frame)Parent)?.Navigate(typeof(SettingsPage),null, new SlideNavigationTransitionInfo(){Effect = SlideNavigationTransitionEffect.FromRight});
+    }
+
+    private void CitiesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (CitiesView.SelectedIndex == -1) return;
+        CurrentCityView.SelectedIndex = -1;
+        MainPageViewModel.Instance.CurrentLocation = CitiesPageViewModel.Instance.Cities[CitiesView.SelectedIndex];
+        if (MainPageViewModel.Instance.CurrentLocation is null)
+        {
+            CitiesPageViewModel.Instance.GetCurrentCity();
+        }
+    }
+
+    private void CurrentCityView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (CurrentCityView.SelectedIndex != 0) return;
+        MainPageViewModel.Instance.CurrentLocation = CitiesPageViewModel.Instance.CurrentCity;
+        CitiesView.SelectedIndex = -1;
+        if (MainPageViewModel.Instance.CurrentLocation is null)
+        {
+            CitiesPageViewModel.Instance.GetCurrentCity();
+        }
     }
 }
