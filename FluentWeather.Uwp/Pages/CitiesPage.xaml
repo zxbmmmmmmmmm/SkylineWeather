@@ -75,19 +75,13 @@
         </Border>
 
         <ListView
-            x:Name="CitiesListView"
+            x:Name="CitiesView"
             Grid.Row="2"
             AllowDrop="True"
             CanDragItems="True"
             CanReorderItems="True"
             ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}"
             SelectedIndex="{x:Bind ViewModel.Selection, Mode=TwoWay}">
-            <ListView.ItemContainerTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
-                    <RepositionThemeTransition IsStaggeringEnabled="False" />
-                </TransitionCollection>
-            </ListView.ItemContainerTransitions>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
                     <controls:CityItem Location="{x:Bind Mode=OneWay}">
