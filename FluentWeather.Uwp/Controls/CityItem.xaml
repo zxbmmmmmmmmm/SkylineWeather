@@ -29,6 +29,6 @@
             Opacity="0.4"
             Source="ms-appx:///Assets/Weather/Day/Cloudy.png"
             Visibility="Collapsed" />
-        <Grid Width="1000"/>
+        <Grid Width="1000" />
     </Grid>
 </UserControl>

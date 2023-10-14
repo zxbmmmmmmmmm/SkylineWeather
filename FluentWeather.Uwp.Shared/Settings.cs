@@ -14,6 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using MetroLog;
 using MetroLog.Targets;
+using System.Collections.ObjectModel;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -152,6 +153,16 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public ObservableCollection<GeolocationBase> SavedCities
+    {
+        get => GetSettingsWithClass("Cities", new ObservableCollection<GeolocationBase>());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values["Cities"] = JsonSerializer.Serialize(value);
+            OnPropertyChanged();
+        }
+    }
+
     public string QGeolocationToken
     {
         get => GetSettings("qgeoapi."+ "Token", "");
@@ -224,7 +235,7 @@ public class Settings:INotifyPropertyChanged
         try
         {
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey(propertyName) &&
-                ApplicationData.Current.LocalSettings.Values[propertyName] != null &&
+                ApplicationData.Current.LocalSettings.Values[propertyName] is not null &&
                 !string.IsNullOrEmpty(ApplicationData.Current.LocalSettings.Values[propertyName].ToString()))
             {
                 if (defaultValue is bool)
@@ -261,7 +272,7 @@ public class Settings:INotifyPropertyChanged
         try
         {
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey(propertyName) &&
-                ApplicationData.Current.LocalSettings.Values[propertyName] != null &&
+                ApplicationData.Current.LocalSettings.Values[propertyName] is not null &&
                 !string.IsNullOrEmpty(ApplicationData.Current.LocalSettings.Values[propertyName].ToString()))
             {
                 if (typeof(T).ToString() == "System.Boolean")
