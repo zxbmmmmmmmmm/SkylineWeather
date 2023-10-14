@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FluentWeather.Uwp.Themes;
 using FluentWeather.Uwp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ public sealed partial class CitiesPage : Page
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
-        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null, new SlideNavigationTransitionInfo(){Effect = SlideNavigationTransitionEffect.FromRight});
+        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null,Theme.GetSplitPaneNavigationTransition());
     }
 
     private void CitiesView_SelectionChanged(object sender, SelectionChangedEventArgs e)

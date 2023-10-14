@@ -3,6 +3,7 @@ using FluentWeather.Uwp.Shared;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace FluentWeather.Uwp.Themes;
 
@@ -41,5 +42,31 @@ public partial class Theme:ResourceDictionary
                 break;
         }
         this.Merge(dic);
+    }
+    public static NavigationTransitionInfo GetNavigationTransition()
+    {
+        return Common.Settings.Theme switch
+        {
+            AppTheme.Fluent => new DrillInNavigationTransitionInfo(),
+            AppTheme.Fluent2017 => new DrillInNavigationTransitionInfo(),
+            AppTheme.Classic => new CommonNavigationTransitionInfo(),
+            _ => new EntranceNavigationTransitionInfo()
+        };
+    }
+    public static NavigationTransitionInfo GetSplitPaneNavigationTransition()
+    {
+        return Common.Settings.Theme switch
+        {
+            AppTheme.Fluent => new SlideNavigationTransitionInfo()
+            {
+                Effect = SlideNavigationTransitionEffect.FromRight
+            },
+            AppTheme.Fluent2017 => new SlideNavigationTransitionInfo()
+            {
+                Effect = SlideNavigationTransitionEffect.FromRight
+            },
+            AppTheme.Classic => new CommonNavigationTransitionInfo(),
+            _ => new EntranceNavigationTransitionInfo()
+        };
     }
 }
