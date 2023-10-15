@@ -9,7 +9,7 @@
     d:DesignWidth="400"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
-    <Grid  x:DefaultBindMode="OneWay">
+    <Grid x:DefaultBindMode="OneWay">
         <StackPanel Margin="4,12,12,12">
             <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Location.Name}" />
             <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Location.AdmDistrict}" />
@@ -29,6 +29,6 @@
             Opacity="0.4"
             Source="ms-appx:///Assets/Weather/Day/Cloudy.png"
             Visibility="Collapsed" />
-        <Grid Width="512" VerticalAlignment="Stretch"/>
+        <Grid Width="512" VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>

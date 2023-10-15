@@ -72,9 +72,8 @@ public sealed partial class RootPage : Page
             {
                 ViewModel.IsPaneOpen = false;
             }
+            e.Handled = true;
         }
-        e.Handled = true;
-
     }
 
     public void SetTitleBar()
