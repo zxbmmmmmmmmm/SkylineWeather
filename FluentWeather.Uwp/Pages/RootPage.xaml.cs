@@ -57,6 +57,8 @@ public sealed partial class RootPage : Page
         {
             var statusBar = StatusBar.GetForCurrentView();
             statusBar.BackgroundColor = Colors.Transparent; //背景色
+            statusBar.BackgroundOpacity = 0;
+            statusBar.ForegroundColor = Colors.White; //信号 时间等绘制颜色
         }
     }
 
