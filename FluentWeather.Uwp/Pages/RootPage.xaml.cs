@@ -56,9 +56,9 @@ public sealed partial class RootPage : Page
         if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
         {
             var statusBar = StatusBar.GetForCurrentView();
-            statusBar.BackgroundColor = Colors.Transparent; //背景色
+            statusBar.BackgroundColor = Colors.Transparent;
             statusBar.BackgroundOpacity = 0;
-            statusBar.ForegroundColor = Colors.White; //信号 时间等绘制颜色
+            statusBar.ForegroundColor = Colors.White;
         }
     }
 
