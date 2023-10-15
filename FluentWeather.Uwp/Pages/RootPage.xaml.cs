@@ -52,6 +52,7 @@ public sealed partial class RootPage : Page
             MainSplitView.OpenPaneLength = Window.Current.Bounds.Width;
             MainSplitView.DisplayMode = SplitViewDisplayMode.Inline;
             HardwareButtons.BackPressed += OnBackPressed; ;//win10m注册返回事件
+            TitleGrid.Margin = new Thickness(0, 8, 0, 0);
         }
         if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
         {
