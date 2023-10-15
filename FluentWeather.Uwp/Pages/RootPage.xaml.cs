@@ -56,7 +56,7 @@ public sealed partial class RootPage : Page
         if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
         {
             var statusBar = StatusBar.GetForCurrentView();
-            statusBar.HideAsync();
+            statusBar.BackgroundColor = Colors.Transparent; //背景色
         }
     }
 

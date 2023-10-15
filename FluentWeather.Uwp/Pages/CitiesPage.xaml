@@ -55,8 +55,7 @@
         </AutoSuggestBox>
         <ListView
             x:Name="CurrentCityView"
-            Grid.Row="1"
-            SelectedIndex="{x:Bind ViewModel.CurrentViewSelection, Mode=TwoWay}">
+            Grid.Row="1">
             <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" />
         </ListView>
         <Border Grid.Row="1">
@@ -80,8 +79,7 @@
             AllowDrop="True"
             CanDragItems="True"
             CanReorderItems="True"
-            ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}"
-            SelectedIndex="{x:Bind ViewModel.Selection, Mode=TwoWay}">
+            ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
                     <controls:CityItem Location="{x:Bind Mode=OneWay}">
