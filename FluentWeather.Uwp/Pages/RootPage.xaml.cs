@@ -56,6 +56,8 @@ public sealed partial class RootPage : Page
         if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
         {
             var statusBar = StatusBar.GetForCurrentView();
+            var applicationView = ApplicationView.GetForCurrentView();
+            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
             statusBar.BackgroundColor = Colors.Transparent;
             statusBar.BackgroundOpacity = 0;
             statusBar.ForegroundColor = Colors.White;
