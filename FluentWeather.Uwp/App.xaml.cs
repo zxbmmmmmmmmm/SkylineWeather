@@ -47,7 +47,7 @@ sealed partial class App : Application
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
 #if (!DEBUG)
-        AppCenter.Start("ae2c8e55-429a-4eb9-a43e-59676cadfa24", typeof(Analytics), typeof(Crashes));
+        AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics), typeof(Crashes));
 #endif
     }
     public static async void RegisterBackgroundTask()
