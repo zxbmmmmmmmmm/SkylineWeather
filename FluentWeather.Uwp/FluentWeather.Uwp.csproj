@@ -218,6 +218,9 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\Generic.xaml.cs">
+      <DependentUpon>Generic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\Theme.xaml.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
     </Compile>
