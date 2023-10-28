@@ -329,6 +329,7 @@
                         Visibility="Collapsed"
                         WeatherForecasts="{Binding DailyForecasts7D}" />
                 </Grid>
+                
                 <!--  每小时预报  -->
                 <Grid Grid.Row="4" Margin="0,12,0,0">
                     <toolkit:AdaptiveGridView
@@ -420,7 +421,8 @@
                         x:DefaultBindMode="OneWay"
                         DesiredWidth="200"
                         ItemHeight="90"
-                        SelectionMode="None">
+                        SelectionMode="None"
+                        IsItemClickEnabled="True">
                         <controls:AdaptiveGridView.Items>
                             <StackPanel
                                 x:Name="WindInfoPanel"
@@ -435,6 +437,27 @@
                                     <Run FontSize="25" Text="{Binding WeatherNow.WindSpeed}" />
                                     <Run FontSize="16" Text="km/h" />
                                 </TextBlock>
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <StackPanel MaxWidth="256">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" >
+                                                <Run Text="{Binding WeatherNow.WindDirection}" />
+                                                <Run Text="-" />
+                                                <Run Text="{Binding WeatherNow.WindScale}" />
+                                                <Run FontSize="14" Text="级" />
+                                            </TextBlock>
+                                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="14" >
+                                                <Run Text="{Binding WeatherNow.WindSpeed}"/>
+                                                <Run Text="km/h" />
+                                            </TextBlock>
+                                            <TextBlock FontSize="16" TextWrapping="Wrap">
+                                                大树枝摇动，电线呼呼有声，举伞困难
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
                             <StackPanel Margin="12" HorizontalAlignment="Left">
                                 <TextBlock
@@ -445,6 +468,29 @@
                                     <Run FontSize="25" Text="{Binding WeatherNow.Humidity}" />
                                     <Run FontSize="16" Text="%" />
                                 </TextBlock>
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <StackPanel MaxWidth="256">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" >
+                                                <Run Text="湿度 -" />
+                                                <Run Text="{Binding WeatherNow.Humidity}" />
+                                                <Run FontSize="14" Text="%" />
+                                            </TextBlock>
+                                            <TextBlock  FontSize="16" TextWrapping="Wrap">
+                                                相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
+                                            </TextBlock>
+                                            <TextBlock Margin="0,8,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="14" >
+                                                <Run Text="露点温度" />
+                                                <Run Text="{Binding WeatherNow.Dew}"/><Run Text="°"/>
+                                            </TextBlock>
+                                            <TextBlock  FontSize="16" TextWrapping="Wrap">
+                                                使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
 
                             <StackPanel Margin="12" HorizontalAlignment="Left">
@@ -456,6 +502,23 @@
                                     <Run FontSize="25" Text="{Binding WeatherNow.Pressure}" />
                                     <Run FontSize="16" Text="hPa" />
                                 </TextBlock>
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <StackPanel MaxWidth="256">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" >
+                                                <Run Text="气压" />
+                                                <Run Text="-" />
+                                                <Run Text="{Binding WeatherNow.Pressure}" />
+                                                <Run FontSize="14" Text="hPa" />
+                                            </TextBlock>
+                                            <TextBlock FontSize="16" TextWrapping="Wrap" IsTextSelectionEnabled="True">
+                                                大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
                             <StackPanel Margin="12" HorizontalAlignment="Left">
                                 <TextBlock
@@ -466,6 +529,23 @@
                                     <Run FontSize="25" Text="{Binding WeatherNow.Visibility}" />
                                     <Run FontSize="16" Text="km" />
                                 </TextBlock>
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <StackPanel MaxWidth="256">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" >
+                                                <Run Text="能见度" />
+                                                <Run Text="-" />
+                                                <Run Text="{Binding WeatherNow.Visibility}" />
+                                                <Run FontSize="14" Text="km" />
+                                            </TextBlock>
+                                            <TextBlock FontSize="16" TextWrapping="Wrap" IsTextSelectionEnabled="True">
+                                                视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
                             <StackPanel
                                 Margin="12"
@@ -479,8 +559,28 @@
                                     <Run FontSize="25" Text="{Binding WeatherNow.CloudAmount}" />
                                     <Run FontSize="16" Text="%" />
                                 </TextBlock>
+                                <FlyoutBase.AttachedFlyout>
+                                    <Flyout>
+                                        <StackPanel MaxWidth="256">
+                                            <TextBlock
+                                                FontSize="18"
+                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" >
+                                                <Run Text="云量" />
+                                                <Run Text="-" />
+                                                <Run Text="{Binding WeatherNow.CloudAmount}" />
+                                                <Run FontSize="14" Text="%" />
+                                            </TextBlock>
+                                            <TextBlock FontSize="16" TextWrapping="Wrap" IsTextSelectionEnabled="True">
+                                                天空被云所遮蔽的比例
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Flyout>
+                                </FlyoutBase.AttachedFlyout>
                             </StackPanel>
                         </controls:AdaptiveGridView.Items>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ListViewOpenFlyoutBehavior />
+                        </i:Interaction.Behaviors>
                     </controls:AdaptiveGridView>
 
                 </Grid>
