@@ -271,38 +271,8 @@
                         ItemHeight="165"
                         ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                         OneRowModeEnabled="True"
+                        ItemTemplate="{StaticResource WeatherForecastTemplate}"
                         SelectionMode="None">
-                        <toolkit:AdaptiveGridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:WeatherBase">
-                                <UserControl>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <controls1:WeatherForecastItem VerticalAlignment="Center" WeatherInfo="{x:Bind}" />
-                                        <TextBlock
-                                            x:Name="TemperatureText"
-                                            Margin="0,4,0,0"
-                                            HorizontalAlignment="Center"
-                                            FontSize="16">
-                                            <Run FontWeight="SemiBold" Text="{Binding MinTemperature}" /><Run Text="°" />
-                                            <Run Text="/" />
-                                            <Run FontWeight="SemiBold" Text="{Binding MaxTemperature}" /><Run Text="°" />
-                                        </TextBlock>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup>
-                                                <VisualState>
-                                                    <VisualState.StateTriggers>
-                                                        <AdaptiveTrigger MinWindowWidth="1102" />
-                                                    </VisualState.StateTriggers>
-                                                    <VisualState.Setters>
-                                                        <Setter Target="TemperatureText.Visibility" Value="Collapsed" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                    </StackPanel>
-                                </UserControl>
-
-                            </DataTemplate>
-                        </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollBehavior />
                             <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog" UseArguments="True" />
@@ -371,60 +341,8 @@
                         ItemHeight="128"
                         ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
                         OneRowModeEnabled="True"
+                        ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
                         SelectionMode="None">
-                        <toolkit:AdaptiveGridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:WeatherBase">
-                                <Grid>
-                                    <controls1:WeatherHourlyForecastItem VerticalAlignment="Center" WeatherInfo="{x:Bind}" />
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="256" Spacing="4">
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
-                                                </TextBlock>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock FontSize="16">
-                                                        <Run Text="{x:Bind Description}" />
-                                                        <Run Text="{Binding Temperature}" /><Run Text="°" />
-                                                    </TextBlock>
-                                                    <FontIcon
-                                                        Margin="8,2,0,0"
-                                                        FontSize="12"
-                                                        Glyph="&#xEB42;"
-                                                        Visibility="{Binding PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}" />
-                                                    <TextBlock
-                                                        Margin="2,0,0,0"
-                                                        FontSize="16"
-                                                        Visibility="{Binding PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}">
-                                                        <Run Text="{Binding PrecipitationProbability}" /><Run Text="%" />
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <TextBlock FontSize="16">
-                                                    <Run Text="{Binding WindDirection}" />
-                                                    <Run Text="{Binding WindSpeed}" />
-                                                    <Run Text="km/h" />
-                                                </TextBlock>
-                                                <StackPanel
-                                                    Margin="0,4,0,0"
-                                                    HorizontalAlignment="Left"
-                                                    Orientation="Horizontal"
-                                                    Spacing="4">
-                                                    <TextBlock Text="湿度:" />
-                                                    <TextBlock>
-                                                        <Run Text="{Binding Humidity}" /><Run Text="%" />
-                                                    </TextBlock>
-                                                    <TextBlock Text="气压:" />
-                                                    <TextBlock>
-                                                        <Run Text="{Binding Pressure}" />
-                                                        <Run Text="kPa" />
-                                                    </TextBlock>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </Grid>
-                            </DataTemplate>
-                        </toolkit:AdaptiveGridView.ItemTemplate>
                         <i:Interaction.Behaviors>
                             <behaviors:ListViewScrollBehavior />
                             <behaviors:ListViewOpenFlyoutBehavior />
