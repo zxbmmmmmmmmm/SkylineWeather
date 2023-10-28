@@ -18,7 +18,8 @@ public static class WeatherNowMapper
             ApparentTemperature = int.Parse(item.FeelsLike),
             Temperature = int.Parse(item.Temp),
             Description = item.Text,
-            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud):null
+            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null,
+            DewPointTemperature = item.Dew is not "" ? int.Parse(item.Dew) : null
         }; 
     }
 }

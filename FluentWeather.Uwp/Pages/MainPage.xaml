@@ -481,9 +481,9 @@
                                             <TextBlock  FontSize="16" TextWrapping="Wrap">
                                                 相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
                                             </TextBlock>
-                                            <TextBlock Margin="0,8,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="14" >
-                                                <Run Text="露点温度" />
-                                                <Run Text="{Binding WeatherNow.Dew}"/><Run Text="°"/>
+                                            <TextBlock Margin="0,8,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="18" >
+                                                <Run Text="露点温度 -" />
+                                                <Run Text="{Binding WeatherNow.DewPointTemperature}"/><Run Text="°"/>
                                             </TextBlock>
                                             <TextBlock  FontSize="16" TextWrapping="Wrap">
                                                 使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”
