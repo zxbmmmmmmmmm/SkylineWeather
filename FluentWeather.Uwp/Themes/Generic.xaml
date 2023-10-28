@@ -732,7 +732,7 @@
             </TextBlock>
             <Image
                 Height="32"
-                Source="{Binding WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
+                Source="{Binding Converter={StaticResource WeatherToIconConverter}}"
                 Stretch="Uniform" />
             <TextBlock
                 HorizontalAlignment="Center"
