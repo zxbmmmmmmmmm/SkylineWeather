@@ -17,7 +17,6 @@
     xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    MinWidth="600"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     FullSizeDesired="True"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
@@ -219,16 +218,14 @@
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-                <Grid
-                    Padding="24,16"
-                    HorizontalAlignment="Left"
-                    Background="{ThemeResource ButtonAcrylic}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="4"
-                    Visibility="{x:Bind Typhoons, Converter={StaticResource NullToVisibilityInvertedConverter}, Mode=OneWay}">
-                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="无台风" />
-                </Grid>
+                <muxc:InfoBar x:Name="NoTyphoonInfo" Visibility="Collapsed" Title="无台风" Severity="Informational" IsOpen="True" HorizontalAlignment="Left" Margin="0,0,200,0"/>
+                <muxc:InfoBar x:Name="ServiceWarning" Visibility="Collapsed" Title="台风追踪服务暂不可用" HorizontalAlignment="Left" Severity="Warning" IsOpen="True" Margin="0,0,180,0">
+                    <TextBlock Margin="0,0,0,16" TextWrapping="Wrap">
+                        <Run Text="台风追踪为和风天气的付费API之一。若需使用，请前往"/>
+                        <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">项目地址</Hyperlink>
+                        <Run Text="了解如何使用付费API KEY"/>
+                    </TextBlock>
+                </muxc:InfoBar>
                 <Button
                     Padding="64,8"
                     HorizontalAlignment="Right"

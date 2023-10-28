@@ -4,6 +4,7 @@ using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -47,8 +48,18 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         private ObservableCollection<TyphoonBase> typhoons = new();
         public async void GetTyphoons()
         {
+            if(Common.Settings.QWeatherDomain is "devapi.qweather.com")
+            {
+                ServiceWarning.Visibility = Visibility.Visible;
+                return;
+            }
             var provider = Locator.ServiceProvider.GetService<ITyphoonProvider>();
             var data = await provider.GetActiveTyphoons();
+            if(data.Count is 0)
+            {
+                NoTyphoonInfo.Visibility = Visibility.Visible;
+                return;
+            }
             data.ForEach(p =>
             {
                 Typhoons.Add(p);
@@ -73,7 +84,6 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             typ.History.ForEach(Tracks.Add);
             Tracks.Add(typ.Now);
             typ.Forecast.ForEach(Tracks.Add);
-            
 
             ShowTrackRoute(typ);
             ShowForecastRoute(typ);
