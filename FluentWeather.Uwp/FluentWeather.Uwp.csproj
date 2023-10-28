@@ -198,6 +198,7 @@
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\HourlyForecastSelectConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\PrecipitationProbabilityToVisibilityConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TransparencyConverter.cs" />
     <Compile Include="Helpers\ValueConverters\TypeConverter.cs" />
     <Compile Include="Helpers\ValueConverters\SeverityColorToColorConverter.cs" />

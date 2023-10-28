@@ -338,7 +338,7 @@
                         HorizontalContentAlignment="Stretch"
                         DesiredWidth="100"
                         IsItemClickEnabled="True"
-                        ItemHeight="128"
+                        ItemHeight="140"
                         ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
                         OneRowModeEnabled="True"
                         ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
