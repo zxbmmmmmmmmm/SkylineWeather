@@ -12,6 +12,7 @@
             <StaticResource x:Key="ContentDialogTopOverlay" ResourceKey="LayerFillColorAltBrush" />
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
+            <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <StaticResource x:Key="NavigationViewContentBackground" ResourceKey="LayerFillColorDefaultBrush" />
@@ -21,9 +22,12 @@
             <StaticResource x:Key="ContentDialogTopOverlay" ResourceKey="LayerFillColorAltBrush" />
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
+            <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
+
     <StaticResource x:Key="SplitViewPaneOpenedBackground" ResourceKey="SystemControlTransparentBrush" />
+
 
     <Thickness x:Key="CityViewMargin">0</Thickness>
     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>

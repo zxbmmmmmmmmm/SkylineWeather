@@ -17,7 +17,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <StackPanel Margin="8,12" Spacing="4">
+            <StackPanel Margin="8,12,8,0" Spacing="4">
                 <StackPanel.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
@@ -27,7 +27,7 @@
                 <settings:PersonalizationSettingSection />
                 <settings:LocationSettingSection />
                 <settings:NotificationSettingSection />
-                <settings:QWeatherSettingSection />
+                <settings:QWeatherSettingSection/>
             </StackPanel>
         </ScrollViewer>
         <controls:PropertySizer

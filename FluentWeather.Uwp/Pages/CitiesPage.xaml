@@ -28,6 +28,7 @@
             PlaceholderText="添加城市..."
             IsTabStop="False"
             QueryIcon="Find"
+            BorderBrush="{StaticResource AutoSuggestBoxBorderBrush}"
             Text="{x:Bind ViewModel.Query, Mode=TwoWay}"
             UpdateTextOnSelect="False">
             <AutoSuggestBox.Resources>

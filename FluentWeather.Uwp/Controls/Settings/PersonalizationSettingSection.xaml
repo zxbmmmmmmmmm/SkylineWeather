@@ -32,7 +32,11 @@
                 IsOpen="False"
                 Severity="Success">
                 <muxc:InfoBar.ActionButton>
-                    <Button x:Name="RestartButton" Click="RestartButton_Click" CornerRadius="{StaticResource ControlCornerRadius}" Content="重启应用"/>
+                    <Button
+                        x:Name="RestartButton"
+                        Click="RestartButton_Click"
+                        Content="重启应用"
+                        CornerRadius="{StaticResource ControlCornerRadius}" />
                 </muxc:InfoBar.ActionButton>
             </muxc:InfoBar>
         </controls:SettingsExpander.ItemsHeader>
