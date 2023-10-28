@@ -30,6 +30,7 @@
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True" />
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <valueConverters:PrecipitationProbabilityToVisibilityConverter x:Key="PrecipitationProbabilityToVisibilityConverter" />
+            <valueConverters:WindScaleToDescriptionConverter x:Key="WindScaleToDescriptionConverter" />
             <valueConverters:TransparencyConverter x:Key="TransparencyConverter" />
             <valueConverters:DateConverter x:Key="DateConverter" />
             <valueConverters:ShortDateConverter x:Key="ShortDateConverter" />
