@@ -4,9 +4,11 @@
 
 
 ## 屏幕截图
-![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/89c40c71-69ed-441b-b3f2-84eaceadef42)
+![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/8bdb3c0f-6344-4c3c-8351-71620679b2bd)
 
-![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/342a414d-1634-45ae-bea5-8c87e76da025)
+![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/e8a26153-ba74-4c32-935f-5b79ab9c06bc)
+
+![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/fda20355-4cba-490b-9a85-54ae8dd19141)
 
 ![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/c08ccb55-b4fd-4985-a258-45828975f812)
 
