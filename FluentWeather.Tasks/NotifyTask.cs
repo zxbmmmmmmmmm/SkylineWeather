@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.UI.Notifications;
 using static FluentWeather.Uwp.Shared.TileHelper;
 using static FluentWeather.Uwp.Shared.Common;
+using System.Text.RegularExpressions;
 
 namespace FluentWeather.Tasks
 {
@@ -47,15 +48,14 @@ namespace FluentWeather.Tasks
             var pushed = JsonSerializer.Deserialize<Dictionary<string, DateTime>>((string)settingContainer.Values["PushedWarnings"]);
             foreach (var warning in warnings)
             {
-                if (!pushed.ContainsKey(warning.Id))//未被推送过
-                {
-                    var toast = new ToastContentBuilder()
-                        .AddText(warning.Title)
-                        .AddText(warning.Description)
-                        .AddAttributionText(warning.Sender);
-                    toast.Show();
-                    pushed.Add(warning.Id,warning.PublishTime);
-                }
+                if (pushed.ContainsKey(warning.Id)) continue; //未被推送过
+                if (Settings.IgnoreWarningWords != "" && Regex.IsMatch(warning.Title,Settings.IgnoreWarningWords)) continue;//匹配屏蔽词
+                var toast = new ToastContentBuilder()
+                    .AddText(warning.Title)
+                    .AddText(warning.Description)
+                    .AddAttributionText(warning.Sender);
+                toast.Show();
+                pushed.Add(warning.Id,warning.PublishTime);
             }
             settingContainer.Values["PushedWarnings"] = JsonSerializer.Serialize(pushed);
         }
