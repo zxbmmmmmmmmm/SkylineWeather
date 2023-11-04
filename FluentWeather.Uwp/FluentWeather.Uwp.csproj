@@ -190,6 +190,7 @@
     <Compile Include="Controls\WeatherHourlyForecastItem.xaml.cs">
       <DependentUpon>WeatherHourlyForecastItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />

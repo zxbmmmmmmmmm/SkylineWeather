@@ -15,6 +15,7 @@ using Windows.UI.Xaml;
 using MetroLog;
 using MetroLog.Targets;
 using System.Collections.ObjectModel;
+using FluentWeather.QWeatherProvider.Models;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -34,6 +35,19 @@ public static class Common
 }
 public class Settings:INotifyPropertyChanged
 {
+    public List<QWeatherData> WeatherCache
+    {
+        get => GetSettingsWithClass(nameof(WeatherCache), new List<QWeatherData>());
+        set
+        {
+            var composite = new Windows.Storage.ApplicationDataCompositeValue
+            {
+                [nameof(WeatherCache)] = value
+            };
+            ApplicationData.Current.LocalSettings.Values[nameof(WeatherCache)] = composite;
+            OnPropertyChanged();
+        }
+    }
     public string IgnoreWarningWords
     {
         get => GetSettings(nameof(IgnoreWarningWords),"");
