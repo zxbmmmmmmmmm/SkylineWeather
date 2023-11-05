@@ -617,7 +617,7 @@
                         DesiredWidth="200"
                         IsItemClickEnabled="True"
                         ItemHeight="90"
-                        ItemsSource="{x:Bind ViewModel.Indices}"
+                        ItemsSource="{x:Bind ViewModel.Indices,Mode=OneWay}"
                         SelectionMode="None">
                         <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:IndicesBase">
