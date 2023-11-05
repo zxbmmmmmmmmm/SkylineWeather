@@ -42,7 +42,7 @@ namespace FluentWeather.Uwp.Controls.Settings
             if (imageFile is null) return;
             if ((await ApplicationData.Current.LocalFolder.TryGetItemAsync("Backgrounds")) is null)
             {
-                ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
+                await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
             }
             var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
             if(await folder.TryGetItemAsync(type + ".png") is StorageFile file)
@@ -57,10 +57,10 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             if ((await ApplicationData.Current.LocalFolder.TryGetItemAsync("Backgrounds")) is null)
             {
-                ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
+                await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
             }
             var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
-            Launcher.LaunchFolderAsync(folder);
+            await Launcher.LaunchFolderAsync(folder);
         }
         private async Task<StorageFile> PickFileAsync()
         {
