@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
@@ -107,6 +108,24 @@ public partial class MainPageViewModel : ObservableObject
 
         AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
 
+    }
+    [RelayCommand]
+    public async Task Refresh()
+    {
+        var lon = CurrentLocation.Longitude;
+        var lat = CurrentLocation.Latitude;
+        List<Task> tasks = new()
+        {
+            GetWeatherNow(lon, lat),
+            GetWeatherWarnings(lon, lat),
+            GetDailyForecast(lon, lat),
+            GetHourlyForecast(lon, lat),
+            GetWeatherPrecipitations(lon, lat),
+            GetAirCondition(lon, lat),
+            GetIndices(lon, lat),
+        };
+        await Task.WhenAll(tasks.ToArray());
+        CacheHelper.Cache(this);
     }
     public async void GetWeather(GeolocationBase geo)
     
