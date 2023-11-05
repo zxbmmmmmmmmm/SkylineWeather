@@ -1,14 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
 using FluentWeather.Tasks;
+using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Telerik.Geospatial;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -106,14 +109,11 @@ public partial class MainPageViewModel : ObservableObject
         AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
 
     }
-    public async void GetWeather(GeolocationBase geo)
+    [RelayCommand]
+    public async Task Refresh()
     {
-        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
-            return;
-
-        var lon = geo.Longitude;
-        var lat = geo.Latitude;
-        //await Task.Run(() => GetTasks(lon, lat));
+        var lon = CurrentLocation.Longitude;
+        var lat = CurrentLocation.Latitude;
         List<Task> tasks = new()
         {
             GetWeatherNow(lon, lat),
@@ -125,6 +125,50 @@ public partial class MainPageViewModel : ObservableObject
             GetIndices(lon, lat),
         };
         await Task.WhenAll(tasks.ToArray());
+        CacheHelper.Cache(this);
+    }
+    public async void GetWeather(GeolocationBase geo)
+    
+    {
+        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
+        {
+            IsLoading = false;
+            return;
+        }
+        var lon = geo.Longitude;
+        var lat = geo.Latitude;
+        var cacheData = await CacheHelper.GetWeatherCache(CurrentLocation);
+        if (cacheData is not null)
+        {
+            DailyForecasts = cacheData.DailyForecasts.ConvertAll(p => p as WeatherBase);
+            SunRise = cacheData.SunRise;
+            SunSet = cacheData.SunSet;
+            AirCondition = cacheData.AirCondition;
+            HourlyForecasts = cacheData.HourlyForecasts.ConvertAll(p => p as WeatherBase);
+            Indices = cacheData.Indices;
+            Precipitation = cacheData.Precipitation;
+            Warnings = cacheData.Warnings.ConvertAll(p => p as WeatherWarningBase);
+            WeatherDescription = cacheData.WeatherDescription;
+            WeatherNow = cacheData.WeatherNow;
+            IsLoading = false;
+        }
+        else
+        {
+            //await Task.Run(() => GetTasks(lon, lat));
+            List<Task> tasks = new()
+            {
+                GetWeatherNow(lon, lat),
+                GetWeatherWarnings(lon, lat),
+                GetDailyForecast(lon, lat),
+                GetHourlyForecast(lon, lat),
+                GetWeatherPrecipitations(lon, lat),
+                GetAirCondition(lon, lat),
+                GetIndices(lon, lat),
+            };
+            await Task.WhenAll(tasks.ToArray());
+            CacheHelper.Cache(this);
+        }
+
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
@@ -133,16 +177,6 @@ public partial class MainPageViewModel : ObservableObject
         {
             TileHelper.UpdateTiles(DailyForecasts);
         }
-    }
-    private void GetTasks(double lon,double lat)
-    {
-        Task.Run(() => GetWeatherNow(lat, lon));
-        Task.Run(() => GetWeatherWarnings(lon, lat));
-        Task.Run(() => GetDailyForecast(lon, lat));
-        Task.Run(() => GetHourlyForecast(lon, lat));
-        Task.Run(() => GetWeatherPrecipitations(lon, lat));
-        Task.Run(() => GetAirCondition(lon, lat));
-        Task.Run(() => GetIndices(lon, lat));
     }
     [ObservableProperty]
     private bool isLoading = true;

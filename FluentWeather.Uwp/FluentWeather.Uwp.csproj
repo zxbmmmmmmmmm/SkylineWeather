@@ -190,6 +190,7 @@
     <Compile Include="Controls\WeatherHourlyForecastItem.xaml.cs">
       <DependentUpon>WeatherHourlyForecastItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
@@ -526,6 +527,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>7.0.3</Version>
     </PackageReference>
     <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
       <Version>1.0.2.11</Version>

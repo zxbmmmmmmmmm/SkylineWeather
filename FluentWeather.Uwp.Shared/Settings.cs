@@ -15,6 +15,7 @@ using Windows.UI.Xaml;
 using MetroLog;
 using MetroLog.Targets;
 using System.Collections.ObjectModel;
+using FluentWeather.QWeatherProvider.Models;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable

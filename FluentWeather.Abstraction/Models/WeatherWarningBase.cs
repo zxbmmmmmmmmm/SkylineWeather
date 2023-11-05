@@ -2,7 +2,7 @@
 
 namespace FluentWeather.Abstraction.Models;
 
-public abstract class WeatherWarningBase
+public class WeatherWarningBase
 {
     public string Id{ get; set; }
     public string Sender { get; set; }
