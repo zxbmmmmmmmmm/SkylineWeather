@@ -48,8 +48,8 @@
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
                 <chart:LinearAxis
-                    Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=4, Mode=OneWay}"
-                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-4, Mode=OneWay}"
+                    Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=4}"
+                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-4}"
                     ShowLabels="False"
                     Visibility="Collapsed">
                     <chart:LinearAxis.LineStyle>

@@ -259,7 +259,7 @@
                             SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherWarningBase">
-                                    <controls1:WarningItem Margin="0,4" Warning="{x:Bind Mode=OneWay}" />
+                                    <controls1:WarningItem Margin="0,4" Warning="{x:Bind}" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
@@ -441,7 +441,6 @@
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
-                            x:DefaultBindMode="OneWay"
                             DesiredWidth="200"
                             IsItemClickEnabled="True"
                             ItemHeight="90"
@@ -615,7 +614,6 @@
                         Grid.Row="6"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Stretch"
-                        x:DefaultBindMode="OneWay"
                         DesiredWidth="200"
                         IsItemClickEnabled="True"
                         ItemHeight="90"

@@ -85,7 +85,7 @@
             ItemsSource="{x:Bind ViewModel.Cities, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GeolocationBase">
-                    <controls:CityItem Location="{x:Bind Mode=OneWay}">
+                    <controls:CityItem Location="{x:Bind}">
                         <controls:CityItem.ContextFlyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem
