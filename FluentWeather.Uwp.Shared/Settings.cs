@@ -34,9 +34,18 @@ public static class Common
 }
 public class Settings:INotifyPropertyChanged
 {
+    public string IgnoreWarningWords
+    {
+        get => GetSettings(nameof(IgnoreWarningWords),"");
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(IgnoreWarningWords)] = value;
+            OnPropertyChanged();
+        }
+    }
     public bool IsWarningNotificationEnabled
     {
-        get => GetSettings(nameof(IsWarningNotificationEnabled), true);
+        get => GetSettings(nameof(IsWarningNotificationEnabled), false);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IsWarningNotificationEnabled)] = value;
