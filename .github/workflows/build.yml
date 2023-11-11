@@ -15,7 +15,7 @@ jobs:
     env:
       SigningCertificate: App_TemporaryKey.pfx
       Solution_Path: .\FluentWeather.Uwp.sln
-      UWP_Project_Directory: src\App
+      UWP_Project_Directory: .\FluentWeather.Uwp
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
