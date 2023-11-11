@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      SigningCertificate: App_TemporaryKey.pfx
+      SigningCertificate: FluentWeather.Uwp_TemporaryKey.pfx
       Solution_Path: .\FluentWeather.sln
       UWP_Project_Directory: .\FluentWeather.Uwp
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
