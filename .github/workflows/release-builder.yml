@@ -39,8 +39,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{github.event.inputs.version}}
+        release_name: Release ${{github.event.inputs.version}}
         draft: true
         prerelease: false
 
@@ -71,15 +71,6 @@ jobs:
         BuildMode: SideloadOnly
         Configuration: Release
    
-    - name: Create x86 archive
-      run: Compress-Archive -Path C:\Package\x86\FluentWeather.Uwp_${{github.event.inputs.version}}_x86_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
-      
-    - name: Create x64 archive
-      run: Compress-Archive -Path C:\Package\x64\FluentWeather.Uwp_${{github.event.inputs.version}}_x64_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
-      
-    - name: Create ARM64 archive
-      run: Compress-Archive -Path C:\Package\ARM64\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
-
     - name: Update x86 release asset
       id: upload-release-asset-x86
       uses: actions/upload-release-asset@v1
@@ -87,9 +78,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
-        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
-        asset_content_type: application/zip
+        asset_path: C:\Package\x86\FluentWeather.Uwp_${{github.event.inputs.version}}_x86_Test\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.msix
+        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x86.msix
+        asset_content_type: application/octet-stream
         
     - name: Update x64 release asset
       id: upload-release-asset-x64
@@ -98,9 +89,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
-        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
-        asset_content_type: application/zip
+        asset_path: C:\Package\x64\FluentWeather.Uwp_${{github.event.inputs.version}}_x64_Test\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.msix
+        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x64.msix
+        asset_content_type: application/octet-stream
         
     - name: Update ARM64 release asset
       id: upload-release-asset-ARM64
@@ -109,6 +100,17 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
-        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
-        asset_content_type: application/zip
+        asset_path: C:\Package\ARM64\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64_Test\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.msix
+        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.msix
+        asset_content_type: application/octet-stream
+
+    - name: Update certificate
+      id: upload-release-asset-cert
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: C:\Package\x64\FluentWeather.Uwp_${{github.event.inputs.version}}_x64_Test\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.cer
+        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}.cer
+        asset_content_type: application/octet-stream
