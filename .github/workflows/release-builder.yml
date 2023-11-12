@@ -61,13 +61,13 @@ jobs:
         Configuration: Release
    
     - name: Create x86 archive
-      run: Compress-Archive -Path C:\Package\x86\App_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
+      run: Compress-Archive -Path C:\Package\x86\FluentWeather.Uwp_${{github.event.inputs.version}}_x86_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
       
     - name: Create x64 archive
-      run: Compress-Archive -Path C:\Package\x64\App_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
+      run: Compress-Archive -Path C:\Package\x64\FluentWeather.Uwp_${{github.event.inputs.version}}_x64_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
       
     - name: Create ARM64 archive
-      run: Compress-Archive -Path C:\Package\ARM64\App_${{github.event.inputs.version}}_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
+      run: Compress-Archive -Path C:\Package\ARM64\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64_Test -DestinationPath C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
 
     - name: Update x86 release asset
       id: upload-release-asset-x86
