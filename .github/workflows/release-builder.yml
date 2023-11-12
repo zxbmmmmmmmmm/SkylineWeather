@@ -33,6 +33,17 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.3
 
@@ -75,7 +86,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
         asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x86.zip
         asset_content_type: application/zip
@@ -86,7 +97,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
         asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x64.zip
         asset_content_type: application/zip
@@ -97,7 +108,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.release-drafter.outputs.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: C:\Package\FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
         asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.zip
         asset_content_type: application/zip
