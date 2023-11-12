@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Spacing="12">
-            <Image Height="45" Source="/Assets/Weather/Day/PartlyCloudy.png" />
+            <Image Height="45" Source="/Assets/Weather/MostlySunnyDay.png" />
             <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Fluent Weather" />
             <TextBlock
                 VerticalAlignment="Center"
