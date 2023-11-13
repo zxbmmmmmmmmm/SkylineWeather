@@ -4,7 +4,9 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.ConstrainedExecution;
 using Windows.UI.Notifications;
+using static FluentWeather.Abstraction.Models.WeatherType;
 
 namespace FluentWeather.Uwp.Shared
 {
@@ -103,7 +105,7 @@ namespace FluentWeather.Uwp.Shared
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Day/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherBase> daily)
@@ -153,7 +155,7 @@ namespace FluentWeather.Uwp.Shared
 
 
             // Set the base URI for the images, so we don't redundantly specify the entire path
-            builder.Content.Visual.BaseUri = new Uri("Assets/Weather/Day/", UriKind.Relative);
+            builder.Content.Visual.BaseUri = new Uri("Assets/Weather/", UriKind.Relative);
 
             builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
             builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirection} {((IWind)daily[0]).WindScale}级";
@@ -242,40 +244,26 @@ namespace FluentWeather.Uwp.Shared
         }
         public static string GetImageName(WeatherType weatherType)
         {
-            switch (weatherType)
+            return weatherType switch
             {
-                case WeatherType.Clear:
-                    return "Clear.png";
-                case WeatherType.Hail:
-                    return "Hail.png";
-                case WeatherType.PartlyCloudy:
-                    return "PartlyCloudy.png";
-                case WeatherType.HeavyRain:
-                case WeatherType.LightRain:
-                    return "Rain.png";
-                case WeatherType.Cloudy:
-                case WeatherType.VeryCloudy:
-                    return "Cloudy.png";
-                case WeatherType.Fog:
-                    return "Fog.png";
-                case WeatherType.HeavyShowers:
-                case WeatherType.LightShowers:
-                    return "Showers.png";
-                case WeatherType.LightSnow:
-                case WeatherType.HeavySnow:
-                case WeatherType.LightSnowShowers:
-                case WeatherType.HeavySnowShowers:
-                    return "Snow.png";
-                case WeatherType.LightSleet:
-                case WeatherType.LightSleetShowers:
-                    return "Sleet.png";
-                case WeatherType.ThunderyHeavyRain:
-                case WeatherType.ThunderyShowers:
-                case WeatherType.ThunderySnowShowers:
-                    return "Thundery.png";
-                default:
-                    return "PartlyCloudy.png";
-            }
+                Hail => "BlowingHail.png",
+                HeavyRain => "HeavyRain.png",
+                LightRain => "LightRain.png",
+                Cloudy => "Cloudy.png",
+                VeryCloudy => "VeryCloudy.png",
+                LightSnow => "LightSnow.png",
+                HeavySnow => "HeavySnow.png",
+                LightSleet or LightSleetShowers => "RainSnow.png",
+                ThunderyHeavyRain or ThunderyShowers or ThunderySnowShowers => "Thundery.png",
+                Clear => "SunnyDay.png",
+                HazeSmoke => "HazeSmokeDay.png",
+                MostlyClear => "MostlySunnyDay.png",
+                MostlyCloudy => "MostCloudyDay.png",
+                PartlyCloudy => "PartlyCloudyDay.png",
+                HeavyShowers or LightShowers => "RainShowersDay.png",
+                LightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
+                _ => "PartlyCloudy.png",
+            };
         }
     }
 

@@ -3,6 +3,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.Abstraction.Interfaces.Weather;
+using static FluentWeather.Abstraction.Models.WeatherType;
+using System.Dynamic;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
@@ -11,8 +13,12 @@ public class WeatherTypeToIconConverter:IValueConverter
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         var weatherType = (WeatherType)value;
-        var uri = new Uri("ms-appx:///Assets/Weather/Day/" + GetImageName(weatherType));
-        return new BitmapImage(uri);
+        var name = GetImageNameDay(weatherType);
+        name = name is "Unknown.png" ?GetImageName(weatherType): name;
+        var uri = new Uri("ms-appx:///Assets/Weather/" + name);
+        var img = new BitmapImage(uri);
+
+        return img;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -22,42 +28,49 @@ public class WeatherTypeToIconConverter:IValueConverter
 
     public static string GetImageName(WeatherType weatherType)
     {
-        switch (weatherType)
+        return weatherType switch
         {
-            case WeatherType.Clear:
-                return "Clear.png";
-            case WeatherType.Hail:
-                return "Hail.png";
-            case WeatherType.PartlyCloudy:
-                return "PartlyCloudy.png";
-            case WeatherType.HeavyRain:
-            case WeatherType.LightRain:
-                return "Rain.png";
-            case WeatherType.Cloudy:
-            case WeatherType.VeryCloudy:
-                return "Cloudy.png";
-            case WeatherType.Fog:
-                return "Fog.png";
-            case WeatherType.HeavyShowers:
-            case WeatherType.LightShowers:
-                return "Showers.png";
-            case WeatherType.LightSnow:
-                return "LightSnow.png";
-            case WeatherType.HeavySnow:
-                return "Snow.png";
-            case WeatherType.LightSnowShowers:
-            case WeatherType.HeavySnowShowers:
-                return "SnowShowers.png";
-            case WeatherType.LightSleet:
-            case WeatherType.LightSleetShowers:
-                return "Sleet.png";
-            case WeatherType.ThunderyHeavyRain:
-            case WeatherType.ThunderyShowers:
-            case WeatherType.ThunderySnowShowers:
-                return "Thundery.png";
-            default:
-                return "PartlyCloudy.png";
-        }
+            Hail => "BlowingHail.png",
+            HeavyRain => "HeavyRain.png",
+            LightRain => "LightRain.png",
+            Cloudy => "Cloudy.png",
+            VeryCloudy => "VeryCloudy.png",
+            LightSnow => "LightSnow.png",
+            HeavySnow => "HeavySnow.png",
+            LightSleet or LightSleetShowers => "RainSnow.png",
+            ThunderyHeavyRain or ThunderyShowers or ThunderySnowShowers => "Thundery.png",
+            _ => "PartlyCloudy.png",
+        };
+    }
+    public static string GetImageNameDay(WeatherType weatherType)
+    {
+        return weatherType switch
+        {
+            Clear => "SunnyDay.png",
+            HazeSmoke => "HazeSmokeDay.png",
+            MostlyClear => "MostlySunnyDay.png",
+            Hail => "HailDay.png",
+            MostlyCloudy => "MostCloudyDay.png",
+            PartlyCloudy => "PartlyCloudyDay.png",
+            HeavyShowers or LightShowers => "RainShowersDay.png",
+            LightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
+            _ => "Unknown.png",
+        };
+    }
+    public static string GetImageNameNight(WeatherType weatherType)
+    {
+        return weatherType switch
+        {
+            Clear => "ClearNight.png",
+            HazeSmoke => "HazeSmokeNight.png",
+            MostlyCloudy => "MostlyCloudyNight.png",
+            MostlyClear => "MostlyClearNight.png",
+            Hail => "HailNight.png",
+            PartlyCloudy => "PartlyCloudyNight.png",
+            HeavyShowers or LightShowers => "RainShowersNight.png",
+            LightSnowShowers or HeavySnowShowers => "SnowShowersNight.png",
+            _ => "Unknown.png",
+        };
     }
 }
 
@@ -68,8 +81,19 @@ public class WeatherToIconConverter : IValueConverter
         if (value is null) return null;
         var weather = (WeatherBase)value;
         var time = ((ITime)weather).Time;
-        var baseUri = (time.TimeOfDay >= TimeSpan.FromHours(6) && time.TimeOfDay <= TimeSpan.FromHours(18)) ? "ms-appx:///Assets/Weather/Day/" : "ms-appx:///Assets/Weather/Night/";
-        var uri = new Uri(baseUri + WeatherTypeToIconConverter.GetImageName(weather.WeatherType));
+        var baseUri = "ms-appx:///Assets/Weather/";
+        var imageName = "";
+        if (time.TimeOfDay >= TimeSpan.FromHours(6) && time.TimeOfDay <= TimeSpan.FromHours(18))
+        {
+            imageName = WeatherTypeToIconConverter.GetImageNameDay(weather.WeatherType);
+        }
+        else
+        {
+            imageName = WeatherTypeToIconConverter.GetImageNameNight(weather.WeatherType);
+        }
+        imageName = imageName is "Unknown.png" ? WeatherTypeToIconConverter.GetImageName(weather.WeatherType) : imageName;
+
+        var uri = new Uri(baseUri + imageName);
         return new BitmapImage(uri);
     }
 

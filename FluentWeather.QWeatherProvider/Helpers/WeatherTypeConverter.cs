@@ -26,6 +26,18 @@ public static class WeatherTypeConverter
         {
             return WeatherType.HeavySnow;
         }
+        if (description.Contains("局部多云"))
+        {
+            return WeatherType.PartlyCloudy;
+        }
+        if (description.Contains("大部多云"))
+        {
+            return WeatherType.MostlyCloudy;
+        }
+        if (description.Contains("少云"))
+        {
+            return WeatherType.MostlyClear;
+        }
         if (description.Contains("雪"))
         {
             return WeatherType.LightSnow;

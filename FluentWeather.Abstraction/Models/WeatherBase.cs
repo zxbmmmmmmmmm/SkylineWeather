@@ -16,6 +16,10 @@ public enum WeatherType
     /// </summary>
     Fog,
     /// <summary>
+    /// 雾
+    /// </summary>
+    HazeSmoke,
+    /// <summary>
     /// 大雨
     /// </summary>
     HeavyRain,
@@ -56,6 +60,10 @@ public enum WeatherType
     /// </summary>
     LightSnowShowers,
     /// <summary>
+    /// 大部多云
+    /// </summary>
+    MostlyCloudy,
+    /// <summary>
     /// 多云
     /// </summary>
     PartlyCloudy,
@@ -63,6 +71,10 @@ public enum WeatherType
     /// 晴朗
     /// </summary>
     Clear,
+    /// <summary>
+    /// 大部晴朗
+    /// </summary>
+    MostlyClear,
     /// <summary>
     /// 雷暴
     /// </summary>
