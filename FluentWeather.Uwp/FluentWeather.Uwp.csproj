@@ -4,7 +4,7 @@
   <PropertyGroup>
     <LangVersion>latestMajor</LangVersion>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>E2586E5814022A00D557CC2495E7929DABCBEEB1</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8C0307A12110FB79F92E74AAECA0DA24B93462FB</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -588,7 +588,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FluentWeather.Uwp_TemporaryKey.pfx" />
+    <None Include="App_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
   </ItemGroup>
   <ItemGroup>
