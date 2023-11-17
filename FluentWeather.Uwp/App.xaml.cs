@@ -77,6 +77,7 @@ sealed partial class App : Application
         e.Handled = true;
         Crashes.TrackError(e.Exception);
         Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
+        InfoBarHelper.Error("未知错误",e.Message);
     }
     protected override void OnActivated(IActivatedEventArgs e)
     {

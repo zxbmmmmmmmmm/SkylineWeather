@@ -19,7 +19,14 @@
     mc:Ignorable="d">
 
     <Grid Margin="0,0,0,0">
-        <Border Background="{ThemeResource SystemControlAcrylicWindowBrush}" Visibility="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=OneWay}" />
+        <Border Background="{ThemeResource SystemControlAcrylicWindowBrush}" Visibility="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=OneWay}"/>
+        <StackPanel x:Name="InfoBarContainer" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="64,0,64,64" MaxWidth="800" Spacing="12"  Canvas.ZIndex="10">
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+        </StackPanel>
         <Grid
             x:Name="TitleGrid"
             VerticalAlignment="Top"
