@@ -67,8 +67,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             SunRise = astronomic.SunRise;
             SunSet = astronomic.SunSet;
-        }
-
+        }      
     }
     public async Task GetHourlyForecast(double lon,double lat)
     {
@@ -90,12 +89,9 @@ public partial class MainPageViewModel : ObservableObject
     public async Task GetIndices(double lon, double lat)
     {
         var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
-        var i = await indicesProvider.GetIndices(lon, lat);
-        foreach (var item in i)
-        {
-            item.Name = item.Name.Replace("指数", "");
-        }
-        Indices = i;
+        var indices = await indicesProvider.GetIndices(lon, lat);
+        indices?.ForEach(p => p.Name = p.Name.Replace("指数", ""));
+        Indices = indices;
     }
     public async Task GetWeatherPrecipitations(double lon, double lat)
     {
@@ -105,9 +101,7 @@ public partial class MainPageViewModel : ObservableObject
     public async Task GetAirCondition(double lon, double lat)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
-
         AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
-
     }
     [RelayCommand]
     public async Task Refresh()
