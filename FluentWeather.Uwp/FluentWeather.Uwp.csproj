@@ -196,6 +196,7 @@
     <Compile Include="Helpers\InfoBarHelper.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="Helpers\TTSHelper.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />

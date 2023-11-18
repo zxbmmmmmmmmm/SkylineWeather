@@ -2,6 +2,8 @@
 using Windows.System;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -18,25 +20,44 @@ internal static class InfoBarHelper
     }
     public static void RemoveInfoBar(InfoBar infoBar)
     {
+        infoBar.IsOpen = false;
         _container?.Children.Remove(infoBar);
     }
-    public static void Error(string title, string message, int delay = 5000)
+    public static void Error(string title, string message, int delay = 5000,bool isClosable = true)
     {
-        AddToContainer(InfoBarSeverity.Error, title, message, delay);
+        AddToContainer(InfoBarSeverity.Error, title, message, delay, isClosable);
     }
-    public static void Info(string title, string message, int delay = 5000)
+    public static void Info(string title, string message, int delay = 5000, bool isClosable = true)
     {
-        AddToContainer(InfoBarSeverity.Informational, title, message, delay);
+        DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
+        {
+            var infoBar = new InfoBar
+            {
+                Severity = InfoBarSeverity.Informational,
+                Background = (Brush)Application.Current.Resources["AcrylicInAppFillColorDefaultBrush"],
+                Title = title,
+                Message = message,
+                IsOpen = true,
+                IsClosable = isClosable
+            };
+            _container.Children.Add(infoBar);
+            if (delay > 0)
+            {
+
+                await Task.Delay(delay);
+                infoBar.IsOpen = false;
+            }
+        });
     }
-    public static void Success(string title, string message, int delay = 5000)
+    public static void Success(string title, string message, int delay = 5000, bool isClosable = true)
     {
-        AddToContainer(InfoBarSeverity.Success, title, message, delay);
+        AddToContainer(InfoBarSeverity.Success, title, message, delay, isClosable);
     }
-    public static void Warning(string title, string message, int delay = 5000)
+    public static void Warning(string title, string message, int delay = 5000, bool isClosable = true)
     {
-        AddToContainer(InfoBarSeverity.Warning, title, message, delay);
+        AddToContainer(InfoBarSeverity.Warning, title, message, delay, isClosable);
     }
-    private static void AddToContainer(InfoBarSeverity severity,string title,string message,int delay)
+    private static void AddToContainer(InfoBarSeverity severity,string title,string message,int delay, bool isClosable)
     {
         DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
         {
@@ -46,6 +67,7 @@ internal static class InfoBarHelper
                 Title = title,
                 Message = message,
                 IsOpen = true,
+                IsClosable = isClosable
             };
             _container.Children.Add(infoBar);
             if (delay > 0)

@@ -87,8 +87,15 @@
                             <StackPanel Opacity="0.95" Orientation="Horizontal">
                                 <TextBlock
                                     x:Name="TemperatureText"
-                                    Style="{ThemeResource TemperatureTextStyle}"
-                                    Text="{Binding WeatherNow.Temperature}" />
+                                    Style="{ThemeResource TemperatureTextStyle}" 
+                                    Text="{Binding WeatherNow.Temperature}" >
+                                    <i:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="DoubleTapped">
+                                            <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}"/>
+                                        </core:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                </TextBlock>
+                                    
                                 <Grid Margin="4,26,0,0">
                                     <TextBlock
                                         Margin="2,-16,0,0"
