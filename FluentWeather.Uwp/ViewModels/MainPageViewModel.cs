@@ -187,7 +187,7 @@ public partial class MainPageViewModel : ObservableObject
         }
         if(!TTSHelper.IsPlaying)
         {
-            InfoBarHelper.Info("天气播报", text, 8000 , false);
+            InfoBarHelper.Info("天气播报", text, 9000 , false);
         }
         TTSHelper.Speech(text);
     }
