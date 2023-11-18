@@ -28,6 +28,13 @@
                 Command="{x:Bind ViewModel.RefreshCommand}"
                 Icon="Refresh"
                 Text="刷新" />
+            <MenuFlyoutItem
+                Command="{x:Bind ViewModel.SpeechWeatherCommand}"
+                Text="语音播报" >
+                <MenuFlyoutItem.Icon>
+                    <FontIcon Glyph="&#xF83B;"/>
+                </MenuFlyoutItem.Icon>
+            </MenuFlyoutItem>
         </MenuFlyout>
     </Page.ContextFlyout>
     <Page.Resources>
