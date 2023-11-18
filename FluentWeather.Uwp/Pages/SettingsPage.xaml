@@ -28,6 +28,10 @@
                 <settings:LocationSettingSection />
                 <settings:NotificationSettingSection />
                 <settings:QWeatherSettingSection/>
+                <StackPanel Spacing="8">
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="开发者选项"></TextBlock>
+                    <Button x:Name="InfoBarTest" Content="测试InfoBar" Click="InfoBarTest_Click"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
         <controls:PropertySizer

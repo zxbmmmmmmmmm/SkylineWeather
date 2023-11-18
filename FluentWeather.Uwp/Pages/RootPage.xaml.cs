@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Themes;
 using FluentWeather.Uwp.ViewModels;
@@ -44,6 +45,7 @@ public sealed partial class RootPage : Page
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         PaneFrame.Navigate(typeof(CitiesPage), Theme.GetSplitPaneNavigationTransition());
+        InfoBarHelper.Initialize(InfoBarContainer);
     }
 
     public void SetTitleBar()

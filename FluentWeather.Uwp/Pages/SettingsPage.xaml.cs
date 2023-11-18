@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentWeather.Uwp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,4 +28,8 @@ public sealed partial class SettingsPage : Page
         this.InitializeComponent();
     }
 
+    private void InfoBarTest_Click(object sender, RoutedEventArgs e)
+    {
+        InfoBarHelper.Success("Title", "Test InfoBar");
+    }
 }

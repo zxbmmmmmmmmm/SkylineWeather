@@ -128,7 +128,6 @@ public partial class MainPageViewModel : ObservableObject
         CacheHelper.Cache(this);
     }
     public async void GetWeather(GeolocationBase geo)
-    
     {
         if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
         {
@@ -177,6 +176,20 @@ public partial class MainPageViewModel : ObservableObject
         {
             TileHelper.UpdateTiles(DailyForecasts);
         }
+    }
+    [RelayCommand]
+    public void SpeechWeather()
+    {
+        var text = $"{CurrentLocation.Name},{DailyForecasts[0].Description},最高温:{((ITemperatureRange)DailyForecasts[0]).MaxTemperature}°,最低温:{((ITemperatureRange)DailyForecasts[0]).MinTemperature}°";
+        if(AirCondition is not null)
+        {
+            text += $",空气质量:{AirCondition.AqiCategory}";
+        }
+        if(!TTSHelper.IsPlaying)
+        {
+            InfoBarHelper.Info("天气播报", text, 8000 , false);
+        }
+        TTSHelper.Speech(text);
     }
     [ObservableProperty]
     private bool isLoading = true;

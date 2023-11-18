@@ -775,24 +775,24 @@
                                 Margin="4,0,0,0"
                                 FontSize="16"
                                 Visibility="{Binding PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}">
-                                <Run Text="{Binding PrecipitationProbability}" /><Run Text="%"  FontSize="12.5"/>
+                                <Run Text="{Binding PrecipitationProbability}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="16">
                             <Run Text="{Binding WindDirection}" />
-                            <Run Text="{Binding WindSpeed}" /><Run Text="km/h"  FontSize="12.5"/>
+                            <Run Text="{Binding WindSpeed}" /><Run FontSize="12.5" Text="km/h" />
                         </TextBlock>
                         <StackPanel
                             HorizontalAlignment="Left"
                             Orientation="Horizontal"
                             Spacing="4">
                             <TextBlock FontSize="16">
-                                <Run Text="湿度:"/>
-                                <Run Text="{Binding Humidity}" /><Run Text="%" FontSize="12.5"/>
+                                <Run Text="湿度:" />
+                                <Run Text="{Binding Humidity}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                             <TextBlock FontSize="16">
-                                <Run Text="气压:"/>
-                                <Run Text="{Binding Pressure}"/><Run Text="kPa"  FontSize="12.5"/>
+                                <Run Text="气压:" />
+                                <Run Text="{Binding Pressure}" /><Run FontSize="12.5" Text="kPa" />
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>
