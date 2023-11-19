@@ -28,11 +28,9 @@
                 Command="{x:Bind ViewModel.RefreshCommand}"
                 Icon="Refresh"
                 Text="刷新" />
-            <MenuFlyoutItem
-                Command="{x:Bind ViewModel.SpeechWeatherCommand}"
-                Text="语音播报" >
+            <MenuFlyoutItem Command="{x:Bind ViewModel.SpeechWeatherCommand}" Text="语音播报">
                 <MenuFlyoutItem.Icon>
-                    <FontIcon Glyph="&#xF83B;"/>
+                    <FontIcon Glyph="&#xF83B;" />
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
         </MenuFlyout>
@@ -89,20 +87,23 @@
                     </Grid.RowDefinitions>
 
                     <!--  当前天气  -->
-                    <Grid Margin="0,0,0,12" x:DefaultBindMode="OneWay">
+                    <Grid
+                        x:Name="WeatherNowGrid"
+                        Margin="0,0,0,12"
+                        x:DefaultBindMode="OneWay">
                         <StackPanel>
                             <StackPanel Opacity="0.95" Orientation="Horizontal">
                                 <TextBlock
                                     x:Name="TemperatureText"
-                                    Style="{ThemeResource TemperatureTextStyle}" 
-                                    Text="{Binding WeatherNow.Temperature}" >
+                                    Style="{ThemeResource TemperatureTextStyle}"
+                                    Text="{Binding WeatherNow.Temperature}">
                                     <i:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="DoubleTapped">
-                                            <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}"/>
+                                            <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}" />
                                         </core:EventTriggerBehavior>
                                     </i:Interaction.Behaviors>
                                 </TextBlock>
-                                    
+
                                 <Grid Margin="4,26,0,0">
                                     <TextBlock
                                         Margin="2,-16,0,0"
@@ -126,7 +127,7 @@
                                     Margin="12,0,0,0"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
-                                    Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}">
+                                    Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                             <Run Text="空气质量 -" />
@@ -631,7 +632,7 @@
                         DesiredWidth="200"
                         IsItemClickEnabled="True"
                         ItemHeight="90"
-                        ItemsSource="{x:Bind ViewModel.Indices,Mode=OneWay}"
+                        ItemsSource="{x:Bind ViewModel.Indices, Mode=OneWay}"
                         SelectionMode="None">
                         <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate x:DataType="models:IndicesBase">
@@ -690,7 +691,7 @@
                         <AdaptiveTrigger MinWindowWidth="1600" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ContentGrid.Margin" Value="32,80,32,32" />
+                        <Setter Target="WeatherNowGrid.Margin" Value="0,40,0,12" />
                         <Setter Target="TemperatureChart.Visibility" Value="Visible" />
                         <Setter Target="DailyGridView.Margin" Value="-32,0" />
                         <Setter Target="DailyGridView.ItemHeight" Value="150" />
