@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Uwp.Behaviors;
+using FluentWeather.Uwp.Pages;
 using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,11 @@ namespace FluentWeather.Uwp.Controls.Settings
         private void ThemeStyleButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {             
             RestartInfoBar.IsOpen = true;
+        }
+
+        private void ApplyBlurButton_Click(object sender, RoutedEventArgs e)
+        {
+            RootPage.Instance.EnterAnimation.Start();
         }
     }
 }
