@@ -5,6 +5,9 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:toolkitBehaviors="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,6 +18,7 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     mc:Ignorable="d">
 
@@ -136,12 +140,28 @@
                 <controls1:ImageEx Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
                         <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType, Mode=OneWay}" />
+                        <core:EventTriggerBehavior EventName="ImageExOpened">
+                            <toolkitBehaviors:StartAnimationAction Animation="{Binding ElementName=EnterAnimation}" />
+                        </core:EventTriggerBehavior>
                     </i:Interaction.Behaviors>
+                    <animations:Explicit.Animations>
+                        <animations:AnimationSet x:Name="EnterAnimation">
+                            <animations:AnimationScope Duration="0:0:1.8" EasingMode="EaseOut">
+                                <animations:ClipAnimation From="0,512,0,0" To="0"/>
+                                <animations:ScaleAnimation From="1.1" To="1"/>
+                                <animations:OpacityAnimation From="0" To="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Duration="0:0:2.5"/>
+                            </animations:AnimationScope>
+                        </animations:AnimationSet>
+                    </animations:Explicit.Animations>
                 </controls1:ImageEx>
+                <Button>
+                    
+                </Button>
                 <Border>
                     <Border.Background>
                         <media:BackdropBlurBrush Amount="{x:Bind app:Common.Settings.BackgroundBlurAmount, Mode=OneWay}" />
                     </Border.Background>
+
                 </Border>
             </Grid>
         </ParallaxView>

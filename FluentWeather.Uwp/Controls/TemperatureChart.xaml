@@ -25,7 +25,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <chart:RadCartesianChart PaletteName="DefaultLight">
+        <chart:RadCartesianChart PaletteName="DefaultLight" EmptyContent="">
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"
