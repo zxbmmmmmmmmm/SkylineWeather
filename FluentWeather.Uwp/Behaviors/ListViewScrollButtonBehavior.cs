@@ -59,6 +59,7 @@ public class ListViewScrollButtonBehavior: Behavior<Button>
 
     private void OnScrollViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
     {
+        if(AssociatedObject is null) return;
         AssociatedObject.Visibility = (_listScrollViewer.ScrollableWidth > 0) ? Visibility.Visible : Visibility.Collapsed;
 
         AssociatedObject.IsEnabled = CanScroll(_listScrollViewer);

@@ -24,20 +24,23 @@
             ItemsSource="{x:Bind DailyForecasts}"
             SelectedItem="{x:Bind SelectedItem, Mode=TwoWay}">
             <Pivot.HeaderTemplate>
-                <DataTemplate x:DataType="models:WeatherBase">
+                <DataTemplate x:DataType="models:WeatherDailyBase">
                     <StackPanel>
                         <TextBlock Text="{Binding Time, Converter={StaticResource DateConverter}}" />
                         <TextBlock FontSize="14">
                             <Run Text="{x:Bind Description}" />
-                            <Run Text="{Binding MinTemperature}" /><Run Text="° /" />
-                            <Run Text="{Binding MaxTemperature}" /><Run Text="°" />
+                            <Run Text="{x:Bind MinTemperature}" /><Run Text="° /" />
+                            <Run Text="{x:Bind MaxTemperature}" /><Run Text="°" />
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>
-                <DataTemplate x:DataType="models:WeatherBase">
+                <DataTemplate x:DataType="models:WeatherDailyBase">
                     <Grid Grid.Row="2" Margin="4,0">
+                        <Grid.ChildrenTransitions>
+                            <EntranceThemeTransition IsStaggeringEnabled="False"/>
+                        </Grid.ChildrenTransitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -48,7 +51,8 @@
                             Grid.Row="0"
                             Height="256"
                             Margin="0,64,0,0"
-                            WeatherForecasts="{Binding HourlyForecasts}" />
+                            HourlyForecasts="{Binding HourlyForecasts}" 
+                            Visibility="{Binding HourlyForecasts,Converter={StaticResource NullToVisibilityConverter}}"/>
                         <Grid Grid.Row="1" Margin="0,16,0,0">
                             <controls1:AdaptiveGridView
                                 x:Name="HourlyGridView"
@@ -120,12 +124,12 @@
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="&#xE018; " /><Run Text="日出" />
-                            <Run Text="{Binding SunRise, Mode=OneWay}" />
+                            <Run Text="{x:Bind SunRise.ToShortTimeString()}" />
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="  &#xE099; " /><Run Text="日落" />
-                            <Run Text="{Binding SunSet, Mode=OneWay}" />
+                            <Run Text="{x:Bind SunSet.ToShortTimeString()}" />
                         </TextBlock>
                         <controls1:AdaptiveGridView
                             Grid.Row="3"
@@ -140,9 +144,8 @@
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="风" />
+                                        Text="{x:Bind WindDirection}" />
                                     <TextBlock FontSize="25">
-                                        <Run Text="{Binding WindDirection}" />
                                         <Run FontSize="25" Text="{Binding WindScale}" />
                                         <Run FontSize="16" Text="级" />
                                     </TextBlock>
@@ -150,19 +153,19 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{Binding WindDirection}" />
+                                                    <Run Text="{x:Bind WindDirection}" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WindScale}" />
+                                                    <Run Text="{x:Bind WindScale}" />
                                                     <Run FontSize="14" Text="级" />
                                                 </TextBlock>
                                                 <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{Binding WindSpeed}" />
+                                                    <Run Text="{x:Bind WindSpeed}" />
                                                     <Run Text="km/h" />
                                                 </TextBlock>
                                                 <TextBlock
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    Text="{Binding WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
+                                                    Text="{x:Bind WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
                                                     TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
@@ -174,7 +177,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="湿度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding Humidity}" />
+                                        <Run FontSize="25" Text="{x:Bind Humidity}" />
                                         <Run FontSize="16" Text="%" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -182,7 +185,7 @@
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="湿度 -" />
-                                                    <Run Text="{Binding Humidity}" />
+                                                    <Run Text="{x:Bind Humidity}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -190,19 +193,6 @@
                                                     IsTextSelectionEnabled="True"
                                                     TextWrapping="Wrap">
                                                     相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
-                                                </TextBlock>
-                                                <TextBlock
-                                                    Margin="0,8,0,0"
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="露点温度 -" />
-                                                    <Run Text="{Binding DewPointTemperature}" /><Run Text="°" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”
                                                 </TextBlock>
                                             </StackPanel>
                                         </Flyout>
@@ -215,7 +205,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="气压" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding Pressure}" />
+                                        <Run FontSize="25" Text="{x:Bind Pressure}" />
                                         <Run FontSize="16" Text="hPa" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -224,7 +214,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="气压" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding Pressure}" />
+                                                    <Run Text="{x:Bind Pressure}" />
                                                     <Run FontSize="14" Text="hPa" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -243,7 +233,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="能见度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding Visibility}" />
+                                        <Run FontSize="25" Text="{x:Bind Visibility}" />
                                         <Run FontSize="16" Text="km" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -252,7 +242,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="能见度" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding Visibility}" />
+                                                    <Run Text="{x:Bind Visibility}" />
                                                     <Run FontSize="14" Text="km" />
                                                 </TextBlock>
                                                 <TextBlock

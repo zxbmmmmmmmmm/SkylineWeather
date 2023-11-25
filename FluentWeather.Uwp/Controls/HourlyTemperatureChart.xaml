@@ -46,7 +46,7 @@
             <chart:RadCartesianChart.VerticalAxis>
                 <chart:LinearAxis
                     Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=2.5}"
-                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-0.3}"
+                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-0.5}"
                     ShowLabels="False"
                     Visibility="Collapsed">
                     <chart:LinearAxis.LineStyle>
@@ -66,7 +66,7 @@
             </chart:RadCartesianChart.Grid>
             <chart:SplineSeries
                 CombineMode="Cluster"
-                ItemsSource="{x:Bind WeatherForecasts, Mode=OneWay}"
+                ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
                 PointTemplate="{StaticResource PointTemplate}"
                 ShowLabels="True"              
                 Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}">

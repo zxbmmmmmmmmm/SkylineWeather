@@ -12,7 +12,7 @@ namespace FluentWeather.Uwp.Shared
 {
     public class TileHelper
     {
-        public static void UpdateTiles(List<WeatherBase> data)
+        public static void UpdateTiles(List<WeatherDailyBase> data)
         {
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.Update(new TileNotification(GenerateTileContent(data).GetXml()));
@@ -101,21 +101,21 @@ namespace FluentWeather.Uwp.Shared
             };
         }
 
-        public static void GetGroupChildren(AdaptiveGroup group, List<WeatherBase> daily)
+        public static void GetGroupChildren(AdaptiveGroup group, List<WeatherDailyBase> daily)
         {
             foreach (var item in daily)
             {
                 group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
-        public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherBase> daily)
+        public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherDailyBase> daily)
         {
             foreach (var item in daily)
             {
                 group.Children.Add(GenerateTileSubgroup(GetWeek(((ITime)item).Time), GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
-        public static TileContent GenerateTileContent(List<WeatherBase> daily)
+        public static TileContent GenerateTileContent(List<WeatherDailyBase> daily)
         {
             TileContentBuilder builder = new TileContentBuilder();
 
@@ -163,7 +163,7 @@ namespace FluentWeather.Uwp.Shared
 
             return builder.Content;
         }
-        public static TileBindingContentAdaptive GenerateLargeTileContent(List<WeatherBase> daily)
+        public static TileBindingContentAdaptive GenerateLargeTileContent(List<WeatherDailyBase> daily)
         {
             var content = new TileBindingContentAdaptive()
             {

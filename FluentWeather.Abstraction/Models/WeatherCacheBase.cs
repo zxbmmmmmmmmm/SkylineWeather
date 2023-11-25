@@ -5,8 +5,8 @@ using System.Text;
 namespace FluentWeather.Abstraction.Models;
 public class WeatherCacheBase
 {
-    public virtual List<WeatherBase> DailyForecasts { get; set; } = new();
-    public virtual List<WeatherBase> HourlyForecasts { get; set; } = new();
+    public virtual List<WeatherDailyBase> DailyForecasts { get; set; } = new();
+    public virtual List<WeatherHourlyBase> HourlyForecasts { get; set; } = new();
     public virtual List<WeatherWarningBase> Warnings { get; set; }
     public virtual WeatherBase WeatherNow { get; set; }
     public virtual string WeatherDescription { get; set; }

@@ -33,33 +33,28 @@ namespace FluentWeather.Uwp.Pages
         {
             this.InitializeComponent();
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            if (e.Parameter is null) return;
-            var parameter = ((List<WeatherBase> Daily, List<WeatherBase> Hourly))e.Parameter;
-        }
+
         [ObservableProperty]
         private WeatherBase _selectedItem;
 
 
-        public List<WeatherBase> DailyForecasts
+        public List<WeatherDailyBase> DailyForecasts
         {
-            get => (List<WeatherBase>)GetValue(DailyForecastsProperty);
+            get => (List<WeatherDailyBase>)GetValue(DailyForecastsProperty);
             set => SetValue(DailyForecastsProperty, value);
         }
 
         public static readonly DependencyProperty DailyForecastsProperty =
             DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(null));
 
-        public List<WeatherBase> HourlyForecasts
+        public List<WeatherHourlyBase> HourlyForecasts
         {
-            get => (List<WeatherBase>)GetValue(HourlyForecastsProperty);
+            get => (List<WeatherHourlyBase>)GetValue(HourlyForecastsProperty);
             set => SetValue(HourlyForecastsProperty, value);
         }
 
         public static readonly DependencyProperty HourlyForecastsProperty =
-            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(null));
 
     }
 }

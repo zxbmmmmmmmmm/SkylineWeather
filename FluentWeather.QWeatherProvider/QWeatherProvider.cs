@@ -67,23 +67,23 @@ public class QWeatherProvider : ProviderBase,
         Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
     }
 
-    public async Task<WeatherBase> GetCurrentWeather(double lon,double lat)
+    public async Task<WeatherNowBase> GetCurrentWeather(double lon,double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherNowApi, new QWeatherRequest(lon, lat));
         return result.WeatherNow.MapToQweatherNow();
     }
 
-    public async Task<List<WeatherBase>> GetDailyForecasts(double lon, double lat)
+    public async Task<List<WeatherDailyBase>> GetDailyForecasts(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherDailyApi, new QWeatherRequest(lon, lat));
-        var res = result.DailyForecasts?.ConvertAll(p => (WeatherBase)p.MapToQWeatherDailyForecast());
+        var res = result.DailyForecasts?.ConvertAll(p => (WeatherDailyBase)p.MapToQWeatherDailyForecast());
         return res;
     }
 
-    public async Task<List<WeatherBase>> GetHourlyForecasts(double lon, double lat)
+    public async Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherHourlyApi, new QWeatherRequest(lon, lat));
-        var res = result.HourlyForecasts?.ConvertAll(p => (WeatherBase)p.MapToQWeatherHourlyForecast());
+        var res = result.HourlyForecasts?.ConvertAll(p => (WeatherHourlyBase)p.MapToQWeatherHourlyForecast());
         return res;
     }
 

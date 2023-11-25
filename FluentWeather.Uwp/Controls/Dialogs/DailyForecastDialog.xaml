@@ -167,7 +167,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <controls2:HourlyTemperatureChart x:Name="TemperatureChart" WeatherForecasts="{x:Bind GetHourly(ViewModel.HourlyForecasts, ViewModel.Selected)}" />
+                <controls2:HourlyTemperatureChart x:Name="TemperatureChart" HourlyForecasts="{x:Bind ViewModel.HourlyForecasts}" />
                 <Grid Grid.Row="1" Margin="0,64,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -223,11 +223,11 @@
                         x:Name="FirstText"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextFirst(TemperatureChart.WeatherForecasts)}" />
+                        Text="{x:Bind GetTextFirst(TemperatureChart.HourlyForecasts)}" />
                     <TextBlock
                         Grid.Column="7"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextLast(TemperatureChart.WeatherForecasts)}"
+                        Text="{x:Bind GetTextLast(TemperatureChart.HourlyForecasts)}"
                         Visibility="{x:Bind FirstText.Visibility}" />
                 </Grid>
             </Grid>
