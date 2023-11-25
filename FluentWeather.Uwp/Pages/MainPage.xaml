@@ -49,8 +49,8 @@
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
         <local:DailyViewPage
-            Name="DailyViewPage"
-            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"
+            x:Name="DailyView"
+            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"          
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}" />
         <muxc:RefreshContainer x:Name="MainContentContainer">
             <muxc:RefreshContainer.Visualizer>
@@ -124,7 +124,7 @@
                                     FontSize="18"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                     <Run Text="体感" />
-                                    <Run Text="{Binding ViewModel.WeatherNow.ApparentTemperature}" /><Run Text="°" />
+                                    <Run Text="{Binding WeatherNow.ApparentTemperature}" /><Run Text="°" />
                                 </TextBlock>
                                 <Button
                                     Margin="12,0,0,0"
@@ -461,6 +461,7 @@
                             DesiredWidth="200"
                             IsItemClickEnabled="True"
                             ItemHeight="90"
+                            x:DefaultBindMode="OneWay"
                             SelectionMode="None">
                             <controls:AdaptiveGridView.Items>
                                 <StackPanel x:Name="WindInfoPanel" Margin="12">
@@ -569,7 +570,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="能见度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding ViewModel.WeatherNow.Visibility}" />
+                                        <Run FontSize="25" Text="{Binding WeatherNow.Visibility}" />
                                         <Run FontSize="16" Text="km" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -578,7 +579,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="能见度" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding ViewModel.WeatherNow.Visibility}" />
+                                                    <Run Text="{Binding WeatherNow.Visibility}" />
                                                     <Run FontSize="14" Text="km" />
                                                 </TextBlock>
                                                 <TextBlock

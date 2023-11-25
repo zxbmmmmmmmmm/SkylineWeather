@@ -32,11 +32,24 @@ namespace FluentWeather.Uwp.Pages
         public DailyViewPage()
         {
             this.InitializeComponent();
+            SmokeBorder.Tapped += OnSmokeBorderTapped;
         }
 
-        [ObservableProperty]
-        private WeatherBase _selectedItem;
+        private void OnSmokeBorderTapped(object sender, TappedRoutedEventArgs e)
+        {
+            CloseRequested?.Invoke(this, e);
+        }
 
+        public event RoutedEventHandler CloseRequested;
+
+        public WeatherDailyBase SelectedItem
+        {
+            get => (WeatherDailyBase)GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register(nameof(SelectedItem), typeof(WeatherDailyBase), typeof(DailyViewPage), new PropertyMetadata(null));
 
         public List<WeatherDailyBase> DailyForecasts
         {
