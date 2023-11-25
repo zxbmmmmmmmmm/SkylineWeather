@@ -213,6 +213,9 @@
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DailyViewPage.xaml.cs">
+      <DependentUpon>DailyViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,7 @@
     </Compile>
     <Compile Include="ViewModels\CitiesPageViewModel.cs" />
     <Compile Include="ViewModels\DailyForecastDialogViewModel.cs" />
+    <Compile Include="ViewModels\DailyViewPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\RootPageViewModel.cs" />
   </ItemGroup>
@@ -481,6 +485,10 @@
     <Page Include="Pages\CitiesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DailyViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MainPage.xaml">
       <SubType>Designer</SubType>

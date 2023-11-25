@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
-
 public class QWeatherDailyForecast : WeatherBase, IWeatherNight, ITemperatureRange, IWind, ITime, IHumidity, IPressure,
     IVisibility,IAstronomic,ICloudAmount
 {
@@ -22,4 +22,5 @@ public class QWeatherDailyForecast : WeatherBase, IWeatherNight, ITemperatureRan
     public DateTime SunRise { get ; set ; }
     public DateTime SunSet { get ; set ; }
     public int? CloudAmount { get; set; }
+    public List<WeatherBase> HourlyForecasts { get; set; } 
 }

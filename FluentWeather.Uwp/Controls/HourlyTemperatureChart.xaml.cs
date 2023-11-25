@@ -21,9 +21,9 @@ namespace FluentWeather.Uwp.Controls
 {
     public sealed partial class HourlyTemperatureChart : UserControl
     {
-        private int MaxTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Max(p => p.Temperature) : 45;
+        private int MaxTemperature => WeatherForecasts is not null && WeatherForecasts.Count != 0 ? WeatherForecasts.Max(p => p.Temperature) : 45;
 
-        private int MinTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Min(p => p.Temperature) : 0;
+        private int MinTemperature => WeatherForecasts is not null && WeatherForecasts.Count != 0 ? WeatherForecasts.Min(p => p.Temperature) : 0;
         public HourlyTemperatureChart()
         {
             this.InitializeComponent();

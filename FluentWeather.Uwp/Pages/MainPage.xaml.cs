@@ -31,7 +31,13 @@ public sealed partial class MainPage : Page
     {
         this.InitializeComponent();
         this.DataContext = ViewModel;
+        DailyGridView.ItemClick += DailyItemClicked;
         Instance = this;
+    }
+
+    private void DailyItemClicked(object sender, ItemClickEventArgs e)
+    {
+        MainContentContainer.Visibility = Visibility.Collapsed;
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)

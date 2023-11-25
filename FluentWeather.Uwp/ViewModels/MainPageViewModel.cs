@@ -119,6 +119,20 @@ public partial class MainPageViewModel : ObservableObject
             GetIndices(lon, lat),
         };
         await Task.WhenAll(tasks.ToArray());
+        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
+        {
+            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+        }
+        if (CurrentLocation.Name == Common.Settings.DefaultGeolocation.Name)
+        {
+            TileHelper.UpdateTiles(DailyForecasts);
+        }
+        foreach (var hourly in HourlyForecasts)
+        {
+            var daily = DailyForecasts.Find(p => ((ITime)p).Time.Date == ((ITime)hourly).Time.Date);
+            ((dynamic)daily).HourlyForecasts ??= new List<WeatherBase>();
+            ((dynamic)daily).HourlyForecasts?.Add(hourly);
+        }
         CacheHelper.Cache(this);
     }
     public async void GetWeather(GeolocationBase geo)
@@ -143,33 +157,20 @@ public partial class MainPageViewModel : ObservableObject
             Warnings = cacheData.Warnings.ConvertAll(p => p as WeatherWarningBase);
             WeatherDescription = cacheData.WeatherDescription;
             WeatherNow = cacheData.WeatherNow;
+            foreach (var hourly in cacheData.HourlyForecasts)
+            {
+                var daily = DailyForecasts.Find(p => ((ITime)p).Time.Date == ((ITime)hourly).Time.Date);
+                ((dynamic)daily).HourlyForecasts ??= new List<WeatherBase>();
+                ((dynamic)daily).HourlyForecasts?.Add(hourly);
+            }
             IsLoading = false;
         }
         else
         {
-            //await Task.Run(() => GetTasks(lon, lat));
-            List<Task> tasks = new()
-            {
-                GetWeatherNow(lon, lat),
-                GetWeatherWarnings(lon, lat),
-                GetDailyForecast(lon, lat),
-                GetHourlyForecast(lon, lat),
-                GetWeatherPrecipitations(lon, lat),
-                GetAirCondition(lon, lat),
-                GetIndices(lon, lat),
-            };
-            await Task.WhenAll(tasks.ToArray());
-            CacheHelper.Cache(this);
+            await Refresh();
         }
 
-        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
-        {
-            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
-        }
-        if(CurrentLocation.Name == Common.Settings.DefaultGeolocation.Name)
-        {
-            TileHelper.UpdateTiles(DailyForecasts);
-        }
+
     }
     [RelayCommand]
     public void SpeechWeather()

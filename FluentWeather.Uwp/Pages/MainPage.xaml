@@ -48,7 +48,10 @@
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
-        <muxc:RefreshContainer>
+        <local:DailyViewPage Name="DailyViewPage" 
+                             DailyForecasts="{x:Bind ViewModel.DailyForecasts,Mode=OneWay}"
+                             Visibility="{x:Bind MainContentContainer.Visibility,Converter={StaticResource VisibilityInverter}, Mode=OneWay}"/>
+        <muxc:RefreshContainer x:Name="MainContentContainer">
             <muxc:RefreshContainer.Visualizer>
                 <muxc:RefreshVisualizer>
                     <muxc:RefreshVisualizer.Content>
@@ -85,7 +88,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-
                     <!--  当前天气  -->
                     <Grid
                         x:Name="WeatherNowGrid"
@@ -313,7 +315,6 @@
                             SelectionMode="None">
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
-                                <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog" UseArguments="True" />
                             </i:Interaction.Behaviors>
                         </toolkit:AdaptiveGridView>
                         <Button
@@ -672,7 +673,6 @@
 
         </muxc:RefreshContainer>
 
-        <!--  内容区  -->
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
