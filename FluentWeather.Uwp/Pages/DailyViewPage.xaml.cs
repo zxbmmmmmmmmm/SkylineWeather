@@ -32,10 +32,10 @@ namespace FluentWeather.Uwp.Pages
         public DailyViewPage()
         {
             this.InitializeComponent();
-            SmokeBorder.Tapped += OnSmokeBorderTapped;
+            PlaceholderBorder.Tapped += OnPlaceholderBorderTapped;
         }
 
-        private void OnSmokeBorderTapped(object sender, TappedRoutedEventArgs e)
+        private void OnPlaceholderBorderTapped(object sender, TappedRoutedEventArgs e)
         {
             CloseRequested?.Invoke(this, e);
         }

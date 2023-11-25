@@ -13,7 +13,7 @@
     mc:Ignorable="d">
 
     <Grid x:DefaultBindMode="OneWay">
-        <Border x:Name="SmokeBorder" Background="#4D000000" />
+        <Border Background="{ThemeResource SystemControlTransparentBrush}" x:Name="PlaceholderBorder"/>
         <Border MaxWidth="1000" MaxHeight="1200">
             <Pivot
                 x:Name="MainPivot"

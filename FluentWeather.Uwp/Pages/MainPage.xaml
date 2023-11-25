@@ -2,8 +2,10 @@
     x:Class="FluentWeather.Uwp.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:behaviors1="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls1="using:FluentWeather.Uwp.Controls"
     xmlns:converters="using:ValueConverters"
@@ -19,6 +21,7 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
@@ -48,11 +51,72 @@
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
+        <Border
+            x:Name="SmokeBorder"
+            Background="#4D000000"
+            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
+            <animations:Implicit.HideAnimations>
+                <animations:OpacityAnimation
+                    EasingMode="EaseOut"
+                    EasingType="Circle"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.4" />
+            </animations:Implicit.HideAnimations>
+            <animations:Implicit.ShowAnimations>
+                <animations:OpacityAnimation
+                    EasingMode="EaseOut"
+                    EasingType="Circle"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.8" />
+            </animations:Implicit.ShowAnimations>
+        </Border>
         <local:DailyViewPage
             x:Name="DailyView"
-            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"          
-            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}" />
-        <muxc:RefreshContainer x:Name="MainContentContainer">
+            ui:VisualExtensions.NormalizedCenterPoint="0.5"
+            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"
+            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
+
+            <animations:Implicit.HideAnimations>
+                <animations:ImplicitAnimationSet x:Name="LeaveAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0"
+                        Duration="0:0:0.4" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="1.2"
+                        Duration="0:0:0.4" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.HideAnimations>
+            <animations:Implicit.ShowAnimations>
+                <animations:ImplicitAnimationSet x:Name="EnterAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.8" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0.5"
+                        To="1"
+                        Duration="0:0:0.8" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.ShowAnimations>
+
+        </local:DailyViewPage>
+        <muxc:RefreshContainer
+            x:Name="MainContentContainer"
+            animations:Implicit.HideAnimations="{Binding ElementName=LeaveAnimation}"
+            animations:Implicit.ShowAnimations="{Binding ElementName=EnterAnimation}"
+            ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <muxc:RefreshContainer.Visualizer>
                 <muxc:RefreshVisualizer>
                     <muxc:RefreshVisualizer.Content>
@@ -64,6 +128,7 @@
                 <core:EventTriggerBehavior EventName="RefreshRequested">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
                 </core:EventTriggerBehavior>
+
             </i:Interaction.Behaviors>
             <ScrollViewer
                 x:Name="MainScrollViewer"
@@ -314,6 +379,7 @@
                             ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                             OneRowModeEnabled="True"
                             SelectionMode="None">
+
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
                             </i:Interaction.Behaviors>
@@ -458,10 +524,10 @@
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
+                            x:DefaultBindMode="OneWay"
                             DesiredWidth="200"
                             IsItemClickEnabled="True"
                             ItemHeight="90"
-                            x:DefaultBindMode="OneWay"
                             SelectionMode="None">
                             <controls:AdaptiveGridView.Items>
                                 <StackPanel x:Name="WindInfoPanel" Margin="12">
