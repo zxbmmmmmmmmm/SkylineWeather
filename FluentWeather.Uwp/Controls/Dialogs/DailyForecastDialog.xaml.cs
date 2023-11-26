@@ -33,7 +33,7 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         {
             this.InitializeComponent();
             this.DataContext = ViewModel;
-            ViewModel.Selected = (WeatherBase)clicked;
+            ViewModel.Selected = (WeatherDailyBase)clicked;
             foreach (var item in MainPageViewModel.Instance.DailyForecasts)
                 ViewModel.DailyForecasts.Add(item);
             foreach(var item in MainPageViewModel.Instance.HourlyForecasts)
@@ -80,12 +80,12 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             await Task.Delay(10);
             await ForecastGridView.SmoothScrollIntoViewWithItemAsync(ViewModel.Selected,itemPlacement:ScrollItemPlacement.Left);
         }
-        private List<ITemperature> GetHourly(ObservableCollection<WeatherBase> weatherList, WeatherBase selected)
+        private List<ITemperature> GetHourly(ObservableCollection<WeatherHourlyBase> weatherList, WeatherBase selected)
         {
             var list = new List<ITime>();
             foreach (var item in weatherList)
             {
-                list.Add(item as ITime);
+                list.Add(item);
             }
             var time = (ITime)selected;
             var res = list.Where(p => p.Time.Date == time.Time.Date).ToList().ConvertAll(p => (ITemperature)p);
@@ -95,12 +95,12 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             return res;
 
         }
-        private string GetTextFirst(List<ITemperature> weatherList)
+        private string GetTextFirst(List<WeatherHourlyBase> weatherList)
         {
             if (weatherList is null) return null;
             return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().First().Time.ToShortTimeString();
         }
-        private string GetTextLast(List<ITemperature> weatherList)
+        private string GetTextLast(List<WeatherHourlyBase> weatherList)
         {
             if (weatherList is null) return null;
             return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().Last().Time.ToShortTimeString();

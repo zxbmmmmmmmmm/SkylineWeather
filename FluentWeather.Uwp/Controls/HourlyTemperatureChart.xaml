@@ -18,7 +18,7 @@
             <Ellipse
                 Width="8"
                 Height="8"
-                Fill="{Binding Converter={StaticResource DataPointToBrushConverter}, Mode=OneWay}"
+                Fill="{ThemeResource SystemControlHighlightAltAltHighBrush}"
                 Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
                 StrokeThickness="2" />
         </DataTemplate>
@@ -28,8 +28,8 @@
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"
-                    PlotMode="BetweenTicks"
-                    Visibility="Collapsed">
+                    Visibility="Collapsed"
+                    PlotMode="BetweenTicks">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -46,7 +46,7 @@
             <chart:RadCartesianChart.VerticalAxis>
                 <chart:LinearAxis
                     Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=2.5}"
-                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-0.3}"
+                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-0.5}"
                     ShowLabels="False"
                     Visibility="Collapsed">
                     <chart:LinearAxis.LineStyle>
@@ -66,10 +66,10 @@
             </chart:RadCartesianChart.Grid>
             <chart:SplineSeries
                 CombineMode="Cluster"
-                ItemsSource="{x:Bind WeatherForecasts, Mode=OneWay}"
+                ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
                 PointTemplate="{StaticResource PointTemplate}"
-                ShowLabels="True"
-                Stroke="{ThemeResource SystemColorControlAccentBrush}">
+                ShowLabels="True"              
+                Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}">
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:LineSeries.CategoryBinding>

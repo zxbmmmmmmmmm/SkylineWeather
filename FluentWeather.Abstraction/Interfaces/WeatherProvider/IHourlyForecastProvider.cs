@@ -12,5 +12,5 @@ public interface IHourlyForecastProvider
     /// <param name="lon">经度</param>
     /// <param name="lat">纬度</param>
     /// <returns></returns>
-    Task<List<WeatherBase>> GetHourlyForecasts(double lon,double lat);
+    Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon,double lat);
 }

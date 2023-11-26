@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace FluentWeather.Uwp.ViewModels;
@@ -9,18 +11,18 @@ namespace FluentWeather.Uwp.ViewModels;
 public partial class DailyForecastDialogViewModel:ObservableObject
 {
     [ObservableProperty]
-    ObservableCollection<WeatherBase> _dailyForecasts = new();
+    List<WeatherDailyBase> _dailyForecasts = new();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SunRise))]
     [NotifyPropertyChangedFor(nameof(SunSet))]
-    WeatherBase _selected;
+    WeatherDailyBase _selected;
 
     public DateTime SunRise => ((IAstronomic)Selected).SunRise;
 
     public DateTime SunSet => ((IAstronomic)Selected).SunSet;
 
     [ObservableProperty]
-    ObservableCollection<WeatherBase> _hourlyForecasts = new();
+    List<WeatherHourlyBase> _hourlyForecasts = new();
 
 }

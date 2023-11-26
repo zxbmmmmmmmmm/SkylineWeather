@@ -12,6 +12,6 @@ public interface IDailyForecastProvider
     /// <param name="lon">经度</param>
     /// <param name="lat">纬度</param>
     /// <returns></returns>
-    Task<List<WeatherBase>> GetDailyForecasts(double lon,double lat);
+    Task<List<WeatherDailyBase>> GetDailyForecasts(double lon,double lat);
 
 }

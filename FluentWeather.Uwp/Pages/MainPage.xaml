@@ -2,8 +2,10 @@
     x:Class="FluentWeather.Uwp.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:behaviors1="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls1="using:FluentWeather.Uwp.Controls"
     xmlns:converters="using:ValueConverters"
@@ -19,6 +21,7 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
@@ -43,12 +46,114 @@
     </Page.Resources>
     <Grid>
         <Border
-            Background="#40404040"
+            Background="{ThemeResource LayerFillColorDefaultBrush}"
             Canvas.ZIndex="2"
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
-        <muxc:RefreshContainer>
+        <Border
+            x:Name="SmokeBorder"
+            Background="{ThemeResource LayerFillColorDefaultBrush}"
+            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
+            <animations:Implicit.HideAnimations>
+                <animations:OpacityAnimation
+                    EasingMode="EaseOut"
+                    EasingType="Circle"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.4" />
+            </animations:Implicit.HideAnimations>
+            <animations:Implicit.ShowAnimations>
+                <animations:OpacityAnimation
+                    EasingMode="EaseOut"
+                    EasingType="Circle"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.8" />
+            </animations:Implicit.ShowAnimations>
+        </Border>
+        <local:DailyViewPage
+            x:Name="DailyView"
+            ui:VisualExtensions.NormalizedCenterPoint="0.5"
+            DailyForecasts="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
+            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="CloseRequested">
+                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Visible"/>
+                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationLeave}"/>
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <animations:Implicit.HideAnimations>
+                <animations:ImplicitAnimationSet x:Name="LeaveAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0"
+                        Duration="0:0:0.4" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0.6"
+                        Duration="0:0:0.4" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.HideAnimations>
+            <animations:Implicit.ShowAnimations>
+                <animations:ImplicitAnimationSet x:Name="EnterAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.6" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0.4"
+                        To="1"
+                        Duration="0:0:0.6" />
+                </animations:ImplicitAnimationSet>
+                
+            </animations:Implicit.ShowAnimations>
+
+        </local:DailyViewPage>
+        <muxc:RefreshContainer
+            x:Name="MainContentContainer"
+            ui:VisualExtensions.NormalizedCenterPoint="0.5">
+            <animations:Implicit.HideAnimations>
+                <animations:ImplicitAnimationSet >
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0"
+                        Duration="0:0:0.4" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="1.2"
+                        Duration="0:0:0.4" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.HideAnimations>
+
+            <animations:Implicit.ShowAnimations>
+                <animations:ImplicitAnimationSet>
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.6" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1.2"
+                        To="1"
+                        Duration="0:0:0.6" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.ShowAnimations>
             <muxc:RefreshContainer.Visualizer>
                 <muxc:RefreshVisualizer>
                     <muxc:RefreshVisualizer.Content>
@@ -85,7 +190,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-
                     <!--  当前天气  -->
                     <Grid
                         x:Name="WeatherNowGrid"
@@ -96,7 +200,7 @@
                                 <TextBlock
                                     x:Name="TemperatureText"
                                     Style="{ThemeResource TemperatureTextStyle}"
-                                    Text="{Binding WeatherNow.Temperature}">
+                                    Text="{x:Bind ViewModel.WeatherNow.Temperature}">
                                     <i:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="DoubleTapped">
                                             <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}" />
@@ -313,7 +417,10 @@
                             SelectionMode="None">
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
-                                <behaviors:ListViewOpenContentDialogBehavior DialogType="dialogs:DailyForecastDialog" UseArguments="True" />
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Collapsed"/>
+                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}"/>
+                                </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </toolkit:AdaptiveGridView>
                         <Button
@@ -365,7 +472,7 @@
                             Height="200"
                             Margin="-32,0,-28,0"
                             Visibility="Collapsed"
-                            WeatherForecasts="{Binding DailyForecasts7D}" />
+                            WeatherForecasts="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}" />
                     </Grid>
 
                     <!--  每小时预报  -->
@@ -456,6 +563,7 @@
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
+                            x:DefaultBindMode="OneWay"
                             DesiredWidth="200"
                             IsItemClickEnabled="True"
                             ItemHeight="90"
@@ -465,29 +573,28 @@
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="风" />
+                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
                                     <TextBlock FontSize="25">
-                                        <Run Text="{Binding WeatherNow.WindDirection}" />
-                                        <Run FontSize="25" Text="{Binding WeatherNow.WindScale}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                         <Run FontSize="16" Text="级" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{Binding WeatherNow.WindDirection}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.WindScale}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                                     <Run FontSize="14" Text="级" />
                                                 </TextBlock>
                                                 <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{Binding WeatherNow.WindSpeed}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindSpeed}" />
                                                     <Run Text="km/h" />
                                                 </TextBlock>
                                                 <TextBlock
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    Text="{Binding WeatherNow.WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
+                                                    Text="{x:Bind ViewModel.WeatherNow.WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
                                                     TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
@@ -499,7 +606,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="湿度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.Humidity}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
                                         <Run FontSize="16" Text="%" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -507,7 +614,7 @@
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="湿度 -" />
-                                                    <Run Text="{Binding WeatherNow.Humidity}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -540,7 +647,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="气压" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.Pressure}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
                                         <Run FontSize="16" Text="hPa" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -549,7 +656,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="气压" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.Pressure}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
                                                     <Run FontSize="14" Text="hPa" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -672,7 +779,6 @@
 
         </muxc:RefreshContainer>
 
-        <!--  内容区  -->
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

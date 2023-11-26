@@ -21,22 +21,22 @@ namespace FluentWeather.Uwp.Controls
 {
     public sealed partial class HourlyTemperatureChart : UserControl
     {
-        private int MaxTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Max(p => p.Temperature) : 45;
+        private int MaxTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Max(p => p.Temperature) : 45;
 
-        private int MinTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Min(p => p.Temperature) : 0;
+        private int MinTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Min(p => p.Temperature) : 0;
         public HourlyTemperatureChart()
         {
             this.InitializeComponent();
         }
-        public List<ITemperature> WeatherForecasts
+        public List<WeatherHourlyBase> HourlyForecasts
         {
-            get => ((List<WeatherBase>)GetValue(WeatherForecastsProperty))?.ConvertAll(p => (ITemperature)p);
-            set => SetValue(WeatherForecastsProperty, value?.ConvertAll(p => (WeatherBase)p));
+            get => ((List<WeatherHourlyBase>)GetValue(WeatherForecastsProperty));
+            set => SetValue(WeatherForecastsProperty, value);
         }
 
 
         public static readonly DependencyProperty WeatherForecastsProperty =
-            DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherBase>), typeof(HourlyTemperatureChart), new PropertyMetadata(default, OnPropertyChanged));
+            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(HourlyTemperatureChart), new PropertyMetadata(default, OnPropertyChanged));
 
         private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

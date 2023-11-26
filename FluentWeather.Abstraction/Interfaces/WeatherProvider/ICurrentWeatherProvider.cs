@@ -12,5 +12,5 @@ public interface ICurrentWeatherProvider
     /// <param name="lon"></param>
     /// <param name="lat"></param>
     /// <returns></returns>
-    Task<WeatherBase> GetCurrentWeather(double lon, double lat);
+    Task<WeatherNowBase> GetCurrentWeather(double lon, double lat);
 }

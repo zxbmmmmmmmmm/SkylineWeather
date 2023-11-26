@@ -85,7 +85,7 @@ namespace FluentWeather.Tasks
                 Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
             }
         }
-        private void PushToday(List<WeatherBase> data)
+        private void PushToday(List<WeatherDailyBase> data)
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
             var group = new AdaptiveGroup();
@@ -98,7 +98,7 @@ namespace FluentWeather.Tasks
             builder.Show();
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Today)");
         }
-        private void PushTomorrow(List<WeatherBase> data)
+        private void PushTomorrow(List<WeatherDailyBase> data)
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(1, 6) : data;
             var group = new AdaptiveGroup();

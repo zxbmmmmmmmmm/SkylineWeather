@@ -33,20 +33,20 @@ public sealed partial class TemperatureChart : UserControl
     private int MinTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Min(p => p.MinTemperature) : 0;
 
 
-    public List<ITemperatureRange> WeatherForecasts
+    public List<WeatherDailyBase> WeatherForecasts
     {
-        get => ((List<WeatherBase>)GetValue(WeatherForecastsProperty))?.ConvertAll(p => (ITemperatureRange)p);
-        set => SetValue(WeatherForecastsProperty, value?.ConvertAll(p => (WeatherBase)p));
+        get => (List<WeatherDailyBase>)GetValue(WeatherForecastsProperty);
+        set => SetValue(WeatherForecastsProperty, value);
     }
     public static readonly DependencyProperty WeatherForecastsProperty =
-        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherBase>), typeof(TemperatureChart), new PropertyMetadata(default,OnPropertyChanged));
+        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherDailyBase>), typeof(TemperatureChart), new PropertyMetadata(default,OnPropertyChanged));
 
     private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var chart = (TemperatureChart)d;
         chart.Bindings.Update();   
     }
-    public (List<CategoricalDataPoint> tempMax, List<CategoricalDataPoint> tempMin) GetDataPoints(IList<ITemperatureRange> weatherDailyForecasts)
+    public (List<CategoricalDataPoint> tempMax, List<CategoricalDataPoint> tempMin) GetDataPoints(IList<WeatherDailyBase> weatherDailyForecasts)
     {
         var tempMax = new List<CategoricalDataPoint>();
         var tempMin = new List<CategoricalDataPoint>();
