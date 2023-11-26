@@ -46,14 +46,14 @@
     </Page.Resources>
     <Grid>
         <Border
-            Background="#40404040"
+            Background="{ThemeResource LayerFillColorDefaultBrush}"
             Canvas.ZIndex="2"
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
         <Border
             x:Name="SmokeBorder"
-            Background="#4D000000"
+            Background="{ThemeResource LayerFillColorDefaultBrush}"
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <animations:Implicit.HideAnimations>
                 <animations:OpacityAnimation
@@ -75,11 +75,54 @@
         <local:DailyViewPage
             x:Name="DailyView"
             ui:VisualExtensions.NormalizedCenterPoint="0.5"
-            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"
+            DailyForecasts="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
-
+            <i:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="CloseRequested">
+                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Visible"/>
+                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationLeave}"/>
+                </core:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
             <animations:Implicit.HideAnimations>
                 <animations:ImplicitAnimationSet x:Name="LeaveAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0"
+                        Duration="0:0:0.4" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="1"
+                        To="0.6"
+                        Duration="0:0:0.4" />
+                </animations:ImplicitAnimationSet>
+            </animations:Implicit.HideAnimations>
+            <animations:Implicit.ShowAnimations>
+                <animations:ImplicitAnimationSet x:Name="EnterAnimation">
+                    <animations:OpacityAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.6" />
+                    <animations:ScaleAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="0.4"
+                        To="1"
+                        Duration="0:0:0.6" />
+                </animations:ImplicitAnimationSet>
+                
+            </animations:Implicit.ShowAnimations>
+
+        </local:DailyViewPage>
+        <muxc:RefreshContainer
+            x:Name="MainContentContainer"
+            ui:VisualExtensions.NormalizedCenterPoint="0.5">
+            <animations:Implicit.HideAnimations>
+                <animations:ImplicitAnimationSet >
                     <animations:OpacityAnimation
                         EasingMode="EaseOut"
                         EasingType="Circle"
@@ -94,29 +137,23 @@
                         Duration="0:0:0.4" />
                 </animations:ImplicitAnimationSet>
             </animations:Implicit.HideAnimations>
+
             <animations:Implicit.ShowAnimations>
-                <animations:ImplicitAnimationSet x:Name="EnterAnimation">
+                <animations:ImplicitAnimationSet>
                     <animations:OpacityAnimation
                         EasingMode="EaseOut"
                         EasingType="Circle"
                         From="0"
                         To="1"
-                        Duration="0:0:0.8" />
+                        Duration="0:0:0.6" />
                     <animations:ScaleAnimation
                         EasingMode="EaseOut"
                         EasingType="Circle"
-                        From="0.5"
+                        From="1.2"
                         To="1"
-                        Duration="0:0:0.8" />
+                        Duration="0:0:0.6" />
                 </animations:ImplicitAnimationSet>
             </animations:Implicit.ShowAnimations>
-
-        </local:DailyViewPage>
-        <muxc:RefreshContainer
-            x:Name="MainContentContainer"
-            animations:Implicit.HideAnimations="{Binding ElementName=LeaveAnimation}"
-            animations:Implicit.ShowAnimations="{Binding ElementName=EnterAnimation}"
-            ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <muxc:RefreshContainer.Visualizer>
                 <muxc:RefreshVisualizer>
                     <muxc:RefreshVisualizer.Content>
@@ -128,7 +165,6 @@
                 <core:EventTriggerBehavior EventName="RefreshRequested">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
                 </core:EventTriggerBehavior>
-
             </i:Interaction.Behaviors>
             <ScrollViewer
                 x:Name="MainScrollViewer"
@@ -379,9 +415,12 @@
                             ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                             OneRowModeEnabled="True"
                             SelectionMode="None">
-
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Collapsed"/>
+                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}"/>
+                                </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </toolkit:AdaptiveGridView>
                         <Button

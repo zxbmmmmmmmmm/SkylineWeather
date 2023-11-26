@@ -33,6 +33,12 @@ namespace FluentWeather.Uwp.Pages
         {
             this.InitializeComponent();
             PlaceholderBorder.Tapped += OnPlaceholderBorderTapped;
+            CloseButton.Click += OnCloseButtonClicked;
+        }
+
+        private void OnCloseButtonClicked(object sender, RoutedEventArgs e)
+        {
+            CloseRequested?.Invoke(this, e);
         }
 
         private void OnPlaceholderBorderTapped(object sender, TappedRoutedEventArgs e)

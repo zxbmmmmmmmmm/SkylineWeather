@@ -143,7 +143,12 @@
 
         <ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="32">
             <Grid>
-                <controls1:ImageEx Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}" Stretch="UniformToFill">
+                <controls1:ImageEx
+                    x:Name="BackgroundImage"
+                    ui:VisualExtensions.NormalizedCenterPoint="0.5"
+                    x:FieldModifier="Public"
+                    Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}"
+                    Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
                         <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType, Mode=OneWay}" />
                         <core:EventTriggerBehavior EventName="ImageExOpened">
@@ -154,8 +159,7 @@
                     <animations:Explicit.Animations>
                         <animations:AnimationSet x:Name="EnterAnimation" x:FieldModifier="Public">
                             <animations:AnimationScope EasingMode="EaseOut" Duration="0:0:1.8">
-                                <animations:ClipAnimation From="0,512,0,0" To="0" />
-                                <animations:ScaleAnimation From="1.1" To="1" />
+                                <animations:ScaleAnimation From="1.3" To="1" />
                                 <animations:BlurEffectAnimation
                                     EasingMode="EaseInOut"
                                     Target="{Binding ElementName=ImageBlurEffect}"
@@ -167,6 +171,22 @@
                                     To="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}"
                                     Duration="0:0:1.5" />
                             </animations:AnimationScope>
+                        </animations:AnimationSet>
+                        <animations:AnimationSet x:Name="ScaleAnimationEnter" x:FieldModifier="Public">
+                            <animations:ScaleAnimation
+                                EasingMode="EaseOut"
+                                EasingType="Circle"
+                                From="1"
+                                To="1.2"
+                                Duration="0:0:0.8" />
+                        </animations:AnimationSet>
+                        <animations:AnimationSet x:Name="ScaleAnimationLeave" x:FieldModifier="Public">
+                            <animations:ScaleAnimation
+                                EasingMode="EaseOut"
+                                EasingType="Circle"
+                                From="1.2"
+                                To="1"
+                                Duration="0:0:0.4" />
                         </animations:AnimationSet>
                     </animations:Explicit.Animations>
                 </controls1:ImageEx>

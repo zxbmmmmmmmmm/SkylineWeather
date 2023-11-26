@@ -36,22 +36,12 @@ public sealed partial class MainPage : Page
         this.InitializeComponent();
         this.DataContext = ViewModel;
         DailyGridView.ItemClick += DailyItemClicked;
-        DailyView.CloseRequested += OnDailyViewCloseRequested;
         Instance = this;
     }
 
-    private async void OnDailyViewCloseRequested(object sender, RoutedEventArgs e)
-    {
-        //await Task.Delay(500);
-        MainContentContainer.Visibility = Visibility.Visible;
-    }
-
-
-    private async void DailyItemClicked(object sender, ItemClickEventArgs e)
+    private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
         DailyView.SelectedItem = e.ClickedItem as WeatherDailyBase;
-        //await Task.Delay(500);
-        MainContentContainer.Visibility = Visibility.Collapsed;
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)
