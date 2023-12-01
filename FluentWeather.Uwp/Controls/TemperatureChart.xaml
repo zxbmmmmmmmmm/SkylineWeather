@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -97,6 +98,7 @@
                     <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature" />
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
+
             <chart:LineSeries
                 CombineMode="Cluster"
                 ItemsSource="{x:Bind WeatherForecasts, Mode=OneWay}"
@@ -127,6 +129,39 @@
                     <chart:PropertyNameDataPointBinding PropertyName="MinTemperature" />
                 </chart:LineSeries.ValueBinding>
             </chart:LineSeries>
+
+            <chart:RangeSeries
+                Canvas.ZIndex="-1"
+                Fill="#40FFEA03"
+                ItemsSource="{x:Bind GetHeatingData(WeatherForecasts), Mode=OneWay}"
+                Stroke="Transparent">
+                <chart:RangeSeries.CategoryBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time" />
+                </chart:RangeSeries.CategoryBinding>
+                <chart:RangeSeries.HighBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature" />
+                </chart:RangeSeries.HighBinding>
+                <chart:RangeSeries.LowBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MinTemperature" />
+                </chart:RangeSeries.LowBinding>
+            </chart:RangeSeries>
+            <chart:RangeSeries
+                Canvas.ZIndex="-1"
+                Fill="#4009B9FF"
+                x:Name="RangeSeriesCooling"
+                ItemsSource="{x:Bind GetCoolingData(WeatherForecasts), Mode=OneWay}"
+                Stroke="Transparent">
+                <chart:RangeSeries.CategoryBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time" />
+                </chart:RangeSeries.CategoryBinding>
+                <chart:RangeSeries.HighBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MaxTemperature" />
+                </chart:RangeSeries.HighBinding>
+                <chart:RangeSeries.LowBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="MinTemperature" />
+                </chart:RangeSeries.LowBinding>
+            </chart:RangeSeries>
+            
         </chart:RadCartesianChart>
 
     </Grid>
