@@ -2,6 +2,7 @@
 using FluentWeather.Abstraction.Models;
 using FluentWeather.QWeatherProvider.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,7 +33,6 @@ public sealed partial class TemperatureChart : UserControl
 
     private int MinTemperature => WeatherForecasts.Count != 0 ? WeatherForecasts.Min(p => p.MinTemperature) : 0;
 
-
     public List<WeatherDailyBase> WeatherForecasts
     {
         get => (List<WeatherDailyBase>)GetValue(WeatherForecastsProperty);
@@ -57,5 +57,40 @@ public sealed partial class TemperatureChart : UserControl
             tempMin.Add(new CategoricalDataPoint { Category = item.GetHashCode(), Value = item.MinTemperature });
         }
         return (tempMax, tempMin);
+    }
+    /// <summary>
+    /// 获取降温数据
+    /// </summary>
+    /// <param name="weatherForecasts"></param>
+    /// <returns></returns>
+    public List<WeatherDailyBase> GetCoolingData(IList<WeatherDailyBase> weatherForecasts)
+    {
+        var list = new List<WeatherDailyBase>();
+        for (var i = 0; i < weatherForecasts.Count-1; i++)
+        {
+            if (weatherForecasts[i+1].MaxTemperature - weatherForecasts[i].MaxTemperature <= -5)
+            {
+                if(!list.Contains(weatherForecasts[i]))
+                    list.Add(weatherForecasts[i]);
+                if (!list.Contains(weatherForecasts[i+1]))
+                    list.Add(weatherForecasts[i + 1]);
+            }
+        }
+        return list;
+    }
+    public List<WeatherDailyBase> GetHeatingData(IList<WeatherDailyBase> weatherForecasts)
+    {
+        var list = new List<WeatherDailyBase>();
+        for (var i = 0; i < weatherForecasts.Count - 1; i++)
+        {
+            if (weatherForecasts[i + 1].MaxTemperature - weatherForecasts[i].MaxTemperature >= 5)
+            {
+                if (!list.Contains(weatherForecasts[i]))
+                    list.Add(weatherForecasts[i]);
+                if (!list.Contains(weatherForecasts[i + 1]))
+                    list.Add(weatherForecasts[i + 1]);
+            }
+        }
+        return list;
     }
 }
