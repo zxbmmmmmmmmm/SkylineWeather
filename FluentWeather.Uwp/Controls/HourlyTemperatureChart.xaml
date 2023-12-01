@@ -28,8 +28,8 @@
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"
-                    Visibility="Collapsed"
-                    PlotMode="BetweenTicks">
+                    PlotMode="BetweenTicks"
+                    Visibility="Collapsed">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -68,8 +68,14 @@
                 CombineMode="Cluster"
                 ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
                 PointTemplate="{StaticResource PointTemplate}"
-                ShowLabels="True"              
+                ShowLabels="True"
                 Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}">
+                <chart:SplineSeries.LabelDefinitions>
+                    <chart:ChartSeriesLabelDefinition
+                        Margin="0,0,0,16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                </chart:SplineSeries.LabelDefinitions>
                 <chart:LineSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:LineSeries.CategoryBinding>
