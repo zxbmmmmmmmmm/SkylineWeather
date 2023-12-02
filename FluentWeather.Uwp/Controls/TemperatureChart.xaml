@@ -132,9 +132,14 @@
 
             <chart:RangeSeries
                 Canvas.ZIndex="-1"
-                Fill="#40FFEA03"
                 ItemsSource="{x:Bind GetHeatingData(WeatherForecasts), Mode=OneWay}"
                 Stroke="Transparent">
+                <chart:RangeSeries.Fill>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="#59FFEA03" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </chart:RangeSeries.Fill>
                 <chart:RangeSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:RangeSeries.CategoryBinding>
@@ -148,9 +153,14 @@
             <chart:RangeSeries
                 x:Name="RangeSeriesCooling"
                 Canvas.ZIndex="-1"
-                Fill="#4009B9FF"
                 ItemsSource="{x:Bind GetCoolingData(WeatherForecasts), Mode=OneWay}"
                 Stroke="Transparent">
+                <chart:RangeSeries.Fill>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="1" Color="#6609B9FF" />
+                        <GradientStop Offset="0" Color="Transparent" />
+                    </LinearGradientBrush>
+                </chart:RangeSeries.Fill>
                 <chart:RangeSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:RangeSeries.CategoryBinding>
