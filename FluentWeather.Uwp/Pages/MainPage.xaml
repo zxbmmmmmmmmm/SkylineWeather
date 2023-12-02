@@ -33,7 +33,7 @@
             Background="#40404040"
             Canvas.ZIndex="2"
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
-            <muxc:ProgressRing Width="100" Height="100" />
+            <ProgressRing Width="100" Height="100" />
         </Border>
 
         <ScrollViewer

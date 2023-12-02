@@ -5,9 +5,9 @@
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:local="using:FluentWeather.Uwp"
     xmlns:themes="using:FluentWeather.Uwp.Themes"
-    RequestedTheme="Dark"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
-    xmlns:valueConverters2="using:ValueConverters">
+    xmlns:valueConverters2="using:ValueConverters"
+    RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,7 +29,6 @@
             <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter" />
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True" />
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
-            <valueConverters:PrecipitationProbabilityToVisibilityConverter x:Key="PrecipitationProbabilityToVisibilityConverter" />
             <valueConverters:WindScaleToDescriptionConverter x:Key="WindScaleToDescriptionConverter" />
             <valueConverters:TransparencyConverter x:Key="TransparencyConverter" />
             <valueConverters:DateConverter x:Key="DateConverter" />
