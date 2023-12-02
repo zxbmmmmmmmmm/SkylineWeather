@@ -21,6 +21,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FluentWeather.Uwp.Helpers.Update;
+using Windows.ApplicationModel;
+using CommunityToolkit.WinUI.Helpers;
+using Windows.System;
+using Microsoft.AppCenter.Analytics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -46,6 +51,31 @@ public sealed partial class RootPage : Page
     {
         PaneFrame.Navigate(typeof(CitiesPage), Theme.GetSplitPaneNavigationTransition());
         InfoBarHelper.Initialize(InfoBarContainer);
+        if (Common.Settings.AutoCheckUpdates)
+        {
+            CheckUpdate();
+        }
+    }
+
+    public static async void CheckUpdate()
+    {
+        try
+        {
+            var info = await UpdateHelper.CheckUpdateAsync("zxbmmmmmmmmm", "FluentWeather", new Version(Package.Current.Id.Version.ToFormattedString()));
+            var viewAction = new Action(() =>
+            {
+                Launcher.LaunchUriAsync(new Uri(info.HtmlUrl));
+            });
+            if (info.IsExistNewVersion)
+            {
+                InfoBarHelper.Info("更新可用", info.TagName, action: viewAction, buttonContent: "查看");
+                Analytics.TrackEvent("UpdateViewed");
+            }
+        }
+        catch(Exception ex)
+        {
+            Common.LogManager.GetLogger("UpdateHelper").Error("检查更新失败", ex);
+        }
     }
 
     public void SetTitleBar()

@@ -28,6 +28,7 @@
                 <settings:LocationSettingSection />
                 <settings:NotificationSettingSection />
                 <settings:QWeatherSettingSection/>
+                <settings:UpdateSettingSection/>
                 <StackPanel Spacing="8" Visibility="Collapsed">
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="开发者选项"></TextBlock>
                     <Button x:Name="InfoBarTest" Content="测试InfoBar" Click="InfoBarTest_Click"/>

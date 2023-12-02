@@ -178,6 +178,9 @@
     <Compile Include="Controls\Settings\QWeatherSettingSection.xaml.cs">
       <DependentUpon>QWeatherSettingSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Settings\UpdateSettingSection.xaml.cs">
+      <DependentUpon>UpdateSettingSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TemperatureChart.xaml.cs">
       <DependentUpon>TemperatureChart.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,9 @@
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\TTSHelper.cs" />
+    <Compile Include="Helpers\Update\SystemVersionInfo.cs" />
+    <Compile Include="Helpers\Update\UpdateHelper.cs" />
+    <Compile Include="Helpers\Update\UpdateInfo.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DataPointToBrushConverter.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
@@ -464,6 +470,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Settings\QWeatherSettingSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\UpdateSettingSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

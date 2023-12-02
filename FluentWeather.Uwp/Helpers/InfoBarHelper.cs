@@ -4,6 +4,9 @@ using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml;
+using System;
+using MetroLog.WinRT;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -27,7 +30,7 @@ internal static class InfoBarHelper
     {
         AddToContainer(InfoBarSeverity.Error, title, message, delay, isClosable);
     }
-    public static void Info(string title, string message, int delay = 5000, bool isClosable = true)
+    public static void Info(string title, string message, int delay = 5000, bool isClosable = true ,string buttonContent = null, Action action = null)
     {
         DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
         {
@@ -38,8 +41,28 @@ internal static class InfoBarHelper
                 Title = title,
                 Message = message,
                 IsOpen = true,
-                IsClosable = isClosable
+                IsClosable = isClosable,           
             };
+            if (action is not null)
+            {
+                var btn = new Button
+                {
+                    Content = buttonContent,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                };
+                btn.Click += (_, _) =>
+                {
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        Common.LogManager.GetLogger(("InfoBarHelper")).Error($"{title} - {message} - {buttonContent}", ex);
+                    }
+                };
+                infoBar.ActionButton = btn;
+            }
             _container.Children.Add(infoBar);
             if (delay > 0)
             {
