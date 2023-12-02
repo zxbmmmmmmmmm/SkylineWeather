@@ -49,7 +49,6 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty]
     private AirConditionBase airCondition;
     public static MainPageViewModel Instance{ get; private set; }
-
     public MainPageViewModel()
     {
         Instance = this;

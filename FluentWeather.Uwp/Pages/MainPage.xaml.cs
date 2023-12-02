@@ -36,6 +36,14 @@ public sealed partial class MainPage : Page
         this.InitializeComponent();
         this.DataContext = ViewModel;
         DailyGridView.ItemClick += DailyItemClicked;
+        MainPageViewModel.Instance.PropertyChanged += async (s, e) =>
+        {
+            if(e.PropertyName is "CurrentLocation")
+            {
+                Task.Delay(500);
+                MainContentContainer.Visibility = Visibility.Visible;
+            }
+        };
         Instance = this;
     }
 
