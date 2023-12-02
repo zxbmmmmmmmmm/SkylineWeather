@@ -57,7 +57,7 @@
     <Style BasedOn="{StaticResource ListViewItemRevealStyle}" TargetType="ListViewItem">
         <Setter Property="Margin" Value="-4,0" />
         <Setter Property="Padding" Value="16,4" />
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
     <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem" />
 </ResourceDictionary>

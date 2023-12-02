@@ -10,20 +10,24 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <controls:SettingsExpander Header="更新" HeaderIcon="sync" IsExpanded="True">
+    <controls:SettingsExpander
+        Header="更新"
+        HeaderIcon="sync"
+        IsExpanded="True">
         <controls:SettingsExpander.Items>
             <controls:SettingsCard
                 Padding="12"
-                Header="检查更新"
                 Description="从GitHub检查更新"
+                Header="检查更新"
                 HeaderIcon="sync">
-                <Button Content="检查" x:Name="CheckUpdateButton" Click="CheckUpdateButton_Click" />
+                <Button
+                    x:Name="CheckUpdateButton"
+                    Click="CheckUpdateButton_Click"
+                    Content="检查" />
             </controls:SettingsCard>
-            <controls:SettingsCard
-                Padding="12"
-                Header="自动检查更新">
+            <controls:SettingsCard Padding="12" Header="自动检查更新">
                 <controls:SettingsCard.HeaderIcon>
-                    <FontIcon Glyph="&#xE752;"/>
+                    <FontIcon Glyph="&#xE752;" />
                 </controls:SettingsCard.HeaderIcon>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.AutoCheckUpdates, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>

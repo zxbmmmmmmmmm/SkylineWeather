@@ -7,9 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
-    xmlns:models="using:FluentWeather.Abstraction.Models"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
@@ -146,9 +146,9 @@
                 </chart:RangeSeries.LowBinding>
             </chart:RangeSeries>
             <chart:RangeSeries
+                x:Name="RangeSeriesCooling"
                 Canvas.ZIndex="-1"
                 Fill="#4009B9FF"
-                x:Name="RangeSeriesCooling"
                 ItemsSource="{x:Bind GetCoolingData(WeatherForecasts), Mode=OneWay}"
                 Stroke="Transparent">
                 <chart:RangeSeries.CategoryBinding>
@@ -161,7 +161,7 @@
                     <chart:PropertyNameDataPointBinding PropertyName="MinTemperature" />
                 </chart:RangeSeries.LowBinding>
             </chart:RangeSeries>
-            
+
         </chart:RadCartesianChart>
 
     </Grid>

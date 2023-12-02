@@ -79,8 +79,11 @@
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="CloseRequested">
-                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Visible"/>
-                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationLeave}"/>
+                    <core:ChangePropertyAction
+                        PropertyName="Visibility"
+                        TargetObject="{x:Bind MainContentContainer}"
+                        Value="Visible" />
+                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationLeave}" />
                 </core:EventTriggerBehavior>
             </i:Interaction.Behaviors>
             <animations:Implicit.HideAnimations>
@@ -114,15 +117,13 @@
                         To="1"
                         Duration="0:0:0.6" />
                 </animations:ImplicitAnimationSet>
-                
+
             </animations:Implicit.ShowAnimations>
 
         </local:DailyViewPage>
-        <muxc:RefreshContainer
-            x:Name="MainContentContainer"
-            ui:VisualExtensions.NormalizedCenterPoint="0.5">
+        <muxc:RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.HideAnimations>
-                <animations:ImplicitAnimationSet >
+                <animations:ImplicitAnimationSet>
                     <animations:OpacityAnimation
                         EasingMode="EaseOut"
                         EasingType="Circle"
@@ -418,8 +419,11 @@
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
                                 <core:EventTriggerBehavior EventName="ItemClick">
-                                    <core:ChangePropertyAction TargetObject="{x:Bind MainContentContainer}" PropertyName="Visibility" Value="Collapsed"/>
-                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}"/>
+                                    <core:ChangePropertyAction
+                                        PropertyName="Visibility"
+                                        TargetObject="{x:Bind MainContentContainer}"
+                                        Value="Collapsed" />
+                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}" />
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </toolkit:AdaptiveGridView>
