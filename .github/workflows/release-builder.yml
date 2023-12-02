@@ -11,6 +11,7 @@ on:
 jobs:
   release:
     runs-on: windows-latest
+    name: Build Release ${{github.event.inputs.version}}
 
     env:
       SigningCertificate: App_TemporaryKey.pfx
