@@ -30,10 +30,9 @@
     </Page.Resources>
     <Grid>
         <Border
-            Background="#40404040"
             Canvas.ZIndex="2"
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
-            <ProgressRing Width="100" Height="100" />
+            <ProgressRing Width="100" Height="100" IsActive="True"/>
         </Border>
 
         <ScrollViewer
