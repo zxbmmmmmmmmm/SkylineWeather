@@ -880,12 +880,19 @@
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry" />
                                             </ContentControl.Clip>
-                                            <ScrollViewer HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Enabled" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" >
+                                            <ScrollViewer
+                                                HorizontalScrollBarVisibility="Hidden"
+                                                HorizontalScrollMode="Enabled"
+                                                VerticalScrollBarVisibility="Disabled"
+                                                VerticalScrollMode="Disabled">
                                                 <Grid Background="{ThemeResource PivotHeaderBackground}">
                                                     <Grid.RenderTransform>
                                                         <CompositeTransform x:Name="HeaderOffsetTranslateTransform" />
                                                     </Grid.RenderTransform>
-                                                    <PivotHeaderPanel x:Name="StaticHeader" Visibility="Visible" Margin="16,0">
+                                                    <PivotHeaderPanel
+                                                        x:Name="StaticHeader"
+                                                        Margin="16,0"
+                                                        Visibility="Visible">
                                                         <PivotHeaderPanel.RenderTransform>
                                                             <CompositeTransform x:Name="StaticHeaderTranslateTransform" />
                                                         </PivotHeaderPanel.RenderTransform>

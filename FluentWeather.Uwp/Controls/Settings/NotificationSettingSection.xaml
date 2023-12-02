@@ -29,10 +29,10 @@
                         <Button.Flyout>
                             <Flyout>
                                 <StackPanel>
-                                    <TextBox Text="{x:Bind app:Common.Settings.IgnoreWarningWords,Mode=TwoWay}"/>
-                                    <TextBlock  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Margin="0,8,0,0">
-                                        <Run Text="你可以屏蔽某些不必要的预警推送(如海上预警)"/>
-                                        <LineBreak/><Run Text="用&quot;|&quot;分割，支持正则表达式"/>
+                                    <TextBox Text="{x:Bind app:Common.Settings.IgnoreWarningWords, Mode=TwoWay}" />
+                                    <TextBlock Margin="0,8,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                        <Run Text="你可以屏蔽某些不必要的预警推送(如海上预警)" />
+                                        <LineBreak /><Run Text="用&quot;|&quot;分割，支持正则表达式" />
                                     </TextBlock>
                                 </StackPanel>
                             </Flyout>

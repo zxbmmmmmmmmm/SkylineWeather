@@ -69,6 +69,7 @@
                                 <HyperlinkButton Content="Progress Telerik UI for UWP" NavigateUri="https://github.com/telerik/UI-For-UWP" />
                                 <HyperlinkButton Content="ValueConverters.NET" NavigateUri="https://github.com/thomasgalliker/ValueConverters.NET" />
                                 <HyperlinkButton Content="MetroLog" NavigateUri="https://github.com/novotnyllc/MetroLog" />
+                                <HyperlinkButton Content="WinUICommunity" NavigateUri="https://github.com/WindowUI/WinUICommunity" />
                             </StackPanel>
                         </Flyout>
                     </Button.Flyout>
@@ -85,25 +86,31 @@
                         <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                     </i:Interaction.Behaviors>
                     <Button.Flyout>
-                        <Flyout Placement="BottomEdgeAlignedLeft" >
+                        <Flyout Placement="BottomEdgeAlignedLeft">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Spacing="12">
                                     <StackPanel>
-                                        <Image Source="/Assets/Sponsor/wx.jpg" Height="200" Width="200"/>
-                                        <TextBlock Text="微信支付" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                        <Image
+                                            Width="200"
+                                            Height="200"
+                                            Source="/Assets/Sponsor/wx.jpg" />
+                                        <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="微信支付" />
                                     </StackPanel>
                                     <StackPanel>
-                                        <Image Source="/Assets/Sponsor/zfb.jpg" Height="200" Width="200"/>
-                                        <TextBlock Text="支付宝" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                                        <Image
+                                            Width="200"
+                                            Height="200"
+                                            Source="/Assets/Sponsor/zfb.jpg" />
+                                        <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="支付宝" />
                                     </StackPanel>
                                 </StackPanel>
                                 <TextBlock>
-                                    <Run Text="如果喜欢本软件，可以扫码打赏任意金额支持开发者"/>
-                                    <LineBreak/><Run Text="也可以去"/>
+                                    <Run Text="如果喜欢本软件，可以扫码打赏任意金额支持开发者" />
+                                    <LineBreak /><Run Text="也可以去" />
                                     <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">GitHub</Hyperlink>
-                                    <Run Text="或者"/>
+                                    <Run Text="或者" />
                                     <Hyperlink NavigateUri="https://gitee.com/Betta_Fish/FluentWeather">Gitee</Hyperlink>
-                                    <Run Text="给个Starヾ(≧∇≦*)ヾ"/>
+                                    <Run Text="给个Starヾ(≧∇≦*)ヾ" />
                                 </TextBlock>
                             </StackPanel>
 
