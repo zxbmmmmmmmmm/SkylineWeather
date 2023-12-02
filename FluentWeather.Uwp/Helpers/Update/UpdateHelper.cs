@@ -22,7 +22,7 @@ public static class UpdateHelper
             throw new ArgumentNullException(nameof(repository));
 
         ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-        var client = new HttpClient();
+        using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("User-Agent", username);
         var url = string.Format(GITHUB_API, username, repository);
         var response = await client.GetAsync(url);
