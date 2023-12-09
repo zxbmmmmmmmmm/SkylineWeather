@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:primitives="using:Telerik.UI.Xaml.Controls.Chart.Primitives"
     xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
     d:DesignHeight="300"
@@ -24,12 +25,9 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <chart:RadCartesianChart PaletteName="DefaultLight">
+        <chart:RadCartesianChart>
             <chart:RadCartesianChart.HorizontalAxis>
-                <chart:CategoricalAxis
-                    BorderBrush="Transparent"
-                    PlotMode="BetweenTicks"
-                    Visibility="Collapsed">
+                <chart:CategoricalAxis LabelFormat="{}{0,0:H时}" PlotMode="BetweenTicks" ShowLabels="{x:Bind IsHorizontalAxisVisible,Mode=OneWay}">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -41,14 +39,10 @@
                         </Style>
                     </chart:CategoricalAxis.MajorTickStyle>
                 </chart:CategoricalAxis>
-
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis
-                    Maximum="{x:Bind MaxTemperature, Converter={StaticResource AddConverter}, ConverterParameter=2.5}"
-                    Minimum="{x:Bind MinTemperature, Converter={StaticResource AddConverter}, ConverterParameter=-0.5}"
-                    ShowLabels="False"
-                    Visibility="Collapsed">
+                <chart:LinearAxis LabelFormat="{}{0}°"
+                                  Maximum="{x:Bind MaxTemperature}" Minimum="{x:Bind MinTemperature}">
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -61,28 +55,79 @@
                     </chart:LinearAxis.MajorTickStyle>
                 </chart:LinearAxis>
             </chart:RadCartesianChart.VerticalAxis>
+
             <chart:RadCartesianChart.Grid>
-                <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed" />
+                <chart:CartesianChartGrid MajorLinesVisibility="Y" />
             </chart:RadCartesianChart.Grid>
-            <chart:SplineSeries
+            <chart:SplineAreaSeries
+                ClipToPlotArea="False"
                 CombineMode="Cluster"
                 ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
-                PointTemplate="{StaticResource PointTemplate}"
-                ShowLabels="True"
-                Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}">
-                <chart:SplineSeries.LabelDefinitions>
+                Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                StrokeThickness="3">
+                <chart:SplineAreaSeries.Fill>
+                    <LinearGradientBrush Opacity="0.4" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="{ThemeResource SystemBaseHighColor}" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </chart:SplineAreaSeries.Fill>
+                <chart:SplineAreaSeries.LabelDefinitions>
                     <chart:ChartSeriesLabelDefinition
-                        Margin="0,0,0,16"
+                        Margin="0,8,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center" />
-                </chart:SplineSeries.LabelDefinitions>
-                <chart:LineSeries.CategoryBinding>
+                </chart:SplineAreaSeries.LabelDefinitions>
+                <chart:SplineAreaSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
-                </chart:LineSeries.CategoryBinding>
-                <chart:LineSeries.ValueBinding>
+                </chart:SplineAreaSeries.CategoryBinding>
+                <chart:SplineAreaSeries.ValueBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Temperature" />
-                </chart:LineSeries.ValueBinding>
-            </chart:SplineSeries>
+                </chart:SplineAreaSeries.ValueBinding>
+                <chart:SplineAreaSeries.VerticalAxis>
+                    <chart:LinearAxis
+                        HorizontalLocation="Right" ShowLabels="False"
+                        Maximum="{x:Bind MaxTemperature}"
+                        Minimum="{x:Bind MinTemperature}">
+                        <chart:LinearAxis.LineStyle>
+                            <Style TargetType="Line">
+                                <Setter Property="Stroke" Value="Transparent" />
+                            </Style>
+                        </chart:LinearAxis.LineStyle>
+                        <chart:LinearAxis.MajorTickStyle>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Stroke" Value="Transparent" />
+                            </Style>
+                        </chart:LinearAxis.MajorTickStyle>
+                    </chart:LinearAxis>
+                </chart:SplineAreaSeries.VerticalAxis>
+                <chart:ChartTrackBallBehavior.TrackInfoTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <TextBlock>
+                                <Run Text="{Binding DataPoint.DataItem.Temperature}" /><Run Text="°" />
+                                <Run Text="{Binding DataPoint.DataItem.Description}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </chart:ChartTrackBallBehavior.TrackInfoTemplate>
+                <chart:ChartTrackBallBehavior.IntersectionTemplate>
+                    <DataTemplate>
+                        <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <TextBlock Margin="6,4">
+                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature}" /><Run Text="°" />
+                                <Run Text="{Binding DataPoint.DataItem.Description}" />
+                            </TextBlock>
+                        </Border>
+                    </DataTemplate>
+                </chart:ChartTrackBallBehavior.IntersectionTemplate>
+            </chart:SplineAreaSeries>
+            <chart:RadCartesianChart.Behaviors>
+                <chart:ChartTrackBallBehavior ShowInfo="False" ShowIntersectionPoints="True" />
+            </chart:RadCartesianChart.Behaviors>
+
         </chart:RadCartesianChart>
 
     </Grid>

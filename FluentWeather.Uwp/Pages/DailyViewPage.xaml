@@ -53,27 +53,30 @@
                 </Pivot.HeaderTemplate>
                 <Pivot.ItemTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                            <Grid>
-                                <Grid.ChildrenTransitions>
-                                    <TransitionCollection>
-                                        <EntranceThemeTransition IsStaggeringEnabled="False" />
-                                    </TransitionCollection>
-                                </Grid.ChildrenTransitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <controls:HourlyTemperatureChart
+                        <UserControl>
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                                <Grid>
+                                    <Grid.ChildrenTransitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition IsStaggeringEnabled="False" />
+                                        </TransitionCollection>
+                                    </Grid.ChildrenTransitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <controls:HourlyTemperatureChart
+                                    x:Name="HourlyTemperatureChart"
                                     Grid.Row="0"
+                                    IsHorizontalAxisVisible="False"
                                     Height="256"
                                     Margin="14,64,22,0"
                                     HourlyForecasts="{Binding HourlyForecasts}"
                                     Visibility="{Binding HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
-                                <Grid Grid.Row="1" Margin="0,16,0,0">
-                                    <controls1:AdaptiveGridView
+                                    <Grid Grid.Row="1" Margin="0,16,0,0">
+                                        <controls1:AdaptiveGridView
                                         x:Name="HourlyGridView"
                                         Margin="16,16,16,0"
                                         HorizontalAlignment="Stretch"
@@ -85,12 +88,12 @@
                                         ItemsSource="{Binding HourlyForecasts}"
                                         OneRowModeEnabled="True"
                                         SelectionMode="None">
-                                        <i:Interaction.Behaviors>
-                                            <behaviors:ListViewScrollBehavior />
-                                            <behaviors:ListViewOpenFlyoutBehavior />
-                                        </i:Interaction.Behaviors>
-                                    </controls1:AdaptiveGridView>
-                                    <Button
+                                            <i:Interaction.Behaviors>
+                                                <behaviors:ListViewScrollBehavior />
+                                                <behaviors:ListViewOpenFlyoutBehavior />
+                                            </i:Interaction.Behaviors>
+                                        </controls1:AdaptiveGridView>
+                                        <Button
                                         Width="40"
                                         Height="40"
                                         HorizontalAlignment="Left"
@@ -99,18 +102,18 @@
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         CornerRadius="50">
-                                        <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
-                                        <i:Interaction.Behaviors>
-                                            <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
-                                        </i:Interaction.Behaviors>
-                                        <Button.Resources>
-                                            <ResourceDictionary>
-                                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                            </ResourceDictionary>
-                                        </Button.Resources>
-                                    </Button>
-                                    <Button
+                                            <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
+                                            <i:Interaction.Behaviors>
+                                                <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
+                                            </i:Interaction.Behaviors>
+                                            <Button.Resources>
+                                                <ResourceDictionary>
+                                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
+                                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
+                                                </ResourceDictionary>
+                                            </Button.Resources>
+                                        </Button>
+                                        <Button
                                         Width="40"
                                         Height="40"
                                         HorizontalAlignment="Right"
@@ -118,21 +121,21 @@
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         CornerRadius="50">
-                                        <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
-                                        <i:Interaction.Behaviors>
-                                            <behaviors:ListViewScrollButtonBehavior ListView="{Binding ElementName=HourlyGridView}" />
-                                        </i:Interaction.Behaviors>
-                                        <Button.Resources>
-                                            <ResourceDictionary>
-                                                <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                                <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                            </ResourceDictionary>
-                                        </Button.Resources>
-                                    </Button>
+                                            <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
+                                            <i:Interaction.Behaviors>
+                                                <behaviors:ListViewScrollButtonBehavior ListView="{Binding ElementName=HourlyGridView}" />
+                                            </i:Interaction.Behaviors>
+                                            <Button.Resources>
+                                                <ResourceDictionary>
+                                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
+                                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
+                                                </ResourceDictionary>
+                                            </Button.Resources>
+                                        </Button>
 
-                                </Grid>
+                                    </Grid>
 
-                                <TextBlock
+                                    <TextBlock
                                     Grid.Row="2"
                                     Margin="16,4,12,0"
                                     FontSize="16"
@@ -147,8 +150,8 @@
                                         FontSize="14"
                                         Text="  &#xE099; " /><Run Text="日落" />
                                     <Run Text="{x:Bind SunSet.ToShortTimeString()}" />
-                                </TextBlock>
-                                <controls1:AdaptiveGridView
+                                    </TextBlock>
+                                    <controls1:AdaptiveGridView
                                     Grid.Row="3"
                                     Margin="2,0,2,0"
                                     HorizontalAlignment="Stretch"
@@ -157,160 +160,174 @@
                                     IsItemClickEnabled="True"
                                     ItemHeight="90"
                                     SelectionMode="None">
-                                    <controls1:AdaptiveGridView.Items>
-                                        <StackPanel x:Name="WindInfoPanel" Margin="12">
-                                            <TextBlock
+                                        <controls1:AdaptiveGridView.Items>
+                                            <StackPanel x:Name="WindInfoPanel" Margin="12">
+                                                <TextBlock
                                                 FontSize="18"
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="{x:Bind WindDirection}" />
-                                            <TextBlock FontSize="25">
+                                                <TextBlock FontSize="25">
                                                 <Run FontSize="25" Text="{Binding WindScale}" />
                                                 <Run FontSize="16" Text="级" />
-                                            </TextBlock>
-                                            <FlyoutBase.AttachedFlyout>
-                                                <Flyout>
-                                                    <StackPanel MaxWidth="256">
-                                                        <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="{x:Bind WindDirection}" />
                                                             <Run Text="-" />
                                                             <Run Text="{x:Bind WindScale}" />
                                                             <Run FontSize="14" Text="级" />
-                                                        </TextBlock>
-                                                        <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                            </TextBlock>
+                                                            <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="{x:Bind WindSpeed}" />
                                                             <Run Text="km/h" />
-                                                        </TextBlock>
-                                                        <TextBlock
+                                                            </TextBlock>
+                                                            <TextBlock
                                                             FontSize="16"
                                                             IsTextSelectionEnabled="True"
                                                             Text="{x:Bind WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
                                                             TextWrapping="Wrap" />
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </FlyoutBase.AttachedFlyout>
-                                        </StackPanel>
-                                        <StackPanel Margin="12">
-                                            <TextBlock
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                            <StackPanel Margin="12">
+                                                <TextBlock
                                                 FontSize="18"
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="湿度" />
-                                            <TextBlock FontSize="25">
+                                                <TextBlock FontSize="25">
                                                 <Run FontSize="25" Text="{x:Bind Humidity}" />
                                                 <Run FontSize="16" Text="%" />
-                                            </TextBlock>
-                                            <FlyoutBase.AttachedFlyout>
-                                                <Flyout>
-                                                    <StackPanel MaxWidth="256">
-                                                        <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="湿度 -" />
                                                             <Run Text="{x:Bind Humidity}" />
                                                             <Run FontSize="14" Text="%" />
-                                                        </TextBlock>
-                                                        <TextBlock
+                                                            </TextBlock>
+                                                            <TextBlock
                                                             FontSize="16"
                                                             IsTextSelectionEnabled="True"
                                                             TextWrapping="Wrap">
                                                             相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </FlyoutBase.AttachedFlyout>
-                                        </StackPanel>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
 
-                                        <StackPanel Margin="12">
-                                            <TextBlock
+                                            <StackPanel Margin="12">
+                                                <TextBlock
                                                 FontSize="18"
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="气压" />
-                                            <TextBlock FontSize="25">
+                                                <TextBlock FontSize="25">
                                                 <Run FontSize="25" Text="{x:Bind Pressure}" />
                                                 <Run FontSize="16" Text="hPa" />
-                                            </TextBlock>
-                                            <FlyoutBase.AttachedFlyout>
-                                                <Flyout>
-                                                    <StackPanel MaxWidth="256">
-                                                        <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="气压" />
                                                             <Run Text="-" />
                                                             <Run Text="{x:Bind Pressure}" />
                                                             <Run FontSize="14" Text="hPa" />
-                                                        </TextBlock>
-                                                        <TextBlock
+                                                            </TextBlock>
+                                                            <TextBlock
                                                             FontSize="16"
                                                             IsTextSelectionEnabled="True"
                                                             TextWrapping="Wrap">
                                                             大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </FlyoutBase.AttachedFlyout>
-                                        </StackPanel>
-                                        <StackPanel Margin="12">
-                                            <TextBlock
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                            <StackPanel Margin="12">
+                                                <TextBlock
                                                 FontSize="18"
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="能见度" />
-                                            <TextBlock FontSize="25">
+                                                <TextBlock FontSize="25">
                                                 <Run FontSize="25" Text="{x:Bind Visibility}" />
                                                 <Run FontSize="16" Text="km" />
-                                            </TextBlock>
-                                            <FlyoutBase.AttachedFlyout>
-                                                <Flyout>
-                                                    <StackPanel MaxWidth="256">
-                                                        <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="能见度" />
                                                             <Run Text="-" />
                                                             <Run Text="{x:Bind Visibility}" />
                                                             <Run FontSize="14" Text="km" />
-                                                        </TextBlock>
-                                                        <TextBlock
+                                                            </TextBlock>
+                                                            <TextBlock
                                                             FontSize="16"
                                                             IsTextSelectionEnabled="True"
                                                             TextWrapping="Wrap">
                                                             视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </FlyoutBase.AttachedFlyout>
-                                        </StackPanel>
-                                        <StackPanel Margin="12" Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
-                                            <TextBlock
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                            <StackPanel Margin="12" Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <TextBlock
                                                 FontSize="18"
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="云量" />
-                                            <TextBlock FontSize="25">
+                                                <TextBlock FontSize="25">
                                                 <Run FontSize="25" Text="{Binding CloudAmount}" />
                                                 <Run FontSize="16" Text="%" />
-                                            </TextBlock>
-                                            <FlyoutBase.AttachedFlyout>
-                                                <Flyout>
-                                                    <StackPanel MaxWidth="256">
-                                                        <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="云量" />
                                                             <Run Text="-" />
                                                             <Run Text="{Binding CloudAmount}" />
                                                             <Run FontSize="14" Text="%" />
-                                                        </TextBlock>
-                                                        <TextBlock
+                                                            </TextBlock>
+                                                            <TextBlock
                                                             FontSize="16"
                                                             IsTextSelectionEnabled="True"
                                                             TextWrapping="Wrap">
                                                             天空被云所遮蔽的比例
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                </Flyout>
-                                            </FlyoutBase.AttachedFlyout>
-                                        </StackPanel>
+                                                            </TextBlock>
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
 
-                                    </controls1:AdaptiveGridView.Items>
-                                    <i:Interaction.Behaviors>
-                                        <behaviors:ListViewOpenFlyoutBehavior />
-                                    </i:Interaction.Behaviors>
-                                </controls1:AdaptiveGridView>
+                                        </controls1:AdaptiveGridView.Items>
+                                        <i:Interaction.Behaviors>
+                                            <behaviors:ListViewOpenFlyoutBehavior />
+                                        </i:Interaction.Behaviors>
+                                    </controls1:AdaptiveGridView>
 
-                            </Grid>
+                                </Grid>
 
-                        </ScrollViewer>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="800" />
+                                            </VisualState.StateTriggers>
+                                            <VisualState.Setters>
+                                                <Setter Target="HourlyTemperatureChart.IsHorizontalAxisVisible" Value="true" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                            </ScrollViewer>
+                        </UserControl>
                     </DataTemplate>
                 </Pivot.ItemTemplate>
                 <Pivot.Resources>
