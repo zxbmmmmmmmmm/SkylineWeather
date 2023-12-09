@@ -990,7 +990,7 @@
     </Style>
 
     <!--  Data Templates  -->
-    <DataTemplate x:Name="WeatherForecastTemplate" x:DataType="models:WeatherBase">
+    <DataTemplate x:Key="WeatherForecastTemplate" x:DataType="models:WeatherDailyBase">
         <UserControl>
             <StackPanel
                 VerticalAlignment="Center"
@@ -1012,13 +1012,16 @@
                     HorizontalAlignment="Center"
                     FontSize="{ThemeResource WeatherDescriptionFontSize}"
                     Text="{Binding Description}" />
-                <TextBlock
-                    x:Name="TemperatureText"
-                    HorizontalAlignment="Center"
-                    FontSize="16">
-                    <Run FontWeight="SemiBold" Text="{Binding MinTemperature}" /><Run Text="°" />
-                    <Run Text="/" />
-                    <Run FontWeight="SemiBold" Text="{Binding MaxTemperature}" /><Run Text="°" />
+                <TextBlock x:Name="TemperatureText" HorizontalAlignment="Center">
+                    <Run
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Text="{Binding MinTemperature}" /><Run FontSize="22" Text="°" />
+                    <Run
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                        Text="{Binding MaxTemperature}" /><Run FontSize="16" Text="°" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                 </TextBlock>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
@@ -1035,7 +1038,7 @@
             </StackPanel>
         </UserControl>
     </DataTemplate>
-    <DataTemplate x:Key="WeatherHourlyForecastTemplate" x:DataType="models:WeatherBase">
+    <DataTemplate x:Key="WeatherHourlyForecastTemplate" x:DataType="models:WeatherHourlyBase">
         <StackPanel
             VerticalAlignment="Center"
             x:DefaultBindMode="OneWay"
