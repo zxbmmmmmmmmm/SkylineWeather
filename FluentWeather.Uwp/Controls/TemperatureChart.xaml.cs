@@ -74,7 +74,9 @@ public sealed partial class TemperatureChart : UserControl
                     list.Add(weatherForecasts[i]);
                 if (!list.Contains(weatherForecasts[i+1]))
                     list.Add(weatherForecasts[i + 1]);
+                break;
             }
+
         }
         return list;
     }
@@ -89,6 +91,7 @@ public sealed partial class TemperatureChart : UserControl
                     list.Add(weatherForecasts[i]);
                 if (!list.Contains(weatherForecasts[i + 1]))
                     list.Add(weatherForecasts[i + 1]);
+                break;
             }
         }
         return list;
