@@ -1016,12 +1016,12 @@
                     <Run
                         FontSize="22"
                         FontWeight="SemiBold"
-                        Text="{Binding MinTemperature}" /><Run FontSize="22" Text="°" />
+                        Text="{Binding MaxTemperature}" /><Run FontSize="22" Text="°" />
                     <Run
                         FontSize="16"
                         FontWeight="SemiBold"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Text="{Binding MaxTemperature}" /><Run FontSize="16" Text="°" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        Text="{Binding MinTemperature}" /><Run FontSize="16" Text="°" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                 </TextBlock>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
