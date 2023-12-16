@@ -13,7 +13,7 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d">
 
-    <Grid x:DefaultBindMode="OneWay">
+    <Grid>
         <Border x:Name="PlaceholderBorder" Background="{ThemeResource SystemControlTransparentBrush}" />
 
         <Grid MaxWidth="1100" MaxHeight="810">
@@ -37,7 +37,7 @@
                 Margin="32,80,32,0"
                 x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
-                ItemsSource="{x:Bind DailyForecasts}"
+                ItemsSource="{x:Bind DailyForecasts,Mode=OneWay}"
                 SelectedItem="{x:Bind SelectedItem, Mode=TwoWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
