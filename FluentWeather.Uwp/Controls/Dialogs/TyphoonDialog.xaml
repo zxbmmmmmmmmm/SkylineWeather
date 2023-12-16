@@ -49,14 +49,14 @@
                     <TextBlock
                         Width="20"
                         Margin="4,4,0,0"
-                        maps:MapControl.Location="{x:Bind point24}"
+                        maps:MapControl.Location="{x:Bind _point24}"
                         Foreground="#CCFFFF00"
                         Text="24小时警戒线"
                         TextWrapping="Wrap" />
                     <TextBlock
                         Width="20"
                         Margin="4,4,0,0"
-                        maps:MapControl.Location="{x:Bind point48}"
+                        maps:MapControl.Location="{x:Bind _point48}"
                         Foreground="#99FFFF00"
                         Text="48小时警戒线"
                         TextWrapping="Wrap" />

@@ -25,13 +25,13 @@ namespace FluentWeather.Uwp.ViewModels;
 public partial class CitiesPageViewModel:ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<GeolocationBase> cities;
+    private ObservableCollection<GeolocationBase> _cities;
     [ObservableProperty]
-    private GeolocationBase currentCity;
+    private GeolocationBase _currentCity;
     [ObservableProperty]
-    private string query;
+    private string _query;
     [ObservableProperty]
-    private List<GeolocationBase> suggestedCities;
+    private List<GeolocationBase> _suggestedCities;
     public static CitiesPageViewModel Instance { get; private set; }
     public CitiesPageViewModel()
     {

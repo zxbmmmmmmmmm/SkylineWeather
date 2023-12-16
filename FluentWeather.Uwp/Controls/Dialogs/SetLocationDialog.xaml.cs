@@ -38,11 +38,11 @@ public sealed partial class SetLocationDialog : ContentDialog
         }
     }
     [ObservableProperty]
-    private string query;
+    private string _query;
     [ObservableProperty]
-    private ObservableCollection<GeolocationBase> suggestedCities = new();
+    private ObservableCollection<GeolocationBase> _suggestedCities = new();
     [ObservableProperty]
-    private GeolocationBase chosenGeolocation;
+    private GeolocationBase _chosenGeolocation;
 
     private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {

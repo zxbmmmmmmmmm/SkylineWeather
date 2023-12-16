@@ -106,7 +106,7 @@
                                     <controls1:MarkdownTextBlock
                                         Width="400"
                                         Background="Transparent"
-                                        Text="{x:Bind backgroundImageSettingInfo}"
+                                        Text="{x:Bind _backgroundImageSettingInfo}"
                                         TextWrapping="Wrap" />
                                 </Flyout>
                             </Button.Flyout>

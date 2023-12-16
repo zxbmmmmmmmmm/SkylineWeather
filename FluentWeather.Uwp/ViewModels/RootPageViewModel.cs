@@ -16,7 +16,7 @@ namespace FluentWeather.Uwp.ViewModels;
 public partial class RootPageViewModel:ObservableObject
 {
     [ObservableProperty]
-    private bool isPaneOpen = false;
+    private bool _isPaneOpen = false;
 
     [RelayCommand]
     private void TogglePane()

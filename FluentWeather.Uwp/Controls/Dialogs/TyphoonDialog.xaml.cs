@@ -43,9 +43,9 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         }
         public const string MapStyleSheetJson = "{\"version\":\"1.*\",\"settings\":{},\"elements\":{\"transportation\":{\"visible\":false},\"road\":{\"labelVisible\":false}}}";
         [ObservableProperty]
-        private ObservableCollection<TyphoonTrackBase> tracks = new();
+        private ObservableCollection<TyphoonTrackBase> _tracks = new();
         [ObservableProperty]
-        private ObservableCollection<TyphoonBase> typhoons = new();
+        private ObservableCollection<TyphoonBase> _typhoons = new();
         public async void GetTyphoons()
         {
             if(Common.Settings.QWeatherDomain is "devapi.qweather.com")
@@ -217,8 +217,8 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             TyphoonMap.MapElements.Add(line24);
             TyphoonMap.MapElements.Add(line48);
         }
-        private readonly Geopoint point24 = new Geopoint(new BasicGeoposition { Longitude = 127, Latitude = 34 });
-        private readonly Geopoint point48 = new Geopoint(new BasicGeoposition { Longitude = 132, Latitude = 34 });
+        private readonly Geopoint _point24 = new Geopoint(new BasicGeoposition { Longitude = 127, Latitude = 34 });
+        private readonly Geopoint _point48 = new Geopoint(new BasicGeoposition { Longitude = 132, Latitude = 34 });
 
         [RelayCommand]
         public void Close()

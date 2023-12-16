@@ -19,35 +19,35 @@ public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
-    private List<WeatherDailyBase> dailyForecasts =new();
+    private List<WeatherDailyBase> _dailyForecasts =new();
     public List<WeatherDailyBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
-    private List<WeatherHourlyBase> hourlyForecasts = new();
+    private List<WeatherHourlyBase> _hourlyForecasts = new();
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
 
     [ObservableProperty]
-    private List<WeatherWarningBase> warnings ;
+    private List<WeatherWarningBase> _warnings ;
 
     [ObservableProperty]
-    private WeatherNowBase weatherNow;
+    private WeatherNowBase _weatherNow;
 
     [ObservableProperty]
-    private string weatherDescription;
+    private string _weatherDescription;
     [ObservableProperty]
-    private DateTime sunRise;
+    private DateTime _sunRise;
     [ObservableProperty]
-    private DateTime sunSet;
+    private DateTime _sunSet;
 
     [ObservableProperty]
-    private GeolocationBase currentLocation;
+    private GeolocationBase _currentLocation;
     [ObservableProperty]
-    private List<IndicesBase> indices;
+    private List<IndicesBase> _indices;
     [ObservableProperty]
-    private PrecipitationBase precipitation;
+    private PrecipitationBase _precipitation;
     [ObservableProperty]
-    private AirConditionBase airCondition;
+    private AirConditionBase _airCondition;
     public static MainPageViewModel Instance{ get; private set; }
     public MainPageViewModel()
     {
@@ -180,5 +180,5 @@ public partial class MainPageViewModel : ObservableObject
         TTSHelper.Speech(text);
     }
     [ObservableProperty]
-    private bool isLoading = true;
+    private bool _isLoading = true;
 }

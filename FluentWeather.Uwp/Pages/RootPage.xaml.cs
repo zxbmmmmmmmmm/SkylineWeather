@@ -92,7 +92,7 @@ public sealed partial class RootPage : Page
         ThemeHelper.SetTitleBarColor(Common.Settings.ApplicationTheme);
     }
     [ObservableProperty]
-    public bool canGoBack;
+    private bool _canGoBack;
     
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
