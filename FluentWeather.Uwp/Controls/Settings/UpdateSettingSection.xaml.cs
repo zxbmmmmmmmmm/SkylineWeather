@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 using CommunityToolkit.WinUI.Helpers;
 using Microsoft.AppCenter.Analytics;
 using System.Security.Cryptography.X509Certificates;
+using FluentWeather.Uwp.Controls.Dialogs;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -41,7 +42,7 @@ namespace FluentWeather.Uwp.Controls.Settings
                 var info = await UpdateHelper.CheckUpdateAsync("zxbmmmmmmmmm", "FluentWeather", new Version(versionString));
                 var viewAction = new Action(() =>
                 {
-                    Launcher.LaunchUriAsync(new Uri(info.HtmlUrl));
+                    new UpdateDialog(info).ShowAsync();
                 });
                 if (info.IsExistNewVersion)
                 {
@@ -49,7 +50,7 @@ namespace FluentWeather.Uwp.Controls.Settings
                 }
                 else
                 {
-                    InfoBarHelper.Success("应用为最新版本", versionString);
+                    InfoBarHelper.Success("应用为最新版本", versionString, action: viewAction, buttonContent: "查看");
                 }
             }
             catch (Exception ex)
