@@ -7,6 +7,7 @@ using FluentWeather.DIContainer;
 using FluentWeather.Tasks;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             SunRise = astronomic.SunRise;
             SunSet = astronomic.SunSet;
-        }      
+        }
     }
     public async Task GetHourlyForecast(double lon,double lat)
     {
@@ -162,8 +163,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             await Refresh();
         }
-
-
+        Analytics.TrackEvent("WeatherDataObtained", new Dictionary<string, string> { { "CityName", geo.Name } });
     }
     [RelayCommand]
     public void SpeechWeather()

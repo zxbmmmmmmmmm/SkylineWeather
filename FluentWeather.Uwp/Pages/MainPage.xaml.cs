@@ -23,6 +23,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Graphics.Canvas.Effects;
 using System.Threading.Tasks;
+using Microsoft.AppCenter.Analytics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -50,6 +51,7 @@ public sealed partial class MainPage : Page
     private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
         DailyView.SelectedItem = e.ClickedItem as WeatherDailyBase;
+        Analytics.TrackEvent("DailyViewEntered");
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)

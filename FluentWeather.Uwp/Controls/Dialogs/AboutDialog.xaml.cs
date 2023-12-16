@@ -28,9 +28,7 @@ public sealed partial class AboutDialog : ContentDialog
     public AboutDialog()
     {
         this.InitializeComponent();
-#if (!DEBUG)
-        Analytics.TrackEvent("AboutOpened");
-#endif
+        Analytics.TrackEvent("AboutOpened", new Dictionary<string, string> { { "CurrentVersion", AppVersion } });
     }
     [RelayCommand]
     public void Close()

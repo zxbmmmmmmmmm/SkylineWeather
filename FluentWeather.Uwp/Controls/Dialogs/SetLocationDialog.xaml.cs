@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Shared;
+using Microsoft.AppCenter.Analytics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
@@ -53,6 +54,7 @@ public sealed partial class SetLocationDialog : ContentDialog
     {
         Common.Settings.DefaultGeolocation = ChosenGeolocation;
         Hide();
+        Analytics.TrackEvent("DefaultLocationChanged", new Dictionary<string, string> { { "CityName", ChosenGeolocation.Name } });
     }
 
     private async void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
