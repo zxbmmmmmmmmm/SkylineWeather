@@ -1096,7 +1096,7 @@
                         </StackPanel>
                         <TextBlock FontSize="16">
                             <Run Text="{Binding WindDirection}" />
-                            <Run Text="{Binding WindSpeed}" /><Run FontSize="12.5" Text="km/h" />
+                            <Run Text="{Binding WindScale}" /><Run FontSize="12.5" Text="级" />
                         </TextBlock>
                         <StackPanel
                             HorizontalAlignment="Left"
