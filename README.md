@@ -1,19 +1,13 @@
 # FluentWeather
 
-一个UWP天气应用，用于替代系统自带的MSN Weather
-
-支持Windows 10 Mobile
+UWP天气应用，用于替代系统自带的MSN Weather
 
 ![image](https://github.com/zxbmmmmmmmmm/FluentWeather/assets/96322503/2daf38d4-df5e-45c3-bd30-7f72cf0924e4)
 
 ## 下载
 ![Release Status](https://img.shields.io/github/v/release/zxbmmmmmmmmm/FluentWeather)
 
-完整版:
 https://wwxk.lanzouj.com/b02x4kddg
-
-Lite版(支持Windows 10 Mobile):
-https://wwxk.lanzouj.com/b02x4spkd
 
 ## 功能
 - 实时天气
