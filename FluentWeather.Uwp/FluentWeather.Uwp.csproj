@@ -4,7 +4,7 @@
   <PropertyGroup>
     <LangVersion>latestMajor</LangVersion>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>E2586E5814022A00D557CC2495E7929DABCBEEB1</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>273B17C3FD4B2E52382899B29331EFADCD351294</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -506,6 +506,7 @@
     <Content Include="Assets\Fonts\WeatherColorIcons.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="App_TemporaryKey.pfx" />
     <None Include="FluentWeather.Uwp_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
   </ItemGroup>
