@@ -14,9 +14,10 @@ public class WeatherDailyBase : WeatherBase, IWeatherNight, ITemperatureRange, I
     public DateTime Time { get; set; }
     public int Visibility { get; set; }
     public WeatherBase WeatherNight { get; set; }
-    public string WindDirection { get; set; }
+    public string WindDirectionDescription { get; set; }
     public string WindScale { get; set; }
     public int WindSpeed { get; set; }
     public DateTime SunRise { get; set; }
     public DateTime SunSet { get; set; }
+    public WindDirection WindDirection { get; set; }
 }

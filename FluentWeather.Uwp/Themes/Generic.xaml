@@ -1005,23 +1005,23 @@
                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                     Text="{Binding Time, Converter={StaticResource ShortDateConverter}}" />
                 <Image
-                    Height="45"
+                    Height="50" Width="50"
                     Source="{Binding WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
                     Stretch="Uniform" />
                 <TextBlock
-                    HorizontalAlignment="Center"
+                    TextAlignment="Center"
                     FontSize="{ThemeResource WeatherDescriptionFontSize}"
-                    Text="{Binding Description}" />
-                <TextBlock x:Name="TemperatureText" HorizontalAlignment="Center">
+                    Text="{Binding Description}" TextWrapping="Wrap"/>
+                <TextBlock x:Name="TemperatureText" TextAlignment="Center" >
                     <Run
                         FontSize="22"
                         FontWeight="SemiBold"
-                        Text="{Binding MinTemperature}" /><Run FontSize="22" Text="°" />
+                        Text="{Binding MaxTemperature}" /><Run FontSize="22" Text="°" />
                     <Run
                         FontSize="16"
                         FontWeight="SemiBold"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Text="{Binding MaxTemperature}" /><Run FontSize="16" Text="°" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        Text="{Binding MinTemperature}" /><Run FontSize="16" Text="°" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                 </TextBlock>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup>
@@ -1095,7 +1095,7 @@
                             </TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="16">
-                            <Run Text="{Binding WindDirection}" />
+                            <Run Text="{Binding WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                             <Run Text="{Binding WindSpeed}" /><Run FontSize="12.5" Text="km/h" />
                         </TextBlock>
                         <StackPanel

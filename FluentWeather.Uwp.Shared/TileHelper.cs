@@ -158,7 +158,7 @@ namespace FluentWeather.Uwp.Shared
             builder.Content.Visual.BaseUri = new Uri("Assets/Weather/", UriKind.Relative);
 
             builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
-            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirection} {((IWind)daily[0]).WindScale}级";
+            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirectionDescription} {((IWind)daily[0]).WindScale}级";
 
 
             return builder.Content;
@@ -201,7 +201,7 @@ namespace FluentWeather.Uwp.Shared
 
                             new AdaptiveText()
                             {
-                                Text = ((IWind)daily[0]).WindDirection  + ((IWind)daily[0]).WindSpeed + "km/h",
+                                Text = ((IWind)daily[0]).WindDirectionDescription  + ((IWind)daily[0]).WindSpeed + "km/h",
                                 HintStyle = AdaptiveTextStyle.CaptionSubtle
                             }
                         }

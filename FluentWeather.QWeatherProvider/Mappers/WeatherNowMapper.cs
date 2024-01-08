@@ -9,7 +9,7 @@ public static class WeatherNowMapper
     {
         return new QWeatherNow
         {
-            WindDirection  = item.WindDir,
+            WindDirectionDescription  = item.WindDir,
             WindScale = item.WindScale,
             WindSpeed = int.Parse(item.WindSpeed),
             Humidity = int.Parse(item.Humidity),

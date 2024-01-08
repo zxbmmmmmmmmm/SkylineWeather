@@ -411,7 +411,7 @@
                             HorizontalContentAlignment="Stretch"
                             DesiredWidth="120"
                             IsItemClickEnabled="True"
-                            ItemHeight="165"
+                            ItemHeight="190"
                             ItemTemplate="{StaticResource WeatherForecastTemplate}"
                             ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                             OneRowModeEnabled="True"
@@ -577,7 +577,7 @@
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
+                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                         <Run FontSize="16" Text="级" />
@@ -586,7 +586,7 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                                     <Run Text="-" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                                     <Run FontSize="14" Text="级" />

@@ -6,9 +6,9 @@ public class WeatherNowBase:WeatherBase, IWind, ITemperature, IPressure, IHumidi
 {
     public int Humidity { get; set; }
     public int Pressure { get; set; }
-    public string WindDirection { get; set; }
+    public string WindDirectionDescription { get; set; }
     public string WindScale { get; set; }
     public int WindSpeed { get; set; }
     public int Temperature { get; set; }
-
+    public WindDirection WindDirection { get; set; }
 }

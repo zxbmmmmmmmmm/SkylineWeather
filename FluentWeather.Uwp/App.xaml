@@ -26,6 +26,7 @@
             </valueConverters2:ValueConverterGroup>
             <valueConverters:VisibilityInverter x:Name="VisibilityInverter" />
             <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter" />
+            <valueConverters:WindDirectionToDescriptionConverter x:Name="WindDirectionToDescriptionConverter" />
 
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True" />
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />

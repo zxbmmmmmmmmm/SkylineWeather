@@ -1,11 +1,14 @@
-﻿namespace FluentWeather.Abstraction.Interfaces.Weather;
+﻿using FluentWeather.Abstraction.Models;
+
+namespace FluentWeather.Abstraction.Interfaces.Weather;
 
 public interface IWind
 {
     /// <summary>
     /// 风向
     /// </summary>
-    string WindDirection{ get; set; }
+    string WindDirectionDescription{ get; set; }
+    public WindDirection WindDirection { get; set; }
     /// <summary>
     /// 风力等级
     /// </summary>

@@ -15,6 +15,8 @@ public static class DIFactory
         Locator.ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
         //Locator.ServiceDescriptors.AddSingleton(typeof(string), "b18d888d25b4437cbae4bbf36990092e");
         QWeatherProvider.QWeatherProvider.RegisterRequiredServices();//最后注册天气服务
+        OpenMeteoProvider.OpenMeteoProvider.RegisterRequiredServices();//最后注册天气服务
+
         QGeoProvider.QGeoProvider.RegisterRequiredServices();
     }
     public static void ReadSettings()

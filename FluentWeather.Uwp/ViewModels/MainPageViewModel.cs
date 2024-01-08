@@ -146,14 +146,14 @@ public partial class MainPageViewModel : ObservableObject
         var cacheData = await CacheHelper.GetWeatherCache(CurrentLocation);
         if (cacheData is not null)
         {
-            DailyForecasts = cacheData.DailyForecasts.ConvertAll(p => p as WeatherDailyBase);
+            DailyForecasts = cacheData.DailyForecasts;
             SunRise = cacheData.SunRise;
             SunSet = cacheData.SunSet;
             AirCondition = cacheData.AirCondition;
-            HourlyForecasts = cacheData.HourlyForecasts.ConvertAll(p => p as WeatherHourlyBase);
+            HourlyForecasts = cacheData.HourlyForecasts;
             Indices = cacheData.Indices;
             Precipitation = cacheData.Precipitation;
-            Warnings = cacheData.Warnings.ConvertAll(p => p as WeatherWarningBase);
+            Warnings = cacheData.Warnings;
             WeatherDescription = cacheData.WeatherDescription;
             WeatherNow = cacheData.WeatherNow;
             IsLoading = false;

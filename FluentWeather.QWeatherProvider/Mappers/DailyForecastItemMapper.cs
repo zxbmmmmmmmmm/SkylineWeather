@@ -11,7 +11,7 @@ public static class DailyForecastItemMapper
         return new QWeatherDailyForecast
         {
             Description = item.TextDay,
-            WindDirection = item.WindDirDay,
+            WindDirectionDescription = item.WindDirDay,
             WindScale = item.WindScaleDay,
             WindSpeed = int.Parse(item.WindSpeedDay),
             Humidity = int.Parse(item.Humidity),
@@ -27,7 +27,7 @@ public static class DailyForecastItemMapper
             WeatherNight = new QWeatherNight
             {
                 Description = item.TextNight,
-                WindDirection = item.WindDirNight,
+                WindDirectionDescription = item.WindDirNight,
                 WindScale = item.WindScaleNight,
                 WindSpeed = int.Parse(item.WindSpeedNight),
             }

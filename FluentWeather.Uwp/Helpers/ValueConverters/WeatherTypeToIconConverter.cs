@@ -32,7 +32,9 @@ public class WeatherTypeToIconConverter:IValueConverter
         {
             Hail => "BlowingHail.png",
             HeavyRain => "HeavyRain.png",
+            ModerateRain => "LightRain.png",
             LightRain => "LightRain.png",
+            ModerateShowers => "LightRain.png",
             Cloudy => "Cloudy.png",
             VeryCloudy => "VeryCloudy.png",
             LightSnow => "LightSnow.png",

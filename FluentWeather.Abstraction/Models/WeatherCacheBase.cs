@@ -8,7 +8,7 @@ public class WeatherCacheBase
     public virtual List<WeatherDailyBase> DailyForecasts { get; set; } = new();
     public virtual List<WeatherHourlyBase> HourlyForecasts { get; set; } = new();
     public virtual List<WeatherWarningBase> Warnings { get; set; }
-    public virtual WeatherBase WeatherNow { get; set; }
+    public virtual WeatherNowBase WeatherNow { get; set; }
     public virtual string WeatherDescription { get; set; }
     public virtual DateTime SunRise { get; set; }
     public virtual DateTime SunSet { get; set; }

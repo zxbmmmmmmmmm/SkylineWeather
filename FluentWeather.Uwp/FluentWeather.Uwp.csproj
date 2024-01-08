@@ -215,6 +215,7 @@
     <Compile Include="Helpers\ValueConverters\TyphoonTypeToDescriptionConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Helpers\ValueConverters\WeatherTypeToIconConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\WindDirectionToDescriptionConverter.cs" />
     <Compile Include="Helpers\ValueConverters\WindScaleToDescriptionConverter.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>
@@ -547,7 +548,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm">
-      <Version>8.2.1</Version>
+      <Version>8.2.2</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Segmented">
       <Version>8.0.230907</Version>
@@ -577,7 +578,7 @@
       <Version>4.1.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">
-      <Version>7.0.0</Version>
+      <Version>8.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.13</Version>
@@ -598,13 +599,13 @@
       <Version>7.1.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.7.0</Version>
+      <Version>2.7.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>7.0.3</Version>
+      <Version>8.0.0</Version>
     </PackageReference>
     <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
       <Version>1.0.2.11</Version>
@@ -625,6 +626,10 @@
     <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj">
       <Project>{15e289d2-4104-4889-b968-60d2c2efd806}</Project>
       <Name>FluentWeather.DIContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.OpenMeteoProvider\FluentWeather.OpenMeteoProvider.csproj">
+      <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
+      <Name>FluentWeather.OpenMeteoProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj">
       <Project>{eb061b33-c7dc-4dec-9398-0cc2c4abd619}</Project>

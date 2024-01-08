@@ -116,7 +116,7 @@
                         <TextBlock
                             FontSize="16"
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Text="{Binding Selected.WindDirection}" />
+                            Text="{Binding Selected.WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                         <TextBlock FontSize="16">
                             <Run FontSize="32" Text="{Binding Selected.WindSpeed}" />
                             <Run Text="km/h" />
