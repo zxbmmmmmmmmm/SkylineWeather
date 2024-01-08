@@ -3,7 +3,6 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoWeatherNow : WeatherNowBase, IDew
+public class OpenMeteoWeatherNow : WeatherNowBase
 {
-    public int? DewPointTemperature { get; set; }
 }

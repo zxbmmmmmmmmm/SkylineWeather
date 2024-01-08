@@ -4,8 +4,7 @@ using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherNow : WeatherNowBase,IDew
+public class QWeatherNow : WeatherNowBase
 {
     public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
-    public int? DewPointTemperature { get ; set ; }
 }

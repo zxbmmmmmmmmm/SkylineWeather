@@ -58,4 +58,18 @@ public class UnitConverter
         if (angle is -999) return WindDirection.Rotational;
         return WindDirection.None;
     }
+
+    /// <summary>
+    /// Aqi(US)转换
+    /// </summary>
+    /// <returns></returns>
+    public static string GetAqiCategoryUS(int aqi)
+    {
+        if (0 <= aqi && aqi <= 50) return "Good";
+        if (51 <= aqi && aqi <= 100) return "Moderate";
+        if (101 <= aqi && aqi <= 150) return "Unhealthy for sensitive groups";
+        if (151 <= aqi && aqi <= 200) return "Unhealthy";
+        if (201 <= aqi && aqi <= 300) return "Very unhealthy";
+        return "Hazardous";
+    }
 }
