@@ -48,14 +48,16 @@ namespace FluentWeather.Uwp.Pages
 
         public event RoutedEventHandler CloseRequested;
 
-        public WeatherDailyBase SelectedItem
+
+        public int SelectedIndex
         {
-            get => (WeatherDailyBase)GetValue(SelectedItemProperty);
-            set =>SetValue(SelectedItemProperty, value);
+            get => (int)GetValue(SelectedIndexProperty);
+            set => SetValue(SelectedIndexProperty, value);
         }
 
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(WeatherDailyBase), typeof(DailyViewPage), new PropertyMetadata(default));
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0));
+
 
         public List<WeatherDailyBase> DailyForecasts
         {

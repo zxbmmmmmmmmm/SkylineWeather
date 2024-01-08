@@ -38,7 +38,7 @@
                 x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
                 ItemsSource="{x:Bind DailyForecasts}"
-                SelectedItem="{x:Bind SelectedItem, Mode=TwoWay}">
+                SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
                         <StackPanel>

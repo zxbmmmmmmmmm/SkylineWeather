@@ -42,7 +42,7 @@ public sealed partial class MainPage : Page
             {
                 Task.Delay(500);
                 MainContentContainer.Visibility = Visibility.Visible;
-                DailyView.SelectedItem = null;
+                DailyView.SelectedIndex = 0;
             }
         };
         Instance = this;
@@ -50,7 +50,7 @@ public sealed partial class MainPage : Page
 
     private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
-        DailyView.SelectedItem = e.ClickedItem as WeatherDailyBase;
+        DailyView.SelectedIndex = DailyGridView.IndexFromContainer(DailyGridView.ContainerFromItem(e.ClickedItem));
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)
