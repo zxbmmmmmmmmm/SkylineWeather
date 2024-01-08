@@ -280,7 +280,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.PM25}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.PM25}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -290,7 +290,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.PM10}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.PM10}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -301,7 +301,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.SO2}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.SO2}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -312,7 +312,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.NO2}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.NO2}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -323,7 +323,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.O3}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.O3}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -333,7 +333,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.CO}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.CO}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -356,7 +356,7 @@
                                 <TextBlock
                                     FontSize="17"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                    Text="{Binding Precipitation.Summary}"
+                                    Text="{x:Bind ViewModel.Precipitation.Summary}"
                                     Visibility="{x:Bind PrecipGrid.Visibility, Converter={StaticResource VisibilityInverter}}" />
                             </Border>
                         </StackPanel>
@@ -367,7 +367,7 @@
                         x:Name="PrecipGrid"
                         Grid.Row="1"
                         Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                        <muxc:Expander HorizontalAlignment="Stretch" Header="{Binding Precipitation.Summary}">
+                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary}">
                             <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
                         </muxc:Expander>
                     </Grid>
@@ -633,7 +633,7 @@
                                                     FontSize="18"
                                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="露点温度 -" />
-                                                    <Run Text="{Binding WeatherNow.DewPointTemperature}" /><Run Text="°" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.DewPointTemperature}" /><Run Text="°" />
                                                 </TextBlock>
                                                 <TextBlock
                                                     FontSize="16"
@@ -680,7 +680,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="能见度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.Visibility}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                         <Run FontSize="16" Text="km" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -689,7 +689,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="能见度" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.Visibility}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                                     <Run FontSize="14" Text="km" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -702,13 +702,13 @@
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
                                 </StackPanel>
-                                <StackPanel Margin="12" Visibility="{Binding WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                                <StackPanel Margin="12" Visibility="{x:Bind ViewModel.WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="云量" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.CloudAmount}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                         <Run FontSize="16" Text="%" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -717,7 +717,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="云量" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.CloudAmount}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
