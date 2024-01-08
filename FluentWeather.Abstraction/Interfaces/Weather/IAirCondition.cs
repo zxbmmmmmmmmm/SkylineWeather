@@ -9,9 +9,9 @@ public interface IAirCondition
     /// <summary>
     /// 空气质量指数等级
     /// </summary>
-    int AqiLevel { get; set; }
+    int? AqiLevel { get; set; }
     /// <summary>
     /// 空气质量指数类别（优/良...）
     /// </summary>
-    string AqiCategory { get; set; }
+    string? AqiCategory { get; set; }
 }

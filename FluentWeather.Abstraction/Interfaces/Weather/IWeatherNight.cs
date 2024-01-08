@@ -4,5 +4,5 @@ namespace FluentWeather.Abstraction.Interfaces.Weather;
 
 public interface IWeatherNight
 {
-    WeatherBase WeatherNight { get; set; }
+    WeatherBase? WeatherNight { get; set; }
 }

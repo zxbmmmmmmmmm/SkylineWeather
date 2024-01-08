@@ -61,7 +61,6 @@ public class CacheHelper
             Precipitation = viewModel.Precipitation,
             UpdatedTime = DateTime.Now,
             Warnings = viewModel.Warnings,
-            WeatherDescription = viewModel.WeatherDescription,
             WeatherNow = viewModel.WeatherNow,
         };
         cacheData.RemoveAll(p => DateTime.Now - p["UpdatedTime"]?.GetValue<DateTime>() > TimeSpan.FromMinutes(10));//删除过期的数据

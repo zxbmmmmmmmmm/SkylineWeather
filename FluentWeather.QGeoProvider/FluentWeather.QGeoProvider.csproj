@@ -5,7 +5,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <LangVersion>latestMajor</LangVersion>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   
   <ItemGroup>
@@ -17,6 +18,13 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Mappers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolySharp" Version="1.14.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

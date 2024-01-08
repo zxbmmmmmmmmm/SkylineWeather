@@ -136,11 +136,10 @@ public class QWeatherProvider : ProviderBase,
     public async Task<TyphoonBase> GetTyphoon (string id,string name)
     {
         var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
-        var qtyp = typ.MapToQTyphoon();
+        var qtyp = typ.MapToQTyphoon(name);
         var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
-        qtyp.Name = name;
         return qtyp;
     }
 }

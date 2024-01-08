@@ -149,12 +149,11 @@ public partial class MainPageViewModel : ObservableObject
             DailyForecasts = cacheData.DailyForecasts;
             SunRise = cacheData.SunRise;
             SunSet = cacheData.SunSet;
-            AirCondition = cacheData.AirCondition;
+            AirCondition = cacheData.AirCondition!;
             HourlyForecasts = cacheData.HourlyForecasts;
-            Indices = cacheData.Indices;
-            Precipitation = cacheData.Precipitation;
-            Warnings = cacheData.Warnings;
-            WeatherDescription = cacheData.WeatherDescription;
+            Indices = cacheData.Indices!;
+            Precipitation = cacheData.Precipitation!;
+            Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
             IsLoading = false;
         }

@@ -7,12 +7,13 @@ public interface IWind
     /// <summary>
     /// 风向
     /// </summary>
-    string WindDirectionDescription{ get; set; }
-    public WindDirection WindDirection { get; set; }
+    string? WindDirectionDescription{ get; set; }
+    WindDirection WindDirection { get; set; }
     /// <summary>
     /// 风力等级
     /// </summary>
-    string WindScale { get; set; }
+    string? WindScale { get; set; }
+
     /// <summary>
     /// 风速(km/h)
     /// </summary>

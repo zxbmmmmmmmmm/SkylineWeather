@@ -13,7 +13,7 @@
     xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d">
 
-    <Grid x:DefaultBindMode="OneWay">
+    <Grid>
         <Border x:Name="PlaceholderBorder" Background="{ThemeResource SystemControlTransparentBrush}" />
 
         <Grid MaxWidth="1100" MaxHeight="810">
@@ -198,7 +198,7 @@
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="湿度" />
                                                 <TextBlock FontSize="25">
-                                                <Run FontSize="25" Text="{x:Bind Humidity}" />
+                                                <Run FontSize="25" Text="{Binding Humidity}" />
                                                 <Run FontSize="16" Text="%" />
                                                 </TextBlock>
                                                 <FlyoutBase.AttachedFlyout>
@@ -206,7 +206,7 @@
                                                         <StackPanel MaxWidth="256">
                                                             <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="湿度 -" />
-                                                            <Run Text="{x:Bind Humidity}" />
+                                                            <Run Text="{Binding Humidity}" />
                                                             <Run FontSize="14" Text="%" />
                                                             </TextBlock>
                                                             <TextBlock
@@ -226,7 +226,7 @@
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="气压" />
                                                 <TextBlock FontSize="25">
-                                                <Run FontSize="25" Text="{x:Bind Pressure}" />
+                                                <Run FontSize="25" Text="{Binding Pressure}" />
                                                 <Run FontSize="16" Text="hPa" />
                                                 </TextBlock>
                                                 <FlyoutBase.AttachedFlyout>
@@ -235,7 +235,7 @@
                                                             <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="气压" />
                                                             <Run Text="-" />
-                                                            <Run Text="{x:Bind Pressure}" />
+                                                            <Run Text="{Binding Pressure}" />
                                                             <Run FontSize="14" Text="hPa" />
                                                             </TextBlock>
                                                             <TextBlock
@@ -254,7 +254,7 @@
                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                                 Text="能见度" />
                                                 <TextBlock FontSize="25">
-                                                <Run FontSize="25" Text="{x:Bind Visibility}" />
+                                                <Run FontSize="25" Text="{Binding Visibility}" />
                                                 <Run FontSize="16" Text="km" />
                                                 </TextBlock>
                                                 <FlyoutBase.AttachedFlyout>
@@ -263,7 +263,7 @@
                                                             <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                             <Run Text="能见度" />
                                                             <Run Text="-" />
-                                                            <Run Text="{x:Bind Visibility}" />
+                                                            <Run Text="{Binding Visibility}" />
                                                             <Run FontSize="14" Text="km" />
                                                             </TextBlock>
                                                             <TextBlock

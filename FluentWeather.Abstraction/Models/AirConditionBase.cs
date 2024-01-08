@@ -7,8 +7,8 @@ namespace FluentWeather.Abstraction.Models;
 
 public class AirConditionBase : IAirCondition
 {
-    public int Aqi { get ; set ; }
-    public int AqiLevel { get ; set ; }
-    public string AqiCategory { get ; set ; }
+    public required int Aqi { get ; set ; }
+    public int? AqiLevel { get ; set ; }
+    public string? AqiCategory { get ; set ; }
 }
 

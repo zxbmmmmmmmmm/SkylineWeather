@@ -10,10 +10,11 @@ using static FluentWeather.QWeatherApi.ApiContracts.TyphoonTrackItem;
 namespace FluentWeather.QWeatherProvider.Mappers;
 public static class TyphoonMapper
 {
-    public static QTyphoon MapToQTyphoon(this TyphoonTrackResponse item)
+    public static QTyphoon MapToQTyphoon(this TyphoonTrackResponse item,string name)
     {
         return new QTyphoon
         {
+            Name = name,
             IsActive = item.IsActive is "1",
             History = item.Tracks.ConvertAll(p => (TyphoonTrackBase)p.MapToQTyphoonTrack()),
             Now = item.Now.MapToQTyphoonTrack(),

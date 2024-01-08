@@ -7,6 +7,6 @@ public class OpenMeteoWeatherNow : WeatherNowBase, ICloudAmount, IApparentTemper
 {
     public int? CloudAmount { get; set; }
     public int ApparentTemperature { get; set; }
-    public int Visibility { get; set; }
+    public int? Visibility { get; set; }
     public int? DewPointTemperature { get; set; }
 }

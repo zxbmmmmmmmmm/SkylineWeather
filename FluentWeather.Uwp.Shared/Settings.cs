@@ -163,9 +163,9 @@ public class Settings:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public GeolocationBase DefaultGeolocation
+    public GeolocationBase? DefaultGeolocation
     {
-        get => GetSettingsWithClass(nameof(DefaultGeolocation), new GeolocationBase());
+        get => GetSettingsWithClass<GeolocationBase?>(nameof(DefaultGeolocation), null);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(DefaultGeolocation)] = JsonSerializer.Serialize(value);

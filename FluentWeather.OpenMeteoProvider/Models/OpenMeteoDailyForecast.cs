@@ -7,5 +7,4 @@ namespace FluentWeather.OpenMeteoProvider.Models;
 
 public class OpenMeteoDailyForecast : WeatherDailyBase
 {
-    public List<WeatherHourlyBase>? HourlyForecasts { get; set; }
 }
