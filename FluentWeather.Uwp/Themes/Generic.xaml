@@ -1047,11 +1047,14 @@
                 <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
             </TextBlock>
             <Image
-                Height="32"
+                Height="36"
+                Width="36"
                 Source="{Binding Converter={StaticResource WeatherToIconConverter}}"
                 Stretch="Uniform" />
             <TextBlock
-                HorizontalAlignment="Center"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords"
+                MaxLines="2"
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
                 Text="{Binding Description}" />
             <TextBlock

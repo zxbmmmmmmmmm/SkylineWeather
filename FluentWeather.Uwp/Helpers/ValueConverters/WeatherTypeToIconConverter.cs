@@ -14,7 +14,7 @@ public class WeatherTypeToIconConverter:IValueConverter
     {
         var weatherType = (WeatherType)value;
         var name = GetImageNameDay(weatherType);
-        name = name is "Cloudy.png" ? GetImageName(weatherType): name;
+        name = name is "" ? GetImageName(weatherType): name;
         var uri = new Uri("ms-appx:///Assets/Weather/" + name);
         var img = new BitmapImage(uri);
 
@@ -58,7 +58,7 @@ public class WeatherTypeToIconConverter:IValueConverter
             PartlyCloudy => "PartlyCloudyDay.png",
             HeavyShowers or LightShowers => "RainShowersDay.png",
             LightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
-            _ => "Cloudy.png",
+            _ => "",
         };
     }
     public static string GetImageNameNight(WeatherType weatherType)
@@ -73,7 +73,7 @@ public class WeatherTypeToIconConverter:IValueConverter
             PartlyCloudy => "PartlyCloudyNight.png",
             HeavyShowers or LightShowers => "RainShowersNight.png",
             LightSnowShowers or HeavySnowShowers => "SnowShowersNight.png",
-            _ => "Cloudy.png",
+            _ => "",
         };
     }
 }
@@ -95,7 +95,7 @@ public class WeatherToIconConverter : IValueConverter
         {
             imageName = WeatherTypeToIconConverter.GetImageNameNight(weather.WeatherType);
         }
-        imageName = imageName is "Unknown.png" ? WeatherTypeToIconConverter.GetImageName(weather.WeatherType) : imageName;
+        imageName = imageName is "" ? WeatherTypeToIconConverter.GetImageName(weather.WeatherType) : imageName;
 
         var uri = new Uri(baseUri + imageName);
         return new BitmapImage(uri);

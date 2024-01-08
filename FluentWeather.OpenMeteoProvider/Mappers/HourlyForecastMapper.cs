@@ -12,6 +12,7 @@ public static class HourlyForecastMapper
     {
         return new OpenMeteoHourlyForecast
         {
+            WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
             Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
             WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!.Value).ToString(),
