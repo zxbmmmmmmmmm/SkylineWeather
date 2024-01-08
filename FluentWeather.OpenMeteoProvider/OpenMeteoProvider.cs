@@ -21,8 +21,10 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
     private readonly OpenMeteoClient _client = new();
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
-        var result = await _client.GetCurrentWeather(lat, lon);
-        var now = result.MapToOpenMeteoWeatherNow();
+        var result = await _client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
+        var now = result.CurrentWeather!.MapToOpenMeteoWeatherNow();
+        now.DewPointTemperature = (int)result.HourlyForecast?.DewPoint2m?[0]!;
+        now.Visibility = (int)(result.HourlyForecast?.Visibility?[0]!/1000);
         return now;
     }
     public async Task<AirConditionBase> GetAirCondition(double lon, double lat)

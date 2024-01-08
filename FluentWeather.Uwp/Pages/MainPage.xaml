@@ -256,10 +256,11 @@
                                         <Flyout Placement="BottomEdgeAlignedLeft">
                                             <Grid>
                                                 <HyperlinkButton
+                                                    Visibility="{Binding AirCondition.Link,FallbackValue=Collapsed}"
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Top"
                                                     Canvas.ZIndex="1"
-                                                    NavigateUri="{Binding AirCondition.Link}"
+                                                    NavigateUri="{Binding AirCondition.Link,FallbackValue={x:Null}}"
                                                     ToolTipService.ToolTip="查看详细信息">
                                                     <FontIcon FontSize="16" Glyph="&#xE2B4;" />
                                                 </HyperlinkButton>

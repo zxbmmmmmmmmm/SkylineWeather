@@ -14,7 +14,7 @@ public class WeatherTypeToIconConverter:IValueConverter
     {
         var weatherType = (WeatherType)value;
         var name = GetImageNameDay(weatherType);
-        name = name is "Unknown.png" ?GetImageName(weatherType): name;
+        name = name is "Cloudy.png" ? GetImageName(weatherType): name;
         var uri = new Uri("ms-appx:///Assets/Weather/" + name);
         var img = new BitmapImage(uri);
 
@@ -39,9 +39,11 @@ public class WeatherTypeToIconConverter:IValueConverter
             VeryCloudy => "VeryCloudy.png",
             LightSnow => "LightSnow.png",
             HeavySnow => "HeavySnow.png",
+            Fog => "Fog.png",
+            FreezingRain => "FreezingRain.png",           
             LightSleet or LightSleetShowers => "RainSnow.png",
             ThunderyHeavyRain or ThunderyShowers or ThunderySnowShowers => "Thundery.png",
-            _ => "PartlyCloudy.png",
+            _ => "Cloudy.png",
         };
     }
     public static string GetImageNameDay(WeatherType weatherType)
@@ -56,7 +58,7 @@ public class WeatherTypeToIconConverter:IValueConverter
             PartlyCloudy => "PartlyCloudyDay.png",
             HeavyShowers or LightShowers => "RainShowersDay.png",
             LightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
-            _ => "Unknown.png",
+            _ => "Cloudy.png",
         };
     }
     public static string GetImageNameNight(WeatherType weatherType)
@@ -71,7 +73,7 @@ public class WeatherTypeToIconConverter:IValueConverter
             PartlyCloudy => "PartlyCloudyNight.png",
             HeavyShowers or LightShowers => "RainShowersNight.png",
             LightSnowShowers or HeavySnowShowers => "SnowShowersNight.png",
-            _ => "Unknown.png",
+            _ => "Cloudy.png",
         };
     }
 }
