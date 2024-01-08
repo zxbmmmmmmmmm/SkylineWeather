@@ -42,6 +42,7 @@ public sealed partial class MainPage : Page
             {
                 Task.Delay(500);
                 MainContentContainer.Visibility = Visibility.Visible;
+                DailyView.SelectedItem = null;
             }
         };
         Instance = this;

@@ -2,7 +2,7 @@
 
 namespace FluentWeather.Abstraction.Models;
 
-public class WeatherNowBase:WeatherBase, IWind, ITemperature, IPressure, IHumidity
+public class WeatherNowBase : WeatherBase, IWind, ITemperature, IPressure, IHumidity, IApparentTemperature, IVisibility, ICloudAmount, IDew
 {
     public int? Humidity { get; set; }
     public int? Pressure { get; set; }
@@ -11,4 +11,8 @@ public class WeatherNowBase:WeatherBase, IWind, ITemperature, IPressure, IHumidi
     public required int WindSpeed { get; set; }
     public required int Temperature { get; set; }
     public required WindDirection WindDirection { get; set; }
+    public int? ApparentTemperature { get; set; }
+    public int? Visibility { get; set; }
+    public int? CloudAmount { get; set; }
+    public int? DewPointTemperature { get; set; }
 }

@@ -3,7 +3,7 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoWeatherNow : WeatherNowBase, IDew
+public class OpenMeteoHourlyForecast : WeatherHourlyBase, ICloudAmount
 {
-    public int? DewPointTemperature { get; set; }
+    public int? CloudAmount { get ; set; }
 }

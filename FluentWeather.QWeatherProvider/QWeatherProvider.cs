@@ -52,7 +52,7 @@ public class QWeatherProvider : ProviderBase,
     {
         //Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider),typeof(QWeatherProvider));
         //Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
+        //Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider));

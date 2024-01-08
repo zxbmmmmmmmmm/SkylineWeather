@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using OpenMeteoApi;
 using System.Collections.Generic;
 using FluentWeather.OpenMeteoProvider.Models;
+using OpenMeteoApi.Variables;
 
 namespace FluentWeather.OpenMeteoProvider;
 
-public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider,IDailyForecastProvider
+public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider
 {
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
@@ -35,6 +36,7 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
         Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider), typeof(OpenMeteoProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(OpenMeteoProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(OpenMeteoProvider));
+        Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(OpenMeteoProvider));
     }
 
     public async Task<List<WeatherDailyBase>> GetDailyForecasts(double lon, double lat)
@@ -42,4 +44,11 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
         var result = await _client.GetDailyForecasts(lat, lon);
         return result.ConvertAll<WeatherDailyBase>(p => p.MapToOpenMeteoDailyForecast());
     }
+
+    public async Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon, double lat)
+    {
+        var result = await _client.GetHourlyForecasts(lat, lon);
+        return result.ConvertAll<WeatherHourlyBase>(p => p.MapToOpenMeteoHourlyForecast());
+    }
+
 }
