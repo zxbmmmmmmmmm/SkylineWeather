@@ -5,6 +5,8 @@ using FluentWeather.DIContainer;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
+using System.Collections.Generic;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -13,11 +15,7 @@ public static class DIFactory
     public static void RegisterRequiredServices()
     {
         Locator.ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
-        //Locator.ServiceDescriptors.AddSingleton(typeof(string), "b18d888d25b4437cbae4bbf36990092e");
-        QWeatherProvider.QWeatherProvider.RegisterRequiredServices();//最后注册天气服务
-        OpenMeteoProvider.OpenMeteoProvider.RegisterRequiredServices();//最后注册天气服务
-
-        QGeoProvider.QGeoProvider.RegisterRequiredServices();
+        RegisterProviders(Common.Settings.DataProviderConfig);
     }
     public static void ReadSettings()
     {
@@ -29,6 +27,17 @@ public static class DIFactory
             {
                 settingsHelper.ReadLocalSetting(item.Id + "." + setting, new object());
             }
+        }
+    }
+    public static void RegisterProviders(List<KeyValuePair<string, string>> dic)
+    {
+        foreach (var item in dic)
+        {
+
+            var name = DataProviderHelper.GetProviderInterfaceByName(item.Key);
+            var provider = DataProviderHelper.GetProviderTypeById(item.Value);
+            if (name is null || provider is null) continue;
+            Locator.ServiceDescriptors.AddSingleton(name,provider);
         }
     }
 }

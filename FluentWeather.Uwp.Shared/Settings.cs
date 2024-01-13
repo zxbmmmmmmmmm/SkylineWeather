@@ -20,7 +20,7 @@ using FluentWeather.QWeatherProvider.Models;
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
 public static class Common
-{ 
+{
     static Common()
     {
 #if DEBUG
@@ -33,11 +33,11 @@ public static class Common
     public static Settings Settings = new();
     public static readonly ILogManager LogManager;
 }
-public class Settings:INotifyPropertyChanged
+public class Settings : INotifyPropertyChanged
 {
     public string IgnoreWarningWords
     {
-        get => GetSettings(nameof(IgnoreWarningWords),"");
+        get => GetSettings(nameof(IgnoreWarningWords), "");
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(IgnoreWarningWords)] = value;
@@ -77,7 +77,7 @@ public class Settings:INotifyPropertyChanged
         set
         {
             ThemeHelper.SetRequestTheme(value);
-            ApplicationData.Current.LocalSettings.Values[nameof(ApplicationTheme)] = value.ToString(); 
+            ApplicationData.Current.LocalSettings.Values[nameof(ApplicationTheme)] = value.ToString();
             OnPropertyChanged();
         }
     }
@@ -184,7 +184,7 @@ public class Settings:INotifyPropertyChanged
 
     public string QGeolocationToken
     {
-        get => GetSettings("qgeoapi."+ "Token", "");
+        get => GetSettings("qgeoapi." + "Token", "");
         set
         {
             ApplicationData.Current.LocalSettings.Values["qgeoapi." + "Token"] = value;
@@ -211,7 +211,7 @@ public class Settings:INotifyPropertyChanged
         }
     }
 
-    public Dictionary<string,DateTime> PushedWarnings
+    public Dictionary<string, DateTime> PushedWarnings
     {
         get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());
         set => ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
@@ -228,12 +228,17 @@ public class Settings:INotifyPropertyChanged
     }
     public AppTheme Theme
     {
-        get => GetSettings(nameof(Theme), (Environment.OSVersion.Version.Build < 21996)?AppTheme.Fluent2017 : AppTheme.Fluent);
+        get => GetSettings(nameof(Theme), (Environment.OSVersion.Version.Build < 21996) ? AppTheme.Fluent2017 : AppTheme.Fluent);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(Theme)] = value.ToString();
             OnPropertyChanged();
         }
+    }
+    public List<KeyValuePair<string, string>> DataProviderConfig
+    {
+        get => GetSettingsWithClass<List<KeyValuePair<string, string>>>(nameof(DataProviderConfig), DataProviderHelper.QWeatherConfig);
+        set => ApplicationData.Current.LocalSettings.Values[nameof(DataProviderConfig)] = JsonSerializer.Serialize(value);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

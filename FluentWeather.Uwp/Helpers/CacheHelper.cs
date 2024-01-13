@@ -68,6 +68,11 @@ public class CacheHelper
         var json = JsonSerializer.Serialize(cacheData);
         await FileIO.WriteTextAsync(item,json);
     }
+    public static async void Clear()
+    {
+        var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt")) as IStorageFile;
+        await FileIO.WriteTextAsync(item, "");
+    }
     public static async Task<IStorageFile> CreateCacheFile()
     {
         return await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("WeatherCache.txt");

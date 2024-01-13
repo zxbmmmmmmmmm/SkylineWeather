@@ -13,6 +13,8 @@
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
             <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
+            <StaticResource x:Key="InfoBarInformationalSeverityBackgroundBrush" ResourceKey="SystemControlAcrylicElementBrush"/>
+
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <StaticResource x:Key="NavigationViewContentBackground" ResourceKey="LayerFillColorDefaultBrush" />
@@ -23,6 +25,7 @@
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
             <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
+            <StaticResource x:Key="InfoBarInformationalSeverityBackgroundBrush" ResourceKey="SystemControlAcrylicElementBrush"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 

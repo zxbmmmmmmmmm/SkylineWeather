@@ -37,7 +37,6 @@ internal static class InfoBarHelper
             var infoBar = new InfoBar
             {
                 Severity = InfoBarSeverity.Informational,
-                Background = (Brush)Application.Current.Resources["AcrylicInAppFillColorDefaultBrush"],
                 Title = title,
                 Message = message,
                 IsOpen = true,
