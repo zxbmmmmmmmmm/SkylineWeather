@@ -45,7 +45,7 @@ public class LocationHelper
         //获取成功:设置位置，并将当前位置设置为默认位置
 
         var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        if (Common.Settings.DefaultGeolocation.Name is null)//默认位置未设置
+        if (Common.Settings.DefaultGeolocation?.Name is null)//默认位置未设置
         {
             var (lon, lat) = await LocationHelper.UpdatePosition();
             if (lon is -1 || lat is -1)//获取位置失败

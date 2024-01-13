@@ -1,6 +1,9 @@
-﻿namespace FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Interfaces.Geolocation;
+using System;
 
-public class GeolocationBase
+namespace FluentWeather.Abstraction.Models;
+
+public class GeolocationBase:ITimeZone
 {
     /// <summary>
     /// 地区名
@@ -18,6 +21,10 @@ public class GeolocationBase
     /// 行政区
     /// </summary>
     public string? AdmDistrict { get; set; }
+    public string? TimeZone { get ; set; }
+    public TimeSpan? UtcOffset { get ; set  ; }
+    public bool? IsDaylightSavingTime { get ; set ; }
+
     public GeolocationBase(string name, double lon, double lat)
     {
         Name = name;

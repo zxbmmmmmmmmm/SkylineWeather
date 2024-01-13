@@ -65,7 +65,7 @@ public partial class CitiesPageViewModel:ObservableObject
         if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
             return;
         var location = await LocationHelper.GetGeolocation();
-        if (Common.Settings.DefaultGeolocation.Name is null)
+        if (Common.Settings.DefaultGeolocation?.Name is null)
             Common.Settings.DefaultGeolocation = location;
         Common.Settings.Latitude = location.Latitude;
         Common.Settings.Longitude = location.Longitude;

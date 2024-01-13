@@ -18,10 +18,10 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
 
-    private readonly OpenMeteoClient _client = new();
+    private static readonly OpenMeteoClient Client = new();
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
-        var result = await _client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
+        var result = await Client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
         var now = result.CurrentWeather!.MapToOpenMeteoWeatherNow();
         now.DewPointTemperature = (int)result.HourlyForecast?.DewPoint2m?[0]!;
         now.Visibility = (int)(result.HourlyForecast?.Visibility?[0]!/1000);
@@ -29,27 +29,28 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
     }
     public async Task<AirConditionBase> GetAirCondition(double lon, double lat)
     {
-        var result = await _client.GetCurrentAirQuality(lat, lon);
+        var result = await Client.GetCurrentAirQuality(lat, lon);
         return result.MapToOpenMeteoWeatherNow();
     }
 
     public static void RegisterRequiredServices()
     {
+        Client.ForecastParameters.Add("forecast_hours", "168");
         Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider), typeof(OpenMeteoProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(OpenMeteoProvider));
         Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(OpenMeteoProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(OpenMeteoProvider));
+        //Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(OpenMeteoProvider));
     }
 
     public async Task<List<WeatherDailyBase>> GetDailyForecasts(double lon, double lat)
     {
-        var result = await _client.GetDailyForecasts(lat, lon);
+        var result = await Client.GetDailyForecasts(lat, lon);
         return result.ConvertAll<WeatherDailyBase>(p => p.MapToOpenMeteoDailyForecast());
     }
 
     public async Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon, double lat)
     {
-        var result = await _client.GetHourlyForecasts(lat, lon);
+        var result = await Client.GetHourlyForecasts(lat, lon);
         return result.ConvertAll<WeatherHourlyBase>(p => p.MapToOpenMeteoHourlyForecast());
     }
 

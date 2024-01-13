@@ -4,11 +4,8 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.QGeoProvider.Models
 {
-    public class QGeolocation : GeolocationBase, ITimeZone
+    public class QGeolocation : GeolocationBase
     {
-        public string? TimeZone { get; set; }
-        public TimeSpan? UtcOffset { get; set; }
-        public bool? IsDaylightSavingTime { get; set; }
         public QGeolocation(string name,double lon, double lat):base(name,lon,lat)
         {
             

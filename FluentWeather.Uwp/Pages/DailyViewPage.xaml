@@ -161,150 +161,158 @@
                                         ItemHeight="90"
                                         SelectionMode="None">
                                         <controls1:AdaptiveGridView.Items>
-                                            <StackPanel x:Name="WindInfoPanel" Margin="12">
-                                                <TextBlock
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                    Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
-                                                <TextBlock FontSize="25">
-                                                    <Run FontSize="25" Text="{Binding WindScale}" />
-                                                    <Run FontSize="16" Text="级" />
-                                                </TextBlock>
-                                                <FlyoutBase.AttachedFlyout>
-                                                    <Flyout>
-                                                        <StackPanel MaxWidth="256">
-                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
-                                                                <Run Text="-" />
-                                                                <Run Text="{x:Bind WindScale}" />
-                                                                <Run FontSize="14" Text="级" />
-                                                            </TextBlock>
-                                                            <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="{x:Bind WindSpeed}" />
-                                                                <Run Text="km/h" />
-                                                            </TextBlock>
-                                                            <TextBlock
-                                                                FontSize="16"
-                                                                IsTextSelectionEnabled="True"
-                                                                Text="{x:Bind WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
-                                                                TextWrapping="Wrap" />
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </FlyoutBase.AttachedFlyout>
-                                            </StackPanel>
-                                            <StackPanel Margin="12">
-                                                <TextBlock
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                    Text="湿度" />
-                                                <TextBlock FontSize="25">
-                                                    <Run FontSize="25" Text="{Binding Humidity}" />
-                                                    <Run FontSize="16" Text="%" />
-                                                </TextBlock>
-                                                <FlyoutBase.AttachedFlyout>
-                                                    <Flyout>
-                                                        <StackPanel MaxWidth="256">
-                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="湿度 -" />
-                                                                <Run Text="{Binding Humidity}" />
-                                                                <Run FontSize="14" Text="%" />
-                                                            </TextBlock>
-                                                            <TextBlock
-                                                                FontSize="16"
-                                                                IsTextSelectionEnabled="True"
-                                                                TextWrapping="Wrap">
-                                                                相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
-                                                            </TextBlock>
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </FlyoutBase.AttachedFlyout>
-                                            </StackPanel>
-
-                                            <StackPanel Margin="12">
-                                                <TextBlock
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                    Text="气压" />
-                                                <TextBlock FontSize="25">
-                                                    <Run FontSize="25" Text="{x:Bind Pressure}" />
-                                                    <Run FontSize="16" Text="hPa" />
-                                                </TextBlock>
-                                                <FlyoutBase.AttachedFlyout>
-                                                    <Flyout>
-                                                        <StackPanel MaxWidth="256">
-                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="气压" />
-                                                                <Run Text="-" />
-                                                                <Run Text="{x:Bind Pressure}" />
-                                                                <Run FontSize="14" Text="hPa" />
-                                                            </TextBlock>
-                                                            <TextBlock
-                                                                FontSize="16"
-                                                                IsTextSelectionEnabled="True"
-                                                                TextWrapping="Wrap">
-                                                                大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关
-                                                            </TextBlock>
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </FlyoutBase.AttachedFlyout>
-                                            </StackPanel>
-                                            <StackPanel Margin="12">
-                                                <TextBlock
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                    Text="能见度" />
-                                                <TextBlock FontSize="25">
-                                                    <Run FontSize="25" Text="{x:Bind Visibility}" />
-                                                    <Run FontSize="16" Text="km" />
-                                                </TextBlock>
-                                                <FlyoutBase.AttachedFlyout>
-                                                    <Flyout>
-                                                        <StackPanel MaxWidth="256">
-                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="能见度" />
-                                                                <Run Text="-" />
-                                                                <Run Text="{x:Bind Visibility}" />
-                                                                <Run FontSize="14" Text="km" />
-                                                            </TextBlock>
-                                                            <TextBlock
-                                                                FontSize="16"
-                                                                IsTextSelectionEnabled="True"
-                                                                TextWrapping="Wrap">
-                                                                视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离
-                                                            </TextBlock>
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </FlyoutBase.AttachedFlyout>
-                                            </StackPanel>
-                                            <StackPanel Margin="12" Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <TextBlock
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                    Text="云量" />
-                                                <TextBlock FontSize="25">
-                                                    <Run FontSize="25" Text="{x:Bind CloudAmount}" />
-                                                    <Run FontSize="16" Text="%" />
-                                                </TextBlock>
-                                                <FlyoutBase.AttachedFlyout>
-                                                    <Flyout>
-                                                        <StackPanel MaxWidth="256">
-                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                <Run Text="云量" />
-                                                                <Run Text="-" />
-                                                                <Run Text="{x:Bind CloudAmount}" />
-                                                                <Run FontSize="14" Text="%" />
-                                                            </TextBlock>
-                                                            <TextBlock
-                                                                FontSize="16"
-                                                                IsTextSelectionEnabled="True"
-                                                                TextWrapping="Wrap">
-                                                                天空被云所遮蔽的比例
-                                                            </TextBlock>
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                </FlyoutBase.AttachedFlyout>
-                                            </StackPanel>
-
+                                            <GridViewItem Visibility="{x:Bind WindScale, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <StackPanel x:Name="WindInfoPanel" Margin="12">
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                                    <TextBlock FontSize="25">
+                                                        <Run FontSize="25" Text="{Binding WindScale}" />
+                                                        <Run FontSize="16" Text="级" />
+                                                    </TextBlock>
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <Flyout>
+                                                            <StackPanel MaxWidth="256">
+                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                                                    <Run Text="-" />
+                                                                    <Run Text="{x:Bind WindScale}" />
+                                                                    <Run FontSize="14" Text="级" />
+                                                                </TextBlock>
+                                                                <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="{x:Bind WindSpeed}" />
+                                                                    <Run Text="km/h" />
+                                                                </TextBlock>
+                                                                <TextBlock
+                                                                    FontSize="16"
+                                                                    IsTextSelectionEnabled="True"
+                                                                    Text="{x:Bind WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
+                                                                    TextWrapping="Wrap" />
+                                                            </StackPanel>
+                                                        </Flyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                </StackPanel>
+                                            </GridViewItem>
+                                            <GridViewItem Visibility="{x:Bind Humidity, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <StackPanel Margin="12">
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="湿度" />
+                                                    <TextBlock FontSize="25">
+                                                        <Run FontSize="25" Text="{Binding Humidity}" />
+                                                        <Run FontSize="16" Text="%" />
+                                                    </TextBlock>
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <Flyout>
+                                                            <StackPanel MaxWidth="256">
+                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="湿度 -" />
+                                                                    <Run Text="{Binding Humidity}" />
+                                                                    <Run FontSize="14" Text="%" />
+                                                                </TextBlock>
+                                                                <TextBlock
+                                                                    FontSize="16"
+                                                                    IsTextSelectionEnabled="True"
+                                                                    TextWrapping="Wrap">
+                                                                    相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Flyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                </StackPanel>
+                                            </GridViewItem>
+                                            <GridViewItem Visibility="{x:Bind Pressure, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <StackPanel Margin="12">
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="气压" />
+                                                    <TextBlock FontSize="25">
+                                                        <Run FontSize="25" Text="{x:Bind Pressure}" />
+                                                        <Run FontSize="16" Text="hPa" />
+                                                    </TextBlock>
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <Flyout>
+                                                            <StackPanel MaxWidth="256">
+                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="气压" />
+                                                                    <Run Text="-" />
+                                                                    <Run Text="{x:Bind Pressure}" />
+                                                                    <Run FontSize="14" Text="hPa" />
+                                                                </TextBlock>
+                                                                <TextBlock
+                                                                    FontSize="16"
+                                                                    IsTextSelectionEnabled="True"
+                                                                    TextWrapping="Wrap">
+                                                                    大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Flyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                </StackPanel>
+                                            </GridViewItem>
+                                            <GridViewItem Visibility="{x:Bind Visibility, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <StackPanel Margin="12">
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="能见度" />
+                                                    <TextBlock FontSize="25">
+                                                        <Run FontSize="25" Text="{x:Bind Visibility}" />
+                                                        <Run FontSize="16" Text="km" />
+                                                    </TextBlock>
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <Flyout>
+                                                            <StackPanel MaxWidth="256">
+                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="能见度" />
+                                                                    <Run Text="-" />
+                                                                    <Run Text="{x:Bind Visibility}" />
+                                                                    <Run FontSize="14" Text="km" />
+                                                                </TextBlock>
+                                                                <TextBlock
+                                                                    FontSize="16"
+                                                                    IsTextSelectionEnabled="True"
+                                                                    TextWrapping="Wrap">
+                                                                    视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Flyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                </StackPanel>
+                                            </GridViewItem>
+                                            <GridViewItem Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                                                <StackPanel Margin="12">
+                                                    <TextBlock
+                                                        FontSize="18"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="云量" />
+                                                    <TextBlock FontSize="25">
+                                                        <Run FontSize="25" Text="{x:Bind CloudAmount}" />
+                                                        <Run FontSize="16" Text="%" />
+                                                    </TextBlock>
+                                                    <FlyoutBase.AttachedFlyout>
+                                                        <Flyout>
+                                                            <StackPanel MaxWidth="256">
+                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                    <Run Text="云量" />
+                                                                    <Run Text="-" />
+                                                                    <Run Text="{x:Bind CloudAmount}" />
+                                                                    <Run FontSize="14" Text="%" />
+                                                                </TextBlock>
+                                                                <TextBlock
+                                                                    FontSize="16"
+                                                                    IsTextSelectionEnabled="True"
+                                                                    TextWrapping="Wrap">
+                                                                    天空被云所遮蔽的比例
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </Flyout>
+                                                    </FlyoutBase.AttachedFlyout>
+                                                </StackPanel>
+                                            </GridViewItem>
                                         </controls1:AdaptiveGridView.Items>
                                         <i:Interaction.Behaviors>
                                             <behaviors:ListViewOpenFlyoutBehavior />

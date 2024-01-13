@@ -17,6 +17,7 @@ public static class DailyForecastMapper
             WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10mDominant!.Value),
             WindSpeed = (int)item.WindSpeed10mMax!,
+            WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10mMax!.Value).ToString(),
             //Humidity = int.Parse(item.),
             MaxTemperature = (int)item.Temperature2mMax!,
             MinTemperature = (int)item.Temperature2mMin!,
