@@ -121,7 +121,7 @@
             </animations:Implicit.ShowAnimations>
 
         </local:DailyViewPage>
-        <muxc:RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
+        <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.HideAnimations>
                 <animations:ImplicitAnimationSet>
                     <animations:OpacityAnimation
@@ -155,13 +155,13 @@
                         Duration="0:0:0.6" />
                 </animations:ImplicitAnimationSet>
             </animations:Implicit.ShowAnimations>
-            <muxc:RefreshContainer.Visualizer>
-                <muxc:RefreshVisualizer>
-                    <muxc:RefreshVisualizer.Content>
+            <RefreshContainer.Visualizer>
+                <RefreshVisualizer>
+                    <RefreshVisualizer.Content>
                         <SymbolIcon Margin="0,0,0,-64" Symbol="Refresh" />
-                    </muxc:RefreshVisualizer.Content>
-                </muxc:RefreshVisualizer>
-            </muxc:RefreshContainer.Visualizer>
+                    </RefreshVisualizer.Content>
+                </RefreshVisualizer>
+            </RefreshContainer.Visualizer>
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="RefreshRequested">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
@@ -782,7 +782,7 @@
 
             </ScrollViewer>
 
-        </muxc:RefreshContainer>
+        </RefreshContainer>
 
 
         <VisualStateManager.VisualStateGroups>

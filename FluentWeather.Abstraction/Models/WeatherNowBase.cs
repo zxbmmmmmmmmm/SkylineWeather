@@ -8,9 +8,9 @@ public class WeatherNowBase : WeatherBase, IWind, ITemperature, IPressure, IHumi
     public int? Pressure { get; set; }
     public string? WindDirectionDescription { get; set; }
     public string? WindScale { get; set; }
-    public required int WindSpeed { get; set; }
-    public required int Temperature { get; set; }
-    public required WindDirection WindDirection { get; set; }
+    public  int WindSpeed { get; set; }
+    public  int Temperature { get; set; }
+    public  WindDirection WindDirection { get; set; }
     public int? ApparentTemperature { get; set; }
     public int? Visibility { get; set; }
     public int? CloudAmount { get; set; }

@@ -7,11 +7,11 @@ public class WeatherHourlyBase :WeatherBase, ITemperature, ITime, IWind, IHumidi
 {
     public int? Humidity { get; set; }
     public int? Pressure { get; set; }
-    public required int Temperature { get; set; }
-    public required DateTime Time { get; set; }
+    public  int Temperature { get; set; }
+    public  DateTime Time { get; set; }
     public string? WindDirectionDescription { get; set; }
     public string? WindScale { get; set; }
-    public required int WindSpeed { get; set; }
+    public  int WindSpeed { get; set; }
     public int? PrecipitationProbability { get; set; }
-    public required WindDirection WindDirection { get; set; }
+    public  WindDirection WindDirection { get; set; }
 }

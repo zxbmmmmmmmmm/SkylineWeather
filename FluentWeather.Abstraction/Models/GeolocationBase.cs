@@ -8,15 +8,15 @@ public class GeolocationBase:ITimeZone
     /// <summary>
     /// 地区名
     /// </summary>
-    public required string Name { get; set; }
+    public  string Name { get; set; }
     /// <summary>
     /// 经度
     /// </summary>
-    public required double Longitude{ get; set; }
+    public  double Longitude{ get; set; }
     /// <summary>
     /// 纬度
     /// </summary>
-    public required double Latitude { get; set; }
+    public  double Latitude { get; set; }
     /// <summary>
     /// 行政区
     /// </summary>
