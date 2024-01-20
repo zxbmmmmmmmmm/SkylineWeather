@@ -255,15 +255,6 @@
                                     <Button.Flyout>
                                         <Flyout Placement="BottomEdgeAlignedLeft">
                                             <Grid>
-                                                <HyperlinkButton
-                                                    Visibility="{Binding AirCondition.Link,FallbackValue=Collapsed}"
-                                                    HorizontalAlignment="Right"
-                                                    VerticalAlignment="Top"
-                                                    Canvas.ZIndex="1"
-                                                    NavigateUri="{Binding AirCondition.Link,FallbackValue={x:Null}}"
-                                                    ToolTipService.ToolTip="查看详细信息">
-                                                    <FontIcon FontSize="16" Glyph="&#xE2B4;" />
-                                                </HyperlinkButton>
                                                 <StackPanel Spacing="8">
                                                     <TextBlock>
                                                         <Run
@@ -367,7 +358,7 @@
                         x:Name="PrecipGrid"
                         Grid.Row="1"
                         Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary}">
+                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary,Mode=OneWay}">
                             <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
                         </muxc:Expander>
                     </Grid>

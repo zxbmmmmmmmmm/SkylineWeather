@@ -41,12 +41,10 @@
                 SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Time, Converter={StaticResource DateConverter}}" />
-                            <TextBlock FontSize="14">
-                                <Run Text="{x:Bind Description}" />
-                                <Run Text="{x:Bind MinTemperature}" /><Run Text="° /" />
-                                <Run Text="{x:Bind MaxTemperature}" /><Run Text="°" />
+                        <StackPanel Padding="8,0">
+                            <TextBlock Text="{x:Bind Time, Converter={StaticResource DateConverter}}" />
+                            <TextBlock FontSize="13">
+                                <Run Text="{x:Bind Time,Converter={StaticResource ShortDateConverter}}" />
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -83,7 +81,7 @@
                                             HorizontalContentAlignment="Stretch"
                                             DesiredWidth="100"
                                             IsItemClickEnabled="True"
-                                            ItemHeight="140"
+                                            ItemHeight="150"
                                             ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
                                             ItemsSource="{Binding HourlyForecasts}"
                                             OneRowModeEnabled="True"
