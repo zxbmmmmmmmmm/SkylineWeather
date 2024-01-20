@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using System.Collections.Generic;
 using FluentWeather.Uwp.Shared;
+using FluentWeather.QWeatherProvider;
+using static FluentWeather.DIContainer.Locator;
+using Windows.Media.Protection.PlayReady;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -14,8 +17,19 @@ public static class DIFactory
 {
     public static void RegisterRequiredServices()
     {
-        Locator.ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
-        RegisterProviders(Common.Settings.DataProviderConfig);
+        ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
+        switch (Common.Settings.ProviderConfig)
+        {
+            case ProviderConfig.QWeather:
+                RegisterQWeather();
+                break;
+            case ProviderConfig.OpenMeteo:
+                RegisterOpenMeteo();
+                break;
+            default:
+                RegisterQWeather();
+                break;
+        }
     }
     public static void ReadSettings()
     {
@@ -29,6 +43,33 @@ public static class DIFactory
             }
         }
     }
+    public static void RegisterQWeather()
+    {
+        ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QGeoProvider.QGeoProvider));
+    }
+    public static void RegisterOpenMeteo()
+    {
+        ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QGeoProvider.QGeoProvider));
+        OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");
+    }
     public static void RegisterProviders(List<KeyValuePair<string, string>> dic)
     {
         foreach (var item in dic)
@@ -37,7 +78,7 @@ public static class DIFactory
             var name = DataProviderHelper.GetProviderInterfaceByName(item.Key);
             var provider = DataProviderHelper.GetProviderTypeById(item.Value);
             if (name is null || provider is null) continue;
-            Locator.ServiceDescriptors.AddSingleton(name,provider);
+            Locator.ServiceDescriptors.AddSingleton(name, provider);
         }
     }
 }

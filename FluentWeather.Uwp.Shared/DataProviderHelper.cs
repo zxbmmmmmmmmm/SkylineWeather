@@ -5,9 +5,11 @@ using System.Reflection;
 using FluentWeather.Abstraction;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
+using Windows.Foundation.Metadata;
 
 namespace FluentWeather.Uwp.Shared;
 
+[Experimental]
 public static class DataProviderHelper
 {
     public static List<KeyValuePair<string, string>> QWeatherConfig = new()
@@ -49,4 +51,5 @@ public static class DataProviderHelper
             _ => typeof(QWeatherProvider.QWeatherProvider)
         };
     }
+   
 }

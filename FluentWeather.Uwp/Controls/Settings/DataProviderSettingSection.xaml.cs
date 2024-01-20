@@ -28,22 +28,22 @@ namespace FluentWeather.Uwp.Controls.Settings
         public DataProviderSettingSection()
         {
             this.InitializeComponent();
-            if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.QWeatherConfig))
-                DataProviderComboBox.SelectedIndex = 0;
-            if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.OpenMeteoConfig))
-                DataProviderComboBox.SelectedIndex = 1;
+            //if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.QWeatherConfig))
+            //    DataProviderComboBox.SelectedIndex = 0;
+            //if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.OpenMeteoConfig))
+            //    DataProviderComboBox.SelectedIndex = 1;
         }
-        public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
-            IList<KeyValuePair<TKey, TValue>> y)
-        {
-            return x.All(p => y.Any(r => r.Equals(p))) && x.Count == y.Count;
-        }
-        private void DataProviderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {           
-            if (e.AddedItems?[0] is "和风天气")
-                Common.Settings.DataProviderConfig = DataProviderHelper.QWeatherConfig; 
-            if (e.AddedItems?[0] is "Open-Meteo")
-                Common.Settings.DataProviderConfig = DataProviderHelper.OpenMeteoConfig;
-        }
+        //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
+        //    IList<KeyValuePair<TKey, TValue>> y)
+        //{
+        //    return x.All(p => y.Any(r => r.Equals(p))) && x.Count == y.Count;
+        //}
+        //private void DataProviderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{           
+        //    if (e.AddedItems?[0] is "和风天气")
+        //        Common.Settings.DataProviderConfig = DataProviderHelper.QWeatherConfig; 
+        //    if (e.AddedItems?[0] is "Open-Meteo")
+        //        Common.Settings.DataProviderConfig = DataProviderHelper.OpenMeteoConfig;
+        //}
     }
 }

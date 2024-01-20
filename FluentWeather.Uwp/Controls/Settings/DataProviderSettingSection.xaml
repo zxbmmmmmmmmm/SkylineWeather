@@ -7,40 +7,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
 
     <Grid>
         <controls:SettingsExpander Header="数据" IsExpanded="True">
 
             <controls:SettingsExpander.Items>
-                <controls:SettingsCard
-                    Padding="12"
-                    Description="设置数据源(需要重启)"
-                    Header="数据源">
-                    <ComboBox
-                        x:Name="DataProviderComboBox"
-                        PlaceholderText="选择数据源"
-                        SelectionChanged="DataProviderComboBox_SelectionChanged">
-                        <x:String>和风天气</x:String>
-                        <x:String>Open-Meteo</x:String>
-                    </ComboBox>
+                <controls:SettingsCard Padding="12" Header="数据提供商" Description="选择数据提供商(需要重启)">
+                    <muxc:RadioButtons>
+                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}">和风天气</RadioButton>
+                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}">Open-Meteo</RadioButton>
+                    </muxc:RadioButtons>
                 </controls:SettingsCard>
-                <controls:SettingsExpander
-                    Visibility="Collapsed"
-                    Margin="-1"
-                    CornerRadius="0"
-                    Header="高级"
-                    ItemsSource="{x:Bind app:Common.Settings.DataProviderConfig, Mode=OneWay}">
-
-                    <controls:SettingsExpander.ItemTemplate>
-                        <DataTemplate>
-                            <controls:SettingsCard Padding="12" Header="{Binding Key}">
-                                <TextBox Text="{Binding Value, Mode=TwoWay}" />
-                            </controls:SettingsCard>
-                        </DataTemplate>
-                    </controls:SettingsExpander.ItemTemplate>
-
-                </controls:SettingsExpander>
             </controls:SettingsExpander.Items>
 
         </controls:SettingsExpander>

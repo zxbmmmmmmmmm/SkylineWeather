@@ -18,7 +18,7 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
 
-    private static readonly OpenMeteoClient Client = new();
+    public static readonly OpenMeteoClient Client = new();
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
         var result = await Client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
@@ -31,15 +31,6 @@ public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirCond
     {
         var result = await Client.GetCurrentAirQuality(lat, lon);
         return result.MapToOpenMeteoWeatherNow();
-    }
-
-    public static void RegisterRequiredServices()
-    {
-        Client.ForecastParameters.Add("forecast_hours", "168");
-        Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider), typeof(OpenMeteoProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(OpenMeteoProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(OpenMeteoProvider));
-        //Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(OpenMeteoProvider));
     }
 
     public async Task<List<WeatherDailyBase>> GetDailyForecasts(double lon, double lat)

@@ -16,6 +16,7 @@ using MetroLog;
 using MetroLog.Targets;
 using System.Collections.ObjectModel;
 using FluentWeather.QWeatherProvider.Models;
+using Windows.Foundation.Metadata;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -235,12 +236,20 @@ public class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public List<KeyValuePair<string, string>> DataProviderConfig
+    //public List<KeyValuePair<string, string>> DataProviderConfig
+    //{
+    //    get => GetSettingsWithClass<List<KeyValuePair<string, string>>>(nameof(DataProviderConfig), DataProviderHelper.QWeatherConfig);
+    //    set => ApplicationData.Current.LocalSettings.Values[nameof(DataProviderConfig)] = JsonSerializer.Serialize(value);
+    //}
+    public ProviderConfig ProviderConfig
     {
-        get => GetSettingsWithClass<List<KeyValuePair<string, string>>>(nameof(DataProviderConfig), DataProviderHelper.QWeatherConfig);
-        set => ApplicationData.Current.LocalSettings.Values[nameof(DataProviderConfig)] = JsonSerializer.Serialize(value);
+        get => GetSettings(nameof(ProviderConfig), ProviderConfig.QWeather);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(ProviderConfig)] = value.ToString();
+            OnPropertyChanged();
+        }
     }
-
     public event PropertyChangedEventHandler? PropertyChanged;
     public async void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
@@ -316,6 +325,11 @@ public class Settings : INotifyPropertyChanged
             return defaultValue;
         }
     }
+}
+public enum ProviderConfig
+{
+    QWeather,
+    OpenMeteo
 }
 public enum AppTheme
 {
