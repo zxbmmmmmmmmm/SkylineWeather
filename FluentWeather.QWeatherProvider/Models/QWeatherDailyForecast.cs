@@ -7,5 +7,5 @@ using FluentWeather.QWeatherProvider.Helpers;
 namespace FluentWeather.QWeatherProvider.Models;
 public class QWeatherDailyForecast : WeatherDailyBase
 {
-    public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
+    public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
 }

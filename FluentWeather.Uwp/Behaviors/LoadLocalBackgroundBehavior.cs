@@ -19,15 +19,15 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     {
         Instance = this;
     }
-    public WeatherType WeatherType
+    public WeatherCode WeatherType
     {
-        get => (WeatherType)GetValue(WeatherTypeProperty);
+        get => (WeatherCode)GetValue(WeatherTypeProperty);
         set => SetValue(WeatherTypeProperty, value);
     }
     public static readonly DependencyProperty WeatherTypeProperty =
-        DependencyProperty.Register(nameof(WeatherType), typeof(WeatherType), 
+        DependencyProperty.Register(nameof(WeatherType), typeof(WeatherCode), 
             typeof(LoadLocalBackgroundBehavior), 
-            new PropertyMetadata(WeatherType.Unknown,WeatherTypeUpdated));
+            new PropertyMetadata(WeatherCode.Unknown,WeatherTypeUpdated));
     private static void WeatherTypeUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var b = d as LoadLocalBackgroundBehavior;
@@ -36,15 +36,8 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
         b.LoadImage();
         b._weatherType = b.WeatherType;
     }
-    protected override void OnAttached()
-    {
-        base.OnAttached();
-    }
-    protected override void OnDetaching()
-    {
-        base.OnDetaching();
-    }
-    private WeatherType _weatherType = WeatherType.Unknown;
+
+    private WeatherCode _weatherType = WeatherCode.Unknown;
     public async void LoadImage()
     {
         StorageFolder folder;

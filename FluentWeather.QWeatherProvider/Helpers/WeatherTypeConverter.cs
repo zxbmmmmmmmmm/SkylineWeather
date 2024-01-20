@@ -1,77 +1,55 @@
 ﻿using FluentWeather.Abstraction.Models;
 
+using static FluentWeather.Abstraction.Models.WeatherCode;
 namespace FluentWeather.QWeatherProvider.Helpers;
+
 
 public static class WeatherTypeConverter
 {
-    public static WeatherType GetWeatherTypeByDescription(string description)
+    public static WeatherCode GetWeatherTypeByDescription(string description)
     {
-        if (description.Contains("冰雹"))
-        {
-            return WeatherType.Hail;
-        }
-        if (description.Contains("雷阵雨"))
-        {
-            return WeatherType.ThunderyShowers;
-        }
-        if (description.Contains("小雨"))
-        {
-            return WeatherType.LightRain;
-        }
-        if (description.Contains("大雨"))
-        {
-            return WeatherType.HeavyRain;
-        }
-        if (description.Contains("大雪"))
-        {
-            return WeatherType.HeavySnow;
-        }
-        if (description.Contains("局部多云"))
-        {
-            return WeatherType.PartlyCloudy;
-        }
-        if (description.Contains("大部多云"))
-        {
-            return WeatherType.MostlyCloudy;
-        }
-        if (description.Contains("少云"))
-        {
-            return WeatherType.MostlyClear;
-        }
-        if (description.Contains("雪"))
-        {
-            return WeatherType.LightSnow;
-        }
-        if (description.Contains("雷"))
-        {
-            return WeatherType.ThunderyHeavyRain;
-        }
-        if (description.Contains("雨"))
-        {
-            return WeatherType.LightRain;
-        }
-        if (description.Contains("雾"))
-        {
-            return WeatherType.Fog;
-        }
-        if (description.Contains("霾"))
-        {
-            return WeatherType.Fog;
-        }
-        if (description.Contains("阴"))
-        {
-            return WeatherType.Cloudy;
-        }
-        if (description.Contains("多云"))
-        {
-            return WeatherType.PartlyCloudy;
-        }
         if (description.Contains("晴"))
-        {
-            return WeatherType.Clear;
-        }
+            return Clear;
+        if (description.Contains("阴"))
+            return Overcast;
+        if (description.Contains("小雨"))       
+            return SlightRain;      
+        if (description.Contains("中雨"))       
+            return ModerateRain;        
+        if (description.Contains("大雨"))
+            return HeavyRain;
+        if (description.Contains("局部多云"))
+            return PartlyCloudy;
+        if (description.Contains("大部多云"))
+            return PartlyCloudy;
+        if (description.Contains("少云"))
+            return MainlyClear;
+
+        if (description.Contains("冰雹"))
+            return SlightHail;
+        if (description.Contains("雷阵雨"))
+            return HeavyThunderStorm;
+        if(description.Contains("小雪"))
+            return SlightSnowFall;
+        if (description.Contains("大雪"))
+            return HeavySnowFall;
 
 
-        return WeatherType.Unknown;
+        if (description.Contains("雪"))
+            return ModerateSnowFall;
+        if (description.Contains("雷"))
+            return SlightOrModerateThunderstorm;
+        if (description.Contains("雨"))
+            return ModerateRain;
+        if (description.Contains("雾"))
+            return Fog;
+        if (description.Contains("霾"))
+            return Haze;
+        if (description.Contains("多云"))
+            return PartlyCloudy;
+
+
+
+        return Unknown;
     }
 }

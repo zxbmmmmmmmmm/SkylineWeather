@@ -2,6 +2,6 @@
 
 public class WeatherBase
 {
-    public virtual WeatherType WeatherType { get; set; }
+    public virtual WeatherCode WeatherType { get; set; }
     public string? Description { get; set; }
 }

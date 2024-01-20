@@ -6,5 +6,5 @@ namespace FluentWeather.QWeatherProvider.Models;
 
 public class QWeatherNow : WeatherNowBase
 {
-    public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
+    public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
 }
