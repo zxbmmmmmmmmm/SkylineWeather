@@ -5,6 +5,7 @@ using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Shared;
+using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             GetTyphoons();
             ShowWarningLines();
             DataContext = this;
+            Analytics.TrackEvent("TyphoonDialogOpened");
         }
         public const string MapStyleSheetJson = "{\"version\":\"1.*\",\"settings\":{},\"elements\":{\"transportation\":{\"visible\":false},\"road\":{\"labelVisible\":false}}}";
         [ObservableProperty]

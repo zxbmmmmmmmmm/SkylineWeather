@@ -1,0 +1,30 @@
+﻿<ContentDialog
+    x:Class="FluentWeather.Uwp.Controls.Dialogs.UpdateDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
+    mc:Ignorable="d"
+    SecondaryButtonText="查看"
+    PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    PrimaryButtonText="下载"
+    CloseButtonText="取消"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
+    Style="{ThemeResource DefaultContentDialogStyle}">
+    <ContentDialog.Title>
+        <TextBlock>
+            <Run Text="更新"/>
+            <Run Text="{x:Bind UpdateInfo.TagName,Mode=OneWay}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+        </TextBlock>
+        
+    </ContentDialog.Title>
+
+    <ScrollViewer>
+        <controls:MarkdownTextBlock Background="Transparent" LinkClicked="MarkdownTextBlock_LinkClicked" Text="{x:Bind UpdateInfo.Changelog,Mode=OneWay}"/>
+    </ScrollViewer>
+</ContentDialog>

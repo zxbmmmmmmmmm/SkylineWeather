@@ -71,10 +71,52 @@ internal static class InfoBarHelper
             }
         });
     }
-    public static void Success(string title, string message, int delay = 5000, bool isClosable = true)
+    public static void Success(string title, string message, int delay = 5000, bool isClosable = true, string buttonContent = null, Action action = null)
     {
-        AddToContainer(InfoBarSeverity.Success, title, message, delay, isClosable);
+        DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
+        {
+            var infoBar = new InfoBar
+            {
+                Severity = InfoBarSeverity.Success,
+                Title = title,
+                Message = message,
+                IsOpen = true,
+                IsClosable = isClosable,
+            };
+            if (action is not null)
+            {
+                var btn = new Button
+                {
+                    Content = buttonContent,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                };
+                btn.Click += (_, _) =>
+                {
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        Common.LogManager.GetLogger(("InfoBarHelper")).Error($"{title} - {message} - {buttonContent}", ex);
+                    }
+                };
+                infoBar.ActionButton = btn;
+            }
+            _container.Children.Add(infoBar);
+            if (delay > 0)
+            {
+
+                await Task.Delay(delay);
+                infoBar.IsOpen = false;
+            }
+        });
     }
+
+    //public static void Success(string title, string message, int delay = 5000, bool isClosable = true)
+    //{
+    //    AddToContainer(InfoBarSeverity.Success, title, message, delay, isClosable);
+    //}
     public static void Warning(string title, string message, int delay = 5000, bool isClosable = true)
     {
         AddToContainer(InfoBarSeverity.Warning, title, message, delay, isClosable);

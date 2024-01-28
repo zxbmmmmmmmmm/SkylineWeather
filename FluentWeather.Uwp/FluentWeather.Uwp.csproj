@@ -157,6 +157,9 @@
     <Compile Include="Controls\Dialogs\TyphoonDialog.xaml.cs">
       <DependentUpon>TyphoonDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dialogs\UpdateDialog.xaml.cs">
+      <DependentUpon>UpdateDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\HourlyTemperatureChart.xaml.cs">
       <DependentUpon>HourlyTemperatureChart.xaml</DependentUpon>
     </Compile>
@@ -446,6 +449,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\TyphoonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialogs\UpdateDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
