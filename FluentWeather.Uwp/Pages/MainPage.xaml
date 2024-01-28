@@ -358,7 +358,7 @@
                         x:Name="PrecipGrid"
                         Grid.Row="1"
                         Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary,Mode=OneWay}">
+                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary, Mode=OneWay}">
                             <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
                         </muxc:Expander>
                     </Grid>
@@ -569,7 +569,7 @@
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                         <Run FontSize="16" Text="级" />
@@ -578,7 +578,7 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                                     <Run Text="-" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                                     <Run FontSize="14" Text="级" />
