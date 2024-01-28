@@ -6,9 +6,8 @@ using System.Text;
 
 namespace FluentWeather.QWeatherProvider.Models
 {
-    public class QWeatherPrecipitation : PrecipitationBase, ISummary
+    public class QWeatherPrecipitation : PrecipitationBase
     {
-        public string Summary { get ; set ; }
     }
 
     public class QWeatherPrecipitationItem:PrecipitationItemBase

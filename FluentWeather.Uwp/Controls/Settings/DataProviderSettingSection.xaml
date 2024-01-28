@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="FluentWeather.Uwp.Controls.Settings.DataProviderSettingSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+
+    <Grid>
+        <controls:SettingsExpander Header="数据" IsExpanded="True">
+
+            <controls:SettingsExpander.Items>
+                <controls:SettingsCard Padding="12" Header="数据提供商" Description="选择数据提供商(需要重启)">
+                    <muxc:RadioButtons>
+                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}">和风天气</RadioButton>
+                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}">Open-Meteo</RadioButton>
+                    </muxc:RadioButtons>
+                </controls:SettingsCard>
+            </controls:SettingsExpander.Items>
+
+        </controls:SettingsExpander>
+
+    </Grid>
+</Page>

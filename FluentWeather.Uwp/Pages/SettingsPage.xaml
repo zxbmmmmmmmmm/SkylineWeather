@@ -17,26 +17,40 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <StackPanel Margin="8,12,8,0" Spacing="4">
-                <StackPanel.ChildrenTransitions>
+            <Grid Margin="8,12,8,12" RowSpacing="4">
+                <Grid.ChildrenTransitions>
                     <TransitionCollection>
                         <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
                         <RepositionThemeTransition IsStaggeringEnabled="False" />
                     </TransitionCollection>
-                </StackPanel.ChildrenTransitions>
-                <settings:PersonalizationSettingSection />
-                <settings:LocationSettingSection />
-                <settings:NotificationSettingSection />
-                <settings:QWeatherSettingSection />
-                <settings:UpdateSettingSection />
-                <StackPanel Spacing="8" Visibility="Collapsed">
+                </Grid.ChildrenTransitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <settings:DataProviderSettingSection Grid.Row="0" />
+                <settings:PersonalizationSettingSection Grid.Row="1" />
+                <settings:LocationSettingSection Grid.Row="2" />
+                <settings:NotificationSettingSection Grid.Row="3" />
+                <settings:QWeatherSettingSection Grid.Row="4" />
+                <settings:UpdateSettingSection Grid.Row="5" />
+                <StackPanel
+                    Grid.Row="6"
+                    Spacing="8"
+                    Visibility="Collapsed">
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="开发者选项" />
                     <Button
                         x:Name="InfoBarTest"
                         Click="InfoBarTest_Click"
                         Content="测试InfoBar" />
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </ScrollViewer>
         <controls:PropertySizer
             Grid.Row="0"

@@ -30,6 +30,6 @@ public sealed partial class SettingsPage : Page
 
     private void InfoBarTest_Click(object sender, RoutedEventArgs e)
     {
-        InfoBarHelper.Success("Title", "Test InfoBar");
+        InfoBarHelper.Info("Title", "Test InfoBar");
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IApparentTemperature
 {
-    int ApparentTemperature { get; set; }
+    int? ApparentTemperature { get; set; }
 }

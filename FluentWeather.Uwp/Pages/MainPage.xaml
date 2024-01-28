@@ -121,7 +121,7 @@
             </animations:Implicit.ShowAnimations>
 
         </local:DailyViewPage>
-        <muxc:RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
+        <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.HideAnimations>
                 <animations:ImplicitAnimationSet>
                     <animations:OpacityAnimation
@@ -155,13 +155,13 @@
                         Duration="0:0:0.6" />
                 </animations:ImplicitAnimationSet>
             </animations:Implicit.ShowAnimations>
-            <muxc:RefreshContainer.Visualizer>
-                <muxc:RefreshVisualizer>
-                    <muxc:RefreshVisualizer.Content>
+            <RefreshContainer.Visualizer>
+                <RefreshVisualizer>
+                    <RefreshVisualizer.Content>
                         <SymbolIcon Margin="0,0,0,-64" Symbol="Refresh" />
-                    </muxc:RefreshVisualizer.Content>
-                </muxc:RefreshVisualizer>
-            </muxc:RefreshContainer.Visualizer>
+                    </RefreshVisualizer.Content>
+                </RefreshVisualizer>
+            </RefreshContainer.Visualizer>
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="RefreshRequested">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
@@ -255,14 +255,6 @@
                                     <Button.Flyout>
                                         <Flyout Placement="BottomEdgeAlignedLeft">
                                             <Grid>
-                                                <HyperlinkButton
-                                                    HorizontalAlignment="Right"
-                                                    VerticalAlignment="Top"
-                                                    Canvas.ZIndex="1"
-                                                    NavigateUri="{Binding AirCondition.Link}"
-                                                    ToolTipService.ToolTip="查看详细信息">
-                                                    <FontIcon FontSize="16" Glyph="&#xE2B4;" />
-                                                </HyperlinkButton>
                                                 <StackPanel Spacing="8">
                                                     <TextBlock>
                                                         <Run
@@ -279,7 +271,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.PM25}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.PM25}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -289,7 +281,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.PM10}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.PM10}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -300,7 +292,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.SO2}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.SO2}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -311,7 +303,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.NO2}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.NO2}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -322,7 +314,7 @@
                                                                 Margin="0,0,4,0"
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.O3}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.O3}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -332,7 +324,7 @@
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 FontSize="26"
-                                                                Text="{Binding AirCondition.CO}" />
+                                                                Text="{x:Bind ViewModel.AirCondition.CO}" />
                                                             <TextBlock
                                                                 HorizontalAlignment="Center"
                                                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -355,7 +347,7 @@
                                 <TextBlock
                                     FontSize="17"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                    Text="{Binding Precipitation.Summary}"
+                                    Text="{x:Bind ViewModel.Precipitation.Summary}"
                                     Visibility="{x:Bind PrecipGrid.Visibility, Converter={StaticResource VisibilityInverter}}" />
                             </Border>
                         </StackPanel>
@@ -366,7 +358,7 @@
                         x:Name="PrecipGrid"
                         Grid.Row="1"
                         Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                        <muxc:Expander HorizontalAlignment="Stretch" Header="{Binding Precipitation.Summary}">
+                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary, Mode=OneWay}">
                             <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
                         </muxc:Expander>
                     </Grid>
@@ -411,7 +403,7 @@
                             HorizontalContentAlignment="Stretch"
                             DesiredWidth="120"
                             IsItemClickEnabled="True"
-                            ItemHeight="165"
+                            ItemHeight="190"
                             ItemTemplate="{StaticResource WeatherForecastTemplate}"
                             ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
                             OneRowModeEnabled="True"
@@ -488,7 +480,7 @@
                             HorizontalContentAlignment="Stretch"
                             DesiredWidth="100"
                             IsItemClickEnabled="True"
-                            ItemHeight="140"
+                            ItemHeight="150"
                             ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
                             ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
                             OneRowModeEnabled="True"
@@ -577,7 +569,7 @@
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
+                                        Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                         <Run FontSize="16" Text="级" />
@@ -586,7 +578,7 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                                     <Run Text="-" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
                                                     <Run FontSize="14" Text="级" />
@@ -632,7 +624,7 @@
                                                     FontSize="18"
                                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="露点温度 -" />
-                                                    <Run Text="{Binding WeatherNow.DewPointTemperature}" /><Run Text="°" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.DewPointTemperature}" /><Run Text="°" />
                                                 </TextBlock>
                                                 <TextBlock
                                                     FontSize="16"
@@ -679,7 +671,7 @@
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="能见度" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.Visibility}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                         <Run FontSize="16" Text="km" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -688,7 +680,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="能见度" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.Visibility}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                                     <Run FontSize="14" Text="km" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -701,13 +693,13 @@
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
                                 </StackPanel>
-                                <StackPanel Margin="12" Visibility="{Binding WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                                <StackPanel Margin="12" Visibility="{x:Bind ViewModel.WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
                                     <TextBlock
                                         FontSize="18"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Text="云量" />
                                     <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{Binding WeatherNow.CloudAmount}" />
+                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                         <Run FontSize="16" Text="%" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
@@ -716,7 +708,7 @@
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="云量" />
                                                     <Run Text="-" />
-                                                    <Run Text="{Binding WeatherNow.CloudAmount}" />
+                                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
@@ -781,7 +773,7 @@
 
             </ScrollViewer>
 
-        </muxc:RefreshContainer>
+        </RefreshContainer>
 
 
         <VisualStateManager.VisualStateGroups>

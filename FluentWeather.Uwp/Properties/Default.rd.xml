@@ -22,8 +22,11 @@
  所有程序集。星号不是通配符。
 -->
     <Assembly Name="*Application*" Dynamic="Required All" />
-    
-    
+    <Namespace Name="Microsoft.UI.Xaml.Controls" Serialize="All" />
+    <Namespace Name="FluentWeather.Uwp.ViewModels" Serialize="All" />
+    <Namespace Name="FluentWeather.Abstraction.Interfaces" Serialize="All" />
+
+
     <!-- 在此处添加应用程序特定的运行时指令。-->
 
 

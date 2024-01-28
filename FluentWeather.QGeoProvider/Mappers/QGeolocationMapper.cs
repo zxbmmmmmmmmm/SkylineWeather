@@ -18,7 +18,7 @@ public static class QGeolocationMapper
             Longitude = double.Parse(item.Lon),
             Name = item.Name,
             TimeZone = item.TimeZone,
-            //UtcOffset = TimeSpan.Parse(item.UtcOffset),
+            UtcOffset = TimeSpan.Parse(item.UtcOffset.Replace("+","")),
         };
     }
 }

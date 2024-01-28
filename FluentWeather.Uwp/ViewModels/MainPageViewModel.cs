@@ -123,15 +123,21 @@ public partial class MainPageViewModel : ObservableObject
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
         }
-        if (CurrentLocation.Name == Common.Settings.DefaultGeolocation.Name)
+        if (CurrentLocation.Name == Common.Settings.DefaultGeolocation?.Name)
         {
             TileHelper.UpdateTiles(DailyForecasts);
         }
         foreach (var hourly in HourlyForecasts)
         {
+            if (CurrentLocation.UtcOffset is not null)
+            {
+                
+                
+            }
             var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
-            ((dynamic)daily).HourlyForecasts ??= new List<WeatherHourlyBase>();
-            ((dynamic)daily).HourlyForecasts?.Add(hourly);
+            if(daily is null) continue;
+            daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
+            daily.HourlyForecasts?.Add(hourly);
         }
         CacheHelper.Cache(this);
     }
@@ -147,15 +153,14 @@ public partial class MainPageViewModel : ObservableObject
         var cacheData = await CacheHelper.GetWeatherCache(CurrentLocation);
         if (cacheData is not null)
         {
-            DailyForecasts = cacheData.DailyForecasts.ConvertAll(p => p as WeatherDailyBase);
+            DailyForecasts = cacheData.DailyForecasts;
             SunRise = cacheData.SunRise;
             SunSet = cacheData.SunSet;
-            AirCondition = cacheData.AirCondition;
-            HourlyForecasts = cacheData.HourlyForecasts.ConvertAll(p => p as WeatherHourlyBase);
-            Indices = cacheData.Indices;
-            Precipitation = cacheData.Precipitation;
-            Warnings = cacheData.Warnings.ConvertAll(p => p as WeatherWarningBase);
-            WeatherDescription = cacheData.WeatherDescription;
+            AirCondition = cacheData.AirCondition!;
+            HourlyForecasts = cacheData.HourlyForecasts;
+            Indices = cacheData.Indices!;
+            Precipitation = cacheData.Precipitation!;
+            Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
             IsLoading = false;
         }
@@ -169,10 +174,7 @@ public partial class MainPageViewModel : ObservableObject
     public void SpeechWeather()
     {
         var text = $"{CurrentLocation.Name},{DailyForecasts[0].Description},最高温:{((ITemperatureRange)DailyForecasts[0]).MaxTemperature}°,最低温:{((ITemperatureRange)DailyForecasts[0]).MinTemperature}°";
-        if(AirCondition is not null)
-        {
-            text += $",空气质量:{AirCondition.AqiCategory}";
-        }
+        text += $",空气质量:{AirCondition.AqiCategory}";
         if(!TTSHelper.IsPlaying)
         {
             InfoBarHelper.Info("天气播报", text, 9000 , false);

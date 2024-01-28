@@ -1,4 +1,5 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
 using System;
 
@@ -10,14 +11,15 @@ public static class HourlyForecastItemMapper
     {
         return new QWeatherHourlyForecast
         {
+            WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360)),
             Description = item.Text,
-            WindDirection = item.WindDir,
+            WindDirectionDescription = item.WindDir,
             WindScale = item.WindScale,
             WindSpeed = int.Parse(item.WindSpeed),
             Humidity = int.Parse(item.Humidity),
             Pressure = int.Parse(item.Pressure),
             Temperature = int.Parse(item.Temp),
-            Time = DateTime.Parse(item.FxTime),
+            Time = DateTime.Parse(item.FxTime.Remove(16)),
             PrecipitationProbability = item.Pop is null or "" ? null : int.Parse(item.Pop),
             CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null
         };

@@ -13,6 +13,8 @@
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
             <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
+            <StaticResource x:Key="InfoBarInformationalSeverityBackgroundBrush" ResourceKey="SystemControlAcrylicElementBrush"/>
+
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
             <StaticResource x:Key="NavigationViewContentBackground" ResourceKey="LayerFillColorDefaultBrush" />
@@ -23,6 +25,7 @@
             <StaticResource x:Key="ContentDialogBorderBrush" ResourceKey="SurfaceStrokeColorDefaultBrush" />
             <StaticResource x:Key="ContentDialogSeparatorBorderBrush" ResourceKey="CardStrokeColorDefaultBrush" />
             <StaticResource x:Key="AutoSuggestBoxBorderBrush" ResourceKey="TextControlBorderBrush" />
+            <StaticResource x:Key="InfoBarInformationalSeverityBackgroundBrush" ResourceKey="SystemControlAcrylicElementBrush"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 
@@ -1005,14 +1008,14 @@
                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                     Text="{Binding Time, Converter={StaticResource ShortDateConverter}}" />
                 <Image
-                    Height="45"
+                    Height="50" Width="50"
                     Source="{Binding WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
                     Stretch="Uniform" />
                 <TextBlock
-                    HorizontalAlignment="Center"
+                    TextAlignment="Center"
                     FontSize="{ThemeResource WeatherDescriptionFontSize}"
-                    Text="{Binding Description}" />
-                <TextBlock x:Name="TemperatureText" HorizontalAlignment="Center">
+                    Text="{Binding Description}" TextWrapping="Wrap"/>
+                <TextBlock x:Name="TemperatureText" TextAlignment="Center" >
                     <Run
                         FontSize="22"
                         FontWeight="SemiBold"
@@ -1047,11 +1050,14 @@
                 <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
             </TextBlock>
             <Image
-                Height="32"
+                Height="36"
+                Width="36"
                 Source="{Binding Converter={StaticResource WeatherToIconConverter}}"
                 Stretch="Uniform" />
             <TextBlock
-                HorizontalAlignment="Center"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords"
+                MaxLines="2"
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
                 Text="{Binding Description}" />
             <TextBlock
@@ -1095,7 +1101,7 @@
                             </TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="16">
-                            <Run Text="{Binding WindDirection}" />
+                            <Run Text="{Binding WindDirection,Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                             <Run Text="{Binding WindScale}" /><Run FontSize="12.5" Text="级" />
                         </TextBlock>
                         <StackPanel

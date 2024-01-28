@@ -48,18 +48,6 @@ public class QWeatherProvider : ProviderBase,
         Option.Token = token;
         Option.Domain = domain;
     }
-    public static void RegisterRequiredServices()
-    {
-        Locator.ServiceDescriptors.AddSingleton(typeof(ICurrentWeatherProvider),typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IDailyForecastProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IHourlyForecastProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider));
-        Locator.ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider));
-    }
     public void GetSettings()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
@@ -136,11 +124,10 @@ public class QWeatherProvider : ProviderBase,
     public async Task<TyphoonBase> GetTyphoon (string id,string name)
     {
         var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
-        var qtyp = typ.MapToQTyphoon();
+        var qtyp = typ.MapToQTyphoon(name);
         var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
-        qtyp.Name = name;
         return qtyp;
     }
 }

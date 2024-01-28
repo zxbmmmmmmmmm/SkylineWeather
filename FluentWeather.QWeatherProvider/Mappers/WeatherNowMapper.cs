@@ -1,4 +1,5 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
 
 namespace FluentWeather.QWeatherProvider.Mappers;
@@ -9,7 +10,8 @@ public static class WeatherNowMapper
     {
         return new QWeatherNow
         {
-            WindDirection  = item.WindDir,
+            WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360)),
+            WindDirectionDescription  = item.WindDir,
             WindScale = item.WindScale,
             WindSpeed = int.Parse(item.WindSpeed),
             Humidity = int.Parse(item.Humidity),

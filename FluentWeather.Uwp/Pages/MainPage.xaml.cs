@@ -39,18 +39,15 @@ public sealed partial class MainPage : Page
         DailyGridView.ItemClick += DailyItemClicked;
         MainPageViewModel.Instance.PropertyChanged += async (s, e) =>
         {
-            if(e.PropertyName is "CurrentLocation")
-            {
-                Task.Delay(500);
-                MainContentContainer.Visibility = Visibility.Visible;
-            }
+            if (e.PropertyName is not "CurrentLocation") return;
+            MainContentContainer.Visibility = Visibility.Visible;
         };
         Instance = this;
     }
 
     private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
-        DailyView.SelectedItem = e.ClickedItem as WeatherDailyBase;
+        DailyView.SelectedIndex = DailyGridView.IndexFromContainer(DailyGridView.ContainerFromItem(e.ClickedItem));
         Analytics.TrackEvent("DailyViewEntered");
     }
 

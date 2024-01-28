@@ -123,6 +123,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DataProviderHelper.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ThemeHelper.cs" />
     <Compile Include="TileHelper.cs" />
@@ -140,13 +141,17 @@
       <Version>7.1.3</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>7.0.3</Version>
+      <Version>8.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj">
       <Project>{0627214c-2da0-4b49-bb12-dc8c44014eee}</Project>
       <Name>FluentWeather.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.OpenMeteoProvider\FluentWeather.OpenMeteoProvider.csproj">
+      <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
+      <Name>FluentWeather.OpenMeteoProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj">
       <Project>{eb061b33-c7dc-4dec-9398-0cc2c4abd619}</Project>

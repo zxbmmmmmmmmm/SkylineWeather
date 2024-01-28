@@ -5,9 +5,7 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
-public class QWeatherDailyForecast : WeatherDailyBase,ICloudAmount
+public class QWeatherDailyForecast : WeatherDailyBase
 {
-    public override WeatherType WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
-    public int? CloudAmount { get; set; }
-    public List<WeatherHourlyBase> HourlyForecasts { get; set; } 
+    public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
 }

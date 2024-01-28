@@ -48,14 +48,16 @@ namespace FluentWeather.Uwp.Pages
 
         public event RoutedEventHandler CloseRequested;
 
-        public WeatherDailyBase SelectedItem
+
+        public int SelectedIndex
         {
-            get => (WeatherDailyBase)GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
+            get => (int)GetValue(SelectedIndexProperty);
+            set => SetValue(SelectedIndexProperty, value);
         }
 
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(WeatherDailyBase), typeof(DailyViewPage), new PropertyMetadata(null));
+        public static readonly DependencyProperty SelectedIndexProperty =
+            DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0));
+
 
         public List<WeatherDailyBase> DailyForecasts
         {
@@ -64,7 +66,7 @@ namespace FluentWeather.Uwp.Pages
         }
 
         public static readonly DependencyProperty DailyForecastsProperty =
-            DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
 
         public List<WeatherHourlyBase> HourlyForecasts
         {
@@ -73,7 +75,7 @@ namespace FluentWeather.Uwp.Pages
         }
 
         public static readonly DependencyProperty HourlyForecastsProperty =
-            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(default));
 
     }
 }

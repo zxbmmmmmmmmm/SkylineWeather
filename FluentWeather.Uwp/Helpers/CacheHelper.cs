@@ -14,7 +14,7 @@ namespace FluentWeather.Uwp.Helpers;
 
 public class CacheHelper
 {
-    public static async Task<QWeatherCache> GetWeatherCache(GeolocationBase location)
+    public static async Task<WeatherCacheBase> GetWeatherCache(GeolocationBase location)
     {
         var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt") )as IStorageFile;
         if (item is null)
@@ -26,7 +26,7 @@ public class CacheHelper
         {      
             //读取文件
             var text = await FileIO.ReadTextAsync(item);
-            var data = JsonSerializer.Deserialize<List<QWeatherCache>>(text);
+            var data = JsonSerializer.Deserialize<List<WeatherCacheBase>>(text);
             data.RemoveAll(p => DateTime.Now - p.UpdatedTime > TimeSpan.FromMinutes(10));//删除过期的数据
             return data.Find(p => p.Location.Name == location.Name);
         }
@@ -49,25 +49,29 @@ public class CacheHelper
         {
             cacheData = new();
         }
-        var cache = new QWeatherCache
+        var cache = new WeatherCacheBase
         {
-            DailyForecasts = viewModel.DailyForecasts.ConvertAll(p => p as QWeatherDailyForecast),
+            DailyForecasts = viewModel.DailyForecasts,
             SunRise = viewModel.SunRise,
             SunSet = viewModel.SunSet,
-            AirCondition = viewModel.AirCondition as QAirCondition,
+            AirCondition = viewModel.AirCondition,
             Location = viewModel.CurrentLocation,
-            HourlyForecasts = viewModel.HourlyForecasts.ConvertAll(p => p as QWeatherHourlyForecast),
+            HourlyForecasts = viewModel.HourlyForecasts,
             Indices = viewModel.Indices,
-            Precipitation = viewModel.Precipitation as QWeatherPrecipitation,
+            Precipitation = viewModel.Precipitation,
             UpdatedTime = DateTime.Now,
-            Warnings = viewModel.Warnings.ConvertAll(p => p as QWeatherWarning),
-            WeatherDescription = viewModel.WeatherDescription,
-            WeatherNow = viewModel.WeatherNow as QWeatherNow,
+            Warnings = viewModel.Warnings,
+            WeatherNow = viewModel.WeatherNow,
         };
-        cacheData.RemoveAll(p => DateTime.Now - p["UpdatedTime"].GetValue<DateTime>() > TimeSpan.FromMinutes(10));//删除过期的数据
+        cacheData.RemoveAll(p => DateTime.Now - p["UpdatedTime"]?.GetValue<DateTime>() > TimeSpan.FromMinutes(10));//删除过期的数据
         cacheData.Add(JsonSerializer.SerializeToNode(cache));      
         var json = JsonSerializer.Serialize(cacheData);
         await FileIO.WriteTextAsync(item,json);
+    }
+    public static async void Clear()
+    {
+        var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt")) as IStorageFile;
+        await FileIO.WriteTextAsync(item, "");
     }
     public static async Task<IStorageFile> CreateCacheFile()
     {

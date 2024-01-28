@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Tasks", "Flue
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentWeather.Uwp.Shared", "FluentWeather.Uwp.Shared\FluentWeather.Uwp.Shared.csproj", "{23269C7B-0343-48B6-9909-505D667B0DBF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWeather.OpenMeteoProvider", "FluentWeather.OpenMeteoProvider\FluentWeather.OpenMeteoProvider.csproj", "{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +227,26 @@ Global
 		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x64.Build.0 = Release|x64
 		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x86.ActiveCfg = Release|x86
 		{23269C7B-0343-48B6-9909-505D667B0DBF}.Release|x86.Build.0 = Release|x86
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|ARM.Build.0 = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|ARM64.Build.0 = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|x64.Build.0 = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{839CCC2A-1F6D-4965-BCD3-8EFC98DD84AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
 using System;
 
@@ -10,8 +11,9 @@ public static class DailyForecastItemMapper
     {
         return new QWeatherDailyForecast
         {
+            WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360Day)),
             Description = item.TextDay,
-            WindDirection = item.WindDirDay,
+            WindDirectionDescription = item.WindDirDay,
             WindScale = item.WindScaleDay,
             WindSpeed = int.Parse(item.WindSpeedDay),
             Humidity = int.Parse(item.Humidity),
@@ -27,7 +29,8 @@ public static class DailyForecastItemMapper
             WeatherNight = new QWeatherNight
             {
                 Description = item.TextNight,
-                WindDirection = item.WindDirNight,
+                WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360Night)),
+                WindDirectionDescription = item.WindDirNight,
                 WindScale = item.WindScaleNight,
                 WindSpeed = int.Parse(item.WindSpeedNight),
             }

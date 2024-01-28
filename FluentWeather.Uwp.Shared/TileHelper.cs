@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.ConstrainedExecution;
 using Windows.UI.Notifications;
-using static FluentWeather.Abstraction.Models.WeatherType;
+using static FluentWeather.Abstraction.Models.WeatherCode;
 
 namespace FluentWeather.Uwp.Shared
 {
@@ -105,7 +105,7 @@ namespace FluentWeather.Uwp.Shared
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Resized/32/" + GetImageName(item.WeatherType) , ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
+                group.Children.Add(GenerateSubgroup(GetWeek(((ITime)item).Time), "Assets/Weather/Resized/32/" + GetImageName(item.WeatherType), ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
         }
         public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherDailyBase> daily)
@@ -121,7 +121,7 @@ namespace FluentWeather.Uwp.Shared
 
             // Small Tile
             builder.AddTile(TileSize.Small)
-                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/24/"+ GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
+                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/24/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
                 .SetTextStacking(TileTextStacking.Center);
 
 
@@ -137,7 +137,7 @@ namespace FluentWeather.Uwp.Shared
                 .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/32/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
                 .SetTextStacking(TileTextStacking.Center)
                 .SetBranding(TileBranding.Name)
-                .SetDisplayName(daily[0].Description,TileSize.Medium);
+                .SetDisplayName(daily[0].Description, TileSize.Medium);
 
             var wideGroup = new AdaptiveGroup();
             GetGroupChildrenForTile(wideGroup, daily.GetRange(0, 5));
@@ -145,7 +145,7 @@ namespace FluentWeather.Uwp.Shared
             // Wide Tile
             builder.AddTile(TileSize.Wide)
                 .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide)
-                .SetBranding(TileBranding.None,TileSize.Wide)
+                .SetBranding(TileBranding.None, TileSize.Wide)
                 .SetTextStacking(TileTextStacking.Center);
 
             // Large tile
@@ -158,7 +158,7 @@ namespace FluentWeather.Uwp.Shared
             builder.Content.Visual.BaseUri = new Uri("Assets/Weather/", UriKind.Relative);
 
             builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
-            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirection} {((IWind)daily[0]).WindScale}级";
+            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirectionDescription} {((IWind)daily[0]).WindScale}级";
 
 
             return builder.Content;
@@ -185,7 +185,7 @@ namespace FluentWeather.Uwp.Shared
                     new AdaptiveSubgroup()
                     {
                         Children =
-                        {                            
+                        {
                             new AdaptiveText()
                             {
                                 Text = daily[0].Description,
@@ -201,7 +201,7 @@ namespace FluentWeather.Uwp.Shared
 
                             new AdaptiveText()
                             {
-                                Text = ((IWind)daily[0]).WindDirection  + ((IWind)daily[0]).WindSpeed + "km/h",
+                                Text = ((IWind)daily[0]).WindDirectionDescription  + ((IWind)daily[0]).WindSpeed + "km/h",
                                 HintStyle = AdaptiveTextStyle.CaptionSubtle
                             }
                         }
@@ -216,7 +216,7 @@ namespace FluentWeather.Uwp.Shared
             }
             };
             var largeGroup = new AdaptiveGroup();
-            foreach (var item in daily.GetRange(1,5))
+            foreach (var item in daily.GetRange(1, 5))
             {
                 largeGroup.Children.Add(GenerateLargeSubgroup(GetWeek(((ITime)item).Time), $"{GetImageName(item.WeatherType)}", ((ITemperatureRange)item).MaxTemperature, ((ITemperatureRange)item).MinTemperature));
             }
@@ -242,29 +242,31 @@ namespace FluentWeather.Uwp.Shared
 
             return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
         }
-        public static string GetImageName(WeatherType weatherType)
+        public static string GetImageName(WeatherCode weatherType)
         {
             return weatherType switch
             {
-                Hail => "BlowingHail.png",
+                SlightHail or ModerateOrHeavyHail => "BlowingHail.png",
                 HeavyRain => "HeavyRain.png",
-                LightRain => "LightRain.png",
-                Cloudy => "Cloudy.png",
-                VeryCloudy => "VeryCloudy.png",
-                LightSnow => "LightSnow.png",
-                HeavySnow => "HeavySnow.png",
-                LightSleet or LightSleetShowers => "RainSnow.png",
-                ThunderyHeavyRain or ThunderyShowers or ThunderySnowShowers => "Thundery.png",
+                ModerateRain => "LightRain.png",
+                SlightRain => "LightRain.png",
+                ModerateRainShowers => "LightRain.png",
+                PartlyCloudy => "Cloudy.png",
+                Overcast => "VeryCloudy.png",
+                SlightSnowFall => "LightSnow.png",
+                HeavySnowFall => "HeavySnow.png",
+                Fog => "Fog.png",
+                LightFreezingRain or HeavyFreezingRain => "FreezingRain.png",
+                SlightSleet or ModerateOrHeavySleet => "RainSnow.png",
+                ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm => "Thundery.png",
                 Clear => "SunnyDay.png",
-                HazeSmoke => "HazeSmokeDay.png",
-                MostlyClear => "MostlySunnyDay.png",
-                MostlyCloudy => "MostCloudyDay.png",
-                PartlyCloudy => "PartlyCloudyDay.png",
-                HeavyShowers or LightShowers => "RainShowersDay.png",
-                LightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
+                Haze => "HazeSmokeDay.png",
+                MainlyClear => "MostlySunnyDay.png",
+                ViolentRainShowers or ViolentRainShowers or SlightRainShowers => "RainShowersDay.png",
+                SlightSnowShowers or HeavySnowShowers => "SnowShowersDay.png",
                 _ => "PartlyCloudy.png",
             };
         }
-    }
 
+    }
 }
