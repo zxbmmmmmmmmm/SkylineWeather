@@ -21,6 +21,7 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Analytics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Globalization;
 using Windows.Storage;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.System;
@@ -109,6 +110,7 @@ sealed partial class App : Application
     {
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
+        ApplicationLanguages.PrimaryLanguageOverride = "en-US";
         // 不要在窗口已包含内容时重复应用程序初始化，
         // 只需确保窗口处于活动状态
         if (rootFrame == null)

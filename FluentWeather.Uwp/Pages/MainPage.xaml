@@ -28,10 +28,12 @@
     <Page.ContextFlyout>
         <MenuFlyout Placement="BottomEdgeAlignedLeft">
             <MenuFlyoutItem
+                x:Uid="RefreshMenuItem"
                 Command="{x:Bind ViewModel.RefreshCommand}"
-                Icon="Refresh"
-                Text="刷新" />
-            <MenuFlyoutItem Command="{x:Bind ViewModel.SpeechWeatherCommand}" Text="语音播报">
+                Icon="Refresh" />
+            <MenuFlyoutItem
+                x:Uid="SpeechMenuItem"
+                Command="{x:Bind ViewModel.SpeechWeatherCommand}">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xF83B;" />
                 </MenuFlyoutItem.Icon>
@@ -52,7 +54,6 @@
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
         <Border
-            x:Name="SmokeBorder"
             Background="{ThemeResource LayerFillColorDefaultBrush}"
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <animations:Implicit.HideAnimations>
@@ -225,7 +226,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                    <Run Text="体感" />
+                                    <Run x:Uid="FeelsLike" />
                                     <Run Text="{Binding WeatherNow.ApparentTemperature}" /><Run Text="°" />
                                 </TextBlock>
                                 <Button
@@ -235,7 +236,8 @@
                                     Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                            <Run Text="空气质量 -" />
+                                            <Run x:Uid="AirCondition" />
+                                            <Run Text="-"/>
                                             <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                         </TextBlock>
                                         <FontIcon
@@ -335,7 +337,7 @@
                                                         Margin="0,0,4,0"
                                                         HorizontalAlignment="Right"
                                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="单位:μg/m³" />
+                                                        x:Uid="AirConditionUnit" />
 
                                                 </StackPanel>
                                             </Grid>
@@ -547,12 +549,12 @@
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
-                                Text="&#xE018; " /><Run Text="日出" />
+                                Text="&#xE018; " /><Run x:Uid="Sunrise" />
                             <Run Text="{x:Bind ViewModel.SunRise.ToShortTimeString(), Mode=OneWay}" />
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
-                                Text="  &#xE099; " /><Run Text="日落" />
+                                Text="  &#xE099; " /><Run x:Uid="Sunset" />
                             <Run Text="{x:Bind ViewModel.SunSet.ToShortTimeString(), Mode=OneWay}" />
                         </TextBlock>
                         <controls:AdaptiveGridView

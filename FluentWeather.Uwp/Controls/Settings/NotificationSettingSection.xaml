@@ -12,28 +12,28 @@
     mc:Ignorable="d">
 
 
-    <controls:SettingsExpander Header="通知" IsExpanded="True">
+    <controls:SettingsExpander
+        x:Uid="NotificationSettingsExpander"
+        Header="通知"
+        IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xEA8F;" />
         </controls:SettingsExpander.HeaderIcon>
         <controls:SettingsExpander.Items>
-            <controls:SettingsCard
-                Padding="12"
-                Description="定时检查并推送预警"
-                Header="预警">
+            <controls:SettingsCard x:Uid="WaringNotificationSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE7BA;" />
                 </controls:SettingsCard.HeaderIcon>
-                <StackPanel Orientation="Horizontal" Spacing="12     ">
-                    <Button Content="设置屏蔽词">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <Button x:Uid="IgnoreWarningButton" Content="设置屏蔽词">
                         <Button.Flyout>
                             <Flyout>
                                 <StackPanel>
                                     <TextBox Text="{x:Bind app:Common.Settings.IgnoreWarningWords, Mode=TwoWay}" />
-                                    <TextBlock Margin="0,8,0,0" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                        <Run Text="你可以屏蔽某些不必要的预警推送(如海上预警)" />
-                                        <LineBreak /><Run Text="用&quot;|&quot;分割，支持正则表达式" />
-                                    </TextBlock>
+                                    <TextBlock
+                                        x:Uid="IgnoreWarning"
+                                        Margin="0,8,0,0"
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>
@@ -42,23 +42,18 @@
                 </StackPanel>
             </controls:SettingsCard>
             <controls:SettingsCard
+                x:Uid="WeatherTodaySettingsCard"
                 Padding="12"
-                Description="在早晨推送今日天气预报"
-                Header="今日天气"
                 HeaderIcon="Calendar">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsDailyNotificationEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
             <controls:SettingsCard
+                x:Uid="WeatherTomorrow"
                 Padding="12"
-                Description="在晚间推送明日天气预报"
-                Header="明日天气"
                 HeaderIcon="Calendar">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsTomorrowNotificationEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
-            <controls:SettingsCard
-                Padding="12"
-                Description="在磁贴上显示每日天气(仅Win10)"
-                Header="磁贴">
+            <controls:SettingsCard x:Uid="WeatherTileSettingCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xECA5;" />
                 </controls:SettingsCard.HeaderIcon>

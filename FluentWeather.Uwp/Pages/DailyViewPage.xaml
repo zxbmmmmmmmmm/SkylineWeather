@@ -44,7 +44,7 @@
                         <StackPanel Padding="8,0">
                             <TextBlock Text="{x:Bind Time, Converter={StaticResource DateConverter}}" />
                             <TextBlock FontSize="13">
-                                <Run Text="{x:Bind Time,Converter={StaticResource ShortDateConverter}}" />
+                                <Run Text="{x:Bind Time, Converter={StaticResource ShortDateConverter}}" />
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -141,12 +141,12 @@
                                         <Run
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
-                                            Text="&#xE018; " /><Run Text="日出" />
+                                            Text="&#xE018; " /><Run x:Uid="Sunrise" />
                                         <Run Text="{x:Bind SunRise.ToShortTimeString()}" />
                                         <Run
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
-                                            Text="  &#xE099; " /><Run Text="日落" />
+                                            Text="  &#xE099; " /><Run x:Uid="Sunset" />
                                         <Run Text="{x:Bind SunSet.ToShortTimeString()}" />
                                     </TextBlock>
                                     <controls1:AdaptiveGridView

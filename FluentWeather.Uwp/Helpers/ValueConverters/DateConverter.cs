@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
@@ -11,10 +13,10 @@ public class DateConverter : IValueConverter
         if (value is not DateTime date)
             return value;
         if (date.Day == DateTime.Today.Day)
-            return "今天";
+            return ResourceLoader.GetForCurrentView().GetString("Today");
         if (date.Day == DateTime.Today.Day + 1)
-            return "明天";
-        
+            return ResourceLoader.GetForCurrentView().GetString("Tomorrow");
+
         return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期","周");
     }
 
@@ -33,7 +35,9 @@ public class ShortDateConverter : IValueConverter
         if (value is not DateTime date)
             return value;
 
-        return date.Month + "月" + date.Day + "日";
+        if (ApplicationLanguages.Languages[0].Contains("zh"))
+            return date.Month + "月" + date.Day + "日";
+        return date.Month + "/" + date.Day;
     }
 
 

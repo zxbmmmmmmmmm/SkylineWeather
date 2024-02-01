@@ -44,7 +44,7 @@
                     Grid.Row="6"
                     Spacing="8"
                     Visibility="Collapsed">
-                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="开发者选项" />
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="DeveloperMenu" />
                     <Button
                         x:Name="InfoBarTest"
                         Click="InfoBarTest_Click"

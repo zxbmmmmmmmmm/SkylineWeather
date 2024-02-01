@@ -63,15 +63,15 @@
 
         </chart:RadCartesianChart>
         <Grid Grid.Row="1" Margin="0,4,0,0">
-            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="现在" />
+            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" x:Uid="NowText"/>
             <TextBlock
                 HorizontalAlignment="Center"
                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                Text="1小时" />
+                x:Uid="OneHourText" />
             <TextBlock
                 HorizontalAlignment="Right"
                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                Text="2小时" />
+                x:Uid="TowHoursText" />
         </Grid>
 
     </Grid>

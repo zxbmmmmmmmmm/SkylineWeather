@@ -35,7 +35,6 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             this.InitializeComponent();
         }
-        private readonly string _backgroundImageSettingInfo = "你也可以根据不同天气使用不同的背景\r\n\r\n方法:点击\"打开背景文件夹\"，将背景图片**(PNG格式)**复制到此文件夹内，将图片按照以下格式重命名即可:\r\n\r\n|  天气   | 文件命名              |\r\n|-------|-------------------|\r\n| 晴     | Clear             |\r\n| 多云    | PartlyCloudy      |\r\n| 阴     | Cloudy            |\r\n| 大雨    | HeavyRain         |\r\n| 小雨/中雨 | LightRain         |\r\n| 大雪    | HeavySnow         |\r\n| 小雪/中雪 | LightSnow         |\r\n| 雷阵雨   | ThunderyShowers   |\r\n| 雷电    | ThunderyHeavyRain |\r\n| 雾/霾   | Fog             ";
         [RelayCommand]
         public async Task SetBackground(string type)
         {
