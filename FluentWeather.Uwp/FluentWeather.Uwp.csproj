@@ -259,7 +259,7 @@
   <ItemGroup>
     <Content Include="Assets\Backgrounds\All.png" />
     <Content Include="Assets\Backgrounds\Clear.png" />
-    <Content Include="Assets\Backgrounds\Cloudy.png" />
+    <Content Include="Assets\Backgrounds\Overcast.png" />
     <Content Include="Assets\Backgrounds\Fog.png" />
     <Content Include="Assets\Backgrounds\HeavyRain.png" />
     <Content Include="Assets\Backgrounds\HeavySnow.png" />

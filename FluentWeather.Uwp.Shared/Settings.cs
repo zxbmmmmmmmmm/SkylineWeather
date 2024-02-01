@@ -17,6 +17,7 @@ using MetroLog.Targets;
 using System.Collections.ObjectModel;
 using FluentWeather.QWeatherProvider.Models;
 using Windows.Foundation.Metadata;
+using System.Globalization;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -208,6 +209,16 @@ public class Settings : INotifyPropertyChanged
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "Domain"] = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string Language
+    {
+        get => GetSettings(nameof(Language), CultureInfo.CurrentCulture.Name);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(Language)] = value;
             OnPropertyChanged();
         }
     }

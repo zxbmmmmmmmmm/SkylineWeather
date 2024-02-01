@@ -26,15 +26,20 @@ namespace FluentWeather.QGeoProvider
         }
         public override string Id => "qgeoapi";
         public override string Name => "和风天气地理服务";
-        public static void RegisterRequiredServices()
-        {
-            Locator.ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QGeoProvider));
-            Locator.ServiceDescriptors.AddSingleton(typeof(ISetting),typeof(QGeoProvider));
-        }
         public void GetSettings()
         {
             var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
-            Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QGeoSettings.Token, "");
+            Option.Token = settingsHelper?.ReadLocalSetting(Id + "." + QGeoSettings.Token, "");
+            var language = settingsHelper?.ReadLocalSetting<string>(QGeoSettings.Language.ToString(), null);
+            if (language is null) return;
+            if (language.Contains("-") && !language.Contains("zh"))
+            {
+                Option.Language = language.Remove(language.IndexOf("-", StringComparison.Ordinal));
+            }
+            else
+            {
+                Option.Language = language;
+            }
         }
         public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
         {
@@ -56,5 +61,6 @@ namespace FluentWeather.QGeoProvider
     public enum QGeoSettings
     {
         Token,
+        Language
     }
 }
