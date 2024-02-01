@@ -56,8 +56,27 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
             folder = await folder.GetFolderAsync("Backgrounds");//无内容直接使用Assets
         } 
         var image = await GetImage(folder, WeatherType.ToString());
-        image ??= await GetImage(folder, "All");
+        image ??= await GetImage(folder, GetImageName(WeatherType));
         AssociatedObject.Source = image;
+    }
+
+    public string GetImageName(WeatherCode weather)
+    {
+        var code = (int)weather;
+        if (code is 0)
+            return "Clear.png";
+        if (code is 1 or 2)
+            return "PartlyCloudy.png";
+        if (code is 3)
+            return "Overcast.png";
+        if (50 <= code && code <= 69 || (80<=code && code <= 82))
+            return "Rain.png";
+        if (40 <= code && code <= 49)
+            return "Fog.png";
+        if (70 <= code && code <= 79)
+            return "Snow.png";
+
+        return "All.png";
     }
     
     private async Task<BitmapImage> GetImage(StorageFolder folder, string name)
