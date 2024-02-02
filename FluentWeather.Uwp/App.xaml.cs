@@ -29,6 +29,7 @@ using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Themes;
 using MetroLog;
 using MetroLog.Targets;
+using Windows.ApplicationModel.Resources;
 
 namespace FluentWeather.Uwp;
 
@@ -76,9 +77,17 @@ sealed partial class App : Application
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         e.Handled = true;
-        Crashes.TrackError(e.Exception);
+        if(Crashes.Instance.InstanceEnabled)
+            Crashes.TrackError(e.Exception);
         Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
-        InfoBarHelper.Error("未知错误",e.Message);
+        try
+        {
+            InfoBarHelper.Error("Error", e.Message);
+        }
+        finally
+        {
+
+        }
     }
     protected override void OnActivated(IActivatedEventArgs e)
     {
@@ -110,7 +119,6 @@ sealed partial class App : Application
     {
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
-        ApplicationLanguages.PrimaryLanguageOverride = "en-US";
         // 不要在窗口已包含内容时重复应用程序初始化，
         // 只需确保窗口处于活动状态
         if (rootFrame == null)

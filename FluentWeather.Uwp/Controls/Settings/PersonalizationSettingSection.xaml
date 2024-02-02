@@ -64,7 +64,7 @@
 
             </controls:SettingsCard>
 
-            <controls:SettingsCard x:Name="WindowBackdropSettingsCard" Padding="12">
+            <controls:SettingsCard x:Uid="WindowBackdropSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF156;" />
                 </controls:SettingsCard.HeaderIcon>

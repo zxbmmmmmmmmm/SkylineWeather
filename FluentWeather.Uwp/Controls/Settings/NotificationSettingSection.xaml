@@ -14,7 +14,6 @@
 
     <controls:SettingsExpander
         x:Uid="NotificationSettingsExpander"
-        Header="通知"
         IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xEA8F;" />
@@ -25,7 +24,7 @@
                     <FontIcon Glyph="&#xE7BA;" />
                 </controls:SettingsCard.HeaderIcon>
                 <StackPanel Orientation="Horizontal" Spacing="12">
-                    <Button x:Uid="IgnoreWarningButton" Content="设置屏蔽词">
+                    <Button x:Uid="IgnoreWarningButton">
                         <Button.Flyout>
                             <Flyout>
                                 <StackPanel>

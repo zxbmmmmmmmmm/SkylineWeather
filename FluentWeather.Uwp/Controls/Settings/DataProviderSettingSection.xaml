@@ -14,12 +14,10 @@
         <controls:SettingsExpander x:Uid="DataSettingsExpander" IsExpanded="True">
 
             <controls:SettingsExpander.Items>
-                <controls:SettingsCard
-                    x:Uid="DataProviderSettingsCard"
-                    Padding="12">
+                <controls:SettingsCard x:Uid="DataProviderSettingsCard" Padding="12">
                     <muxc:RadioButtons>
                         <RadioButton x:Uid="QWeatherSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}" />
-                        <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}"/>
+                        <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}" />
                     </muxc:RadioButtons>
                 </controls:SettingsCard>
             </controls:SettingsExpander.Items>

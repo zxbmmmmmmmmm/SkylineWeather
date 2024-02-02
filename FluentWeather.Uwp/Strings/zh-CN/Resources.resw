@@ -165,6 +165,12 @@
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>经典</value>
   </data>
+  <data name="CloudAmountDescription.Text" xml:space="preserve">
+    <value>天空被云所遮蔽的比例</value>
+  </data>
+  <data name="CloudAmountText.Text" xml:space="preserve">
+    <value>云量</value>
+  </data>
   <data name="CurrentLocation.Text" xml:space="preserve">
     <value>当前位置</value>
   </data>
@@ -192,6 +198,12 @@
   <data name="DeveloperMenu.Text" xml:space="preserve">
     <value>开发者选项</value>
   </data>
+  <data name="DewPointDescription.Text" xml:space="preserve">
+    <value>使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”</value>
+  </data>
+  <data name="DewPointText.Text" xml:space="preserve">
+    <value>露点温度</value>
+  </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>更改</value>
   </data>
@@ -207,12 +219,21 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
+  <data name="HumidityDescription.Text" xml:space="preserve">
+    <value>相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量</value>
+  </data>
+  <data name="HumidityText.Text" xml:space="preserve">
+    <value>湿度</value>
+  </data>
   <data name="IgnoreWarning.Text" xml:space="preserve">
     <value>你可以屏蔽某些不必要的预警推送(如海上预警)
 用|分割，支持正则表达式</value>
   </data>
   <data name="IgnoreWarningButton.Content" xml:space="preserve">
     <value>设置屏蔽词</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>应用为最新版本</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>明亮</value>
@@ -223,6 +244,9 @@
   <data name="MoreInfoText" xml:space="preserve">
     <value>了解详情</value>
     <comment>警告内了解详情</comment>
+  </data>
+  <data name="NotificationSettingsExpander.Header" xml:space="preserve">
+    <value>通知</value>
   </data>
   <data name="NowText.Text" xml:space="preserve">
     <value>现在</value>
@@ -238,6 +262,12 @@
   </data>
   <data name="PersonalizationSettingExpander.Header" xml:space="preserve">
     <value>个性化</value>
+  </data>
+  <data name="PressureDescription.Text" xml:space="preserve">
+    <value>大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关</value>
+  </data>
+  <data name="PressureText.Text" xml:space="preserve">
+    <value>气压</value>
   </data>
   <data name="QGeolocationTokenSettingsCard.Description" xml:space="preserve">
     <value>QGeoApi的KEY，可以在控制台中找到</value>
@@ -322,8 +352,41 @@
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>台风</value>
   </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>未知错误</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>更新可用</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>检查更新失败</value>
+  </data>
+  <data name="UpdateCheckFailedDescription" xml:space="preserve">
+    <value>请检查当前网络或尝试开启代理</value>
+  </data>
+  <data name="UpdateDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="UpdateDialog.PrimaryButtonText" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="UpdateDialog.SecondaryButtonText" xml:space="preserve">
+    <value>查看</value>
+  </data>
   <data name="UpdateSettingsExpander.Header" xml:space="preserve">
     <value>更新</value>
+  </data>
+  <data name="UpdateText.Text" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="VisibilityDescription.Text" xml:space="preserve">
+    <value>视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离</value>
+  </data>
+  <data name="VisibilityText.Text" xml:space="preserve">
+    <value>能见度</value>
   </data>
   <data name="WaringNotificationSettingsCard.Description" xml:space="preserve">
     <value>定时检查并推送预警</value>
@@ -349,11 +412,122 @@
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>明日天气</value>
   </data>
+  <data name="WindDirection_East" xml:space="preserve">
+    <value>东风</value>
+  </data>
+  <data name="WindDirection_EastNorthEast" xml:space="preserve">
+    <value>东北偏东风</value>
+  </data>
+  <data name="WindDirection_EastSouthEast" xml:space="preserve">
+    <value>东南偏东风</value>
+  </data>
+  <data name="WindDirection_None" xml:space="preserve">
+    <value>无持续风向</value>
+  </data>
+  <data name="WindDirection_North" xml:space="preserve">
+    <value>北风</value>
+  </data>
+  <data name="WindDirection_NorthEast" xml:space="preserve">
+    <value>东北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
+    <value>东北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
+    <value>西北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthWest" xml:space="preserve">
+    <value>西北风</value>
+  </data>
+  <data name="WindDirection_Rotational" xml:space="preserve">
+    <value>旋转风向</value>
+  </data>
+  <data name="WindDirection_South" xml:space="preserve">
+    <value>南风</value>
+  </data>
+  <data name="WindDirection_SouthEast" xml:space="preserve">
+    <value>东南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
+    <value>东南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
+    <value>西南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthWest" xml:space="preserve">
+    <value>西南风</value>
+  </data>
+  <data name="WindDirection_West" xml:space="preserve">
+    <value>西风</value>
+  </data>
+  <data name="WindDirection_WestNorthWest" xml:space="preserve">
+    <value>西北偏西风</value>
+  </data>
+  <data name="WindDirection_WestSouthWest" xml:space="preserve">
+    <value>西南偏西风</value>
+  </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Win11下将覆盖Mica
 将背景透明度设置为100%以查看效果</value>
   </data>
   <data name="WindowBackdropSettingsCard.Header" xml:space="preserve">
     <value>窗口亚克力</value>
+  </data>
+  <data name="WindScaleDescription_1" xml:space="preserve">
+    <value>静，烟直向上</value>
+  </data>
+  <data name="WindScaleDescription_10" xml:space="preserve">
+    <value>大树连根拔起，建筑物损毁</value>
+  </data>
+  <data name="WindScaleDescription_11" xml:space="preserve">
+    <value>陆上少见，建筑物普遍损毁</value>
+  </data>
+  <data name="WindScaleDescription_12" xml:space="preserve">
+    <value>陆上少见，建筑物普遍严重损毁</value>
+  </data>
+  <data name="WindScaleDescription_13" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_14" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_15" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_16" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_17" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_2" xml:space="preserve">
+    <value>烟能表示风向，风向标不转动</value>
+  </data>
+  <data name="WindScaleDescription_3" xml:space="preserve">
+    <value>树叶及小树枝摇动不息，旗展开</value>
+  </data>
+  <data name="WindScaleDescription_4" xml:space="preserve">
+    <value>吹起地面灰尘和纸张，小树枝摇动</value>
+  </data>
+  <data name="WindScaleDescription_5" xml:space="preserve">
+    <value>有叶的小树整棵摇摆；内陆水面有波纹</value>
+  </data>
+  <data name="WindScaleDescription_6" xml:space="preserve">
+    <value>大树枝摇摆，持伞有困难，电线有呼呼声</value>
+  </data>
+  <data name="WindScaleDescription_7" xml:space="preserve">
+    <value>全树摇动，人迎风前行有困难</value>
+  </data>
+  <data name="WindScaleDescription_8" xml:space="preserve">
+    <value>小树枝折断，人向前行阻力甚大</value>
+  </data>
+  <data name="WindScaleDescription_9" xml:space="preserve">
+    <value>烟囱顶部移动，木屋受损</value>
+  </data>
+  <data name="WindScaleDescription_&gt;17" xml:space="preserve">
+    <value>陆上极难出现，毁灭性破坏</value>
+  </data>
+  <data name="WindScaleText.Text" xml:space="preserve">
+    <value>级</value>
   </data>
 </root>

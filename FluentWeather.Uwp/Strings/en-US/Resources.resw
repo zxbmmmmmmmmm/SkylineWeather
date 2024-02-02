@@ -165,6 +165,12 @@
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>Classic</value>
   </data>
+  <data name="CloudAmountDescription.Text" xml:space="preserve">
+    <value>The fraction of the sky obscured by clouds on average when observed from a particular location</value>
+  </data>
+  <data name="CloudAmountText.Text" xml:space="preserve">
+    <value>Cloud cover</value>
+  </data>
   <data name="CurrentLocation.Text" xml:space="preserve">
     <value>Current location</value>
   </data>
@@ -172,7 +178,7 @@
     <value>Dark</value>
   </data>
   <data name="DataProviderSettingsCard.Description" xml:space="preserve">
-    <value>Select Data Provider (needs restart)</value>
+    <value>Select Data Provider (requires restart app)</value>
   </data>
   <data name="DataProviderSettingsCard.Header" xml:space="preserve">
     <value>Data provider</value>
@@ -181,7 +187,7 @@
     <value>Data</value>
   </data>
   <data name="DefaultPositionSettingsCard.Description" xml:space="preserve">
-    <value>Use this position as current location (restart to take effect)</value>
+    <value>Use this position as current location (requires restart app)</value>
   </data>
   <data name="DefaultPositionSettingsCard.Header" xml:space="preserve">
     <value>Default position</value>
@@ -191,6 +197,12 @@
   </data>
   <data name="DeveloperMenu.Text" xml:space="preserve">
     <value>For Developers</value>
+  </data>
+  <data name="DewPointDescription.Text" xml:space="preserve">
+    <value>The temperature to which it must be cooled to become saturated with water vapor</value>
+  </data>
+  <data name="DewPointText.Text" xml:space="preserve">
+    <value>Dew point</value>
   </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>Edit</value>
@@ -207,12 +219,21 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>Follow system</value>
   </data>
+  <data name="HumidityDescription.Text" xml:space="preserve">
+    <value>The concentration of water vapor present in the air</value>
+  </data>
+  <data name="HumidityText.Text" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
   <data name="IgnoreWarning.Text" xml:space="preserve">
     <value>You can ignore some unnecessary warning push (e.g. sea warning)
 Split with "|", support Regex</value>
   </data>
   <data name="IgnoreWarningButton.Content" xml:space="preserve">
     <value>Set block word</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Application is the latest version</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>Light</value>
@@ -223,6 +244,9 @@ Split with "|", support Regex</value>
   <data name="MoreInfoText" xml:space="preserve">
     <value>See details</value>
     <comment>警告内了解详情</comment>
+  </data>
+  <data name="NotificationSettingsExpander.Header" xml:space="preserve">
+    <value>Notification</value>
   </data>
   <data name="NowText.Text" xml:space="preserve">
     <value>Now</value>
@@ -238,6 +262,12 @@ Split with "|", support Regex</value>
   </data>
   <data name="PersonalizationSettingExpander.Header" xml:space="preserve">
     <value>Personalization</value>
+  </data>
+  <data name="PressureDescription.Text" xml:space="preserve">
+    <value>The weight of the air in the atmosphere. Higher air pressure is usually associated with a bright weather, lower air pressure is related to storm weather</value>
+  </data>
+  <data name="PressureText.Text" xml:space="preserve">
+    <value>Pressure</value>
   </data>
   <data name="QGeolocationTokenSettingsCard.Description" xml:space="preserve">
     <value>QGeoApi's KEY, available in console</value>
@@ -297,7 +327,7 @@ Split with "|", support Regex</value>
     <value>Colors</value>
   </data>
   <data name="ThemeSettingsCard.Description" xml:space="preserve">
-    <value>Set App Theme (Requires Restart)</value>
+    <value>Set App Theme (requires restart app)</value>
   </data>
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
     <value>Theme</value>
@@ -321,8 +351,41 @@ Split with "|", support Regex</value>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>Typhoon</value>
   </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>Updates Available</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>Update check failed</value>
+  </data>
+  <data name="UpdateCheckFailedDescription" xml:space="preserve">
+    <value>Please try again later</value>
+  </data>
+  <data name="UpdateDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UpdateDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="UpdateDialog.SecondaryButtonText" xml:space="preserve">
+    <value>View</value>
+  </data>
   <data name="UpdateSettingsExpander.Header" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="UpdateText.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="VisibilityDescription.Text" xml:space="preserve">
+    <value>The measure of the distance at which an object or light can be clearly discerned</value>
+  </data>
+  <data name="VisibilityText.Text" xml:space="preserve">
+    <value>Visibility</value>
   </data>
   <data name="WaringNotificationSettingsCard.Description" xml:space="preserve">
     <value>Check and push warning on time</value>
@@ -348,11 +411,122 @@ Split with "|", support Regex</value>
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>Weather Tomorrow</value>
   </data>
+  <data name="WindDirection_East" xml:space="preserve">
+    <value>East wind</value>
+  </data>
+  <data name="WindDirection_EastNorthEast" xml:space="preserve">
+    <value>Northeast wind</value>
+  </data>
+  <data name="WindDirection_EastSouthEast" xml:space="preserve">
+    <value>Southeast wind</value>
+  </data>
+  <data name="WindDirection_None" xml:space="preserve">
+    <value>No sustainable wind direction</value>
+  </data>
+  <data name="WindDirection_North" xml:space="preserve">
+    <value>North wind</value>
+  </data>
+  <data name="WindDirection_NorthEast" xml:space="preserve">
+    <value>Northeast wind</value>
+  </data>
+  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
+    <value>Northeast wind</value>
+  </data>
+  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
+    <value>Northwest wind</value>
+  </data>
+  <data name="WindDirection_NorthWest" xml:space="preserve">
+    <value>Northwest wind</value>
+  </data>
+  <data name="WindDirection_Rotational" xml:space="preserve">
+    <value>Rotational wind</value>
+  </data>
+  <data name="WindDirection_South" xml:space="preserve">
+    <value>South wind</value>
+  </data>
+  <data name="WindDirection_SouthEast" xml:space="preserve">
+    <value>Southeast wind</value>
+  </data>
+  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
+    <value>Southeast wind</value>
+  </data>
+  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
+    <value>Southwest wind</value>
+  </data>
+  <data name="WindDirection_SouthWest" xml:space="preserve">
+    <value>Southwest wind</value>
+  </data>
+  <data name="WindDirection_West" xml:space="preserve">
+    <value>West wind</value>
+  </data>
+  <data name="WindDirection_WestNorthWest" xml:space="preserve">
+    <value>Northwest wind</value>
+  </data>
+  <data name="WindDirection_WestSouthWest" xml:space="preserve">
+    <value>Southwest wind</value>
+  </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>This section will overwrite Mica effect on Windows 11 
 to set background transparency to 100% to see effects</value>
   </data>
   <data name="WindowBackdropSettingsCard.Header" xml:space="preserve">
     <value>Background Acrylic</value>
+  </data>
+  <data name="WindScaleDescription_1" xml:space="preserve">
+    <value>Smoke rises vertically</value>
+  </data>
+  <data name="WindScaleDescription_10" xml:space="preserve">
+    <value>Seldom experienced inland; trees uprooted; considerable structural damage</value>
+  </data>
+  <data name="WindScaleDescription_11" xml:space="preserve">
+    <value>Very rarely experienced; accompanied by widespread damage</value>
+  </data>
+  <data name="WindScaleDescription_12" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_13" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_14" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_15" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_16" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_17" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleDescription_2" xml:space="preserve">
+    <value>Wind felt on face; leaves rustle; wind vane moved by wind</value>
+  </data>
+  <data name="WindScaleDescription_3" xml:space="preserve">
+    <value>Leaves and small twigs in constant motion; light flags extended</value>
+  </data>
+  <data name="WindScaleDescription_4" xml:space="preserve">
+    <value>Raises dust and loose paper; small branches moved</value>
+  </data>
+  <data name="WindScaleDescription_5" xml:space="preserve">
+    <value>Small trees in leaf begin to sway; crested wavelets form on inland waters</value>
+  </data>
+  <data name="WindScaleDescription_6" xml:space="preserve">
+    <value>Large branches in motion; whistling heard in telegraph wires; umbrellas used with difficulty</value>
+  </data>
+  <data name="WindScaleDescription_7" xml:space="preserve">
+    <value>Whole trees in motion; inconvenience felt when walking against the wind</value>
+  </data>
+  <data name="WindScaleDescription_8" xml:space="preserve">
+    <value>Twigs break off trees; generally impedes progress</value>
+  </data>
+  <data name="WindScaleDescription_9" xml:space="preserve">
+    <value>Slight structural damage (chimney pots and slates removed)</value>
+  </data>
+  <data name="WindScaleDescription_&gt;17" xml:space="preserve">
+    <value>Devastation</value>
+  </data>
+  <data name="WindScaleText.Text" xml:space="preserve">
+    <value>Level</value>
   </data>
 </root>
