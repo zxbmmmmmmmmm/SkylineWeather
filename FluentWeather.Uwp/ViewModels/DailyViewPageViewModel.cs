@@ -5,7 +5,7 @@ using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class DailyViewViewModel : ObservableObject
+public sealed partial class DailyViewViewModel : ObservableObject
 {
     [ObservableProperty]
     private List<WeatherBase> _dailyForecasts;

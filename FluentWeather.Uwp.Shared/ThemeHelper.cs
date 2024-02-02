@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Shared;
 
-public class ThemeHelper
+public sealed class ThemeHelper
 {
     private static ElementTheme _theme;
     public static async Task SetRequestedThemeAsync(ElementTheme theme)

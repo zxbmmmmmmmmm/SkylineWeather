@@ -7,7 +7,7 @@ using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;
 
-public class SettingsHelper:ISettingsHelper
+public sealed class SettingsHelper:ISettingsHelper
 {
     public T ReadLocalSetting<T>(string settingName, T defaultValue)
     {

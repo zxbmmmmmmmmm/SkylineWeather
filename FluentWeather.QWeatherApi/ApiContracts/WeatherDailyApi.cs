@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
+public sealed class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.DailyForecast7D;
@@ -23,7 +23,7 @@ public class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
     }
 }
 
-public class WeatherDailyResponse : QWeatherResponseBase
+public sealed class WeatherDailyResponse : QWeatherResponseBase
 {
     [JsonPropertyName("daily")]
     public List<DailyForecastItem> DailyForecasts { get; set; }

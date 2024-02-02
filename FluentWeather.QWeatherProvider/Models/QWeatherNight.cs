@@ -4,7 +4,7 @@ using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherNight : WeatherBase, IWind
+public sealed class QWeatherNight : WeatherBase, IWind
 {
     public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
     public string WindDirectionDescription { get; set; }

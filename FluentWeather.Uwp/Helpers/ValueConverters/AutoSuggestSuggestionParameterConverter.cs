@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class AutoSuggestSuggestionParameterConverter : IValueConverter
+public sealed class AutoSuggestSuggestionParameterConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

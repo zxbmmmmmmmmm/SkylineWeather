@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class RootPageViewModel:ObservableObject
+public sealed partial class RootPageViewModel:ObservableObject
 {
     [ObservableProperty]
     private bool _isPaneOpen = false;

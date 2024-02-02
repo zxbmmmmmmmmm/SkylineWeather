@@ -6,10 +6,10 @@ using System.Text;
 
 namespace FluentWeather.QWeatherProvider.Models
 {
-    public class QTyphoon:TyphoonBase
+    public sealed class QTyphoon:TyphoonBase
     {
     }
-    public class QTyphoonTrack : TyphoonTrackBase, IWindRadius
+    public sealed class QTyphoonTrack : TyphoonTrackBase, IWindRadius
     {
         public WindRadius WindRadius7 { get ; set ; }
         public WindRadius WindRadius10 { get ; set ; }

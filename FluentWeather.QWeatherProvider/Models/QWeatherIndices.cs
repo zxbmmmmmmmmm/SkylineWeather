@@ -3,7 +3,7 @@ using System;
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherIndices : IndicesBase
+public sealed class QWeatherIndices : IndicesBase
 {
     public DateTime Date { get; set; }
 

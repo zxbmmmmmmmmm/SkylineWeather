@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class SeverityColorToColorConverter : IValueConverter
+public sealed class SeverityColorToColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

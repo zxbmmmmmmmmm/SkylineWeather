@@ -10,7 +10,7 @@ using static FluentWeather.Abstraction.Models.WeatherCode;
 
 namespace FluentWeather.Uwp.Shared
 {
-    public class TileHelper
+    public sealed class TileHelper
     {
         public static void UpdateTiles(List<WeatherDailyBase> data)
         {

@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class DataPointToBrushConverter : IValueConverter
+public sealed class DataPointToBrushConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

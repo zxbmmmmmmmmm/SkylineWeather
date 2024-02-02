@@ -8,7 +8,7 @@ using System.Dynamic;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class WeatherTypeToIconConverter:IValueConverter
+public sealed class WeatherTypeToIconConverter:IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

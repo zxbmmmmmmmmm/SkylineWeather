@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class TyphoonListApi : QApiContractBase<RequestBase,TyphoonListResponse>
+public sealed class TyphoonListApi : QApiContractBase<RequestBase,TyphoonListResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
 
@@ -22,7 +22,7 @@ public class TyphoonListApi : QApiContractBase<RequestBase,TyphoonListResponse>
         return res;
     }
 }
-public class TyphoonListResponse
+public sealed class TyphoonListResponse
 {
     [JsonPropertyName("storm")]
     public List<TyphoonListItem> Typhoons { get; set; }

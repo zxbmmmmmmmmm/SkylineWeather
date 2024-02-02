@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherHourlyApi: QApiContractBase<WeatherHourlyResponse>
+public sealed class WeatherHourlyApi: QApiContractBase<WeatherHourlyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.HourlyForecast24H;
@@ -21,10 +21,10 @@ public class WeatherHourlyApi: QApiContractBase<WeatherHourlyResponse>
         return res;
     }
 }
-public class WeatherHourlyResponse : QWeatherResponseBase
+public sealed class WeatherHourlyResponse : QWeatherResponseBase
 {
     [JsonPropertyName("hourly")] public List<HourlyForecastItem> HourlyForecasts { get; set; }
-    public class HourlyForecastItem
+    public sealed class HourlyForecastItem
     {
         [JsonPropertyName("fxTime")]
         public string FxTime { get; set; }

@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class TyphoonTypeToDescriptionConverter:IValueConverter
+public sealed class TyphoonTypeToDescriptionConverter:IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

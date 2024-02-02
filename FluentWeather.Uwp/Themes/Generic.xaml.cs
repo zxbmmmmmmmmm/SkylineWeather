@@ -2,7 +2,7 @@
 
 namespace FluentWeather.Uwp.Themes;
 
-public partial class Generic:ResourceDictionary
+public sealed partial class Generic:ResourceDictionary
 {
     public Generic()
     {

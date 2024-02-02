@@ -7,13 +7,13 @@ using System.Text.Json.Serialization;
 
 namespace FluentWeather.QWeatherApi.ApiContracts
 {
-    public class PrecipitationApi : QApiContractBase<PrecipitationResponse>
+    public sealed class PrecipitationApi : QApiContractBase<PrecipitationResponse>
     {
         public override HttpMethod Method => HttpMethod.Get;
 
         public override string Path => ApiConstants.Weather.MinutelyPrecipitation;
     }
-    public class PrecipitationResponse:QWeatherResponseBase
+    public sealed class PrecipitationResponse:QWeatherResponseBase
     {
         [JsonPropertyName("minutely")]
         public List<PrecipitationItem> MinutelyPrecipitations { get; set; }

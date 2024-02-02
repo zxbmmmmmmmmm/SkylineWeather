@@ -6,7 +6,7 @@ using static FluentWeather.Abstraction.Models.WindDirection;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class WindDirectionToDescriptionConverter:IValueConverter
+public sealed class WindDirectionToDescriptionConverter:IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

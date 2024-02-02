@@ -6,11 +6,11 @@ using System.Text;
 
 namespace FluentWeather.QWeatherProvider.Models
 {
-    public class QWeatherPrecipitation : PrecipitationBase
+    public sealed class QWeatherPrecipitation : PrecipitationBase
     {
     }
 
-    public class QWeatherPrecipitationItem:PrecipitationItemBase
+    public sealed class QWeatherPrecipitationItem:PrecipitationItemBase
     {
     }
 }

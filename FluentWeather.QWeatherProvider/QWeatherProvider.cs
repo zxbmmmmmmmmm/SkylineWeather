@@ -18,7 +18,7 @@ using System.Threading.Tasks.Sources;
 
 namespace FluentWeather.QWeatherProvider;
 
-public class QWeatherProvider : ProviderBase,
+public sealed class QWeatherProvider : ProviderBase,
     ICurrentWeatherProvider,
     IDailyForecastProvider,
     IHourlyForecastProvider,

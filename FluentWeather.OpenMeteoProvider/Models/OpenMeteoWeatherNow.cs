@@ -3,6 +3,6 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoWeatherNow : WeatherNowBase
+public sealed class OpenMeteoWeatherNow : WeatherNowBase
 {
 }

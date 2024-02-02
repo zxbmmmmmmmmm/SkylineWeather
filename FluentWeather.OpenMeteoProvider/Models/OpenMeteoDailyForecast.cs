@@ -5,6 +5,6 @@ using System.Collections.Generic;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoDailyForecast : WeatherDailyBase
+public sealed class OpenMeteoDailyForecast : WeatherDailyBase
 {
 }
