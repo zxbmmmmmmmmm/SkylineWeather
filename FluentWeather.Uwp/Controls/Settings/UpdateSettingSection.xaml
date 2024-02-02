@@ -11,21 +11,20 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <controls:SettingsExpander
-        Header="更新"
+        x:Uid="UpdateSettingsExpander"
         HeaderIcon="sync"
         IsExpanded="True">
         <controls:SettingsExpander.Items>
             <controls:SettingsCard
+                x:Uid="CheckUpdateSettingsCard"
                 Padding="12"
-                Description="从GitHub检查更新"
-                Header="检查更新"
                 HeaderIcon="sync">
                 <Button
                     x:Name="CheckUpdateButton"
-                    Click="CheckUpdateButton_Click"
-                    Content="检查" />
+                    x:Uid="CheckUpdateButton"
+                    Click="CheckUpdateButton_Click" />
             </controls:SettingsCard>
-            <controls:SettingsCard Padding="12" Header="自动检查更新">
+            <controls:SettingsCard x:Uid="AutoCheckUpdatesSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE752;" />
                 </controls:SettingsCard.HeaderIcon>

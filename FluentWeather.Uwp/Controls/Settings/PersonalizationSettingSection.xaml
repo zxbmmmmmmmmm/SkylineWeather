@@ -18,14 +18,14 @@
     d:DesignWidth="400"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
-    <controls:SettingsExpander Header="个性化" IsExpanded="True">
+    <controls:SettingsExpander x:Uid="PersonalizationSettingExpander" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE771;" />
         </controls:SettingsExpander.HeaderIcon>
         <controls:SettingsExpander.ItemsHeader>
             <muxc:InfoBar
                 x:Name="RestartInfoBar"
-                Title="重启以应用主题"
+                x:Uid="RestartInfoBar"
                 BorderThickness="0"
                 CornerRadius="0"
                 IsClosable="False"
@@ -34,64 +34,50 @@
                 <muxc:InfoBar.ActionButton>
                     <Button
                         x:Name="RestartButton"
+                        x:Uid="RestartButton"
                         Click="RestartButton_Click"
-                        Content="重启应用"
                         CornerRadius="{StaticResource ControlCornerRadius}" />
                 </muxc:InfoBar.ActionButton>
             </muxc:InfoBar>
         </controls:SettingsExpander.ItemsHeader>
         <controls:SettingsExpander.Items>
-            <controls:SettingsCard Padding="12" Description="设置应用主题(需要重启)">
-                <controls:SettingsCard.Header>
-                    <TextBlock>
-                        <Run Text="主题" />
-                        <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="Beta" />
-                    </TextBlock>
-                </controls:SettingsCard.Header>
+            <controls:SettingsCard x:Uid="ThemeSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE771;" />
                 </controls:SettingsCard.HeaderIcon>
                 <muxc:RadioButtons x:Name="ThemeStyleButtons" SelectionChanged="ThemeStyleButtons_SelectionChanged">
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent}">Windows 11</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent2017}">Windows 10</RadioButton>
-                    <RadioButton IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Classic}">经典</RadioButton>
+                    <RadioButton x:Uid="FluentThemeSection" IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent}" />
+                    <RadioButton x:Uid="Fluent2017ThemeSection" IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fluent2017}" />
+                    <RadioButton x:Uid="ClassicThemeSection" IsChecked="{x:Bind app:Common.Settings.Theme, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Classic}" />
                 </muxc:RadioButtons>
             </controls:SettingsCard>
 
-            <controls:SettingsCard
-                Padding="12"
-                Description="设置主题颜色"
-                Header="颜色">
+            <controls:SettingsCard x:Uid="ThemeColorSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE790;" />
                 </controls:SettingsCard.HeaderIcon>
                 <muxc:RadioButtons x:Name="ThemeButtons" SelectionChanged="ThemeButtons_SelectionChanged">
-                    <RadioButton Tag="Default">跟随系统</RadioButton>
-                    <RadioButton Tag="Light">明亮</RadioButton>
-                    <RadioButton Tag="Dark">黑暗</RadioButton>
+                    <RadioButton x:Uid="FollowSystemSection" Tag="Default" />
+                    <RadioButton x:Uid="LightSection" Tag="Light" />
+                    <RadioButton x:Uid="DarkSection" Tag="Dark" />
                 </muxc:RadioButtons>
 
             </controls:SettingsCard>
 
-            <controls:SettingsCard Padding="12" Header="窗口亚克力">
+            <controls:SettingsCard x:Uid="WindowBackdropSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xF156;" />
                 </controls:SettingsCard.HeaderIcon>
-                <controls:SettingsCard.Description>
-                    <TextBlock>
-                        <Run Text="Win11下将覆盖Mica" /><LineBreak /><Run Text="将背景透明度设置为100%以查看效果" />
-                    </TextBlock>
-                </controls:SettingsCard.Description>
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAcrylicEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
 
-            <controls:SettingsCard Padding="12" Description="应用背景设置">
+            <controls:SettingsCard x:Uid="BackgroundSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE8B9;" />
                 </controls:SettingsCard.HeaderIcon>
                 <controls:SettingsCard.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="背景图片" />
+                        <TextBlock x:Uid="BackgroundImageText" />
                         <Button
                             Margin="4,0,0,0"
                             Padding="0"
@@ -104,9 +90,9 @@
                             <Button.Flyout>
                                 <Flyout>
                                     <controls1:MarkdownTextBlock
+                                        x:Uid="BackgroundImageDescription"
                                         Width="400"
                                         Background="Transparent"
-                                        Text="{x:Bind _backgroundImageSettingInfo}"
                                         TextWrapping="Wrap" />
                                 </Flyout>
                             </Button.Flyout>
@@ -115,16 +101,16 @@
                 </controls:SettingsCard.Header>
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <Button
+                        x:Uid="SelectButton"
                         Command="{x:Bind SetBackgroundCommand}"
-                        CommandParameter="All"
-                        Content="选取" />
+                        CommandParameter="All" />
                     <Button
+                        x:Uid="OpenBackgroundFolderButton"
                         Command="{x:Bind OpenBackgroundsFolderCommand}"
-                        CommandParameter="All"
-                        Content="打开背景文件夹" />
+                        CommandParameter="All" />
                 </StackPanel>
             </controls:SettingsCard>
-            <controls:SettingsCard Padding="12" Header="背景模糊半径">
+            <controls:SettingsCard x:Uid="BackgroundBlurSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <PathIcon
                         HorizontalAlignment="Center"
@@ -134,8 +120,8 @@
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <Button
                         x:Name="ApplyBlurButton"
-                        Click="ApplyBlurButton_Click"
-                        Content="应用" />
+                        x:Uid="ApplyButton"
+                        Click="ApplyBlurButton_Click" />
                     <Slider
                         x:Name="BlurAmountSlider"
                         Maximum="32"
@@ -146,7 +132,7 @@
                         Text="{x:Bind BlurAmountSlider.Value, Mode=OneWay}" />
                 </StackPanel>
             </controls:SettingsCard>
-            <controls:SettingsCard Padding="12" Header="背景透明度">
+            <controls:SettingsCard x:Uid="BackgroundTransparencySettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE727;" />
                 </controls:SettingsCard.HeaderIcon>

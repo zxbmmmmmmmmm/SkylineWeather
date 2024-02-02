@@ -23,11 +23,11 @@
         </Grid.RowDefinitions>
         <AutoSuggestBox
             x:Name="SearchBox"
+            x:Uid="SearchAutoSuggestBox"
             Margin="8,8,8,8"
             BorderBrush="{StaticResource AutoSuggestBoxBorderBrush}"
             IsTabStop="False"
             ItemsSource="{x:Bind ViewModel.SuggestedCities, Mode=OneWay}"
-            PlaceholderText="添加城市..."
             QueryIcon="Find"
             Text="{x:Bind ViewModel.Query, Mode=TwoWay}"
             UpdateTextOnSelect="False">
@@ -70,7 +70,7 @@
                     FontFamily="{StaticResource SymbolThemeFontFamily}"
                     FontSize="11"
                     Text="&#xE81B;" />
-                <Run Text="当前位置" />
+                <Run x:Uid="CurrentLocation" />
             </TextBlock>
 
         </Border>
@@ -89,10 +89,10 @@
                         <controls:CityItem.ContextFlyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem
+                                    x:Uid="DeleteMenuItem"
                                     Command="{x:Bind vm:CitiesPageViewModel.Instance.DeleteCityCommand}"
                                     CommandParameter="{x:Bind}"
-                                    Icon="Delete"
-                                    Text="删除" />
+                                    Icon="Delete" />
                             </MenuFlyout>
                         </controls:CityItem.ContextFlyout>
                     </controls:CityItem>
@@ -104,17 +104,17 @@
             VerticalAlignment="Bottom"
             Background="Transparent"
             DefaultLabelPosition="Right">
-            <AppBarButton Label="台风">
+            <AppBarButton x:Uid="TyphoonAppBarButton">
                 <i:Interaction.Behaviors>
                     <behaviors:ButtonOpenContentDialogBehavior DialogType="dialogs:TyphoonDialog" />
                 </i:Interaction.Behaviors>
             </AppBarButton>
             <AppBarButton
                 x:Name="SettingsButton"
+                x:Uid="SettingsAppBarButton"
                 Click="SettingsButton_Click"
-                Icon="Setting"
-                Label="设置" />
-            <AppBarButton Label="关于">
+                Icon="Setting" />
+            <AppBarButton x:Uid="AboutAppBarButton" >
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE946;" />
                 </AppBarButton.Icon>

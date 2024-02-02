@@ -21,6 +21,7 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Analytics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Globalization;
 using Windows.Storage;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.System;
@@ -28,6 +29,7 @@ using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Themes;
 using MetroLog;
 using MetroLog.Targets;
+using Windows.ApplicationModel.Resources;
 
 namespace FluentWeather.Uwp;
 
@@ -75,9 +77,17 @@ sealed partial class App : Application
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         e.Handled = true;
-        Crashes.TrackError(e.Exception);
+        if(Crashes.Instance.InstanceEnabled)
+            Crashes.TrackError(e.Exception);
         Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
-        InfoBarHelper.Error("未知错误",e.Message);
+        try
+        {
+            InfoBarHelper.Error("Error", e.Message);
+        }
+        finally
+        {
+
+        }
     }
     protected override void OnActivated(IActivatedEventArgs e)
     {

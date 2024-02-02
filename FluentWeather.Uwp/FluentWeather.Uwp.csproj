@@ -21,7 +21,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FluentWeather.Uwp</RootNamespace>
     <AssemblyName>FluentWeather.Uwp</AssemblyName>
-    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22000.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
@@ -259,14 +259,12 @@
   <ItemGroup>
     <Content Include="Assets\Backgrounds\All.png" />
     <Content Include="Assets\Backgrounds\Clear.png" />
-    <Content Include="Assets\Backgrounds\Cloudy.png" />
     <Content Include="Assets\Backgrounds\Fog.png" />
-    <Content Include="Assets\Backgrounds\HeavyRain.png" />
-    <Content Include="Assets\Backgrounds\HeavySnow.png" />
-    <Content Include="Assets\Backgrounds\LightRain.png" />
-    <Content Include="Assets\Backgrounds\LightSnow.png" />
+    <Content Include="Assets\Backgrounds\Overcast.png" />
+    <Content Include="Assets\Backgrounds\Rain.png" />
+    <Content Include="Assets\Backgrounds\Snow.png" />
     <Content Include="Assets\Backgrounds\PartlyCloudy.png" />
-    <Content Include="Assets\Backgrounds\ThunderyShowers.png" />
+    <Content Include="Assets\Backgrounds\Thundery.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
@@ -628,6 +626,10 @@
   <ItemGroup>
     <None Include="App_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\zh-CN\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj">

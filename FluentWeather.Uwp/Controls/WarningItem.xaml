@@ -48,7 +48,7 @@
                         Visibility="{x:Bind GetActionButtonsVisibility(Warning)}">
                         <HyperlinkButton Background="Transparent" BorderBrush="Transparent">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock Text="追踪" />
+                                <TextBlock x:Uid="TrackText" />
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
                             <i:Interaction.Behaviors>
@@ -61,7 +61,7 @@
                             BorderBrush="Transparent"
                             Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock Text="了解详情" />
+                                <TextBlock x:Uid="MoreInfoText" />
                                 <FontIcon FontSize="12" Glyph="&#xE00F;" />
                             </StackPanel>
                             <i:Interaction.Behaviors>

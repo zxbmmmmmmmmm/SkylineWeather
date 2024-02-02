@@ -26,6 +26,9 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         this.InitializeComponent();
+#if DEBUG
+        DeveloperMenu.Visibility = Visibility.Visible;
+#endif
     }
 
     private void InfoBarTest_Click(object sender, RoutedEventArgs e)

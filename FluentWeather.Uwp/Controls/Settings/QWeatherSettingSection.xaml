@@ -11,29 +11,26 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
 
-    <controls:SettingsExpander Header="和风天气" IsExpanded="True">
+    <controls:SettingsExpander x:Uid="QWeatherSettingsExpander" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE621;" />
         </controls:SettingsExpander.HeaderIcon>
         <controls:SettingsExpander.Items>
             <controls:SettingsCard
+                x:Uid="QWeatherDomainSettingsCard"
                 Padding="12"
-                Description="和风天气Api请求的域名，若使用付费KEY请更改此选项为api.qweather.com"
-                Header="域名"
                 HeaderIcon="home">
                 <TextBox Text="{x:Bind app:Common.Settings.QWeatherDomain, Mode=TwoWay}" />
             </controls:SettingsCard>
             <controls:SettingsCard
+                x:Uid="QWeatherTokenSettingsCard"
                 Padding="12"
-                Description="和风天气的KEY，可以在控制台中找到"
-                Header="KEY"
                 HeaderIcon="Permissions">
                 <TextBox Text="{x:Bind app:Common.Settings.QWeatherToken, Mode=TwoWay}" />
             </controls:SettingsCard>
             <controls:SettingsCard
+                x:Uid="QGeolocationTokenSettingsCard"
                 Padding="12"
-                Description="QGeoApi的KEY，可以在控制台中找到"
-                Header="GeoApi KEY"
                 HeaderIcon="Permissions">
                 <TextBox Text="{x:Bind app:Common.Settings.QGeolocationToken, Mode=TwoWay}" />
             </controls:SettingsCard>

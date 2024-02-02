@@ -43,8 +43,10 @@
                 <StackPanel
                     Grid.Row="6"
                     Spacing="8"
+                    x:Name="DeveloperMenu"
                     Visibility="Collapsed">
-                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="开发者选项" />
+                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="DeveloperMenu" />
+                    <TextBox Text="{x:Bind app:Common.Settings.Language}"/>
                     <Button
                         x:Name="InfoBarTest"
                         Click="InfoBarTest_Click"

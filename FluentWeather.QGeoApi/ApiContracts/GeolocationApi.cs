@@ -27,6 +27,8 @@ namespace FluentWeather.QGeoApi.ApiContracts
             {
                 query = $"?key={option.Token}&location={byName.Name}";
             }
+            if(option.Language is not null)
+                query += $"&lang={option.Language}";
             var requestMessage = new HttpRequestMessage(Method, Url + query);
 
             var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
@@ -127,6 +129,7 @@ namespace FluentWeather.QGeoApi.ApiContracts
     {
         public Dictionary<string, string> Cookies { get; } = new();
         public string Token { get; set; }
+        public string Language { get; set; }
 
         public JsonSerializerOptions JsonSerializerOptions =
             new(JsonSerializerOptions.Default)

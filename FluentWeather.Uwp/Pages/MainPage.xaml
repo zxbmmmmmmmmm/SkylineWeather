@@ -28,10 +28,10 @@
     <Page.ContextFlyout>
         <MenuFlyout Placement="BottomEdgeAlignedLeft">
             <MenuFlyoutItem
+                x:Uid="RefreshMenuItem"
                 Command="{x:Bind ViewModel.RefreshCommand}"
-                Icon="Refresh"
-                Text="刷新" />
-            <MenuFlyoutItem Command="{x:Bind ViewModel.SpeechWeatherCommand}" Text="语音播报">
+                Icon="Refresh" />
+            <MenuFlyoutItem x:Uid="SpeechMenuItem" Command="{x:Bind ViewModel.SpeechWeatherCommand}">
                 <MenuFlyoutItem.Icon>
                     <FontIcon Glyph="&#xF83B;" />
                 </MenuFlyoutItem.Icon>
@@ -51,10 +51,7 @@
             Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
-        <Border
-            x:Name="SmokeBorder"
-            Background="{ThemeResource LayerFillColorDefaultBrush}"
-            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
+        <Border Background="{ThemeResource LayerFillColorDefaultBrush}" Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <animations:Implicit.HideAnimations>
                 <animations:OpacityAnimation
                     EasingMode="EaseOut"
@@ -225,7 +222,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="18"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                    <Run Text="体感" />
+                                    <Run x:Uid="FeelsLike" />
                                     <Run Text="{Binding WeatherNow.ApparentTemperature}" /><Run Text="°" />
                                 </TextBlock>
                                 <Button
@@ -235,7 +232,8 @@
                                     Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                            <Run Text="空气质量 -" />
+                                            <Run x:Uid="AirCondition" />
+                                            <Run Text="-" />
                                             <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                         </TextBlock>
                                         <FontIcon
@@ -332,10 +330,10 @@
                                                         </StackPanel>
                                                     </StackPanel>
                                                     <TextBlock
+                                                        x:Uid="AirConditionUnit"
                                                         Margin="0,0,4,0"
                                                         HorizontalAlignment="Right"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="单位:μg/m³" />
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
 
                                                 </StackPanel>
                                             </Grid>
@@ -547,12 +545,12 @@
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
-                                Text="&#xE018; " /><Run Text="日出" />
+                                Text="&#xE018; " /><Run x:Uid="Sunrise" />
                             <Run Text="{x:Bind ViewModel.SunRise.ToShortTimeString(), Mode=OneWay}" />
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
-                                Text="  &#xE099; " /><Run Text="日落" />
+                                Text="  &#xE099; " /><Run x:Uid="Sunset" />
                             <Run Text="{x:Bind ViewModel.SunSet.ToShortTimeString(), Mode=OneWay}" />
                         </TextBlock>
                         <controls:AdaptiveGridView
@@ -572,16 +570,15 @@
                                         Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
-                                        <Run FontSize="16" Text="级" />
+                                        <Run FontSize="16" x:Uid="WindScaleText" />
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
-                                                    <Run Text="-" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
-                                                    <Run FontSize="14" Text="级" />
+                                                    <Run x:Uid="WindScaleText" FontSize="14" />
                                                 </TextBlock>
                                                 <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindSpeed}" />
@@ -598,9 +595,9 @@
                                 </StackPanel>
                                 <StackPanel Margin="12">
                                     <TextBlock
+                                        x:Uid="HumidityText"
                                         FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="湿度" />
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
                                         <Run FontSize="16" Text="%" />
@@ -609,29 +606,27 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="湿度 -" />
+                                                    <Run x:Uid="HumidityText" /><Run Text=" " />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
+                                                    x:Uid="HumidityDescription"
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量
-                                                </TextBlock>
+                                                    TextWrapping="Wrap" />
                                                 <TextBlock
                                                     Margin="0,8,0,0"
                                                     FontSize="18"
                                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="露点温度 -" />
+                                                    <Run x:Uid="DewPointText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.DewPointTemperature}" /><Run Text="°" />
                                                 </TextBlock>
                                                 <TextBlock
+                                                    x:Uid="DewPointDescription"
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”
-                                                </TextBlock>
+                                                    TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
@@ -639,9 +634,9 @@
 
                                 <StackPanel Margin="12">
                                     <TextBlock
+                                        x:Uid="PressureText"
                                         FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="气压" />
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
                                         <Run FontSize="16" Text="hPa" />
@@ -650,26 +645,24 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="气压" />
-                                                    <Run Text="-" />
+                                                    <Run x:Uid="PressureText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
                                                     <Run FontSize="14" Text="hPa" />
                                                 </TextBlock>
                                                 <TextBlock
+                                                    x:Uid="PressureDescription"
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关
-                                                </TextBlock>
+                                                    TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
                                 </StackPanel>
                                 <StackPanel Margin="12">
                                     <TextBlock
+                                        x:Uid="VisibilityText"
                                         FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="能见度" />
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                         <Run FontSize="16" Text="km" />
@@ -678,26 +671,24 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="能见度" />
-                                                    <Run Text="-" />
+                                                    <Run x:Uid="VisibilityText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
                                                     <Run FontSize="14" Text="km" />
                                                 </TextBlock>
                                                 <TextBlock
+                                                    x:Uid="VisibilityDescription"
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离
-                                                </TextBlock>
+                                                    TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>
                                 </StackPanel>
                                 <StackPanel Margin="12" Visibility="{x:Bind ViewModel.WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
                                     <TextBlock
+                                        x:Uid="CloudAmountText"
                                         FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="云量" />
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                     <TextBlock FontSize="25">
                                         <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                         <Run FontSize="16" Text="%" />
@@ -706,17 +697,15 @@
                                         <Flyout>
                                             <StackPanel MaxWidth="256">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="云量" />
-                                                    <Run Text="-" />
+                                                    <Run x:Uid="CloudAmountText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
                                                     <Run FontSize="14" Text="%" />
                                                 </TextBlock>
                                                 <TextBlock
+                                                    x:Uid="CloudAmountDescription"
                                                     FontSize="16"
                                                     IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap">
-                                                    天空被云所遮蔽的比例
-                                                </TextBlock>
+                                                    TextWrapping="Wrap" />
                                             </StackPanel>
                                         </Flyout>
                                     </FlyoutBase.AttachedFlyout>

@@ -42,17 +42,28 @@ public class QWeatherProvider : ProviderBase,
         Instance = this;
         GetSettings();
     }
-    public QWeatherProvider(string token,string domain)
+    public QWeatherProvider(string token,string domain,string language = null)
     {
         Instance = this;
         Option.Token = token;
         Option.Domain = domain;
+        Option.Language = language;
     }
     public void GetSettings()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
         Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
+        var language = settingsHelper?.ReadLocalSetting<string>(QWeatherSettings.Language.ToString(), null);
+        if (language is null) return;
+        if (language.Contains("-") && !language.Contains("zh"))
+        {
+            Option.Language = language.Remove(language.IndexOf("-", StringComparison.Ordinal));
+        }
+        else
+        {
+            Option.Language = language;
+        }
     }
 
     public async Task<WeatherNowBase> GetCurrentWeather(double lon,double lat)
@@ -135,4 +146,5 @@ public enum QWeatherSettings
 {
     Token,
     Domain,
+    Language
 }

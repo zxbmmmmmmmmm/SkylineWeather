@@ -8,17 +8,15 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:app="using:FluentWeather.Uwp.Shared"
     mc:Ignorable="d"
-    SecondaryButtonText="查看"
     PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    PrimaryButtonText="下载"
-    CloseButtonText="取消"
+    x:Uid="UpdateDialog"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     Style="{ThemeResource DefaultContentDialogStyle}">
     <ContentDialog.Title>
         <TextBlock>
-            <Run Text="更新"/>
+            <Run x:Uid="UpdateText"/>
             <Run Text="{x:Bind UpdateInfo.TagName,Mode=OneWay}" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
         </TextBlock>
         

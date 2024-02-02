@@ -21,6 +21,7 @@ using CommunityToolkit.WinUI.Helpers;
 using Microsoft.AppCenter.Analytics;
 using System.Security.Cryptography.X509Certificates;
 using FluentWeather.Uwp.Controls.Dialogs;
+using Windows.ApplicationModel.Resources;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -36,6 +37,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         private async void CheckUpdateButton_Click(object sender, RoutedEventArgs e)
         {
             var versionString = Package.Current.Id.Version.ToFormattedString();
+            var res = ResourceLoader.GetForCurrentView();
             Analytics.TrackEvent("UpdateManualChecked",new Dictionary<string, string> { { "CurrentVersion", versionString } });
             try
             {
@@ -46,17 +48,17 @@ namespace FluentWeather.Uwp.Controls.Settings
                 });
                 if (info.IsExistNewVersion)
                 {
-                    InfoBarHelper.Info("更新可用", info.TagName, action: viewAction, buttonContent: "查看");
+                    InfoBarHelper.Info(res.GetString("UpdateAvailable"), info.TagName, action: viewAction, buttonContent: res.GetString("ViewUpdate"));
                 }
                 else
                 {
-                    InfoBarHelper.Success("应用为最新版本", versionString, action: viewAction, buttonContent: "查看");
+                    InfoBarHelper.Success(res.GetString("LatestVersion"), versionString, action: viewAction, buttonContent: res.GetString("ViewUpdate"));
                 }
             }
             catch (Exception ex)
             {
-                InfoBarHelper.Error("检查更新失败", "请检查当前网络或尝试开启代理");
-                Common.LogManager.GetLogger("UpdateHelper").Error("检查更新失败", ex);
+                InfoBarHelper.Error(res.GetString("LatestVersion"), res.GetString("UpdateCheckFailedDescription"));
+                Common.LogManager.GetLogger("UpdateHelper").Error("UpdateFailed", ex);
             }
         }
     }

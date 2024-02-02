@@ -27,7 +27,7 @@
     <Grid>
         <chart:RadCartesianChart>
             <chart:RadCartesianChart.HorizontalAxis>
-                <chart:CategoricalAxis LabelFormat="{}{0,0:H时}" PlotMode="BetweenTicks" ShowLabels="{x:Bind IsHorizontalAxisVisible,Mode=OneWay}">
+                <chart:CategoricalAxis x:Uid="TimeAxis" PlotMode="BetweenTicks" ShowLabels="{x:Bind IsHorizontalAxisVisible,Mode=OneWay}">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />

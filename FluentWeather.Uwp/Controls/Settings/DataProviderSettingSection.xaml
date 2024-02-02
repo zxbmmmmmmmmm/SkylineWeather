@@ -11,13 +11,13 @@
     mc:Ignorable="d">
 
     <Grid>
-        <controls:SettingsExpander Header="数据" IsExpanded="True">
+        <controls:SettingsExpander x:Uid="DataSettingsExpander" IsExpanded="True">
 
             <controls:SettingsExpander.Items>
-                <controls:SettingsCard Padding="12" Header="数据提供商" Description="选择数据提供商(需要重启)">
+                <controls:SettingsCard x:Uid="DataProviderSettingsCard" Padding="12">
                     <muxc:RadioButtons>
-                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}">和风天气</RadioButton>
-                        <RadioButton IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}">Open-Meteo</RadioButton>
+                        <RadioButton x:Uid="QWeatherSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}" />
+                        <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}" />
                     </muxc:RadioButtons>
                 </controls:SettingsCard>
             </controls:SettingsExpander.Items>

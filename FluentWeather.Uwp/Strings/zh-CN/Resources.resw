@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutAppBarButton.Label" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="AirCondition.Text" xml:space="preserve">
+    <value>空气质量</value>
+  </data>
+  <data name="AirConditionUnit.Text" xml:space="preserve">
+    <value>单位:μg/m³</value>
+  </data>
+  <data name="ApplyButton.Content" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="AutoCheckUpdatesSettingsCard.Header" xml:space="preserve">
+    <value>自动检查更新</value>
+  </data>
+  <data name="AutoPositioningSettingsCard.Description" xml:space="preserve">
+    <value>需要定位权限，可能会减慢启动速度，台式机不建议开启</value>
+  </data>
+  <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
+    <value>启动时更新位置</value>
+  </data>
+  <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
+    <value>背景模糊半径</value>
+  </data>
+  <data name="BackgroundImageDescription.Text" xml:space="preserve">
+    <value>你也可以根据不同天气使用不同的背景\r\n\r\n方法:点击\"打开背景文件夹\"，将背景图片**(PNG格式)**复制到此文件夹内，将图片按照以下格式重命名即可:\r\n\r\n|  天气   | 文件命名              |\r\n|-------|-------------------|\r\n| 晴     | Clear             |\r\n| 多云    | PartlyCloudy      |\r\n| 阴     | Cloudy            |\r\n| 大雨    | HeavyRain         |\r\n| 小雨/中雨 | LightRain         |\r\n| 大雪    | HeavySnow         |\r\n| 小雪/中雪 | LightSnow         |\r\n| 雷阵雨   | ThunderyShowers   |\r\n| 雷电    | ThunderyHeavyRain |\r\n| 雾/霾   | Fog</value>
+  </data>
+  <data name="BackgroundImageText.Text" xml:space="preserve">
+    <value>背景图片</value>
+  </data>
+  <data name="BackgroundSettingsCard.Description" xml:space="preserve">
+    <value>应用背景设置</value>
+  </data>
+  <data name="BackgroundTransparencySettingsCard.Header" xml:space="preserve">
+    <value>背景透明度</value>
+  </data>
+  <data name="CheckUpdateButton.Content" xml:space="preserve">
+    <value>检查</value>
+  </data>
+  <data name="CheckUpdateSettingsCard.Description" xml:space="preserve">
+    <value>从GitHub检查更新</value>
+  </data>
+  <data name="CheckUpdateSettingsCard.Header" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="ClassicThemeSection.Content" xml:space="preserve">
+    <value>经典</value>
+  </data>
+  <data name="CloudAmountDescription.Text" xml:space="preserve">
+    <value>天空被云所遮蔽的比例</value>
+  </data>
+  <data name="CloudAmountText.Text" xml:space="preserve">
+    <value>云量</value>
+  </data>
+  <data name="CurrentLocation.Text" xml:space="preserve">
+    <value>当前位置</value>
+  </data>
+  <data name="DarkSection.Content" xml:space="preserve">
+    <value>黑暗</value>
+  </data>
+  <data name="DataProviderSettingsCard.Description" xml:space="preserve">
+    <value>选择数据提供商(需要重启)</value>
+  </data>
+  <data name="DataProviderSettingsCard.Header" xml:space="preserve">
+    <value>数据提供商</value>
+  </data>
+  <data name="DataSettingsExpander.Header" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="DefaultPositionSettingsCard.Description" xml:space="preserve">
+    <value>使用此位置作为当前位置(重启生效)</value>
+  </data>
+  <data name="DefaultPositionSettingsCard.Header" xml:space="preserve">
+    <value>默认位置</value>
+  </data>
+  <data name="DeleteMenuItem.Text" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DeveloperMenu.Text" xml:space="preserve">
+    <value>开发者选项</value>
+  </data>
+  <data name="DewPointDescription.Text" xml:space="preserve">
+    <value>使空气中水分凝结成液态水(例如露水)所需要降至的温度。露点温度越高,感觉越“闷热”</value>
+  </data>
+  <data name="DewPointText.Text" xml:space="preserve">
+    <value>露点温度</value>
+  </data>
+  <data name="EditDefaultPositionButton.Content" xml:space="preserve">
+    <value>更改</value>
+  </data>
+  <data name="FeelsLike.Text" xml:space="preserve">
+    <value>体感</value>
+  </data>
+  <data name="Fluent2017ThemeSection.Content" xml:space="preserve">
+    <value>Windows 10</value>
+  </data>
+  <data name="FluentThemeSection.Content" xml:space="preserve">
+    <value>Windows 11</value>
+  </data>
+  <data name="FollowSystemSection.Content" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="HumidityDescription.Text" xml:space="preserve">
+    <value>相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量</value>
+  </data>
+  <data name="HumidityText.Text" xml:space="preserve">
+    <value>湿度</value>
+  </data>
+  <data name="IgnoreWarning.Text" xml:space="preserve">
+    <value>你可以屏蔽某些不必要的预警推送(如海上预警)
+用|分割，支持正则表达式</value>
+  </data>
+  <data name="IgnoreWarningButton.Content" xml:space="preserve">
+    <value>设置屏蔽词</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>应用为最新版本</value>
+  </data>
+  <data name="LightSection.Content" xml:space="preserve">
+    <value>明亮</value>
+  </data>
+  <data name="LocationSettingsExpander.Header" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="MoreInfoText" xml:space="preserve">
+    <value>了解详情</value>
+    <comment>警告内了解详情</comment>
+  </data>
+  <data name="NotificationSettingsExpander.Header" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="NowText.Text" xml:space="preserve">
+    <value>现在</value>
+  </data>
+  <data name="OneHourText.Text" xml:space="preserve">
+    <value>1小时</value>
+  </data>
+  <data name="OpenBackgroundFolderButton.Content" xml:space="preserve">
+    <value>打开背景文件夹</value>
+  </data>
+  <data name="OpenMeteoSection.Content" xml:space="preserve">
+    <value>Open-Meteo</value>
+  </data>
+  <data name="PersonalizationSettingExpander.Header" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="PressureDescription.Text" xml:space="preserve">
+    <value>大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关</value>
+  </data>
+  <data name="PressureText.Text" xml:space="preserve">
+    <value>气压</value>
+  </data>
+  <data name="QGeolocationTokenSettingsCard.Description" xml:space="preserve">
+    <value>QGeoApi的KEY，可以在控制台中找到</value>
+  </data>
+  <data name="QGeolocationTokenSettingsCard.Header" xml:space="preserve">
+    <value>GeoApi KEY</value>
+  </data>
+  <data name="QWeatherDomainSettingsCard.Description" xml:space="preserve">
+    <value>和风天气Api请求的域名
+若使用付费KEY请更改此选项为api.qweather.com</value>
+  </data>
+  <data name="QWeatherDomainSettingsCard.Header" xml:space="preserve">
+    <value>域名</value>
+  </data>
+  <data name="QWeatherSection.Content" xml:space="preserve">
+    <value>和风天气</value>
+  </data>
+  <data name="QWeatherSettingsExpander.Header" xml:space="preserve">
+    <value>和风天气</value>
+  </data>
+  <data name="QWeatherTokenSettingsCard.Description" xml:space="preserve">
+    <value>和风天气的KEY，可以在控制台中找到</value>
+  </data>
+  <data name="QWeatherTokenSettingsCard.Header" xml:space="preserve">
+    <value>KEY</value>
+  </data>
+  <data name="RefreshMenuItem.Text" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="RestartButton.Content" xml:space="preserve">
+    <value>重启应用</value>
+  </data>
+  <data name="RestartInfoBar.Title" xml:space="preserve">
+    <value>重启以应用主题</value>
+  </data>
+  <data name="SearchAutoSuggestBox.PlaceholderText" xml:space="preserve">
+    <value>添加城市...</value>
+  </data>
+  <data name="SelectButton.Content" xml:space="preserve">
+    <value>选取</value>
+  </data>
+  <data name="SettingsAppBarButton.Label" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SpeechMenuItem.Text" xml:space="preserve">
+    <value>语音播报</value>
+  </data>
+  <data name="Sunrise.Text" xml:space="preserve">
+    <value>日出</value>
+  </data>
+  <data name="Sunset.Text" xml:space="preserve">
+    <value>日落</value>
+  </data>
+  <data name="ThemeColorSettingsCard.Description" xml:space="preserve">
+    <value>设置主题颜色</value>
+  </data>
+  <data name="ThemeColorSettingsCard.Header" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="ThemeSettingsCard.Description" xml:space="preserve">
+    <value>设置应用主题(需要重启)</value>
+  </data>
+  <data name="ThemeSettingsCard.Header" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="TimeAxis.LabelFormat" xml:space="preserve">
+    <value>{}{0,0:H时}</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>今天</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>明天</value>
+  </data>
+  <data name="TowHoursText.Text" xml:space="preserve">
+    <value>2小时</value>
+  </data>
+  <data name="TrackText" xml:space="preserve">
+    <value>追踪</value>
+    <comment>台风警告内快捷追踪</comment>
+  </data>
+  <data name="TyphoonAppBarButton.Label" xml:space="preserve">
+    <value>台风</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>未知错误</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>更新可用</value>
+  </data>
+  <data name="UpdateCheckFailed" xml:space="preserve">
+    <value>检查更新失败</value>
+  </data>
+  <data name="UpdateCheckFailedDescription" xml:space="preserve">
+    <value>请检查当前网络或尝试开启代理</value>
+  </data>
+  <data name="UpdateDialog.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="UpdateDialog.PrimaryButtonText" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="UpdateDialog.SecondaryButtonText" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="UpdateSettingsExpander.Header" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="UpdateText.Text" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="ViewUpdate" xml:space="preserve">
+    <value>查看</value>
+  </data>
+  <data name="VisibilityDescription.Text" xml:space="preserve">
+    <value>视力正常的人在当前天气条件下，能从天空背景中看到和辨认出目标物(黑色、大小适度)轮廓的最大水平距离</value>
+  </data>
+  <data name="VisibilityText.Text" xml:space="preserve">
+    <value>能见度</value>
+  </data>
+  <data name="WaringNotificationSettingsCard.Description" xml:space="preserve">
+    <value>定时检查并推送预警</value>
+  </data>
+  <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
+    <value>预警</value>
+  </data>
+  <data name="WeatherTileSettingCard.Description" xml:space="preserve">
+    <value>在磁贴上显示每日天气(仅Win10)</value>
+  </data>
+  <data name="WeatherTileSettingCard.Header" xml:space="preserve">
+    <value>磁贴</value>
+  </data>
+  <data name="WeatherTodaySettingsCard.Description" xml:space="preserve">
+    <value>在早晨推送今日天气预报</value>
+  </data>
+  <data name="WeatherTodaySettingsCard.Header" xml:space="preserve">
+    <value>今日天气</value>
+  </data>
+  <data name="WeatherTomorrow.Description" xml:space="preserve">
+    <value>在晚间推送明日天气预报</value>
+  </data>
+  <data name="WeatherTomorrow.Header" xml:space="preserve">
+    <value>明日天气</value>
+  </data>
+  <data name="WindDirection_East" xml:space="preserve">
+    <value>东风</value>
+  </data>
+  <data name="WindDirection_EastNorthEast" xml:space="preserve">
+    <value>东北偏东风</value>
+  </data>
+  <data name="WindDirection_EastSouthEast" xml:space="preserve">
+    <value>东南偏东风</value>
+  </data>
+  <data name="WindDirection_None" xml:space="preserve">
+    <value>无持续风向</value>
+  </data>
+  <data name="WindDirection_North" xml:space="preserve">
+    <value>北风</value>
+  </data>
+  <data name="WindDirection_NorthEast" xml:space="preserve">
+    <value>东北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
+    <value>东北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
+    <value>西北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthWest" xml:space="preserve">
+    <value>西北风</value>
+  </data>
+  <data name="WindDirection_Rotational" xml:space="preserve">
+    <value>旋转风向</value>
+  </data>
+  <data name="WindDirection_South" xml:space="preserve">
+    <value>南风</value>
+  </data>
+  <data name="WindDirection_SouthEast" xml:space="preserve">
+    <value>东南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
+    <value>东南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
+    <value>西南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthWest" xml:space="preserve">
+    <value>西南风</value>
+  </data>
+  <data name="WindDirection_West" xml:space="preserve">
+    <value>西风</value>
+  </data>
+  <data name="WindDirection_WestNorthWest" xml:space="preserve">
+    <value>西北偏西风</value>
+  </data>
+  <data name="WindDirection_WestSouthWest" xml:space="preserve">
+    <value>西南偏西风</value>
+  </data>
+  <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
+    <value>Win11下将覆盖Mica
+将背景透明度设置为100%以查看效果</value>
+  </data>
+  <data name="WindowBackdropSettingsCard.Header" xml:space="preserve">
+    <value>窗口亚克力</value>
+  </data>
+  <data name="WindScaleDescription_1" xml:space="preserve">
+    <value>静，烟直向上</value>
+  </data>
+  <data name="WindScaleDescription_10" xml:space="preserve">
+    <value>大树连根拔起，建筑物损毁</value>
+  </data>
+  <data name="WindScaleDescription_11" xml:space="preserve">
+    <value>陆上少见，建筑物普遍损毁</value>
+  </data>
+  <data name="WindScaleDescription_12" xml:space="preserve">
+    <value>陆上少见，建筑物普遍严重损毁</value>
+  </data>
+  <data name="WindScaleDescription_13" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_14" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_15" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_16" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_17" xml:space="preserve">
+    <value>陆上难以出现，如有必成灾祸</value>
+  </data>
+  <data name="WindScaleDescription_2" xml:space="preserve">
+    <value>烟能表示风向，风向标不转动</value>
+  </data>
+  <data name="WindScaleDescription_3" xml:space="preserve">
+    <value>树叶及小树枝摇动不息，旗展开</value>
+  </data>
+  <data name="WindScaleDescription_4" xml:space="preserve">
+    <value>吹起地面灰尘和纸张，小树枝摇动</value>
+  </data>
+  <data name="WindScaleDescription_5" xml:space="preserve">
+    <value>有叶的小树整棵摇摆；内陆水面有波纹</value>
+  </data>
+  <data name="WindScaleDescription_6" xml:space="preserve">
+    <value>大树枝摇摆，持伞有困难，电线有呼呼声</value>
+  </data>
+  <data name="WindScaleDescription_7" xml:space="preserve">
+    <value>全树摇动，人迎风前行有困难</value>
+  </data>
+  <data name="WindScaleDescription_8" xml:space="preserve">
+    <value>小树枝折断，人向前行阻力甚大</value>
+  </data>
+  <data name="WindScaleDescription_9" xml:space="preserve">
+    <value>烟囱顶部移动，木屋受损</value>
+  </data>
+  <data name="WindScaleDescription_&gt;17" xml:space="preserve">
+    <value>陆上极难出现，毁灭性破坏</value>
+  </data>
+  <data name="WindScaleText.Text" xml:space="preserve">
+    <value>级</value>
+  </data>
+</root>
