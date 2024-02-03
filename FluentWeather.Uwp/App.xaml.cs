@@ -52,6 +52,7 @@ sealed partial class App : Application
         AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics), typeof(Crashes));
 #endif
     }
+    public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()
     {
         var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
@@ -149,9 +150,8 @@ sealed partial class App : Application
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
-
+        ActiveArguments = e.Arguments;
         ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
-        
     }
 
     /// <summary>
