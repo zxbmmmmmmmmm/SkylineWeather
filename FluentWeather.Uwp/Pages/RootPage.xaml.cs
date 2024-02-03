@@ -105,4 +105,8 @@ public sealed partial class RootPage : Page
     {
         CanGoBack = PaneFrame.CanGoBack;
     }
+    private static double GetTransparency(int value)
+    {
+        return 1 - ((double)value / 100);
+    }
 }

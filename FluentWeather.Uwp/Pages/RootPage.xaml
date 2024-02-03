@@ -147,7 +147,7 @@
                     x:Name="BackgroundImage"
                     ui:VisualExtensions.NormalizedCenterPoint="0.5"
                     x:FieldModifier="Public"
-                    Opacity="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}"
+                    Opacity="{x:Bind local:RootPage.GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
                     Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
                         <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType, Mode=OneWay}" />
@@ -168,7 +168,7 @@
                                     Duration="0:0:1.2" />
                                 <animations:OpacityAnimation
                                     From="0"
-                                    To="{x:Bind app:Common.Settings.BackgroundTransparency, Converter={StaticResource TransparencyConverter}, Mode=OneWay}"
+                                    To="{x:Bind local:RootPage.GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
                                     Duration="0:0:1.5" />
                             </animations:AnimationScope>
                         </animations:AnimationSet>

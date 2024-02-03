@@ -13,7 +13,6 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter" />
         <valueConverters1:AddConverter x:Key="AddConverter" />
         <DataTemplate x:Key="PointTemplate">
             <Ellipse

@@ -32,7 +32,7 @@ namespace FluentWeather.QGeoProvider
             Option.Token = settingsHelper?.ReadLocalSetting(Id + "." + QGeoSettings.Token, "");
             var language = settingsHelper?.ReadLocalSetting<string>(QGeoSettings.Language.ToString(), null);
             if (language is null) return;
-            if (language.Contains("-") && !language.Contains("zh"))
+            if (language.Contains("-") && !language.Contains("zh-hant"))
             {
                 Option.Language = language.Remove(language.IndexOf("-", StringComparison.Ordinal));
             }

@@ -13,9 +13,6 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <converters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter" />
-    </UserControl.Resources>
     <muxc:Expander
         HorizontalAlignment="Stretch"
         HorizontalContentAlignment="Stretch"
@@ -31,7 +28,7 @@
                             Width="5"
                             Height="5"
                             Margin="0,0,12,0"
-                            Fill="{x:Bind Warning.SeverityColor, Converter={StaticResource SeverityColorToColorConverter}}"
+                            Fill="{x:Bind local:WarningItem.SeverityColorToColor(Warning.SeverityColor)}"
                             Visibility="{x:Bind Warning.SeverityColor, Converter={StaticResource NullToVisibilityConverter}}" />
                         <FontIcon Glyph="&#xE7BA;" />
                         <TextBlock
