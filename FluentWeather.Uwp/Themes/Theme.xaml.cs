@@ -27,7 +27,6 @@ public sealed partial class Theme:ResourceDictionary
         }
         dic.Merge("ms-appx:///Styles/ListView.xaml");
         dic.Merge("ms-appx:///Styles/ContentDialog.xaml");
-        dic.Merge("ms-appx:///Themes/Generic.xaml");
 
         switch (Common.Settings.Theme)
         {

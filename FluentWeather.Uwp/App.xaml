@@ -10,6 +10,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <themes:Generic/>
                 <themes:Theme />
             </ResourceDictionary.MergedDictionaries>
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter" />
