@@ -50,11 +50,12 @@ public sealed partial class SetLocationDialog : ContentDialog
         Hide();
     }
 
-    private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+    private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         Common.Settings.DefaultGeolocation = ChosenGeolocation;
         Hide();
         Analytics.TrackEvent("DefaultLocationChanged", new Dictionary<string, string> { { "CityName", ChosenGeolocation.Name } });
+        await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation, Common.Settings.SavedCities);
     }
 
     private async void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)

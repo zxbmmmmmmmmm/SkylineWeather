@@ -203,6 +203,7 @@
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\InfoBarHelper.cs" />
+    <Compile Include="Helpers\JumpListHelper.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\TTSHelper.cs" />
@@ -260,6 +261,12 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Icons\CurrentLocation.targetsize-32_theme-dark.png" />
+    <Content Include="Assets\Icons\CurrentLocation.targetsize-32.png" />
+    <Content Include="Assets\Icons\CurrentLocation.targetsize-32_theme-light.png" />
+    <Content Include="Assets\Icons\SavedCity.targetsize-32_theme-dark.png" />
+    <Content Include="Assets\Icons\SavedCity.targetsize-32.png" />
+    <Content Include="Assets\Icons\SavedCity.targetsize-32_theme-light.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

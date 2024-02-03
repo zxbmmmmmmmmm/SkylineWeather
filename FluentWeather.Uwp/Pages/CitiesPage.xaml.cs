@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Abstraction.Models;
 using Newtonsoft.Json.Linq;
+using FluentWeather.Uwp.Shared;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 namespace FluentWeather.Uwp.Pages;
@@ -29,9 +30,32 @@ public sealed partial class CitiesPage : Page
         this.InitializeComponent();
         this.DataContext = this;
         this.NavigationCacheMode = NavigationCacheMode.Required;
-        CurrentCityView.SelectedIndex = 0;
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
+        if (!App.ActiveArguments.Contains("City_"))
+        {
+            SetSelectedLocation(Common.Settings.DefaultGeolocation?.Name);
+            return;
+        }
+        SetSelectedLocation(App.ActiveArguments.Replace("City_", ""));
+    }
+
+    public void SetSelectedLocation(string name)
+    {
+        if (Common.Settings.DefaultGeolocation?.Name is null)
+        {
+            CurrentCityView.SelectedIndex = 0;
+            return;
+        }
+        if (name == ViewModel.CurrentCity.Name)
+        {
+            CurrentCityView.SelectedIndex = 0;
+            return;
+        }
+        var location = ViewModel.Cities.FirstOrDefault(p => p.Name == name);
+        if (location is null) return;
+        var index = ViewModel.Cities.IndexOf(location);
+        CitiesView.SelectedIndex = index;
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)

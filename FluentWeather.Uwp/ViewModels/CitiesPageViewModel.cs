@@ -28,7 +28,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     [ObservableProperty]
     private ObservableCollection<GeolocationBase> _cities;
     [ObservableProperty]
-    private GeolocationBase _currentCity;
+    public GeolocationBase _currentCity;
     [ObservableProperty]
     private string _query;
     [ObservableProperty]
@@ -37,7 +37,11 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     public CitiesPageViewModel()
     {
         Cities = Common.Settings.SavedCities;
-        Cities.CollectionChanged += (_, _) => Common.Settings.SavedCities = Cities;
+        Cities.CollectionChanged += async (_, _) =>
+        {
+            Common.Settings.SavedCities = Cities;
+            await JumpListHelper.SetJumpList(CurrentCity,Cities);
+        };
         Instance = this;
         GetCurrentCity();
     }
