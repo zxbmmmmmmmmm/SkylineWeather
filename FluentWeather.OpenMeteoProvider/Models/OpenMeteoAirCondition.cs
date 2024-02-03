@@ -4,7 +4,7 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoAirCondition : AirConditionBase
+public sealed class OpenMeteoAirCondition : AirConditionBase
 {
     public override string? AqiCategory => UnitConverter.GetAqiCategoryUS(Aqi);
 }

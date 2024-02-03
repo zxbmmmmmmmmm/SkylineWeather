@@ -14,12 +14,8 @@ using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers;
 
-public class LocationHelper
+public sealed class LocationHelper
 {
-    /// <summary>
-    /// g
-    /// </summary>
-    /// <returns></returns>
     public static async Task<(double lon,double lat)> UpdatePosition()
     {
         var accessStatus = await Geolocator.RequestAccessAsync();

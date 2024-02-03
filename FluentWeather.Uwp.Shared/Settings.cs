@@ -35,7 +35,7 @@ public static class Common
     public static Settings Settings = new();
     public static readonly ILogManager LogManager;
 }
-public class Settings : INotifyPropertyChanged
+public sealed class Settings : INotifyPropertyChanged
 {
     public string IgnoreWarningWords
     {

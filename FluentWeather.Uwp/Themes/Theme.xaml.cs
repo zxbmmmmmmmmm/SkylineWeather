@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace FluentWeather.Uwp.Themes;
 
-public partial class Theme:ResourceDictionary
+public sealed partial class Theme:ResourceDictionary
 {
     public Theme()
     {
@@ -27,7 +27,6 @@ public partial class Theme:ResourceDictionary
         }
         dic.Merge("ms-appx:///Styles/ListView.xaml");
         dic.Merge("ms-appx:///Styles/ContentDialog.xaml");
-        dic.Merge("ms-appx:///Themes/Generic.xaml");
 
         switch (Common.Settings.Theme)
         {

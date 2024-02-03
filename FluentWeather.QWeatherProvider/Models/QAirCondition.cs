@@ -6,7 +6,7 @@ using System.Text;
 
 namespace FluentWeather.QWeatherProvider.Models
 {
-    public class QAirCondition:AirConditionBase,IAirPollutants
+    public sealed class QAirCondition:AirConditionBase,IAirPollutants
     {
         public string Link{ get; set; }
     }

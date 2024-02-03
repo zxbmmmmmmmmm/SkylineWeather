@@ -13,7 +13,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts;
 /// <summary>
 /// 台风当前情况和历史
 /// </summary>
-public class TyphoonTrackApi : QApiContractBase<TyphoonTrackRequest, TyphoonTrackResponse>
+public sealed class TyphoonTrackApi : QApiContractBase<TyphoonTrackRequest, TyphoonTrackResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
 
@@ -23,11 +23,11 @@ public class TyphoonTrackApi : QApiContractBase<TyphoonTrackRequest, TyphoonTrac
         return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&stormid={Request.TyphoonId}");
     }
 }
-public class TyphoonTrackRequest:RequestBase
+public sealed class TyphoonTrackRequest:RequestBase
 {
     public string TyphoonId { get; set; }
 }
-public class TyphoonTrackResponse
+public sealed class TyphoonTrackResponse
 {
     [JsonPropertyName("isActive")]
     public string IsActive { get;set; }
@@ -38,7 +38,7 @@ public class TyphoonTrackResponse
     [JsonPropertyName("track")]
     public List<TyphoonTrackItem> Tracks { get; set; }
 }
-public class TyphoonTrackItem
+public sealed class TyphoonTrackItem
 {
     [JsonPropertyName("pubTime")]
     private string _pubTime 
@@ -83,7 +83,7 @@ public class TyphoonTrackItem
     public WindRadiusItem WindRadius12 { get; set; }
 
 
-    public class WindRadiusItem
+    public sealed class WindRadiusItem
     {
         [JsonPropertyName("neRadius")]
         public string NeRadius { get; set; }

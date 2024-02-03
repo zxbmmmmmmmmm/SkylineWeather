@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using FluentWeather.QGeoApi.Bases;
+using System;
 
 namespace FluentWeather.QGeoApi.ApiContracts
 {
@@ -27,7 +28,7 @@ namespace FluentWeather.QGeoApi.ApiContracts
             {
                 query = $"?key={option.Token}&location={byName.Name}";
             }
-            if(option.Language is not null)
+            if (option.Language is not null)
                 query += $"&lang={option.Language}";
             var requestMessage = new HttpRequestMessage(Method, Url + query);
 

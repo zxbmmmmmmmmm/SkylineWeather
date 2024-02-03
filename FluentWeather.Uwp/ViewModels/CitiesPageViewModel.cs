@@ -23,7 +23,7 @@ using Microsoft.AppCenter.Analytics;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class CitiesPageViewModel:ObservableObject
+public sealed partial class CitiesPageViewModel:ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<GeolocationBase> _cities;

@@ -16,7 +16,7 @@ using Telerik.Geospatial;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class MainPageViewModel : ObservableObject
+public sealed partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]

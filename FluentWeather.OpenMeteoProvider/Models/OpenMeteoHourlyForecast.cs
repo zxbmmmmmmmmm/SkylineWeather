@@ -3,7 +3,7 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.OpenMeteoProvider.Models;
 
-public class OpenMeteoHourlyForecast : WeatherHourlyBase, ICloudAmount
+public sealed class OpenMeteoHourlyForecast : WeatherHourlyBase, ICloudAmount
 {
     public int? CloudAmount { get ; set; }
 }

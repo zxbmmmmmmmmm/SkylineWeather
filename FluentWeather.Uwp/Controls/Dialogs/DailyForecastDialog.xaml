@@ -16,9 +16,6 @@
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     Style="{ThemeResource ContentDialogFullStyle}"
     mc:Ignorable="d">
-    <ContentDialog.Resources>
-        <converters:HourlyForecastSelectConverter x:Key="HourlyForecastSelectConverter" />
-    </ContentDialog.Resources>
     <Grid x:Name="ContentGrid" Margin="-32">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -223,11 +220,11 @@
                         x:Name="FirstText"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextFirst(TemperatureChart.HourlyForecasts)}" />
+                        Text="{x:Bind GetTextFirst(TemperatureChart.HourlyForecasts),Mode=OneTime}" />
                     <TextBlock
                         Grid.Column="7"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextLast(TemperatureChart.HourlyForecasts)}"
+                        Text="{x:Bind GetTextLast(TemperatureChart.HourlyForecasts),Mode=OneTime}"
                         Visibility="{x:Bind FirstText.Visibility}" />
                 </Grid>
             </Grid>

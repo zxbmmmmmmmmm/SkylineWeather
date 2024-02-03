@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
-public class VisibilityInverter:IValueConverter
+public sealed class VisibilityInverter:IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {

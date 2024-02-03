@@ -18,7 +18,7 @@ using System.Threading.Tasks.Sources;
 
 namespace FluentWeather.QWeatherProvider;
 
-public class QWeatherProvider : ProviderBase,
+public sealed class QWeatherProvider : ProviderBase,
     ICurrentWeatherProvider,
     IDailyForecastProvider,
     IHourlyForecastProvider,
@@ -56,7 +56,7 @@ public class QWeatherProvider : ProviderBase,
         Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
         var language = settingsHelper?.ReadLocalSetting<string>(QWeatherSettings.Language.ToString(), null);
         if (language is null) return;
-        if (language.Contains("-") && !language.Contains("zh"))
+        if (language.Contains("-") && !language.Contains("zh-hant"))
         {
             Option.Language = language.Remove(language.IndexOf("-", StringComparison.Ordinal));
         }

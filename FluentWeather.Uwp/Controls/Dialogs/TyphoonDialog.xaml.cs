@@ -48,6 +48,7 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         private ObservableCollection<TyphoonTrackBase> _tracks = new();
         [ObservableProperty]
         private ObservableCollection<TyphoonBase> _typhoons = new();
+        private TyphoonBase _selected;
         public async void GetTyphoons()
         {
             if(Common.Settings.QWeatherDomain is "devapi.qweather.com")
@@ -232,6 +233,23 @@ namespace FluentWeather.Uwp.Controls.Dialogs
         {
             var items = e.AddedItems;
             MoveToTyphoonCenter(items[0] as TyphoonBase);
+        }
+        private static Geopoint GetGeoPoint(double lat, double lon)
+        {
+            return new Geopoint(new BasicGeoposition { Latitude = lat, Longitude = lon });
+        }
+        private static string TyphoonTypeToDescription(TyphoonType type)
+        {
+            return type switch
+            {
+                TyphoonType.TD => "热带气压",
+                TyphoonType.TS => "热带风暴",
+                TyphoonType.STS => "强热带风暴",
+                TyphoonType.TY => "台风",
+                TyphoonType.STY => "强台风",
+                TyphoonType.SuperTY => "超强台风",
+                _ => "未知强度"
+            };
         }
     }
 }

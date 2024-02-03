@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class DailyForecastDialogViewModel:ObservableObject
+public sealed partial class DailyForecastDialogViewModel:ObservableObject
 {
     [ObservableProperty]
     List<WeatherDailyBase> _dailyForecasts = new();

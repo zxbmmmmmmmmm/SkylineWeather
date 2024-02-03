@@ -4,16 +4,16 @@ using System.Text.Json.Serialization;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherNowApi: QApiContractBase<WeatherNowResponse>
+public sealed class WeatherNowApi: QApiContractBase<WeatherNowResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.Now;
 }
-public class WeatherNowResponse : QWeatherResponseBase
+public sealed class WeatherNowResponse : QWeatherResponseBase
 {
     [JsonPropertyName("now")]
     public WeatherNowItem WeatherNow { get; set; }
-    public class WeatherNowItem
+    public sealed class WeatherNowItem
     {
         [JsonPropertyName("obsTime")]
         public string ObsTime { get; set; }

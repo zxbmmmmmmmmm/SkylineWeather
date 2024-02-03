@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FluentWeather.QWeatherApi.ApiContracts
 {
-    public class TyphoonForecastApi : QApiContractBase<TyphoonForecastRequest, TyphoonForecastResponse>
+    public sealed class TyphoonForecastApi : QApiContractBase<TyphoonForecastRequest, TyphoonForecastResponse>
     {
         public override HttpMethod Method => HttpMethod.Get;
 
@@ -19,11 +19,11 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&stormid={Request.TyphoonId}");
         }
     }
-    public class TyphoonForecastRequest : RequestBase
+    public sealed class TyphoonForecastRequest : RequestBase
     {
         public string TyphoonId { get; set; }
     }
-    public class TyphoonForecastResponse
+    public sealed class TyphoonForecastResponse
     {
         [JsonPropertyName("forecast")]
         public List<TyphoonForecastItem> Forecasts { get; set; }

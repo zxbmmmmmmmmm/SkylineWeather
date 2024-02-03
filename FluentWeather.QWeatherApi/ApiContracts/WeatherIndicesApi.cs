@@ -6,7 +6,7 @@ using FluentWeather.QWeatherApi.Bases;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherIndicesApi : QApiContractBase<WeatherIndicesResponse>
+public sealed class WeatherIndicesApi : QApiContractBase<WeatherIndicesResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.WeatherIndices1D;
@@ -19,7 +19,7 @@ public class WeatherIndicesApi : QApiContractBase<WeatherIndicesResponse>
         return res;
     }
 }
-public class WeatherIndicesResponse : QWeatherResponseBase
+public sealed class WeatherIndicesResponse : QWeatherResponseBase
 {
     [JsonPropertyName("daily")] public List<IndicesItem> Indices { get; set; }
     public class IndicesItem

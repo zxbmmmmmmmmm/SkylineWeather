@@ -23,8 +23,6 @@
     Style="{ThemeResource ContentDialogFullStyle}"
     mc:Ignorable="d">
     <ContentDialog.Resources>
-        <converters:TyphoonTrackToGeopointConverter x:Key="TyphoonTrackToGeopointConverter" />
-        <converters:TyphoonTypeToDescriptionConverter x:Key="TyphoonTypeToDescriptionConverter" />
         <media:AcrylicBrush
             x:Key="ButtonAcrylic"
             BackgroundSource="Backdrop"
@@ -64,7 +62,7 @@
                 <maps:MapItemsControl x:Name="MapItemsTyphoonNow" ItemsSource="{x:Bind Typhoons, Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonBase">
-                            <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind Now, Converter={StaticResource TyphoonTrackToGeopointConverter}}">
+                            <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Now.Latitude,Now.Longitude)}">
                                 <controls1:DropShadowPanel
                                     Margin="0,-16,0,0"
                                     HorizontalAlignment="Center"
@@ -104,7 +102,7 @@
                                 Height="20"
                                 Margin="-10,-10,0,0"
                                 Padding="0"
-                                maps:MapControl.Location="{x:Bind Converter={StaticResource TyphoonTrackToGeopointConverter}}"
+                                maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Latitude,Longitude)}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 ToolTipService.ToolTip="{x:Bind Time}">
@@ -154,6 +152,7 @@
                         Name="SegmentedControl"
                         Background="{ThemeResource ButtonAcrylic}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        SelectedItem="{x:Bind _selected,Mode=TwoWay}"
                         ItemsSource="{x:Bind Typhoons, Mode=OneWay}"
                         SelectionChanged="SegmentedControl_SelectionChanged">
                         <controls:Segmented.ItemTemplate>
@@ -173,26 +172,26 @@
                         Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                         <StackPanel Spacing="4" Visibility="{x:Bind SegmentedControl.SelectedItem, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                             <TextBlock Style="{ThemeResource TitleTextBlockStyle}">
-                                <Run Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Name}" />
+                                <Run Text="{x:Bind _selected.Name}" />
                                 <Run
                                     FontSize="16"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                    Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Type, Converter={StaticResource TyphoonTypeToDescriptionConverter}}" />
+                                    Text="{x:Bind local:TyphoonDialog.TyphoonTypeToDescription(_selected.Now.Type)}" />
                             </TextBlock>
                             <StackPanel Orientation="Horizontal" Spacing="16">
                                 <TextBlock>
                                     <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="最大风速" />
-                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.WindSpeed}" />
+                                    <LineBreak /><Run FontSize="16" Text="{x:Bind _selected.Now.WindSpeed}" />
                                     <Run Text="m/s" />
                                 </TextBlock>
                                 <TextBlock>
                                     <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="移动速度" />
-                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.MoveSpeed}" />
+                                    <LineBreak /><Run FontSize="16" Text="{x:Bind _selected.Now.MoveSpeed}" />
                                     <Run Text="km/h" />
                                 </TextBlock>
                                 <TextBlock>
                                     <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="气压" />
-                                    <LineBreak /><Run FontSize="16" Text="{Binding ElementName=SegmentedControl, Path=SelectedItem.Now.Pressure}" />
+                                    <LineBreak /><Run FontSize="16" Text="{x:Bind _selected.Now.Pressure}" />
                                     <Run Text="kPa" />
                                 </TextBlock>
                             </StackPanel>

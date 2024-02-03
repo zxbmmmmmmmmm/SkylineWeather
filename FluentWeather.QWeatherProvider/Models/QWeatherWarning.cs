@@ -2,7 +2,7 @@
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherWarning:WeatherWarningBase
+public sealed class QWeatherWarning:WeatherWarningBase
 {
     
 }

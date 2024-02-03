@@ -13,7 +13,7 @@ using OpenMeteoApi.Variables;
 
 namespace FluentWeather.OpenMeteoProvider;
 
-public class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider
+public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider
 {
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";

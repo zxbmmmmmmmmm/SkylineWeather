@@ -4,7 +4,7 @@ using FluentWeather.QWeatherProvider.Helpers;
 
 namespace FluentWeather.QWeatherProvider.Models;
 
-public class QWeatherNow : WeatherNowBase
+public sealed class QWeatherNow : WeatherNowBase
 {
     public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
 }

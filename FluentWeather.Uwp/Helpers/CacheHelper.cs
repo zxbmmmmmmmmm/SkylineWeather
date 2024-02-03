@@ -12,7 +12,7 @@ using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;
 
-public class CacheHelper
+public sealed class CacheHelper
 {
     public static async Task<WeatherCacheBase> GetWeatherCache(GeolocationBase location)
     {

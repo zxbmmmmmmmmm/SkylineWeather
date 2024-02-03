@@ -2,6 +2,8 @@
     x:Class="FluentWeather.Uwp.Themes.Generic"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
+    xmlns:local="using:FluentWeather.Uwp.Themes"
     xmlns:models="using:FluentWeather.Abstraction.Models">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
@@ -960,13 +962,10 @@
                                     </Grid>
                                 </PivotPanel>
                             </ScrollViewer>
-
                         </Grid>
-
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="Orientation">
                                 <VisualState x:Name="Portrait">
-
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleContentControl" Storyboard.TargetProperty="Margin">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}" />
@@ -974,16 +973,13 @@
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Landscape">
-
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TitleContentControl" Storyboard.TargetProperty="Margin">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
                             </VisualStateGroup>
-
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
 
@@ -992,41 +988,37 @@
         </Setter>
     </Style>
 
-    <!--  Data Templates  -->
     <DataTemplate x:Key="WeatherForecastTemplate" x:DataType="models:WeatherDailyBase">
         <UserControl>
-            <StackPanel
-                VerticalAlignment="Center"
-                x:DefaultBindMode="OneWay"
-                Spacing="4">
+            <StackPanel VerticalAlignment="Center" Spacing="4">
                 <TextBlock
                     HorizontalAlignment="Center"
                     FontSize="17"
-                    Text="{Binding Time, Converter={StaticResource DateConverter}}" />
+                    Text="{x:Bind Time, Converter={StaticResource DateConverter}}" />
                 <TextBlock
                     HorizontalAlignment="Center"
                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                    Text="{Binding Time, Converter={StaticResource ShortDateConverter}}" />
+                    Text="{x:Bind Time, Converter={StaticResource ShortDateConverter}}" />
                 <Image
                     Width="50"
                     Height="50"
-                    Source="{Binding WeatherType, Converter={StaticResource WeatherTypeToIconConverter}}"
+                    Source="{x:Bind local:Generic.GetIconByWeather(WeatherType)}"
                     Stretch="Uniform" />
                 <TextBlock
                     FontSize="{ThemeResource WeatherDescriptionFontSize}"
-                    Text="{Binding Description}"
+                    Text="{x:Bind Description}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
                 <TextBlock x:Name="TemperatureText" TextAlignment="Center">
                     <Run
                         FontSize="22"
                         FontWeight="SemiBold"
-                        Text="{Binding MaxTemperature}" /><Run FontSize="22" Text="°" />
+                        Text="{x:Bind MaxTemperature}" /><Run FontSize="22" Text="°" />
                     <Run
                         FontSize="16"
                         FontWeight="SemiBold"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Text="{Binding MinTemperature}" /><Run
+                        Text="{x:Bind MinTemperature}" /><Run
                         FontSize="16"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                         Text="°" />
@@ -1047,67 +1039,64 @@
         </UserControl>
     </DataTemplate>
     <DataTemplate x:Key="WeatherHourlyForecastTemplate" x:DataType="models:WeatherHourlyBase">
-        <StackPanel
-            VerticalAlignment="Center"
-            x:DefaultBindMode="OneWay"
-            Spacing="4">
+        <StackPanel VerticalAlignment="Center" Spacing="4">
             <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
+                <Run Text="{x:Bind Time.Hour}" /><Run Text=":00" />
             </TextBlock>
             <Image
                 Width="36"
                 Height="36"
-                Source="{Binding Converter={StaticResource WeatherToIconConverter}}"
+                Source="{x:Bind local:Generic.GetIconByWeather(WeatherType,Time)}"
                 Stretch="Uniform" />
             <TextBlock
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
                 MaxLines="2"
-                Text="{Binding Description}"
+                Text="{x:Bind Description}"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
             <TextBlock
                 Margin="4,-2,0,0"
                 HorizontalAlignment="Center"
                 FontSize="17">
-                <Run FontWeight="SemiBold" Text="{Binding Temperature}" /><Run Text="°" />
+                <Run FontWeight="SemiBold" Text="{x:Bind Temperature}" /><Run Text="°" />
             </TextBlock>
             <TextBlock
                 Margin="0,-2,0,0"
                 HorizontalAlignment="Center"
                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                Visibility="{Binding PrecipitationProbability, Converter={StaticResource PrecipitationProbabilityToVisibilityConverter}}">
+                Visibility="{x:Bind local:Generic.GetPrecipVisibility(PrecipitationProbability)}">
                 <Run
                     FontFamily="{ThemeResource SymbolThemeFontFamily}"
                     FontSize="10"
                     Text="&#xEB42;" />
-                <Run FontSize="16" Text="{Binding PrecipitationProbability}" /><Run FontSize="12.5" Text="%" />
+                <Run FontSize="16" Text="{x:Bind PrecipitationProbability}" /><Run FontSize="12.5" Text="%" />
             </TextBlock>
             <FlyoutBase.AttachedFlyout>
                 <Flyout>
                     <StackPanel MaxWidth="256" Spacing="4">
                         <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                            <Run Text="{Binding Time.Hour}" /><Run Text=":00" />
+                            <Run Text="{x:Bind Time.Hour}" /><Run Text=":00" />
                         </TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="16">
-                                <Run Text="{Binding Description}" />
-                                <Run Text="{Binding Temperature}" /><Run Text="°" />
+                                <Run Text="{x:Bind Description}" />
+                                <Run Text="{x:Bind Temperature}" /><Run Text="°" />
                             </TextBlock>
                             <FontIcon
                                 Margin="10,2,0,0"
                                 FontSize="12"
                                 Glyph="&#xEB42;"
-                                Visibility="{Binding PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}" />
+                                Visibility="{x:Bind PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}" />
                             <TextBlock
                                 Margin="4,0,0,0"
                                 FontSize="16"
-                                Visibility="{Binding PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}">
-                                <Run Text="{Binding PrecipitationProbability}" /><Run FontSize="12.5" Text="%" />
+                                Visibility="{x:Bind PrecipitationProbability, Converter={StaticResource NullToVisibilityConverter}}">
+                                <Run Text="{x:Bind PrecipitationProbability}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="16">
-                            <Run Text="{Binding WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
-                            <Run Text="{Binding WindScale}" /><Run FontSize="12.5" Text="级" />
+                            <Run Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
+                            <Run Text="{x:Bind WindScale}" /><Run FontSize="12.5" Text="级" />
                         </TextBlock>
                         <StackPanel
                             HorizontalAlignment="Left"
@@ -1115,11 +1104,11 @@
                             Spacing="4">
                             <TextBlock FontSize="16">
                                 <Run Text="湿度:" />
-                                <Run Text="{Binding Humidity}" /><Run FontSize="12.5" Text="%" />
+                                <Run Text="{x:Bind Humidity}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                             <TextBlock FontSize="16">
                                 <Run Text="气压:" />
-                                <Run Text="{Binding Pressure}" /><Run FontSize="12.5" Text="kPa" />
+                                <Run Text="{x:Bind Pressure}" /><Run FontSize="12.5" Text="kPa" />
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>

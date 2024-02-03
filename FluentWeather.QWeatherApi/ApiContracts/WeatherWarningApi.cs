@@ -5,16 +5,16 @@ using FluentWeather.QWeatherApi.Bases;
 
 namespace FluentWeather.QWeatherApi.ApiContracts;
 
-public class WeatherWarningApi: QApiContractBase<WeatherWarningResponse>
+public sealed class WeatherWarningApi: QApiContractBase<WeatherWarningResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.WarningNow;
 }
-public class WeatherWarningResponse : QWeatherResponseBase
+public sealed class WeatherWarningResponse : QWeatherResponseBase
 {
     [JsonPropertyName("warning")]
     public List<WeatherWarningItem> Warnings { get; set; }
-    public class WeatherWarningItem
+    public sealed class WeatherWarningItem
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

@@ -14,13 +14,12 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <valueConverters:DataPointToBrushConverter x:Key="DataPointToBrushConverter" />
         <valueConverters1:AddConverter x:Key="AddConverter" />
         <DataTemplate x:Key="PointTemplate" x:DataType="charting:DataPoint">
             <Ellipse
                 Width="8"
                 Height="8"
-                Fill="{x:Bind Converter={StaticResource DataPointToBrushConverter}, Mode=OneWay}"
+                Fill="{x:Bind valueConverters:ConverterMethods.DataPointToBrush(Presenter),Mode=OneWay}"
                 Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
                 StrokeThickness="2" />
         </DataTemplate>
