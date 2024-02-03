@@ -59,7 +59,7 @@ public sealed partial class Generic:ResourceDictionary
             SlightSnowFall or ModerateSnowFall => "LightSnow.png",
             HeavySnowFall => "HeavySnow.png",
             Fog => "Fog.png",
-            LightFreezingRain or HeavyFreezingRain => "FreezingRain.png",
+            DenseFreezingDrizzle or LightFreezingDrizzle or LightFreezingRain or HeavyFreezingRain => "FreezingRain.png",
             SlightSleet or ModerateOrHeavySleet => "RainSnow.png",
             ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm => "Thunder.png",
             _ => "Cloudy.png",

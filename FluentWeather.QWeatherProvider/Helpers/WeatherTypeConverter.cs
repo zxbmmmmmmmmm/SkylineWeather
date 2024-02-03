@@ -8,6 +8,7 @@ public static class WeatherTypeConverter
 {
     public static WeatherCode GetWeatherTypeByDescription(string description)
     {
+        description = description.ToLower();
         if (description.Contains("晴") || description.Contains("Clear"))
             return Clear;
         if (description.Contains("阴") || description.Contains("Overcast"))
@@ -33,7 +34,8 @@ public static class WeatherTypeConverter
             return SlightSnowFall;
         if (description.Contains("大雪") || description.Contains("Heavy Snow"))
             return HeavySnowFall;
-
+        if (description.Contains("冻雨") || description.Contains("Freezing Rain"))
+            return LightFreezingRain;
 
         if (description.Contains("雪") || description.Contains("Snow"))
             return ModerateSnowFall;
