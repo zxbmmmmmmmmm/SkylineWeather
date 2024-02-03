@@ -64,19 +64,19 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     {
         var code = (int)weather;
         if (code is 0)
-            return "Clear.png";
+            return "Clear";
         if (code is 1 or 2)
-            return "PartlyCloudy.png";
+            return "PartlyCloudy";
         if (code is 3)
-            return "Overcast.png";
+            return "Overcast";
         if (50 <= code && code <= 69 || (80<=code && code <= 82))
-            return "Rain.png";
+            return "Rain";
         if (40 <= code && code <= 49)
-            return "Fog.png";
+            return "Fog";
         if (70 <= code && code <= 79)
-            return "Snow.png";
+            return "Snow";
 
-        return "All.png";
+        return "All";
     }
     
     private async Task<BitmapImage> GetImage(StorageFolder folder, string name)
