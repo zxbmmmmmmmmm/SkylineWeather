@@ -212,11 +212,7 @@
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\ConverterMethods.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
-    <Compile Include="Helpers\ValueConverters\PrecipitationProbabilityToVisibilityConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
-    <Compile Include="Helpers\ValueConverters\WeatherTypeToIconConverter.cs" />
-    <Compile Include="Helpers\ValueConverters\WindDirectionToDescriptionConverter.cs" />
-    <Compile Include="Helpers\ValueConverters\WindScaleToDescriptionConverter.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>
     </Compile>

@@ -220,11 +220,11 @@
                         x:Name="FirstText"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextFirst(TemperatureChart.HourlyForecasts)}" />
+                        Text="{x:Bind GetTextFirst(TemperatureChart.HourlyForecasts),Mode=OneTime}" />
                     <TextBlock
                         Grid.Column="7"
                         HorizontalAlignment="Center"
-                        Text="{x:Bind GetTextLast(TemperatureChart.HourlyForecasts)}"
+                        Text="{x:Bind GetTextLast(TemperatureChart.HourlyForecasts),Mode=OneTime}"
                         Visibility="{x:Bind FirstText.Visibility}" />
                 </Grid>
             </Grid>

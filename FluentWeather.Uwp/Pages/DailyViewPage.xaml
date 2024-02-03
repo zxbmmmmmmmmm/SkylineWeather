@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d">
@@ -70,9 +71,9 @@
                                         Grid.Row="0"
                                         Height="256"
                                         Margin="14,64,22,0"
-                                        HourlyForecasts="{Binding HourlyForecasts}"
+                                        HourlyForecasts="{x:Bind HourlyForecasts}"
                                         IsHorizontalAxisVisible="False"
-                                        Visibility="{Binding HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
                                     <Grid Grid.Row="1" Margin="0,16,0,0">
                                         <controls1:AdaptiveGridView
                                             x:Name="HourlyGridView"
@@ -83,7 +84,7 @@
                                             IsItemClickEnabled="True"
                                             ItemHeight="150"
                                             ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
-                                            ItemsSource="{Binding HourlyForecasts}"
+                                            ItemsSource="{x:Bind HourlyForecasts}"
                                             OneRowModeEnabled="True"
                                             SelectionMode="None">
                                             <i:Interaction.Behaviors>
@@ -164,16 +165,16 @@
                                                     <TextBlock
                                                         FontSize="18"
                                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                                        Text="{x:Bind  WindDirection}" />
                                                     <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{Binding WindScale}" />
+                                                        <Run FontSize="25" Text="{x:Bind WindScale}" />
                                                         <Run x:Uid="WindScaleText" FontSize="16" />
                                                     </TextBlock>
                                                     <FlyoutBase.AttachedFlyout>
                                                         <Flyout>
                                                             <StackPanel MaxWidth="256">
                                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run Text="{x:Bind WindDirection, Converter={StaticResource WindDirectionToDescriptionConverter}}" />
+                                                                    <Run Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
                                                                     <Run Text="-" />
                                                                     <Run Text="{x:Bind WindScale}" />
                                                                     <Run x:Uid="WindScaleText" FontSize="14" />
@@ -185,7 +186,7 @@
                                                                 <TextBlock
                                                                     FontSize="16"
                                                                     IsTextSelectionEnabled="True"
-                                                                    Text="{x:Bind WindScale, Converter={StaticResource WindScaleToDescriptionConverter}}"
+                                                                    Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(WindScale)}"
                                                                     TextWrapping="Wrap" />
                                                             </StackPanel>
                                                         </Flyout>
