@@ -41,6 +41,11 @@
             </muxc:InfoBar>
         </controls:SettingsExpander.ItemsHeader>
         <controls:SettingsExpander.Items>
+            <controls:SettingsCard Padding="12" Header="自定义主页" Description="自定义你的主页(试验功能)" HeaderIcon="Home">
+                <StackPanel>
+                    <Button x:Name="SelectPageFile" Click="SelectPageFile_Click" Content="选择文件"/>
+                </StackPanel>
+            </controls:SettingsCard>
             <controls:SettingsCard x:Uid="ThemeSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE771;" />

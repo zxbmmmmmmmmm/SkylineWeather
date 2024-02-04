@@ -10,7 +10,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <themes:Generic/>
+                <themes:Generic />
                 <themes:Theme />
             </ResourceDictionary.MergedDictionaries>
             <valueConverters2:BoolNegationConverter x:Key="BoolNegationConverter" />

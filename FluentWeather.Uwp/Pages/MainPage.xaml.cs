@@ -24,6 +24,8 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.Graphics.Canvas.Effects;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
+using FluentWeather.Uwp.Helpers;
+using Windows.Storage;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -32,22 +34,18 @@ public sealed partial class MainPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
     public static MainPage Instance ;
+    private XamlRenderService _xamlRenderer = new XamlRenderService();
     public MainPage()
     {
-        this.InitializeComponent();
         this.DataContext = ViewModel;
-        DailyGridView.ItemClick += DailyItemClicked;
-        MainPageViewModel.Instance.PropertyChanged += async (s, e) =>
-        {
-            if (e.PropertyName is not "CurrentLocation") return;
-            MainContentContainer.Visibility = Visibility.Visible;
-        };
+        _xamlRenderer.DataContext = ViewModel;
         Instance = this;
+        LoadElements();
     }
 
     private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
-        DailyView.SelectedIndex = DailyGridView.IndexFromContainer(DailyGridView.ContainerFromItem(e.ClickedItem));
+        //DailyView.SelectedIndex = DailyGridView.IndexFromContainer(DailyGridView.ContainerFromItem(e.ClickedItem));
         Analytics.TrackEvent("DailyViewEntered");
     }
 
@@ -57,5 +55,45 @@ public sealed partial class MainPage : Page
         if (precipList is null) return Visibility.Collapsed;
         if (precipList.Count is 0) return Visibility.Collapsed;
         return precipList.Sum(p => p.Precipitation) == 0 ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    private async void LoadElements()
+    {
+        var content = await GetCustomContent();
+        if (content is null)
+        {
+            this.InitializeComponent();
+            //DailyGridView.ItemClick += DailyItemClicked;
+            MainPageViewModel.Instance.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName is not "CurrentLocation") return;
+                //MainContentContainer.Visibility = Visibility.Visible;
+            };
+            return; 
+        }
+        this.Content = content;
+    }
+    
+    private async Task<UIElement> GetCustomContent()
+    {
+        StorageFolder folder;
+        try
+        {
+            folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CustomPages");
+        }
+        catch
+        {
+            folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
+        }
+        try
+        {
+            var file = await folder.GetFileAsync("MainPage.xaml");
+            var text = await FileIO.ReadTextAsync(file);
+            return _xamlRenderer.Render(text);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

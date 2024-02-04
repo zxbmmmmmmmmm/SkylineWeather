@@ -141,7 +141,7 @@
             </SplitView.Content>
         </SplitView>
 
-        <ParallaxView Source="{x:Bind local:MainPage.Instance.MainScrollViewer}" VerticalShift="32">
+        <ParallaxView VerticalShift="32">
             <Grid>
                 <controls1:ImageEx
                     x:Name="BackgroundImage"
