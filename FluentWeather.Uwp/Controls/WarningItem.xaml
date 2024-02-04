@@ -28,7 +28,7 @@
                             Width="5"
                             Height="5"
                             Margin="0,0,12,0"
-                            Fill="{x:Bind local:WarningItem.SeverityColorToColor(Warning.SeverityColor)}"
+                            Fill="{x:Bind converters:ConverterMethods.SeverityColorToColor(Warning.SeverityColor)}"
                             Visibility="{x:Bind Warning.SeverityColor, Converter={StaticResource NullToVisibilityConverter}}" />
                         <FontIcon Glyph="&#xE7BA;" />
                         <TextBlock

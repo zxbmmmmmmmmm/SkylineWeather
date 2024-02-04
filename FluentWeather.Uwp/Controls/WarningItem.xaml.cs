@@ -41,20 +41,6 @@ namespace FluentWeather.Uwp.Controls
 
         public static readonly DependencyProperty WarningProperty =
             DependencyProperty.Register(nameof(Warning), typeof(WeatherWarningBase), typeof(WarningItem), new PropertyMetadata(default));
-        private static Brush SeverityColorToColor(SeverityColor? color)
-        {
-            return color switch
-            {
-                SeverityColor.Red => new SolidColorBrush(Colors.Red),
-                SeverityColor.Green => new SolidColorBrush(Colors.Green),
-                SeverityColor.Blue => new SolidColorBrush(Colors.DeepSkyBlue),
-                SeverityColor.Orange => new SolidColorBrush(Colors.Orange),
-                SeverityColor.White => new SolidColorBrush(Colors.White),
-                SeverityColor.Yellow => new SolidColorBrush(Colors.Gold),
-                SeverityColor.Black => new SolidColorBrush(Colors.Black),
-                _ => new SolidColorBrush(Colors.Red)
-            };
-        }
 
     }
 }

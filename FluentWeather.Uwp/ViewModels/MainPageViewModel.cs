@@ -11,6 +11,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Telerik.Geospatial;
 
@@ -36,19 +37,28 @@ public sealed partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private string _weatherDescription;
+
     [ObservableProperty]
     private DateTime _sunRise;
+
     [ObservableProperty]
     private DateTime _sunSet;
 
     [ObservableProperty]
     private GeolocationBase _currentLocation;
+
     [ObservableProperty]
     private List<IndicesBase> _indices;
+
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(TotalPrecipitation))]
+    [NotifyPropertyChangedFor(nameof(HasPrecipitation))]
     private PrecipitationBase _precipitation;
+
     [ObservableProperty]
     private AirConditionBase _airCondition;
+    public double? TotalPrecipitation => Precipitation.Precipitations?.Sum(p => p.Precipitation);
+    public bool HasPrecipitation => TotalPrecipitation > 0;
     public static MainPageViewModel Instance{ get; private set; }
     public MainPageViewModel()
     {

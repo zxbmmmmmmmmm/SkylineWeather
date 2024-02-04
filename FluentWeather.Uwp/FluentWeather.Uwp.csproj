@@ -212,6 +212,7 @@
     <Compile Include="Helpers\Update\UpdateInfo.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\ConverterMethods.cs" />
+    <Compile Include="Helpers\ValueConverters\DataConverters.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Helpers\XamlRenderService.cs" />

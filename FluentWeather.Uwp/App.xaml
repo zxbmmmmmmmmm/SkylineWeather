@@ -24,6 +24,7 @@
             </valueConverters2:ValueConverterGroup>
             <valueConverters:VisibilityInverter x:Name="VisibilityInverter" />
             <valueConverters2:EnumToBoolConverter x:Name="EnumToBoolConverter" />
+            <valueConverters2:BoolToVisibilityConverter x:Name="BoolToVisibilityConverter"/>
             <valueConverters2:NullToBoolConverter x:Name="NullToBoolConverter" IsInverted="True" />
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <valueConverters:DateConverter x:Key="DateConverter" />

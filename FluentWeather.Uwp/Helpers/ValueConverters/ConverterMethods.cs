@@ -31,5 +31,19 @@ public static class ConverterMethods
         }
         return ResourceLoader.GetForCurrentView().GetString("WindScaleDescription_" + scale);
     }
+    public static Brush SeverityColorToColor(SeverityColor? color)
+    {
+        return color switch
+        {
+            SeverityColor.Red => new SolidColorBrush(Colors.Red),
+            SeverityColor.Green => new SolidColorBrush(Colors.Green),
+            SeverityColor.Blue => new SolidColorBrush(Colors.DeepSkyBlue),
+            SeverityColor.Orange => new SolidColorBrush(Colors.Orange),
+            SeverityColor.White => new SolidColorBrush(Colors.White),
+            SeverityColor.Yellow => new SolidColorBrush(Colors.Gold),
+            SeverityColor.Black => new SolidColorBrush(Colors.Black),
+            _ => new SolidColorBrush(Colors.Red)
+        };
+    }
 
 }
