@@ -35,6 +35,9 @@ public sealed partial class MainPage : Page
     public MainPageViewModel ViewModel { get; set; } = new();
     public static MainPage Instance ;
     private XamlRenderService _xamlRenderer = new XamlRenderService();
+
+    private ListViewBase _dailyItemsView;
+    private DailyViewPage _dailyViewPage;
     public MainPage()
     {
         this.DataContext = ViewModel;
@@ -45,7 +48,7 @@ public sealed partial class MainPage : Page
 
     private void DailyItemClicked(object sender, ItemClickEventArgs e)
     {
-        //DailyView.SelectedIndex = DailyGridView.IndexFromContainer(DailyGridView.ContainerFromItem(e.ClickedItem));
+        _dailyViewPage.SelectedIndex = _dailyItemsView.IndexFromContainer(_dailyItemsView.ContainerFromItem(e.ClickedItem));
         Analytics.TrackEvent("DailyViewEntered");
     }
 
@@ -63,15 +66,21 @@ public sealed partial class MainPage : Page
         if (content is null)
         {
             this.InitializeComponent();
-            //DailyGridView.ItemClick += DailyItemClicked;
-            MainPageViewModel.Instance.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName is not "CurrentLocation") return;
-                //MainContentContainer.Visibility = Visibility.Visible;
-            };
-            return; 
         }
-        this.Content = content;
+        else
+        {
+            this.Content = content;
+        }
+        _dailyItemsView = FindName("DailyItemsView") as ListViewBase;
+        _dailyViewPage = this.FindChild<DailyViewPage>();
+        if (_dailyItemsView is null) return;
+        _dailyItemsView.ItemClick += DailyItemClicked;
+
+        MainPageViewModel.Instance.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName is not "CurrentLocation" || _dailyViewPage is null) return;
+            _dailyViewPage.Visibility = Visibility.Collapsed;
+        };
     }
     
     private async Task<UIElement> GetCustomContent()

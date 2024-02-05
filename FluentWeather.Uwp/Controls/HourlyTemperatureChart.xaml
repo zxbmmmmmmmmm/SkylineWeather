@@ -26,7 +26,12 @@
     <Grid>
         <chart:RadCartesianChart>
             <chart:RadCartesianChart.HorizontalAxis>
-                <chart:CategoricalAxis x:Uid="TimeAxis" PlotMode="BetweenTicks" ShowLabels="{x:Bind IsHorizontalAxisVisible,Mode=OneWay}">
+                <chart:CategoricalAxis
+                    x:Uid="TimeAxis"
+                    LabelFormat="{}{0,0:HH:00}"
+                    PlotMode="OnTicksPadded"
+                    MajorTickInterval="{x:Bind MajorTickInterval,Mode=OneWay}"
+                    ShowLabels="{x:Bind IsHorizontalAxisVisible, Mode=OneWay}">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -40,8 +45,10 @@
                 </chart:CategoricalAxis>
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis LabelFormat="{}{0}°"
-                                  Maximum="{x:Bind MaxTemperature}" Minimum="{x:Bind MinTemperature}">
+                <chart:LinearAxis
+                    LabelFormat="{}{0}°"
+                    Maximum="{x:Bind MaxTemperature}"
+                    Minimum="{x:Bind MinTemperature}">
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -84,9 +91,10 @@
                 </chart:SplineAreaSeries.ValueBinding>
                 <chart:SplineAreaSeries.VerticalAxis>
                     <chart:LinearAxis
-                        HorizontalLocation="Right" ShowLabels="False"
+                        HorizontalLocation="Right"
                         Maximum="{x:Bind MaxTemperature}"
-                        Minimum="{x:Bind MinTemperature}">
+                        Minimum="{x:Bind MinTemperature}"
+                        ShowLabels="False">
                         <chart:LinearAxis.LineStyle>
                             <Style TargetType="Line">
                                 <Setter Property="Stroke" Value="Transparent" />

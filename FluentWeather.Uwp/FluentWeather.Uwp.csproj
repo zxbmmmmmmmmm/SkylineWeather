@@ -140,8 +140,9 @@
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
-    <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
+    <Compile Include="Behaviors\ButtonListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\LoadLocalBackgroundBehavior.cs" />
+    <Compile Include="Behaviors\SetParallaxViewSourceBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>

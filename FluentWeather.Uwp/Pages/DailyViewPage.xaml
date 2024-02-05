@@ -72,7 +72,7 @@
                                         Height="256"
                                         Margin="14,64,22,0"
                                         HourlyForecasts="{x:Bind HourlyForecasts}"
-                                        IsHorizontalAxisVisible="False"
+                                        MajorTickInterval="6"
                                         Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
                                     <Grid Grid.Row="1" Margin="0,16,0,0">
                                         <controls1:AdaptiveGridView
@@ -103,7 +103,7 @@
                                             CornerRadius="50">
                                             <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                                             <i:Interaction.Behaviors>
-                                                <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
+                                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
                                             </i:Interaction.Behaviors>
                                             <Button.Resources>
                                                 <ResourceDictionary>
@@ -122,7 +122,7 @@
                                             CornerRadius="50">
                                             <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                                             <i:Interaction.Behaviors>
-                                                <behaviors:ListViewScrollButtonBehavior ListView="{Binding ElementName=HourlyGridView}" />
+                                                <behaviors:ButtonListViewScrollBehavior ListView="{Binding ElementName=HourlyGridView}" />
                                             </i:Interaction.Behaviors>
                                             <Button.Resources>
                                                 <ResourceDictionary>
@@ -165,7 +165,7 @@
                                                     <TextBlock
                                                         FontSize="18"
                                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="{x:Bind WindDirection}" />
+                                                        Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
                                                     <TextBlock FontSize="25">
                                                         <Run FontSize="25" Text="{x:Bind WindScale}" />
                                                         <Run x:Uid="WindScaleText" FontSize="16" />
@@ -321,7 +321,7 @@
                                                 <AdaptiveTrigger MinWindowWidth="800" />
                                             </VisualState.StateTriggers>
                                             <VisualState.Setters>
-                                                <Setter Target="HourlyTemperatureChart.IsHorizontalAxisVisible" Value="true" />
+                                                <Setter Target="HourlyTemperatureChart.MajorTickInterval" Value="2" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
