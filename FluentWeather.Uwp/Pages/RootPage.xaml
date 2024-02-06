@@ -141,7 +141,7 @@
             </SplitView.Content>
         </SplitView>
 
-        <ParallaxView x:Name="BackgroundParallaxView" x:FieldModifier="public" >
+        <ParallaxView x:Name="BackgroundParallaxView"  x:FieldModifier="public" >
             <Grid>
                 <controls1:ImageEx
                     x:Name="BackgroundImage"

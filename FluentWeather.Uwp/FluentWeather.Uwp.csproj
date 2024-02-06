@@ -131,6 +131,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\AnimateBackgroundAction.cs" />
     <Compile Include="Behaviors\ButtonCloseContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentDialogBehavior.cs" />

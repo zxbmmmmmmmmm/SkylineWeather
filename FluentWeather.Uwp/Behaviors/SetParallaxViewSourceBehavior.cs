@@ -56,6 +56,9 @@ public sealed class SetParallaxViewSourceBehavior : Behavior<FrameworkElement>
         AssociatedObject.Loaded -= OnLoaded;
         base.OnDetaching();
     }
+
+
+
     private static ScrollViewer FindScrollViewer(FrameworkElement element)
     {
         var viewer = element.FindChild<ScrollViewer>();
