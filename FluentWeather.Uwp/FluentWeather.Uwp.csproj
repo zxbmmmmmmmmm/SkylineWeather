@@ -627,6 +627,7 @@
   <ItemGroup>
     <None Include="App_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
+    <PRIResource Include="Strings\zh-TW\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\zh-CN\Resources.resw">
       <SubType>Designer</SubType>
