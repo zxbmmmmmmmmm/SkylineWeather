@@ -1,6 +1,7 @@
 ﻿using FluentWeather.Abstraction.Interfaces.Weather;
 using System.Collections.Generic;
 using System;
+using FluentWeather.Abstraction.Helpers;
 
 namespace FluentWeather.Abstraction.Models;
 
@@ -10,7 +11,15 @@ public class WeatherDailyBase : WeatherBase, IWeatherNight, ITemperatureRange, I
     public  int MinTemperature { get; set; }
     public  DateTime Time { get; set; }
     public WeatherBase? WeatherNight { get; set; }
-    public string? WindDirectionDescription { get; set; }
+
+    private string? _windDirectionDescription;
+
+    public string WindDirectionDescription
+    {
+        get => _windDirectionDescription ?? ResourcesHelper.GetWindDirectionDescription(WindDirection);
+        set => _windDirectionDescription = value;
+    }
+
     public string? WindScale { get; set; }
     public  int WindSpeed { get; set; }
     public  DateTime SunRise { get; set; }

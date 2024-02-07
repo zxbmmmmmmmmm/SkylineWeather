@@ -121,10 +121,10 @@
     <value>晴</value>
   </data>
   <data name="WeatherCode_1" xml:space="preserve">
-    <value>大部晴朗</value>
+    <value>少云</value>
   </data>
   <data name="WeatherCode_2" xml:space="preserve">
-    <value>局部多云</value>
+    <value>多云</value>
   </data>
   <data name="WeatherCode_3" xml:space="preserve">
     <value>阴</value>
@@ -203,5 +203,59 @@
   </data>
   <data name="WeatherCode_Unknown" xml:space="preserve">
     <value>未知</value>
+  </data>
+  <data name="WindDirection_East" xml:space="preserve">
+    <value>东风</value>
+  </data>
+  <data name="WindDirection_EastNorthEast" xml:space="preserve">
+    <value>东北偏东风</value>
+  </data>
+  <data name="WindDirection_EastSouthEast" xml:space="preserve">
+    <value>东南偏东风</value>
+  </data>
+  <data name="WindDirection_None" xml:space="preserve">
+    <value>无持续风向</value>
+  </data>
+  <data name="WindDirection_North" xml:space="preserve">
+    <value>北风</value>
+  </data>
+  <data name="WindDirection_NorthEast" xml:space="preserve">
+    <value>东北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
+    <value>东北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
+    <value>西北偏北风</value>
+  </data>
+  <data name="WindDirection_NorthWest" xml:space="preserve">
+    <value>西北风</value>
+  </data>
+  <data name="WindDirection_Rotational" xml:space="preserve">
+    <value>旋转风向</value>
+  </data>
+  <data name="WindDirection_South" xml:space="preserve">
+    <value>南风</value>
+  </data>
+  <data name="WindDirection_SouthEast" xml:space="preserve">
+    <value>东南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
+    <value>东南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
+    <value>西南偏南风</value>
+  </data>
+  <data name="WindDirection_SouthWest" xml:space="preserve">
+    <value>西南风</value>
+  </data>
+  <data name="WindDirection_West" xml:space="preserve">
+    <value>西风</value>
+  </data>
+  <data name="WindDirection_WestNorthWest" xml:space="preserve">
+    <value>西北偏西风</value>
+  </data>
+  <data name="WindDirection_WestSouthWest" xml:space="preserve">
+    <value>西南偏西风</value>
   </data>
 </root>

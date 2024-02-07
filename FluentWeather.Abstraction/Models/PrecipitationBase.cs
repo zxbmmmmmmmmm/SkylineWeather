@@ -11,7 +11,7 @@ namespace FluentWeather.Abstraction.Models
     /// </summary>
     public class PrecipitationBase:ISummary
     {
-        public  List<PrecipitationItemBase> Precipitations { get; set; }
+        public List<PrecipitationItemBase> Precipitations { get; set; }
         public string? Summary { get; set; }
     }
     public class PrecipitationItemBase
@@ -19,8 +19,8 @@ namespace FluentWeather.Abstraction.Models
         /// <summary>
         /// 降水量，单位毫米
         /// </summary>
-        public  double Precipitation { get; set; }
-        public  DateTime Time { get; set; }  
+        public double Precipitation { get; set; }
+        public DateTime Time { get; set; }  
         public bool IsSnow { get; set; }
     }
 }

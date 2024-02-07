@@ -1,4 +1,5 @@
-﻿using FluentWeather.Abstraction.Interfaces.Weather;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Interfaces.Weather;
 using System;
 
 namespace FluentWeather.Abstraction.Models;
@@ -9,7 +10,15 @@ public class WeatherHourlyBase :WeatherBase, ITemperature, ITime, IWind, IHumidi
     public int? Pressure { get; set; }
     public  int Temperature { get; set; }
     public  DateTime Time { get; set; }
-    public string? WindDirectionDescription { get; set; }
+
+    private string? _windDirectionDescription;
+
+    public string WindDirectionDescription
+    {
+        get => _windDirectionDescription ?? ResourcesHelper.GetWindDirectionDescription(WindDirection);
+        set => _windDirectionDescription = value;
+    }
+
     public string? WindScale { get; set; }
     public  int WindSpeed { get; set; }
     public int? PrecipitationProbability { get; set; }

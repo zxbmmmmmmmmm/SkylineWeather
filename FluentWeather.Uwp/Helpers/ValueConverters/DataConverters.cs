@@ -22,19 +22,6 @@ public class SeverityColorToColorConverter : IValueConverter
     }
 }
 
-public class WindDirectionToDescriptionConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, string language)
-    {
-        var dir = (WindDirection)value;
-        return ConverterMethods.GetWindDirectionDescription(dir);
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, string language)
-    {
-        throw new NotImplementedException();
-    }
-}
 public class WindScaleToDescriptionConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)

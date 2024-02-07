@@ -1,4 +1,5 @@
-﻿using FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.Abstraction.Interfaces.Weather;
 
@@ -7,8 +8,8 @@ public interface IWind
     /// <summary>
     /// 风向
     /// </summary>
-    string? WindDirectionDescription{ get; set; }
-    WindDirection WindDirection { get; set; }
+    string WindDirectionDescription{ get; set; }
+
     /// <summary>
     /// 风力等级
     /// </summary>

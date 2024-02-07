@@ -7,7 +7,7 @@ namespace FluentWeather.Abstraction.Models;
 
 public class AirConditionBase : IAirCondition, IAirPollutants
 {
-    public  int Aqi { get; set; }
+    public int Aqi { get; set; }
     public int? AqiLevel { get; set; }
     public virtual string? AqiCategory { get; set; }
     public double PM25 { get; set; }

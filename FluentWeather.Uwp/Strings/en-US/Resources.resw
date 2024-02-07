@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -130,25 +130,25 @@
     <value>Apply</value>
   </data>
   <data name="AutoCheckUpdatesSettingsCard.Header" xml:space="preserve">
-    <value>Checking for updates automatically</value>
+    <value>Check for updates automatically</value>
   </data>
   <data name="AutoPositioningSettingsCard.Description" xml:space="preserve">
-    <value>Requires location permission. This may slow startup speed, desktop devices are not recommended.</value>
+    <value>Location permission is required. This may slow startup speed, and we do not recommend desktop devices to turn on this feature.</value>
   </data>
   <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
-    <value>Update location on startup</value>
+    <value>Update locations on startup</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>Background blur radius</value>
   </data>
   <data name="BackgroundImageDescription.Text" xml:space="preserve">
-    <value>You can also use different background\r\n\r\nmethods depending on weather: click \"Open Background Folder\", copy background image **(PNG)** to this folder, Image can be renamed:\r\n\r\n| Weather | File naming |\r\n| ----------|-------------------- |\r\n| sunny | Clear |\r\n| clouds | PartlyCloudy |\r\n| Cloudy |\r\n| Heavy rain | HeavyRain |\r\n| Light rains/rain | LightRain |\r\n| HeavySnow |\r\n| Light snow | Light snow | LightsSnow |\r\n| ThunderyShowers |\r\n| ThunderyHeavyRain |\r\n| Fog</value>
+    <value>You can also use different background\r\n\r\nmethods depending on weather: click \"Open Background Folder\", copy background image **(PNG)** to the folder, rename the images according to the following format:\r\n\r\n| Weather | File naming |\r\n| ----------|-------------------- |\r\n| sunny | Clear |\r\n| clouds | PartlyCloudy |\r\n| Cloudy |\r\n| Heavy rain | HeavyRain |\r\n| Light rains/rain | LightRain |\r\n| HeavySnow |\r\n| Light snow | Light snow | LightsSnow |\r\n| ThunderyShowers |\r\n| ThunderyHeavyRain |\r\n| Fog</value>
   </data>
   <data name="BackgroundImageText.Text" xml:space="preserve">
     <value>Background Image</value>
   </data>
   <data name="BackgroundSettingsCard.Description" xml:space="preserve">
-    <value>App background settings</value>
+    <value>Apply Background Settings</value>
   </data>
   <data name="BackgroundTransparencySettingsCard.Header" xml:space="preserve">
     <value>Background transparency</value>
@@ -160,16 +160,16 @@
     <value>Check for updates from GitHub</value>
   </data>
   <data name="CheckUpdateSettingsCard.Header" xml:space="preserve">
-    <value>Check for Update</value>
+    <value>Check for Updates</value>
   </data>
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>Classic</value>
   </data>
   <data name="CloudAmountDescription.Text" xml:space="preserve">
-    <value>The fraction of the sky obscured by clouds on average when observed from a particular location</value>
+    <value>Percentage of the sky covered by cloud</value>
   </data>
   <data name="CloudAmountText.Text" xml:space="preserve">
-    <value>Cloud cover</value>
+    <value>Cloud amount</value>
   </data>
   <data name="CurrentLocation.Text" xml:space="preserve">
     <value>Current location</value>
@@ -178,7 +178,7 @@
     <value>Dark</value>
   </data>
   <data name="DataProviderSettingsCard.Description" xml:space="preserve">
-    <value>Select Data Provider (requires restart app)</value>
+    <value>Select Data Provider (requires app restart)</value>
   </data>
   <data name="DataProviderSettingsCard.Header" xml:space="preserve">
     <value>Data provider</value>
@@ -199,7 +199,7 @@
     <value>For Developers</value>
   </data>
   <data name="DewPointDescription.Text" xml:space="preserve">
-    <value>The temperature to which it must be cooled to become saturated with water vapor</value>
+    <value>The temperature required to liquefy water(like dew) in the air. The higher the dew point temperature is, the greater your feeling of being hot and stuffy will be.</value>
   </data>
   <data name="DewPointText.Text" xml:space="preserve">
     <value>Dew point</value>
@@ -233,7 +233,7 @@ Split with "|", support Regex</value>
     <value>Set block word</value>
   </data>
   <data name="LatestVersion" xml:space="preserve">
-    <value>Application is the latest version</value>
+    <value>You're up-to-date!</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>Light</value>
@@ -242,7 +242,7 @@ Split with "|", support Regex</value>
     <value>Location</value>
   </data>
   <data name="MoreInfoText" xml:space="preserve">
-    <value>See details</value>
+    <value>Learn more</value>
     <comment>警告内了解详情</comment>
   </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
@@ -252,7 +252,7 @@ Split with "|", support Regex</value>
     <value>Now</value>
   </data>
   <data name="OneHourText.Text" xml:space="preserve">
-    <value>1 hr</value>
+    <value>1h</value>
   </data>
   <data name="OpenBackgroundFolderButton.Content" xml:space="preserve">
     <value>Open background folder</value>
@@ -264,7 +264,7 @@ Split with "|", support Regex</value>
     <value>Personalization</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
-    <value>The weight of the air in the atmosphere. Higher air pressure is usually associated with a bright weather, lower air pressure is related to storm weather</value>
+    <value>The gravity of the air in the atmosphere. Higher air pressure is usually associated with a bright weather, lower air pressure is related to storm weather</value>
   </data>
   <data name="PressureText.Text" xml:space="preserve">
     <value>Pressure</value>
@@ -276,7 +276,8 @@ Split with "|", support Regex</value>
     <value>GeoApi KEY</value>
   </data>
   <data name="QWeatherDomainSettingsCard.Description" xml:space="preserve">
-    <value>Please change this option to api.qweather.com if you use paid KEY for domain</value>
+    <value>The domain QWeather API uses.
+Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="QWeatherDomainSettingsCard.Header" xml:space="preserve">
     <value>Domain</value>
@@ -327,7 +328,7 @@ Split with "|", support Regex</value>
     <value>Colors</value>
   </data>
   <data name="ThemeSettingsCard.Description" xml:space="preserve">
-    <value>Set App Theme (requires restart app)</value>
+    <value>Set App Theme (Requires Restart)</value>
   </data>
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
     <value>Theme</value>
@@ -339,7 +340,7 @@ Split with "|", support Regex</value>
     <value>Tomorrow</value>
   </data>
   <data name="TowHoursText.Text" xml:space="preserve">
-    <value>2 hr</value>
+    <value>2h</value>
   </data>
   <data name="TrackText" xml:space="preserve">
     <value>Track</value>
@@ -355,10 +356,10 @@ Split with "|", support Regex</value>
     <value>Updates Available</value>
   </data>
   <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>Update check failed</value>
+    <value>Failed to check updates</value>
   </data>
   <data name="UpdateCheckFailedDescription" xml:space="preserve">
-    <value>Please try again later</value>
+    <value>Please try again later or try to turn on your network agent</value>
   </data>
   <data name="UpdateDialog.CloseButtonText" xml:space="preserve">
     <value>Cancel</value>
@@ -367,7 +368,7 @@ Split with "|", support Regex</value>
     <value>Download</value>
   </data>
   <data name="UpdateDialog.SecondaryButtonText" xml:space="preserve">
-    <value>View</value>
+    <value>View Details</value>
   </data>
   <data name="UpdateSettingsExpander.Header" xml:space="preserve">
     <value>Update</value>
@@ -385,92 +386,41 @@ Split with "|", support Regex</value>
     <value>Visibility</value>
   </data>
   <data name="WaringNotificationSettingsCard.Description" xml:space="preserve">
-    <value>Check and push warning on time</value>
+    <value>Check and push alerts on time</value>
   </data>
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
-    <value>Warnings</value>
+    <value>Alerts</value>
   </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">
-    <value>Display daily weather on tiles (Win10 only)</value>
+    <value>Display daily weather on tiles (Windows 10 only)</value>
   </data>
   <data name="WeatherTileSettingCard.Header" xml:space="preserve">
     <value>Tiles</value>
   </data>
   <data name="WeatherTodaySettingsCard.Description" xml:space="preserve">
-    <value>Push weather forecast today in the morning</value>
+    <value>Push today's weather forecast in the morning</value>
   </data>
   <data name="WeatherTodaySettingsCard.Header" xml:space="preserve">
-    <value>Weather Today</value>
+    <value>Today's Weather</value>
   </data>
   <data name="WeatherTomorrow.Description" xml:space="preserve">
-    <value>Push weather forecast at night</value>
+    <value>Push tomorrow's weather forecast at night</value>
   </data>
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>Weather Tomorrow</value>
   </data>
-  <data name="WindDirection_East" xml:space="preserve">
-    <value>East wind</value>
-  </data>
-  <data name="WindDirection_EastNorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
-  </data>
-  <data name="WindDirection_EastSouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
-  </data>
-  <data name="WindDirection_None" xml:space="preserve">
-    <value>No sustainable wind direction</value>
-  </data>
-  <data name="WindDirection_North" xml:space="preserve">
-    <value>North wind</value>
-  </data>
-  <data name="WindDirection_NorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
-  </data>
-  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
-  </data>
-  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
-  </data>
-  <data name="WindDirection_NorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
-  </data>
-  <data name="WindDirection_Rotational" xml:space="preserve">
-    <value>Rotational wind</value>
-  </data>
-  <data name="WindDirection_South" xml:space="preserve">
-    <value>South wind</value>
-  </data>
-  <data name="WindDirection_SouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
-  </data>
-  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
-  </data>
-  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
-  </data>
-  <data name="WindDirection_SouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
-  </data>
-  <data name="WindDirection_West" xml:space="preserve">
-    <value>West wind</value>
-  </data>
-  <data name="WindDirection_WestNorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
-  </data>
-  <data name="WindDirection_WestSouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
-  </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
-    <value>This section will overwrite Mica effect on Windows 11 
-to set background transparency to 100% to see effects</value>
+    <value>Override the Mica backdrop on Windows 11.
+Set the background transparency to 100% to preview.</value>
   </data>
   <data name="WindowBackdropSettingsCard.Header" xml:space="preserve">
     <value>Background Acrylic</value>
   </data>
-  <data name="WindScaleDescription_1" xml:space="preserve">
+  <data name="WindScaleDescription_0" xml:space="preserve">
     <value>Smoke rises vertically</value>
+  </data>
+  <data name="WindScaleDescription_1" xml:space="preserve">
+    <value>Direction shown by smoke drift but not by wind vanes</value>
   </data>
   <data name="WindScaleDescription_10" xml:space="preserve">
     <value>Seldom experienced inland; trees uprooted; considerable structural damage</value>

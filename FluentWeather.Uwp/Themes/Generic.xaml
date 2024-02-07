@@ -1095,7 +1095,7 @@
                             </TextBlock>
                         </StackPanel>
                         <TextBlock FontSize="16">
-                            <Run Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
+                            <Run Text="{x:Bind WindDirectionDescription}" />
                             <Run Text="{x:Bind WindScale}" /><Run FontSize="12.5" Text="级" />
                         </TextBlock>
                         <StackPanel

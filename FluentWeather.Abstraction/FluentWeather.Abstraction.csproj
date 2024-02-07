@@ -19,16 +19,16 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Strings\WeatherCodeDescription.zh-CN.Designer.cs">
+    <Compile Update="Strings\Resources.zh-CN.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>WeatherCodeDescription.zh-CN.resx</DependentUpon>
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Strings\WeatherCodeDescription.zh-CN.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>WeatherCodeDescription.zh-CN.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Strings\Resources.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

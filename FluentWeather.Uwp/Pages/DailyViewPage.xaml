@@ -165,7 +165,7 @@
                                                     <TextBlock
                                                         FontSize="18"
                                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
+                                                        Text="{x:Bind WindDirectionDescription}" />
                                                     <TextBlock FontSize="25">
                                                         <Run FontSize="25" Text="{x:Bind WindScale}" />
                                                         <Run x:Uid="WindScaleText" FontSize="16" />
@@ -174,7 +174,7 @@
                                                         <Flyout>
                                                             <StackPanel MaxWidth="256">
                                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
+                                                                    <Run Text="{x:Bind WindDirectionDescription}" />
                                                                     <Run Text="-" />
                                                                     <Run Text="{x:Bind WindScale}" />
                                                                     <Run x:Uid="WindScaleText" FontSize="14" />

@@ -18,10 +18,6 @@ public static class ConverterMethods
         var series = presenter as CategoricalStrokedSeries;
         return series?.Stroke;
     }
-    public static string GetWindDirectionDescription(WindDirection dir)
-    {
-        return ResourceLoader.GetForCurrentView().GetString("WindDirection_" + dir);
-    }
     public static string GetWindScaleDescription(string scale)
     {
         if (scale.Contains("-"))
@@ -47,3 +43,4 @@ public static class ConverterMethods
     }
 
 }
+
