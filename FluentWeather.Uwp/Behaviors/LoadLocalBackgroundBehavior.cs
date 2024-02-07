@@ -49,14 +49,12 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
         {
             folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
         }
-        var items = await folder.GetItemsAsync();
-        if (items.Count is 0)
-        {
-            folder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");//无内容直接使用Assets
-            folder = await folder.GetFolderAsync("Backgrounds");//无内容直接使用Assets
-        } 
+        var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
+        assetsFolder = await assetsFolder.GetFolderAsync("Backgrounds");
+
         var image = await GetImage(folder, WeatherType.ToString());
         image ??= await GetImage(folder, GetImageName(WeatherType));
+        image ??= await GetImage(assetsFolder, GetImageName(WeatherType));
         AssociatedObject.Source = image;
     }
 

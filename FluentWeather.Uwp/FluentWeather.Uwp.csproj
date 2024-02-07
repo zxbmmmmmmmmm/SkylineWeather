@@ -131,6 +131,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\AnimateBackgroundAction.cs" />
     <Compile Include="Behaviors\ButtonCloseContentDialogBehavior.cs" />
     <Compile Include="Behaviors\ButtonContentSnapBehavior.cs" />
     <Compile Include="Behaviors\ButtonOpenContentDialogBehavior.cs" />
@@ -140,8 +141,9 @@
     <Compile Include="Behaviors\ButtonOpenContentPopupBehavior.cs" />
     <Compile Include="Behaviors\ListViewOpenFlyoutBehavior.cs" />
     <Compile Include="Behaviors\ListViewScrollBehavior.cs" />
-    <Compile Include="Behaviors\ListViewScrollButtonBehavior.cs" />
+    <Compile Include="Behaviors\ButtonListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\LoadLocalBackgroundBehavior.cs" />
+    <Compile Include="Behaviors\SetParallaxViewSourceBehavior.cs" />
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>
@@ -212,8 +214,10 @@
     <Compile Include="Helpers\Update\UpdateInfo.cs" />
     <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\ConverterMethods.cs" />
+    <Compile Include="Helpers\ValueConverters\DataConverters.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
+    <Compile Include="Helpers\XamlRenderService.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
       <DependentUpon>CitiesPage.xaml</DependentUpon>
     </Compile>

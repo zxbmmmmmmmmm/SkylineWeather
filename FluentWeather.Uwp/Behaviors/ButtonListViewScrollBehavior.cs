@@ -7,7 +7,7 @@ using Microsoft.Toolkit.Uwp.UI.Converters;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ListViewScrollButtonBehavior: Behavior<Button>
+public class ButtonListViewScrollBehavior: Behavior<Button>
 {
 
 
@@ -17,7 +17,7 @@ public class ListViewScrollButtonBehavior: Behavior<Button>
         set => SetValue(ListViewProperty, value);
     }
     public static readonly DependencyProperty ListViewProperty =
-        DependencyProperty.Register(nameof(ListView), typeof(ListViewBase), typeof(ListViewScrollButtonBehavior), new PropertyMetadata(null));
+        DependencyProperty.Register(nameof(ListView), typeof(ListViewBase), typeof(ButtonListViewScrollBehavior), new PropertyMetadata(null));
 
 
     public bool IsRight
@@ -27,7 +27,7 @@ public class ListViewScrollButtonBehavior: Behavior<Button>
     }
 
     public static readonly DependencyProperty IsRightProperty =
-        DependencyProperty.Register(nameof(IsRight), typeof(bool), typeof(ListViewScrollButtonBehavior), new PropertyMetadata(true));
+        DependencyProperty.Register(nameof(IsRight), typeof(bool), typeof(ButtonListViewScrollBehavior), new PropertyMetadata(true));
     private ScrollViewer _listScrollViewer;
     protected override void OnAttached()
     {

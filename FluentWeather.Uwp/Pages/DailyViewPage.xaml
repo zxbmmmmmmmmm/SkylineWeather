@@ -6,10 +6,10 @@
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     mc:Ignorable="d">
@@ -38,7 +38,7 @@
                 Margin="32,80,32,0"
                 x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
-                ItemsSource="{x:Bind DailyForecasts}"
+                ItemsSource="{x:Bind DailyForecasts,Mode=OneWay}"
                 SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
@@ -72,7 +72,7 @@
                                         Height="256"
                                         Margin="14,64,22,0"
                                         HourlyForecasts="{x:Bind HourlyForecasts}"
-                                        IsHorizontalAxisVisible="False"
+                                        MajorTickInterval="6"
                                         Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
                                     <Grid Grid.Row="1" Margin="0,16,0,0">
                                         <controls1:AdaptiveGridView
@@ -103,7 +103,7 @@
                                             CornerRadius="50">
                                             <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                                             <i:Interaction.Behaviors>
-                                                <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
+                                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
                                             </i:Interaction.Behaviors>
                                             <Button.Resources>
                                                 <ResourceDictionary>
@@ -122,7 +122,7 @@
                                             CornerRadius="50">
                                             <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                                             <i:Interaction.Behaviors>
-                                                <behaviors:ListViewScrollButtonBehavior ListView="{Binding ElementName=HourlyGridView}" />
+                                                <behaviors:ButtonListViewScrollBehavior ListView="{Binding ElementName=HourlyGridView}" />
                                             </i:Interaction.Behaviors>
                                             <Button.Resources>
                                                 <ResourceDictionary>
@@ -165,7 +165,7 @@
                                                     <TextBlock
                                                         FontSize="18"
                                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="{x:Bind  WindDirection}" />
+                                                        Text="{x:Bind converters:ConverterMethods.GetWindDirectionDescription(WindDirection)}" />
                                                     <TextBlock FontSize="25">
                                                         <Run FontSize="25" Text="{x:Bind WindScale}" />
                                                         <Run x:Uid="WindScaleText" FontSize="16" />
@@ -321,7 +321,7 @@
                                                 <AdaptiveTrigger MinWindowWidth="800" />
                                             </VisualState.StateTriggers>
                                             <VisualState.Setters>
-                                                <Setter Target="HourlyTemperatureChart.IsHorizontalAxisVisible" Value="true" />
+                                                <Setter Target="HourlyTemperatureChart.MajorTickInterval" Value="2" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>

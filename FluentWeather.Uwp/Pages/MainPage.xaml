@@ -114,23 +114,6 @@
 
         </local:DailyViewPage>
         <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
-            <animations:Implicit.HideAnimations>
-                <animations:ImplicitAnimationSet>
-                    <animations:OpacityAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="1"
-                        To="0"
-                        Duration="0:0:0.4" />
-                    <animations:ScaleAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="1"
-                        To="1.2"
-                        Duration="0:0:0.4" />
-                </animations:ImplicitAnimationSet>
-            </animations:Implicit.HideAnimations>
-
             <animations:Implicit.ShowAnimations>
                 <animations:ImplicitAnimationSet>
                     <animations:OpacityAnimation
@@ -158,6 +141,7 @@
                 <core:EventTriggerBehavior EventName="RefreshRequested">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
                 </core:EventTriggerBehavior>
+                <behaviors:SetParallaxViewSourceBehavior VerticalShift="64" />
             </i:Interaction.Behaviors>
             <ScrollViewer
                 x:Name="MainScrollViewer"
@@ -390,7 +374,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <toolkit:AdaptiveGridView
-                            x:Name="DailyGridView"
+                            x:Name="DailyItemsView"
                             Margin="0,0,0,0"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
@@ -404,11 +388,12 @@
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
                                 <core:EventTriggerBehavior EventName="ItemClick">
+                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}" />
+
                                     <core:ChangePropertyAction
                                         PropertyName="Visibility"
                                         TargetObject="{x:Bind MainContentContainer}"
                                         Value="Collapsed" />
-                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}" />
                                 </core:EventTriggerBehavior>
                             </i:Interaction.Behaviors>
                         </toolkit:AdaptiveGridView>
@@ -425,7 +410,7 @@
                             CornerRadius="50">
                             <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                             <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind DailyGridView}" />
+                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{x:Bind DailyItemsView}" />
                             </i:Interaction.Behaviors>
                             <Button.Resources>
                                 <ResourceDictionary>
@@ -446,7 +431,7 @@
                             CornerRadius="50">
                             <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                             <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind DailyGridView}" />
+                                <behaviors:ButtonListViewScrollBehavior ListView="{x:Bind DailyItemsView}" />
                             </i:Interaction.Behaviors>
                             <Button.Resources>
                                 <ResourceDictionary>
@@ -495,7 +480,7 @@
                             CornerRadius="50">
                             <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
                             <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollButtonBehavior IsRight="False" ListView="{x:Bind HourlyGridView}" />
+                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{x:Bind HourlyGridView}" />
                             </i:Interaction.Behaviors>
                             <Button.Resources>
                                 <ResourceDictionary>
@@ -515,7 +500,7 @@
                             CornerRadius="50">
                             <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
                             <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollButtonBehavior ListView="{x:Bind HourlyGridView}" />
+                                <behaviors:ButtonListViewScrollBehavior ListView="{x:Bind HourlyGridView}" />
                             </i:Interaction.Behaviors>
                             <Button.Resources>
                                 <ResourceDictionary>
@@ -753,10 +738,7 @@
                         </i:Interaction.Behaviors>
                     </controls:AdaptiveGridView>
                 </Grid>
-
-
             </ScrollViewer>
-
         </RefreshContainer>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -766,8 +748,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="TemperatureChart.Visibility" Value="Visible" />
-                        <Setter Target="DailyGridView.Margin" Value="-32,0" />
-                        <Setter Target="DailyGridView.ItemHeight" Value="150" />
+                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
+                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -777,8 +759,8 @@
                     <VisualState.Setters>
                         <Setter Target="WeatherNowGrid.Margin" Value="0,40,0,12" />
                         <Setter Target="TemperatureChart.Visibility" Value="Visible" />
-                        <Setter Target="DailyGridView.Margin" Value="-32,0" />
-                        <Setter Target="DailyGridView.ItemHeight" Value="150" />
+                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
+                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

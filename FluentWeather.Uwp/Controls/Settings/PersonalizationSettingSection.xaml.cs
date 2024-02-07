@@ -109,5 +109,28 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             RootPage.Instance.EnterAnimation.Start();
         }
+
+        private async void SelectPageFile_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.List,
+            };
+            picker.FileTypeFilter.Add(".xaml");
+            var file = await picker.PickSingleFileAsync(); 
+            if (file is null) return;
+            if ((await ApplicationData.Current.LocalFolder.TryGetItemAsync("CustomPages")) is null)
+            {
+                await ApplicationData.Current.LocalFolder.CreateFolderAsync("CustomPages");
+            }
+            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CustomPages");
+            if (await folder.TryGetItemAsync("MainPage.xaml") is StorageFile file1)
+            {
+                await file1.DeleteAsync();
+            }
+            await file.CopyAsync(folder,"MainPage.xaml");
+            RestartInfoBar.IsOpen = true;
+            Common.Settings.EnableCustomPage = true;
+        }
     }
 }

@@ -9,13 +9,23 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <chart:ChartPalette x:Key="PrecipitationChartPalette">
 
+            <chart:ChartPalette.FillEntries>
+                <chart:PaletteEntryCollection>
+                    <SolidColorBrush Opacity="0.8" Color="{ThemeResource SystemBaseMediumColor}"/>
+                </chart:PaletteEntryCollection>
+
+            </chart:ChartPalette.FillEntries>
+        </chart:ChartPalette>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <chart:RadCartesianChart PaletteName="DefaultLight">
+        <chart:RadCartesianChart PaletteName="None" Palette="{StaticResource PrecipitationChartPalette}">
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"
@@ -52,7 +62,7 @@
             <chart:RadCartesianChart.Grid>
                 <chart:CartesianChartGrid MajorLinesVisibility="None" Visibility="Collapsed" />
             </chart:RadCartesianChart.Grid>
-            <chart:BarSeries ItemsSource="{x:Bind Precipitations, Mode=OneWay}">
+            <chart:BarSeries ItemsSource="{x:Bind Precipitations, Mode=OneWay}" Background="SlateBlue">
                 <chart:BarSeries.ValueBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Precipitation" />
                 </chart:BarSeries.ValueBinding>

@@ -19,7 +19,7 @@
             <Ellipse
                 Width="8"
                 Height="8"
-                Fill="{x:Bind valueConverters:ConverterMethods.DataPointToBrush(Presenter),Mode=OneWay}"
+                Fill="{x:Bind valueConverters:ConverterMethods.DataPointToBrush(Presenter), Mode=OneWay}"
                 Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
                 StrokeThickness="2" />
         </DataTemplate>

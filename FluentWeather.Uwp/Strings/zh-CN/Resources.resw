@@ -333,9 +333,6 @@
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
     <value>主题</value>
   </data>
-  <data name="TimeAxis.LabelFormat" xml:space="preserve">
-    <value>{}{0,0:H时}</value>
-  </data>
   <data name="Today" xml:space="preserve">
     <value>今天</value>
   </data>

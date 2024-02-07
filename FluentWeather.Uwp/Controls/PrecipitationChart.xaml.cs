@@ -25,10 +25,6 @@ namespace FluentWeather.Uwp.Controls
             this.InitializeComponent();
         }
 
-
-
-
-
         public List<PrecipitationItemBase> Precipitations
         {
             get => (List<PrecipitationItemBase>)GetValue(PrecipitationsProperty);
@@ -36,10 +32,5 @@ namespace FluentWeather.Uwp.Controls
         }
         public static readonly DependencyProperty PrecipitationsProperty =
             DependencyProperty.Register(nameof(Precipitations), typeof(List<PrecipitationItemBase>), typeof(PrecipitationChart), new PropertyMetadata(default));
-
-
-
-
-
     }
 }

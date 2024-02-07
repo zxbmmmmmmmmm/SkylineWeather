@@ -42,10 +42,21 @@ namespace FluentWeather.Uwp.Controls
             get => ((bool)GetValue(IsHorizontalAxisVisibleProperty));
             set => SetValue(IsHorizontalAxisVisibleProperty, value);
         }
-
-
         public static readonly DependencyProperty IsHorizontalAxisVisibleProperty =
             DependencyProperty.Register(nameof(IsHorizontalAxisVisible), typeof(bool), typeof(HourlyTemperatureChart), new PropertyMetadata(true, OnPropertyChanged));
+
+
+
+        public int MajorTickInterval
+        {
+            get => (int)GetValue(MajorTickIntervalProperty);
+            set => SetValue(MajorTickIntervalProperty, value);
+        }
+
+        public static readonly DependencyProperty MajorTickIntervalProperty =
+            DependencyProperty.Register(nameof(MajorTickInterval), typeof(int), typeof(HourlyTemperatureChart), new PropertyMetadata(0));
+
+
 
         private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
