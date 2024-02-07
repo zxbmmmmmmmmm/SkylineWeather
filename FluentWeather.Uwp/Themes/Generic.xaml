@@ -1103,11 +1103,11 @@
                             Orientation="Horizontal"
                             Spacing="4">
                             <TextBlock FontSize="16">
-                                <Run Text="湿度:" />
+                                <Run x:Uid="HumidityText"/><Run Text=":" />
                                 <Run Text="{x:Bind Humidity}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                             <TextBlock FontSize="16">
-                                <Run Text="气压:" />
+                                <Run x:Uid="PressureText"/><Run Text=":" />
                                 <Run Text="{x:Bind Pressure}" /><Run FontSize="12.5" Text="kPa" />
                             </TextBlock>
                         </StackPanel>

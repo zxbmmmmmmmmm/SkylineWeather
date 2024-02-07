@@ -29,6 +29,8 @@
             <valueConverters:AutoSuggestSuggestionParameterConverter x:Key="AutoSuggestSuggestionParameterConverter" />
             <valueConverters:DateConverter x:Key="DateConverter" />
             <valueConverters:ShortDateConverter x:Key="ShortDateConverter" />
+            <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter" />
+            <valueConverters:WeatherToIconConverter x:Key="WeatherToIconConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
