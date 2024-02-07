@@ -1,5 +1,4 @@
 ﻿using FluentWeather.Abstraction.Models;
-using FluentWeather.OpenMeteoProvider.Helpers;
 using FluentWeather.OpenMeteoProvider.Models;
 using System;
 using OpenMeteoApi.Models;
@@ -13,7 +12,7 @@ public static class DailyForecastMapper
     {
         return new OpenMeteoDailyForecast
         {
-            Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
+            //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
             WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10mDominant!.Value),
             WindSpeed = (int)item.WindSpeed10mMax!,

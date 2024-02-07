@@ -1,7 +1,17 @@
-﻿namespace FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Helpers;
+
+namespace FluentWeather.Abstraction.Models;
 
 public class WeatherBase
 {
     public virtual WeatherCode WeatherType { get; set; }
-    public string? Description { get; set; }
+
+    private string? _description;
+
+    public string Description
+    {
+        get => _description??WeatherCodeHelper.GetWeatherDescription((int)WeatherType);
+        set => _description = value;
+    }
 }
+

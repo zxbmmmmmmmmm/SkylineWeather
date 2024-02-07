@@ -1,5 +1,4 @@
-﻿using FluentWeather.OpenMeteoProvider.Helpers;
-using FluentWeather.OpenMeteoProvider.Models;
+﻿using FluentWeather.OpenMeteoProvider.Models;
 using System;
 using FluentWeather.Abstraction.Helpers;
 using OpenMeteoApi.Models;
@@ -12,7 +11,7 @@ public static class CurrentWeatherMapper
     {
         return new OpenMeteoWeatherNow
         {
-            Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
+            //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
             WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
             WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!).ToString(),

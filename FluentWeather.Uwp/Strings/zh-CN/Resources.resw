@@ -391,6 +391,93 @@
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
     <value>预警</value>
   </data>
+  <data name="WeatherCode_0" xml:space="preserve">
+    <value>晴</value>
+  </data>
+  <data name="WeatherCode_1" xml:space="preserve">
+    <value>大部晴朗</value>
+  </data>
+  <data name="WeatherCode_2" xml:space="preserve">
+    <value>局部多云</value>
+  </data>
+  <data name="WeatherCode_3" xml:space="preserve">
+    <value>阴</value>
+  </data>
+  <data name="WeatherCode_45" xml:space="preserve">
+    <value>雾</value>
+  </data>
+  <data name="WeatherCode_48" xml:space="preserve">
+    <value>雾霾</value>
+  </data>
+  <data name="WeatherCode_51" xml:space="preserve">
+    <value>小雨</value>
+  </data>
+  <data name="WeatherCode_53" xml:space="preserve">
+    <value>中雨</value>
+  </data>
+  <data name="WeatherCode_55" xml:space="preserve">
+    <value>大雨</value>
+  </data>
+  <data name="WeatherCode_56" xml:space="preserve">
+    <value>小冻雨</value>
+  </data>
+  <data name="WeatherCode_57" xml:space="preserve">
+    <value>大冻雨</value>
+  </data>
+  <data name="WeatherCode_61" xml:space="preserve">
+    <value>小雨</value>
+  </data>
+  <data name="WeatherCode_63" xml:space="preserve">
+    <value>中雨</value>
+  </data>
+  <data name="WeatherCode_65" xml:space="preserve">
+    <value>大雨</value>
+  </data>
+  <data name="WeatherCode_66" xml:space="preserve">
+    <value>小冻雨</value>
+  </data>
+  <data name="WeatherCode_67" xml:space="preserve">
+    <value>大冻雨</value>
+  </data>
+  <data name="WeatherCode_71" xml:space="preserve">
+    <value>小雪</value>
+  </data>
+  <data name="WeatherCode_73" xml:space="preserve">
+    <value>中雪</value>
+  </data>
+  <data name="WeatherCode_75" xml:space="preserve">
+    <value>大雪</value>
+  </data>
+  <data name="WeatherCode_77" xml:space="preserve">
+    <value>雪粒</value>
+  </data>
+  <data name="WeatherCode_80" xml:space="preserve">
+    <value>小阵雨</value>
+  </data>
+  <data name="WeatherCode_81" xml:space="preserve">
+    <value>中阵雨</value>
+  </data>
+  <data name="WeatherCode_82" xml:space="preserve">
+    <value>大阵雨</value>
+  </data>
+  <data name="WeatherCode_85" xml:space="preserve">
+    <value>小阵雪</value>
+  </data>
+  <data name="WeatherCode_86" xml:space="preserve">
+    <value>大阵雪</value>
+  </data>
+  <data name="WeatherCode_95" xml:space="preserve">
+    <value>雷暴</value>
+  </data>
+  <data name="WeatherCode_96" xml:space="preserve">
+    <value>雷雨伴小冰雹</value>
+  </data>
+  <data name="WeatherCode_99" xml:space="preserve">
+    <value>雷暴伴大冰雹</value>
+  </data>
+  <data name="WeatherCode_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">
     <value>在磁贴上显示每日天气(仅Win10)</value>
   </data>

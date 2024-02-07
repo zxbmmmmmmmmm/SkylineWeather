@@ -1,5 +1,4 @@
 ﻿using FluentWeather.Abstraction.Helpers;
-using FluentWeather.OpenMeteoProvider.Helpers;
 using FluentWeather.OpenMeteoProvider.Models;
 using OpenMeteoApi.Models;
 using System;
@@ -14,7 +13,7 @@ public static class HourlyForecastMapper
         {
             WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
-            Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
+            //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
             WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!.Value).ToString(),
             WindSpeed = (int)item.WindSpeed10m!.Value,
             Humidity = item.RelativeHumidity2m,

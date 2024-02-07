@@ -18,5 +18,8 @@
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj" />
     <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
 
 </Project>
