@@ -27,6 +27,7 @@ using FluentWeather.Uwp.Helpers;
 using Windows.Storage;
 using CommunityToolkit.WinUI;
 using Windows.System.RemoteSystems;
+using FluentWeather.Uwp.Shared;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -83,15 +84,23 @@ public sealed partial class MainPage : Page
 
     private async void LoadElements()
     {
-        var content = await GetCustomContent();
-        if (content is null)
+        if (Common.Settings.EnableCustomPage)
         {
-            this.InitializeComponent();
+            var content = await GetCustomContent();
+            if (content is null)
+            {
+                this.InitializeComponent();
+            }
+            else
+            {
+                this.Content = content;
+            }
         }
         else
         {
-            this.Content = content;
+            this.InitializeComponent();
         }
+
         ((FrameworkElement)this.Content).Loaded += OnLoaded;
     }
 

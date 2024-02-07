@@ -261,6 +261,17 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    public bool EnableCustomPage
+    {
+        get => GetSettings(nameof(EnableCustomPage), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(EnableCustomPage)] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     public async void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {

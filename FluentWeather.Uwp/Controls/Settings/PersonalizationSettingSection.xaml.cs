@@ -130,6 +130,7 @@ namespace FluentWeather.Uwp.Controls.Settings
             }
             await file.CopyAsync(folder,"MainPage.xaml");
             RestartInfoBar.IsOpen = true;
+            Common.Settings.EnableCustomPage = true;
         }
     }
 }
