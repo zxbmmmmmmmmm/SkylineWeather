@@ -70,7 +70,7 @@
                     FontFamily="{StaticResource SymbolThemeFontFamily}"
                     FontSize="11"
                     Text="&#xE81B;" />
-                <Run x:Uid="CurrentLocation" />
+                <Run x:Uid="CurrentLocationText" />
             </TextBlock>
 
         </Border>

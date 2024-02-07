@@ -178,10 +178,3 @@ sealed partial class App : Application
         deferral.Complete();
     }
 }
-
-public enum AppSettings
-{
-    Cities,
-    Longitude,
-    Latitude
-}

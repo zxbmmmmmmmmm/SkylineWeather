@@ -174,7 +174,10 @@
   <data name="CloudAmountText.Text" xml:space="preserve">
     <value>云量</value>
   </data>
-  <data name="CurrentLocation.Text" xml:space="preserve">
+  <data name="CurrentLocation" xml:space="preserve">
+    <value>当前位置</value>
+  </data>
+  <data name="CurrentLocationText.Text" xml:space="preserve">
     <value>当前位置</value>
   </data>
   <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
@@ -230,6 +233,9 @@
   </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>最高温</value>
+  </data>
+  <data name="HourlyForecast.Text" xml:space="preserve">
+    <value>24小时预报</value>
   </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
     <value>相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="RestartInfoBar.Title" xml:space="preserve">
     <value>重启以应用主题</value>
+  </data>
+  <data name="SavedLocations" xml:space="preserve">
+    <value>保存的位置</value>
   </data>
   <data name="SearchAutoSuggestBox.PlaceholderText" xml:space="preserve">
     <value>添加城市...</value>
@@ -429,6 +438,9 @@
   </data>
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>明日天气</value>
+  </data>
+  <data name="WeeklyForecast.Text" xml:space="preserve">
+    <value>7日预报</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Win11下将覆盖Mica

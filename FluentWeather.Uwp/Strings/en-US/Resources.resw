@@ -126,6 +126,9 @@
   <data name="AirConditionUnit.Text" xml:space="preserve">
     <value>Unit:μg/m³</value>
   </data>
+  <data name="AirQuality" xml:space="preserve">
+    <value>Air quality</value>
+  </data>
   <data name="ApplyButton.Content" xml:space="preserve">
     <value>Apply</value>
   </data>
@@ -171,8 +174,17 @@
   <data name="CloudAmountText.Text" xml:space="preserve">
     <value>Cloud amount</value>
   </data>
-  <data name="CurrentLocation.Text" xml:space="preserve">
+  <data name="CurrentLocation" xml:space="preserve">
     <value>Current location</value>
+  </data>
+  <data name="CurrentLocationText.Text" xml:space="preserve">
+    <value>Current location</value>
+  </data>
+  <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
+    <value>Customize your main page</value>
+  </data>
+  <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
+    <value>Custom main page</value>
   </data>
   <data name="DarkSection.Content" xml:space="preserve">
     <value>Dark</value>
@@ -219,6 +231,12 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>Follow system</value>
   </data>
+  <data name="HighestTemperature" xml:space="preserve">
+    <value>Highest</value>
+  </data>
+  <data name="HourlyForecast.Text" xml:space="preserve">
+    <value>24-Hour forecast</value>
+  </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
     <value>The concentration of water vapor present in the air</value>
   </data>
@@ -241,6 +259,9 @@ Split with "|", support Regex</value>
   <data name="LocationSettingsExpander.Header" xml:space="preserve">
     <value>Location</value>
   </data>
+  <data name="LowestTemperature" xml:space="preserve">
+    <value>Lowest</value>
+  </data>
   <data name="MoreInfoText" xml:space="preserve">
     <value>Learn more</value>
     <comment>警告内了解详情</comment>
@@ -260,7 +281,7 @@ Split with "|", support Regex</value>
   <data name="OpenMeteoSection.Content" xml:space="preserve">
     <value>Open-Meteo</value>
   </data>
-  <data name="PersonalizationSettingExpander.Header" xml:space="preserve">
+  <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>Personalization</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
@@ -303,17 +324,26 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="RestartInfoBar.Title" xml:space="preserve">
     <value>Restart to apply theme</value>
   </data>
+  <data name="SavedLocations" xml:space="preserve">
+    <value>Saved</value>
+  </data>
   <data name="SearchAutoSuggestBox.PlaceholderText" xml:space="preserve">
     <value>Search a place...</value>
   </data>
   <data name="SelectButton.Content" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="SelectPageFileButton.Content" xml:space="preserve">
+    <value>Select File</value>
+  </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="SpeechMenuItem.Text" xml:space="preserve">
     <value>Broadcast weather</value>
+  </data>
+  <data name="SpeechWeather" xml:space="preserve">
+    <value>Weather Report</value>
   </data>
   <data name="Sunrise.Text" xml:space="preserve">
     <value>Sunrise</value>
@@ -408,6 +438,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>Weather Tomorrow</value>
+  </data>
+  <data name="WeeklyForecast.Text" xml:space="preserve">
+    <value>7-Day forecast</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Override the Mica backdrop on Windows 11.
