@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Telerik.Geospatial;
+using Windows.ApplicationModel.Resources;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -183,11 +184,12 @@ public sealed partial class MainPageViewModel : ObservableObject
     [RelayCommand]
     public void SpeechWeather()
     {
-        var text = $"{CurrentLocation.Name},{DailyForecasts[0].Description},最高温:{((ITemperatureRange)DailyForecasts[0]).MaxTemperature}°,最低温:{((ITemperatureRange)DailyForecasts[0]).MinTemperature}°";
-        text += $",空气质量:{AirCondition.AqiCategory}";
+        var loader = ResourceLoader.GetForCurrentView();
+        var text = $"{CurrentLocation.Name},{DailyForecasts[0].Description},{loader.GetString("HighestTemperature")}:{DailyForecasts[0].MaxTemperature}°,{loader.GetString("LowestTemperature")}:{DailyForecasts[0].MinTemperature}°";
+        text += $",{loader.GetString("AirQuality")}:{AirCondition.AqiCategory}";
         if(!TTSHelper.IsPlaying)
         {
-            InfoBarHelper.Info("天气播报", text, 9000 , false);
+            InfoBarHelper.Info(loader.GetString("SpeechWeather"), text, 9000 , false);
         }
         TTSHelper.Speech(text);
     }

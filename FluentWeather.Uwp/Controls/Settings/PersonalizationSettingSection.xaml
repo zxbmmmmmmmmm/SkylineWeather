@@ -18,7 +18,7 @@
     d:DesignWidth="400"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
-    <controls:SettingsExpander x:Uid="PersonalizationSettingExpander" IsExpanded="True">
+    <controls:SettingsExpander x:Uid="PersonalizationSettingsExpander" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE771;" />
         </controls:SettingsExpander.HeaderIcon>
@@ -41,9 +41,9 @@
             </muxc:InfoBar>
         </controls:SettingsExpander.ItemsHeader>
         <controls:SettingsExpander.Items>
-            <controls:SettingsCard Padding="12" Header="自定义主页" Description="自定义你的主页(试验功能)" HeaderIcon="Home">
+            <controls:SettingsCard x:Uid="CustomPagesSettingsCard" Padding="12" HeaderIcon="Home">
                 <StackPanel Orientation="Horizontal" Spacing="12">
-                    <Button x:Name="SelectPageFile" Click="SelectPageFile_Click" Content="选择文件"/>
+                    <Button x:Name="SelectPageFile" x:Uid="SelectPageFileButton" Click="SelectPageFile_Click"/>
                     <ToggleSwitch IsOn="{x:Bind app:Common.Settings.EnableCustomPage,Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}"/>
                 </StackPanel>
             </controls:SettingsCard>
