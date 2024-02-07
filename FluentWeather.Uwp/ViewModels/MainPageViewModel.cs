@@ -142,8 +142,7 @@ public sealed partial class MainPageViewModel : ObservableObject
         {
             if (CurrentLocation.UtcOffset is not null)
             {
-                
-                
+                hourly.Time += (TimeSpan)CurrentLocation.UtcOffset;
             }
             var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
             if(daily is null) continue;
