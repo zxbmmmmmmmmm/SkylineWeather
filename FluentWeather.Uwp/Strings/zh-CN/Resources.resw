@@ -219,6 +219,12 @@
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>更改</value>
   </data>
+  <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="ErrorDialog.Title" xml:space="preserve">
+    <value>错误</value>
+  </data>
   <data name="FeelsLike.Text" xml:space="preserve">
     <value>体感</value>
   </data>

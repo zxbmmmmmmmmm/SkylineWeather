@@ -28,6 +28,7 @@ using Windows.Storage;
 using CommunityToolkit.WinUI;
 using Windows.System.RemoteSystems;
 using FluentWeather.Uwp.Shared;
+using FluentWeather.Uwp.Controls.Dialogs;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -142,7 +143,7 @@ public sealed partial class MainPage : Page
         }
         catch
         {
-            folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
+            folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CustomPages");
         }
         try
         {
@@ -152,6 +153,9 @@ public sealed partial class MainPage : Page
         }
         catch
         {
+            var dialog = new ErrorDialog();
+            dialog.Exceptions = _xamlRenderer.Errors.Cast<Exception>().ToList();
+            dialog.ShowAsync();
             return null;
         }
     }
