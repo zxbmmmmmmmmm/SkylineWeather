@@ -11,6 +11,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Telerik.Geospatial;
@@ -58,7 +59,7 @@ public sealed partial class MainPageViewModel : ObservableObject
 
     [ObservableProperty]
     private AirConditionBase _airCondition;
-    public double? TotalPrecipitation => Precipitation.Precipitations?.Sum(p => p.Precipitation);
+    public double? TotalPrecipitation => Precipitation?.Precipitations?.Sum(p => p.Precipitation);
     public bool HasPrecipitation => TotalPrecipitation > 0;
     public static MainPageViewModel Instance{ get; private set; }
     public MainPageViewModel()
@@ -83,7 +84,19 @@ public sealed partial class MainPageViewModel : ObservableObject
     public async Task GetHourlyForecast(double lon,double lat)
     {
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
-        HourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
+        var hourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
+        foreach ( var forecast in hourlyForecasts )
+        {
+            if (CurrentLocation.UtcOffset is not null)
+            {
+                if(forecast.Time.Kind is not DateTimeKind.Unspecified)
+                {
+                    forecast.Time = forecast.Time.ToUniversalTime();
+                }
+                forecast.Time += (TimeSpan)CurrentLocation.UtcOffset;
+            }
+        }
+        HourlyForecasts = hourlyForecasts;
     }
     public async Task GetWeatherNow(double lon, double lat)
     {
@@ -140,10 +153,6 @@ public sealed partial class MainPageViewModel : ObservableObject
         }
         foreach (var hourly in HourlyForecasts)
         {
-            if (CurrentLocation.UtcOffset is not null)
-            {
-                hourly.Time += (TimeSpan)CurrentLocation.UtcOffset;
-            }
             var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
             if(daily is null) continue;
             daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
