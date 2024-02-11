@@ -7,9 +7,9 @@ namespace FluentWeather.QWeatherProvider.Mappers;
 
 public static class WeatherWarningMapper
 {
-    public static QWeatherWarning MapToQWeatherWarning(this WeatherWarningResponse.WeatherWarningItem item)
+    public static WeatherWarningBase MapToWeatherWarningBase(this WeatherWarningResponse.WeatherWarningItem item)
     {
-        return new QWeatherWarning
+        return new WeatherWarningBase
         {
             Id = item.Id,
             Description = item.Text,

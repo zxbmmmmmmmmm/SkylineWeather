@@ -10,9 +10,9 @@ using static FluentWeather.QWeatherApi.ApiContracts.TyphoonTrackItem;
 namespace FluentWeather.QWeatherProvider.Mappers;
 public static class TyphoonMapper
 {
-    public static QTyphoon MapToQTyphoon(this TyphoonTrackResponse item,string name)
+    public static TyphoonBase MapToTyphoonBase(this TyphoonTrackResponse item,string name)
     {
-        return new QTyphoon
+        return new TyphoonBase
         {
             Name = name,
             IsActive = item.IsActive is "1",

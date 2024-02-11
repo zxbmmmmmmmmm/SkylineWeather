@@ -1,6 +1,4 @@
 ﻿using FluentWeather.Abstraction.Models;
-using FluentWeather.QGeoProvider;
-using FluentWeather.QGeoProvider.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

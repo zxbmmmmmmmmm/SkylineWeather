@@ -47,7 +47,7 @@ public static class DataProviderHelper
         {
             "qweather" => typeof(QWeatherProvider.QWeatherProvider),
             "open-meteo" => typeof(OpenMeteoProvider.OpenMeteoProvider),
-            "qgeoapi" => typeof(QGeoProvider.QGeoProvider),
+            "qgeoapi" => typeof(QWeatherProvider.QWeatherProvider),
             _ => typeof(QWeatherProvider.QWeatherProvider)
         };
     }

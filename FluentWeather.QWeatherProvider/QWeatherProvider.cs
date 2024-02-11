@@ -93,7 +93,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<List<WeatherWarningBase>> GetWeatherWarnings(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherWarningApi, new QWeatherRequest(lon, lat));
-        var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToQWeatherWarning());
+        var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToWeatherWarningBase());
         return res;
     }
     public async Task<List<IndicesBase>> GetIndices(double lon, double lat)
@@ -112,7 +112,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.PrecipitationApi, new QWeatherRequest(lon, lat));
-        var res = result.MapToQweatherPrecipitation();
+        var res = result.MapToPrecipitationBase();
         return res;
     }
 
@@ -139,7 +139,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<TyphoonBase> GetTyphoon (string id,string name)
     {
         var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
-        var qtyp = typ.MapToQTyphoon(name);
+        var qtyp = typ.MapToTyphoonBase(name);
         var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
