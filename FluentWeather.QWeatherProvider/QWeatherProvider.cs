@@ -1,9 +1,11 @@
 ﻿using FluentWeather.Abstraction;
+using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.QGeoApi.ApiContracts;
 using FluentWeather.QWeatherApi;
 using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherApi.Bases;
@@ -27,6 +29,7 @@ public sealed class QWeatherProvider : ProviderBase,
     IPrecipitationProvider,
     IAirConditionProvider,
     ITyphoonProvider,
+    IGeolocationProvider,
     ISetting
 {
     public override string Name => "和风天气";
@@ -35,7 +38,8 @@ public sealed class QWeatherProvider : ProviderBase,
     public Enum Settings => new QWeatherSettings();
 
     public ApiHandlerOption Option { get; set; } = new();
-    
+
+
     public static QWeatherProvider Instance = null;
     public QWeatherProvider()
     {
@@ -140,6 +144,17 @@ public sealed class QWeatherProvider : ProviderBase,
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
         return qtyp;
+    }
+
+    public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
+    {
+        var result = await RequestAsync(new GeolocationApi<QGeolocationResponse>(), new QGeolocationRequestByName { Name = name });
+        return result.Locations?.ConvertAll(p => p.MapToGeolocationBase());
+    }
+    public async Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon)
+    {
+        var result = await RequestAsync(new GeolocationApi<QGeolocationResponse>(), new QGeolocationRequestByLocation { Lat = lat, Lon = lon });
+        return result.Locations.ConvertAll(p => p.MapToGeolocationBase());
     }
 }
 public enum QWeatherSettings
