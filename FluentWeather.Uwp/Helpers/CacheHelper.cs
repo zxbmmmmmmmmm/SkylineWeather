@@ -28,7 +28,7 @@ public sealed class CacheHelper
             var text = await FileIO.ReadTextAsync(item);
             var data = JsonSerializer.Deserialize<List<WeatherCacheBase>>(text);
             data.RemoveAll(p => DateTime.Now - p.UpdatedTime > TimeSpan.FromMinutes(10));//删除过期的数据
-            return data.Find(p => p.Location.Name == location.Name);
+            return data.Find(p => p.Location.Name == location.Name&&p.Location.AdmDistrict == location.AdmDistrict);
         }
         catch
         {
