@@ -9,132 +9,179 @@
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    Title="关于"
-    PrimaryButtonCommand="{x:Bind CloseCommand}"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    SecondaryButtonText="关闭"
     Style="{ThemeResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Spacing="12">
-            <Image Height="45" Source="/Assets/Weather/MostlySunnyDay.png" />
-            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Fluent Weather" />
-            <TextBlock
-                VerticalAlignment="Center"
-                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                Style="{StaticResource SubtitleTextBlockStyle}"
-                Text="Beta" />
-        </StackPanel>
-        <StackPanel Grid.Row="1" Spacing="4">
-            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                <Run Text="版本:" />
-                <Run Text="{x:Bind AppVersion}" />
-            </TextBlock>
-            <TextBlock>
-                <Run Text="作者:" />
-                <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm" UnderlineStyle="None">Betta_Fish</Hyperlink>
-            </TextBlock>
-            <TextBlock Margin="0,4,0,0">
-                <Run Text="特别鸣谢:" />
-                <Hyperlink NavigateUri="https://github.com/kengwang" UnderlineStyle="None">Kengwang</Hyperlink>
-                <Hyperlink NavigateUri="https://github.com/cnbluefire" UnderlineStyle="None">叫我蓝火火</Hyperlink>
-            </TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <Button Background="Transparent" BorderBrush="Transparent">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="开放源代码许可" />
-                        <FontIcon
-                            FontSize="14"
-                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Glyph="&#xE00F;" />
+    <ContentDialog.Resources>
+        <Thickness x:Key="ContentDialogPadding">0</Thickness>
+    </ContentDialog.Resources>
+    <Grid MaxHeight="380">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*" />
+            <ColumnDefinition Width="16*" />
+        </Grid.ColumnDefinitions>
+        <Image Source="/Assets/Backgrounds/Clear.png" Stretch="UniformToFill" />
+        <Grid Grid.Column="1" Padding="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}">
+                    <Run Text="Skyline" />
+                    <Run
+                        FontSize="21"
+                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                        Text="{x:Bind AppVersion}" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,12,0,0">
+                <TextBlock Text="Skyline是一款开源的天气应用，旨在取代网页套壳的自带天气应用，并提供更多实用功能" TextWrapping="Wrap" />
+                <Grid
+                    Margin="0,12,0,4"
+                    Padding="12"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="Designer &amp; Developer" />
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Text="Betta_Fish" />
                     </StackPanel>
-                    <i:Interaction.Behaviors>
-                        <behaviors:ButtonContentSnapBehavior SnapType="Left" />
-                    </i:Interaction.Behaviors>
-                    <Button.Flyout>
-                        <Flyout Placement="BottomEdgeAlignedLeft">
-                            <StackPanel>
-                                <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="本应用使用以下开源库" />
-                                <HyperlinkButton
-                                    Margin="0,4,0,0"
-                                    Content="Windows UI Library"
-                                    NavigateUri="https://github.com/microsoft/microsoft-ui-xaml" />
-                                <HyperlinkButton Content="Windows Community Toolkit" NavigateUri="https://github.com/CommunityToolkit/Windows" />
-                                <HyperlinkButton Content="CoolControls.WinUI3" NavigateUri="https://github.com/cnbluefire/CoolControls.WinUI3" />
-                                <HyperlinkButton Content="Progress Telerik UI for UWP" NavigateUri="https://github.com/telerik/UI-For-UWP" />
-                                <HyperlinkButton Content="ValueConverters.NET" NavigateUri="https://github.com/thomasgalliker/ValueConverters.NET" />
-                                <HyperlinkButton Content="MetroLog" NavigateUri="https://github.com/novotnyllc/MetroLog" />
-                                <HyperlinkButton Content="WinUICommunity" NavigateUri="https://github.com/WindowUI/WinUICommunity" />
+                    <muxc:PersonPicture
+                        Grid.Row="0"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        ProfilePicture="https://avatars.githubusercontent.com/u/96322503?s=40&amp;v=4" />
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,12,0,-4"
+                        Orientation="Horizontal"
+                        Spacing="14">
+                        <HyperlinkButton>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <PathIcon VerticalAlignment="Center" Data="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+                                <TextBlock Text="GitHub" />
                             </StackPanel>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
-                <Button Background="Transparent" BorderBrush="Transparent">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="赞助" />
-                        <FontIcon
-                            FontSize="14"
-                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Glyph="&#xE00F;" />
+                        </HyperlinkButton>
+                        <HyperlinkButton>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <PathIcon VerticalAlignment="Center" Data="M3.73252 2.67094C3.33229 2.28484 3.33229 1.64373 3.73252 1.25764C4.11291 0.890684 4.71552 0.890684 5.09591 1.25764L7.21723 3.30403C7.27749 3.36218 7.32869 3.4261 7.37081 3.49407H10.5789C10.6211 3.4261 10.6723 3.36218 10.7325 3.30403L12.8538 1.25764C13.2342 0.890684 13.8368 0.890684 14.2172 1.25764C14.6175 1.64373 14.6175 2.28484 14.2172 2.67094L13.364 3.49407H14C16.2091 3.49407 18 5.28493 18 7.49407V12.9996C18 15.2087 16.2091 16.9996 14 16.9996H4C1.79086 16.9996 0 15.2087 0 12.9996V7.49406C0 5.28492 1.79086 3.49407 4 3.49407H4.58579L3.73252 2.67094ZM4 5.42343C2.89543 5.42343 2 6.31886 2 7.42343V13.0702C2 14.1748 2.89543 15.0702 4 15.0702H14C15.1046 15.0702 16 14.1748 16 13.0702V7.42343C16 6.31886 15.1046 5.42343 14 5.42343H4ZM5 9.31747C5 8.76519 5.44772 8.31747 6 8.31747C6.55228 8.31747 7 8.76519 7 9.31747V10.2115C7 10.7638 6.55228 11.2115 6 11.2115C5.44772 11.2115 5 10.7638 5 10.2115V9.31747ZM12 8.31747C11.4477 8.31747 11 8.76519 11 9.31747V10.2115C11 10.7638 11.4477 11.2115 12 11.2115C12.5523 11.2115 13 10.7638 13 10.2115V9.31747C13 8.76519 12.5523 8.31747 12 8.31747Z" />
+                                <TextBlock Text="BiliBili" />
+                            </StackPanel>
+                        </HyperlinkButton>
                     </StackPanel>
-                    <i:Interaction.Behaviors>
-                        <behaviors:ButtonContentSnapBehavior SnapType="Left" />
-                    </i:Interaction.Behaviors>
-                    <Button.Flyout>
-                        <Flyout Placement="BottomEdgeAlignedLeft">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="12">
-                                    <StackPanel>
-                                        <Image
-                                            Width="200"
-                                            Height="200"
-                                            Source="/Assets/Sponsor/wx.jpg" />
-                                        <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="微信支付" />
-                                    </StackPanel>
-                                    <StackPanel>
-                                        <Image
-                                            Width="200"
-                                            Height="200"
-                                            Source="/Assets/Sponsor/zfb.jpg" />
-                                        <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="支付宝" />
-                                    </StackPanel>
+                </Grid>
+                <Grid
+                    Margin="0,0,0,12"
+                    Padding="12,4"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                    <StackPanel Orientation="Horizontal" Spacing="16">
+                        <HyperlinkButton>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <PathIcon VerticalAlignment="Center" Data="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+                                <TextBlock Text="在GitHub上查看项目" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                        <HyperlinkButton>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontSize="16" Glyph="&#xF2B7;" />
+                                <TextBlock Text="参与翻译" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="开放源代码许可" />
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE00F;" />
+                        </StackPanel>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ButtonContentSnapBehavior SnapType="Left" />
+                        </i:Interaction.Behaviors>
+                        <Button.Flyout>
+                            <Flyout Placement="BottomEdgeAlignedLeft">
+                                <StackPanel>
+                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="本应用使用以下开源库" />
+                                    <HyperlinkButton
+                                        Margin="0,4,0,0"
+                                        Content="Windows UI Library"
+                                        NavigateUri="https://github.com/microsoft/microsoft-ui-xaml" />
+                                    <HyperlinkButton Content="Windows Community Toolkit" NavigateUri="https://github.com/CommunityToolkit/Windows" />
+                                    <HyperlinkButton Content="CoolControls.WinUI3" NavigateUri="https://github.com/cnbluefire/CoolControls.WinUI3" />
+                                    <HyperlinkButton Content="Progress Telerik UI for UWP" NavigateUri="https://github.com/telerik/UI-For-UWP" />
+                                    <HyperlinkButton Content="ValueConverters.NET" NavigateUri="https://github.com/thomasgalliker/ValueConverters.NET" />
+                                    <HyperlinkButton Content="MetroLog" NavigateUri="https://github.com/novotnyllc/MetroLog" />
+                                    <HyperlinkButton Content="WinUICommunity" NavigateUri="https://github.com/WindowUI/WinUICommunity" />
                                 </StackPanel>
-                                <TextBlock>
-                                    <Run Text="如果喜欢本软件，可以扫码打赏任意金额支持开发者" />
-                                    <LineBreak /><Run Text="也可以去" />
-                                    <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">GitHub</Hyperlink>
-                                    <Run Text="或者" />
-                                    <Hyperlink NavigateUri="https://gitee.com/Betta_Fish/FluentWeather">Gitee</Hyperlink>
-                                    <Run Text="给个Starヾ(≧∇≦*)ヾ" />
-                                </TextBlock>
-                            </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Button Background="Transparent" BorderBrush="Transparent">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="赞助" />
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE00F;" />
+                        </StackPanel>
+                        <i:Interaction.Behaviors>
+                            <behaviors:ButtonContentSnapBehavior SnapType="Left" />
+                        </i:Interaction.Behaviors>
+                        <Button.Flyout>
+                            <Flyout Placement="BottomEdgeAlignedLeft">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <StackPanel>
+                                            <Image
+                                                Width="200"
+                                                Height="200"
+                                                Source="/Assets/Sponsor/wx.jpg" />
+                                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="微信支付" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Image
+                                                Width="200"
+                                                Height="200"
+                                                Source="/Assets/Sponsor/zfb.jpg" />
+                                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="支付宝" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock>
+                                        <Run Text="如果喜欢本软件，可以扫码打赏任意金额支持开发者" />
+                                        <LineBreak /><Run Text="也可以去" />
+                                        <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">GitHub</Hyperlink>
+                                        <Run Text="或者" />
+                                        <Hyperlink NavigateUri="https://gitee.com/Betta_Fish/FluentWeather">Gitee</Hyperlink>
+                                        <Run Text="给个Starヾ(≧∇≦*)ヾ" />
+                                    </TextBlock>
+                                </StackPanel>
 
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
 
+                </StackPanel>
+                <Button
+                    Margin="0,8,0,0"
+                    Padding="48,4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Command="{x:Bind CloseCommand}"
+                    Content="关闭" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <HyperlinkButton Padding="10,6" NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <PathIcon VerticalAlignment="Center" Data="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
-                        <TextBlock Text="仓库地址" />
-                    </StackPanel>
-                </HyperlinkButton>
-                <HyperlinkButton Padding="10,6" NavigateUri="https://www.qweather.com/">
-                    <StackPanel Orientation="Horizontal" Spacing="4">
-                        <PathIcon VerticalAlignment="Center" Data="M14.936 11.53c-.907.799-1.434 1.36-2.616 1.634a7.158 7.158 0 0 0 .715-9.529A7.27 7.27 0 0 0 8.66.935a7.313 7.313 0 0 0-5.08.858A7.212 7.212 0 0 0 .354 5.778a7.144 7.144 0 0 0 .253 5.104 7.229 7.229 0 0 0 3.604 3.652c1.612.74 3.44.868 5.14.361a7.864 7.864 0 0 0 4.344-.864c1.126-.589 1.588-1.46 2.305-2.5h-1.064ZM6.51 14.152a5.743 5.743 0 0 1-3.551-1.69 5.642 5.642 0 0 1-.514-7.317 5.727 5.727 0 0 1 3.28-2.162 5.767 5.767 0 0 1 3.912.45 5.696 5.696 0 0 1 2.692 2.851 5.628 5.628 0 0 1 .197 3.9 5.682 5.682 0 0 1-2.39 3.105 7.005 7.005 0 0 1-1.07-.146c-1.302-.294-2.437-1.113-3.237-2.056-.002 0-.003-.003-.004-.004a3.2 3.2 0 0 1-.7-1.929 2.254 2.254 0 0 1 .548-1.517 2.473 2.473 0 0 1 1.91-.89c.198 0 .396.023.589.07a1.423 1.423 0 0 1 .24.07c.327.139.603.377.784.682a1.48 1.48 0 0 1-.44 1.98 1.509 1.509 0 0 1-1.403.162.17.17 0 0 0-.192.045.167.167 0 0 0-.017.195 1.675 1.675 0 0 0 1.426.8l.048-.001a2.821 2.821 0 0 0 1.203-.342A2.747 2.747 0 0 0 11.26 7.99a2.862 2.862 0 0 0-.47-1.585 3.49 3.49 0 0 0-.072-.098c-.02-.028-.042-.055-.064-.083l-.036-.045c-.79-1.03-2.033-1.634-3.45-1.593-1.27.036-2.417.53-3.223 1.382a4.357 4.357 0 0 0-.724 4.99 7.827 7.827 0 0 0 3.44 3.205c-.051-.004-.101-.006-.151-.011Z" />
-                        <TextBlock Text="数据提供商 | 和风天气" />
-                    </StackPanel>
-                </HyperlinkButton>
-
-            </StackPanel>
-
-        </StackPanel>
+        </Grid>
     </Grid>
 </ContentDialog>

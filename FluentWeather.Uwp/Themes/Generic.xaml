@@ -2,8 +2,8 @@
     x:Class="FluentWeather.Uwp.Themes.Generic"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:local="using:FluentWeather.Uwp.Themes"
     xmlns:models="using:FluentWeather.Abstraction.Models">
     <ResourceDictionary.ThemeDictionaries>
@@ -1047,7 +1047,7 @@
             <Image
                 Width="36"
                 Height="36"
-                Source="{x:Bind local:Generic.GetIconByWeather(WeatherType,Time)}"
+                Source="{x:Bind local:Generic.GetIconByWeather(WeatherType, Time)}"
                 Stretch="Uniform" />
             <TextBlock
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
@@ -1104,11 +1104,11 @@
                             Orientation="Horizontal"
                             Spacing="4">
                             <TextBlock FontSize="16">
-                                <Run x:Uid="HumidityText"/><Run Text=":" />
+                                <Run x:Uid="HumidityText" /><Run Text=":" />
                                 <Run Text="{x:Bind Humidity}" /><Run FontSize="12.5" Text="%" />
                             </TextBlock>
                             <TextBlock FontSize="16">
-                                <Run x:Uid="PressureText"/><Run Text=":" />
+                                <Run x:Uid="PressureText" /><Run Text=":" />
                                 <Run Text="{x:Bind Pressure}" /><Run FontSize="12.5" Text="kPa" />
                             </TextBlock>
                         </StackPanel>
@@ -1118,8 +1118,8 @@
 
         </StackPanel>
     </DataTemplate>
-    
-    
-    <!--Animations-->
-    <animations:TranslationAnimation x:Key="DefaultTranslationAnimation"/>
+
+
+    <!--  Animations  -->
+    <animations:TranslationAnimation x:Key="DefaultTranslationAnimation" />
 </ResourceDictionary>
