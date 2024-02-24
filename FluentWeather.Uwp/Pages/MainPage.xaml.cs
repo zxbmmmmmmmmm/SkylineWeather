@@ -62,7 +62,7 @@ public sealed partial class MainPage : Page
         _dailyItemsView.ItemClick += DailyItemClicked;
         MainPageViewModel.Instance.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName is not "CurrentLocation" || _dailyViewPage is null) return;
+            if (e.PropertyName is not "CurrentGeolocation" || _dailyViewPage is null) return;
             _mainContentContainer.Visibility = Visibility.Visible;
         };
     }

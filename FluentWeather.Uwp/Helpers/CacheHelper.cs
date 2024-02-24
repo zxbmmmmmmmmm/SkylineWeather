@@ -55,7 +55,7 @@ public sealed class CacheHelper
             SunRise = viewModel.SunRise,
             SunSet = viewModel.SunSet,
             AirCondition = viewModel.AirCondition,
-            Location = viewModel.CurrentLocation,
+            Location = viewModel.CurrentGeolocation,
             HourlyForecasts = viewModel.HourlyForecasts,
             Indices = viewModel.Indices,
             Precipitation = viewModel.Precipitation,

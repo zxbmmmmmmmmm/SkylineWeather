@@ -67,8 +67,8 @@ public sealed partial class CitiesPage : Page
     {
         if (CitiesView.SelectedIndex == -1) return;
         CurrentCityView.SelectedIndex = -1;
-        MainPageViewModel.Instance.CurrentLocation = CitiesPageViewModel.Instance.Cities[CitiesView.SelectedIndex];
-        if (MainPageViewModel.Instance.CurrentLocation is null)
+        MainPageViewModel.Instance.CurrentGeolocation = CitiesPageViewModel.Instance.Cities[CitiesView.SelectedIndex];
+        if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
             CitiesPageViewModel.Instance.GetCurrentCity();
         }
@@ -77,9 +77,9 @@ public sealed partial class CitiesPage : Page
     private void CurrentCityView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (CurrentCityView.SelectedIndex != 0) return;
-        MainPageViewModel.Instance.CurrentLocation = CitiesPageViewModel.Instance.CurrentCity;
+        MainPageViewModel.Instance.CurrentGeolocation = CitiesPageViewModel.Instance.CurrentCity;
         CitiesView.SelectedIndex = -1;
-        if (MainPageViewModel.Instance.CurrentLocation is null)
+        if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
             CitiesPageViewModel.Instance.GetCurrentCity();
         }

@@ -43,7 +43,7 @@
         <Border
             Background="{ThemeResource LayerFillColorDefaultBrush}"
             Canvas.ZIndex="2"
-            Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}">
+            Visibility="{x:Bind ViewModel.GetWeatherNowCommand.IsRunning, Mode=OneWay}">
             <muxc:ProgressRing Width="100" Height="100" />
         </Border>
         <Border Background="{ThemeResource LayerFillColorDefaultBrush}" Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">

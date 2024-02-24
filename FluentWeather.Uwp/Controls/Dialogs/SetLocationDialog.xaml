@@ -54,9 +54,9 @@
                 </TextBlock>
                 <TextBlock>
                     <Run Text="经度:" />
-                    <Run Text="{x:Bind ChosenGeolocation.Longitude}" />
+                    <Run Text="{x:Bind ChosenGeolocation.Location.Longitude}" />
                     <Run Text="纬度:" />
-                    <Run Text="{x:Bind ChosenGeolocation.Latitude}" />
+                    <Run Text="{x:Bind ChosenGeolocation.Location.Latitude}" />
                 </TextBlock>
             </StackPanel>
         </StackPanel>

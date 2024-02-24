@@ -14,8 +14,7 @@ public static class QGeolocationMapper
         {
             AdmDistrict = item.AdministrativeDistrict1,
             IsDaylightSavingTime = item.IsDaylightSavingTime is "1",
-            Latitude = double.Parse(item.Lat),
-            Longitude = double.Parse(item.Lon),
+            Location = new (double.Parse(item.Lat), double.Parse(item.Lon)),
             Name = item.Name,
             TimeZone = item.TimeZone,
             UtcOffset = TimeSpan.Parse(item.UtcOffset.Replace("+","")),

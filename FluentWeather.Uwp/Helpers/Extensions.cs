@@ -1,5 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Helpers;
@@ -20,5 +22,9 @@ public static class Extensions
     {
         dictionary.MergedDictionaries.Add(new XamlControlsResources { ControlsResourcesVersion = version });
         return dictionary;
+    }
+    public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable)
+    {
+        return new ObservableCollection<T>(enumerable);
     }
 }

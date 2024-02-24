@@ -73,10 +73,10 @@ public sealed partial class CitiesPageViewModel:ObservableObject
         var location = await LocationHelper.GetGeolocation();
         if (Common.Settings.DefaultGeolocation?.Name is null)
             Common.Settings.DefaultGeolocation = location;
-        Common.Settings.Latitude = location.Latitude;
-        Common.Settings.Longitude = location.Longitude;
+        Common.Settings.Latitude = location.Location.Latitude;
+        Common.Settings.Longitude = location.Location.Longitude;
         CitiesPageViewModel.Instance.CurrentCity = location;
-        MainPageViewModel.Instance.CurrentLocation = location;
+        MainPageViewModel.Instance.CurrentGeolocation = location;
     }
 
 

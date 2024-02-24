@@ -7,18 +7,19 @@ using FluentWeather.DIContainer;
 using FluentWeather.Tasks;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
+using FluentWeather.Uwp.ViewModels.Interfaces;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Telerik.Geospatial;
 using Windows.ApplicationModel.Resources;
+using Windows.Devices.Geolocation;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public sealed partial class MainPageViewModel : ObservableObject
+public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewModel
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
@@ -46,7 +47,7 @@ public sealed partial class MainPageViewModel : ObservableObject
     private DateTime _sunSet;
 
     [ObservableProperty]
-    private GeolocationBase _currentLocation;
+    private GeolocationBase _currentGeolocation;
 
     [ObservableProperty]
     private List<IndicesBase> _indices;
@@ -66,83 +67,94 @@ public sealed partial class MainPageViewModel : ObservableObject
         Instance = this;
     }
 
-    partial void OnCurrentLocationChanged(GeolocationBase oldValue, GeolocationBase newValue)
+    partial void OnCurrentGeolocationChanged(GeolocationBase oldValue, GeolocationBase newValue)
     {
-        GetWeather(CurrentLocation);
+        GetWeather(CurrentGeolocation);
     }
-    public async Task GetDailyForecast(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetDailyForecast(Location location)
     {
         var dailyProvider = Locator.ServiceProvider.GetService<IDailyForecastProvider>();
-        DailyForecasts = await dailyProvider.GetDailyForecasts(lon, lat);
+        DailyForecasts = await dailyProvider.GetDailyForecasts(location.Longitude, location.Latitude);
         if (DailyForecasts[0] is IAstronomic astronomic)
         {
             SunRise = astronomic.SunRise;
             SunSet = astronomic.SunSet;
         }
     }
-    public async Task GetHourlyForecast(double lon,double lat)
+
+    [RelayCommand]
+    public async Task GetHourlyForecast(Location location)
     {
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
-        HourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
+        HourlyForecasts = await hourlyProvider.GetHourlyForecasts(location.Longitude, location.Latitude);
     }
-    public async Task GetWeatherNow(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetWeatherNow(Location location)
     {
-        IsLoading = true;
         var nowProvider = Locator.ServiceProvider.GetService<ICurrentWeatherProvider>();
-        WeatherNow = await nowProvider.GetCurrentWeather(lon, lat);
-        IsLoading = false;
+        WeatherNow = await nowProvider.GetCurrentWeather(location.Longitude, location.Latitude);
     }
-    public async Task GetWeatherWarnings(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetWeatherWarnings(Location location)
     {
         var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
-        Warnings = await warningProvider.GetWeatherWarnings(lon, lat);
+        Warnings = await warningProvider.GetWeatherWarnings(location.Longitude, location.Latitude);
     }
-    public async Task GetIndices(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetIndices(Location location)
     {
         var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
-        var indices = await indicesProvider.GetIndices(lon, lat);
+        var indices = await indicesProvider.GetIndices(location.Longitude, location.Latitude);
         indices?.ForEach(p => p.Name = p.Name.Replace("指数", ""));
         Indices = indices;
     }
-    public async Task GetWeatherPrecipitations(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetWeatherPrecipitations(Location location)
     {
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
-        Precipitation = await precipProvider.GetPrecipitations(lon, lat);
+        Precipitation = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
     }
-    public async Task GetAirCondition(double lon, double lat)
+
+    [RelayCommand]
+    public async Task GetAirCondition(Location location)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
-        AirCondition = await airConditionProvider.GetAirCondition(lon, lat);
+        AirCondition = await airConditionProvider.GetAirCondition(location.Longitude, location.Latitude);
     }
+
     [RelayCommand]
     public async Task Refresh()
     {
-        var lon = CurrentLocation.Longitude;
-        var lat = CurrentLocation.Latitude;
         List<Task> tasks = new()
         {
-            GetWeatherNow(lon, lat),
-            GetWeatherWarnings(lon, lat),
-            GetDailyForecast(lon, lat),
-            GetHourlyForecast(lon, lat),
-            GetWeatherPrecipitations(lon, lat),
-            GetAirCondition(lon, lat),
-            GetIndices(lon, lat),
+            GetWeatherNowCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetWeatherWarningsCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetDailyForecastCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetHourlyForecastCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetWeatherPrecipitationsCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetIndicesCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetAirConditionCommand.ExecuteAsync(CurrentGeolocation.Location),
         };
         await Task.WhenAll(tasks.ToArray());
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
         }
-        if (CurrentLocation.Name == Common.Settings.DefaultGeolocation?.Name)
+        if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
         {
             TileHelper.UpdateTiles(DailyForecasts);
         }
         foreach (var hourly in HourlyForecasts)
         {
-            if (CurrentLocation.UtcOffset is not null)
+            if (CurrentGeolocation.UtcOffset is not null)
             {
-                hourly.Time += (TimeSpan)CurrentLocation.UtcOffset;
+                hourly.Time += (TimeSpan)CurrentGeolocation.UtcOffset;
             }
             var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
             if(daily is null) continue;
@@ -151,16 +163,14 @@ public sealed partial class MainPageViewModel : ObservableObject
         }
         CacheHelper.Cache(this);
     }
+
     public async void GetWeather(GeolocationBase geo)
     {
         if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
         {
-            IsLoading = false;
             return;
         }
-        var lon = geo.Longitude;
-        var lat = geo.Latitude;
-        var cacheData = await CacheHelper.GetWeatherCache(CurrentLocation);
+        var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
         if (cacheData is not null)
         {
             DailyForecasts = cacheData.DailyForecasts;
@@ -172,7 +182,6 @@ public sealed partial class MainPageViewModel : ObservableObject
             Precipitation = cacheData.Precipitation!;
             Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
-            IsLoading = false;
         }
         else
         {
@@ -180,11 +189,12 @@ public sealed partial class MainPageViewModel : ObservableObject
         }
         Analytics.TrackEvent("WeatherDataObtained", new Dictionary<string, string> { { "CityName", geo.Name } });
     }
+
     [RelayCommand]
     public void SpeechWeather()
     {
         var loader = ResourceLoader.GetForCurrentView();
-        var text = $"{CurrentLocation.Name},{DailyForecasts[0].Description},{loader.GetString("HighestTemperature")}:{DailyForecasts[0].MaxTemperature}°,{loader.GetString("LowestTemperature")}:{DailyForecasts[0].MinTemperature}°";
+        var text = $"{CurrentGeolocation.Name},{DailyForecasts[0].Description},{loader.GetString("HighestTemperature")}:{DailyForecasts[0].MaxTemperature}°,{loader.GetString("LowestTemperature")}:{DailyForecasts[0].MinTemperature}°";
         text += $",{loader.GetString("AirQuality")}:{AirCondition.AqiCategory}";
         if(!TTSHelper.IsPlaying)
         {
@@ -192,6 +202,4 @@ public sealed partial class MainPageViewModel : ObservableObject
         }
         TTSHelper.Speech(text);
     }
-    [ObservableProperty]
-    private bool _isLoading = true;
 }

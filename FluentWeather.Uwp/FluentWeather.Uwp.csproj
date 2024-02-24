@@ -243,6 +243,7 @@
     <Compile Include="ViewModels\CitiesPageViewModel.cs" />
     <Compile Include="ViewModels\DailyForecastDialogViewModel.cs" />
     <Compile Include="ViewModels\DailyViewPageViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IMainPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\RootPageViewModel.cs" />
   </ItemGroup>

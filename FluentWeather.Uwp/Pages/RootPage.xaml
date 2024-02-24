@@ -107,7 +107,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     FontSize="15">
-                    <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentLocation.Name, Mode=OneWay}" />
+                    <Run Text="{x:Bind vm:MainPageViewModel.Instance.CurrentGeolocation.Name, Mode=OneWay}" />
                 </TextBlock>
                 <Grid Background="Transparent" />
                 <Grid.Transitions>
