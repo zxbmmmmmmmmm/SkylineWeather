@@ -219,6 +219,12 @@
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ErrorDialog.Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="FeelsLike.Text" xml:space="preserve">
     <value>Feels like:</value>
   </data>

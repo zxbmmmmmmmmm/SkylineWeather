@@ -1,9 +1,11 @@
 ﻿using FluentWeather.Abstraction;
+using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.QGeoApi.ApiContracts;
 using FluentWeather.QWeatherApi;
 using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherApi.Bases;
@@ -27,6 +29,7 @@ public sealed class QWeatherProvider : ProviderBase,
     IPrecipitationProvider,
     IAirConditionProvider,
     ITyphoonProvider,
+    IGeolocationProvider,
     ISetting
 {
     public override string Name => "和风天气";
@@ -35,7 +38,8 @@ public sealed class QWeatherProvider : ProviderBase,
     public Enum Settings => new QWeatherSettings();
 
     public ApiHandlerOption Option { get; set; } = new();
-    
+
+
     public static QWeatherProvider Instance = null;
     public QWeatherProvider()
     {
@@ -89,7 +93,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<List<WeatherWarningBase>> GetWeatherWarnings(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherWarningApi, new QWeatherRequest(lon, lat));
-        var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToQWeatherWarning());
+        var res = result.Warnings?.ConvertAll(p => (WeatherWarningBase)p.MapToWeatherWarningBase());
         return res;
     }
     public async Task<List<IndicesBase>> GetIndices(double lon, double lat)
@@ -108,7 +112,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.PrecipitationApi, new QWeatherRequest(lon, lat));
-        var res = result.MapToQweatherPrecipitation();
+        var res = result.MapToPrecipitationBase();
         return res;
     }
 
@@ -135,11 +139,22 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<TyphoonBase> GetTyphoon (string id,string name)
     {
         var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
-        var qtyp = typ.MapToQTyphoon(name);
+        var qtyp = typ.MapToTyphoonBase(name);
         var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
         return qtyp;
+    }
+
+    public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
+    {
+        var result = await RequestAsync(new GeolocationApi<QGeolocationResponse>(), new QGeolocationRequestByName { Name = name });
+        return result.Locations?.ConvertAll(p => p.MapToGeolocationBase());
+    }
+    public async Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon)
+    {
+        var result = await RequestAsync(new GeolocationApi<QGeolocationResponse>(), new QGeolocationRequestByLocation { Lat = lat, Lon = lon });
+        return result.Locations.ConvertAll(p => p.MapToGeolocationBase());
     }
 }
 public enum QWeatherSettings

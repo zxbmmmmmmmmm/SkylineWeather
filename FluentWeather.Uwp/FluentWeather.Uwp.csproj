@@ -153,6 +153,9 @@
     <Compile Include="Controls\Dialogs\DailyForecastDialog.xaml.cs">
       <DependentUpon>DailyForecastDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dialogs\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogs\SetLocationDialog.xaml.cs">
       <DependentUpon>SetLocationDialog.xaml</DependentUpon>
     </Compile>
@@ -444,6 +447,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Dialogs\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Dialogs\SetLocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -646,10 +653,6 @@
     <ProjectReference Include="..\FluentWeather.OpenMeteoProvider\FluentWeather.OpenMeteoProvider.csproj">
       <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
       <Name>FluentWeather.OpenMeteoProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FluentWeather.QGeoProvider\FluentWeather.QGeoProvider.csproj">
-      <Project>{eb061b33-c7dc-4dec-9398-0cc2c4abd619}</Project>
-      <Name>FluentWeather.QGeoProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
       <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>

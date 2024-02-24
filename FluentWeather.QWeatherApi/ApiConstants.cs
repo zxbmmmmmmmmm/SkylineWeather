@@ -25,4 +25,10 @@ public static class ApiConstants
         public const string TyphoonList = "/v7/tropical/storm-list";
         public const string TyphoonForecast = "/v7/tropical/storm-forecast";
     }
+
+    public static class Geolocation 
+    {
+        public const string CityLookup = "/v2/city/lookup";
+    }
+
 }

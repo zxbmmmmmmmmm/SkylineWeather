@@ -54,7 +54,7 @@ public static class DIFactory
         ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
-        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QGeoProvider.QGeoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QWeatherProvider.QWeatherProvider));
     }
     public static void RegisterOpenMeteo()
     {
@@ -67,7 +67,7 @@ public static class DIFactory
         ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
-        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QGeoProvider.QGeoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QWeatherProvider.QWeatherProvider));
         OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");
     }
     public static void RegisterProviders(List<KeyValuePair<string, string>> dic)

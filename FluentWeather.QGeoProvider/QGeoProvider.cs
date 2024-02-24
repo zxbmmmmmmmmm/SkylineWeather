@@ -44,7 +44,7 @@ namespace FluentWeather.QGeoProvider
         public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
         {
             var result = await RequestAsync(new GeolocationApi<QGeolocationResponse>(), new QGeolocationRequestByName{Name = name});
-            return result.Locations?.ConvertAll(p => (GeolocationBase)p.MapToQGeolocation());
+            return result.Locations.ConvertAll(p => (GeolocationBase)p.MapToQGeolocation());
         }
         public async Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat,double lon)
         {

@@ -47,7 +47,7 @@ public sealed partial class CitiesPage : Page
             CurrentCityView.SelectedIndex = 0;
             return;
         }
-        if (name == ViewModel.CurrentCity.Name)
+        if (ViewModel.CurrentCity is null || name == ViewModel.CurrentCity.Name)
         {
             CurrentCityView.SelectedIndex = 0;
             return;

@@ -9,21 +9,21 @@ namespace FluentWeather.QWeatherProvider.Mappers
 {
     public static class PrecipitationMapper
     {
-        public static QWeatherPrecipitationItem MapToQweatherPrecipitationItem(this PrecipitationResponse.PrecipitationItem item)
+        public static PrecipitationItemBase MapToPrecipitationItemBase(this PrecipitationResponse.PrecipitationItem item)
         {
-            return new QWeatherPrecipitationItem
+            return new PrecipitationItemBase
             {
                  Precipitation = double.Parse(item.Precip),
                  Time = DateTime.Parse(item.FxTime),
                  IsSnow = item.Type is "snow"
             };
         }
-        public static QWeatherPrecipitation MapToQweatherPrecipitation(this PrecipitationResponse item) 
+        public static PrecipitationBase MapToPrecipitationBase(this PrecipitationResponse item) 
         {
-            return new QWeatherPrecipitation
+            return new PrecipitationBase
             {
                 Summary = item.Summary,
-                Precipitations = item.MinutelyPrecipitations?.ConvertAll(p => (PrecipitationItemBase)p.MapToQweatherPrecipitationItem()),
+                Precipitations = item.MinutelyPrecipitations?.ConvertAll(p => (PrecipitationItemBase)p.MapToPrecipitationItemBase()),
             };
         }
     }
