@@ -75,7 +75,18 @@
                         PropertyName="Visibility"
                         TargetObject="{x:Bind MainContentContainer}"
                         Value="Visible" />
-                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationLeave}" />
+                    <behaviors:AnimateBackgroundAction>
+                        <behaviors:AnimateBackgroundAction.Animation>
+                            <animations:AnimationSet x:Name="ScaleAnimationLeave" x:FieldModifier="Public">
+                                <animations:ScaleAnimation
+                                    EasingMode="EaseOut"
+                                    EasingType="Circle"
+                                    From="1.2"
+                                    To="1"
+                                    Duration="0:0:0.4" />
+                            </animations:AnimationSet>
+                        </behaviors:AnimateBackgroundAction.Animation>
+                    </behaviors:AnimateBackgroundAction>
                 </core:EventTriggerBehavior>
             </i:Interaction.Behaviors>
             <animations:Implicit.HideAnimations>
@@ -388,8 +399,18 @@
                             <i:Interaction.Behaviors>
                                 <behaviors:ListViewScrollBehavior />
                                 <core:EventTriggerBehavior EventName="ItemClick">
-                                    <behaviors1:StartAnimationAction Animation="{x:Bind local:RootPage.Instance.ScaleAnimationEnter}" />
-
+                                    <behaviors:AnimateBackgroundAction>
+                                        <behaviors:AnimateBackgroundAction.Animation>
+                                            <animations:AnimationSet x:Name="ScaleAnimationEnter" x:FieldModifier="Public">
+                                                <animations:ScaleAnimation
+                                                    EasingMode="EaseOut"
+                                                    EasingType="Circle"
+                                                    From="1"
+                                                    To="1.2"
+                                                    Duration="0:0:0.8" />
+                                            </animations:AnimationSet>
+                                        </behaviors:AnimateBackgroundAction.Animation>
+                                    </behaviors:AnimateBackgroundAction>
                                     <core:ChangePropertyAction
                                         PropertyName="Visibility"
                                         TargetObject="{x:Bind MainContentContainer}"

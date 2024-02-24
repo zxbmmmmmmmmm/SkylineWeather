@@ -23,6 +23,8 @@
 -->
     <Assembly Name="*Application*" Dynamic="Required All" />
     <Namespace Name="Microsoft.UI.Xaml.Controls" Serialize="All" />
+    <Namespace Name="Microsoft.Toolkit.Uwp.UI.Controls" Serialize="All" />
+    <Namespace Name="Microsoft.Toolkit.Uwp.UI.Animations" Serialize="All" />
     <Namespace Name="FluentWeather.Uwp.ViewModels" Serialize="All" />
     <Namespace Name="FluentWeather.Abstraction.Interfaces" Serialize="All" />
 
