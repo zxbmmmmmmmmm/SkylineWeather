@@ -89,16 +89,17 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetHourlyForecast(Location location)
     {
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
-        var hourlyForecasts = await hourlyProvider.GetHourlyForecasts(lon, lat);
+        var hourlyForecasts = await hourlyProvider.GetHourlyForecasts(location.Longitude, location.Latitude);
+
         foreach ( var forecast in hourlyForecasts )
         {
-            if (CurrentLocation.UtcOffset is not null)
+            if (CurrentGeolocation.UtcOffset is not null)
             {
                 if(forecast.Time.Kind is not DateTimeKind.Unspecified)
                 {
                     forecast.Time = forecast.Time.ToUniversalTime();
                 }
-                forecast.Time += (TimeSpan)CurrentLocation.UtcOffset;
+                forecast.Time += (TimeSpan)CurrentGeolocation.UtcOffset;
             }
         }
         HourlyForecasts = hourlyForecasts;

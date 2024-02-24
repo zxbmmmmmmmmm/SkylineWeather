@@ -31,6 +31,9 @@
             <valueConverters:ShortDateConverter x:Key="ShortDateConverter" />
             <valueConverters:WeatherTypeToIconConverter x:Key="WeatherTypeToIconConverter" />
             <valueConverters:WeatherToIconConverter x:Key="WeatherToIconConverter" />
+            <valueConverters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter" />
+            <valueConverters:ToShortTimeStringConverter x:Key="ToShortTimeStringConverter" />
+            <valueConverters:WindScaleToDescriptionConverter x:Key="WindScaleToDescriptionConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
