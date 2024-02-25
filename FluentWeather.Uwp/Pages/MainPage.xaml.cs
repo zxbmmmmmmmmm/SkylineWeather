@@ -99,6 +99,7 @@ public sealed partial class MainPage : Page
         }
         else
         {
+            await Task.Delay(200);
             this.InitializeComponent();
         }
 
