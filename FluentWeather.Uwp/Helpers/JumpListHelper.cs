@@ -24,8 +24,8 @@ public static class JumpListHelper
     private static JumpListItem CreateDefaultItem(GeolocationBase geolocation)
     {
         var item = JumpListItem.CreateWithArguments("City_" + geolocation.Name,geolocation.Name);
-        item.GroupName = ResourceLoader.GetForCurrentView().GetString("CurrentGeolocation");
-        item.Logo = new Uri("ms-appx:///Assets/Icons/CurrentGeolocation.png");
+        item.GroupName = ResourceLoader.GetForCurrentView().GetString("CurrentLocation");
+        item.Logo = new Uri("ms-appx:///Assets/Icons/CurrentLocation.png");
         return item;
     }
     private static JumpListItem CreateItem(GeolocationBase geolocation)
