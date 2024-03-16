@@ -33,7 +33,7 @@ public sealed partial class SetLocationDialog : ContentDialog
     public SetLocationDialog()
     {
         this.InitializeComponent();
-        if(Common.Settings.DefaultGeolocation.Name is not null)
+        if(Common.Settings.DefaultGeolocation?.Name is not null)
         {
             SecondaryButtonText = "取消";
         }
