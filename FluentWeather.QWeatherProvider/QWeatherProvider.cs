@@ -4,8 +4,8 @@ using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.DIContainer;
-using FluentWeather.QGeoApi.ApiContracts;
 using FluentWeather.QWeatherApi;
 using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherApi.Bases;
@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
 
@@ -52,6 +53,14 @@ public sealed class QWeatherProvider : ProviderBase,
         Option.Token = token;
         Option.Domain = domain;
         Option.Language = language;
+    }
+    public void SetDomain(string domain)
+    {
+        Option.Domain = domain;
+    }
+    public void SetToken(string token)
+    {
+        Option.Token = token;
     }
     public void GetSettings()
     {
@@ -103,10 +112,13 @@ public sealed class QWeatherProvider : ProviderBase,
         return res;
     }
     public async Task<TResponse> RequestAsync<TRequest, TResponse>(
-        ApiContractBase<TRequest, TResponse> contract, TRequest request)
+        ApiContractBase<TRequest, TResponse> contract, TRequest request) where TResponse : QWeatherResponseBase
     {
         var handler = new QWeatherApiHandler();
-        return await handler.RequestAsync(contract, request, Option);
+        var response = await handler.RequestAsync(contract, request, Option);
+        if (!response.Code.StartsWith("2"))
+            throw new HttpResponseException($"Request returned http status code {response.Code}",(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode),response.Code));
+        return response;
     }
 
     public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)

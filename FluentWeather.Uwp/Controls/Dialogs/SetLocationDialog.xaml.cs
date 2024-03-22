@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 using Windows.Foundation;
@@ -22,6 +23,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Shared;
 using Microsoft.AppCenter.Analytics;
+using FluentWeather.Abstraction.Models.Exceptions;
+using FluentWeather.Uwp.Controls.Dialogs.QWeather;
+using System.Reflection;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
@@ -60,9 +66,24 @@ public sealed partial class SetLocationDialog : ContentDialog
 
     private async void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
     {
+
+    }
+    [RelayCommand]
+    public async Task FindCities()
+    {
         SuggestedCities.Clear();
         var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        (await service.GetCitiesGeolocationByName(sender.Text))?.ForEach(SuggestedCities.Add);
+        try
+        {
+            var result = await service.GetCitiesGeolocationByName(Query);
+            result?.ForEach(SuggestedCities.Add);
+        }
+        catch (HttpResponseException e)
+        {
+            if (e.Code == HttpStatusCode.BadRequest) return;
+            Hide();
+            await new SetTokenDialog().ShowAsync();
+        }
     }
 
     private void SearchBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)

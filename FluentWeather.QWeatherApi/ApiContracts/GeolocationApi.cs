@@ -1,18 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text.Json;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using System;
 using FluentWeather.QWeatherApi.Bases;
-using FluentWeather.QWeatherApi;
 
-namespace FluentWeather.QGeoApi.ApiContracts
+namespace FluentWeather.QWeatherApi.ApiContracts
 {
-    public class GeolocationApi<TResponse>: QApiContractBase<IQGeolocationRequest,TResponse>
+    public class GeolocationApi<TResponse>: QApiContractBase<IQGeolocationRequest,TResponse> where TResponse : QWeatherResponseBase
     {
 
         public override HttpMethod Method => HttpMethod.Get;
@@ -67,7 +62,7 @@ namespace FluentWeather.QGeoApi.ApiContracts
     {
         
     }
-    public class QGeolocationResponse
+    public class QGeolocationResponse:QWeatherResponseBase
     {
         [JsonPropertyName("location")]
         public List<QGeolocationItem> Locations { get; set; }

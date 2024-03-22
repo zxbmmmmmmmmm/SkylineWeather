@@ -27,7 +27,7 @@ public sealed class TyphoonTrackRequest:RequestBase
 {
     public string TyphoonId { get; set; }
 }
-public sealed class TyphoonTrackResponse
+public sealed class TyphoonTrackResponse : QWeatherResponseBase
 {
     [JsonPropertyName("isActive")]
     public string IsActive { get;set; }

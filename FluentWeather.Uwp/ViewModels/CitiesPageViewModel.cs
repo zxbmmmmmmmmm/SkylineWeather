@@ -43,7 +43,6 @@ public sealed partial class CitiesPageViewModel:ObservableObject
             await JumpListHelper.SetJumpList(CurrentCity,Cities);
         };
         Instance = this;
-        GetCurrentCity();
     }
 
     [RelayCommand]
@@ -68,8 +67,6 @@ public sealed partial class CitiesPageViewModel:ObservableObject
 
     public async void GetCurrentCity()
     {
-        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
-            return;
         var location = await LocationHelper.GetGeolocation();
         if (Common.Settings.DefaultGeolocation?.Name is null)
             Common.Settings.DefaultGeolocation = location;

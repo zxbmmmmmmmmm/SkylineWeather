@@ -22,7 +22,7 @@ public sealed class TyphoonListApi : QApiContractBase<RequestBase,TyphoonListRes
         return res;
     }
 }
-public sealed class TyphoonListResponse
+public sealed class TyphoonListResponse : QWeatherResponseBase
 {
     [JsonPropertyName("storm")]
     public List<TyphoonListItem> Typhoons { get; set; }

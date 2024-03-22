@@ -23,7 +23,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts
     {
         public string TyphoonId { get; set; }
     }
-    public sealed class TyphoonForecastResponse
+    public sealed class TyphoonForecastResponse : QWeatherResponseBase
     {
         [JsonPropertyName("forecast")]
         public List<TyphoonForecastItem> Forecasts { get; set; }

@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.DIContainer;
 using FluentWeather.Tasks;
+using FluentWeather.Uwp.Controls.Dialogs.QWeather;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels.Interfaces;
@@ -155,7 +157,14 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             GetIndicesCommand.ExecuteAsync(CurrentGeolocation.Location),
             GetAirConditionCommand.ExecuteAsync(CurrentGeolocation.Location),
         };
-        await Task.WhenAll(tasks.ToArray());
+        try
+        {
+            await Task.WhenAll(tasks.ToArray());
+        }
+        catch(HttpResponseException e)
+        { 
+            await new SetTokenDialog().ShowAsync();
+        }
         if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
             WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
@@ -176,10 +185,6 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     public async void GetWeather(GeolocationBase geo)
     {
-        if (Common.Settings.QWeatherToken is "" || Common.Settings.QGeolocationToken is "")
-        {
-            return;
-        }
         var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
         if (cacheData is not null)
         {

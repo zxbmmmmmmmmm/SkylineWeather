@@ -20,6 +20,11 @@
                         <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}" />
                     </muxc:RadioButtons>
                 </controls:SettingsCard>
+                <controls:SettingsCard x:Name="SetKeyCard" Header="和风天气" Description="自定义KEY" Click="SetKeyCard_Click" IsClickEnabled="True" Padding="12">
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE621;" />
+                    </controls:SettingsCard.HeaderIcon>
+                </controls:SettingsCard>
             </controls:SettingsExpander.Items>
 
         </controls:SettingsExpander>

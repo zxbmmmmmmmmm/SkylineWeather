@@ -11,5 +11,5 @@ public abstract class ApiContractBase<TRequest, TResponse>
     public TRequest Request { get; set; }
     public virtual Dictionary<string, string> Cookies { get; } = new();
     public abstract Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option);
-    public abstract Task<TResponse> ProcessResponseAsync(HttpResponseMessage response, ApiHandlerOption option);
+    public abstract Task<TResponse> ProcessResponseAsync(HttpResponseMessage response, ApiHandlerOption option) ;
 }
