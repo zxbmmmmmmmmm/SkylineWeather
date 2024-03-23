@@ -13,7 +13,7 @@ public sealed class TyphoonListApi : QApiContractBase<RequestBase,TyphoonListRes
     public override HttpMethod Method => HttpMethod.Get;
 
     public override string Path => ApiConstants.Weather.TyphoonList;
-    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    public override async Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
         var res = await base.GenerateRequestMessageAsync(option);
         var uri = res.RequestUri.ToString();

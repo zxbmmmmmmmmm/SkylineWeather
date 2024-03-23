@@ -201,6 +201,16 @@ public sealed class Settings : INotifyPropertyChanged
         }
     }
 
+    public string QWeatherPublicKey
+    {
+        get => GetSettings("qweather." + "Public", "");
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values["qweather." + "Public"] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public string QWeatherDomain
     {
         get => GetSettings("qweather." + "Domain", "devapi.qweather.com");

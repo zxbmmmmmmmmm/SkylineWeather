@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using FluentWeather.QWeatherApi.Bases;
@@ -18,18 +21,11 @@ namespace FluentWeather.QWeatherApi.ApiContracts
 
         public override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
         {
-            string query = string.Empty;
-            if(Request is QGeolocationRequestByLocation byLocation)
-            {
-                query = $"?key={option.Token}&location={byLocation.Lat},{byLocation.Lon}";
-            }
-            else if(Request is QGeolocationRequestByName byName)
-            {
-                query = $"?key={option.Token}&location={byName.Name}";
-            }
-            if (option.Language is not null)
-                query += $"&lang={option.Language}";
-            var requestMessage = new HttpRequestMessage(Method, Url + Path + query);
+            var sb = new StringBuilder(Url);
+            string query = GenerateQuery(option).ToString();
+            sb.Append(Path).Append("?").Append(query);
+
+            var requestMessage = new HttpRequestMessage(Method,sb.ToString());
 
             var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
             foreach (var keyValuePair in Cookies)
@@ -39,6 +35,19 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             if (cookies.Count > 0)
                 requestMessage.Headers.Add("Cookie", string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}")));
             return Task.FromResult(requestMessage);
+        }
+        protected override NameValueCollection GenerateQuery(ApiHandlerOption option)
+        {
+            var result = base.GenerateQuery(option);
+            if (Request is QGeolocationRequestByLocation byLocation)
+            {
+                result.Add("location", $"{byLocation.Lat},{byLocation.Lon}");
+            }
+            else if (Request is QGeolocationRequestByName byName)
+            {
+                result.Add("location", $"{byName.Name}");
+            }
+            return result;
         }
     }
     /// <summary>

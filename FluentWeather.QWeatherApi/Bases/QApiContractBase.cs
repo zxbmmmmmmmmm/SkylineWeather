@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 using System;
 using System.Runtime.CompilerServices;
 using FluentWeather.QWeatherApi.Helpers;
+using System.Web;
+using System.Collections.Specialized;
 
 namespace FluentWeather.QWeatherApi.Bases;
 
 public abstract class QApiContractBase<TResponse>:QApiContractBase<QWeatherRequest,TResponse> where TResponse : QWeatherResponseBase
 {
-    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    protected override NameValueCollection GenerateQuery(ApiHandlerOption option)
     {
-        return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&location={Request.Lon},{Request.Lat}");
+        var result = base.GenerateQuery(option);
+        result.Add("location", $"{Request.Lon},{Request.Lat}");
+        return result;
     }
 }
 
@@ -22,10 +26,11 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
 {
     public override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
-        var uri = "https://" + option.Domain + Path + $"?key={option.Token}";
-        if (option.Language is not null)
-            uri += $"&lang={option.Language}";
-        var requestMessage = new HttpRequestMessage(Method, uri);
+        var sb = new StringBuilder("https://");
+        sb.Append(option.Domain).Append(Path).Append("?");
+        sb.Append(GenerateQuery(option).Sort());
+
+        var requestMessage = new HttpRequestMessage(Method, sb.ToString());
 
         var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
         foreach (var keyValuePair in Cookies)
@@ -36,6 +41,16 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
             requestMessage.Headers.Add("Cookie", string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}")));
         return Task.FromResult(requestMessage);
     }
+
+    protected virtual NameValueCollection GenerateQuery(ApiHandlerOption option)
+    {
+        var queryCollection = HttpUtility.ParseQueryString(string.Empty);
+        queryCollection.Add("key", option.Token);
+        if (option.Language is not null)
+            queryCollection.Add("lang", option.Language);
+        return queryCollection;
+    }
+
     public override async Task<TResponse> ProcessResponseAsync(HttpResponseMessage response, ApiHandlerOption option)
     {
         var buffer = await response.Content.ReadAsByteArrayAsync();

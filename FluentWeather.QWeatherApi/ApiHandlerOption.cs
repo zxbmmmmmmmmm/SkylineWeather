@@ -9,6 +9,7 @@ public class ApiHandlerOption
     public Dictionary<string, string> Cookies { get; } = new();
     public string Token { get; set; } 
     public string Language { get; set; }
+    public string PublicKey { get; set; }
 
     public JsonSerializerOptions JsonSerializerOptions =
         new(JsonSerializerOptions.Default)
