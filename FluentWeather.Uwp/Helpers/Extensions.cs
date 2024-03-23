@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Helpers;
@@ -26,5 +28,17 @@ public static class Extensions
     public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable)
     {
         return new ObservableCollection<T>(enumerable);
+    }
+    public static async Task<StorageFile> GetOrCreateFileAsync(this StorageFolder folder,string name)
+    {
+        var item = await folder.TryGetItemAsync(name) as StorageFile;
+        item ??= await folder.CreateFileAsync(name);
+        return item;
+    }
+    public static async Task<StorageFolder> GetOrCreateFolderAsync(this StorageFolder folder, string name)
+    {
+        var item = await folder.TryGetItemAsync(name) as StorageFolder;
+        item ??= await folder.CreateFolderAsync(name);
+        return item;
     }
 }

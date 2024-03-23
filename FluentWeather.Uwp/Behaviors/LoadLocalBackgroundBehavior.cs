@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.ApplicationModel;
+using FluentWeather.Uwp.Helpers;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -40,17 +41,9 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     private WeatherCode _weatherType = WeatherCode.Unknown;
     public async void LoadImage()
     {
-        StorageFolder folder;
-        try
-        {
-            folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
-        }
-        catch
-        {
-            folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
-        }
-        var assetsFolder = await Package.Current.InstalledLocation.GetFolderAsync("Assets");
-        assetsFolder = await assetsFolder.GetFolderAsync("Backgrounds");
+        var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("Backgrounds");
+        var assetsFolder = await Package.Current.InstalledLocation.GetOrCreateFolderAsync("Assets");
+        assetsFolder = await assetsFolder.GetOrCreateFolderAsync("Backgrounds");
 
         var image = await GetImage(folder, WeatherType.ToString());
         image ??= await GetImage(folder, GetImageName(WeatherType));

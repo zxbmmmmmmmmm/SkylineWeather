@@ -16,12 +16,7 @@ public sealed class CacheHelper
 {
     public static async Task<WeatherCacheBase> GetWeatherCache(GeolocationBase location)
     {
-        var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt") )as IStorageFile;
-        if (item is null)
-        {
-            item = await CreateCacheFile();
-            return null;
-        }
+        var item = await ApplicationData.Current.LocalCacheFolder.GetOrCreateFileAsync("WeatherCache.txt");
         try
         {      
             //读取文件
@@ -38,7 +33,7 @@ public sealed class CacheHelper
     }
     public static async void Cache(MainPageViewModel viewModel)
     {
-        var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt")) as IStorageFile;
+        var item = await ApplicationData.Current.LocalCacheFolder.GetOrCreateFileAsync("WeatherCache.txt");
         var text = await FileIO.ReadTextAsync(item);
         List<JsonNode> cacheData;
         try
@@ -68,13 +63,10 @@ public sealed class CacheHelper
         var json = JsonSerializer.Serialize(cacheData);
         await FileIO.WriteTextAsync(item,json);
     }
+
     public static async void Clear()
     {
-        var item = (await ApplicationData.Current.LocalCacheFolder.TryGetItemAsync("WeatherCache.txt")) as IStorageFile;
+        var item = await ApplicationData.Current.LocalCacheFolder.GetOrCreateFileAsync("WeatherCache.txt");
         await FileIO.WriteTextAsync(item, "");
-    }
-    public static async Task<IStorageFile> CreateCacheFile()
-    {
-        return await ApplicationData.Current.LocalCacheFolder.CreateFileAsync("WeatherCache.txt");
     }
 }
