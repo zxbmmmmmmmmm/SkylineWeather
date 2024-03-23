@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
@@ -28,6 +29,29 @@ namespace FluentWeather.QWeatherApi.Helpers
                 }
             }
             return newCollection;
+        }
+        public static string MD5Encrypt64(this string data)
+        {
+            var md5 = MD5.Create(); 
+            var s = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
+            return Convert.ToBase64String(s);
+        }
+
+        public static string MD5Encrypt32(this string data)
+        {
+            var md5 = MD5.Create();
+            var t = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
+            var stringBuilder = new StringBuilder();
+            for (var i = 0; i < t.Length; i++)
+            {
+                stringBuilder.Append(t[i].ToString("x").PadLeft(2, '0'));
+            }
+            return stringBuilder.ToString();
+        }
+        public static string GetTimeStamp(this DateTime dt)
+        {
+            var ts = dt - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();//精确到秒
         }
     }
 }

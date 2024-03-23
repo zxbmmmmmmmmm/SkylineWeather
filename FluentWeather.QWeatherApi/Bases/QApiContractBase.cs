@@ -28,7 +28,26 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
     {
         var sb = new StringBuilder("https://");
         sb.Append(option.Domain).Append(Path).Append("?");
-        sb.Append(GenerateQuery(option).Sort());
+        var query = GenerateQuery(option);
+
+        if (option.PublicId is not "" && option.PublicId is not null)
+        {
+            query.Remove("key");
+            query.Remove("sign");
+            query.Add("t", DateTime.UtcNow.GetTimeStamp());
+            query.Add("publicid", option.PublicId);
+            query = query.Sort();
+            var param= HttpUtility.UrlDecode(query.ToString());
+            param += option.Token;
+            var sign = param.MD5Encrypt32().ToLower();
+            sb.Append(HttpUtility.UrlDecode(query.ToString()));
+            sb.Append("&sign=").Append(sign);
+        }
+        else
+        {
+            query.Add("key", option.Token);
+            sb.Append(query.Sort());
+        }
 
         var requestMessage = new HttpRequestMessage(Method, sb.ToString());
 
@@ -41,11 +60,11 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
             requestMessage.Headers.Add("Cookie", string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}")));
         return Task.FromResult(requestMessage);
     }
+    
 
     protected virtual NameValueCollection GenerateQuery(ApiHandlerOption option)
     {
         var queryCollection = HttpUtility.ParseQueryString(string.Empty);
-        queryCollection.Add("key", option.Token);
         if (option.Language is not null)
             queryCollection.Add("lang", option.Language);
         return queryCollection;

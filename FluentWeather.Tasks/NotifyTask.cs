@@ -22,7 +22,7 @@ namespace FluentWeather.Tasks
 
             LogManager.GetLogger(nameof(NotifyTask)).Info("NotifyTask Started");
 
-            var provider = new QWeatherProvider.QWeatherProvider(Settings.QWeatherToken,Settings.QWeatherDomain);
+            var provider = new QWeatherProvider.QWeatherProvider(Settings.QWeatherToken,Settings.QWeatherDomain,null,Settings.QWeatherPublicId);
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
             if(lat is -1 || lon is -1)

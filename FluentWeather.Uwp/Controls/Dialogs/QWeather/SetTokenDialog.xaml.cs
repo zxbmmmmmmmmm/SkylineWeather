@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.QWeatherProvider;
 using FluentWeather.Uwp.Shared;
 using System;
@@ -38,22 +39,33 @@ public sealed partial class SetTokenDialog : ContentDialog
     }
     [RelayCommand]
     private async Task Confirm()
-    { 
-        var domain = await CheckKey(Key);
-        if(domain is "")
+    {
+        try
+        {
+            var domain = await CheckKey(Key);
+            Common.Settings.QWeatherToken = Key;
+            Common.Settings.QWeatherDomain = domain;
+            Common.Settings.QWeatherPublicId = PublicId;
+            Hide();
+            await CoreApplication.RequestRestartAsync(string.Empty);
+        }
+        catch(HttpResponseException e)
         {
             ErrorTextblock.Visibility = Visibility.Visible;
-            ErrorTextblock.Text = "此KEY不可用，请重试";
-            return;
+            if(PublicId != "")
+            {
+                ErrorTextblock.Text = $"认证失败({(int)e.Code}-{e.Code})" + Environment.NewLine + "请检查Public Id与KEY是否对应";
+            }
+            else
+            {
+                ErrorTextblock.Text = $"此KEY不可用，请重试({(int)e.Code}-{e.Code})";
+            }
         }
-        Common.Settings.QWeatherToken = Key;
-        Common.Settings.QWeatherDomain = domain;
-        Hide();
-        await CoreApplication.RequestRestartAsync(string.Empty);
+
     }
     private async Task<string> CheckKey(string token)
     {
-        var client = new QWeatherProvider.QWeatherProvider(token, "api.qweather.com");
+        var client = new QWeatherProvider.QWeatherProvider(token, "api.qweather.com",null,PublicId);
         try
         {
             await client.GetCurrentWeather(116.39,39.9);
@@ -61,14 +73,7 @@ public sealed partial class SetTokenDialog : ContentDialog
         catch
         {
             client.SetDomain("devapi.qweather.com");
-            try
-            {
-               await client.GetCurrentWeather(116.39, 39.9);
-            }
-            catch
-            {
-                return "";
-            }
+            await client.GetCurrentWeather(116.39, 39.9);
             return "devapi.qweather.com";
         }
         return "api.qweather.com";

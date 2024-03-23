@@ -201,12 +201,12 @@ public sealed class Settings : INotifyPropertyChanged
         }
     }
 
-    public string QWeatherPublicKey
+    public string QWeatherPublicId
     {
-        get => GetSettings("qweather." + "Public", "");
+        get => GetSettings("qweather." + "PublicId", "");
         set
         {
-            ApplicationData.Current.LocalSettings.Values["qweather." + "Public"] = value;
+            ApplicationData.Current.LocalSettings.Values["qweather." + "PublicId"] = value;
             OnPropertyChanged();
         }
     }

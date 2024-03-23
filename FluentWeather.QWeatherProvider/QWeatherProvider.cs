@@ -53,7 +53,7 @@ public sealed class QWeatherProvider : ProviderBase,
         Option.Token = token;
         Option.Domain = domain;
         Option.Language = language;
-        Option.PublicKey = publicKey;
+        Option.PublicId = publicKey;
     }
     public void SetDomain(string domain)
     {
@@ -65,14 +65,14 @@ public sealed class QWeatherProvider : ProviderBase,
     }
     public void SetPublicKey(string key)
     {
-        Option.PublicKey = key;
+        Option.PublicId = key;
     }
     public void GetSettings()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
         Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
-        Option.PublicKey = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.PublicKey, "");
+        Option.PublicId = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.PublicId, "");
         var language = settingsHelper?.ReadLocalSetting<string>(QWeatherSettings.Language.ToString(), null);
         if (language is null) return;
         if (language.Contains("-") && !language.Contains("zh-hant"))
@@ -180,5 +180,5 @@ public enum QWeatherSettings
     Token,
     Domain,
     Language,
-    PublicKey
+    PublicId
 }
