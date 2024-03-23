@@ -7,25 +7,49 @@ using System.Threading.Tasks;
 using System;
 using System.Runtime.CompilerServices;
 using FluentWeather.QWeatherApi.Helpers;
+using System.Web;
+using System.Collections.Specialized;
 
 namespace FluentWeather.QWeatherApi.Bases;
 
-public abstract class QApiContractBase<TResponse>:QApiContractBase<QWeatherRequest,TResponse>
+public abstract class QApiContractBase<TResponse>:QApiContractBase<QWeatherRequest,TResponse> where TResponse : QWeatherResponseBase
 {
-    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    protected override NameValueCollection GenerateQuery(ApiHandlerOption option)
     {
-        return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&location={Request.Lon},{Request.Lat}");
+        var result = base.GenerateQuery(option);
+        result.Add("location", $"{Request.Lon},{Request.Lat}");
+        return result;
     }
 }
 
-public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TResquest, TResponse>
+public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TResquest, TResponse> where TResponse : QWeatherResponseBase
 {
     public override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
-        var uri = "https://" + option.Domain + Path + $"?key={option.Token}";
-        if (option.Language is not null)
-            uri += $"&lang={option.Language}";
-        var requestMessage = new HttpRequestMessage(Method, uri);
+        var sb = new StringBuilder("https://");
+        sb.Append(option.Domain).Append(Path).Append("?");
+        var query = GenerateQuery(option);
+
+        if (option.PublicId is not "" && option.PublicId is not null)
+        {
+            query.Remove("key");
+            query.Remove("sign");
+            query.Add("t", DateTime.UtcNow.GetTimeStamp());
+            query.Add("publicid", option.PublicId);
+            query = query.Sort();
+            var param= HttpUtility.UrlDecode(query.ToString());
+            param += option.Token;
+            var sign = param.MD5Encrypt32().ToLower();
+            sb.Append(HttpUtility.UrlDecode(query.ToString()));
+            sb.Append("&sign=").Append(sign);
+        }
+        else
+        {
+            query.Add("key", option.Token);
+            sb.Append(query.Sort());
+        }
+
+        var requestMessage = new HttpRequestMessage(Method, sb.ToString());
 
         var cookies = option.Cookies.ToDictionary(t => t.Key, t => t.Value);
         foreach (var keyValuePair in Cookies)
@@ -36,15 +60,22 @@ public abstract class QApiContractBase<TResquest,TResponse> : ApiContractBase<TR
             requestMessage.Headers.Add("Cookie", string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}")));
         return Task.FromResult(requestMessage);
     }
+    
+
+    protected virtual NameValueCollection GenerateQuery(ApiHandlerOption option)
+    {
+        var queryCollection = HttpUtility.ParseQueryString(string.Empty);
+        if (option.Language is not null)
+            queryCollection.Add("lang", option.Language);
+        return queryCollection;
+    }
+
     public override async Task<TResponse> ProcessResponseAsync(HttpResponseMessage response, ApiHandlerOption option)
     {
-        if (!response.IsSuccessStatusCode)
-            throw new HttpRequestException( $"请求返回 HTTP 代码: {response.StatusCode}");
-
         var buffer = await response.Content.ReadAsByteArrayAsync();
         if (buffer is null || buffer.Length == 0) throw new DecoderFallbackException("返回体预读取错误");
-        var ret = JsonSerializer.Deserialize<TResponse>(Encoding.UTF8.GetString(buffer), option.JsonSerializerOptions);
-        
+        var str = Encoding.UTF8.GetString(buffer);
+        var ret = JsonSerializer.Deserialize<TResponse>(str, option.JsonSerializerOptions);
         if (ret is null) throw new JsonException("返回 JSON 解析为空");
         return ret;
     }

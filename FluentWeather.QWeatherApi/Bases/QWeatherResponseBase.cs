@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text.Json.Serialization;
 
 namespace FluentWeather.QWeatherApi.Bases;

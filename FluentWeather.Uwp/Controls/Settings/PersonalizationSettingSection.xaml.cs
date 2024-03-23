@@ -97,7 +97,7 @@ namespace FluentWeather.Uwp.Controls.Settings
 
         private async void RestartButton_Click(object sender, RoutedEventArgs e)
         {
-            await CoreApplication.RequestRestartAsync(String.Empty);
+            await CoreApplication.RequestRestartAsync(string.Empty);
         }
 
         private void ThemeStyleButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)

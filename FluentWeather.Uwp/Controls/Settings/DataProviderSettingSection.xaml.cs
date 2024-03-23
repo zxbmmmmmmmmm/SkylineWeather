@@ -1,4 +1,5 @@
-﻿using FluentWeather.Uwp.Helpers;
+﻿using FluentWeather.Uwp.Controls.Dialogs.QWeather;
+using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace FluentWeather.Uwp.Controls.Settings
             //    DataProviderComboBox.SelectedIndex = 0;
             //if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.OpenMeteoConfig))
             //    DataProviderComboBox.SelectedIndex = 1;
+        }
+
+        private async void SetKeyCard_Click(object sender, RoutedEventArgs e)
+        {
+            await new SetTokenDialog().ShowAsync();
         }
         //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
         //    IList<KeyValuePair<TKey, TValue>> y)

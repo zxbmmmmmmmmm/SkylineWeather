@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     mc:Ignorable="d"
     Style="{ThemeResource DefaultContentDialogStyle}"
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     x:Uid="ErrorDialog">
 
     <Grid>

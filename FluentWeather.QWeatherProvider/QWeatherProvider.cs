@@ -4,8 +4,8 @@ using FluentWeather.Abstraction.Interfaces.Helpers;
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.DIContainer;
-using FluentWeather.QGeoApi.ApiContracts;
 using FluentWeather.QWeatherApi;
 using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherApi.Bases;
@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
 
@@ -46,18 +47,32 @@ public sealed class QWeatherProvider : ProviderBase,
         Instance = this;
         GetSettings();
     }
-    public QWeatherProvider(string token,string domain,string language = null)
+    public QWeatherProvider(string token,string domain,string language = null,string publicKey = null)
     {
         Instance = this;
         Option.Token = token;
         Option.Domain = domain;
         Option.Language = language;
+        Option.PublicId = publicKey;
+    }
+    public void SetDomain(string domain)
+    {
+        Option.Domain = domain;
+    }
+    public void SetToken(string token)
+    {
+        Option.Token = token;
+    }
+    public void SetPublicKey(string key)
+    {
+        Option.PublicId = key;
     }
     public void GetSettings()
     {
         var settingsHelper = Locator.ServiceProvider.GetService<ISettingsHelper>();
         Option.Token = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Token, "");
         Option.Domain = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.Domain, "devapi.qweather.com");
+        Option.PublicId = settingsHelper.ReadLocalSetting(Id + "." + QWeatherSettings.PublicId, "");
         var language = settingsHelper?.ReadLocalSetting<string>(QWeatherSettings.Language.ToString(), null);
         if (language is null) return;
         if (language.Contains("-") && !language.Contains("zh-hant"))
@@ -103,10 +118,13 @@ public sealed class QWeatherProvider : ProviderBase,
         return res;
     }
     public async Task<TResponse> RequestAsync<TRequest, TResponse>(
-        ApiContractBase<TRequest, TResponse> contract, TRequest request)
+        ApiContractBase<TRequest, TResponse> contract, TRequest request) where TResponse : QWeatherResponseBase
     {
         var handler = new QWeatherApiHandler();
-        return await handler.RequestAsync(contract, request, Option);
+        var response = await handler.RequestAsync(contract, request, Option);
+        if (!response.Code.StartsWith("2"))
+            throw new HttpResponseException($"Request returned http status code {response.Code}",(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode),response.Code));
+        return response;
     }
 
     public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)
@@ -161,5 +179,6 @@ public enum QWeatherSettings
 {
     Token,
     Domain,
-    Language
+    Language,
+    PublicId
 }

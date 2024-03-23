@@ -1,6 +1,7 @@
 ﻿using FluentWeather.QWeatherApi.Bases;
 using FluentWeather.QWeatherApi.Helpers;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ public sealed class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
 {
     public override HttpMethod Method => HttpMethod.Get;
     public override string Path => ApiConstants.Weather.DailyForecast7D;
-    public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+    public override async Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
     {
         var res = await base.GenerateRequestMessageAsync(option);
         if(option.Domain is "api.qweather.com")

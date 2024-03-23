@@ -2,6 +2,7 @@
 using FluentWeather.QWeatherApi.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -14,16 +15,18 @@ namespace FluentWeather.QWeatherApi.ApiContracts
         public override HttpMethod Method => HttpMethod.Get;
 
         public override string Path => ApiConstants.Weather.TyphoonForecast;
-        public async override Task<HttpRequestMessage> GenerateRequestMessageAsync(ApiHandlerOption option)
+        protected override NameValueCollection GenerateQuery(ApiHandlerOption option)
         {
-            return (await base.GenerateRequestMessageAsync(option)).AddQuery($"&stormid={Request.TyphoonId}");
+            var result = base.GenerateQuery(option);
+            result.Add("stormid", Request.TyphoonId);
+            return result;
         }
     }
     public sealed class TyphoonForecastRequest : RequestBase
     {
         public string TyphoonId { get; set; }
     }
-    public sealed class TyphoonForecastResponse
+    public sealed class TyphoonForecastResponse : QWeatherResponseBase
     {
         [JsonPropertyName("forecast")]
         public List<TyphoonForecastItem> Forecasts { get; set; }

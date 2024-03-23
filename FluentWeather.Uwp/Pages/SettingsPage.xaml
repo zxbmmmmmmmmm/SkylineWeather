@@ -38,10 +38,9 @@
                 <settings:PersonalizationSettingSection Grid.Row="1" />
                 <settings:LocationSettingSection Grid.Row="2" />
                 <settings:NotificationSettingSection Grid.Row="3" />
-                <settings:QWeatherSettingSection Grid.Row="4" />
-                <settings:UpdateSettingSection Grid.Row="5" />
+                <settings:UpdateSettingSection Grid.Row="4" />
                 <StackPanel
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Spacing="8"
                     x:Name="DeveloperMenu"
                     Visibility="Collapsed">
