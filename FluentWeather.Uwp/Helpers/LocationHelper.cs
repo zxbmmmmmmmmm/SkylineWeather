@@ -12,6 +12,7 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Controls.Dialogs.QWeather;
+using FluentWeather.Abstraction.Models.Exceptions;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -60,7 +61,7 @@ public sealed class LocationHelper
                 }
                 return city.First();
             }
-            catch
+            catch(HttpResponseException)
             {
                 await new SetTokenDialog().ShowAsync();
             }
