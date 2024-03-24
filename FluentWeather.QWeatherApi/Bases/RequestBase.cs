@@ -1,4 +1,4 @@
-﻿namespace FluentWeather.QWeatherApi.Bases;
+﻿namespace QWeatherApi.Bases;
 
 public class RequestBase
 {

@@ -1,14 +1,12 @@
-﻿using FluentWeather.QWeatherApi.Bases;
-using FluentWeather.QWeatherApi.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using QWeatherApi.Bases;
+using QWeatherApi.Helpers;
 
-namespace FluentWeather.QWeatherApi.ApiContracts;
+namespace QWeatherApi.ApiContracts;
 
 /// <summary>
 /// 台风当前情况和历史

@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentWeather.QWeatherApi.Bases;
+using QWeatherApi.Bases;
 
-namespace FluentWeather.QWeatherApi;
+namespace QWeatherApi;
 
 public class QWeatherApiHandler
 {

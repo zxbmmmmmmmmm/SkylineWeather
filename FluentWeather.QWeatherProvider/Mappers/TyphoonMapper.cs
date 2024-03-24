@@ -1,11 +1,11 @@
 ﻿using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
-using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static FluentWeather.QWeatherApi.ApiContracts.TyphoonTrackItem;
+using QWeatherApi.ApiContracts;
+using static QWeatherApi.ApiContracts.TyphoonTrackItem;
 
 namespace FluentWeather.QWeatherProvider.Mappers;
 public static class TyphoonMapper

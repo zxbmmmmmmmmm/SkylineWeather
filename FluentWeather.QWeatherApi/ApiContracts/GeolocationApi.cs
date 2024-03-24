@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using FluentWeather.QWeatherApi.Bases;
+using QWeatherApi.Bases;
 
-namespace FluentWeather.QWeatherApi.ApiContracts
+namespace QWeatherApi.ApiContracts
 {
     public class GeolocationApi<TResponse>: QApiContractBase<IQGeolocationRequest,TResponse> where TResponse : QWeatherResponseBase
     {

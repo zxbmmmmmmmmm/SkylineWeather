@@ -1,9 +1,9 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
-using FluentWeather.QWeatherProvider.Models;
+﻿using FluentWeather.QWeatherProvider.Models;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using QWeatherApi.ApiContracts;
 
 namespace FluentWeather.QWeatherProvider.Mappers
 {

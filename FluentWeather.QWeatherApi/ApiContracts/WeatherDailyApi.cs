@@ -1,13 +1,11 @@
-﻿using FluentWeather.QWeatherApi.Bases;
-using FluentWeather.QWeatherApi.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using QWeatherApi.Bases;
 
-namespace FluentWeather.QWeatherApi.ApiContracts;
+namespace QWeatherApi.ApiContracts;
 
 public sealed class WeatherDailyApi:QApiContractBase<WeatherDailyResponse>
 {

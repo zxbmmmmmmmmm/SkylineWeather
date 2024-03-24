@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FluentWeather.QWeatherApi.Bases;
+namespace QWeatherApi.Bases;
 
 public abstract class ApiContractBase<TRequest, TResponse>
 {

@@ -1,8 +1,9 @@
-﻿using FluentWeather.QWeatherApi.Bases;
+﻿using System;
 using System.Net.Http;
 using System.Text.Json.Serialization;
-using System;
-namespace FluentWeather.QWeatherApi.ApiContracts;
+using QWeatherApi.Bases;
+
+namespace QWeatherApi.ApiContracts;
 
 public sealed class WeatherNowApi: QApiContractBase<WeatherNowResponse>
 {

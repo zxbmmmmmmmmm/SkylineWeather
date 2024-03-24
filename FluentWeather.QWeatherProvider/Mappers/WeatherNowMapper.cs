@@ -1,6 +1,6 @@
 ﻿using FluentWeather.Abstraction.Helpers;
-using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
+using QWeatherApi.ApiContracts;
 
 namespace FluentWeather.QWeatherProvider.Mappers;
 

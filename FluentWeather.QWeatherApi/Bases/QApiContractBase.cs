@@ -1,16 +1,14 @@
-﻿using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Runtime.CompilerServices;
-using FluentWeather.QWeatherApi.Helpers;
-using System.Web;
+﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Web;
+using QWeatherApi.Helpers;
 
-namespace FluentWeather.QWeatherApi.Bases;
+namespace QWeatherApi.Bases;
 
 public abstract class QApiContractBase<TResponse>:QApiContractBase<QWeatherRequest,TResponse> where TResponse : QWeatherResponseBase
 {

@@ -1,4 +1,4 @@
-﻿namespace FluentWeather.QWeatherApi;
+﻿namespace QWeatherApi;
 
 public static class ApiConstants
 {

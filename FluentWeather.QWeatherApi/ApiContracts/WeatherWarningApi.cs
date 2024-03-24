@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
-using FluentWeather.QWeatherApi.Bases;
+using QWeatherApi.Bases;
 
-namespace FluentWeather.QWeatherApi.ApiContracts;
+namespace QWeatherApi.ApiContracts;
 
 public sealed class WeatherWarningApi: QApiContractBase<WeatherWarningResponse>
 {

@@ -1,6 +1,6 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
+﻿using QWeatherApi.ApiContracts;
 
-namespace FluentWeather.QWeatherApi;
+namespace QWeatherApi;
 
 public static class QWeatherApis
 {

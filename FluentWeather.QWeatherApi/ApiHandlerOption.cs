@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace FluentWeather.QWeatherApi;
+namespace QWeatherApi;
 
 public class ApiHandlerOption
 {

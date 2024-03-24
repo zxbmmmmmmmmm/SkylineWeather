@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FluentWeather.Abstraction\FluentWeather.Abstraction.csproj" />
     <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj" />
-    <ProjectReference Include="..\FluentWeather.QWeatherApi\FluentWeather.QWeatherApi.csproj" />
+    <ProjectReference Include="..\FluentWeather.QWeatherApi\QWeatherApi.csproj" />
   </ItemGroup>
   
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using FluentWeather.Abstraction.Models;
 using System;
 using System.Runtime.CompilerServices;
-using static FluentWeather.QWeatherApi.ApiContracts.QGeolocationResponse;
+using static QWeatherApi.ApiContracts.QGeolocationResponse;
 
 namespace FluentWeather.QWeatherProvider.Mappers;
 public static class GeolocationMapper
