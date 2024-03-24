@@ -1,9 +1,9 @@
 ﻿using FluentWeather.Abstraction.Models;
-using FluentWeather.QWeatherApi.ApiContracts;
 using FluentWeather.QWeatherProvider.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using QWeatherApi.ApiContracts;
 
 namespace FluentWeather.QWeatherProvider.Mappers
 {
@@ -13,8 +13,8 @@ namespace FluentWeather.QWeatherProvider.Mappers
         {
             return new PrecipitationItemBase
             {
-                 Precipitation = double.Parse(item.Precip),
-                 Time = DateTime.Parse(item.FxTime),
+                 Precipitation = item.Precip,
+                 Time = item.FxTime,
                  IsSnow = item.Type is "snow"
             };
         }

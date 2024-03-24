@@ -547,12 +547,12 @@
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                            <Run Text="{x:Bind ViewModel.SunRise.ToShortTimeString(), Mode=OneWay}" />
+                            <Run Text="{x:Bind ViewModel.SunRise,Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                            <Run Text="{x:Bind ViewModel.SunSet.ToShortTimeString(), Mode=OneWay}" />
+                            <Run Text="{x:Bind ViewModel.SunSet,Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
                         </TextBlock>
                         <controls:AdaptiveGridView
                             Grid.Row="1"

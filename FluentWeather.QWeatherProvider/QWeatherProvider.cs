@@ -6,9 +6,6 @@ using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.DIContainer;
-using FluentWeather.QWeatherApi;
-using FluentWeather.QWeatherApi.ApiContracts;
-using FluentWeather.QWeatherApi.Bases;
 using FluentWeather.QWeatherProvider.Mappers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +15,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
+using QWeatherApi;
+using QWeatherApi.ApiContracts;
+using QWeatherApi.Bases;
 
 namespace FluentWeather.QWeatherProvider;
 

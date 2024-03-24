@@ -1,8 +1,7 @@
-﻿using FluentWeather.QWeatherApi.ApiContracts;
-using FluentWeather.QWeatherProvider.Models;
+﻿using FluentWeather.QWeatherProvider.Models;
 using System;
 using System.Runtime.CompilerServices;
-using static FluentWeather.QWeatherApi.ApiContracts.WeatherIndicesResponse;
+using static QWeatherApi.ApiContracts.WeatherIndicesResponse;
 
 namespace FluentWeather.QWeatherProvider.Mappers;
 
@@ -13,11 +12,11 @@ public static class WeatherIndicesMapper
         return new QWeatherIndices
         {
             Category = item.Category,
-            Date = DateTime.Parse(item.Date),
+            Date = item.Date,
             Name = item.Name,
             Description = item.Text,
-            Level = int.Parse(item.Level),
-            Type = int.Parse(item.Type)
+            Level = item.Level,
+            Type = item.Type
         };
     }
 }

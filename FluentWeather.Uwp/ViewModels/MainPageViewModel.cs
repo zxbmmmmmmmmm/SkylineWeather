@@ -44,10 +44,10 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     private string _weatherDescription;
 
     [ObservableProperty]
-    private DateTime _sunRise;
+    private DateTime? _sunRise;
 
     [ObservableProperty]
-    private DateTime _sunSet;
+    private DateTime? _sunSet;
 
     [ObservableProperty]
     private GeolocationBase _currentGeolocation;

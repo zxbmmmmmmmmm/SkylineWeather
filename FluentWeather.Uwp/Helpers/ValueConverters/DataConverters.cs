@@ -41,7 +41,8 @@ public class ToShortTimeStringConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-        return ((DateTime)value).ToShortTimeString();
+        var result = (DateTime?)value;
+        return value is null ? null : result.Value.ToShortTimeString();
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -22,8 +22,8 @@ public class WeatherDailyBase : WeatherBase, IWeatherNight, ITemperatureRange, I
 
     public string? WindScale { get; set; }
     public  int WindSpeed { get; set; }
-    public  DateTime SunRise { get; set; }
-    public  DateTime SunSet { get; set; }
+    public  DateTime? SunRise { get; set; }
+    public  DateTime? SunSet { get; set; }
     public  WindDirection WindDirection { get; set; }
     public List<WeatherHourlyBase>? HourlyForecasts { get; set; }
     public int? CloudAmount { get; set; }
