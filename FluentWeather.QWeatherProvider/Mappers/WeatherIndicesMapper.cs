@@ -13,11 +13,11 @@ public static class WeatherIndicesMapper
         return new QWeatherIndices
         {
             Category = item.Category,
-            Date = DateTime.Parse(item.Date),
+            Date = item.Date,
             Name = item.Name,
             Description = item.Text,
-            Level = int.Parse(item.Level),
-            Type = int.Parse(item.Type)
+            Level = item.Level,
+            Type = item.Type
         };
     }
 }

@@ -145,7 +145,7 @@
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Text="日出" />
                         <TextBlock FontSize="16">
-                            <Run FontSize="32" Text="{x:Bind ViewModel.SunRise.ToShortTimeString()}" />
+                            <Run FontSize="32" Text="{x:Bind ViewModel.SunRise,Converter={StaticResource ToShortTimeStringConverter}}" />
                         </TextBlock>
                     </StackPanel>
                     <StackPanel>
@@ -154,7 +154,7 @@
                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                             Text="日落" />
                         <TextBlock FontSize="16">
-                            <Run FontSize="32" Text="{x:Bind ViewModel.SunSet.ToShortTimeString()}" />
+                            <Run FontSize="32" Text="{x:Bind ViewModel.SunSet,Converter={StaticResource ToShortTimeStringConverter}}" />
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>

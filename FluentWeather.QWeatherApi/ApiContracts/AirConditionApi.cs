@@ -20,13 +20,13 @@ namespace FluentWeather.QWeatherApi.ApiContracts
         public class AirConditionItem
         {
             [JsonPropertyName("pubTime")]
-            public string PubTime { get; set; }
+            public DateTime PubTime { get; set; }
 
             [JsonPropertyName("aqi")]
-            public string Aqi { get; set; }
+            public int Aqi { get; set; }
 
             [JsonPropertyName("level")]
-            public string Level { get; set; }
+            public int Level { get; set; }
 
             [JsonPropertyName("category")]
             public string Category { get; set; }
@@ -35,22 +35,22 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             public string Primary { get; set; }
 
             [JsonPropertyName("pm10")]
-            public string Pm10 { get; set; }
+            public double Pm10 { get; set; }
 
             [JsonPropertyName("pm2p5")]
-            public string Pm2p5 { get; set; }
+            public double Pm2p5 { get; set; }
 
             [JsonPropertyName("no2")]
-            public string No2 { get; set; }
+            public double No2 { get; set; }
 
             [JsonPropertyName("so2")]
-            public string So2 { get; set; }
+            public double So2 { get; set; }
 
             [JsonPropertyName("co")]
-            public string Co { get; set; }
+            public double Co { get; set; }
 
             [JsonPropertyName("o3")]
-            public string O3 { get; set; }
+            public double O3 { get; set; }
         }
     }
 }

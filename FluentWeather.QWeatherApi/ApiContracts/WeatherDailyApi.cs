@@ -35,16 +35,37 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
         public DateTime FxDate { get; set; }
 
         [JsonPropertyName("sunrise")]
-        public DateTime? Sunrise { get; set; }
+        private string _sunrise;
+        public DateTime? Sunrise
+        {
+            get => _sunrise is "" or null ? null : DateTime.Parse(_sunrise);
+            set => _sunrise = value.ToString();
+        }
 
         [JsonPropertyName("sunset")]
-        public DateTime? Sunset { get; set; }
+        private string _sunset;
+        public DateTime? Sunset
+        {
+            get => _sunset is "" or null ? null : DateTime.Parse(_sunset);
+            set => _sunset = value.ToString();
+        }
 
         [JsonPropertyName("moonrise")]
-        public DateTime? Moonrise { get; set; }
+        private string _moonrise;
+        public DateTime? Moonrise
+        {
+            get => _moonrise is "" or null ? null : DateTime.Parse(_moonrise);
+            set => _moonrise = value.ToString();
+        }
 
         [JsonPropertyName("moonset")]
-        public DateTime? Moonset { get; set; }
+        private string _moonset;
+        public DateTime? Moonset
+        {
+            get => _moonset is "" or null ? null : DateTime.Parse(_moonset);
+            set => _moonset = value.ToString();
+        }
+        
 
         [JsonPropertyName("moonPhase")]
         public string MoonPhase { get; set; }
@@ -74,7 +95,7 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
         public string Wind360Day { get; set; }
 
         [JsonPropertyName("windDirDay")]
-        public int WindDirDay { get; set; }
+        public string WindDirDay { get; set; }
 
         [JsonPropertyName("windScaleDay")]
         public string WindScaleDay { get; set; }

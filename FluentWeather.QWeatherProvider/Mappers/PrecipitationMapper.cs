@@ -13,8 +13,8 @@ namespace FluentWeather.QWeatherProvider.Mappers
         {
             return new PrecipitationItemBase
             {
-                 Precipitation = double.Parse(item.Precip),
-                 Time = DateTime.Parse(item.FxTime),
+                 Precipitation = item.Precip,
+                 Time = item.FxTime,
                  IsSnow = item.Type is "snow"
             };
         }

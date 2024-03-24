@@ -47,7 +47,7 @@ public sealed class TyphoonTrackItem
     }
 
     [JsonPropertyName("time")]
-    public DateTime Time { get; set; }
+    public DateTime? Time { get; set; }
 
     [JsonPropertyName("lat")]
     public double Lat { get; set; }

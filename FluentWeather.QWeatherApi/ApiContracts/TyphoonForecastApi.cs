@@ -51,7 +51,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             public int WindSpeed { get; set; }
 
             [JsonPropertyName("moveSpeed")]
-            public int MoveSpeed { get; set; }
+            public int? MoveSpeed { get; set; }
 
             [JsonPropertyName("moveDir")]
             public string MoveDir { get; set; }

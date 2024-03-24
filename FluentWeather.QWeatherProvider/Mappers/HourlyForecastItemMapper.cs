@@ -11,17 +11,17 @@ public static class HourlyForecastItemMapper
     {
         return new QWeatherHourlyForecast
         {
-            WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360)),
+            WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
             Description = item.Text,
             WindDirectionDescription = item.WindDir,
             WindScale = item.WindScale,
-            WindSpeed = int.Parse(item.WindSpeed),
-            Humidity = int.Parse(item.Humidity),
-            Pressure = int.Parse(item.Pressure),
-            Temperature = int.Parse(item.Temp),
-            Time = DateTime.Parse(item.FxTime),
-            PrecipitationProbability = item.Pop is null or "" ? null : int.Parse(item.Pop),
-            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null
+            WindSpeed = item.WindSpeed,
+            Humidity = item.Humidity,
+            Pressure = item.Pressure,
+            Temperature = item.Temp,
+            Time = item.FxTime,
+            PrecipitationProbability = item.Pop,
+            CloudAmount = item.Cloud
         };
     }
 }

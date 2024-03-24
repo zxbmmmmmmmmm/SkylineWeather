@@ -7,9 +7,9 @@ public interface IAstronomic
     /// <summary>
     /// 日出时间
     /// </summary>
-    DateTime SunRise { get; set; }
+    DateTime? SunRise { get; set; }
     /// <summary>
     /// 日落时间
     /// </summary>
-    DateTime SunSet { get; set; }
+    DateTime? SunSet { get; set; }
 }

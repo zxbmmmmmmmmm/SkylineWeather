@@ -29,7 +29,7 @@ public sealed class WeatherIndicesResponse : QWeatherResponseBase
         public DateTime Date { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public int Type { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

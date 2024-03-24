@@ -12,7 +12,7 @@ public static class GeolocationMapper
         {
             AdmDistrict = item.AdministrativeDistrict1,
             IsDaylightSavingTime = item.IsDaylightSavingTime is "1",
-            Location = new(double.Parse(item.Lat), double.Parse(item.Lon)),
+            Location = new(item.Lat, item.Lon),
             Name = item.Name,
             TimeZone = item.TimeZone,
             UtcOffset = TimeSpan.Parse(item.UtcOffset.Replace("+","")),

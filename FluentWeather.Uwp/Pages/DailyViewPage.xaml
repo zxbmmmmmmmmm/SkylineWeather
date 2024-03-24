@@ -143,12 +143,12 @@
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
                                             Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                                        <Run Text="{x:Bind SunRise.ToShortTimeString()}" />
+                                        <Run Text="{x:Bind SunRise,Converter={StaticResource ToShortTimeStringConverter}}" />
                                         <Run
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
                                             Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                                        <Run Text="{x:Bind SunSet.ToShortTimeString()}" />
+                                        <Run Text="{x:Bind SunSet,Converter={StaticResource ToShortTimeStringConverter}}" />
                                     </TextBlock>
                                     <controls1:AdaptiveGridView
                                         Grid.Row="3"

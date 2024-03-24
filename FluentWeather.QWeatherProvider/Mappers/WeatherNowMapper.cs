@@ -10,18 +10,18 @@ public static class WeatherNowMapper
     {
         return new QWeatherNow
         {
-            WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360)),
+            WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
             WindDirectionDescription  = item.WindDir,
             WindScale = item.WindScale,
-            WindSpeed = int.Parse(item.WindSpeed),
-            Humidity = int.Parse(item.Humidity),
-            Pressure = int.Parse(item.Pressure),
-            Visibility = int.Parse(item.Vis),
-            ApparentTemperature = int.Parse(item.FeelsLike),
-            Temperature = int.Parse(item.Temp),
+            WindSpeed = item.WindSpeed,
+            Humidity = item.Humidity,
+            Pressure = item.Pressure,
+            Visibility = item.Vis,
+            ApparentTemperature = item.FeelsLike,
+            Temperature = item.Temp,
             Description = item.Text,
-            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null,
-            DewPointTemperature = item.Dew is not "" ? int.Parse(item.Dew) : null
+            CloudAmount = item.Cloud,
+            DewPointTemperature = item.Dew
         }; 
     }
 }

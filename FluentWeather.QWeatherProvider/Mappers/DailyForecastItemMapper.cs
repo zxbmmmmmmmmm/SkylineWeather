@@ -15,24 +15,24 @@ public static class DailyForecastItemMapper
             Description = item.TextDay,
             WindDirectionDescription = item.WindDirDay,
             WindScale = item.WindScaleDay,
-            WindSpeed = int.Parse(item.WindSpeedDay),
-            Humidity = int.Parse(item.Humidity),
-            MaxTemperature = int.Parse(item.TempMax),
-            MinTemperature = int.Parse(item.TempMin),
-            Pressure = int.Parse(item.Pressure),
-            Time = DateTime.Parse(item.FxDate),
-            Visibility = int.Parse(item.Vis),
-            SunRise = DateTime.Parse(item.Sunrise),
-            SunSet = DateTime.Parse(item.Sunset),
-            CloudAmount = item.Cloud is not "" ? int.Parse(item.Cloud) : null,
+            WindSpeed = item.WindSpeedDay,
+            Humidity = item.Humidity,
+            MaxTemperature = item.TempMax,
+            MinTemperature = item.TempMin,
+            Pressure = item.Pressure,
+            Time = item.FxDate,
+            Visibility = item.Vis,
+            SunRise = item.Sunrise,
+            SunSet = item.Sunset,
+            CloudAmount = item.Cloud,
 
             WeatherNight = new QWeatherNight
             {
                 Description = item.TextNight,
-                WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360Night)),
+                WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360Night),
                 WindDirectionDescription = item.WindDirNight,
                 WindScale = item.WindScaleNight,
-                WindSpeed = int.Parse(item.WindSpeedNight),
+                WindSpeed = item.WindSpeedNight,
             }
         };
     }
