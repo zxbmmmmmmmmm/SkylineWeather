@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Http;
 using System.Text.Json.Serialization;
@@ -25,7 +26,7 @@ public sealed class WeatherIndicesResponse : QWeatherResponseBase
     public class IndicesItem
     {
         [JsonPropertyName("date")]
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -34,7 +35,7 @@ public sealed class WeatherIndicesResponse : QWeatherResponseBase
         public string Name { get; set; }
 
         [JsonPropertyName("level")]
-        public string Level { get; set; }
+        public int Level { get; set; }
 
         [JsonPropertyName("category")]
         public string Category { get; set; }

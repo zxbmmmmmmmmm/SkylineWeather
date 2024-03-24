@@ -33,31 +33,31 @@ namespace FluentWeather.QWeatherApi.ApiContracts
         public class TyphoonForecastItem
         {
             [JsonPropertyName("fxTime")]
-            public string FxTime { get; set; }
+            public DateTime FxTime { get; set; }
 
             [JsonPropertyName("lat")]
-            public string Lat { get; set; }
+            public double Lat { get; set; }
 
             [JsonPropertyName("lon")]
-            public string Lon { get; set; }
+            public double Lon { get; set; }
 
             [JsonPropertyName("type")]
             public string Type { get; set; }
 
             [JsonPropertyName("pressure")]
-            public string Pressure { get; set; }
+            public int Pressure { get; set; }
 
             [JsonPropertyName("windSpeed")]
-            public string WindSpeed { get; set; }
+            public int WindSpeed { get; set; }
 
             [JsonPropertyName("moveSpeed")]
-            public string MoveSpeed { get; set; }
+            public int MoveSpeed { get; set; }
 
             [JsonPropertyName("moveDir")]
             public string MoveDir { get; set; }
 
             [JsonPropertyName("move360")]
-            public string Move360 { get; set; }
+            public int Move360 { get; set; }
         }
     }
 }

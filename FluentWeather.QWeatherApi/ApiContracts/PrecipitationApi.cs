@@ -23,10 +23,10 @@ namespace FluentWeather.QWeatherApi.ApiContracts
         public class PrecipitationItem
         {
             [JsonPropertyName("fxTime")]
-            public string FxTime { get; set; }
+            public DateTime FxTime { get; set; }
 
             [JsonPropertyName("precip")]
-            public string Precip { get; set; }
+            public double Precip { get; set; }
 
             [JsonPropertyName("type")]
             public string Type { get; set; }

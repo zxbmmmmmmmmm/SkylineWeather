@@ -1,4 +1,5 @@
 ﻿using FluentWeather.QWeatherApi.Bases;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
@@ -27,10 +28,10 @@ public sealed class WeatherHourlyResponse : QWeatherResponseBase
     public sealed class HourlyForecastItem
     {
         [JsonPropertyName("fxTime")]
-        public string FxTime { get; set; }
+        public DateTime FxTime { get; set; }
 
         [JsonPropertyName("temp")]
-        public string Temp { get; set; }
+        public int Temp { get; set; }
 
         [JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -39,7 +40,7 @@ public sealed class WeatherHourlyResponse : QWeatherResponseBase
         public string Text { get; set; }
 
         [JsonPropertyName("wind360")]
-        public string Wind360 { get; set; }
+        public int Wind360 { get; set; }
 
         [JsonPropertyName("windDir")]
         public string WindDir { get; set; }
@@ -48,25 +49,25 @@ public sealed class WeatherHourlyResponse : QWeatherResponseBase
         public string WindScale { get; set; }
 
         [JsonPropertyName("windSpeed")]
-        public string WindSpeed { get; set; }
+        public int WindSpeed { get; set; }
 
         [JsonPropertyName("humidity")]
-        public string Humidity { get; set; }
+        public int Humidity { get; set; }
 
         [JsonPropertyName("pop")]
-        public string Pop { get; set; }
+        public int Pop { get; set; }
 
         [JsonPropertyName("precip")]
-        public string Precipitation { get; set; }
+        public double Precipitation { get; set; }
 
         [JsonPropertyName("pressure")]
-        public string Pressure { get; set; }
+        public int Pressure { get; set; }
 
         [JsonPropertyName("cloud")]
-        public string Cloud { get; set; }
+        public int? Cloud { get; set; }
 
         [JsonPropertyName("dew")]
-        public string Dew { get; set; }
+        public int? Dew { get; set; }
     }
 
 }

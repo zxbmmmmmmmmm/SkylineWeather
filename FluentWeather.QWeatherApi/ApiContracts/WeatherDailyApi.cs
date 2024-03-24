@@ -1,5 +1,6 @@
 ﻿using FluentWeather.QWeatherApi.Bases;
 using FluentWeather.QWeatherApi.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net.Http;
@@ -31,19 +32,19 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
     public class DailyForecastItem
     {
         [JsonPropertyName("fxDate")]
-        public string FxDate { get; set; }
+        public DateTime FxDate { get; set; }
 
         [JsonPropertyName("sunrise")]
-        public string Sunrise { get; set; }
+        public DateTime? Sunrise { get; set; }
 
         [JsonPropertyName("sunset")]
-        public string Sunset { get; set; }
+        public DateTime? Sunset { get; set; }
 
         [JsonPropertyName("moonrise")]
-        public string Moonrise { get; set; }
+        public DateTime? Moonrise { get; set; }
 
         [JsonPropertyName("moonset")]
-        public string Moonset { get; set; }
+        public DateTime? Moonset { get; set; }
 
         [JsonPropertyName("moonPhase")]
         public string MoonPhase { get; set; }
@@ -52,10 +53,10 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
         public string MoonPhaseIcon { get; set; }
          
         [JsonPropertyName("tempMax")]
-        public string TempMax { get; set; }
+        public int TempMax { get; set; }
 
         [JsonPropertyName("tempMin")]
-        public string TempMin { get; set; }
+        public int TempMin { get; set; }
 
         [JsonPropertyName("iconDay")]
         public string IconDay { get; set; }
@@ -73,16 +74,16 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
         public string Wind360Day { get; set; }
 
         [JsonPropertyName("windDirDay")]
-        public string WindDirDay { get; set; }
+        public int WindDirDay { get; set; }
 
         [JsonPropertyName("windScaleDay")]
         public string WindScaleDay { get; set; }
 
         [JsonPropertyName("windSpeedDay")]
-        public string WindSpeedDay { get; set; }
+        public int WindSpeedDay { get; set; }
 
         [JsonPropertyName("wind360Night")]
-        public string Wind360Night { get; set; }
+        public int Wind360Night { get; set; }
 
         [JsonPropertyName("windDirNight")]
         public string WindDirNight { get; set; }
@@ -91,24 +92,24 @@ public sealed class WeatherDailyResponse : QWeatherResponseBase
         public string WindScaleNight { get; set; }
 
         [JsonPropertyName("windSpeedNight")]
-        public string WindSpeedNight { get; set; }
+        public int WindSpeedNight { get; set; }
 
         [JsonPropertyName("humidity")]
-        public string Humidity { get; set; }
+        public int Humidity { get; set; }
 
         [JsonPropertyName("precip")]
-        public string Precipitation { get; set; }
+        public double Precipitation { get; set; }
 
         [JsonPropertyName("pressure")]
-        public string Pressure { get; set; }
+        public int Pressure { get; set; }
 
         [JsonPropertyName("vis")]
-        public string Vis { get; set; }
+        public int Vis { get; set; }
 
         [JsonPropertyName("cloud")]
-        public string Cloud { get; set; }
+        public int? Cloud { get; set; }
 
         [JsonPropertyName("uvIndex")]
-        public string UvIndex { get; set; }
+        public int UvIndex { get; set; }
     }
 }

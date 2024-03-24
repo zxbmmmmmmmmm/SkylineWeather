@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json.Serialization;
 using FluentWeather.QWeatherApi.Bases;
@@ -23,16 +24,16 @@ public sealed class WeatherWarningResponse : QWeatherResponseBase
         public string Sender { get; set; }
 
         [JsonPropertyName("pubTime")]
-        public string PubTime { get; set; }
+        public DateTime PubTime { get; set; }
 
         [JsonPropertyName("title")]
         public string Title { get; set; }
 
         [JsonPropertyName("startTime")]
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [JsonPropertyName("endTime")]
-        public string EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [JsonPropertyName("status")]
         public string Status { get; set; }

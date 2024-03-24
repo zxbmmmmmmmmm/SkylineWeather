@@ -41,37 +41,37 @@ public sealed class TyphoonTrackResponse : QWeatherResponseBase
 public sealed class TyphoonTrackItem
 {
     [JsonPropertyName("pubTime")]
-    private string _pubTime 
+    private DateTime _pubTime 
     {
         set => Time = value;
     }
 
     [JsonPropertyName("time")]
-    public string Time { get; set; }
+    public DateTime Time { get; set; }
 
     [JsonPropertyName("lat")]
-    public string Lat { get; set; }
+    public double Lat { get; set; }
 
     [JsonPropertyName("lon")]
-    public string Lon { get; set; }
+    public double Lon { get; set; }
 
     [JsonPropertyName("type")]
     public string Type { get; set; }
 
     [JsonPropertyName("pressure")]
-    public string Pressure { get; set; }
+    public int Pressure { get; set; }
 
     [JsonPropertyName("windSpeed")]
-    public string WindSpeed { get; set; }
+    public int WindSpeed { get; set; }
 
     [JsonPropertyName("moveSpeed")]
-    public string MoveSpeed { get; set; }
+    public int MoveSpeed { get; set; }
 
     [JsonPropertyName("moveDir")]
     public string MoveDir { get; set; }
 
     [JsonPropertyName("move360")]
-    public string Move360 { get; set; }
+    public int Move360 { get; set; }
 
     [JsonPropertyName("windRadius30")]
     public WindRadiusItem WindRadius7 { get; set; }
@@ -86,15 +86,15 @@ public sealed class TyphoonTrackItem
     public sealed class WindRadiusItem
     {
         [JsonPropertyName("neRadius")]
-        public string NeRadius { get; set; }
+        public int NeRadius { get; set; }
 
         [JsonPropertyName("seRadius")]
-        public string SeRadius { get; set; }
+        public int SeRadius { get; set; }
 
         [JsonPropertyName("swRadius")]
-        public string SwRadius { get; set; }
+        public int SwRadius { get; set; }
 
         [JsonPropertyName("nwRadius")]
-        public string NwRadius { get; set; }
+        public int NwRadius { get; set; }
     }
 }

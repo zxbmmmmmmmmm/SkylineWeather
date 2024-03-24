@@ -74,10 +74,10 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             public string Id { get; set; }
 
             [JsonPropertyName("lat")]
-            public string Lat { get; set; }
+            public double Lat { get; set; }
 
             [JsonPropertyName("lon")]
-            public string Lon { get; set; }
+            public double Lon { get; set; }
             /// <summary>
             /// 地区/城市的上级行政区划名称(如:北京)
             /// </summary>
@@ -106,7 +106,7 @@ namespace FluentWeather.QWeatherApi.ApiContracts
             public string Type { get; set; }
 
             [JsonPropertyName("rank")]
-            public string Rank { get; set; }
+            public int Rank { get; set; }
 
             [JsonPropertyName("fxLink")]
             public string FxLink { get; set; }
