@@ -5,5 +5,5 @@ namespace FluentWeather.DIContainer;
 public class Locator
 {
     public static ServiceCollection ServiceDescriptors { get; } = new();
-    public static ServiceProvider ServiceProvider => ServiceDescriptors.BuildServiceProvider();
+    public static ServiceProvider ServiceProvider;
 }

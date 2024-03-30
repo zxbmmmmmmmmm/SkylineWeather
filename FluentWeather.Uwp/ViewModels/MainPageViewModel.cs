@@ -202,7 +202,6 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         {
             await Refresh();
         }
-        Analytics.TrackEvent("WeatherDataObtained", new Dictionary<string, string> { { "CityName", geo.Name } });
     }
 
     [RelayCommand]

@@ -20,6 +20,7 @@ using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using Windows.UI.Xaml;
 using FluentWeather.Uwp.Shared;
 using Microsoft.AppCenter.Analytics;
+using FluentWeather.Uwp.Helpers.Analytics;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -57,7 +58,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     {
         Cities.Add(city);
         Query = city.Name;
-        Analytics.TrackEvent("CitySaved", new Dictionary<string, string> { { "CityName", city.Name } });
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackCitySaved(city.Name);
     }
     [RelayCommand]
     public void DeleteCity(GeolocationBase item)

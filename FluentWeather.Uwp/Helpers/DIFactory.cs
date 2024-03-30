@@ -10,6 +10,7 @@ using FluentWeather.Uwp.Shared;
 using FluentWeather.QWeatherProvider;
 using static FluentWeather.DIContainer.Locator;
 using Windows.Media.Protection.PlayReady;
+using FluentWeather.Uwp.Helpers.Analytics;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -18,6 +19,8 @@ public static class DIFactory
     public static void RegisterRequiredServices()
     {
         ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
+        ServiceDescriptors.AddSingleton(typeof(AppAnalyticsService), typeof(AppCenterAnalyticsService));
+
         switch (Common.Settings.ProviderConfig)
         {
             case ProviderConfig.QWeather:
@@ -30,6 +33,8 @@ public static class DIFactory
                 RegisterQWeather();
                 break;
         }
+
+        Locator.ServiceProvider = ServiceDescriptors.BuildServiceProvider();
     }
     public static void ReadSettings()
     {

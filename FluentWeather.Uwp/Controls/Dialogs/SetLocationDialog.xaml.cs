@@ -28,6 +28,7 @@ using FluentWeather.Uwp.Controls.Dialogs.QWeather;
 using System.Reflection;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.Uwp.Helpers.Analytics;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
@@ -60,7 +61,7 @@ public sealed partial class SetLocationDialog : ContentDialog
     {
         Common.Settings.DefaultGeolocation = ChosenGeolocation;
         Hide();
-        Analytics.TrackEvent("DefaultLocationChanged", new Dictionary<string, string> { { "CityName", ChosenGeolocation.Name } });
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackDefaultLocationChanged(ChosenGeolocation.Name);
         await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation, Common.Settings.SavedCities);
     }
 
