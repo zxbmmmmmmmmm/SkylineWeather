@@ -30,7 +30,6 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
             Point = new Coordinate(lat,lon),
             IncludeIso2 = true,
             IncludeNeighborhood = true,
-            
             BingMapsKey = BingMapsKey
         };
 
@@ -58,7 +57,6 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
             BingMapsKey = BingMapsKey
         };
 
-        //Process the request by using the ServiceManager.
         var response = await request.Execute();
 
         if (response is { ResourceSets.Length: > 0 } &&
