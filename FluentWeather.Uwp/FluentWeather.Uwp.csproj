@@ -657,6 +657,10 @@
       <Project>{0627214c-2da0-4b49-bb12-dc8c44014eee}</Project>
       <Name>FluentWeather.Abstraction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.BingGeolocationProvider\FluentWeather.BingGeolocationProvider.csproj">
+      <Project>{d48c0130-53b3-4c1d-8d03-45cb5bcbbbcc}</Project>
+      <Name>FluentWeather.BingGeolocationProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentWeather.DIContainer\FluentWeather.DIContainer.csproj">
       <Project>{15e289d2-4104-4889-b968-60d2c2efd806}</Project>
       <Name>FluentWeather.DIContainer</Name>
