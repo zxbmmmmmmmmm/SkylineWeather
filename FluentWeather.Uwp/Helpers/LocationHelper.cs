@@ -53,7 +53,7 @@ public sealed class LocationHelper
                     await new SetLocationDialog().ShowAsync();
                     return Common.Settings.DefaultGeolocation;
                 }
-                var city = await service.GetCitiesGeolocationByLocation(lon, lat);
+                var city = await service.GetCitiesGeolocationByLocation(lat, lon);
                 if (city.Count is 0)//根据经纬度获取城市失败
                 {
                     await new SetLocationDialog().ShowAsync();
@@ -76,7 +76,7 @@ public sealed class LocationHelper
         {
             return Common.Settings.DefaultGeolocation;
         }
-        var c = await service.GetCitiesGeolocationByLocation(lo, la);
+        var c = await service.GetCitiesGeolocationByLocation(la, lo);
         return c.Count is 0 ? Common.Settings.DefaultGeolocation : c.First();//若定位失败仍然使用默认位置
     }
 
