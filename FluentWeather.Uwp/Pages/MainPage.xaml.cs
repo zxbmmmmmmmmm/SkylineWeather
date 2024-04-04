@@ -159,7 +159,7 @@ public sealed partial class MainPage : Page
         {
             var dialog = new ErrorDialog();
             dialog.Exceptions = _xamlRenderer.Errors.Cast<Exception>().ToList();
-            dialog.ShowAsync();
+            await DialogManager.OpenDialogAsync(dialog);
             return null;
         }
     }

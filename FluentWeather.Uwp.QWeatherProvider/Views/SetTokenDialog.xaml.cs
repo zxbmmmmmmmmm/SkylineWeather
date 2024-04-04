@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Models.Exceptions;
-using FluentWeather.QWeatherProvider;
 using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
-namespace FluentWeather.Uwp.Controls.Dialogs.QWeather;
+namespace FluentWeather.Uwp.QWeatherProvider.Views;
 [ObservableObject]
 public sealed partial class SetTokenDialog : ContentDialog
 {
@@ -65,7 +64,7 @@ public sealed partial class SetTokenDialog : ContentDialog
     }
     private async Task<string> CheckKey(string token)
     {
-        var client = new QWeatherProvider.QWeatherProvider(token, "api.qweather.com",null,PublicId);
+        var client = new QWeatherProvider(token, "api.qweather.com",null,PublicId);
         try
         {
             await client.GetCurrentWeather(116.39,39.9);

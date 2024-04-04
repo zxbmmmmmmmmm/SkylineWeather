@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Uwp.Controls.Popups;
+using FluentWeather.Uwp.Shared;
 using Microsoft.Xaml.Interactivity;
 using System;
 using Windows.UI.Xaml;
@@ -42,17 +43,17 @@ public class ListViewOpenContentDialogBehavior:Behavior<ListViewBase>
     }
     private async void ListItemClicked(object sender, ItemClickEventArgs e)
     {
-
+        ContentDialog dialog;
         if(UseArguments)
-        {
-            var dialog = Activator.CreateInstance(DialogType,AssociatedObject,e.ClickedItem) as ContentDialog;
-            await dialog?.ShowAsync();
+        { 
+            dialog = Activator.CreateInstance(DialogType,AssociatedObject,e.ClickedItem) as ContentDialog;
         }
         else
-        {
-            var dialog = Activator.CreateInstance(DialogType) as ContentDialog;
-            await dialog?.ShowAsync();
+        { 
+            dialog = Activator.CreateInstance(DialogType) as ContentDialog;
         }
+        await DialogManager.OpenDialogAsync(dialog);
+
     }
 
 }

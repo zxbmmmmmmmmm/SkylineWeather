@@ -41,15 +41,15 @@ public static class DataProviderHelper
         var assembly = typeof(ProviderBase).Assembly;
         return assembly.ExportedTypes.FirstOrDefault(p => p.Name == name);
     }
-    public static Type GetProviderTypeById(string id)
-    {
-        return id switch
-        {
-            "qweather" => typeof(QWeatherProvider.QWeatherProvider),
-            "open-meteo" => typeof(OpenMeteoProvider.OpenMeteoProvider),
-            "qgeoapi" => typeof(QWeatherProvider.QWeatherProvider),
-            _ => typeof(QWeatherProvider.QWeatherProvider)
-        };
-    }
+    //public static Type GetProviderTypeById(string id)
+    //{
+    //    //return id switch
+    //    //{
+    //    //    "qweather" => typeof(QWeatherProvider),
+    //    //    "open-meteo" => typeof(OpenMeteoProvider.OpenMeteoProvider),
+    //    //    "qgeoapi" => typeof(QWeatherProvider),
+    //    //    _ => typeof(QWeatherProvider)
+    //    //};
+    //}
    
 }

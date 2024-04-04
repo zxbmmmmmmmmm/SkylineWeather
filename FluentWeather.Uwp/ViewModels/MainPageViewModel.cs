@@ -6,7 +6,6 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.DIContainer;
 using FluentWeather.Tasks;
-using FluentWeather.Uwp.Controls.Dialogs.QWeather;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels.Interfaces;
@@ -19,6 +18,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
+using FluentWeather.Uwp.QWeatherProvider.Views;
+using FluentWeather.Uwp.Controls.Dialogs;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -160,27 +161,28 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         try
         {
             await Task.WhenAll(tasks.ToArray());
+            if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
+            {
+                WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+            }
+            if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
+            {
+                TileHelper.UpdateTiles(DailyForecasts);
+            }
+            foreach (var hourly in HourlyForecasts)
+            {
+                var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
+                if (daily is null) continue;
+                daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
+                daily.HourlyForecasts?.Add(hourly);
+            }
+            CacheHelper.Cache(this);
         }
         catch(HttpResponseException e)
-        { 
-            await new SetTokenDialog().ShowAsync();
-        }
-        if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
         {
-            WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+            InfoBarHelper.Error("获取数据失败",e.Message);
         }
-        if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
-        {
-            TileHelper.UpdateTiles(DailyForecasts);
-        }
-        foreach (var hourly in HourlyForecasts)
-        {
-            var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
-            if(daily is null) continue;
-            daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
-            daily.HourlyForecasts?.Add(hourly);
-        }
-        CacheHelper.Cache(this);
+
     }
 
     public async void GetWeather(GeolocationBase geo)

@@ -157,9 +157,6 @@
     <Compile Include="Controls\Dialogs\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Dialogs\QWeather\SetTokenDialog.xaml.cs">
-      <DependentUpon>SetTokenDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Dialogs\SetLocationDialog.xaml.cs">
       <DependentUpon>SetLocationDialog.xaml</DependentUpon>
     </Compile>
@@ -458,10 +455,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Dialogs\QWeather\SetTokenDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\Dialogs\SetLocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -669,13 +662,13 @@
       <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
       <Name>FluentWeather.OpenMeteoProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
-      <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>
-      <Name>FluentWeather.QWeatherProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FluentWeather.Tasks\FluentWeather.Tasks.csproj">
       <Project>{1d5d0620-541d-44ae-8206-90cb899ccf8c}</Project>
       <Name>FluentWeather.Tasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.Uwp.QWeatherProvider\FluentWeather.Uwp.QWeatherProvider.csproj">
+      <Project>{47f2b7fc-1b81-4d69-b5ba-d1160532ed63}</Project>
+      <Name>FluentWeather.Uwp.QWeatherProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\FluentWeather.Uwp.Shared\FluentWeather.Uwp.Shared.csproj">
       <Project>{23269c7b-0343-48b6-9909-505d667b0dbf}</Project>

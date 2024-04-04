@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using System.Collections.Generic;
 using FluentWeather.Uwp.Shared;
-using FluentWeather.QWeatherProvider;
+using FluentWeather.Uwp.QWeatherProvider;
 using static FluentWeather.DIContainer.Locator;
 using Windows.Media.Protection.PlayReady;
 using FluentWeather.Uwp.Helpers.Analytics;
@@ -76,15 +76,15 @@ public static class DIFactory
         ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(BingGeolocationProvider.BingGeolocationProvider));
         OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");
     }
-    public static void RegisterProviders(List<KeyValuePair<string, string>> dic)
-    {
-        foreach (var item in dic)
-        {
+    //public static void RegisterProviders(List<KeyValuePair<string, string>> dic)
+    //{
+    //    foreach (var item in dic)
+    //    {
 
-            var name = DataProviderHelper.GetProviderInterfaceByName(item.Key);
-            var provider = DataProviderHelper.GetProviderTypeById(item.Value);
-            if (name is null || provider is null) continue;
-            Locator.ServiceDescriptors.AddSingleton(name, provider);
-        }
-    }
+    //        var name = DataProviderHelper.GetProviderInterfaceByName(item.Key);
+    //        var provider = DataProviderHelper.GetProviderTypeById(item.Value);
+    //        if (name is null || provider is null) continue;
+    //        Locator.ServiceDescriptors.AddSingleton(name, provider);
+    //    }
+    //}
 }

@@ -1,5 +1,4 @@
 ﻿using FluentWeather.Abstraction.Models;
-using FluentWeather.QWeatherProvider.Models;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
 using System;
