@@ -26,6 +26,9 @@ using Windows.ApplicationModel;
 using CommunityToolkit.WinUI.Helpers;
 using Windows.System;
 using Microsoft.AppCenter.Analytics;
+using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -69,7 +72,7 @@ public sealed partial class RootPage : Page
             if (info.IsExistNewVersion)
             {
                 InfoBarHelper.Info("更新可用", info.TagName, action: viewAction, buttonContent: "查看");
-                Analytics.TrackEvent("UpdateViewed");
+                Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackUpdateViewed(info.TagName);
             }
         }
         catch(Exception ex)

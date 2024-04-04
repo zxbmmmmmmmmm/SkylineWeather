@@ -26,6 +26,7 @@
             x:Uid="SearchAutoSuggestBox"
             Margin="8,8,8,8"
             BorderBrush="{StaticResource AutoSuggestBoxBorderBrush}"
+            ItemTemplate="{ThemeResource GeolocationSuggestTemplate}"
             IsTabStop="False"
             ItemsSource="{x:Bind ViewModel.SuggestedCities, Mode=OneWay}"
             QueryIcon="Find"
@@ -34,17 +35,6 @@
             <AutoSuggestBox.Resources>
                 <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem" />
             </AutoSuggestBox.Resources>
-            <AutoSuggestBox.ItemTemplate>
-                <DataTemplate x:DataType="models:GeolocationBase">
-                    <Grid>
-                        <TextBlock Text="{x:Bind Name}" />
-                        <TextBlock
-                            HorizontalAlignment="Right"
-                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                            Text="{x:Bind AdmDistrict}" />
-                    </Grid>
-                </DataTemplate>
-            </AutoSuggestBox.ItemTemplate>
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="QuerySubmitted">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.GetCitiesCommand}" CommandParameter="{x:Bind SearchBox.Text, Mode=OneWay}" />

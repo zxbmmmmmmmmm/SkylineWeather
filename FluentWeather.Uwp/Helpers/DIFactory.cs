@@ -10,6 +10,8 @@ using FluentWeather.Uwp.Shared;
 using FluentWeather.QWeatherProvider;
 using static FluentWeather.DIContainer.Locator;
 using Windows.Media.Protection.PlayReady;
+using FluentWeather.Uwp.Helpers.Analytics;
+using FluentWeather.BingGeolocationProvider;
 
 namespace FluentWeather.Uwp.Helpers;
 
@@ -18,6 +20,8 @@ public static class DIFactory
     public static void RegisterRequiredServices()
     {
         ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
+        ServiceDescriptors.AddSingleton(typeof(AppAnalyticsService), typeof(AppCenterAnalyticsService));
+
         switch (Common.Settings.ProviderConfig)
         {
             case ProviderConfig.QWeather:
@@ -30,6 +34,8 @@ public static class DIFactory
                 RegisterQWeather();
                 break;
         }
+
+        Locator.ServiceProvider = ServiceDescriptors.BuildServiceProvider();
     }
     public static void ReadSettings()
     {
@@ -54,7 +60,7 @@ public static class DIFactory
         ServiceDescriptors.AddSingleton(typeof(IAirConditionProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
-        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(BingGeolocationProvider.BingGeolocationProvider));
     }
     public static void RegisterOpenMeteo()
     {
@@ -67,7 +73,7 @@ public static class DIFactory
         ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(ISetting), typeof(QWeatherProvider.QWeatherProvider));
-        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(QWeatherProvider.QWeatherProvider));
+        ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(BingGeolocationProvider.BingGeolocationProvider));
         OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");
     }
     public static void RegisterProviders(List<KeyValuePair<string, string>> dic)

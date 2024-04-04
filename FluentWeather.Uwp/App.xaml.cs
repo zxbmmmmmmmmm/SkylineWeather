@@ -30,6 +30,8 @@ using FluentWeather.Uwp.Themes;
 using MetroLog;
 using MetroLog.Targets;
 using Windows.ApplicationModel.Resources;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FluentWeather.Uwp;
 
@@ -48,9 +50,6 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
-#if (!DEBUG)
-        AppCenter.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(Analytics), typeof(Crashes));
-#endif
     }
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()
@@ -151,6 +150,8 @@ sealed partial class App : Application
             Window.Current.Activate();
         }
         ActiveArguments = e.Arguments;
+        var service = DIContainer.Locator.ServiceProvider.GetService<AppAnalyticsService>();
+        service.Start();
         ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
     }
 

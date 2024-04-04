@@ -29,6 +29,9 @@ using CommunityToolkit.WinUI;
 using Windows.System.RemoteSystems;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Controls.Dialogs;
+using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -72,7 +75,7 @@ public sealed partial class MainPage : Page
     {
         _dailyViewPage.SelectedIndex = _dailyItemsView.IndexFromContainer(_dailyItemsView.ContainerFromItem(e.ClickedItem));
         _mainContentContainer.Visibility = Visibility.Collapsed;
-        Analytics.TrackEvent("DailyViewEntered");
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackDailyViewEntered();
     }
 
     private Visibility GetPrecipChartVisibility(PrecipitationBase precip)

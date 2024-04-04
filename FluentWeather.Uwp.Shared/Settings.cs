@@ -182,6 +182,16 @@ public sealed class Settings : INotifyPropertyChanged
         }
     }
 
+    public string BingMapsKey
+    {
+        get => GetSettings("bingmaps." + "Key", "");
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values["bingmaps." + "Key"] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public string QGeolocationToken
     {
         get => GetSettings("qgeoapi." + "Token", "");

@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers.Analytics;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +31,7 @@ public sealed partial class AboutDialog : ContentDialog
     public AboutDialog()
     {
         this.InitializeComponent();
-        Analytics.TrackEvent("AboutOpened", new Dictionary<string, string> { { "CurrentVersion", AppVersion } });
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackAboutOpened();
     }
     [RelayCommand]
     public void Close()

@@ -22,6 +22,9 @@ using Microsoft.AppCenter.Analytics;
 using System.Security.Cryptography.X509Certificates;
 using FluentWeather.Uwp.Controls.Dialogs;
 using Windows.ApplicationModel.Resources;
+using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -38,10 +41,10 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             var versionString = Package.Current.Id.Version.ToFormattedString();
             var res = ResourceLoader.GetForCurrentView();
-            Analytics.TrackEvent("UpdateManualChecked",new Dictionary<string, string> { { "CurrentVersion", versionString } });
             try
             {
                 var info = await UpdateHelper.CheckUpdateAsync("zxbmmmmmmmmm", "FluentWeather", new Version(versionString));
+                Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackUpdateManualChecked();
                 var viewAction = new Action(() =>
                 {
                     new UpdateDialog(info).ShowAsync();
