@@ -2,11 +2,13 @@
 using FluentWeather.Abstraction;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.BingGeolocationProvider.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +43,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
         {
             return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
         }
-        throw new HttpRequestException();
+        throw new HttpResponseException(response.ErrorDetails[0],(HttpStatusCode)response.StatusCode);
     }
 
     public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
@@ -64,6 +66,6 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
         {
             return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
         }
-        throw new HttpRequestException();
+        throw new HttpResponseException(response.ErrorDetails[0], (HttpStatusCode)response.StatusCode);
     }
 }

@@ -25,8 +25,8 @@ public sealed class LocationHelper
         {
             case GeolocationAccessStatus.Allowed:
 
-                Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = 100 };
-                Geoposition pos = await geolocator.GetGeopositionAsync();
+                var geolocator = new Geolocator { DesiredAccuracyInMeters = 10 };
+                var pos = await geolocator.GetGeopositionAsync();
                 return (pos.Coordinate.Point.Position.Longitude, pos.Coordinate.Point.Position.Latitude);
 
             case GeolocationAccessStatus.Unspecified:
@@ -45,26 +45,19 @@ public sealed class LocationHelper
         var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
         if (Common.Settings.DefaultGeolocation?.Name is null)//默认位置未设置
         {
-            try
+            var (lon, lat) = await LocationHelper.UpdatePosition();
+            if (lon is -1 || lat is -1)//获取位置失败
             {
-                var (lon, lat) = await LocationHelper.UpdatePosition();
-                if (lon is -1 || lat is -1)//获取位置失败
-                {
-                    await new SetLocationDialog().ShowAsync();
-                    return Common.Settings.DefaultGeolocation;
-                }
-                var city = await service.GetCitiesGeolocationByLocation(lat, lon);
-                if (city.Count is 0)//根据经纬度获取城市失败
-                {
-                    await new SetLocationDialog().ShowAsync();
-                    return Common.Settings.DefaultGeolocation;
-                }
-                return city.First();
+                await new SetLocationDialog().ShowAsync();
+                return Common.Settings.DefaultGeolocation;
             }
-            catch(HttpResponseException)
+            var city = await service.GetCitiesGeolocationByLocation(lat, lon);
+            if (city.Count is 0)//根据经纬度获取城市失败
             {
-                await new SetTokenDialog().ShowAsync();
+                await new SetLocationDialog().ShowAsync();
+                return Common.Settings.DefaultGeolocation;
             }
+            return city.First();
         }
 
         if (!Common.Settings.UpdateLocationOnStartup)//不更新位置
