@@ -4,6 +4,7 @@ using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.BingGeolocationProvider.Mappers;
+using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,10 +21,8 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
 {
     public override string Name => "BingMapsGeolocation";
 
-    public override string Id => "bing-maps";
-
-    private const string BingMapsKey = "";
-
+    public override string Id => "bingmaps";
+    
     public async Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon)
     {
         var request = new ReverseGeocodeRequest()
@@ -32,7 +31,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
             Point = new Coordinate(lat,lon),
             IncludeIso2 = true,
             IncludeNeighborhood = true,
-            BingMapsKey = BingMapsKey
+            BingMapsKey = Common.Settings.BingMapsKey,
         };
 
         //Process the request by using the ServiceManager.
@@ -56,7 +55,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
             IncludeIso2 = true,
             IncludeNeighborhood = true,
             MaxResults = 25,
-            BingMapsKey = BingMapsKey
+            BingMapsKey = Common.Settings.BingMapsKey,
         };
 
         var response = await request.Execute();
