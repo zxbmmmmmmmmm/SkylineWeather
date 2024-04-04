@@ -1123,12 +1123,11 @@
     </DataTemplate>
     <DataTemplate x:Key="GeolocationSuggestTemplate" x:DataType="models:GeolocationBase">
         <StackPanel Padding="0,8">
-            <TextBlock Text="{x:Bind Name}"/>
-            <TextBlock 
-                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                <Run Text="{x:Bind Country}"/>
-                <Run Text="{x:Bind AdmDistrict}"/>
-                <Run Text="{x:Bind AdmDistrict2}"/>
+            <TextBlock Text="{x:Bind Name}" />
+            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                <Run Text="{x:Bind Country}" />
+                <Run Text="{x:Bind AdmDistrict}" />
+                <Run Text="{x:Bind AdmDistrict2}" />
             </TextBlock>
         </StackPanel>
     </DataTemplate>

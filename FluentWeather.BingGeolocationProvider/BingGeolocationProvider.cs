@@ -28,10 +28,10 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
         var request = new ReverseGeocodeRequest()
         {
             Culture = CultureInfo.CurrentCulture.ToString(),
-            Point = new Coordinate(lat,lon),
+            Point = new Coordinate(lat, lon),
             IncludeIso2 = true,
             IncludeNeighborhood = true,
-            BingMapsKey = Common.Settings.BingMapsKey,
+            BingMapsKey = Constants.BingMapsKey,
         };
 
         //Process the request by using the ServiceManager.
@@ -55,7 +55,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
             IncludeIso2 = true,
             IncludeNeighborhood = true,
             MaxResults = 25,
-            BingMapsKey = Common.Settings.BingMapsKey,
+            BingMapsKey = Constants.BingMapsKey,
         };
 
         var response = await request.Execute();

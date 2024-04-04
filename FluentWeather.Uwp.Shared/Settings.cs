@@ -181,20 +181,10 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
-    public string BingMapsKey
-    {
-        get => GetSettings("bingmaps." + "Key", "");
-        set
-        {
-            ApplicationData.Current.LocalSettings.Values["bingmaps." + "Key"] = value;
-            OnPropertyChanged();
-        }
-    }
-
+    
     public string QGeolocationToken
     {
-        get => GetSettings("qgeoapi." + "Token", "");
+        get => GetSettings("qgeoapi." + "Token", Constants.QGeolocationToken);
         set
         {
             ApplicationData.Current.LocalSettings.Values["qgeoapi." + "Token"] = value;
@@ -203,7 +193,7 @@ public sealed class Settings : INotifyPropertyChanged
     }
     public string QWeatherToken
     {
-        get => GetSettings("qweather." + "Token", "");
+        get => GetSettings("qweather." + "Token", Constants.QWeatherToken);
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "Token"] = value;
@@ -213,7 +203,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public string QWeatherPublicId
     {
-        get => GetSettings("qweather." + "PublicId", "");
+        get => GetSettings("qweather." + "PublicId", Constants.QWeatherPublicId);
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "PublicId"] = value;

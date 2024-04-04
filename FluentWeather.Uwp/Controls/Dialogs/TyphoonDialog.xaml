@@ -38,7 +38,6 @@
             <maps:MapControl
                 x:Name="TyphoonMap"
                 LandmarksVisible="False"
-                MapServiceToken="6iY6JneJPV7AFhir2V6U~8UMtoXGEqONtfgaNlwbBFQ~AjYXGzbTvKUcQK5QKcI3--6uWd0k03mMqMJP8jmYxuYzdd0CrLmhFaQWggXaAggO"
                 PedestrianFeaturesVisible="False"
                 Style="AerialWithRoads"
                 TrafficFlowVisible="False"

@@ -123,6 +123,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Constants.Secret.cs" />
     <Compile Include="DataProviderHelper.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ThemeHelper.cs" />

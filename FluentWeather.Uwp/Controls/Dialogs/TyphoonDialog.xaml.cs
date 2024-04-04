@@ -41,6 +41,7 @@ namespace FluentWeather.Uwp.Controls.Dialogs
             this.InitializeComponent();
             GetTyphoons();
             ShowWarningLines();
+            TyphoonMap.MapServiceToken = Constants.BingMapsKey;
             DataContext = this;
             Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackTyphoonDialogOpened();
         }
