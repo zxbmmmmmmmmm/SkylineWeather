@@ -279,6 +279,16 @@ public sealed class Settings : INotifyPropertyChanged
         }
     }
 
+    public bool OOBECompleted
+    {
+        get => GetSettings(nameof(OOBECompleted), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(OOBECompleted)] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     public async void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
