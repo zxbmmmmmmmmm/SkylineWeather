@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Controls.Dialogs;
+using FluentWeather.Uwp.Shared;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 namespace FluentWeather.Uwp.Controls.Settings
@@ -30,7 +31,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         [RelayCommand]
         private async Task OpenLocationDialog()
         {
-            await new SetLocationDialog().ShowAsync();
+            await DialogManager.OpenDialogAsync(new SetLocationDialog());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using FluentWeather.Uwp.Controls.Dialogs.QWeather;
-using FluentWeather.Uwp.Helpers;
+﻿using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
@@ -16,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FluentWeather.Uwp.QWeatherProvider.Views;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -37,7 +37,7 @@ namespace FluentWeather.Uwp.Controls.Settings
 
         private async void SetKeyCard_Click(object sender, RoutedEventArgs e)
         {
-            await new SetTokenDialog().ShowAsync();
+            await DialogManager.OpenDialogAsync(new SetTokenDialog());
         }
         //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
         //    IList<KeyValuePair<TKey, TValue>> y)

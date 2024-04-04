@@ -13,7 +13,6 @@ using Windows.UI.Xaml;
 using MetroLog;
 using MetroLog.Targets;
 using System.Collections.ObjectModel;
-using FluentWeather.QWeatherProvider.Models;
 using Windows.Foundation.Metadata;
 using System.Globalization;
 

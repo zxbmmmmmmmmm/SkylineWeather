@@ -24,11 +24,15 @@ public sealed partial class Generic:ResourceDictionary
 
     public static ImageSource GetIconByWeather(WeatherCode code)
     {
+        return new BitmapImage(GetIconUriByWeather(code));
+    }
+    public static Uri GetIconUriByWeather(WeatherCode code)
+    {
         var name = GetImageNameDay(code);
         name = name is "" ? GetImageName(code) : name;
-        return new BitmapImage(new Uri("ms-appx:///Assets/Weather/" + name));
+        return new Uri("ms-appx:///Assets/Weather/" + name);
     }
-    public static ImageSource GetIconByWeather(WeatherCode weather,DateTime time)
+    public static Uri GetIconUriByWeather(WeatherCode weather, DateTime time)
     {
         var imageName = "";
         if (time.TimeOfDay >= TimeSpan.FromHours(6) && time.TimeOfDay <= TimeSpan.FromHours(18))
@@ -41,8 +45,11 @@ public sealed partial class Generic:ResourceDictionary
         }
         imageName = imageName is "" ? GetImageName(weather) : imageName;
 
-        var uri = new Uri("ms-appx:///Assets/Weather/" + imageName);
-        return new BitmapImage(uri);
+        return new Uri("ms-appx:///Assets/Weather/" + imageName);
+    }
+    public static ImageSource GetIconByWeather(WeatherCode weather,DateTime time)
+    {
+        return new BitmapImage(GetIconUriByWeather(weather,time));
     }
 
     public static string GetImageName(WeatherCode weatherType)

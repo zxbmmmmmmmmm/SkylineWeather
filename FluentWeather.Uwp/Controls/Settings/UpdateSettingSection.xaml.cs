@@ -45,9 +45,9 @@ namespace FluentWeather.Uwp.Controls.Settings
             {
                 var info = await UpdateHelper.CheckUpdateAsync("zxbmmmmmmmmm", "FluentWeather", new Version(versionString));
                 Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackUpdateManualChecked();
-                var viewAction = new Action(() =>
-                {
-                    new UpdateDialog(info).ShowAsync();
+                var viewAction = new Action(async () =>
+                { 
+                    DialogManager.OpenDialogAsync(new UpdateDialog(info));
                 });
                 if (info.IsExistNewVersion)
                 {

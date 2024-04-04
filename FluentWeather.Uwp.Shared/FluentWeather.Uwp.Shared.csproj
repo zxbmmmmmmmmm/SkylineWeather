@@ -126,6 +126,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Constants.Secret.cs" />
     <Compile Include="DataProviderHelper.cs" />
+    <Compile Include="DialogManager.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ThemeHelper.cs" />
     <Compile Include="TileHelper.cs" />
@@ -155,10 +156,9 @@
       <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
       <Name>FluentWeather.OpenMeteoProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FluentWeather.QWeatherProvider\FluentWeather.QWeatherProvider.csproj">
-      <Project>{89720ebb-0489-4147-a200-753747f4bcb8}</Project>
-      <Name>FluentWeather.QWeatherProvider</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

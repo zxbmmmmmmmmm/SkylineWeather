@@ -1006,8 +1006,15 @@
                 <Image
                     Width="50"
                     Height="50"
-                    Source="{x:Bind local:Generic.GetIconByWeather(WeatherType)}"
-                    Stretch="Uniform" />
+                    Stretch="Uniform">
+                    <Image.Source>
+                        <BitmapImage
+                            DecodePixelHeight="50"
+                            DecodePixelWidth="50"
+                            UriSource="{x:Bind local:Generic.GetIconUriByWeather(WeatherType)}" />
+                    </Image.Source>
+                </Image>
+
                 <TextBlock
                     FontSize="{ThemeResource WeatherDescriptionFontSize}"
                     Text="{x:Bind Description}"
@@ -1050,8 +1057,14 @@
             <Image
                 Width="36"
                 Height="36"
-                Source="{x:Bind local:Generic.GetIconByWeather(WeatherType, Time)}"
-                Stretch="Uniform" />
+                Stretch="Uniform">
+                <Image.Source>
+                    <BitmapImage
+                        DecodePixelHeight="36"
+                        DecodePixelWidth="36"
+                        UriSource="{x:Bind local:Generic.GetIconUriByWeather(WeatherType, Time)}" />
+                </Image.Source>
+            </Image>
             <TextBlock
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
                 MaxLines="2"

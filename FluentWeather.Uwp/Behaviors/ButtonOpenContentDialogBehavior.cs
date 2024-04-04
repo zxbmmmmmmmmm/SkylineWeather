@@ -3,6 +3,7 @@ using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -26,7 +27,7 @@ public class ButtonOpenContentDialogBehavior:Behavior<ButtonBase>
     private async void ButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
     {
         var dialog = Activator.CreateInstance(DialogType) as ContentDialog;
-        await dialog?.ShowAsync();
+        await DialogManager.OpenDialogAsync(dialog);
     }
 
     protected override void OnDetaching()

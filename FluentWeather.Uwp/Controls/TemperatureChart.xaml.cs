@@ -1,6 +1,5 @@
 ﻿using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
-using FluentWeather.QWeatherProvider.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
