@@ -6,6 +6,5 @@ namespace FluentWeather.Uwp.QWeatherProvider.Models;
 
 public sealed class QWeatherHourlyForecast :WeatherHourlyBase,  ICloudAmount
 {
-    public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
     public int? CloudAmount { get; set; }
 }

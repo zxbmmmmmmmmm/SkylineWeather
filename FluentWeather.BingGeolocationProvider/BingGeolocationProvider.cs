@@ -60,10 +60,14 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
 
         var response = await request.Execute();
 
-        if (response is { ResourceSets.Length: > 0 } &&
-            response.ResourceSets[0].Resources is { Length: > 0 })
+        if (response is { ResourceSets.Length: > 0 })
         {
-            return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
+            if(response.ResourceSets[0].Resources is { Length: > 0 })
+            {
+                return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
+            }
+
+            return new List<GeolocationBase>();
         }
         throw new HttpResponseException(response.ErrorDetails[0], (HttpStatusCode)response.StatusCode);
     }

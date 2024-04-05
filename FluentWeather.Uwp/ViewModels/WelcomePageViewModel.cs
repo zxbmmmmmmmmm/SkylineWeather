@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using FluentWeather.Uwp.Pages;
 using FluentWeather.Uwp.Themes;
 using static QWeatherApi.ApiConstants;
+using Windows.ApplicationModel.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -19,13 +20,14 @@ public partial class WelcomePageViewModel:ObservableObject
     {
         if(providerId is "qweather")
         {
-            await DialogManager.OpenDialogAsync(new SetTokenDialog());           
+            Common.Settings.ProviderConfig = ProviderConfig.QWeather;
+            await DialogManager.OpenDialogAsync(new SetTokenDialog());
         }
         if (providerId is "open-meteo")
         {
-            var rootFrame = Window.Current.Content as Frame;
             Common.Settings.OOBECompleted = true;
-            rootFrame!.Navigate(typeof(RootPage), Theme.GetNavigationTransition());
+            Common.Settings.ProviderConfig = ProviderConfig.OpenMeteo;
+            await CoreApplication.RequestRestartAsync(string.Empty);
         }
     }
 }
