@@ -10,15 +10,21 @@ using OpenMeteoApi;
 using System.Collections.Generic;
 using FluentWeather.OpenMeteoProvider.Models;
 using OpenMeteoApi.Variables;
+using System;
 
 namespace FluentWeather.OpenMeteoProvider;
 
-public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider
+public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider , IPrecipitationProvider
 {
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
 
-    public static readonly OpenMeteoClient Client = new();
+    public static OpenMeteoClient Client { get; }
+    static OpenMeteoProvider()
+    {
+        Client = new();
+        Client.ForecastParameters.Add("forecast_minutely_15", "8");
+    }
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
         var result = await Client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
@@ -45,4 +51,13 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
         return result.ConvertAll<WeatherHourlyBase>(p => p.MapToOpenMeteoHourlyForecast());
     }
 
+    public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)
+    {
+        var result = await Client.GetMinutelyForecasts(lat, lon);
+        var precip = new PrecipitationBase
+        {
+            Precipitations = result.ConvertAll(p  => new PrecipitationItemBase(DateTime.Parse(p.Time),p.Precipitation!.Value)),
+        };
+        return precip;
+    }
 }
