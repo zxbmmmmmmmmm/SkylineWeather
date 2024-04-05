@@ -51,6 +51,9 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
+#if DEBUG
+        ApplicationLanguages.PrimaryLanguageOverride = Common.Settings.Language;
+#endif
     }
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()

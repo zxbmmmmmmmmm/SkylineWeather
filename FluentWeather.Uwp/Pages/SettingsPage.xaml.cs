@@ -30,9 +30,4 @@ public sealed partial class SettingsPage : Page
         DeveloperMenu.Visibility = Visibility.Visible;
 #endif
     }
-
-    private void InfoBarTest_Click(object sender, RoutedEventArgs e)
-    {
-        InfoBarHelper.Info("Title", "Test InfoBar");
-    }
 }

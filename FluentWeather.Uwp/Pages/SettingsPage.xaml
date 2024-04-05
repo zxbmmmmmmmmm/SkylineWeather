@@ -9,6 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
     <Grid>
@@ -39,18 +41,7 @@
                 <settings:LocationSettingSection Grid.Row="2" />
                 <settings:NotificationSettingSection Grid.Row="3" />
                 <settings:UpdateSettingSection Grid.Row="4" />
-                <StackPanel
-                    Grid.Row="5"
-                    Spacing="8"
-                    x:Name="DeveloperMenu"
-                    Visibility="Collapsed">
-                    <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" x:Uid="DeveloperMenu" />
-                    <TextBox Text="{x:Bind app:Common.Settings.Language}"/>
-                    <Button
-                        x:Name="InfoBarTest"
-                        Click="InfoBarTest_Click"
-                        Content="测试InfoBar" />
-                </StackPanel>
+                <settings:DeveloperSettingSection Grid.Row="5" x:Name="DeveloperMenu" Visibility="Collapsed"/>
             </Grid>
         </ScrollViewer>
         <controls:PropertySizer

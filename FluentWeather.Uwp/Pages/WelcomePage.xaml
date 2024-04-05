@@ -6,10 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:settings="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
     mc:Ignorable="d">
 
     <Grid Padding="24">
@@ -34,6 +37,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel Margin="0,0,0,20" Spacing="8">
                 <TextBlock
@@ -46,6 +50,8 @@
             </StackPanel>
             <toolkit:SettingsCard
                 Grid.Row="1"
+                Command="{x:Bind ViewModel.SetProviderCommand}"
+                CommandParameter="open-meteo"
                 Description="免费的天气数据源"
                 Header="Open-Meteo"
                 IsClickEnabled="True">
@@ -58,6 +64,8 @@
             </toolkit:SettingsCard>
             <toolkit:SettingsCard
                 Grid.Row="2"
+                CommandParameter="qweather"
+                Command="{x:Bind ViewModel.SetProviderCommand}"
                 Description="需要自行注册KEY"
                 Header="和风天气"
                 IsClickEnabled="True">
@@ -69,7 +77,7 @@
                 </HyperlinkButton>
             </toolkit:SettingsCard>
             <StackPanel
-                Grid.Row="3"
+                Grid.Row="4"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Horizontal">

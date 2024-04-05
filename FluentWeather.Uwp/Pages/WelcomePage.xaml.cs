@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FluentWeather.Uwp.ViewModels;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -22,6 +23,7 @@ namespace FluentWeather.Uwp.Pages;
 /// </summary>
 public sealed partial class WelcomePage : Page
 {
+    public WelcomePageViewModel ViewModel { get; } = new();
     public WelcomePage()
     {
         this.InitializeComponent();
