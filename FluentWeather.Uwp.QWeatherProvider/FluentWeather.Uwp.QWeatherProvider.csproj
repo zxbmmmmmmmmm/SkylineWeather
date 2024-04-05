@@ -145,11 +145,9 @@
     <Compile Include="Mappers\WeatherWarningMapper.cs" />
     <Compile Include="Models\QAirCondition.cs" />
     <Compile Include="Models\QTyphoon.cs" />
-    <Compile Include="Models\QWeatherDailyForecast.cs" />
     <Compile Include="Models\QWeatherHourlyForecast.cs" />
     <Compile Include="Models\QWeatherIndices.cs" />
     <Compile Include="Models\QWeatherNight.cs" />
-    <Compile Include="Models\QWeatherNow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QWeatherProvider.cs" />
     <EmbeddedResource Include="Properties\FluentWeather.Uwp.QWeatherProvider.rd.xml" />
@@ -172,6 +170,9 @@
     </PackageReference>
     <PackageReference Include="QWeather">
       <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory">
+      <Version>4.5.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

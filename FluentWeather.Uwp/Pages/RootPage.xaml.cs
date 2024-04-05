@@ -86,7 +86,8 @@ public sealed partial class RootPage : Page
         var titleBar = ApplicationView.GetForCurrentView().TitleBar;
         var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
         Window.Current.SetTitleBar(Title);
-        coreTitleBar.ExtendViewIntoTitleBar = true; titleBar.ForegroundColor = Windows.UI.Colors.Transparent;
+        coreTitleBar.ExtendViewIntoTitleBar = true;
+        titleBar.ForegroundColor = Windows.UI.Colors.Transparent;
         titleBar.BackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;

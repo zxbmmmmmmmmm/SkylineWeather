@@ -45,6 +45,7 @@ public sealed partial class SetTokenDialog : ContentDialog
             Common.Settings.QWeatherToken = Key;
             Common.Settings.QWeatherDomain = domain;
             Common.Settings.QWeatherPublicId = PublicId;
+            Common.Settings.OOBECompleted = true;
             Hide();
             await CoreApplication.RequestRestartAsync(string.Empty);
         }

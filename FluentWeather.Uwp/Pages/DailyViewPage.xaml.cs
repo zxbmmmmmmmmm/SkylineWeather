@@ -21,61 +21,60 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace FluentWeather.Uwp.Pages
+namespace FluentWeather.Uwp.Pages;
+
+/// <summary>
+/// 可用于自身或导航至 Frame 内部的空白页。
+/// </summary>
+[ObservableObject]
+public sealed partial class DailyViewPage : Page
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
-    [ObservableObject]
-    public sealed partial class DailyViewPage : Page
+    public DailyViewPage()
     {
-        public DailyViewPage()
-        {
-            this.InitializeComponent();
-            PlaceholderBorder.Tapped += OnPlaceholderBorderTapped;
-            CloseButton.Click += OnCloseButtonClicked;
-        }
-
-        private void OnCloseButtonClicked(object sender, RoutedEventArgs e)
-        {
-            CloseRequested?.Invoke(this, e);
-        }
-
-        private void OnPlaceholderBorderTapped(object sender, TappedRoutedEventArgs e)
-        {
-            CloseRequested?.Invoke(this, e);
-        }
-
-        public event RoutedEventHandler CloseRequested;
-
-
-        public int SelectedIndex
-        {
-            get => (int)GetValue(SelectedIndexProperty);
-            set => SetValue(SelectedIndexProperty, value);
-        }
-
-        public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0));
-
-
-        public List<WeatherDailyBase> DailyForecasts
-        {
-            get => (List<WeatherDailyBase>)GetValue(DailyForecastsProperty);
-            set => SetValue(DailyForecastsProperty, value);
-        }
-
-        public static readonly DependencyProperty DailyForecastsProperty =
-            DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
-
-        public List<WeatherHourlyBase> HourlyForecasts
-        {
-            get => (List<WeatherHourlyBase>)GetValue(HourlyForecastsProperty);
-            set => SetValue(HourlyForecastsProperty, value);
-        }
-
-        public static readonly DependencyProperty HourlyForecastsProperty =
-            DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(default));
-
+        this.InitializeComponent();
+        PlaceholderBorder.Tapped += OnPlaceholderBorderTapped;
+        CloseButton.Click += OnCloseButtonClicked;
     }
+
+    private void OnCloseButtonClicked(object sender, RoutedEventArgs e)
+    {
+        CloseRequested?.Invoke(this, e);
+    }
+
+    private void OnPlaceholderBorderTapped(object sender, TappedRoutedEventArgs e)
+    {
+        CloseRequested?.Invoke(this, e);
+    }
+
+    public event RoutedEventHandler CloseRequested;
+
+
+    public int SelectedIndex
+    {
+        get => (int)GetValue(SelectedIndexProperty);
+        set => SetValue(SelectedIndexProperty, value);
+    }
+
+    public static readonly DependencyProperty SelectedIndexProperty =
+        DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0));
+
+
+    public List<WeatherDailyBase> DailyForecasts
+    {
+        get => (List<WeatherDailyBase>)GetValue(DailyForecastsProperty);
+        set => SetValue(DailyForecastsProperty, value);
+    }
+
+    public static readonly DependencyProperty DailyForecastsProperty =
+        DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
+
+    public List<WeatherHourlyBase> HourlyForecasts
+    {
+        get => (List<WeatherHourlyBase>)GetValue(HourlyForecastsProperty);
+        set => SetValue(HourlyForecastsProperty, value);
+    }
+
+    public static readonly DependencyProperty HourlyForecastsProperty =
+        DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(default));
+
 }

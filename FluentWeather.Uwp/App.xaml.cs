@@ -32,6 +32,7 @@ using MetroLog.Targets;
 using Windows.ApplicationModel.Resources;
 using FluentWeather.Uwp.Helpers.Analytics;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace FluentWeather.Uwp;
 
@@ -50,6 +51,9 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
+#if DEBUG
+        ApplicationLanguages.PrimaryLanguageOverride = Common.Settings.Language;
+#endif
     }
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()
@@ -105,7 +109,14 @@ sealed partial class App : Application
         {
             // 当导航堆栈尚未还原时，导航到第一页，
             // 并通过将所需信息作为导航参数传入来配置
-            rootFrame.Navigate(typeof(RootPage),Theme.GetNavigationTransition());
+            if(Common.Settings.OOBECompleted)
+            {
+                rootFrame.Navigate(typeof(RootPage), Theme.GetNavigationTransition());
+            }
+            else
+            {
+                rootFrame.Navigate(typeof(WelcomePage), Theme.GetNavigationTransition());
+            }
         }
         // 确保当前窗口处于活动状态
         Window.Current.Activate();
@@ -144,7 +155,14 @@ sealed partial class App : Application
                 // 当导航堆栈尚未还原时，导航到第一页，
                 // 并通过将所需信息作为导航参数传入来配置
                 // 参数
-                rootFrame.Navigate(typeof(RootPage), e.Arguments, Theme.GetNavigationTransition());
+                if (Common.Settings.OOBECompleted)
+                {
+                    rootFrame.Navigate(typeof(RootPage), Theme.GetNavigationTransition());
+                }
+                else
+                {
+                    rootFrame.Navigate(typeof(WelcomePage), Theme.GetNavigationTransition());
+                }
             }
             // 确保当前窗口处于活动状态
             Window.Current.Activate();

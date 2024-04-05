@@ -1,4 +1,6 @@
 ﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Models;
+using FluentWeather.Uwp.QWeatherProvider.Helpers;
 using FluentWeather.Uwp.QWeatherProvider.Models;
 using QWeatherApi.ApiContracts;
 
@@ -6,10 +8,11 @@ namespace FluentWeather.Uwp.QWeatherProvider.Mappers;
 
 public static class DailyForecastItemMapper
 {
-    public static QWeatherDailyForecast MapToQWeatherDailyForecast(this WeatherDailyResponse.DailyForecastItem item)
+    public static WeatherDailyBase MapToQWeatherDailyForecast(this WeatherDailyResponse.DailyForecastItem item)
     {
-        return new QWeatherDailyForecast
+        return new WeatherDailyBase
         {
+            WeatherType = WeatherTypeConverter.GetWeatherTypeByDescription(item.TextDay),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360Day)),
             Description = item.TextDay,
             WindDirectionDescription = item.WindDirDay,

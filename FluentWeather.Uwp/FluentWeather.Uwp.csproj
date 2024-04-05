@@ -178,6 +178,9 @@
     <Compile Include="Controls\Settings\DataProviderSettingSection.xaml.cs">
       <DependentUpon>DataProviderSettingSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Settings\DeveloperSettingSection.xaml.cs">
+      <DependentUpon>DeveloperSettingSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings\LocationSettingSection.xaml.cs">
       <DependentUpon>LocationSettingSection.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,7 @@
     <Compile Include="Controls\WeatherHourlyForecastItem.xaml.cs">
       <DependentUpon>WeatherHourlyForecastItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalUsings.cs" />
     <Compile Include="Helpers\Analytics\AppAnalyticsService.cs" />
     <Compile Include="Helpers\Analytics\AppCenterAnalyticsService.cs" />
     <Compile Include="Helpers\CacheHelper.cs" />
@@ -239,6 +243,9 @@
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Themes\Generic.xaml.cs">
       <DependentUpon>Generic.xaml</DependentUpon>
@@ -252,6 +259,7 @@
     <Compile Include="ViewModels\Interfaces\IMainPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\RootPageViewModel.cs" />
+    <Compile Include="ViewModels\WelcomePageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -483,6 +491,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Settings\DeveloperSettingSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Settings\LocationSettingSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -536,6 +548,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

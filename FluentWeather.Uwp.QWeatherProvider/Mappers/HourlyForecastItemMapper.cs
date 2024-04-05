@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Uwp.QWeatherProvider.Helpers;
 using FluentWeather.Uwp.QWeatherProvider.Models;
 using QWeatherApi.ApiContracts;
 
@@ -10,6 +11,7 @@ public static class HourlyForecastItemMapper
     {
         return new QWeatherHourlyForecast
         {
+            WeatherType = WeatherTypeConverter.GetWeatherTypeByDescription(item.Text),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
             Description = item.Text,
             WindDirectionDescription = item.WindDir,
