@@ -42,6 +42,7 @@ namespace FluentWeather.Uwp.Controls.Settings
 
         private async void RestartButton_Click(object sender, RoutedEventArgs e)
         {
+            CacheHelper.Clear();
             await CoreApplication.RequestRestartAsync(string.Empty);
         }
 
