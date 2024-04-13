@@ -14,7 +14,7 @@
 
             <chart:ChartPalette.FillEntries>
                 <chart:PaletteEntryCollection>
-                    <SolidColorBrush Opacity="0.8" Color="{ThemeResource SystemBaseMediumColor}"/>
+                    <SolidColorBrush Opacity="0.8" Color="#0B85DB"/>
                 </chart:PaletteEntryCollection>
 
             </chart:ChartPalette.FillEntries>
@@ -25,7 +25,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <chart:RadCartesianChart PaletteName="None" Palette="{StaticResource PrecipitationChartPalette}">
+        <chart:RadCartesianChart PaletteName="None">
             <chart:RadCartesianChart.HorizontalAxis>
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"

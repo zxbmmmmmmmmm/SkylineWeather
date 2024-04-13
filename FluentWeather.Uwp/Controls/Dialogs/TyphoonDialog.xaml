@@ -226,6 +226,7 @@
                     Visibility="Collapsed" />
                 <muxc:InfoBar
                     x:Name="ServiceWarning"
+                    x:Uid="TyphoonServiceWarning"
                     Margin="0,0,180,0"
                     HorizontalAlignment="Left"
                     IsOpen="True"
