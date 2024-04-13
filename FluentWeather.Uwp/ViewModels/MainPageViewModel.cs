@@ -135,7 +135,12 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetWeatherPrecipitations(Location location)
     {
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
-        Precipitation = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
+        var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
+        if(precip.Summary is "" or null)
+        {
+            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations.Sum(p => p.Precipitation)> 0 ? "HasPrecipitationText" : "NoPrecipitationText");
+        }
+        Precipitation = precip;
     }
 
     [RelayCommand]
@@ -180,7 +185,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         }
         catch(HttpResponseException e)
         {
-            InfoBarHelper.Error("获取数据失败",e.Message);
+            InfoBarHelper.Error(ResourceLoader.GetForCurrentView().GetString("GetDataFailed"),e.Message);
         }
 
     }

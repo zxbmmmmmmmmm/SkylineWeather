@@ -267,6 +267,12 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
+  <data name="GetDataFailed" xml:space="preserve">
+    <value>获取数据失败</value>
+  </data>
+  <data name="HasPrecipitationText" xml:space="preserve">
+    <value>未来两小时有降水</value>
+  </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>最高温</value>
   </data>
@@ -301,6 +307,9 @@
   <data name="MoreInfoText" xml:space="preserve">
     <value>了解详情</value>
     <comment>警告内了解详情</comment>
+  </data>
+  <data name="NoPrecipitationText" xml:space="preserve">
+    <value>未来两小时无降水</value>
   </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>通知</value>
