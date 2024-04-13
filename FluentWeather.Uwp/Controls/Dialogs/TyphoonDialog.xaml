@@ -226,7 +226,6 @@
                     Visibility="Collapsed" />
                 <muxc:InfoBar
                     x:Name="ServiceWarning"
-                    Title="台风追踪服务暂不可用"
                     Margin="0,0,180,0"
                     HorizontalAlignment="Left"
                     IsOpen="True"
@@ -245,7 +244,7 @@
                     Background="{ThemeResource ButtonAcrylic}"
                     Canvas.ZIndex="1"
                     Command="{x:Bind CloseCommand}"
-                    Content="关闭"
+                    x:Uid="CloseButton"
                     FontSize="16" />
             </Grid>
 

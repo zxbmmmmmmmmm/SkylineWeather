@@ -20,8 +20,8 @@
         <Grid
             x:Name="Title"
             Height="40"
-            Background="Transparent"
-            VerticalAlignment="Top"/>
+            VerticalAlignment="Top"
+            Background="Transparent" />
         <Grid
             MaxWidth="1024"
             Margin="24"
@@ -38,21 +38,27 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Margin="0,0,0,20" Spacing="8">
+            <StackPanel
+                Margin="0,0,0,8"
+                HorizontalAlignment="Center"
+                Spacing="8">
                 <TextBlock
+                    x:Uid="Welcome"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="40"
-                    Style="{ThemeResource TitleTextBlockStyle}"
-                    Text="欢迎" />
-                <TextBlock HorizontalAlignment="Center" Text="选择一个数据提供商以继续" />
+                    Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock x:Uid="SelectProviderToContinue" HorizontalAlignment="Center" />
+                <HyperlinkButton
+                    x:Uid="WelcomePage_CompareHyperlink"
+                    HorizontalAlignment="Center"
+                    NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather/wiki/%E5%8A%9F%E8%83%BD%E5%AF%B9%E7%85%A7" />
             </StackPanel>
             <toolkit:SettingsCard
+                x:Uid="OpenMeteoWelcomeCard"
                 Grid.Row="1"
                 Command="{x:Bind ViewModel.SetProviderCommand}"
                 CommandParameter="open-meteo"
-                Description="免费的天气数据源"
-                Header="Open-Meteo"
                 IsClickEnabled="True">
                 <toolkit:SettingsCard.HeaderIcon>
                     <PathIcon Data="M7 8a3.5 3.5 0 0 1 3.5 3.555.5.5 0 0 0 .624.492A1.503 1.503 0 0 1 13 13.5a1.5 1.5 0 0 1-1.5 1.5H3a2 2 0 1 1 .1-3.998.5.5 0 0 0 .51-.375A3.502 3.502 0 0 1 7 8zm4.473 3a4.5 4.5 0 0 0-8.72-.99A3 3 0 0 0 3 16h8.5a2.5 2.5 0 0 0 0-5h-.027zM10.5 1.5a.5.5 0 0 0-1 0v1a.5.5 0 0 0 1 0v-1zm3.743 1.964a.5.5 0 1 0-.707-.707l-.708.707a.5.5 0 0 0 .708.708l.707-.708zm-7.779-.707a.5.5 0 0 0-.707.707l.707.708a.5.5 0 1 0 .708-.708l-.708-.707zm1.734 3.374a2 2 0 1 1 3.296 2.198c.199.281.372.582.516.898a3 3 0 1 0-4.84-3.225c.352.011.696.055 1.028.129zm4.484 4.074c.6.215 1.125.59 1.522 1.072a.5.5 0 0 0 .039-.742l-.707-.707a.5.5 0 0 0-.854.377zM14.5 6.5a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
@@ -60,15 +66,15 @@
                 <HyperlinkButton NavigateUri="https://open-meteo.com/">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon FontSize="16" Glyph="&#xE8A7;" />
-                        <TextBlock Text="官方网站"/>
-                    </StackPanel>                </HyperlinkButton>
+                        <TextBlock x:Uid="OfficialWebsite" />
+                    </StackPanel>
+                </HyperlinkButton>
             </toolkit:SettingsCard>
             <toolkit:SettingsCard
+                x:Uid="QWeatherWelcomeCard"
                 Grid.Row="2"
                 Command="{x:Bind ViewModel.SetProviderCommand}"
                 CommandParameter="qweather"
-                Description="需要自行注册KEY"
-                Header="和风天气"
                 IsClickEnabled="True">
                 <toolkit:SettingsCard.HeaderIcon>
                     <PathIcon Data="M14.936 11.53c-.907.799-1.434 1.36-2.616 1.634a7.158 7.158 0 0 0 .715-9.529A7.27 7.27 0 0 0 8.66.935a7.313 7.313 0 0 0-5.08.858A7.212 7.212 0 0 0 .354 5.778a7.144 7.144 0 0 0 .253 5.104 7.229 7.229 0 0 0 3.604 3.652c1.612.74 3.44.868 5.14.361a7.864 7.864 0 0 0 4.344-.864c1.126-.589 1.588-1.46 2.305-2.5h-1.064ZM6.51 14.152a5.743 5.743 0 0 1-3.551-1.69 5.642 5.642 0 0 1-.514-7.317 5.727 5.727 0 0 1 3.28-2.162 5.767 5.767 0 0 1 3.912.45 5.696 5.696 0 0 1 2.692 2.851 5.628 5.628 0 0 1 .197 3.9 5.682 5.682 0 0 1-2.39 3.105 7.005 7.005 0 0 1-1.07-.146c-1.302-.294-2.437-1.113-3.237-2.056-.002 0-.003-.003-.004-.004a3.2 3.2 0 0 1-.7-1.929 2.254 2.254 0 0 1 .548-1.517 2.473 2.473 0 0 1 1.91-.89c.198 0 .396.023.589.07a1.423 1.423 0 0 1 .24.07c.327.139.603.377.784.682a1.48 1.48 0 0 1-.44 1.98 1.509 1.509 0 0 1-1.403.162.17.17 0 0 0-.192.045.167.167 0 0 0-.017.195 1.675 1.675 0 0 0 1.426.8l.048-.001a2.821 2.821 0 0 0 1.203-.342A2.747 2.747 0 0 0 11.26 7.99a2.862 2.862 0 0 0-.47-1.585 3.49 3.49 0 0 0-.072-.098c-.02-.028-.042-.055-.064-.083l-.036-.045c-.79-1.03-2.033-1.634-3.45-1.593-1.27.036-2.417.53-3.223 1.382a4.357 4.357 0 0 0-.724 4.99 7.827 7.827 0 0 0 3.44 3.205c-.051-.004-.101-.006-.151-.011Z" />
@@ -76,7 +82,7 @@
                 <HyperlinkButton NavigateUri="https://dev.qweather.com/">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon FontSize="16" Glyph="&#xE8A7;" />
-                        <TextBlock Text="官方网站"/>
+                        <TextBlock x:Uid="OfficialWebsite" />
                     </StackPanel>
                 </HyperlinkButton>
             </toolkit:SettingsCard>
@@ -88,7 +94,7 @@
                 <Button Background="Transparent" BorderBrush="Transparent">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                            <Run Text="关于" />
+                            <Run x:Uid="About" />
                             <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind app:Common.AppVersion}" />
                         </TextBlock>
                     </StackPanel>
