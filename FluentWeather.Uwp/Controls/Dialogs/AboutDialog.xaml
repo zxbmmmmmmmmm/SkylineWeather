@@ -33,11 +33,11 @@
                     <Run
                         FontSize="21"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Text="{x:Bind AppVersion}" />
+                        Text="{x:Bind app:Common.AppVersion}" />
                 </TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1" Margin="0,12,0,0">
-                <TextBlock Text="Skyline是一款开源的天气应用。" TextWrapping="Wrap" />
+                <TextBlock x:Uid="About_AppDescription" TextWrapping="Wrap" />
                 <Grid Width="114514" />
                 <Grid
                     Margin="0,12,0,4"
@@ -92,13 +92,13 @@
                         <HyperlinkButton NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <PathIcon VerticalAlignment="Center" Data="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
-                                <TextBlock Text="项目地址" />
+                                <TextBlock x:Uid="About_ProjectUrl" />
                             </StackPanel>
                         </HyperlinkButton>
                         <HyperlinkButton NavigateUri="https://crowdin.com/project/fluent-weather">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontSize="16" Glyph="&#xF2B7;" />
-                                <TextBlock Text="参与翻译" />
+                                <TextBlock x:Uid="About_HelpTranslate" />
                             </StackPanel>
                         </HyperlinkButton>
                     </StackPanel>
@@ -106,7 +106,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="开放源代码许可" />
+                            <TextBlock x:Uid="About_OpenSourceLicenses" />
                             <FontIcon
                                 FontSize="14"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -118,7 +118,7 @@
                         <Button.Flyout>
                             <Flyout Placement="BottomEdgeAlignedLeft">
                                 <StackPanel>
-                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="本应用使用以下开源库" />
+                                    <TextBlock x:Uid="About_OpenSourceLicensesDescription" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                     <HyperlinkButton
                                         Margin="0,4,0,0"
                                         Content="Windows UI Library"
@@ -135,7 +135,7 @@
                     </Button>
                     <Button Background="Transparent" BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="赞助" />
+                            <TextBlock x:Uid="About_Sponsor" />
                             <FontIcon
                                 FontSize="14"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -179,12 +179,12 @@
 
                 </StackPanel>
                 <Button
+                    x:Uid="CloseButton"
                     Margin="0,8,0,0"
                     Padding="48,4"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Command="{x:Bind CloseCommand}"
-                    Content="关闭" />
+                    Command="{x:Bind CloseCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

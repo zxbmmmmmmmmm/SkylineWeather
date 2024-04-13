@@ -22,5 +22,11 @@ namespace FluentWeather.Abstraction.Models
         public double Precipitation { get; set; }
         public DateTime Time { get; set; }  
         public bool IsSnow { get; set; }
+        public PrecipitationItemBase(DateTime time,double precipitation,bool isSnow=false)
+        {
+            Precipitation = precipitation;
+            Time = time;
+            IsSnow = isSnow;
+        }
     }
 }

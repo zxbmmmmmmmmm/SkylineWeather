@@ -12,18 +12,34 @@ using static FluentWeather.Uwp.Shared.TileHelper;
 using static FluentWeather.Uwp.Shared.Common;
 using System.Text.RegularExpressions;
 using FluentWeather.Uwp.QWeatherProvider;
+using FluentWeather.Abstraction;
+using FluentWeather.OpenMeteoProvider;
+using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 
 namespace FluentWeather.Tasks
 {
     public sealed class NotifyTask :IBackgroundTask
     {
+        private IWeatherWarningProvider _warningProvider;
+        private IDailyForecastProvider _dailyForecastProvider;
+
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
             LogManager.GetLogger(nameof(NotifyTask)).Info("NotifyTask Started");
 
-            var provider = new QWeatherProvider(Settings.QWeatherToken,Settings.QWeatherDomain,null,Settings.QWeatherPublicId);
+            if(Settings.ProviderConfig is Uwp.Shared.ProviderConfig.QWeather)
+            {
+                var provider = new QWeatherProvider(Settings.QWeatherToken, Settings.QWeatherDomain, null, Settings.QWeatherPublicId);
+                _warningProvider = provider;
+                _dailyForecastProvider = provider;
+            }
+            else
+            {
+                var provider = new OpenMeteoProvider.OpenMeteoProvider();
+                _dailyForecastProvider = provider;
+            }
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
             if(lat is -1 || lon is -1)
@@ -40,11 +56,11 @@ namespace FluentWeather.Tasks
         }
         private async Task PushWarnings(double lon, double lat)
         {
+            if (_warningProvider is null) return;
             var settingContainer = ApplicationData.Current.LocalSettings;
             var isWarningNotificationEnabled = Settings.IsWarningNotificationEnabled;
             if (!isWarningNotificationEnabled) return;
-
-            var warnings = await QWeatherProvider.Instance.GetWeatherWarnings(lon, lat);
+            var warnings = await _warningProvider.GetWeatherWarnings(lon, lat);
             settingContainer.Values["PushedWarnings"] ??= JsonSerializer.Serialize(new Dictionary<string,DateTime>());
             var pushed = JsonSerializer.Deserialize<Dictionary<string, DateTime>>((string)settingContainer.Values["PushedWarnings"]);
             foreach (var warning in warnings)
@@ -62,12 +78,12 @@ namespace FluentWeather.Tasks
         }
         private async Task PushDaily(double lon, double lat)
         {
+            if (_dailyForecastProvider is null) return;
             var isPushTodayAvailable = Settings.IsDailyNotificationEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
             var isPushTomorrowAvailable = Settings.IsTomorrowNotificationEnabled && Settings.LastPushedTimeTomorrow != DateTime.Now.Date.DayOfYear;
             var isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
             if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
-
-            var data = await QWeatherProvider.Instance.GetDailyForecasts(lon, lat);
+            var data = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
             if (isTileAvailable)
             {
                 UpdateTiles(data);

@@ -117,8 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
   <data name="AboutAppBarButton.Label" xml:space="preserve">
     <value>关于</value>
+  </data>
+  <data name="About_AppDescription.Text" xml:space="preserve">
+    <value>Skyline是一款开源的天气应用。</value>
+  </data>
+  <data name="About_HelpTranslate.Text" xml:space="preserve">
+    <value>参与翻译</value>
+  </data>
+  <data name="About_OpenSourceLicenses.Text" xml:space="preserve">
+    <value>开放源代码许可</value>
+  </data>
+  <data name="About_OpenSourceLicensesDescription.Text" xml:space="preserve">
+    <value>本应用使用以下开源库</value>
+  </data>
+  <data name="About_ProjectUrl.Text" xml:space="preserve">
+    <value>项目地址</value>
+  </data>
+  <data name="About_Sponsor.Text" xml:space="preserve">
+    <value>赞助</value>
   </data>
   <data name="AirCondition.Text" xml:space="preserve">
     <value>空气质量</value>
@@ -156,6 +177,9 @@
   <data name="BackgroundTransparencySettingsCard.Header" xml:space="preserve">
     <value>背景透明度</value>
   </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>取消</value>
+  </data>
   <data name="CheckUpdateButton.Content" xml:space="preserve">
     <value>检查</value>
   </data>
@@ -167,6 +191,9 @@
   </data>
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>经典</value>
+  </data>
+  <data name="CloseButton.Content" xml:space="preserve">
+    <value>关闭</value>
   </data>
   <data name="CloudAmountDescription.Text" xml:space="preserve">
     <value>天空被云所遮蔽的比例</value>
@@ -189,11 +216,14 @@
   <data name="DarkSection.Content" xml:space="preserve">
     <value>黑暗</value>
   </data>
-  <data name="DataProviderSettingsCard.Description" xml:space="preserve">
-    <value>选择数据提供商(需要重启)</value>
-  </data>
   <data name="DataProviderSettingsCard.Header" xml:space="preserve">
     <value>数据提供商</value>
+  </data>
+  <data name="DataProviderSettingsExpanderDescription.Text" xml:space="preserve">
+    <value>选择数据提供商</value>
+  </data>
+  <data name="DataProviderSettingsExpanderDescription_CompareHyperlink.Text" xml:space="preserve">
+    <value>功能对照</value>
   </data>
   <data name="DataSettingsExpander.Header" xml:space="preserve">
     <value>数据</value>
@@ -237,6 +267,12 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
+  <data name="GetDataFailed" xml:space="preserve">
+    <value>获取数据失败</value>
+  </data>
+  <data name="HasPrecipitationText" xml:space="preserve">
+    <value>未来两小时有降水</value>
+  </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>最高温</value>
   </data>
@@ -272,11 +308,17 @@
     <value>了解详情</value>
     <comment>警告内了解详情</comment>
   </data>
+  <data name="NoPrecipitationText" xml:space="preserve">
+    <value>未来两小时无降水</value>
+  </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>通知</value>
   </data>
   <data name="NowText.Text" xml:space="preserve">
     <value>现在</value>
+  </data>
+  <data name="OfficialWebsite.Text" xml:space="preserve">
+    <value>官方网站</value>
   </data>
   <data name="OneHourText.Text" xml:space="preserve">
     <value>1小时</value>
@@ -285,6 +327,12 @@
     <value>打开背景文件夹</value>
   </data>
   <data name="OpenMeteoSection.Content" xml:space="preserve">
+    <value>Open-Meteo</value>
+  </data>
+  <data name="OpenMeteoWelcomeCard.Description" xml:space="preserve">
+    <value>免费的天气数据源</value>
+  </data>
+  <data name="OpenMeteoWelcomeCard.Header" xml:space="preserve">
     <value>Open-Meteo</value>
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
@@ -312,6 +360,12 @@
   <data name="QWeatherSection.Content" xml:space="preserve">
     <value>和风天气</value>
   </data>
+  <data name="QWeatherSettingsCard.Description" xml:space="preserve">
+    <value>自定义KEY</value>
+  </data>
+  <data name="QWeatherSettingsCard.Header" xml:space="preserve">
+    <value>和风天气</value>
+  </data>
   <data name="QWeatherSettingsExpander.Header" xml:space="preserve">
     <value>和风天气</value>
   </data>
@@ -321,6 +375,18 @@
   <data name="QWeatherTokenSettingsCard.Header" xml:space="preserve">
     <value>KEY</value>
   </data>
+  <data name="QWeatherWelcomeCard.Description" xml:space="preserve">
+    <value>需要自行注册KEY</value>
+  </data>
+  <data name="QWeatherWelcomeCard.Header" xml:space="preserve">
+    <value>和风天气</value>
+  </data>
+  <data name="QWeather_GetFreeKeyHyperlink.Content" xml:space="preserve">
+    <value>获取免费KEY</value>
+  </data>
+  <data name="QWeather_PublicIdBox.PlaceholderText" xml:space="preserve">
+    <value>Public ID (可选)</value>
+  </data>
   <data name="RefreshMenuItem.Text" xml:space="preserve">
     <value>刷新</value>
   </data>
@@ -328,7 +394,7 @@
     <value>重启应用</value>
   </data>
   <data name="RestartInfoBar.Title" xml:space="preserve">
-    <value>重启以应用主题</value>
+    <value>重启以应用设置</value>
   </data>
   <data name="SavedLocations" xml:space="preserve">
     <value>保存的位置</value>
@@ -341,6 +407,9 @@
   </data>
   <data name="SelectPageFileButton.Content" xml:space="preserve">
     <value>选择文件</value>
+  </data>
+  <data name="SelectProviderToContinue.Text" xml:space="preserve">
+    <value>选择一个数据提供商以继续</value>
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>设置</value>
@@ -384,6 +453,9 @@
   </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>台风</value>
+  </data>
+  <data name="TyphoonServiceWarning.Title" xml:space="preserve">
+    <value>台风追踪服务暂不可用</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
     <value>未知错误</value>
@@ -447,6 +519,12 @@
   </data>
   <data name="WeeklyForecast.Text" xml:space="preserve">
     <value>7日预报</value>
+  </data>
+  <data name="Welcome.Text" xml:space="preserve">
+    <value>欢迎</value>
+  </data>
+  <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
+    <value>数据源功能对照</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Win11下将覆盖Mica

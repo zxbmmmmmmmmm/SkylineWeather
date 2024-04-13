@@ -12,15 +12,48 @@
 
     <Grid>
         <controls:SettingsExpander x:Uid="DataSettingsExpander" IsExpanded="True">
-
+            <controls:SettingsExpander.Description>
+                <StackPanel>
+                    <TextBlock >
+                        <Run x:Uid="DataProviderSettingsExpanderDescription"/>
+                        <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather/wiki/%E5%8A%9F%E8%83%BD%E5%AF%B9%E7%85%A7">
+                            <Run x:Uid="DataProviderSettingsExpanderDescription_CompareHyperlink"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </controls:SettingsExpander.Description>
+            <controls:SettingsExpander.ItemsHeader>
+                <muxc:InfoBar
+                    x:Name="RestartInfoBar"
+                    x:Uid="RestartInfoBar"
+                    BorderThickness="0"
+                    CornerRadius="0"
+                    IsClosable="False"
+                    IsOpen="False"
+                    Severity="Success">
+                    <muxc:InfoBar.ActionButton>
+                        <Button
+                            x:Name="RestartButton"
+                            x:Uid="RestartButton"
+                            Click="RestartButton_Click"
+                            CornerRadius="{StaticResource ControlCornerRadius}" />
+                    </muxc:InfoBar.ActionButton>
+                </muxc:InfoBar>
+            </controls:SettingsExpander.ItemsHeader>
             <controls:SettingsExpander.Items>
-                <controls:SettingsCard x:Uid="DataProviderSettingsCard" Padding="12">
-                    <muxc:RadioButtons>
+                <controls:SettingsCard Padding="12">
+
+                    <muxc:RadioButtons SelectionChanged="OnSelectionChanged">
                         <RadioButton x:Uid="QWeatherSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}" />
                         <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}" />
                     </muxc:RadioButtons>
                 </controls:SettingsCard>
-                <controls:SettingsCard x:Name="SetKeyCard" Header="和风天气" Description="自定义KEY" Click="SetKeyCard_Click" IsClickEnabled="True" Padding="12">
+                <controls:SettingsCard
+                    x:Name="SetKeyCard"
+                    x:Uid="QWeatherSettingsCard"
+                    Padding="12"
+                    Click="SetKeyCard_Click"
+                    IsClickEnabled="True">
                     <controls:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE621;" />
                     </controls:SettingsCard.HeaderIcon>
