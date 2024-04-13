@@ -15,6 +15,7 @@ using MetroLog.Targets;
 using System.Collections.ObjectModel;
 using Windows.Foundation.Metadata;
 using System.Globalization;
+using Windows.ApplicationModel;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -31,6 +32,11 @@ public static class Common
     }
     public static Settings Settings = new();
     public static readonly ILogManager LogManager;
+    public static string AppVersion = string.Format("{0}.{1}.{2}.{3}",
+        Package.Current.Id.Version.Major,
+        Package.Current.Id.Version.Minor,
+        Package.Current.Id.Version.Build,
+        Package.Current.Id.Version.Revision);
 }
 public sealed class Settings : INotifyPropertyChanged
 {

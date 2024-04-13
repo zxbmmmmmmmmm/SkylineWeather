@@ -33,7 +33,7 @@
                     <Run
                         FontSize="21"
                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                        Text="{x:Bind AppVersion}" />
+                        Text="{x:Bind app:Common.AppVersion}" />
                 </TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1" Margin="0,12,0,0">

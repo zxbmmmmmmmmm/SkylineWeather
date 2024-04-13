@@ -95,6 +95,7 @@ public sealed partial class RootPage : Page
         titleBar.ButtonHoverBackgroundColor = Color.FromArgb(40,128,128,128);
         ThemeHelper.SetTitleBarColor(Common.Settings.ApplicationTheme);
     }
+
     [ObservableProperty]
     private bool _canGoBack;
     

@@ -39,6 +39,16 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             await DialogManager.OpenDialogAsync(new SetTokenDialog());
         }
+
+        private async void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            await CoreApplication.RequestRestartAsync(string.Empty);
+        }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RestartInfoBar.IsOpen = true;
+        }
         //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
         //    IList<KeyValuePair<TKey, TValue>> y)
         //{

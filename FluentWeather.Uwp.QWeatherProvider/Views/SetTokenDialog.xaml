@@ -15,6 +15,7 @@
     Title="设置KEY">
     <Grid>
         <StackPanel>
+            <HyperlinkButton Content="获取免费KEY" NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather/wiki/%E8%8E%B7%E5%8F%96API-KEY" Margin="0,0,0,4"/>
             <TextBlock Visibility="Collapsed" x:Name="ErrorTextblock" Margin="0,0,0,12"/>
             <AutoSuggestBox x:Name="KeyBox" Text="{x:Bind Key,Mode=TwoWay}" PlaceholderText="KEY" QueryIcon="Paste" QuerySubmitted="KeyBox_QuerySubmitted"/>
             <AutoSuggestBox Margin="0,12,0,0" x:Name="PublicIdBox" Text="{x:Bind PublicId,Mode=TwoWay}" PlaceholderText="Public ID (可选)" QueryIcon="Paste" QuerySubmitted="PublicIdBox_QuerySubmitted"/>
