@@ -218,7 +218,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public string QWeatherDomain
     {
-        get => GetSettings("qweather." + "Domain", "devapi.qweather.com");
+        get => GetSettings("qweather." + "Domain", Constants.QWeatherDomain??"devapi.qweather.com");
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "Domain"] = value;
