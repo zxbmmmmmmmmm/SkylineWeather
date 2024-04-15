@@ -150,6 +150,10 @@
       <Project>{15e289d2-4104-4889-b968-60d2c2efd806}</Project>
       <Name>FluentWeather.DIContainer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FluentWeather.OpenMeteoProvider\FluentWeather.OpenMeteoProvider.csproj">
+      <Project>{839ccc2a-1f6d-4965-bcd3-8efc98dd84aa}</Project>
+      <Name>FluentWeather.OpenMeteoProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentWeather.Uwp.QWeatherProvider\FluentWeather.Uwp.QWeatherProvider.csproj">
       <Project>{47F2B7FC-1B81-4D69-B5BA-D1160532ED63}</Project>
       <Name>FluentWeather.Uwp.QWeatherProvider</Name>
