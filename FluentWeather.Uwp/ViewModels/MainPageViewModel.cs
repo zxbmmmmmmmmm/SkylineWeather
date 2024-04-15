@@ -80,6 +80,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetDailyForecast(Location location)
     {
         var dailyProvider = Locator.ServiceProvider.GetService<IDailyForecastProvider>();
+        if (dailyProvider is null) return;
         DailyForecasts = await dailyProvider.GetDailyForecasts(location.Longitude, location.Latitude);
         if (DailyForecasts[0] is IAstronomic astronomic)
         {
@@ -92,6 +93,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetHourlyForecast(Location location)
     {
         var hourlyProvider = Locator.ServiceProvider.GetService<IHourlyForecastProvider>();
+        if (hourlyProvider is null) return;
         var hourlyForecasts = await hourlyProvider.GetHourlyForecasts(location.Longitude, location.Latitude);
 
         foreach ( var forecast in hourlyForecasts )
@@ -112,6 +114,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetWeatherNow(Location location)
     {
         var nowProvider = Locator.ServiceProvider.GetService<ICurrentWeatherProvider>();
+        if (nowProvider is null) return;
         WeatherNow = await nowProvider.GetCurrentWeather(location.Longitude, location.Latitude);
     }
 
@@ -119,6 +122,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetWeatherWarnings(Location location)
     {
         var warningProvider = Locator.ServiceProvider.GetService<IWeatherWarningProvider>();
+        if (warningProvider is null) return;
         Warnings = await warningProvider.GetWeatherWarnings(location.Longitude, location.Latitude);
     }
 
@@ -126,6 +130,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetIndices(Location location)
     {
         var indicesProvider = Locator.ServiceProvider.GetService<IIndicesProvider>();
+        if (indicesProvider is null) return;
         var indices = await indicesProvider.GetIndices(location.Longitude, location.Latitude);
         indices?.ForEach(p => p.Name = p.Name.Replace("指数", ""));
         Indices = indices;
@@ -135,6 +140,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetWeatherPrecipitations(Location location)
     {
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
+        if (precipProvider is null) return;
         var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
         if(precip.Summary is "" or null)
         {
@@ -147,6 +153,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public async Task GetAirCondition(Location location)
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
+        if (airConditionProvider is null) return;
         AirCondition = await airConditionProvider.GetAirCondition(location.Longitude, location.Latitude);
     }
 
