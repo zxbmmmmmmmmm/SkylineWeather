@@ -15,6 +15,7 @@ using FluentWeather.Uwp.QWeatherProvider;
 using FluentWeather.Abstraction;
 using FluentWeather.OpenMeteoProvider;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
+using Windows.ApplicationModel.Resources;
 
 namespace FluentWeather.Tasks
 {
@@ -109,8 +110,8 @@ namespace FluentWeather.Tasks
             GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType +".png"))
-                .AddAttributionText("今日天气")
-                .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddAttributionText(ResourceLoader.GetForCurrentView().GetString("ToadyWeather"))
+                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForCurrentView().GetString("HighestTemperature")}{((ITemperatureRange)trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForCurrentView().GetString("LowestTemperature")}{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Today)");
@@ -122,8 +123,8 @@ namespace FluentWeather.Tasks
             GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType + ".png"))
-                .AddAttributionText("明日天气")
-                .AddText($"{trimmed[0].Description}  最高{((ITemperatureRange)trimmed[0]).MaxTemperature}°,最低{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddAttributionText(ResourceLoader.GetForCurrentView().GetString("TomorrowWeather"))
+                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForCurrentView().GetString("HighestTemperature")}{((ITemperatureRange)trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForCurrentView().GetString("LowestTemperature")}{((ITemperatureRange)trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");

@@ -1,10 +1,11 @@
-﻿using FluentWeather.Abstraction.Interfaces.Weather;
+﻿  using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.ConstrainedExecution;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Notifications;
 using static FluentWeather.Abstraction.Models.WeatherCode;
 
@@ -236,9 +237,9 @@ namespace FluentWeather.Uwp.Shared
         public static string GetWeek(DateTime date)
         {
             if (date.Day == DateTime.Today.Day)
-                return "今天";
+                return ResourceLoader.GetForCurrentView().GetString("Today");
             if (date.Day == DateTime.Today.Day + 1)
-                return "明天";
+                return ResourceLoader.GetForCurrentView().GetString("Tomorrow");
 
             return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
         }

@@ -117,8 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AboutAppBarButton.Label" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="About_AppDescription.Text" xml:space="preserve">
+    <value>Skyline is an open source weather application.</value>
+  </data>
+  <data name="About_HelpTranslate.Text" xml:space="preserve">
+    <value>Help Translate</value>
+  </data>
+  <data name="About_OpenSourceLicenses.Text" xml:space="preserve">
+    <value>Open source licenses</value>
+  </data>
+  <data name="About_OpenSourceLicensesDescription.Text" xml:space="preserve">
+    <value>The app uses the following open source libraries</value>
+  </data>
+  <data name="About_ProjectUrl.Text" xml:space="preserve">
+    <value>Source Code</value>
+  </data>
+  <data name="About_Sponsor.Text" xml:space="preserve">
+    <value>Sponsor</value>
   </data>
   <data name="AirCondition.Text" xml:space="preserve">
     <value>Air quality</value>
@@ -128,6 +149,12 @@
   </data>
   <data name="AirQuality" xml:space="preserve">
     <value>Air quality</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>An open source weather app</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Weather</value>
   </data>
   <data name="ApplyButton.Content" xml:space="preserve">
     <value>Apply</value>
@@ -156,6 +183,9 @@
   <data name="BackgroundTransparencySettingsCard.Header" xml:space="preserve">
     <value>Background transparency</value>
   </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CheckUpdateButton.Content" xml:space="preserve">
     <value>Check</value>
   </data>
@@ -167,6 +197,9 @@
   </data>
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>Classic</value>
+  </data>
+  <data name="CloseButton.Content" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="CloudAmountDescription.Text" xml:space="preserve">
     <value>Percentage of the sky covered by cloud</value>
@@ -189,11 +222,14 @@
   <data name="DarkSection.Content" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="DataProviderSettingsCard.Description" xml:space="preserve">
-    <value>Select Data Provider (requires app restart)</value>
-  </data>
   <data name="DataProviderSettingsCard.Header" xml:space="preserve">
     <value>Data provider</value>
+  </data>
+  <data name="DataProviderSettingsExpanderDescription.Text" xml:space="preserve">
+    <value>Select data provider</value>
+  </data>
+  <data name="DataProviderSettingsExpanderDescription_CompareHyperlink.Text" xml:space="preserve">
+    <value>Feature comparison</value>
   </data>
   <data name="DataSettingsExpander.Header" xml:space="preserve">
     <value>Data</value>
@@ -237,6 +273,12 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>Follow system</value>
   </data>
+  <data name="GetDataFailed" xml:space="preserve">
+    <value>Failed to get data</value>
+  </data>
+  <data name="HasPrecipitationText" xml:space="preserve">
+    <value>There will be precipitation in the next two hours</value>
+  </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>Highest</value>
   </data>
@@ -272,11 +314,17 @@ Split with "|", support Regex</value>
     <value>Learn more</value>
     <comment>警告内了解详情</comment>
   </data>
+  <data name="NoPrecipitationText" xml:space="preserve">
+    <value>No Precipitation for the next two hours</value>
+  </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>Notification</value>
   </data>
   <data name="NowText.Text" xml:space="preserve">
     <value>Now</value>
+  </data>
+  <data name="OfficialWebsite.Text" xml:space="preserve">
+    <value>Official Website</value>
   </data>
   <data name="OneHourText.Text" xml:space="preserve">
     <value>1h</value>
@@ -285,6 +333,12 @@ Split with "|", support Regex</value>
     <value>Open background folder</value>
   </data>
   <data name="OpenMeteoSection.Content" xml:space="preserve">
+    <value>Open-Meteo</value>
+  </data>
+  <data name="OpenMeteoWelcomeCard.Description" xml:space="preserve">
+    <value>Free weather data source</value>
+  </data>
+  <data name="OpenMeteoWelcomeCard.Header" xml:space="preserve">
     <value>Open-Meteo</value>
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
@@ -312,6 +366,12 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="QWeatherSection.Content" xml:space="preserve">
     <value>QWeather</value>
   </data>
+  <data name="QWeatherSettingsCard.Description" xml:space="preserve">
+    <value>Custom KEY</value>
+  </data>
+  <data name="QWeatherSettingsCard.Header" xml:space="preserve">
+    <value>QWeather</value>
+  </data>
   <data name="QWeatherSettingsExpander.Header" xml:space="preserve">
     <value>QWeather</value>
   </data>
@@ -321,6 +381,18 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="QWeatherTokenSettingsCard.Header" xml:space="preserve">
     <value>KEY</value>
   </data>
+  <data name="QWeatherWelcomeCard.Description" xml:space="preserve">
+    <value>Self-registration is required for KEY</value>
+  </data>
+  <data name="QWeatherWelcomeCard.Header" xml:space="preserve">
+    <value>QWeather</value>
+  </data>
+  <data name="QWeather_GetFreeKeyHyperlink.Content" xml:space="preserve">
+    <value>Get free KEY</value>
+  </data>
+  <data name="QWeather_PublicIdBox.PlaceholderText" xml:space="preserve">
+    <value>Public ID (optional)</value>
+  </data>
   <data name="RefreshMenuItem.Text" xml:space="preserve">
     <value>Refresh</value>
   </data>
@@ -328,7 +400,7 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
     <value>Restart app</value>
   </data>
   <data name="RestartInfoBar.Title" xml:space="preserve">
-    <value>Restart to apply theme</value>
+    <value>Restart to apply settings</value>
   </data>
   <data name="SavedLocations" xml:space="preserve">
     <value>Saved</value>
@@ -341,6 +413,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="SelectPageFileButton.Content" xml:space="preserve">
     <value>Select File</value>
+  </data>
+  <data name="SelectProviderToContinue.Text" xml:space="preserve">
+    <value>Select a data provider to continue</value>
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
@@ -384,6 +459,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>Typhoon</value>
+  </data>
+  <data name="TyphoonServiceWarning.Title" xml:space="preserve">
+    <value>Typhoon Tracking Service is currently unavailable</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
     <value>Unknown error</value>
@@ -447,6 +525,12 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="WeeklyForecast.Text" xml:space="preserve">
     <value>7-Day forecast</value>
+  </data>
+  <data name="Welcome.Text" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
+    <value>Data Source Feature Comparison</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Override the Mica backdrop on Windows 11.

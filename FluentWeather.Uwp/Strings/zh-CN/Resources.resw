@@ -150,6 +150,12 @@
   <data name="AirQuality" xml:space="preserve">
     <value>空气质量</value>
   </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>一款开源的天气应用</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>天气</value>
+  </data>
   <data name="ApplyButton.Content" xml:space="preserve">
     <value>应用</value>
   </data>
