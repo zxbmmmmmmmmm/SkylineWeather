@@ -46,8 +46,7 @@ public sealed class CacheHelper
         var cache = new WeatherCacheBase
         {
             DailyForecasts = viewModel.DailyForecasts,
-            SunRise = viewModel.SunRise,
-            SunSet = viewModel.SunSet,
+
             AirCondition = viewModel.AirCondition,
             Location = viewModel.CurrentGeolocation,
             HourlyForecasts = viewModel.HourlyForecasts,
@@ -57,6 +56,11 @@ public sealed class CacheHelper
             Warnings = viewModel.Warnings,
             WeatherNow = viewModel.WeatherNow,
         };
+        if(viewModel.SunRise is not null)
+        {
+            cache.SunRise = viewModel.SunRise.Value;
+            cache.SunSet = viewModel.SunSet!.Value;
+        }
         cacheData.RemoveAll(p => DateTime.Now - p["UpdatedTime"]?.GetValue<DateTime>() > TimeSpan.FromMinutes(10));//删除过期的数据
         cacheData.Add(JsonSerializer.SerializeToNode(cache));      
         var json = JsonSerializer.Serialize(cacheData);
