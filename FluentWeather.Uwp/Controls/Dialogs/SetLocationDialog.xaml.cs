@@ -63,6 +63,7 @@ public sealed partial class SetLocationDialog : ContentDialog
         Hide();
         Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackDefaultLocationChanged(ChosenGeolocation.Name);
         await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation, Common.Settings.SavedCities);
+        
     }
 
     private async void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)

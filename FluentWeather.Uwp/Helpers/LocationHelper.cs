@@ -47,14 +47,18 @@ public sealed class LocationHelper
             var (lon, lat) = await LocationHelper.UpdatePosition();
             if (lon is -1 || lat is -1)//获取位置失败
             {
-                await DialogManager.OpenDialogAsync(new SetLocationDialog());
-                return Common.Settings.DefaultGeolocation;
+                var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
+                await DialogManager.OpenDialogAsync(dialog);
+                Common.Settings.DefaultGeolocation = dialog.Result;
+                return dialog.Result;
             }
             var city = await service.GetCitiesGeolocationByLocation(lat, lon);
             if (city.Count is 0)//根据经纬度获取城市失败
             {
-                await DialogManager.OpenDialogAsync(new SetLocationDialog());
-                return Common.Settings.DefaultGeolocation;
+                var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
+                await DialogManager.OpenDialogAsync(dialog);
+                Common.Settings.DefaultGeolocation = dialog.Result;
+                return dialog.Result;
             }
             return city.First();
         }

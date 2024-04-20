@@ -49,8 +49,32 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     [RelayCommand]
     public async Task GetCities(string name)
     {
+        if (name is "" or null) return;
         var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        SuggestedCities = await service.GetCitiesGeolocationByName(name);
+
+        try
+        {
+            SuggestedCities = await service.GetCitiesGeolocationByName(name);
+        }
+        catch
+        {
+            await AddCustomLocation();
+            return;
+        }
+        if(SuggestedCities.Count == 0)
+        {
+            await AddCustomLocation();
+        }
+    }
+    [RelayCommand]
+    public async Task AddCustomLocation()
+    {
+        var dialog = new LocationDialog(LocationDialogOptions.HideSearchLocation);
+        await DialogManager.OpenDialogAsync(dialog);
+        if (dialog.Result != null)
+        {
+            Cities.Add(dialog.Result);
+        }
     }
 
     [RelayCommand]
@@ -75,6 +99,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
         Common.Settings.Longitude = location.Location.Longitude;
         CitiesPageViewModel.Instance.CurrentCity = location;
         MainPageViewModel.Instance.CurrentGeolocation = location;
+        await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation, Common.Settings.SavedCities);
     }
 
 

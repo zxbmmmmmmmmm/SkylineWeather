@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -31,7 +32,10 @@ namespace FluentWeather.Uwp.Controls.Settings
         [RelayCommand]
         private async Task OpenLocationDialog()
         {
-            await DialogManager.OpenDialogAsync(new SetLocationDialog());
+            var dialog = new LocationDialog();
+            await DialogManager.OpenDialogAsync(dialog);
+            Common.Settings.DefaultGeolocation = dialog.Result;
+            await CoreApplication.RequestRestartAsync(string.Empty);
         }
     }
 }

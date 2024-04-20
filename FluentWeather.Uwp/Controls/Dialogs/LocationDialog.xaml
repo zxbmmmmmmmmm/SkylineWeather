@@ -1,0 +1,67 @@
+﻿<ContentDialog
+    x:Class="FluentWeather.Uwp.Controls.Dialogs.LocationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:app="using:FluentWeather.Uwp.Shared"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    Title="选择位置"
+    DefaultButton="Primary"
+    Closing="ContentDialog_Closing"
+    IsPrimaryButtonEnabled="{x:Bind CanContinue, Mode=OneWay}"
+    PrimaryButtonCommand="{x:Bind ContinueCommand}"
+    PrimaryButtonText="确定"
+    RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    mc:Ignorable="d">
+
+    <Grid >
+        <StackPanel>
+            <AutoSuggestBox
+                        x:Name="SearchLocationBox"
+                        ItemsSource="{x:Bind SuggestedCities, Mode=OneWay}"
+                        ItemTemplate="{ThemeResource GeolocationSuggestTemplate}"
+                        PlaceholderText="搜索城市..."
+                        QueryIcon="Find"
+                        Text="{x:Bind Query, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        UpdateTextOnSelect="False">
+                <AutoSuggestBox.Resources>
+                    <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem" />
+                </AutoSuggestBox.Resources>
+                <i:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="QuerySubmitted">
+                        <core:InvokeCommandAction Command="{x:Bind FindCitiesCommand}"/>
+                    </core:EventTriggerBehavior>
+                    <core:EventTriggerBehavior EventName="SuggestionChosen">
+                        <core:InvokeCommandAction Command="{x:Bind SelectSuggestedCitiesCommand}" InputConverter="{StaticResource AutoSuggestSuggestionParameterConverter}" />
+                    </core:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </AutoSuggestBox>
+            <Button  x:Name="ShowCustomLocationButton" Click="ShowCustomLocationButton_Click" Margin="0,12,0,0">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="自定义选项"/>
+                    <FontIcon Glyph="&#xE70D;" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontSize="14"/>
+                </StackPanel>
+            </Button>
+            <StackPanel Visibility="Collapsed" Margin="0,12,0,0" x:Name="CustomLocationPanel" Spacing="12">
+                <TextBox Text="{x:Bind Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Header="名称*" PlaceholderText="位置名称"/>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <muxc:NumberBox Header="经度*" PlaceholderText="经度" Text="{x:Bind Longitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <muxc:NumberBox Header="纬度*" PlaceholderText="纬度" Text="{x:Bind Latitude,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <ComboBox Header="时区*" PlaceholderText="时区" SelectedItem="{x:Bind TimeZone,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsTextSearchEnabled="True" ItemsSource="{x:Bind TimeZones}" MaxWidth="128"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBox Width="100"  Text="{x:Bind Country,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PlaceholderText="国家/地区" Header="国家/地区"/>
+                    <TextBox Width="100" Text="{x:Bind AdmDistrict,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Header="行政区" PlaceholderText="省/州"/>
+                    <TextBox Width="100" Text="{x:Bind AdmDistrict2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Header="行政区2" PlaceholderText="市/区/县"/>
+                </StackPanel>
+
+                
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

@@ -15,26 +15,25 @@ using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
-namespace FluentWeather.Uwp.Controls.Dialogs
+namespace FluentWeather.Uwp.Controls.Dialogs;
+
+public sealed partial class ErrorDialog : ContentDialog
 {
-    public sealed partial class ErrorDialog : ContentDialog
+
+
+    public IList<Exception> Exceptions
     {
-
-
-        public IList<Exception> Exceptions
-        {
-            get => (IList<Exception>)GetValue(ExceptionsProperty); 
-            set => SetValue(ExceptionsProperty, value); 
-        }
-
-        public static readonly DependencyProperty ExceptionsProperty =
-            DependencyProperty.Register(nameof(Exceptions), typeof(IList<Exception>), typeof(ErrorDialog), new PropertyMetadata(null));
-
-
-        public ErrorDialog()
-        {
-            this.InitializeComponent();
-        }
-
+        get => (IList<Exception>)GetValue(ExceptionsProperty); 
+        set => SetValue(ExceptionsProperty, value); 
     }
+
+    public static readonly DependencyProperty ExceptionsProperty =
+        DependencyProperty.Register(nameof(Exceptions), typeof(IList<Exception>), typeof(ErrorDialog), new PropertyMetadata(null));
+
+
+    public ErrorDialog()
+    {
+        this.InitializeComponent();
+    }
+
 }

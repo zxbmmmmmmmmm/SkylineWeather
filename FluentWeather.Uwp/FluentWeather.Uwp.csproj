@@ -157,6 +157,9 @@
     <Compile Include="Controls\Dialogs\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dialogs\LocationDialog.xaml.cs">
+      <DependentUpon>LocationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogs\SetLocationDialog.xaml.cs">
       <DependentUpon>SetLocationDialog.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialogs\LocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
