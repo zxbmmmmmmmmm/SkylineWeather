@@ -87,7 +87,7 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackCitySaved(string cityName)
     {
-        TrackEvent("TrackAboutOpened","CityName",cityName);
+        TrackEvent("TrackCitySaved", "CityName",cityName);
     }
     public virtual void TrackDefaultLocationChanged(string cityName)
     {
