@@ -30,7 +30,7 @@
                 <chart:CategoricalAxis
                     BorderBrush="Transparent"
                     PlotMode="BetweenTicks"
-                    Visibility="Collapsed">
+                    ShowLabels="False">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -46,7 +46,8 @@
 
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis Visibility="Collapsed">
+                
+                <chart:LinearAxis Visibility="Collapsed" MajorStep="0.2" Maximum="0.8">
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
