@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -51,7 +52,7 @@ public sealed partial class LocationDialog : ContentDialog
         }
         if ((options & LocationDialogOptions.HideCancelButton) is not LocationDialogOptions.HideCancelButton)
         {
-            SecondaryButtonText = "关闭";
+            SecondaryButtonText = ResourceLoader.GetForCurrentView().GetString("Close");
         }
     }
 

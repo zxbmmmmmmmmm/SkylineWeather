@@ -141,6 +141,18 @@
   <data name="About_Sponsor.Text" xml:space="preserve">
     <value>Sponsor</value>
   </data>
+  <data name="AdminDistrict2TextBox.Header" xml:space="preserve">
+    <value>Admin district 2</value>
+  </data>
+  <data name="AdminDistrict2TextBox.PlaceholderText" xml:space="preserve">
+    <value>City/District/County</value>
+  </data>
+  <data name="AdminDistrictTextBox.Header" xml:space="preserve">
+    <value>Admin district</value>
+  </data>
+  <data name="AdminDistrictTextBox.PlaceholderText" xml:space="preserve">
+    <value>Province/State</value>
+  </data>
   <data name="AirCondition.Text" xml:space="preserve">
     <value>Air quality</value>
   </data>
@@ -198,6 +210,9 @@
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>Classic</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="CloseButton.Content" xml:space="preserve">
     <value>Close</value>
   </data>
@@ -207,11 +222,20 @@
   <data name="CloudAmountText.Text" xml:space="preserve">
     <value>Cloud amount</value>
   </data>
+  <data name="CountryRegionTextBox.Header" xml:space="preserve">
+    <value>Country/Region</value>
+  </data>
+  <data name="CountryRegionTextBox.PlaceholderText" xml:space="preserve">
+    <value>Country/Region</value>
+  </data>
   <data name="CurrentLocation" xml:space="preserve">
     <value>Current location</value>
   </data>
   <data name="CurrentLocationText.Text" xml:space="preserve">
     <value>Current location</value>
+  </data>
+  <data name="CustomOptions.Text" xml:space="preserve">
+    <value>Custom Options</value>
   </data>
   <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
     <value>Customize your main page</value>
@@ -301,11 +325,35 @@ Split with "|", support Regex</value>
   <data name="LatestVersion" xml:space="preserve">
     <value>You're up-to-date!</value>
   </data>
+  <data name="LatitudeNumberBox.Header" xml:space="preserve">
+    <value>Latitude*</value>
+  </data>
+  <data name="LatitudeNumberBox.PlaceholderText" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>Light</value>
   </data>
+  <data name="LocationDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="LocationDialog.Title" xml:space="preserve">
+    <value>Select Location</value>
+  </data>
+  <data name="LocationNameTextBox.Header" xml:space="preserve">
+    <value>Name*</value>
+  </data>
+  <data name="LocationNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Location name</value>
+  </data>
   <data name="LocationSettingsExpander.Header" xml:space="preserve">
     <value>Location</value>
+  </data>
+  <data name="LongitudeNumberBox.Header" xml:space="preserve">
+    <value>Longitude*</value>
+  </data>
+  <data name="LongitudeNumberBox.PlaceholderText" xml:space="preserve">
+    <value>Longitude</value>
   </data>
   <data name="LowestTemperature" xml:space="preserve">
     <value>Lowest</value>
@@ -443,6 +491,12 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
     <value>Theme</value>
+  </data>
+  <data name="TimeZoneComboBox.Header" xml:space="preserve">
+    <value>Time zone*</value>
+  </data>
+  <data name="TimeZoneComboBox.PlaceholderText" xml:space="preserve">
+    <value>Time zone</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Today</value>

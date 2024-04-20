@@ -34,6 +34,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             var dialog = new LocationDialog();
             await DialogManager.OpenDialogAsync(dialog);
+            if (dialog.Result is null) return;
             Common.Settings.DefaultGeolocation = dialog.Result;
             await CoreApplication.RequestRestartAsync(string.Empty);
         }
