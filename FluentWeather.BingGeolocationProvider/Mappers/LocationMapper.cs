@@ -20,7 +20,7 @@ public static class LocationMapper
         };
         var name = location.Name;
 
-        if(Common.Settings.Language.Contains("zh"))
+        if(Common.Settings.Language.Contains("zh")&& Common.Settings.Language.Contains("cn"))
         {
             if (location.Address.AdminDistrict is not null && location.Address.AdminDistrict != name)
             {
