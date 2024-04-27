@@ -586,6 +586,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
     <value>Data Source Feature Comparison</value>
   </data>
+  <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
+    <value>We recommend using Open-Meteo data provider</value>
+  </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Override the Mica backdrop on Windows 11.
 Set the background transparency to 100% to preview.</value>
