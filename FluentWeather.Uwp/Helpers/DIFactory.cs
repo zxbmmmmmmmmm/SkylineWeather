@@ -73,6 +73,8 @@ public static class DIFactory
         //ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(BingGeolocationProvider.BingGeolocationProvider));
         OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");
+        OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("timezone", "auto");
+
     }
     //public static void RegisterProviders(List<KeyValuePair<string, string>> dic)
     //{

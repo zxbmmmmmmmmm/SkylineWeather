@@ -100,7 +100,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         {
             if (CurrentGeolocation.UtcOffset is not null)
             {
-                if(forecast.Time.Kind is not DateTimeKind.Unspecified)
+                if(forecast.Time.Kind is not DateTimeKind.Utc)
                 {
                     forecast.Time = forecast.Time.ToUniversalTime();
                 }
@@ -142,7 +142,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
         if (precipProvider is null) return;
         var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
-        if(precip.Summary is "" or null)
+        if(precip.Summary is "" or null&&precip.Precipitations is not null)
         {
             precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations.Sum(p => p.Precipitation)> 0 ? "HasPrecipitationText" : "NoPrecipitationText");
         }
@@ -197,7 +197,8 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     }
 
-    public async void GetWeather(GeolocationBase geo)
+    [RelayCommand]
+    public async Task GetWeather(GeolocationBase geo)
     {
         var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
         if (cacheData is not null)

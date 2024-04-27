@@ -61,7 +61,7 @@ public sealed class CacheHelper
             cache.SunRise = viewModel.SunRise.Value;
             cache.SunSet = viewModel.SunSet!.Value;
         }
-        cacheData.RemoveAll(p => DateTime.Now - p["UpdatedTime"]?.GetValue<DateTime>() > TimeSpan.FromMinutes(10));//删除过期的数据
+        cacheData.RemoveAll(p => (DateTime.Now - p["UpdatedTime"]?.GetValue<DateTime>() > TimeSpan.FromMinutes(10)) || p["Location"]?["Location"].Deserialize<Location>() == viewModel.CurrentGeolocation.Location);//删除过期的数据
         cacheData.Add(JsonSerializer.SerializeToNode(cache));      
         var json = JsonSerializer.Serialize(cacheData);
         await FileIO.WriteTextAsync(item,json);
