@@ -127,22 +127,22 @@ public sealed partial class LocationDialog : ContentDialog
         };
         Hide();
     }
-    private TimeZoneInfo GetTimeZoneFromLocation(double longitude)
+    public TimeZoneInfo GetTimeZoneFromLocation(double longitude)
     {
         var timeZone = 0;
 
-        var shangValue = (int)(longitude / 15);
-        var yushuValue = Math.Abs(longitude % 15);
-        if (yushuValue <= 7.5)
+        var quotient = (int)(longitude / 15);
+        var remainder = Math.Abs(longitude % 15);
+        if (remainder <= 7.5)
         {
-            timeZone = shangValue;
+            timeZone = quotient;
         }
         else
         {
-            timeZone = shangValue + (longitude > 0 ? 1 : -1);
+            timeZone = quotient + (longitude > 0 ? 1 : -1);
         }
 
-        return TimeZones.First(p => p.BaseUtcOffset == TimeSpan.FromHours(1)* timeZone);
+        return TimeZones.FirstOrDefault(p => p.BaseUtcOffset == TimeSpan.FromHours(1)* timeZone);
     }
 
     [ObservableProperty]

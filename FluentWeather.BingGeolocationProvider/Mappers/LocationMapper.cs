@@ -1,8 +1,10 @@
 ﻿using BingMapsRESTToolkit;
+using FluentWeather.Abstraction.Interfaces.Geolocation;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.BingGeolocationProvider.Helpers;
 using FluentWeather.Uwp.Shared;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FluentWeather.BingGeolocationProvider.Mappers;
@@ -18,6 +20,8 @@ public static class LocationMapper
             AdmDistrict2 = location.Address.AdminDistrict2,
             Location = new Abstraction.Models.Location(location.Point.Coordinates[0], location.Point.Coordinates[1]),
         };
+        result.TimeZone = GetTimeZoneFromLocation(result.Location.Longitude).Id;
+        result.UtcOffset = GetTimeZoneFromLocation(result.Location.Longitude).BaseUtcOffset;
         var name = location.Name;
 
         if(Common.Settings.Language.ToLower().Contains("zh"))
@@ -45,4 +49,24 @@ public static class LocationMapper
         result.Name = name;
         return result;
     }
+
+    public static TimeZoneInfo GetTimeZoneFromLocation(double longitude)
+    {
+        var timeZone = 0;
+
+        var quotient = (int)(longitude / 15);
+        var remainder = Math.Abs(longitude % 15);
+        if (remainder <= 7.5)
+        {
+            timeZone = quotient;
+        }
+        else
+        {
+            timeZone = quotient + (longitude > 0 ? 1 : -1);
+        }
+
+        return TimeZones.FirstOrDefault(p => p.BaseUtcOffset == TimeSpan.FromHours(1) * timeZone);
+    }
+
+    public static ReadOnlyCollection<TimeZoneInfo> TimeZones = TimeZoneInfo.GetSystemTimeZones();
 }
