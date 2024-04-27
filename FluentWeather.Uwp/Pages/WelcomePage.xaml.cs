@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
+using System.Globalization;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -32,6 +33,10 @@ public sealed partial class WelcomePage : Page
     {
         this.InitializeComponent();
         SetTitleBar();
+        if(CultureInfo.CurrentCulture.Name is "zh-CN")
+        {
+            WelcomeSuggestion.Visibility = Visibility.Visible;
+        }
     }
     public void SetTitleBar()
     {

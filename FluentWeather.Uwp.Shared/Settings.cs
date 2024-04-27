@@ -287,7 +287,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public bool OOBECompleted
     {
-        get => GetSettings(nameof(OOBECompleted), false);
+        get => GetSettings(nameof(OOBECompleted), (Common.Settings.QWeatherToken != null && Common.Settings.QWeatherToken != "" ));
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(OOBECompleted)] = value;

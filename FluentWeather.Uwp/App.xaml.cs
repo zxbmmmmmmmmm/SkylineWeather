@@ -109,7 +109,7 @@ sealed partial class App : Application
         {
             // 当导航堆栈尚未还原时，导航到第一页，
             // 并通过将所需信息作为导航参数传入来配置
-            if(Common.Settings.OOBECompleted&&Common.Settings.QWeatherToken!="")
+            if(Common.Settings.OOBECompleted)
             {
                 rootFrame.Navigate(typeof(RootPage), Theme.GetNavigationTransition());
             }

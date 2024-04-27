@@ -586,6 +586,9 @@
   <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
     <value>数据源功能对照</value>
   </data>
+  <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
+    <value>对于中国大陆的用户，推荐使用和风天气以获得更精确的数据</value>
+  </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Win11下将覆盖Mica
 将背景透明度设置为100%以查看效果</value>

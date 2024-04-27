@@ -49,6 +49,7 @@
                     FontSize="40"
                     Style="{ThemeResource TitleTextBlockStyle}" />
                 <TextBlock x:Uid="SelectProviderToContinue" HorizontalAlignment="Center" />
+                <TextBlock x:Name="WelcomeSuggestion" Visibility="Collapsed" HorizontalAlignment="Center" x:Uid="WelcomePage_Suggestion"/>
                 <HyperlinkButton
                     x:Uid="WelcomePage_CompareHyperlink"
                     HorizontalAlignment="Center"
