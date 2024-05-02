@@ -20,9 +20,11 @@ using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using FluentWeather.Uwp.QWeatherProvider.Views;
 using FluentWeather.Uwp.Controls.Dialogs;
+using MessagePack;
 
 namespace FluentWeather.Uwp.ViewModels;
 
+[MessagePackObject(keyAsPropertyName:true)]
 public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewModel
 {
     [ObservableProperty]
@@ -35,7 +37,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     private List<WeatherHourlyBase> _hourlyForecasts = new();
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
 
-    [ObservableProperty]
+    [ObservableProperty] 
     private List<WeatherWarningBase> _warnings ;
 
     [ObservableProperty]
@@ -71,9 +73,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         Instance = this;
     }
 
-    partial void OnCurrentGeolocationChanged(GeolocationBase oldValue, GeolocationBase newValue)
+    async partial void OnCurrentGeolocationChanged(GeolocationBase oldValue, GeolocationBase newValue)
     {
-        GetWeather(CurrentGeolocation);
+        await GetWeather(CurrentGeolocation);
     }
 
     [RelayCommand]
@@ -188,7 +190,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                 daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
                 daily.HourlyForecasts?.Add(hourly);
             }
-            CacheHelper.Cache(this);
+            await CacheHelper.CacheAsync(this);
         }
         catch(HttpResponseException e)
         {
@@ -200,7 +202,8 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     [RelayCommand]
     public async Task GetWeather(GeolocationBase geo)
     {
-        var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
+        //var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
+        var cacheData = await CacheHelper.GetCacheAsync(CurrentGeolocation);
         if (cacheData is not null)
         {
             DailyForecasts = cacheData.DailyForecasts;

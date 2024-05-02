@@ -607,6 +607,9 @@
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Sizers">
       <Version>8.0.240109</Version>
     </PackageReference>
+    <PackageReference Include="MessagePack">
+      <Version>2.5.140</Version>
+    </PackageReference>
     <PackageReference Include="MetroLog">
       <Version>1.0.1</Version>
     </PackageReference>

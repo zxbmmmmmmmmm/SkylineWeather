@@ -16,6 +16,8 @@ using System.Collections.ObjectModel;
 using Windows.Foundation.Metadata;
 using System.Globalization;
 using Windows.ApplicationModel;
+using MessagePack;
+using MessagePack.Resolvers;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -170,7 +172,7 @@ public sealed class Settings : INotifyPropertyChanged
     }
     public GeolocationBase? DefaultGeolocation
     {
-        get => GetSettingsWithClass<GeolocationBase?>(nameof(DefaultGeolocation), null);
+        get => GetSettingsFromJson<GeolocationBase?>(nameof(DefaultGeolocation), null);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(DefaultGeolocation)] = JsonSerializer.Serialize(value);
@@ -179,7 +181,7 @@ public sealed class Settings : INotifyPropertyChanged
     }
     public ObservableCollection<GeolocationBase> SavedCities
     {
-        get => GetSettingsWithClass("Cities", new ObservableCollection<GeolocationBase>());
+        get => GetSettingsFromJson("Cities", new ObservableCollection<GeolocationBase>());
         set
         {
             ApplicationData.Current.LocalSettings.Values["Cities"] = JsonSerializer.Serialize(value);
@@ -238,7 +240,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public Dictionary<string, DateTime> PushedWarnings
     {
-        get => GetSettingsWithClass(nameof(PushedWarnings), new Dictionary<string, DateTime>());
+        get => GetSettingsFromJson(nameof(PushedWarnings), new Dictionary<string, DateTime>());
         set => ApplicationData.Current.LocalSettings.Values[nameof(PushedWarnings)] = JsonSerializer.Serialize(value);
     }
     public int LastPushedTime
@@ -345,7 +347,7 @@ public sealed class Settings : INotifyPropertyChanged
     /// <param name="propertyName"></param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
-    public static T GetSettingsWithClass<T>(string propertyName, T defaultValue)//使用default value中的T
+    public static T GetSettingsFromJson<T>(string propertyName, T defaultValue)//使用default value中的T
     {
         try
         {
@@ -362,6 +364,39 @@ public sealed class Settings : INotifyPropertyChanged
             else
             {
                 ApplicationData.Current.LocalSettings.Values[propertyName] = JsonSerializer.Serialize(defaultValue);
+            }
+            return defaultValue;
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    /// <summary>
+    /// 通过MessagePack序列化数据并保存
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="propertyName"></param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    public static T GetSettingsFromMessagePack<T>(string propertyName, T defaultValue)//使用default value中的T
+    {
+        try
+        {
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(propertyName) &&
+                ApplicationData.Current.LocalSettings.Values[propertyName] is not null &&
+                !string.IsNullOrEmpty(ApplicationData.Current.LocalSettings.Values[propertyName].ToString()))
+            {
+                if (typeof(T).ToString() == "System.Boolean")
+                    return (T)(object)bool.Parse(ApplicationData.Current.LocalSettings.Values[propertyName]
+                        .ToString());
+                var bytes = (byte[])ApplicationData.Current.LocalSettings.Values[propertyName];//获取二进制
+                return MessagePackSerializer.Deserialize<T>(bytes, ContractlessStandardResolver.Options);
+            }
+            else
+            {
+                ApplicationData.Current.LocalSettings.Values[propertyName] = MessagePackSerializer.Serialize(defaultValue, ContractlessStandardResolver.Options);
             }
             return defaultValue;
         }

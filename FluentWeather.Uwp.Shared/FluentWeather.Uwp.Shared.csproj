@@ -134,6 +134,9 @@
     <EmbeddedResource Include="Properties\FluentWeather.Uwp.Shared.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MessagePack">
+      <Version>2.5.140</Version>
+    </PackageReference>
     <PackageReference Include="MetroLog">
       <Version>1.0.1</Version>
     </PackageReference>

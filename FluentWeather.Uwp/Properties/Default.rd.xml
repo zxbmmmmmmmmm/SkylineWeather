@@ -26,7 +26,8 @@
     <Namespace Name="Microsoft.Toolkit.Uwp.UI.Controls" Serialize="All" />
     <Namespace Name="Microsoft.Toolkit.Uwp.UI.Animations" Serialize="All" />
     <Namespace Name="FluentWeather.Uwp.ViewModels" Serialize="All" />
-    <Namespace Name="FluentWeather.Abstraction.Interfaces" Serialize="All" />
+    <Namespace Name="FluentWeather.Abstraction" Serialize="All" />
+    <Namespace Name="MessagePack" Serialize="All" />
 
 
     <!-- 在此处添加应用程序特定的运行时指令。-->
