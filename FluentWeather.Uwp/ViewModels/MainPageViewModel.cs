@@ -20,6 +20,8 @@ using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using FluentWeather.Uwp.QWeatherProvider.Views;
 using FluentWeather.Uwp.Controls.Dialogs;
+using System.Diagnostics;
+using Windows.ApplicationModel.Resources.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -179,7 +181,13 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             }
             if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
             {
-                TileHelper.UpdateTiles(DailyForecasts);
+                TileHelper.UpdateForecastTile(DailyForecasts);
+                if (Common.Settings.IsWarningNotificationEnabled)
+                {
+                    TileHelper.UpdateWarningTile(Warnings);
+                    TileHelper.UpdateBadge(Warnings.Count);
+                }
+
             }
             foreach (var hourly in HourlyForecasts)
             {

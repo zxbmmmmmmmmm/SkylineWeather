@@ -309,6 +309,9 @@
   <data name="HourlyForecast.Text" xml:space="preserve">
     <value>24-Hour forecast</value>
   </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
     <value>The concentration of water vapor present in the air</value>
   </data>
@@ -330,6 +333,9 @@ Split with "|", support Regex</value>
   </data>
   <data name="LatitudeNumberBox.PlaceholderText" xml:space="preserve">
     <value>Latitude</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>Light</value>
@@ -391,6 +397,9 @@ Split with "|", support Regex</value>
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>Personalization</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Pressure</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
     <value>The gravity of the air in the atmosphere. Higher air pressure is usually associated with a bright weather, lower air pressure is related to storm weather</value>
@@ -501,8 +510,14 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="Today" xml:space="preserve">
     <value>Today</value>
   </data>
+  <data name="TodayWeather" xml:space="preserve">
+    <value>Today's Weather</value>
+  </data>
   <data name="Tomorrow" xml:space="preserve">
     <value>Tomorrow</value>
+  </data>
+  <data name="TomorrowWeather" xml:space="preserve">
+    <value>Tomorrow's Weather</value>
   </data>
   <data name="TowHoursText.Text" xml:space="preserve">
     <value>2h</value>
@@ -558,6 +573,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
     <value>Alerts</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">
     <value>Display daily weather on tiles (Windows 10 only)</value>

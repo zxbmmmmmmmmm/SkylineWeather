@@ -4,18 +4,23 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.UI.Notifications;
-using static FluentWeather.Uwp.Shared.TileHelper;
 using static FluentWeather.Uwp.Shared.Common;
-using System.Text.RegularExpressions;
 using FluentWeather.Uwp.QWeatherProvider;
 using FluentWeather.Abstraction;
 using FluentWeather.OpenMeteoProvider;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using Windows.ApplicationModel.Resources;
+using FluentWeather.Abstraction.Strings;
+using System.Globalization;
+using System.Runtime.ConstrainedExecution;
+using Windows.Data.Xml.Dom;
+using static FluentWeather.Abstraction.Models.WeatherCode;
+using TileHelper = FluentWeather.Uwp.Shared.TileHelper;
 
 namespace FluentWeather.Tasks
 {
@@ -75,19 +80,33 @@ namespace FluentWeather.Tasks
                 toast.Show();
                 pushed.Add(warning.Id,warning.PublishTime);
             }
+            if (Settings.IsDailyNotificationTileEnabled)
+            {
+
+                TileHelper.UpdateWarningTile(warnings);
+            }
+            TileHelper.UpdateBadge(warnings.Count);
             settingContainer.Values["PushedWarnings"] = JsonSerializer.Serialize(pushed);
         }
         private async Task PushDaily(double lon, double lat)
         {
-            if (_dailyForecastProvider is null) return;
-            var isPushTodayAvailable = Settings.IsDailyNotificationEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
-            var isPushTomorrowAvailable = Settings.IsTomorrowNotificationEnabled && Settings.LastPushedTimeTomorrow != DateTime.Now.Date.DayOfYear;
-            var isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
-            if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
+            var isTileAvailable = true;
+            var isPushTodayAvailable = true;
+            var isPushTomorrowAvailable = true;
+            if (!Settings.DeveloperMode)
+            {
+                if (_dailyForecastProvider is null) return;
+                isPushTodayAvailable = Settings.IsDailyNotificationEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
+                isPushTomorrowAvailable = Settings.IsTomorrowNotificationEnabled && Settings.LastPushedTimeTomorrow != DateTime.Now.Date.DayOfYear;
+                isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
+                if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
+            }
+
+
             var data = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
             if (isTileAvailable)
             {
-                UpdateTiles(data);
+                TileHelper.UpdateForecastTile(data);
                 LogManager.GetLogger(nameof(NotifyTask)).Info("Tile Updated");
             }
             if (DateTime.Now.Hour < 18)
@@ -107,11 +126,11 @@ namespace FluentWeather.Tasks
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
             var group = new AdaptiveGroup();
-            GetGroupChildren(group, trimmed);
+            TileHelper.GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType +".png"))
-                .AddAttributionText(ResourceLoader.GetForCurrentView().GetString("ToadyWeather"))
-                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForCurrentView().GetString("HighestTemperature")}{((ITemperatureRange)trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForCurrentView().GetString("LowestTemperature")}{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
+                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Today)");
@@ -120,11 +139,11 @@ namespace FluentWeather.Tasks
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(1, 6) : data;
             var group = new AdaptiveGroup();
-            GetGroupChildren(group, trimmed);
+            TileHelper.GetGroupChildren(group, trimmed);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + trimmed[0].WeatherType + ".png"))
-                .AddAttributionText(ResourceLoader.GetForCurrentView().GetString("TomorrowWeather"))
-                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForCurrentView().GetString("HighestTemperature")}{((ITemperatureRange)trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForCurrentView().GetString("LowestTemperature")}{((ITemperatureRange)trimmed[0]).MinTemperature}°")
+                .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("TomorrowWeather"))
+                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(group);
             builder.Show();
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
@@ -132,4 +151,6 @@ namespace FluentWeather.Tasks
         }
 
     }
+
+
 }
