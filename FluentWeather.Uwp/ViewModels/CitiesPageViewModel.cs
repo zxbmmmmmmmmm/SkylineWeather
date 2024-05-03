@@ -42,6 +42,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
         {
             Common.Settings.SavedCities = Cities;
             await JumpListHelper.SetJumpList(CurrentCity,Cities);
+            await CacheHelper.DeleteUnused();
         };
         Instance = this;
     }

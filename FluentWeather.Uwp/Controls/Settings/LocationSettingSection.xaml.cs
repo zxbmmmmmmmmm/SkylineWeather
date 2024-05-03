@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Controls.Dialogs;
+using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
@@ -36,7 +37,14 @@ namespace FluentWeather.Uwp.Controls.Settings
             await DialogManager.OpenDialogAsync(dialog);
             if (dialog.Result is null) return;
             Common.Settings.DefaultGeolocation = dialog.Result;
-            await CoreApplication.RequestRestartAsync(string.Empty);
+            try
+            {
+                await CacheHelper.DeleteUnused();
+            }
+            finally
+            {
+                await CoreApplication.RequestRestartAsync(string.Empty);
+            }
         }
     }
 }

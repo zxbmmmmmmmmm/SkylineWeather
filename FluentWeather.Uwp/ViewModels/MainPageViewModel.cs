@@ -188,7 +188,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                 daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
                 daily.HourlyForecasts?.Add(hourly);
             }
-            CacheHelper.Cache(this);
+            await CacheHelper.CacheAsync(this);
         }
         catch(HttpResponseException e)
         {
@@ -200,7 +200,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     [RelayCommand]
     public async Task GetWeather(GeolocationBase geo)
     {
-        var cacheData = await CacheHelper.GetWeatherCache(CurrentGeolocation);
+        var cacheData = await CacheHelper.GetCacheAsync(CurrentGeolocation);
         if (cacheData is not null)
         {
             DailyForecasts = cacheData.DailyForecasts;
