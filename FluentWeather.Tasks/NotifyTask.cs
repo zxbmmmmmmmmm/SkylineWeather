@@ -75,6 +75,10 @@ namespace FluentWeather.Tasks
                 toast.Show();
                 pushed.Add(warning.Id,warning.PublishTime);
             }
+            if(Settings.IsDailyNotificationTileEnabled)
+            {
+                UpdateWarningTile(warnings);
+            }
             settingContainer.Values["PushedWarnings"] = JsonSerializer.Serialize(pushed);
         }
         private async Task PushDaily(double lon, double lat)
@@ -87,7 +91,7 @@ namespace FluentWeather.Tasks
             var data = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
             if (isTileAvailable)
             {
-                UpdateTiles(data);
+                UpdateForecastTile(data);
                 LogManager.GetLogger(nameof(NotifyTask)).Info("Tile Updated");
             }
             if (DateTime.Now.Hour < 18)

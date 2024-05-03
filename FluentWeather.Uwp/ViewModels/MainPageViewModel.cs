@@ -179,7 +179,8 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             }
             if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
             {
-                TileHelper.UpdateTiles(DailyForecasts);
+                TileHelper.UpdateForecastTile(DailyForecasts);
+                TileHelper.UpdateWarningTile(Warnings);
             }
             foreach (var hourly in HourlyForecasts)
             {
