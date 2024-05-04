@@ -13,6 +13,7 @@ public enum WeatherCode
     Overcast = 3,
 
     Haze = 5,
+    Dust = 6,
     #endregion
     Mist = 10,
     #region 40-49 Fog

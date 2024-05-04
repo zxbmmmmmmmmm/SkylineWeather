@@ -12,7 +12,7 @@ public static class DailyForecastItemMapper
     {
         return new WeatherDailyBase
         {
-            WeatherType = WeatherTypeConverter.GetWeatherTypeByDescription(item.TextDay),
+            WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.IconDay)),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(int.Parse(item.Wind360Day)),
             Description = item.TextDay,
             WindDirectionDescription = item.WindDirDay,
@@ -30,6 +30,7 @@ public static class DailyForecastItemMapper
 
             WeatherNight = new QWeatherNight
             {
+                WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.IconNight)),
                 Description = item.TextNight,
                 WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360Night),
                 WindDirectionDescription = item.WindDirNight,

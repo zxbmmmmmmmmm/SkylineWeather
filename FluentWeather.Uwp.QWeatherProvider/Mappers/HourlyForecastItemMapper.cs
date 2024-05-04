@@ -11,7 +11,7 @@ public static class HourlyForecastItemMapper
     {
         return new QWeatherHourlyForecast
         {
-            WeatherType = WeatherTypeConverter.GetWeatherTypeByDescription(item.Text),
+            WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.Icon)),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
             Description = item.Text,
             WindDirectionDescription = item.WindDir,

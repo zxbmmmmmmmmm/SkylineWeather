@@ -12,7 +12,7 @@ public static class WeatherNowMapper
     {
         return new WeatherNowBase
         {
-            WeatherType = WeatherTypeConverter.GetWeatherTypeByDescription(item.Text),
+            WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.Icon)),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
             WindDirectionDescription  = item.WindDir,
             WindScale = item.WindScale,

@@ -6,7 +6,6 @@ namespace FluentWeather.Uwp.QWeatherProvider.Models;
 
 public sealed class QWeatherNight : WeatherBase, IWind
 {
-    public override WeatherCode WeatherType => WeatherTypeConverter.GetWeatherTypeByDescription(Description);
     public string WindDirectionDescription { get; set; }
     public WindDirection WindDirection { get; set; }
     public string WindScale { get; set; }
