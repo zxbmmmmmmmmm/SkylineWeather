@@ -15,7 +15,7 @@ public class AppCenterAnalyticsService : AppAnalyticsService
     public override void Start()
     {
         base.Start();
-        AppCenterService.Start("507a5f67-6c14-432d-bcc3-4619144ecd38", typeof(AppCenter), typeof(Crashes));
+        AppCenterService.Start(Constants.AppCenterSecret, typeof(AppCenter), typeof(Crashes));
     }
     public override void TrackEvent(string name, IDictionary<string, string> properties = null, bool addDefaultProperties = true)
     {

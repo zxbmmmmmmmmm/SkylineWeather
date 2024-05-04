@@ -1,9 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Behaviors;
 using FluentWeather.Uwp.Helpers;
+using FluentWeather.Uwp.Helpers.Analytics;
 using FluentWeather.Uwp.Pages;
 using FluentWeather.Uwp.Shared;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -100,6 +103,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         private void ThemeStyleButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {             
             RestartInfoBar.IsOpen = true;
+            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackThemeChanged(Common.Settings.Theme.ToString());
         }
 
         private void ApplyBlurButton_Click(object sender, RoutedEventArgs e)
@@ -128,6 +132,7 @@ namespace FluentWeather.Uwp.Controls.Settings
             await file.CopyAsync(folder,"MainPage.xaml");
             RestartInfoBar.IsOpen = true;
             Common.Settings.EnableCustomPage = true;
+            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackMainPageChanged(file.Name);
         }
     }
 }

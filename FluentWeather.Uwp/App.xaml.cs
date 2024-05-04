@@ -178,8 +178,13 @@ sealed partial class App : Application
             Window.Current.Activate();
         }
         ActiveArguments = e.Arguments;
-        var service = DIContainer.Locator.ServiceProvider.GetService<AppAnalyticsService>();
-        service.Start();
+
+        if(Common.Settings.IsAnalyticsEnabled)
+        {
+            var service = DIContainer.Locator.ServiceProvider.GetService<AppAnalyticsService>();
+            service.Start();
+        }
+
         ThemeHelper.SetRequestTheme(Common.Settings.ApplicationTheme);//重新设置主题以加载主题资源
     }
 

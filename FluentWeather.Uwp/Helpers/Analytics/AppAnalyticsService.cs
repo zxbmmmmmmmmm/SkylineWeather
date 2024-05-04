@@ -51,15 +51,15 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackWeatherDataObtained()
     {
-        TrackEvent("TrackWeatherDataObtained");
+        TrackEvent("WeatherDataObtained");
     }
     public virtual void TrackTyphoonDialogOpened()
     {
-        TrackEvent("TrackTyphoonDialogOpened");
+        TrackEvent("TyphoonDialogOpened");
     }
     public virtual void TrackProviderChanged(string providerName)
     {
-        TrackEvent("TrackProviderChanged","ProviderName",providerName,false);
+        TrackEvent("ProviderChanged","ProviderName",providerName,false);
     }
     public virtual void TrackThemeChanged(string themeName)
     {
@@ -71,27 +71,31 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackDailyViewEntered()
     {
-        TrackEvent("TrackDailyViewEntered");
+        TrackEvent("DailyViewEntered");
     }
     public virtual void TrackUpdateManualChecked()
     {
-        TrackEvent("TrackUpdateManualChecked");
+        TrackEvent("UpdateManualChecked");
     }
     public virtual void TrackAboutOpened()
     {
-        TrackEvent("TrackAboutOpened");
+        TrackEvent("AboutOpened");
     }
     public virtual void TrackUpdateViewed(string updateVersion)
     {
-        TrackEvent("TrackUpdateViewed","UpdateVersion",updateVersion);
+        TrackEvent("UpdateViewed","UpdateVersion",updateVersion);
     }
     public virtual void TrackCitySaved(string cityName)
     {
-        TrackEvent("TrackCitySaved", "CityName",cityName);
+        TrackEvent("CitySaved", "CityName",cityName);
     }
     public virtual void TrackDefaultLocationChanged(string cityName)
     {
-        TrackEvent("TrackAboutOpened", "CityName", cityName);
+        TrackEvent("DefaultLocationChanged", "CityName", cityName);
+    }
+    public virtual void TrackDeveloperModeEnabled()
+    {
+        TrackEvent("DeveloperModeEnabled");
     }
     #endregion
 }

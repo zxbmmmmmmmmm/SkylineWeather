@@ -118,7 +118,19 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
+    public bool IsAnalyticsEnabled
+    {
+#if DEBUG
+        get => GetSettings(nameof(IsAnalyticsEnabled), false);
+#else
+        get => GetSettings(nameof(IsAnalyticsEnabled), true);
+#endif
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(IsAnalyticsEnabled)] = value;
+            OnPropertyChanged();
+        }
+    }
     public bool NotificationsDebugMode
     {
         get => GetSettings(nameof(NotificationsDebugMode), false);

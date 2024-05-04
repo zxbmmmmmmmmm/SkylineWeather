@@ -24,18 +24,22 @@
                 Padding="12"
                 Click="OpenLog_Click"
                 IsClickEnabled="True" />
-            <controls:SettingsCard Padding="12" Header="Set Language">
-                <TextBox Text="{x:Bind app:Common.Settings.Language,Mode=TwoWay}" />
-            </controls:SettingsCard>
             <controls:SettingsCard
                 x:Name="OOBECard"
                 Padding="12"
                 Click="OOBECard_Click"
                 Header="Enter OOBE"
                 IsClickEnabled="True" />
+            <controls:SettingsCard Padding="12" Header="Set Language">
+                <TextBox Text="{x:Bind app:Common.Settings.Language,Mode=TwoWay}" />
+            </controls:SettingsCard>
             <controls:SettingsCard Header="Notification debug mode" Padding="12">
                 <ToggleSwitch IsOn="{x:Bind app:Common.Settings.NotificationsDebugMode, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
             </controls:SettingsCard>
+            <controls:SettingsCard Header="Enable analytics" Padding="12">
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.IsAnalyticsEnabled, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
+            </controls:SettingsCard>
         </controls:SettingsExpander.Items>
+
     </controls:SettingsExpander>
 </UserControl>

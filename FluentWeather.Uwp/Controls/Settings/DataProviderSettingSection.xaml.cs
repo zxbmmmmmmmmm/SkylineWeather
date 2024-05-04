@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.QWeatherProvider.Views;
+using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -49,6 +52,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RestartInfoBar.IsOpen = true;
+            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackProviderChanged(Common.Settings.ProviderConfig.ToString());
         }
         //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
         //    IList<KeyValuePair<TKey, TValue>> y)

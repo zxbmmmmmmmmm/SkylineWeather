@@ -42,6 +42,7 @@ public sealed partial class AboutDialog : ContentDialog
     [RelayCommand]
     public void EnableDeveloperMode()
     {
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackDeveloperModeEnabled();
         Common.Settings.DeveloperMode = true;
     }
 }
