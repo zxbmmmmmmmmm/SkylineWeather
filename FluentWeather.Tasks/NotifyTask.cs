@@ -74,11 +74,14 @@ namespace FluentWeather.Tasks
             {               
                 if (!Settings.NotificationsDebugMode&&pushed.ContainsKey(warning.Id)) continue; //未被推送过
                 if (Settings.IgnoreWarningWords != "" && Regex.IsMatch(warning.Title,Settings.IgnoreWarningWords)) continue;//匹配屏蔽词
-                var toast = new ToastContentBuilder()
+                var builder = new ToastContentBuilder()
                     .AddText(warning.Title)
                     .AddText(warning.Description)
                     .AddAttributionText(warning.Sender);
-                toast.Show();
+                builder.Show(toast =>
+                {
+                    toast.ExpirationTime = DateTime.Now.AddHours(16);
+                });
                 if (Settings.NotificationsDebugMode) continue;
                 pushed.Add(warning.Id,warning.PublishTime);
             }
@@ -139,7 +142,10 @@ namespace FluentWeather.Tasks
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
                 .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(largeGroup);
-            builder.Show();
+            builder.Show(toast =>
+            {
+                toast.ExpirationTime = DateTime.Now.AddHours(12);
+            });
             LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Today)");
         }
         private void PushTomorrow(List<WeatherDailyBase> data)
@@ -155,8 +161,11 @@ namespace FluentWeather.Tasks
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("TomorrowWeather"))
                 .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(largeGroup);
-            builder.Show();
-            LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
+            builder.Show(toast =>
+            {
+                toast.ExpirationTime = DateTime.Now.AddHours(12);
+            });
+               LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
 
         }
 
