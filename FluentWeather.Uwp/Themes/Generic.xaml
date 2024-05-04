@@ -1113,7 +1113,7 @@
                         </StackPanel>
                         <TextBlock FontSize="16">
                             <Run Text="{x:Bind WindDirectionDescription}" />
-                            <Run Text="{x:Bind WindScale}" /><Run FontSize="12.5" Text="级" />
+                            <Run Text="{x:Bind WindScale}" /><Run x:Uid="WindScaleText" FontSize="12.5" />
                         </TextBlock>
                         <StackPanel
                             HorizontalAlignment="Left"
