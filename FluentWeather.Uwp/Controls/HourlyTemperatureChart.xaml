@@ -45,7 +45,7 @@
                 </chart:CategoricalAxis>
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis
+                <chart:LinearAxis                   
                     LabelFormat="{}{0}°"
                     Maximum="{x:Bind MaxTemperature}"
                     Minimum="{x:Bind MinTemperature}">

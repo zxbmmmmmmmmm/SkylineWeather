@@ -66,6 +66,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     [ObservableProperty]
     private AirConditionBase _airCondition;
+
     public double? TotalPrecipitation => Precipitation?.Precipitations?.Sum(p => p.Precipitation);
     public bool HasPrecipitation => TotalPrecipitation > 0;
     public static MainPageViewModel Instance{ get; private set; }

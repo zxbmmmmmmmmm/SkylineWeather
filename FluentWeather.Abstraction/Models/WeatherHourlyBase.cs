@@ -4,7 +4,7 @@ using System;
 
 namespace FluentWeather.Abstraction.Models;
 
-public class WeatherHourlyBase :WeatherBase, ITemperature, ITime, IWind, IHumidity, IPressure,IPrecipitationProbability
+public class WeatherHourlyBase : WeatherBase, ITemperature, ITime, IWind, IHumidity, IPressure, IPrecipitationProbability, ICloudAmount, IVisibility
 {
     public int? Humidity { get; set; }
     public int? Pressure { get; set; }
@@ -23,4 +23,6 @@ public class WeatherHourlyBase :WeatherBase, ITemperature, ITime, IWind, IHumidi
     public  int WindSpeed { get; set; }
     public int? PrecipitationProbability { get; set; }
     public  WindDirection WindDirection { get; set; }
+    public int? CloudAmount { get ; set ; }
+    public int? Visibility { get ; set ; }
 }

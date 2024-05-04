@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Models;
 using FluentWeather.OpenMeteoProvider.Models;
 using OpenMeteoApi.Models;
 using System;
@@ -7,9 +8,9 @@ namespace FluentWeather.OpenMeteoProvider.Mappers;
 
 public static class HourlyForecastMapper
 {
-    public static OpenMeteoHourlyForecast MapToOpenMeteoHourlyForecast(this HourlyForecastItem item)
+    public static WeatherHourlyBase MapToHourlyForecast(this HourlyForecastItem item)
     {
-        return new OpenMeteoHourlyForecast
+        return new WeatherHourlyBase
         {
             WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
@@ -21,7 +22,8 @@ public static class HourlyForecastMapper
             Temperature = (int)item.Temperature2m!,
             Time = item.Time!.Value,
             PrecipitationProbability = item.PrecipitationProbability,
-            CloudAmount = item.CloudCover
+            CloudAmount = item.CloudCover,
+            Visibility = (int?)item.Visibility/1000,
         };
     }
 }

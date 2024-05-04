@@ -97,7 +97,7 @@ public sealed class QWeatherProvider : ProviderBase,
     public async Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherHourlyApi, new QWeatherRequest(lon, lat));
-        var res = result.HourlyForecasts?.ConvertAll(p => (WeatherHourlyBase)p.MapToQWeatherHourlyForecast());
+        var res = result.HourlyForecasts?.ConvertAll(p => (WeatherHourlyBase)p.MapToHourlyForecast());
         return res;
     }
 

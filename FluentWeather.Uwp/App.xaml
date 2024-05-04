@@ -34,6 +34,7 @@
             <valueConverters:SeverityColorToColorConverter x:Key="SeverityColorToColorConverter" />
             <valueConverters:ToShortTimeStringConverter x:Key="ToShortTimeStringConverter" />
             <valueConverters:WindScaleToDescriptionConverter x:Key="WindScaleToDescriptionConverter" />
+            <valueConverters:ListPropertyNullToVisibilityConverter x:Key="ListPropertyNullToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,89 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.HourlyDataChart"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FluentWeather.Uwp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valueConverters="using:ValueConverters"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <valueConverters:AddConverter x:Key="AddConverter" />
+        <DataTemplate x:Key="PointTemplate">
+            <Ellipse
+                Width="8"
+                Height="8"
+                Fill="{ThemeResource SystemControlHighlightAltAltHighBrush}"
+                Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
+                StrokeThickness="2" />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <chart:RadCartesianChart>
+            <chart:RadCartesianChart.HorizontalAxis>
+                <chart:CategoricalAxis
+                    x:Uid="TimeAxis"
+                    LabelFormat="{}{0,0:HH:00}"
+                    MajorTickInterval="3"
+                    PlotMode="OnTicksPadded" />
+            </chart:RadCartesianChart.HorizontalAxis>
+            <chart:RadCartesianChart.VerticalAxis>
+                <chart:LinearAxis
+                    x:Name="VerticalLinearAxis"
+                    HorizontalLocation="Left"
+                    LabelFormat="{x:Bind LabelFormat, Mode=OneWay}">
+                    <chart:LinearAxis.LineStyle>
+                        <Style TargetType="Line">
+                            <Setter Property="Stroke" Value="Transparent" />
+                        </Style>
+                    </chart:LinearAxis.LineStyle>
+                    <chart:LinearAxis.MajorTickStyle>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Stroke" Value="Transparent" />
+                        </Style>
+                    </chart:LinearAxis.MajorTickStyle>
+                </chart:LinearAxis>
+            </chart:RadCartesianChart.VerticalAxis>
+
+            <chart:RadCartesianChart.Grid>
+                <chart:CartesianChartGrid MajorLinesVisibility="Y" />
+            </chart:RadCartesianChart.Grid>
+            <chart:SplineAreaSeries
+                chart:ChartTrackBallBehavior.IntersectionTemplate="{x:Bind IntersectionTemplate, Mode=OneWay}"
+                chart:ChartTrackBallBehavior.TrackInfoTemplate="{x:Bind TrackInfoTemplate, Mode=OneWay}"
+                ClipToPlotArea="False"
+                CombineMode="Cluster"
+                ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
+                Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                StrokeThickness="3">
+                <chart:SplineAreaSeries.Fill>
+                    <LinearGradientBrush Opacity="0.4" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="{ThemeResource SystemBaseHighColor}" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </chart:SplineAreaSeries.Fill>
+                <chart:SplineAreaSeries.LabelDefinitions>
+                    <chart:ChartSeriesLabelDefinition
+                        Margin="0,8,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                </chart:SplineAreaSeries.LabelDefinitions>
+                <chart:SplineAreaSeries.CategoryBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="Time" />
+                </chart:SplineAreaSeries.CategoryBinding>
+                <chart:SplineAreaSeries.ValueBinding>
+                    <chart:PropertyNameDataPointBinding PropertyName="{x:Bind PropertyName, Mode=OneWay}" />
+                </chart:SplineAreaSeries.ValueBinding>
+            </chart:SplineAreaSeries>
+            <chart:RadCartesianChart.Behaviors>
+                <chart:ChartTrackBallBehavior ShowInfo="False" ShowIntersectionPoints="True" />
+            </chart:RadCartesianChart.Behaviors>
+
+        </chart:RadCartesianChart>
+
+    </Grid>
+</UserControl>

@@ -48,7 +48,7 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
     public async Task<List<WeatherHourlyBase>> GetHourlyForecasts(double lon, double lat)
     {
         var result = await Client.GetHourlyForecasts(lat, lon);
-        return result.ConvertAll<WeatherHourlyBase>(p => p.MapToOpenMeteoHourlyForecast());
+        return result.ConvertAll<WeatherHourlyBase>(p => p.MapToHourlyForecast());
     }
 
     public async Task<PrecipitationBase> GetPrecipitations(double lon, double lat)

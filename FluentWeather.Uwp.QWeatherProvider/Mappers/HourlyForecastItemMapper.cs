@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.QWeatherProvider.Helpers;
 using FluentWeather.Uwp.QWeatherProvider.Models;
 using QWeatherApi.ApiContracts;
@@ -7,9 +8,9 @@ namespace FluentWeather.Uwp.QWeatherProvider.Mappers;
 
 public static class HourlyForecastItemMapper
 {
-    public static QWeatherHourlyForecast MapToQWeatherHourlyForecast(this WeatherHourlyResponse.HourlyForecastItem item)
+    public static WeatherHourlyBase MapToHourlyForecast(this WeatherHourlyResponse.HourlyForecastItem item)
     {
-        return new QWeatherHourlyForecast
+        return new WeatherHourlyBase
         {
             WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.Icon)),
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
@@ -22,7 +23,7 @@ public static class HourlyForecastItemMapper
             Temperature = item.Temp,
             Time = item.FxTime,
             PrecipitationProbability = item.Pop,
-            CloudAmount = item.Cloud
+            CloudAmount = item.Cloud,          
         };
     }
 }

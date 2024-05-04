@@ -6,6 +6,7 @@
     xmlns:app="using:FluentWeather.Uwp.Shared"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:behaviors1="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
+    xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls1="using:FluentWeather.Uwp.Controls"
     xmlns:converters="using:ValueConverters"
@@ -539,6 +540,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+                        <!--  日出日落  -->
                         <TextBlock
                             Margin="12,0,0,0"
                             FontSize="16"
@@ -547,13 +549,14 @@
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                            <Run Text="{x:Bind ViewModel.SunRise,Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
+                            <Run Text="{x:Bind ViewModel.SunRise, Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
                             <Run
                                 FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                 FontSize="14"
                                 Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                            <Run Text="{x:Bind ViewModel.SunSet,Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
+                            <Run Text="{x:Bind ViewModel.SunSet, Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
                         </TextBlock>
+                        <!--  风力、能见度、云量等  -->
                         <controls:AdaptiveGridView
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
@@ -575,7 +578,40 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256">
+                                            <StackPanel MaxWidth="430">
+                                                <controls1:HourlyDataChart
+                                                    Height="200"
+                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                                                    Maximum="40"
+                                                    PropertyName="WindSpeed">
+                                                    <controls1:HourlyDataChart.TrackInfoTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel
+                                                                Margin="4"
+                                                                HorizontalAlignment="Center"
+                                                                Orientation="Horizontal">
+                                                                <TextBlock>
+                                                                    <Run Text="{Binding DataPoint.DataItem.WindSpeed}" /><Run Text=" km/h" />
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.TrackInfoTemplate>
+                                                    <controls1:HourlyDataChart.IntersectionTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                                                <TextBlock Margin="6,4">
+                                                                    <Run
+                                                                        FontWeight="SemiBold"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.WindSpeed}" /><Run Text=" km/h" />
+                                                                    <LineBreak /><Run Text="{Binding DataPoint.DataItem.WindScale}" /><Run x:Uid="WindScaleText" FontSize="14" />
+                                                                    <Run Text="{Binding DataPoint.DataItem.WindDirectionDescription}" />
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.IntersectionTemplate>
+                                                </controls1:HourlyDataChart>
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
@@ -605,7 +641,28 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256">
+                                            <StackPanel MaxWidth="430">
+                                                <controls1:HourlyDataChart
+                                                    Height="200"
+                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                                                    LabelFormat="{}{0}"
+                                                    Maximum="100"
+                                                    MajorStep="25"
+                                                    PropertyName="Humidity">
+                                                    <controls1:HourlyDataChart.IntersectionTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                                                <TextBlock Margin="6,4">
+                                                                    <Run
+                                                                        FontWeight="SemiBold"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Humidity}" /><Run Text="%" />
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.IntersectionTemplate>
+                                                </controls1:HourlyDataChart>
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run x:Uid="HumidityText" /><Run Text=" " />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
@@ -644,7 +701,27 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256">
+                                            <StackPanel MaxWidth="430">
+                                                <controls1:HourlyDataChart
+                                                    Height="200"
+                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                                                    PropertyName="Pressure">
+       
+                                                    <controls1:HourlyDataChart.IntersectionTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                                                <TextBlock Margin="6,4">
+                                                                    <Run
+                                                                        FontWeight="SemiBold"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Pressure}" /><Run Text="hPa" />
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.IntersectionTemplate>
+                                                </controls1:HourlyDataChart>
+
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run x:Uid="PressureText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
@@ -670,7 +747,39 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256">
+                                            <StackPanel MaxWidth="430">
+                                                <controls1:HourlyDataChart
+                                                    Visibility="{x:Bind ViewModel.HourlyForecasts24H,Converter={StaticResource ListPropertyNullToVisibilityConverter},ConverterParameter=Visibility}"
+                                                    Height="200"
+                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"                                                   
+                                                    PropertyName="Visibility">
+                                                    <controls1:HourlyDataChart.TrackInfoTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel
+                                                                Margin="4"
+                                                                HorizontalAlignment="Center"
+                                                                Orientation="Horizontal">
+                                                                <TextBlock>
+                                                                    <Run Text="{Binding DataPoint.DataItem.Visibility}" /><Run Text=" km" />
+                                                                </TextBlock>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.TrackInfoTemplate>
+                                                    <controls1:HourlyDataChart.IntersectionTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                                                <TextBlock Margin="6,4">
+                                                                    <Run
+                                                                        FontWeight="SemiBold"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Visibility}" /><Run Text="km" />
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.IntersectionTemplate>
+                                                </controls1:HourlyDataChart>
+
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run x:Uid="VisibilityText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
@@ -696,7 +805,29 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="256">
+                                            <StackPanel MaxWidth="430">
+                                                <controls1:HourlyDataChart
+                                                    Height="200"
+                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                                                    LabelFormat="{}{0}"
+                                                    Maximum="100"
+                                                    MajorStep="25"
+                                                    PropertyName="CloudAmount">
+                                                    <controls1:HourlyDataChart.IntersectionTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                                                <TextBlock Margin="6,4">
+                                                                    <Run
+                                                                        FontWeight="SemiBold"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.CloudAmount}" /><Run Text="%" />
+                                                                </TextBlock>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </controls1:HourlyDataChart.IntersectionTemplate>
+                                                </controls1:HourlyDataChart>
+
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run x:Uid="CloudAmountText" />
                                                     <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />

@@ -30,12 +30,12 @@ namespace FluentWeather.Uwp.Controls
         }
         public List<WeatherHourlyBase> HourlyForecasts
         {
-            get => ((List<WeatherHourlyBase>)GetValue(WeatherForecastsProperty));
-            set => SetValue(WeatherForecastsProperty, value);
+            get => ((List<WeatherHourlyBase>)GetValue(HourlyForecastsProperty));
+            set => SetValue(HourlyForecastsProperty, value);
         }
 
 
-        public static readonly DependencyProperty WeatherForecastsProperty =
+        public static readonly DependencyProperty HourlyForecastsProperty =
             DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(HourlyTemperatureChart), new PropertyMetadata(default, OnPropertyChanged));
         public bool IsHorizontalAxisVisible
         {

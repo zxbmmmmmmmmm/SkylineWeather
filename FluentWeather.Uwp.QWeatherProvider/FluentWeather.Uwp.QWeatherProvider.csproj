@@ -145,7 +145,6 @@
     <Compile Include="Mappers\WeatherWarningMapper.cs" />
     <Compile Include="Models\QAirCondition.cs" />
     <Compile Include="Models\QTyphoon.cs" />
-    <Compile Include="Models\QWeatherHourlyForecast.cs" />
     <Compile Include="Models\QWeatherIndices.cs" />
     <Compile Include="Models\QWeatherNight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

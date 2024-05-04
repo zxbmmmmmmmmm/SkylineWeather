@@ -169,6 +169,9 @@
     <Compile Include="Controls\Dialogs\UpdateDialog.xaml.cs">
       <DependentUpon>UpdateDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\HourlyDataChart.xaml.cs">
+      <DependentUpon>HourlyDataChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\HourlyTemperatureChart.xaml.cs">
       <DependentUpon>HourlyTemperatureChart.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,7 @@
     <Compile Include="Helpers\ValueConverters\ConverterMethods.cs" />
     <Compile Include="Helpers\ValueConverters\DataConverters.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\ListPropertyNullToVisibilityConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Helpers\XamlRenderService.cs" />
     <Compile Include="Pages\CitiesPage.xaml.cs">
@@ -480,6 +484,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\UpdateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HourlyDataChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
