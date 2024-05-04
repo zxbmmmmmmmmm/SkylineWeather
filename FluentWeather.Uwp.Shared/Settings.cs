@@ -118,6 +118,16 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    public bool NotificationsDebugMode
+    {
+        get => GetSettings(nameof(NotificationsDebugMode), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(NotificationsDebugMode)] = value;
+            OnPropertyChanged();
+        }
+    }
     public int BackgroundBlurAmount
     {
         get => GetSettings(nameof(BackgroundBlurAmount), 2);

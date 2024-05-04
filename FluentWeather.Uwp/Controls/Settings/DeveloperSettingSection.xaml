@@ -33,6 +33,9 @@
                 Click="OOBECard_Click"
                 Header="Enter OOBE"
                 IsClickEnabled="True" />
+            <controls:SettingsCard Header="Notification debug mode" Padding="12">
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.NotificationsDebugMode, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
+            </controls:SettingsCard>
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>
 </UserControl>

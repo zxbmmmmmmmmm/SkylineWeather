@@ -36,6 +36,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
             updater.EnableNotificationQueue(true);
             updater.Update(new TileNotification(GenerateWarningsTileContent(data).GetXml()) { Tag = "warnings" });
         }
+
         public static TileContent GenerateWarningsTileContent(List<WeatherWarningBase> warnings)
         {
             TileContentBuilder builder = new TileContentBuilder();
@@ -78,6 +79,59 @@ namespace FluentWeather.Uwp.Shared.Helpers
                 }
                 builder.AddText("", size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle);
             }
+            return builder.Content;
+        }
+        public static TileContent GenerateForecastTileContent(List<WeatherDailyBase> daily)
+        {
+            TileContentBuilder builder = new TileContentBuilder();
+
+            // Small Tile
+            builder.AddTile(TileSize.Small)
+                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Assets/Weather/Resized/24/" + AssetsHelper.GetWeatherIconName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
+                .SetTextStacking(TileTextStacking.Center);
+
+
+            //var mediumGroup = new AdaptiveGroup();
+            //GetGroupChildren(mediumGroup, daily.GetRange(0, 2));
+
+            //// Medium Tile
+            //builder.AddTile(TileSize.Medium)
+            //    .AddAdaptiveTileVisualChild(mediumGroup, TileSize.Medium);
+            builder.AddTile(TileSize.Medium)
+                .AddText("")
+                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Assets/Weather/Resized/32/" + AssetsHelper.GetWeatherIconName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
+                .SetTextStacking(TileTextStacking.Center)
+                .SetBranding(TileBranding.Name)
+                .SetDisplayName(daily[0].Description, TileSize.Medium);
+
+            // Wide Tile
+            builder.AddTile(TileSize.Wide)
+                .AddText($"{daily[0].Description}", TileSize.Wide, AdaptiveTextStyle.Title)
+                .AddText($"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}", TileSize.Wide, AdaptiveTextStyle.Body)
+                .AddText($"{ResourceLoader.GetForViewIndependentUse().GetString("Humidity")}:{daily[0].Humidity}% {ResourceLoader.GetForViewIndependentUse().GetString("Pressure")}:{daily[0].Pressure}hPa", TileSize.Wide, AdaptiveTextStyle.CaptionSubtle)
+                .SetBranding(TileBranding.Auto, TileSize.Wide)
+                .SetTextStacking(TileTextStacking.Center);
+
+            // Large tile
+            builder.AddTile(TileSize.Large, GenerateLargeTileContent(daily))
+
+                .SetBranding(TileBranding.Name)
+                .SetTextStacking(TileTextStacking.Center);
+
+            if (!Common.Settings.TransparentTiles)
+            {
+                builder.SetBackgroundImage(new Uri("Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(daily[0].WeatherType) + ".png", UriKind.Relative), TileSize.Large, hintOverlay: 40)
+                    .SetBackgroundImage(new Uri("Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(daily[0].WeatherType) + ".png", UriKind.Relative), TileSize.Wide, hintOverlay: 40);
+
+            }
+
+            // Set the base URI for the images, so we don't redundantly specify the entire path
+            //builder.Content.Visual.BaseUri = new Uri("Assets/", UriKind.Relative);
+
+            builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
+            builder.Content.Visual.LockDetailedStatus2 = $"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+
+
             return builder.Content;
         }
 
@@ -169,67 +223,8 @@ namespace FluentWeather.Uwp.Shared.Helpers
         {
             foreach (var item in daily)
             {
-                group.Children.Add(GenerateSubgroup(GetWeek(item.Time), "Weather/Resized/32/" + AssetsHelper.GetWeatherIconName(item.WeatherType), item.MaxTemperature, item.MinTemperature));
+                group.Children.Add(GenerateSubgroup(GetWeek(item.Time), "ms-appx:///Assets/Weather/Resized/32" + AssetsHelper.GetWeatherIconName(item.WeatherType), item.MaxTemperature, item.MinTemperature));
             }
-        }
-        public static void GetGroupChildrenForTile(AdaptiveGroup group, List<WeatherDailyBase> daily)
-        {
-            foreach (var item in daily)
-            {
-                group.Children.Add(GenerateTileSubgroup(GetWeek(item.Time), "Weather/Resized/32/" + AssetsHelper.GetWeatherIconName(item.WeatherType), item.MaxTemperature, item.MinTemperature));
-            }
-        }
-        public static TileContent GenerateForecastTileContent(List<WeatherDailyBase> daily)
-        {
-            TileContentBuilder builder = new TileContentBuilder();
-
-            // Small Tile
-            builder.AddTile(TileSize.Small)
-                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Weather/Resized/24/" + AssetsHelper.GetWeatherIconName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
-                .SetTextStacking(TileTextStacking.Center);
-
-
-            //var mediumGroup = new AdaptiveGroup();
-            //GetGroupChildren(mediumGroup, daily.GetRange(0, 2));
-
-            //// Medium Tile
-            //builder.AddTile(TileSize.Medium)
-            //    .AddAdaptiveTileVisualChild(mediumGroup, TileSize.Medium);
-            builder.AddTile(TileSize.Medium)
-                .AddText("")
-                .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Weather/Resized/32/" + AssetsHelper.GetWeatherIconName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
-                .SetTextStacking(TileTextStacking.Center)
-                .SetBranding(TileBranding.Name)
-                .SetDisplayName(daily[0].Description, TileSize.Medium);
-
-            // Wide Tile
-            builder.AddTile(TileSize.Wide)
-                .AddText($"{daily[0].Description}", TileSize.Wide, AdaptiveTextStyle.Title)
-                .AddText($"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}", TileSize.Wide, AdaptiveTextStyle.Body)
-                .AddText($"{ResourceLoader.GetForViewIndependentUse().GetString("Humidity")}:{daily[0].Humidity}% {ResourceLoader.GetForViewIndependentUse().GetString("Pressure")}:{daily[0].Pressure}hPa", TileSize.Wide, AdaptiveTextStyle.CaptionSubtle)
-                .SetBranding(TileBranding.Auto, TileSize.Wide)
-                .SetTextStacking(TileTextStacking.Center);
-
-            // Large tile
-            builder.AddTile(TileSize.Large, GenerateLargeTileContent(daily))
-                .SetBranding(TileBranding.Name)
-                .SetTextStacking(TileTextStacking.Center);
-
-            if (!Common.Settings.TransparentTiles)
-            {
-                builder.SetBackgroundImage(new Uri("Backgrounds/" + AssetsHelper.GetBackgroundImageName(daily[0].WeatherType) + ".png", UriKind.Relative), TileSize.Large, hintOverlay: 40)
-                    .SetBackgroundImage(new Uri("Backgrounds/" + AssetsHelper.GetBackgroundImageName(daily[0].WeatherType) + ".png", UriKind.Relative), TileSize.Wide, hintOverlay: 40);
-
-            }
-
-            // Set the base URI for the images, so we don't redundantly specify the entire path
-            builder.Content.Visual.BaseUri = new Uri("Assets/", UriKind.Relative);
-
-            builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
-            builder.Content.Visual.LockDetailedStatus2 = $"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
-
-
-            return builder.Content;
         }
 
 
@@ -239,60 +234,55 @@ namespace FluentWeather.Uwp.Shared.Helpers
             {
                 Children =
                 {
-            new AdaptiveGroup()
-            {
-                Children =
-                {
-                    new AdaptiveSubgroup()
+                    new AdaptiveGroup()
                     {
-                        HintWeight = 31,
                         Children =
                         {
-                            new AdaptiveImage() { Source = $"Weather/{AssetsHelper.GetWeatherIconName(daily[0].WeatherType)}" }
+                            new AdaptiveSubgroup()
+                            {
+                                HintWeight = 31,
+                                Children =
+                                {
+                                    new AdaptiveImage() { Source = $"Assets/Weather/{AssetsHelper.GetWeatherIconName(daily[0].WeatherType)}" }
+                                }
+                            },
+
+                            new AdaptiveSubgroup()
+                            {
+                                Children =
+                                {
+                                    new AdaptiveText()
+                                    {
+                                        Text = daily[0].Description,
+                                        HintStyle = AdaptiveTextStyle.Subtitle
+
+                                    },
+
+                                    new AdaptiveText()
+                                    {
+                                        Text = (daily[0]).MaxTemperature + "° / " +daily[0].MinTemperature + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
+                                    },
+                                },
+                                HintTextStacking = AdaptiveSubgroupTextStacking.Center,
+                            }
                         }
                     },
 
-                    new AdaptiveSubgroup()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = daily[0].Description,
-                                HintStyle = AdaptiveTextStyle.Subtitle
+                    // For spacing
+                    new AdaptiveText(),
 
-                            },
 
-                            new AdaptiveText()
-                            {
-                                Text = (daily[0]).MaxTemperature + "° / " +daily[0].MinTemperature + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
-                            },
-                        },
-                        HintTextStacking = AdaptiveSubgroupTextStacking.Center,
-                    }
                 }
-            },
-
-            // For spacing
-            new AdaptiveText(),
-
-
-            }
             };
             var largeGroup = new AdaptiveGroup();
-            foreach (var item in daily.GetRange(1, 5))
-            {
-                largeGroup.Children.Add(GenerateLargeSubgroup(GetWeek(item.Time), $"Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
+            foreach (var item in daily.GetRange(1,5))
+            {                
+                largeGroup.Children.Add(GenerateTileSubgroup(GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
             }
             content.Children.Add(largeGroup);
             return content;
         }
-        public static AdaptiveSubgroup GenerateLargeSubgroup(string day, string image, int high, int low)
-        {
-            var subgroup = GenerateTileSubgroup(day, image, high, low);
 
-            return subgroup;
-        }
 
         public static string GetWeek(DateTime date)
         {
