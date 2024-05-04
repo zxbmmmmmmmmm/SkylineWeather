@@ -116,6 +116,7 @@
                         CommandParameter="All" />
                 </StackPanel>
             </controls:SettingsCard>
+            
             <controls:SettingsCard x:Uid="BackgroundBlurSettingsCard" Padding="12">
                 <controls:SettingsCard.HeaderIcon>
                     <PathIcon
@@ -149,6 +150,13 @@
                     </TextBlock>
                 </StackPanel>
             </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="TransparentTilesSettingsCard" Padding="12">
+                <controls:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xF156;" />
+                </controls:SettingsCard.HeaderIcon>
+                <ToggleSwitch IsOn="{x:Bind app:Common.Settings.TransparentTiles, Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}" />
+            </controls:SettingsCard>
+
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>
 </UserControl>

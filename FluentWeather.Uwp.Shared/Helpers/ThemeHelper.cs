@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
@@ -7,13 +6,14 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
-namespace FluentWeather.Uwp.Shared;
+namespace FluentWeather.Uwp.Shared.Helpers;
 
 public sealed class ThemeHelper
 {
     private static ElementTheme _theme;
     public static async Task SetRequestedThemeAsync(ElementTheme theme)
     {
+
         foreach (var view in CoreApplication.Views)
         {
             await view.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

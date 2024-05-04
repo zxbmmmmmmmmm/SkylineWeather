@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using Windows.Foundation.Metadata;
 using FluentWeather.Abstraction;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
-using Windows.Foundation.Metadata;
 
-namespace FluentWeather.Uwp.Shared;
+namespace FluentWeather.Uwp.Shared.Helpers;
 
 [Experimental]
 public static class DataProviderHelper

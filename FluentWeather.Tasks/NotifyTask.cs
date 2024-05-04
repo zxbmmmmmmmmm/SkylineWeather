@@ -20,7 +20,7 @@ using System.Globalization;
 using System.Runtime.ConstrainedExecution;
 using Windows.Data.Xml.Dom;
 using static FluentWeather.Abstraction.Models.WeatherCode;
-using TileHelper = FluentWeather.Uwp.Shared.TileHelper;
+using TileHelper = FluentWeather.Uwp.Shared.Helpers.TileHelper;
 
 namespace FluentWeather.Tasks
 {

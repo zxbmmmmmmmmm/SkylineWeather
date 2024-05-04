@@ -526,6 +526,12 @@
     <value>追踪</value>
     <comment>台风警告内快捷追踪</comment>
   </data>
+  <data name="TransparentTilesSettingsCard.Description" xml:space="preserve">
+    <value>使宽磁贴/大磁贴透明</value>
+  </data>
+  <data name="TransparentTilesSettingsCard.Header" xml:space="preserve">
+    <value>透明磁贴</value>
+  </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>台风</value>
   </data>

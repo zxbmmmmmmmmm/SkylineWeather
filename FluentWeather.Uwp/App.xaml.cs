@@ -31,6 +31,7 @@ using MetroLog;
 using MetroLog.Targets;
 using Windows.ApplicationModel.Resources;
 using FluentWeather.Uwp.Helpers.Analytics;
+using FluentWeather.Uwp.Shared.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Helpers;
 
@@ -51,9 +52,18 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
+        if(Common.Settings.ApplicationTheme is ElementTheme.Light) 
+        {
+            this.RequestedTheme = ApplicationTheme.Light;
+        }
+        else if(Common.Settings.ApplicationTheme is ElementTheme.Dark)
+        {
+            this.RequestedTheme = ApplicationTheme.Dark;
+        }
 #if DEBUG
         ApplicationLanguages.PrimaryLanguageOverride = Common.Settings.Language;
 #endif
+
     }
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()

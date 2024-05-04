@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using Windows.Foundation.Metadata;
 using System.Globalization;
 using Windows.ApplicationModel;
+using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.Shared;
 #nullable enable
@@ -154,6 +155,17 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
+    public bool TransparentTiles
+    {
+        get => GetSettings(nameof(TransparentTiles), false);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(TransparentTiles)] = value;
+            OnPropertyChanged();
+        }
+    }
+
     public bool IsAcrylicEnabled
     {
         get => GetSettings(nameof(IsAcrylicEnabled), false);
@@ -163,6 +175,7 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+
     public double Latitude
     {
         get => GetSettings(nameof(Latitude), -1.0);

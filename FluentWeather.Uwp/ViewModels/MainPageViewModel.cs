@@ -22,6 +22,7 @@ using FluentWeather.Uwp.QWeatherProvider.Views;
 using FluentWeather.Uwp.Controls.Dialogs;
 using System.Diagnostics;
 using Windows.ApplicationModel.Resources.Core;
+using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.ViewModels;
 

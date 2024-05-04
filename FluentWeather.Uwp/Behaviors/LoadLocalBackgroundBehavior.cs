@@ -10,6 +10,8 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.ApplicationModel;
 using FluentWeather.Uwp.Helpers;
+using FluentWeather.Uwp.Shared;
+using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -46,29 +48,12 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
         assetsFolder = await assetsFolder.GetOrCreateFolderAsync("Backgrounds");
 
         var image = await GetImage(folder, WeatherType.ToString());
-        image ??= await GetImage(folder, GetImageName(WeatherType));
-        image ??= await GetImage(assetsFolder, GetImageName(WeatherType));
+        image ??= await GetImage(folder, AssetsHelper.GetBackgroundImageName(WeatherType));
+        image ??= await GetImage(assetsFolder, AssetsHelper.GetBackgroundImageName(WeatherType));
         AssociatedObject.Source = image;
     }
 
-    public string GetImageName(WeatherCode weather)
-    {
-        var code = (int)weather;
-        if (code is 0)
-            return "Clear";
-        if (code is 1 or 2)
-            return "PartlyCloudy";
-        if (code is 3)
-            return "Overcast";
-        if (50 <= code && code <= 69 || (80<=code && code <= 82))
-            return "Rain";
-        if (40 <= code && code <= 49)
-            return "Fog";
-        if (70 <= code && code <= 79)
-            return "Snow";
 
-        return "All";
-    }
     
     private async Task<BitmapImage> GetImage(StorageFolder folder, string name)
     {

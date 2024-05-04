@@ -28,6 +28,7 @@ using Windows.System;
 using Microsoft.AppCenter.Analytics;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Helpers.Analytics;
+using FluentWeather.Uwp.Shared.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板

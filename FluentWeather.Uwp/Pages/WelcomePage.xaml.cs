@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
 using System.Globalization;
+using FluentWeather.Uwp.Shared.Helpers;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
