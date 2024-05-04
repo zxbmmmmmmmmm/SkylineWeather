@@ -309,6 +309,9 @@
   <data name="HourlyForecast.Text" xml:space="preserve">
     <value>24小时预报</value>
   </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>湿度</value>
+  </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
     <value>相对于空气在当前温度下所能包含的最大水分量,空气中存在的水分量</value>
   </data>
@@ -330,6 +333,9 @@
   </data>
   <data name="LatitudeNumberBox.PlaceholderText" xml:space="preserve">
     <value>纬度</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>级</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>明亮</value>
@@ -391,6 +397,9 @@
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>个性化</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>气压</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
     <value>大气中空气的重量。较高的气压通常与晴朗的天气相关,较低的气压与暴风雨天气相关</value>
@@ -501,8 +510,14 @@
   <data name="Today" xml:space="preserve">
     <value>今天</value>
   </data>
+  <data name="TodayWeather" xml:space="preserve">
+    <value>今日天气</value>
+  </data>
   <data name="Tomorrow" xml:space="preserve">
     <value>明天</value>
+  </data>
+  <data name="TomorrowWeather" xml:space="preserve">
+    <value>明日天气</value>
   </data>
   <data name="TowHoursText.Text" xml:space="preserve">
     <value>2小时</value>
@@ -557,6 +572,9 @@
     <value>定时检查并推送预警</value>
   </data>
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
+    <value>预警</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
     <value>预警</value>
   </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">

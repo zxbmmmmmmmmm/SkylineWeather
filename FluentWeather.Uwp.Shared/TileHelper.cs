@@ -3,21 +3,36 @@ using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.ConstrainedExecution;
 using Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Data.Xml.Dom;
+using Windows.Foundation.Collections;
 using Windows.UI.Notifications;
 using static FluentWeather.Abstraction.Models.WeatherCode;
 
 namespace FluentWeather.Uwp.Shared
 {
-    public sealed class TileHelper
+    public static class TileHelper
     {
+
+        public static void UpdateBadge(int value)
+        {
+            var badgeXml =
+                BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);
+            var badgeElement = badgeXml.SelectSingleNode("/badge") as XmlElement;
+            badgeElement!.SetAttribute("value", value.ToString());
+            var badge = new BadgeNotification(badgeXml);
+            var badgeUpdater = BadgeUpdateManager.CreateBadgeUpdaterForApplication();
+            badgeUpdater.Update(badge);
+        }
         public static void UpdateForecastTile(List<WeatherDailyBase> data)
         {
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.EnableNotificationQueue(true);
-            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()) { Tag="forecast"});
+            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()) { Tag = "forecast" });
         }
         public static void UpdateWarningTile(List<WeatherWarningBase> data)
         {
@@ -29,42 +44,54 @@ namespace FluentWeather.Uwp.Shared
         {
             TileContentBuilder builder = new TileContentBuilder();
 
-            var description = string.Format("{0}条预警", warnings.Count.ToString());
+            //var description = string.Format("{0}条预警", warnings.Count.ToString());
             builder.AddTile(TileSize.Medium)
-                .AddText(description, hintStyle: AdaptiveTextStyle.CaptionSubtle)                
                 .SetTextStacking(TileTextStacking.Top)
-                .SetBranding(TileBranding.None, TileSize.Medium);
+                .SetDisplayName("ms-resource:Warning", TileSize.Medium)
+                .SetBranding(TileBranding.Auto, TileSize.Medium);
 
             // Wide Tile
             builder.AddTile(TileSize.Wide)
-                .AddText(description, size: TileSize.Wide, hintWrap: true, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintMaxLines: 2)
+                //.AddText(description, size: TileSize.Wide, hintWrap: true, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintMaxLines: 2)
                 .SetTextStacking(TileTextStacking.Center)
-                .SetBranding(TileBranding.Name, TileSize.Wide);
+                .SetDisplayName("ms-resource:Warning", TileSize.Wide)
+                .SetBranding(TileBranding.Auto, TileSize.Wide);
 
             // Large tile
             builder.AddTile(TileSize.Large)
                 .SetTextStacking(TileTextStacking.Top)
                 .SetBranding(TileBranding.Name)
-                .SetDisplayName(description, TileSize.Large);
+                .SetDisplayName("ms-resource:Warning", TileSize.Large);
 
             foreach (var item in warnings)
             {
                 builder.AddText(item.ShortTitle, size: TileSize.Medium, hintStyle: AdaptiveTextStyle.Caption, hintWrap: true, hintMaxLines: 2);
                 builder.AddText(item.ShortTitle, size: TileSize.Wide, hintStyle: AdaptiveTextStyle.Body, hintWrap: true, hintMaxLines: 2);
+                if(warnings.Count == 1)
+                {
+                    builder.AddText(item.Description, size: TileSize.Wide, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 3);
+                }   
                 builder.AddText(item.ShortTitle, size: TileSize.Large, hintStyle: AdaptiveTextStyle.Base);
-                builder.AddText(item.Description, size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 3);
+                if(warnings.Count == 1)
+                {
+                    builder.AddText(item.Description, size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 10);
+                }
+                else
+                {
+                    builder.AddText(item.Description, size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 3);
+                }
                 builder.AddText("", size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle);
             }
             return builder.Content;
         }
 
-        
-        
+
+
         public static AdaptiveSubgroup GenerateSubgroup(string day, string img, int tempHi, int tempLo)
         {
             return new AdaptiveSubgroup()
             {
-                HintWeight = 1,          
+                HintWeight = 1,
                 Children =
                 {
                     // Day
@@ -161,7 +188,7 @@ namespace FluentWeather.Uwp.Shared
             TileContentBuilder builder = new TileContentBuilder();
 
             // Small Tile
-            builder.AddTile(TileSize.Small)          
+            builder.AddTile(TileSize.Small)
                 .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/24/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
                 .SetTextStacking(TileTextStacking.Center);
 
@@ -172,7 +199,6 @@ namespace FluentWeather.Uwp.Shared
             //// Medium Tile
             //builder.AddTile(TileSize.Medium)
             //    .AddAdaptiveTileVisualChild(mediumGroup, TileSize.Medium);
-
             builder.AddTile(TileSize.Medium)
                 .AddText("")
                 .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Resized/32/" + GetImageName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
@@ -180,13 +206,13 @@ namespace FluentWeather.Uwp.Shared
                 .SetBranding(TileBranding.Name)
                 .SetDisplayName(daily[0].Description, TileSize.Medium);
 
-            var wideGroup = new AdaptiveGroup();
-            GetGroupChildrenForTile(wideGroup, daily.GetRange(0, 5));
-
             // Wide Tile
             builder.AddTile(TileSize.Wide)
-                .AddAdaptiveTileVisualChild(wideGroup, TileSize.Wide)
-                .SetBranding(TileBranding.None, TileSize.Wide)
+                .AddText($"{daily[0].Description}", TileSize.Wide, AdaptiveTextStyle.Title)
+                .AddText($"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}", TileSize.Wide, AdaptiveTextStyle.Body)
+                .AddText($"{ResourceLoader.GetForViewIndependentUse().GetString("Humidity")}:{daily[0].Humidity}% {ResourceLoader.GetForViewIndependentUse().GetString("Pressure")}:{daily[0].Pressure}hPa", TileSize.Wide, AdaptiveTextStyle.CaptionSubtle)
+
+                .SetBranding(TileBranding.Auto, TileSize.Wide)
                 .SetTextStacking(TileTextStacking.Center);
 
             // Large tile
@@ -199,11 +225,13 @@ namespace FluentWeather.Uwp.Shared
             builder.Content.Visual.BaseUri = new Uri("Assets/Weather/", UriKind.Relative);
 
             builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
-            builder.Content.Visual.LockDetailedStatus2 = $"{((ITemperatureRange)daily[0]).MinTemperature}° / {((ITemperatureRange)daily[0]).MaxTemperature}° {((IWind)daily[0]).WindDirectionDescription} {((IWind)daily[0]).WindScale}级";
+            builder.Content.Visual.LockDetailedStatus2 = $"{daily[0].MaxTemperature}° / {daily[0].MinTemperature}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
 
 
             return builder.Content;
         }
+
+
         public static TileBindingContentAdaptive GenerateLargeTileContent(List<WeatherDailyBase> daily)
         {
             var content = new TileBindingContentAdaptive()
@@ -236,7 +264,7 @@ namespace FluentWeather.Uwp.Shared
 
                             new AdaptiveText()
                             {
-                                Text = (daily[0]).MaxTemperature + "° / " +daily[0].MinTemperature + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindSpeed + "km/h"
+                                Text = (daily[0]).MaxTemperature + "° / " +daily[0].MinTemperature + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
                             },
                         },
                         HintTextStacking = AdaptiveSubgroupTextStacking.Center,
@@ -260,20 +288,17 @@ namespace FluentWeather.Uwp.Shared
         }
         public static AdaptiveSubgroup GenerateLargeSubgroup(string day, string image, int high, int low)
         {
-            // Generate the normal subgroup
             var subgroup = GenerateTileSubgroup(day, image, high, low);
-
-            // Allow there to be padding around the image
-            (subgroup.Children[1] as AdaptiveImage).HintRemoveMargin = true;
 
             return subgroup;
         }
+
         public static string GetWeek(DateTime date)
         {
             if (date.Day == DateTime.Today.Day)
-                return ResourceLoader.GetForCurrentView().GetString("Today");
+                return "ms-resource:Today";
             if (date.Day == DateTime.Today.Day + 1)
-                return ResourceLoader.GetForCurrentView().GetString("Tomorrow");
+                return "ms-resource:Tomorrow";
 
             return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
         }

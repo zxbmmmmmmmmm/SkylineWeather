@@ -104,6 +104,19 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public bool DeveloperMode
+    {
+#if DEBUG
+        get => GetSettings(nameof(DeveloperMode), true);
+#else
+        get => GetSettings(nameof(DeveloperMode), false);
+#endif
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(DeveloperMode)] = value;
+            OnPropertyChanged();
+        }
+    }
     public int BackgroundBlurAmount
     {
         get => GetSettings(nameof(BackgroundBlurAmount), 2);
