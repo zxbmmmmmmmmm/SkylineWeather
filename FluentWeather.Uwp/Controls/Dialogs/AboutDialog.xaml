@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
@@ -44,8 +45,13 @@
                     Padding="12"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
+                    BorderThickness="1" 
                     CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="DoubleTapped">
+                            <core:InvokeCommandAction Command="{x:Bind EnableDeveloperModeCommand}"/>
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />

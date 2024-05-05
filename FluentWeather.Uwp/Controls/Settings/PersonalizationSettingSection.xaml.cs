@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Uwp.Behaviors;
+using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Pages;
 using FluentWeather.Uwp.Shared;
 using System;
@@ -55,11 +56,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         [RelayCommand]
         public async Task OpenBackgroundsFolder()
         {
-            if ((await ApplicationData.Current.LocalFolder.TryGetItemAsync("Backgrounds")) is null)
-            {
-                await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
-            }
-            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
+            var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("Backgrounds");
             await Launcher.LaunchFolderAsync(folder);
         }
         private async Task<StorageFile> PickFileAsync()

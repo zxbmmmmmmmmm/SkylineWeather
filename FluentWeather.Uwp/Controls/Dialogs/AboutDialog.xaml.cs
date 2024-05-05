@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Helpers.Analytics;
+using FluentWeather.Uwp.Shared;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,5 +38,10 @@ public sealed partial class AboutDialog : ContentDialog
     public void Close()
     {
         Hide();
+    }
+    [RelayCommand]
+    public void EnableDeveloperMode()
+    {
+        Common.Settings.DeveloperMode = true;
     }
 }

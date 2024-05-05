@@ -13,19 +13,25 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
 
-    <controls:SettingsExpander Header="开发者选项" IsExpanded="True">
+    <controls:SettingsExpander Header="Developer Menu" IsExpanded="True">
         <controls:SettingsExpander.HeaderIcon>
             <FontIcon Glyph="&#xE943;" />
         </controls:SettingsExpander.HeaderIcon>
         <controls:SettingsExpander.Items>
-            <controls:SettingsCard Padding="12" Header="设置语言">
+            <controls:SettingsCard
+                Header="Open Log"
+                x:Name="OpenLog"
+                Padding="12"
+                Click="OpenLog_Click"
+                IsClickEnabled="True" />
+            <controls:SettingsCard Padding="12" Header="Set Language">
                 <TextBox Text="{x:Bind app:Common.Settings.Language,Mode=TwoWay}" />
             </controls:SettingsCard>
             <controls:SettingsCard
                 x:Name="OOBECard"
                 Padding="12"
                 Click="OOBECard_Click"
-                Header="进入OOBE"
+                Header="Enter OOBE"
                 IsClickEnabled="True" />
         </controls:SettingsExpander.Items>
     </controls:SettingsExpander>

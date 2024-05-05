@@ -32,7 +32,7 @@ namespace FluentWeather.Uwp.Shared
         {
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.EnableNotificationQueue(true);
-            updater.Update(new TileNotification(GenerateTileContent(data).GetXml()) { Tag = "forecast" });
+            updater.Update(new TileNotification(GenerateForecastTileContent(data).GetXml()) { Tag = "forecast" });
         }
         public static void UpdateWarningTile(List<WeatherWarningBase> data)
         {
@@ -183,7 +183,7 @@ namespace FluentWeather.Uwp.Shared
                 group.Children.Add(GenerateTileSubgroup(GetWeek(item.Time), "Resized/32/" + GetImageName(item.WeatherType), item.MaxTemperature, item.MinTemperature));
             }
         }
-        public static TileContent GenerateTileContent(List<WeatherDailyBase> daily)
+        public static TileContent GenerateForecastTileContent(List<WeatherDailyBase> daily)
         {
             TileContentBuilder builder = new TileContentBuilder();
 
