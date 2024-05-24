@@ -87,6 +87,20 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    #region Units
+
+    public TemperatureUnit TemperatureUnit
+    {
+        get => GetSettings(nameof(TemperatureUnit), TemperatureUnit.Celsius);
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(TemperatureUnit)] = value.ToString();
+            OnPropertyChanged();
+        }
+    }
+
+    #endregion
+
     public bool IsDailyNotificationTileEnabled
     {
         get => GetSettings(nameof(IsDailyNotificationTileEnabled), Environment.OSVersion.Version.Build < 21996);//Win10下默认开启
@@ -294,11 +308,13 @@ public sealed class Settings : INotifyPropertyChanged
         get => GetSettings(nameof(LastPushedTime), DateTime.Now.DayOfYear);
         set => ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTime)] = value;
     }
+
     public int LastPushedTimeTomorrow
     {
         get => GetSettings(nameof(LastPushedTimeTomorrow), DateTime.Now.DayOfYear);
         set => ApplicationData.Current.LocalSettings.Values[nameof(LastPushedTimeTomorrow)] = value;
     }
+
     public AppTheme Theme
     {
         get => GetSettings(nameof(Theme), (Environment.OSVersion.Version.Build < 21996) ? AppTheme.Fluent2017 : AppTheme.Fluent);
@@ -429,4 +445,9 @@ public enum AppTheme
     Fluent,
     Fluent2017,
     Classic
+}
+public enum TemperatureUnit
+{
+    Celsius,
+    Fahrenheit,
 }

@@ -76,3 +76,25 @@ public class WeatherToIconConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+public class TemperatureUnitConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        double? result = null;
+        if(value is int num)
+        {
+            result = num;
+        }
+        else if(value is string str)
+        {
+            result = double.Parse(str);
+        }
+        var round = parameter is true or "true";
+        return ConverterMethods.TemperatureUnitConvert(result, round);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        throw new NotImplementedException();
+    }
+}

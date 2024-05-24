@@ -2,7 +2,7 @@
 
 namespace FluentWeather.Abstraction.Helpers;
 
-public class UnitConverter
+public static class UnitConverter
 {
     /// <summary>
     /// 将风速(KM/H)转换为风力等级
@@ -71,5 +71,10 @@ public class UnitConverter
         if (151 <= aqi && aqi <= 200) return "Unhealthy";
         if (201 <= aqi && aqi <= 300) return "Very unhealthy";
         return "Hazardous";
+    }
+
+    public static double ToFahrenheit(this double celsiusTemperature)
+    {
+        return celsiusTemperature * 9 / 5 + 32;
     }
 }

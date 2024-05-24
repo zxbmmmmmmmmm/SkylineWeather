@@ -15,6 +15,10 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <valueConverters1:AddConverter x:Key="AddConverter" />
+        <valueConverters1:ValueConverterGroup x:Name="ConvertTempertureAddConverter">
+            <valueConverters1:AddConverter />
+
+        </valueConverters1:ValueConverterGroup>
         <DataTemplate x:Key="PointTemplate" x:DataType="charting:DataPoint">
             <Ellipse
                 Width="8"
@@ -84,7 +88,7 @@
                                     Margin="-12,-32,-18,0"
                                     HorizontalAlignment="Center"
                                     FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature}" /><Run Text="°" />
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature,Converter={StaticResource TemperatureUnitConverter}}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
@@ -115,7 +119,7 @@
                                     Margin="-11,5,-18,-24"
                                     HorizontalAlignment="Center"
                                     FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature}" /><Run Text="°" />
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature,Converter={StaticResource TemperatureUnitConverter}}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
