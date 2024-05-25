@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Telerik.Charting;
+using Telerik.Core;
+using Telerik.UI.Xaml.Controls.Chart;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,6 +25,7 @@ namespace FluentWeather.Uwp.Controls;
 
 public sealed partial class TemperatureChart : UserControl
 {
+
     public TemperatureChart()
     {
         this.InitializeComponent();
@@ -45,6 +48,12 @@ public sealed partial class TemperatureChart : UserControl
         var chart = (TemperatureChart)d;
         chart.Bindings.Update();   
     }
+    public static Brush DataPointToBrush(IElementPresenter presenter)
+    {
+        var series = presenter as CategoricalStrokedSeries;
+        return series?.Stroke;
+    }
+
     public (List<CategoricalDataPoint> tempMax, List<CategoricalDataPoint> tempMin) GetDataPoints(IList<WeatherDailyBase> weatherDailyForecasts)
     {
         var tempMax = new List<CategoricalDataPoint>();

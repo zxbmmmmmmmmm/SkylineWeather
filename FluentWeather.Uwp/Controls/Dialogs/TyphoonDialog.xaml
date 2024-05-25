@@ -6,7 +6,6 @@
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:geo="Windows.Devices.Geolocation"
     xmlns:geolocation="using:Windows.Devices.Geolocation"

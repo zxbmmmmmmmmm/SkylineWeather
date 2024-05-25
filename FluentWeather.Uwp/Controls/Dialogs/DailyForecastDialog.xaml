@@ -6,7 +6,6 @@
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls2="using:FluentWeather.Uwp.Controls"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"

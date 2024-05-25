@@ -77,4 +77,8 @@ public static class UnitConverter
     {
         return celsiusTemperature * 9 / 5 + 32;
     }
+    public static int ToFahrenheit(this int celsiusTemperature)
+    {
+        return celsiusTemperature * 9 / 5 + 32;
+    }
 }

@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
-    xmlns:converters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"

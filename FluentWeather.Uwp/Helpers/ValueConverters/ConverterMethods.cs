@@ -53,6 +53,7 @@ public static class ConverterMethods
         var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.Value.ToFahrenheit():temp.Value;
         return disableRound ? result : Math.Round(result);
     }
+
     public static double ToDouble(int value)
     {
         return value;

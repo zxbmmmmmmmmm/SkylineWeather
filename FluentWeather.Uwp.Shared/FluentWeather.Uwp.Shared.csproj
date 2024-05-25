@@ -128,6 +128,12 @@
     <Compile Include="Constants.Secret.cs" />
     <Compile Include="Helpers\DataProviderHelper.cs" />
     <Compile Include="DialogManager.cs" />
+    <Compile Include="Helpers\ValueConverters\AutoSuggestSuggestionParameterConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\ConverterMethods.cs" />
+    <Compile Include="Helpers\ValueConverters\DataConverters.cs" />
+    <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\ListPropertyNullToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Helpers\ThemeHelper.cs" />
     <Compile Include="Helpers\TileHelper.cs" />
