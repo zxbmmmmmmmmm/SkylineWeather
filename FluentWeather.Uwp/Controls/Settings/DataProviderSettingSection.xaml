@@ -58,18 +58,19 @@
                         <FontIcon Glyph="&#xE621;" />
                     </toolkit:SettingsCard.HeaderIcon>
                 </toolkit:SettingsCard>
+                <toolkit:SettingsCard
+                    x:Uid="Settings_TemperatureUnitCard"
+                    Padding="12">
+                    <ComboBox Name="TempUnitComboBox">
+                        <ComboBoxItem
+                            x:Uid="Settings_TemperatureUnit_CelsiusItem"
+                            IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Celsius, Mode=TwoWay}" />
+                        <ComboBoxItem
+                            x:Uid="Settings_TemperatureUnit_FahrenheitItem"
+                            IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fahrenheit, Mode=TwoWay}" />
+                    </ComboBox>
+                </toolkit:SettingsCard>
 
-                <toolkit:SettingsExpander Header="Unit settings" Padding="12">
-                    <toolkit:SettingsExpander.Items>
-                        <toolkit:SettingsCard Padding="12" Header="Temperature unit">
-                            <ComboBox Name="TempUnitComboBox">
-                                <ComboBoxItem Content="Celsius" IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Celsius, Mode=TwoWay}" />
-                                <ComboBoxItem Content="Fahrenheit" IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fahrenheit, Mode=TwoWay}" />
-                            </ComboBox>
-                        </toolkit:SettingsCard>
-                    </toolkit:SettingsExpander.Items>
-
-                </toolkit:SettingsExpander>
             </toolkit:SettingsExpander.Items>
 
         </toolkit:SettingsExpander>
