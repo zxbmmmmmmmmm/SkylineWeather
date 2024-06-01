@@ -261,7 +261,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
 
                                     new AdaptiveText()
                                     {
-                                        Text = (daily[0]).MaxTemperature + "° / " +daily[0].MinTemperature.ConvertTemperatureUnit() + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
+                                        Text = (daily[0]).MaxTemperature.ConvertTemperatureUnit() + "° / " +daily[0].MinTemperature.ConvertTemperatureUnit() + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
                                     },
                                 },
                                 HintTextStacking = AdaptiveSubgroupTextStacking.Center,
