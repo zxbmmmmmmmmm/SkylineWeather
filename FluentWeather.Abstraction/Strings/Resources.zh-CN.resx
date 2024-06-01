@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="USAQI_Good" xml:space="preserve">
+    <value>好</value>
+  </data>
+  <data name="USAQI_Hazardous" xml:space="preserve">
+    <value>危险</value>
+  </data>
+  <data name="USAQI_Moderate" xml:space="preserve">
+    <value>中等</value>
+  </data>
+  <data name="USAQI_Unhealthy" xml:space="preserve">
+    <value>不健康</value>
+  </data>
+  <data name="USAQI_UnhealthyForSensitiveGroups" xml:space="preserve">
+    <value>不适于敏感人群</value>
+  </data>
+  <data name="USAQI_VeryUnhealthy" xml:space="preserve">
+    <value>非常不健康</value>
+  </data>
   <data name="WeatherCode_0" xml:space="preserve">
     <value>晴</value>
   </data>

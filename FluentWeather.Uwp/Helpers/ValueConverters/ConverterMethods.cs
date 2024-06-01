@@ -1,13 +1,11 @@
-﻿using System;
-using Windows.UI;
-using Telerik.Charting;
+﻿using Windows.UI;
 using Telerik.Core;
 using Telerik.UI.Xaml.Controls.Chart;
 using Windows.UI.Xaml.Media;
 using FluentWeather.Abstraction.Models;
-using Windows.Devices.Geolocation;
-using Newtonsoft.Json.Linq;
 using Windows.ApplicationModel.Resources;
+using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers.ValueConverters;
 
@@ -42,5 +40,23 @@ public static class ConverterMethods
         };
     }
 
+    /// <summary>
+    /// 根据应用设置自动转换温度
+    /// 此转换仅在UI层进行
+    /// </summary>
+    /// <param name="temp">摄氏温度</param>
+    /// <param name="disableRound">关闭取整</param>
+    /// <returns></returns>
+    public static double? TemperatureUnitConvert(double? temp,bool disableRound = false)
+    {
+        if (temp is null) return null;
+        var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.Value.ToFahrenheit():temp.Value;
+        return disableRound ? result : Math.Round(result);
+    }
+
+    public static double ToDouble(int value)
+    {
+        return value;
+    }
 }
 

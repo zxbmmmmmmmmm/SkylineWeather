@@ -477,6 +477,15 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
+    <value>Temperature unit</value>
+  </data>
+  <data name="Settings_TemperatureUnit_CelsiusItem.Content" xml:space="preserve">
+    <value>Celsius</value>
+  </data>
+  <data name="Settings_TemperatureUnit_FahrenheitItem.Content" xml:space="preserve">
+    <value>Fahrenheit</value>
+  </data>
   <data name="SpeechMenuItem.Text" xml:space="preserve">
     <value>Broadcast weather</value>
   </data>

@@ -3,26 +3,26 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FluentWeather.Uwp.Controls.Settings"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
     <Grid>
-        <controls:SettingsExpander x:Uid="DataSettingsExpander" IsExpanded="True">
-            <controls:SettingsExpander.Description>
+        <toolkit:SettingsExpander x:Uid="DataSettingsExpander" IsExpanded="True">
+            <toolkit:SettingsExpander.Description>
                 <StackPanel>
-                    <TextBlock >
-                        <Run x:Uid="DataProviderSettingsExpanderDescription"/>
+                    <TextBlock>
+                        <Run x:Uid="DataProviderSettingsExpanderDescription" />
                         <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/FluentWeather/wiki/%E5%8A%9F%E8%83%BD%E5%AF%B9%E7%85%A7">
-                            <Run x:Uid="DataProviderSettingsExpanderDescription_CompareHyperlink"/>
+                            <Run x:Uid="DataProviderSettingsExpanderDescription_CompareHyperlink" />
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>
-            </controls:SettingsExpander.Description>
-            <controls:SettingsExpander.ItemsHeader>
+            </toolkit:SettingsExpander.Description>
+            <toolkit:SettingsExpander.ItemsHeader>
                 <muxc:InfoBar
                     x:Name="RestartInfoBar"
                     x:Uid="RestartInfoBar"
@@ -39,28 +39,41 @@
                             CornerRadius="{StaticResource ControlCornerRadius}" />
                     </muxc:InfoBar.ActionButton>
                 </muxc:InfoBar>
-            </controls:SettingsExpander.ItemsHeader>
-            <controls:SettingsExpander.Items>
-                <controls:SettingsCard Padding="12">
+            </toolkit:SettingsExpander.ItemsHeader>
+            <toolkit:SettingsExpander.Items>
+                <toolkit:SettingsCard Padding="12">
 
                     <muxc:RadioButtons SelectionChanged="OnSelectionChanged">
                         <RadioButton x:Uid="QWeatherSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=QWeather}" />
                         <RadioButton x:Uid="OpenMeteoSection" IsChecked="{x:Bind app:Common.Settings.ProviderConfig, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=OpenMeteo}" />
                     </muxc:RadioButtons>
-                </controls:SettingsCard>
-                <controls:SettingsCard
+                </toolkit:SettingsCard>
+                <toolkit:SettingsCard
                     x:Name="SetKeyCard"
                     x:Uid="QWeatherSettingsCard"
                     Padding="12"
                     Click="SetKeyCard_Click"
                     IsClickEnabled="True">
-                    <controls:SettingsCard.HeaderIcon>
+                    <toolkit:SettingsCard.HeaderIcon>
                         <FontIcon Glyph="&#xE621;" />
-                    </controls:SettingsCard.HeaderIcon>
-                </controls:SettingsCard>
-            </controls:SettingsExpander.Items>
+                    </toolkit:SettingsCard.HeaderIcon>
+                </toolkit:SettingsCard>
+                <toolkit:SettingsCard
+                    x:Uid="Settings_TemperatureUnitCard"
+                    Padding="12">
+                    <ComboBox Name="TempUnitComboBox">
+                        <ComboBoxItem
+                            x:Uid="Settings_TemperatureUnit_CelsiusItem"
+                            IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Celsius, Mode=TwoWay}" />
+                        <ComboBoxItem
+                            x:Uid="Settings_TemperatureUnit_FahrenheitItem"
+                            IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Fahrenheit, Mode=TwoWay}" />
+                    </ComboBox>
+                </toolkit:SettingsCard>
 
-        </controls:SettingsExpander>
+            </toolkit:SettingsExpander.Items>
+
+        </toolkit:SettingsExpander>
 
     </Grid>
 </Page>

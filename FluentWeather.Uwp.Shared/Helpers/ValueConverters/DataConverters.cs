@@ -1,13 +1,9 @@
 ﻿using System;
-using Windows.UI;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using FluentWeather.Abstraction.Models;
-using Windows.ApplicationModel.Resources;
-using FluentWeather.Uwp.Themes;
 using FluentWeather.Abstraction.Interfaces.Weather;
+using FluentWeather.Abstraction.Models;
 
-namespace FluentWeather.Uwp.Helpers.ValueConverters;
+namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
 public class SeverityColorToColorConverter : IValueConverter
 {
@@ -68,8 +64,7 @@ public class WeatherToIconConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-        var weather = value as WeatherBase;
-        return weather?.WeatherType.GetIconByWeather(((ITime)weather).Time);
+        return ((WeatherBase)value).WeatherType.GetIconByWeather(((ITime)value).Time);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -77,7 +72,10 @@ public class WeatherToIconConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
-public class TemperatureUnitConverter : IValueConverter
+
+
+
+public class ConvertTemperatureUniter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
@@ -91,7 +89,7 @@ public class TemperatureUnitConverter : IValueConverter
             result = double.Parse(str);
         }
         var round = parameter is true or "true";
-        return ConverterMethods.TemperatureUnitConvert(result, round);
+        return ConverterMethods.ConvertTemperatureUnit(result, round);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

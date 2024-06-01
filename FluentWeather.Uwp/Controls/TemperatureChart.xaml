@@ -8,18 +8,21 @@
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
-    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
         <valueConverters1:AddConverter x:Key="AddConverter" />
+        <valueConverters1:ValueConverterGroup x:Name="ConvertTempertureAddConverter">
+            <valueConverters1:AddConverter />
+
+        </valueConverters1:ValueConverterGroup>
         <DataTemplate x:Key="PointTemplate" x:DataType="charting:DataPoint">
             <Ellipse
                 Width="8"
                 Height="8"
-                Fill="{x:Bind valueConverters:ConverterMethods.DataPointToBrush(Presenter), Mode=OneWay}"
+                Fill="{x:Bind local:TemperatureChart.DataPointToBrush(Presenter), Mode=OneWay}"
                 Stroke="{ThemeResource SystemControlBackgroundBaseMediumHighBrush}"
                 StrokeThickness="2" />
         </DataTemplate>
@@ -84,7 +87,7 @@
                                     Margin="-12,-32,-18,0"
                                     HorizontalAlignment="Center"
                                     FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature}" /><Run Text="°" />
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MaxTemperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>
@@ -115,7 +118,7 @@
                                     Margin="-11,5,-18,-24"
                                     HorizontalAlignment="Center"
                                     FontSize="20">
-                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature}" /><Run Text="°" />
+                                    <Run FontWeight="SemiBold" Text="{Binding DataItem.MinTemperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 </TextBlock>
                             </DataTemplate>
                         </chart:ChartSeriesLabelDefinition.Template>

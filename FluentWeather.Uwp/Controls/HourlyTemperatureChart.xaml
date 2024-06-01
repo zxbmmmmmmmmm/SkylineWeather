@@ -7,7 +7,6 @@
     xmlns:local="using:FluentWeather.Uwp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:primitives="using:Telerik.UI.Xaml.Controls.Chart.Primitives"
-    xmlns:valueConverters="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:valueConverters1="using:ValueConverters"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -46,9 +45,16 @@
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
                 <chart:LinearAxis                   
-                    LabelFormat="{}{0}°"
+                    
                     Maximum="{x:Bind MaxTemperature}"
                     Minimum="{x:Bind MinTemperature}">
+                    <chart:LinearAxis.LabelTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Converter={StaticResource ConvertTemperatureUniter},ConverterParameter=true}"/><Run Text="°"/> 
+                            </TextBlock>
+                        </DataTemplate>
+                    </chart:LinearAxis.LabelTemplate>
                     <chart:LinearAxis.LineStyle>
                         <Style TargetType="Line">
                             <Setter Property="Stroke" Value="Transparent" />
@@ -87,7 +93,7 @@
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:SplineAreaSeries.CategoryBinding>
                 <chart:SplineAreaSeries.ValueBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="Temperature" />
+                    <chart:PropertyNameDataPointBinding PropertyName="Temperature"  />
                 </chart:SplineAreaSeries.ValueBinding>
                 <chart:SplineAreaSeries.VerticalAxis>
                     <chart:LinearAxis
@@ -114,7 +120,7 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
                             <TextBlock>
-                                <Run Text="{Binding DataPoint.DataItem.Temperature}" /><Run Text="°" />
+                                <Run Text="{Binding DataPoint.DataItem.Temperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </StackPanel>
@@ -124,7 +130,7 @@
                     <DataTemplate>
                         <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
                             <TextBlock Margin="6,4">
-                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature}" /><Run Text="°" />
+                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </Border>

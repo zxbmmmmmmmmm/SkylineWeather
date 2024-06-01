@@ -477,6 +477,15 @@
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>设置</value>
   </data>
+  <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
+    <value>温度单位</value>
+  </data>
+  <data name="Settings_TemperatureUnit_CelsiusItem.Content" xml:space="preserve">
+    <value>摄氏</value>
+  </data>
+  <data name="Settings_TemperatureUnit_FahrenheitItem.Content" xml:space="preserve">
+    <value>华氏</value>
+  </data>
   <data name="SpeechMenuItem.Text" xml:space="preserve">
     <value>语音播报</value>
   </data>

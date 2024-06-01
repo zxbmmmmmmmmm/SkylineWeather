@@ -1,8 +1,9 @@
 ﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Strings;
 
 namespace FluentWeather.Abstraction.Helpers;
 
-public class UnitConverter
+public static class UnitConverter
 {
     /// <summary>
     /// 将风速(KM/H)转换为风力等级
@@ -65,11 +66,20 @@ public class UnitConverter
     /// <returns></returns>
     public static string GetAqiCategoryUS(int aqi)
     {
-        if (0 <= aqi && aqi <= 50) return "Good";
-        if (51 <= aqi && aqi <= 100) return "Moderate";
-        if (101 <= aqi && aqi <= 150) return "Unhealthy for sensitive groups";
-        if (151 <= aqi && aqi <= 200) return "Unhealthy";
-        if (201 <= aqi && aqi <= 300) return "Very unhealthy";
-        return "Hazardous";
+        if (0 <= aqi && aqi <= 50) return Resources.ResourceManager.GetString("USAQI_Good")!;
+        if (51 <= aqi && aqi <= 100) return Resources.ResourceManager.GetString("USAQI_Moderate")!;
+        if (101 <= aqi && aqi <= 150) return Resources.ResourceManager.GetString("USAQI_UnhealthyForSensitiveGroups")!;
+        if (151 <= aqi && aqi <= 200) return Resources.ResourceManager.GetString("USAQI_Unhealthy")!;
+        if (201 <= aqi && aqi <= 300) return Resources.ResourceManager.GetString("USAQI_VeryUnhealthy")!;
+        return Resources.ResourceManager.GetString("USAQI_Hazardous")!;
+    }
+
+    public static double ToFahrenheit(this double celsiusTemperature)
+    {
+        return celsiusTemperature * 9 / 5 + 32;
+    }
+    public static int ToFahrenheit(this int celsiusTemperature)
+    {
+        return celsiusTemperature * 9 / 5 + 32;
     }
 }

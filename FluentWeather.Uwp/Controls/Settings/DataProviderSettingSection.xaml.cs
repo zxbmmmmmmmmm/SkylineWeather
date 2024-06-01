@@ -36,6 +36,12 @@ namespace FluentWeather.Uwp.Controls.Settings
             //    DataProviderComboBox.SelectedIndex = 0;
             //if (Equals(Common.Settings.DataProviderConfig, DataProviderHelper.OpenMeteoConfig))
             //    DataProviderComboBox.SelectedIndex = 1;
+            this.Loaded += DataProviderSettingSection_Loaded;
+        }
+
+        private void DataProviderSettingSection_Loaded(object sender, RoutedEventArgs e)
+        {
+            TempUnitComboBox.SelectedIndex = (int)Common.Settings.TemperatureUnit;
         }
 
         private async void SetKeyCard_Click(object sender, RoutedEventArgs e)

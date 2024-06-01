@@ -10,7 +10,6 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls1="using:FluentWeather.Uwp.Controls"
     xmlns:converters="using:ValueConverters"
-    xmlns:converters1="using:FluentWeather.Uwp.Helpers.ValueConverters"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogs="using:FluentWeather.Uwp.Controls.Dialogs"
@@ -25,6 +24,7 @@
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels"
+    xmlns:converters1="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.ContextFlyout>
@@ -189,7 +189,7 @@
                                 <TextBlock
                                     x:Name="TemperatureText"
                                     Style="{ThemeResource TemperatureTextStyle}"
-                                    Text="{x:Bind ViewModel.WeatherNow.Temperature}">
+                                    Text="{x:Bind  converters1:ConverterMethods.ConvertTemperatureUnit(ViewModel.WeatherNow.Temperature,x:False)}">
                                     <i:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="DoubleTapped">
                                             <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}" />
@@ -214,7 +214,7 @@
                                     FontSize="18"
                                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                     <Run x:Uid="FeelsLike" />
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.ApparentTemperature}" /><Run Text="°" />
+                                    <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(ViewModel.WeatherNow.ApparentTemperature,x:False)}" /><Run Text="°" />
                                 </TextBlock>
                                 <Button
                                     Margin="12,0,0,0"
