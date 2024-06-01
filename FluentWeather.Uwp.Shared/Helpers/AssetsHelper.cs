@@ -21,7 +21,7 @@ public static class AssetsHelper
             Fog => "Fog.png",
             LightFreezingRain or HeavyFreezingRain => "FreezingRain.png",
             SlightSleet or ModerateOrHeavySleet => "RainSnow.png",
-            ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm => "Thundery.png",
+            ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm => "Thunder.png",
             Clear => "SunnyDay.png",
             Haze => "HazeSmokeDay.png",
             MainlyClear => "MostlySunnyDay.png",
