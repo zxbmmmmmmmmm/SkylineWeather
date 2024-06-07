@@ -107,6 +107,7 @@ public sealed class CacheHelper
 [JsonSerializable(typeof(PrecipitationBase))]
 [JsonSerializable(typeof(PrecipitationItemBase))]
 [JsonSerializable(typeof(HistoricalDailyWeatherBase))]
+[JsonSerializable(typeof(Dictionary<string,HistoricalDailyWeatherBase>))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

@@ -175,6 +175,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             GetHourlyForecastCommand.ExecuteAsync(CurrentGeolocation.Location),
             GetWeatherPrecipitationsCommand.ExecuteAsync(CurrentGeolocation.Location),
             GetIndicesCommand.ExecuteAsync(CurrentGeolocation.Location),
+            GetHistoricalWeatherCommand.ExecuteAsync(CurrentGeolocation.Location),
             GetAirConditionCommand.ExecuteAsync(CurrentGeolocation.Location),
         };
         try
@@ -239,9 +240,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         }
     }
     [RelayCommand]
-    public async Task GetHistoricalWeather()
+    public async Task GetHistoricalWeather(Location location)
     {
-
+        HistoricalWeather = await HistoricalWeatherHelper.GetHistoricalWeatherAsync(location, DateTime.Now);
     }
 
     [RelayCommand]

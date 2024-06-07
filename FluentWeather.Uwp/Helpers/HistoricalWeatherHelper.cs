@@ -59,10 +59,11 @@ public class HistoricalWeatherHelper
                 var minTemp = int.MaxValue;
                 var minTempDate = DateTime.MinValue;
 
-                var totalPrecip = 0.0;
+                double? totalPrecip = 0.0;
                 double? maxPrecip = 0.0;
                 DateTime? maxPrecipDate = DateTime.MinValue;
-
+                
+              
                 var totalMaxTemp = 0;
                 var totalMinTemp = 0;
                 double? totalPrecipHours = 0.0;
@@ -88,6 +89,7 @@ public class HistoricalWeatherHelper
                     totalMaxTemp += item.MaxTemperature;
                     totalMinTemp += item.MinTemperature;
                     totalPrecipHours += item.PrecipitationHours;
+                    totalPrecip += item.Precipitation;
                     weatherCodeDic[item.WeatherType] = weatherCodeDic.GetOrCreate(item.WeatherType) + 1;
                     count++;
                 }
@@ -123,8 +125,14 @@ public class HistoricalWeatherHelper
     {
 
     }
-    public static void GetHistoricalWeather()
+    public static async Task<HistoricalDailyWeatherBase> GetHistoricalWeatherAsync(Location location,DateTime date)
     {
-
+        var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("HistoricalWeather");
+        var folder1 = await folder.GetFolderAsync(location.GetHashCode().ToString());
+        var id = date.Month.ToString().PadLeft(2, '0');
+        var file = await folder1.GetFileAsync(id);
+        using var stream = await file.OpenStreamForReadAsync();
+        var dic = JsonSerializer.Deserialize<Dictionary<string,HistoricalDailyWeatherBase>>(stream, new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
+        return dic[date.Day.ToString()];
     }
 }
