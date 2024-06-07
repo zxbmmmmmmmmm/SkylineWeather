@@ -186,11 +186,18 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             }
             if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
             {
-                TileHelper.UpdateForecastTile(DailyForecasts);
-                if (Common.Settings.IsWarningNotificationEnabled)
+                try
                 {
-                    TileHelper.UpdateWarningTile(Warnings);
-                    TileHelper.UpdateBadge(Warnings.Count);
+                    TileHelper.UpdateForecastTile(DailyForecasts);
+                    if (Common.Settings.IsWarningNotificationEnabled && Warnings.Count > 0)
+                    {
+                        TileHelper.UpdateWarningTile(Warnings);
+                        TileHelper.UpdateBadge(Warnings.Count);
+                    }
+                }
+                catch
+                {
+
                 }
 
             }
