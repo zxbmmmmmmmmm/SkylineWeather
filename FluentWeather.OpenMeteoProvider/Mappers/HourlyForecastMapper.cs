@@ -16,14 +16,14 @@ public static class HourlyForecastMapper
             WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
             //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
             WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!.Value).ToString(),
-            WindSpeed = (int)item.WindSpeed10m!.Value,
+            WindSpeed = (int)Math.Round(item.WindSpeed10m!.Value),
             Humidity = item.RelativeHumidity2m,
-            Pressure = (int?)item.SurfacePressure,
-            Temperature = (int)item.Temperature2m!,
+            Pressure = item.SurfacePressure is null ? null : (int)Math.Round(item.SurfacePressure.Value),
+            Temperature = (int)Math.Round(item.Temperature2m!.Value),
             Time = item.Time!.Value,
             PrecipitationProbability = item.PrecipitationProbability,
             CloudAmount = item.CloudCover,
-            Visibility = (int?)item.Visibility/1000,
+            Visibility = item.Visibility is null ? null : (int)Math.Round(item.Visibility.Value/1000),
         };
     }
 }
