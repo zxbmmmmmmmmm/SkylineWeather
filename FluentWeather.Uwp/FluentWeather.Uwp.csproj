@@ -157,6 +157,9 @@
     <Compile Include="Controls\Dialogs\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dialogs\HistoricalWeatherSetupDialog.xaml.cs">
+      <DependentUpon>HistoricalWeatherSetupDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dialogs\LocationDialog.xaml.cs">
       <DependentUpon>LocationDialog.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,7 @@
     <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\HistoricalWeatherHelper.cs" />
     <Compile Include="Helpers\InfoBarHelper.cs" />
     <Compile Include="Helpers\JumpListHelper.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
@@ -462,6 +466,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dialogs\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialogs\HistoricalWeatherSetupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

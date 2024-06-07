@@ -70,6 +70,7 @@ public static class DIFactory
         //ServiceDescriptors.AddSingleton(typeof(IWeatherWarningProvider), typeof(QWeatherProvider.QWeatherProvider));
         //ServiceDescriptors.AddSingleton(typeof(IIndicesProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(IPrecipitationProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+        ServiceDescriptors.AddSingleton(typeof(IHistoricalWeatherProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
         //ServiceDescriptors.AddSingleton(typeof(ITyphoonProvider), typeof(QWeatherProvider.QWeatherProvider));
         ServiceDescriptors.AddSingleton(typeof(IGeolocationProvider), typeof(BingGeolocationProvider.BingGeolocationProvider));
         OpenMeteoProvider.OpenMeteoProvider.Client.ForecastParameters.Add("forecast_hours", "168");

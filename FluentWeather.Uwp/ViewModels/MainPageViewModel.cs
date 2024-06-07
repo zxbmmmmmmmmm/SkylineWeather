@@ -39,6 +39,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
 
     [ObservableProperty]
+    private HistoricalDailyWeatherBase _historicalWeather;
+
+    [ObservableProperty]
     private List<WeatherWarningBase> _warnings ;
 
     [ObservableProperty]
@@ -227,6 +230,11 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         {
             await Refresh();
         }
+    }
+    [RelayCommand]
+    public async Task GetHistoricalWeather()
+    {
+
     }
 
     [RelayCommand]

@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using FluentWeather.Abstraction.Models;
 using Newtonsoft.Json.Linq;
 using FluentWeather.Uwp.Shared;
+using FluentWeather.Uwp.Controls.Dialogs;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 namespace FluentWeather.Uwp.Pages;
@@ -83,5 +84,10 @@ public sealed partial class CitiesPage : Page
         {
             CitiesPageViewModel.Instance.GetCurrentCity();
         }
+    }
+
+    private async void GetHistoricalWeatherItem_Click(object sender, RoutedEventArgs e)
+    {
+        await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation.Location));
     }
 }

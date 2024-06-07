@@ -41,4 +41,14 @@ public static class Extensions
         item ??= await folder.CreateFolderAsync(name);
         return item;
     }
+    public static TValue GetOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
+    {
+        if (!dict.TryGetValue(key, out TValue val))
+        {
+            val = default;
+            dict.Add(key, val);
+        }
+
+        return val;
+    }
 }

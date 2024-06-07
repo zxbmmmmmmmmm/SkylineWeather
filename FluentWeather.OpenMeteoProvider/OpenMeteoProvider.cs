@@ -65,14 +65,18 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
     public async Task<List<WeatherDailyBase>> GetHistoricalDailyWeather(double lon, double lat, DateTime startTime, DateTime endTime)
     {
         var list = new List<WeatherDailyBase>();
-        var data = await Client.GetHistoricalWeatherData(lat, lon, startTime, endTime);
+        var data = await Client.GetHistoricalWeatherData(lat, lon, startTime, endTime, 
+            dailyVariables: [DailyVariables.WeatherCode,DailyVariables.Temperature2mMax,DailyVariables.Temperature2mMin,DailyVariables.PrecipitationSum,DailyVariables.PrecipitationHours]
+            );
         for (var i = 0; i < data.DailyForecast!.Time!.Count(); i++)
         {
             var item = new WeatherDailyBase
             {
                 Time = data.DailyForecast.Time![i]!.Value,
-                MaxTemperature = (int)data.DailyForecast.Temperature2mMax![i]!.Value,
-                MinTemperature = (int)data.DailyForecast.Temperature2mMin![i]!.Value,
+                Precipitation = data.DailyForecast.PrecipitationSum![i],
+                PrecipitationHours = data.DailyForecast.PrecipitationHours![i],
+                MaxTemperature = (int)Math.Round(data.DailyForecast.Temperature2mMax![i]!.Value),
+                MinTemperature = (int)Math.Round(data.DailyForecast.Temperature2mMin![i]!.Value),
             };
             list.Add(item);
         }
