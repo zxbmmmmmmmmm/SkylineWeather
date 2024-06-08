@@ -179,6 +179,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!--  当前天气  -->
                     <Grid
@@ -854,16 +855,15 @@
 
 
                     <!--  历史天气  -->
-                    <Grid Grid.Row="6" Visibility="{x:Bind ViewModel.HistoricalWeather,Converter={StaticResource NullToVisibilityConverter},Mode=OneWay}">
+                    <Grid Grid.Row="6" Visibility="{x:Bind ViewModel.HistoricalWeather, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
                         <dv:RadLinearGauge
-                        
-                        Height="120"
-                        Margin="24,0"
-                        x:DefaultBindMode="OneWay"
-                        LabelStep="1"
-                        MaxValue="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}"
-                        MinValue="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}"
-                        TickStep="1">
+                            Height="120"
+                            Margin="24,0"
+                            x:DefaultBindMode="OneWay"
+                            LabelStep="1"
+                            MaxValue="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}"
+                            MinValue="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}"
+                            TickStep="1">
                             <dv:RadLinearGauge.TickTemplate>
                                 <DataTemplate />
                             </dv:RadLinearGauge.TickTemplate>
@@ -872,37 +872,37 @@
                             </dv:RadLinearGauge.LabelTemplate>
                             <dv:SegmentedLinearGaugeIndicator Value="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}">
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMinTemperature, ViewModel.HistoricalWeather.HistoricalMinTemperature)}"
-                                Stroke="#1AB3B3B3"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMinTemperature, ViewModel.HistoricalWeather.HistoricalMinTemperature)}"
+                                    Stroke="#1AB3B3B3"
+                                    Thickness="4" />
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMaxTemperature, ViewModel.HistoricalWeather.AverageMinTemperature)}"
-                                Stroke="#80B3B3B3"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMaxTemperature, ViewModel.HistoricalWeather.AverageMinTemperature)}"
+                                    Stroke="#80B3B3B3"
+                                    Thickness="4" />
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.HistoricalWeather.AverageMaxTemperature)}"
-                                Stroke="#1AB3B3B3"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.HistoricalWeather.AverageMaxTemperature)}"
+                                    Stroke="#1AB3B3B3"
+                                    Thickness="4" />
                             </dv:SegmentedLinearGaugeIndicator>
                             <!--  平均低温  -->
                             <dv:MarkerGaugeIndicator Margin="0,-40,0,0" Value="{x:Bind ViewModel.HistoricalWeather.AverageMinTemperature}">
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel>
                                         <TextBlock
-                                        FontSize="12"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="平均低温" />
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="平均低温" />
                                         <TextBlock
-                                        Margin="4,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.AverageMinTemperature}" /><Run Text="°" />
+                                            Margin="4,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.AverageMinTemperature}" /><Run Text="°" />
                                         </TextBlock>
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FFCCCCCC" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FFCCCCCC" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -912,21 +912,21 @@
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel>
                                         <TextBlock
-                                        FontSize="12"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="平均高温" />
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="平均高温" />
                                         <TextBlock
-                                        Margin="4,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.AverageMaxTemperature}" /><Run Text="°" />
+                                            Margin="4,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.AverageMaxTemperature}" /><Run Text="°" />
 
                                         </TextBlock>
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FFCCCCCC" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FFCCCCCC" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -936,25 +936,25 @@
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel>
                                         <TextBlock
-
-                                        HorizontalAlignment="Center"
-                                        FontSize="12" TextAlignment="Center"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperatureDate.Year}" FontSize="12"/>
-                                        <LineBreak/>
-                                        <Run Text="历史低温"/>
+                                            HorizontalAlignment="Center"
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            TextAlignment="Center">
+                                            <Run FontSize="12" Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperatureDate.Year}" />
+                                            <LineBreak />
+                                            <Run Text="历史低温" />
                                         </TextBlock>
                                         <TextBlock
-                                        Margin="4,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}" />°
+                                            Margin="4,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}" /><Run Text="°"/>
                                         </TextBlock>
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FF666666" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FF666666" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -964,24 +964,25 @@
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel>
                                         <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="12" TextAlignment="Center"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperatureDate.Year}" FontSize="12"/>
-                                        <LineBreak/>
-                                        <Run Text="历史高温"/>
+                                            HorizontalAlignment="Center"
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            TextAlignment="Center">
+                                            <Run FontSize="12" Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperatureDate.Year}" />
+                                            <LineBreak />
+                                            <Run Text="历史高温" />
                                         </TextBlock>
                                         <TextBlock
-                                        Margin="4,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}" />°
+                                            Margin="4,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}" /><Run Text="°"/>
                                         </TextBlock>
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FF666666" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FF666666" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -991,18 +992,18 @@
                             <!--  今日天气 指示条  -->
                             <dv:SegmentedLinearGaugeIndicator dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}">
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.WeatherToday.MinTemperature, ViewModel.HistoricalWeather.HistoricalMinTemperature)}"
-                                Stroke="Transparent"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.WeatherToday.MinTemperature, ViewModel.HistoricalWeather.HistoricalMinTemperature)}"
+                                    Stroke="Transparent"
+                                    Thickness="4" />
 
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.WeatherToday.MaxTemperature, ViewModel.WeatherToday.MinTemperature)}"
-                                Stroke="#66808080"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.WeatherToday.MaxTemperature, ViewModel.WeatherToday.MinTemperature)}"
+                                    Stroke="#66808080"
+                                    Thickness="4" />
                                 <dv:BarIndicatorSegment
-                                Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.WeatherToday.MaxTemperature)}"
-                                Stroke="Transparent"
-                                Thickness="4" />
+                                    Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.WeatherToday.MaxTemperature)}"
+                                    Stroke="Transparent"
+                                    Thickness="4" />
                             </dv:SegmentedLinearGaugeIndicator>
 
                             <!--  今日低温  -->
@@ -1010,21 +1011,21 @@
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel VerticalAlignment="Bottom">
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FF808080" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FF808080" />
                                         <TextBlock
-                                        Margin="2,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}" /><Run Text="°" />
+                                            Margin="2,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}" /><Run Text="°" />
 
                                         </TextBlock>
                                         <TextBlock
-                                        FontSize="12"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="今日低温" />
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="今日低温" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -1034,20 +1035,20 @@
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel VerticalAlignment="Bottom">
                                         <Ellipse
-                                        Width="8"
-                                        Height="8"
-                                        HorizontalAlignment="Center"
-                                        Fill="#FF808080" />
+                                            Width="8"
+                                            Height="8"
+                                            HorizontalAlignment="Center"
+                                            Fill="#FF808080" />
                                         <TextBlock
-                                        Margin="2,0,0,0"
-                                        HorizontalAlignment="Center"
-                                        FontSize="18">
-                                        <Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}" /><Run Text="°" />
+                                            Margin="2,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="18">
+                                            <Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}" /><Run Text="°" />
                                         </TextBlock>
                                         <TextBlock
-                                        FontSize="12"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="今日高温" />
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="今日高温" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -1059,7 +1060,7 @@
 
                     </Grid>
                     <controls:AdaptiveGridView
-                        Grid.Row="6"
+                        Grid.Row="7"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Stretch"
                         DesiredWidth="200"

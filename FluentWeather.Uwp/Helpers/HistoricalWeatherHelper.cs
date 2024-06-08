@@ -1,7 +1,9 @@
 ﻿using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.OpenMeteoProvider;
 using Microsoft.Extensions.DependencyInjection;
+using OpenMeteoApi;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -25,6 +27,7 @@ public class HistoricalWeatherHelper
         }
 
         var service = Locator.ServiceProvider.GetService<IHistoricalWeatherProvider>();
+        service ??= new OpenMeteoProvider.OpenMeteoProvider();
         var data = await service.GetHistoricalDailyWeather(location.Longitude, location.Latitude,DateTime.Parse("1940-01-01"), DateTime.Parse($"{DateTime.Now.Year}-01-01"));
 
         //保存原始数据
