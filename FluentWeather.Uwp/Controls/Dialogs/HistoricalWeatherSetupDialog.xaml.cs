@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -44,11 +46,25 @@ namespace FluentWeather.Uwp.Controls.Dialogs
 
         private async void GetHistoricalWeatherButton_Click(object sender, RoutedEventArgs e)
         {
+            GetHistoricalWeatherButton.IsEnabled = false;
+            ProgressBarPanel.Visibility = Visibility.Visible;
+            WarningInfoBar.Visibility = Visibility.Collapsed;
+            DownloadProgressBar.Value = 0;
+
+            ProgressText.Text = "下载原始数据...";
+            await Task.Delay(500);
+
             var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Location);
+            DownloadProgressBar.Value = 50;
+            ProgressText.Text = "分析中...";
             var result = await HistoricalWeatherHelper.AnalyseHistoricalWeatherAsync(data);
             var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
             var folder1 = await folder.GetOrCreateFolderAsync(Location.GetHashCode().ToString());
             var dic = new Dictionary<string, Dictionary<string,HistoricalDailyWeatherBase>>();
+            await Task.Delay(1000);
+
+            DownloadProgressBar.Value = 75;
+            ProgressText.Text = "保存数据...";
             foreach (var pair in result)
             {
                 var month = pair.Key.AsSpan().Slice(0, 2).ToString();
@@ -67,6 +83,23 @@ namespace FluentWeather.Uwp.Controls.Dialogs
                 await JsonSerializer.SerializeAsync(stream, item.Value);
                 stream.Close();
             }
+            await Task.Delay(500);
+
+            DownloadProgressBar.Value = 100;
+            ProgressText.Text = "完成";
+            GetHistoricalWeatherButton.Visibility = Visibility.Collapsed;
+            RestartButton.Visibility = Visibility.Visible;
+            GetHistoricalWeatherButton.IsEnabled = true;
+        }
+
+        private void HideButton_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+        }
+
+        private async void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            await CoreApplication.RequestRestartAsync(string.Empty);
         }
     }
 }

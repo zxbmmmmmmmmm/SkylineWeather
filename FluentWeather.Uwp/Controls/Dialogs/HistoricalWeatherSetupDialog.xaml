@@ -2,18 +2,84 @@
     x:Class="FluentWeather.Uwp.Controls.Dialogs.HistoricalWeatherSetupDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:app="using:FluentWeather.Uwp.Shared"
-    Style="{ThemeResource DefaultContentDialogStyle}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
-    CloseButtonText="关闭"
-    mc:Ignorable="d"
-    Title="历史天气">
-    <Grid>
-        <StackPanel>
-            <Button x:Name="GetHistoricalWeatherButton" Click="GetHistoricalWeatherButton_Click" Content="获取"/>
-        </StackPanel>
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    mc:Ignorable="d">
+    <Grid Margin="-28">
+        <Grid ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <FontIcon
+                    Margin="12"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="64"
+                    FontWeight="ExtraBlack"
+                    Glyph="&#xE81C;"
+                    Opacity="0.3"
+                    Rotation="10" />
+            </Grid>
+            <StackPanel
+                Grid.Column="1"
+                Padding="28,28,28,24"
+                Spacing="12">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="历史天气" />
+                <TextBlock TextWrapping="Wrap">
+                    通过此功能，您可以对比过去数十年的天气数据<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="数据来源:" /><LineBreak />
+                    Open-Meteo（ERA5 / ECMWF IFS）<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="支持功能:" />
+                    <LineBreak />
+                    每日 历史最低/最高温度<LineBreak />
+                    每日 平均最低/最高温度</TextBlock>
+                <muxc:InfoBar
+                    x:Name="WarningInfoBar"
+                    Title="警告"
+                    IsClosable="False"
+                    IsOpen="True"
+                    Message="请勿频繁获取历史天气数据，违反使用条款可能造成您的IP被Open-Meteo封禁！"
+                    Severity="Warning" />
+                <StackPanel
+                    x:Name="ProgressBarPanel"
+                    Spacing="2"
+                    Visibility="Collapsed">
+                    <TextBlock x:Name="ProgressText" />
+                    <muxc:ProgressBar x:Name="DownloadProgressBar" Value="50" />
+                </StackPanel>
+                <StackPanel
+                    Margin="0,8,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="HideButton"
+                        Padding="36,6"
+                        Click="HideButton_Click"
+                        Content="关闭"
+                        IsEnabled="{x:Bind GetHistoricalWeatherButton.IsEnabled, Mode=OneWay}" />
+                    <Button
+                        x:Name="GetHistoricalWeatherButton"
+                        Margin="12,0,0,0"
+                        Padding="36,6"
+                        Click="GetHistoricalWeatherButton_Click"
+                        Content="获取"
+                        Style="{ThemeResource AccentButtonStyle}" />
+                    <Button
+                        x:Name="RestartButton"
+                        Click="RestartButton_Click"
+                        Margin="12,0,0,0"
+                        Padding="36,6"
+                        Content="重启应用"
+                        Style="{ThemeResource AccentButtonStyle}"
+                        Visibility="Collapsed" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </ContentDialog>
