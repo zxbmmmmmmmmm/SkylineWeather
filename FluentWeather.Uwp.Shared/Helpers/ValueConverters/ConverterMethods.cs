@@ -144,5 +144,10 @@ public static class ConverterMethods
             _ => "",
         };
     }
+
+    public static int Subtract(this int num1,int num2)
+    {
+        return num1 - num2;
+    }
 }
 

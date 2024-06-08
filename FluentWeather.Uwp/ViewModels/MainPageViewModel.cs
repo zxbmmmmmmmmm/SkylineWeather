@@ -30,13 +30,17 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
+    [NotifyPropertyChangedFor(nameof(WeatherToday))]
     private List<WeatherDailyBase> _dailyForecasts =new();
+
     public List<WeatherDailyBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
     private List<WeatherHourlyBase> _hourlyForecasts = new();
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
+
+    public WeatherDailyBase WeatherToday => DailyForecasts.FirstOrDefault();
 
     [ObservableProperty]
     private HistoricalDailyWeatherBase _historicalWeather;
@@ -233,6 +237,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             Precipitation = cacheData.Precipitation!;
             Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
+            await GetHistoricalWeatherCommand.ExecuteAsync(CurrentGeolocation.Location);
         }
         else
         {

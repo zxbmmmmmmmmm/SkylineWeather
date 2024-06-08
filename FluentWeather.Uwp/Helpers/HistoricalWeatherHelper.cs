@@ -127,12 +127,15 @@ public class HistoricalWeatherHelper
     }
     public static async Task<HistoricalDailyWeatherBase> GetHistoricalWeatherAsync(Location location,DateTime date)
     {
-        var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("HistoricalWeather");
-        var folder1 = await folder.GetFolderAsync(location.GetHashCode().ToString());
+        var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
+        var folderItem = await folder.TryGetItemAsync(location.GetHashCode().ToString());
+        if (folderItem == null) return null;
+        var folder1 = (StorageFolder)folderItem;
         var id = date.Month.ToString().PadLeft(2, '0');
         var file = await folder1.GetFileAsync(id);
         using var stream = await file.OpenStreamForReadAsync();
-        var dic = JsonSerializer.Deserialize<Dictionary<string,HistoricalDailyWeatherBase>>(stream, new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
+        var dic = JsonSerializer.Deserialize<Dictionary<string, HistoricalDailyWeatherBase>>(stream, new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
         return dic[date.Day.ToString()];
+
     }
 }
