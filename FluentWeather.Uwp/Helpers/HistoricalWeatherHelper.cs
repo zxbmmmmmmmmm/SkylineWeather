@@ -20,11 +20,11 @@ public class HistoricalWeatherHelper
     {
         var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
         var folder1 = await folder.GetOrCreateFolderAsync(location.GetHashCode().ToString());
-        if ((await folder1.TryGetItemAsync("data")) is not null)
-        {
-            var cache = await folder1.GetFileAsync("data");
-            return await JsonSerializer.DeserializeAsync<List<WeatherDailyBase>>(await cache.OpenStreamForReadAsync(), new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
-        }
+        //if (await folder1.TryGetItemAsync("data") is not null)
+        //{
+        //    var cache = await folder1.GetFileAsync("data");
+        //    return await JsonSerializer.DeserializeAsync<List<WeatherDailyBase>>(await cache.OpenStreamForReadAsync(), new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
+        //}
 
         var service = Locator.ServiceProvider.GetService<IHistoricalWeatherProvider>();
         service ??= new OpenMeteoProvider.OpenMeteoProvider();
