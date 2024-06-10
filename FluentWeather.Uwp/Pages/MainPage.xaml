@@ -948,7 +948,7 @@
                                             Margin="4,0,0,0"
                                             HorizontalAlignment="Center"
                                             FontSize="18">
-                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}" /><Run Text="°"/>
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperature}" /><Run Text="°" />
                                         </TextBlock>
                                         <Ellipse
                                             Width="8"
@@ -976,7 +976,7 @@
                                             Margin="4,0,0,0"
                                             HorizontalAlignment="Center"
                                             FontSize="18">
-                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}" /><Run Text="°"/>
+                                            <Run Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}" /><Run Text="°" />
                                         </TextBlock>
                                         <Ellipse
                                             Width="8"
@@ -1007,7 +1007,10 @@
                             </dv:SegmentedLinearGaugeIndicator>
 
                             <!--  今日低温  -->
-                            <dv:MarkerGaugeIndicator dv:RadLinearGauge.IndicatorOffset="32" Value="{x:Bind ViewModel.WeatherToday.MinTemperature}">
+                            <dv:MarkerGaugeIndicator
+                                x:Name="LowestTempTodayIndicator"
+                                dv:RadLinearGauge.IndicatorOffset="32"
+                                Value="{x:Bind ViewModel.WeatherToday.MinTemperature}">
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel VerticalAlignment="Bottom">
                                         <Ellipse
@@ -1019,7 +1022,7 @@
                                             Margin="2,0,0,0"
                                             HorizontalAlignment="Center"
                                             FontSize="18">
-                                            <Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}" /><Run Text="°" />
+                                            <Run Text="{x:Bind LowestTempTodayIndicator.Value}" /><Run Text="°" />
 
                                         </TextBlock>
                                         <TextBlock
@@ -1031,7 +1034,10 @@
                             </dv:MarkerGaugeIndicator>
 
                             <!--  今日高温  -->
-                            <dv:MarkerGaugeIndicator dv:RadLinearGauge.IndicatorOffset="32" Value="{x:Bind ViewModel.WeatherToday.MaxTemperature}">
+                            <dv:MarkerGaugeIndicator
+                                x:Name="HighestTempTodayIndicator"
+                                dv:RadLinearGauge.IndicatorOffset="32"
+                                Value="{x:Bind ViewModel.WeatherToday.MaxTemperature}">
                                 <dv:MarkerGaugeIndicator.Content>
                                     <StackPanel VerticalAlignment="Bottom">
                                         <Ellipse
@@ -1043,7 +1049,7 @@
                                             Margin="2,0,0,0"
                                             HorizontalAlignment="Center"
                                             FontSize="18">
-                                            <Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}" /><Run Text="°" />
+                                            <Run Text="{x:Bind HighestTempTodayIndicator.Value}" /><Run Text="°" />
                                         </TextBlock>
                                         <TextBlock
                                             FontSize="12"
