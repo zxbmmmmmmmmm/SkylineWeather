@@ -580,7 +580,7 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="430">
+                                            <StackPanel MaxWidth="420">
                                                 <controls1:HourlyDataChart
                                                     Height="200"
                                                     HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
@@ -643,7 +643,7 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="430">
+                                            <StackPanel MaxWidth="420">
                                                 <controls1:HourlyDataChart
                                                     Height="200"
                                                     HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
@@ -703,7 +703,7 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="430">
+                                            <StackPanel MaxWidth="420">
                                                 <controls1:HourlyDataChart
                                                     Height="200"
                                                     HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
@@ -749,7 +749,7 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="430">
+                                            <StackPanel MaxWidth="420">
                                                 <controls1:HourlyDataChart
                                                     Height="200"
                                                     HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
@@ -807,7 +807,7 @@
                                     </TextBlock>
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout>
-                                            <StackPanel MaxWidth="430">
+                                            <StackPanel MaxWidth="420">
                                                 <controls1:HourlyDataChart
                                                     Height="200"
                                                     HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
