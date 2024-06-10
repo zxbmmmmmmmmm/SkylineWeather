@@ -41,7 +41,7 @@
                 <settings:LocationSettingSection Grid.Row="2" />
                 <settings:NotificationSettingSection Grid.Row="3" />
                 <settings:UpdateSettingSection Grid.Row="4" />
-                <settings:DeveloperSettingSection Grid.Row="5" x:Name="DeveloperMenu" Visibility="Collapsed"/>
+                <settings:DeveloperSettingSection Grid.Row="5" x:Name="DeveloperMenu" />
             </Grid>
         </ScrollViewer>
         <controls:PropertySizer

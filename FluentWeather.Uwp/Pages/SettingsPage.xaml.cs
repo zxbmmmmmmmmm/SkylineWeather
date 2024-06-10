@@ -1,4 +1,5 @@
 ﻿using FluentWeather.Uwp.Helpers;
+using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,8 +27,6 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         this.InitializeComponent();
-#if DEBUG
-        DeveloperMenu.Visibility = Visibility.Visible;
-#endif
+        DeveloperMenu.Visibility = Common.Settings.DeveloperMode ? Visibility.Visible : Visibility.Collapsed;
     }
 }
