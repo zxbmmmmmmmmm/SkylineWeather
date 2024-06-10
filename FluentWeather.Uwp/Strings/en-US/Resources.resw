@@ -243,9 +243,6 @@
   <data name="CustomOptions.Text" xml:space="preserve">
     <value>Custom Options</value>
   </data>
-  <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
-    <value>Customize your main page</value>
-  </data>
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>Custom main page</value>
   </data>
@@ -528,6 +525,12 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Settings_CustomPagesSettingsCard_Description.Text" xml:space="preserve">
+    <value>Customize your main page</value>
+  </data>
+  <data name="Settings_CustomPagesSettingsCard_Get.Text" xml:space="preserve">
+    <value>Get</value>
   </data>
   <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
     <value>Temperature unit</value>

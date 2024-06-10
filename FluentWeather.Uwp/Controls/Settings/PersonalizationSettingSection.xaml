@@ -41,6 +41,14 @@
         </controls:SettingsExpander.ItemsHeader>
         <controls:SettingsExpander.Items>
             <controls:SettingsCard x:Uid="CustomPagesSettingsCard" Padding="12" HeaderIcon="Home">
+                <controls:SettingsCard.Description>
+                    <TextBlock>
+                        <Run x:Uid="Settings_CustomPagesSettingsCard_Description" />
+                        <Hyperlink NavigateUri="https://github.com/zxbmmmmmmmmm/SkylineWeather/discussions/categories/themes">
+                            <Run x:Uid="Settings_CustomPagesSettingsCard_Get"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </controls:SettingsCard.Description>
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <Button x:Name="SelectPageFile" x:Uid="SelectPageFileButton" Click="SelectPageFile_Click"/>
                     <ToggleSwitch IsOn="{x:Bind app:Common.Settings.EnableCustomPage,Mode=TwoWay}" Style="{StaticResource DefaultToggleSwitchStyle}"/>

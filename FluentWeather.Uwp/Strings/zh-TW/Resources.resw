@@ -141,6 +141,18 @@
   <data name="About_Sponsor.Text" xml:space="preserve">
     <value>赞助</value>
   </data>
+  <data name="AdminDistrict2TextBox.Header" xml:space="preserve">
+    <value>行政区2</value>
+  </data>
+  <data name="AdminDistrict2TextBox.PlaceholderText" xml:space="preserve">
+    <value>市/区/县</value>
+  </data>
+  <data name="AdminDistrictTextBox.Header" xml:space="preserve">
+    <value>行政区</value>
+  </data>
+  <data name="AdminDistrictTextBox.PlaceholderText" xml:space="preserve">
+    <value>省/州</value>
+  </data>
   <data name="AirCondition.Text" xml:space="preserve">
     <value>空氣品質</value>
   </data>
@@ -167,6 +179,12 @@
   </data>
   <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
     <value>啟動時更新位置</value>
+  </data>
+  <data name="AverageHighTemp.Text" xml:space="preserve">
+    <value>平均高温</value>
+  </data>
+  <data name="AverageLowTemp.Text" xml:space="preserve">
+    <value>平均低温</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>佈景模糊半徑</value>
@@ -198,6 +216,9 @@
   <data name="ClassicThemeSection.Content" xml:space="preserve">
     <value>經典</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
   <data name="CloseButton.Content" xml:space="preserve">
     <value>关闭</value>
   </data>
@@ -207,14 +228,20 @@
   <data name="CloudAmountText.Text" xml:space="preserve">
     <value>雲量</value>
   </data>
+  <data name="CountryRegionTextBox.Header" xml:space="preserve">
+    <value>国家/地区</value>
+  </data>
+  <data name="CountryRegionTextBox.PlaceholderText" xml:space="preserve">
+    <value>国家/地区</value>
+  </data>
   <data name="CurrentLocation" xml:space="preserve">
     <value>現時位置</value>
   </data>
   <data name="CurrentLocationText.Text" xml:space="preserve">
     <value>現時位置</value>
   </data>
-  <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
-    <value>您主頁的個人化設置</value>
+  <data name="CustomOptions.Text" xml:space="preserve">
+    <value>自定义选项</value>
   </data>
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>自訂首頁</value>
@@ -273,8 +300,14 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟隨系統</value>
   </data>
+  <data name="GetButton.Content" xml:space="preserve">
+    <value>获取</value>
+  </data>
   <data name="GetDataFailed" xml:space="preserve">
     <value>获取数据失败</value>
+  </data>
+  <data name="GetHistoricalWeatherItem.Text" xml:space="preserve">
+    <value>获取历史天气</value>
   </data>
   <data name="HasPrecipitationText" xml:space="preserve">
     <value>未来两小时有降水</value>
@@ -282,8 +315,51 @@
   <data name="HighestTemperature" xml:space="preserve">
     <value>最高温</value>
   </data>
+  <data name="HistoricalHighTemp.Text" xml:space="preserve">
+    <value>历史高温</value>
+  </data>
+  <data name="HistoricalLowTemp.Text" xml:space="preserve">
+    <value>历史低温</value>
+  </data>
+  <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
+    <value>通过此功能，您可以对比过去数十年的天气数据</value>
+  </data>
+  <data name="HistoricalWeatherFeature.Text" xml:space="preserve">
+    <value>支持功能</value>
+  </data>
+  <data name="HistoricalWeatherFeatureDescription.Text" xml:space="preserve">
+    <value>每日 历史最低/最高温度
+每日 平均最低/最高温度</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Analysing" xml:space="preserve">
+    <value>分析中...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Downloading" xml:space="preserve">
+    <value>下载原始数据...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Saving" xml:space="preserve">
+    <value>保存数据...</value>
+  </data>
+  <data name="HistoricalWeatherSource.Text" xml:space="preserve">
+    <value>数据来源:</value>
+  </data>
+  <data name="HistoricalWeatherTitle.Text" xml:space="preserve">
+    <value>历史天气</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Message" xml:space="preserve">
+    <value>请勿频繁获取历史天气数据，违反使用条款可能造成您的IP被Open-Meteo封禁！</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Title" xml:space="preserve">
+    <value>警告</value>
+  </data>
   <data name="HourlyForecast.Text" xml:space="preserve">
     <value>24小时预报</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>湿度</value>
   </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
     <value>相對於空氣在當前溫度下所能夠包含的最大水分量，空氣中存在的水分量</value>
@@ -301,11 +377,38 @@
   <data name="LatestVersion" xml:space="preserve">
     <value>應用程式已是最新版本</value>
   </data>
+  <data name="LatitudeNumberBox.Header" xml:space="preserve">
+    <value>纬度*</value>
+  </data>
+  <data name="LatitudeNumberBox.PlaceholderText" xml:space="preserve">
+    <value>纬度</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>级</value>
+  </data>
   <data name="LightSection.Content" xml:space="preserve">
     <value>明亮</value>
   </data>
+  <data name="LocationDialog.PrimaryButtonText" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="LocationDialog.Title" xml:space="preserve">
+    <value>选择位置</value>
+  </data>
+  <data name="LocationNameTextBox.Header" xml:space="preserve">
+    <value>名称*</value>
+  </data>
+  <data name="LocationNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>位置名称</value>
+  </data>
   <data name="LocationSettingsExpander.Header" xml:space="preserve">
     <value>位置</value>
+  </data>
+  <data name="LongitudeNumberBox.Header" xml:space="preserve">
+    <value>经度*</value>
+  </data>
+  <data name="LongitudeNumberBox.PlaceholderText" xml:space="preserve">
+    <value>经度</value>
   </data>
   <data name="LowestTemperature" xml:space="preserve">
     <value>最低温</value>
@@ -343,6 +446,9 @@
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>個人化</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>气压</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
     <value>大氣中空氣的重量。較高的氣壓通常與晴朗的天氣相關，較低的氣壓與暴風雨天氣相關</value>
@@ -420,6 +526,21 @@
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="Settings_CustomPagesSettingsCard_Description.Text" xml:space="preserve">
+    <value>自定义你的主页</value>
+  </data>
+  <data name="Settings_CustomPagesSettingsCard_Get.Text" xml:space="preserve">
+    <value>获取</value>
+  </data>
+  <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
+    <value>温度单位</value>
+  </data>
+  <data name="Settings_TemperatureUnit_CelsiusItem.Content" xml:space="preserve">
+    <value>摄氏</value>
+  </data>
+  <data name="Settings_TemperatureUnit_FahrenheitItem.Content" xml:space="preserve">
+    <value>华氏</value>
+  </data>
   <data name="SpeechMenuItem.Text" xml:space="preserve">
     <value>語音播報</value>
   </data>
@@ -444,11 +565,29 @@
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
     <value>主題</value>
   </data>
+  <data name="TimeZoneComboBox.Header" xml:space="preserve">
+    <value>时区*</value>
+  </data>
+  <data name="TimeZoneComboBox.PlaceholderText" xml:space="preserve">
+    <value>时区</value>
+  </data>
   <data name="Today" xml:space="preserve">
     <value>今天</value>
   </data>
+  <data name="TodayHighTemp.Text" xml:space="preserve">
+    <value>今日高温</value>
+  </data>
+  <data name="TodayLowTemp.Text" xml:space="preserve">
+    <value>今日低温</value>
+  </data>
+  <data name="TodayWeather" xml:space="preserve">
+    <value>今日天气</value>
+  </data>
   <data name="Tomorrow" xml:space="preserve">
     <value>明天</value>
+  </data>
+  <data name="TomorrowWeather" xml:space="preserve">
+    <value>明日天气</value>
   </data>
   <data name="TowHoursText.Text" xml:space="preserve">
     <value>2 小時</value>
@@ -456,6 +595,12 @@
   <data name="TrackText" xml:space="preserve">
     <value>追蹤</value>
     <comment>台风警告内快捷追踪</comment>
+  </data>
+  <data name="TransparentTilesSettingsCard.Description" xml:space="preserve">
+    <value>使宽磁贴/大磁贴透明</value>
+  </data>
+  <data name="TransparentTilesSettingsCard.Header" xml:space="preserve">
+    <value>透明磁贴</value>
   </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
     <value>颱風</value>
@@ -505,6 +650,9 @@
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
     <value>預警</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>预警</value>
+  </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">
     <value>在動態磚上顯示每日天氣（僅適用於 Windows 10）</value>
   </data>
@@ -531,6 +679,9 @@
   </data>
   <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
     <value>数据源功能对照</value>
+  </data>
+  <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
+    <value>对于中国大陆的用户，推荐使用和风天气以获得更精确的数据</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Windows 11 下將覆蓋 Mica

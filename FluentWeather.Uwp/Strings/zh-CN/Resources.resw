@@ -243,9 +243,6 @@
   <data name="CustomOptions.Text" xml:space="preserve">
     <value>自定义选项</value>
   </data>
-  <data name="CustomPagesSettingsCard.Description" xml:space="preserve">
-    <value>自定义你的主页</value>
-  </data>
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>自定义主页</value>
   </data>
@@ -528,6 +525,12 @@
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>设置</value>
+  </data>
+  <data name="Settings_CustomPagesSettingsCard_Description.Text" xml:space="preserve">
+    <value>自定义你的主页</value>
+  </data>
+  <data name="Settings_CustomPagesSettingsCard_Get.Text" xml:space="preserve">
+    <value>获取</value>
   </data>
   <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
     <value>温度单位</value>
