@@ -7,8 +7,8 @@ namespace FluentWeather.Abstraction.Models;
 
 public class WeatherDailyBase : WeatherBase, IWeatherNight, ITemperatureRange, IWind, ITime, IAstronomic,ICloudAmount,IVisibility,IPressure,IHumidity
 {
-    public  int MaxTemperature { get; set; }
-    public  int MinTemperature { get; set; }
+    public int MaxTemperature { get; set; }
+    public int MinTemperature { get; set; }
     public  DateTime Time { get; set; }
     public WeatherBase? WeatherNight { get; set; }
 
@@ -30,4 +30,6 @@ public class WeatherDailyBase : WeatherBase, IWeatherNight, ITemperatureRange, I
     public int? Visibility { get; set; }
     public int? Pressure { get; set; }
     public int? Humidity { get; set ; }
+    public double? Precipitation { get; set; }
+    public double? PrecipitationHours { get; set; }
 }

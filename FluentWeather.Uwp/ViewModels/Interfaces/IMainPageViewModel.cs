@@ -24,6 +24,11 @@ public interface IMainPageViewModel
     List<IndicesBase> Indices { get; }
 
     /// <summary>
+    /// 当日历史天气
+    /// </summary>
+    HistoricalDailyWeatherBase HistoricalWeather { get; }
+
+    /// <summary>
     /// 当前天气
     /// </summary>
     WeatherNowBase WeatherNow { get; }

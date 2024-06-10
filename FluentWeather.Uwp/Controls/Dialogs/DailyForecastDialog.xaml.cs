@@ -98,12 +98,12 @@ public sealed partial class DailyForecastDialog : ContentDialog
     private string GetTextFirst(List<WeatherHourlyBase> weatherList)
     {
         if (weatherList is null) return null;
-        return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().First().Time.ToShortTimeString();
+        return weatherList.Count is 0 ? null : weatherList?.First().Time.ToShortTimeString();
     }
     private string GetTextLast(List<WeatherHourlyBase> weatherList)
     {
         if (weatherList is null) return null;
-        return weatherList.Count is 0 ? null : weatherList?.ConvertAll(p => (ITime)p).ToList().Last().Time.ToShortTimeString();
+        return weatherList.Count is 0 ? null : weatherList?.Last().Time.ToShortTimeString();
     }
     private void ForecastGridView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
     {

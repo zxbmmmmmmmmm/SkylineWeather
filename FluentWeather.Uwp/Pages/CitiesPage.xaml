@@ -47,7 +47,17 @@
             x:Name="CurrentCityView"
             Grid.Row="1"
             Margin="{ThemeResource CityViewMargin}">
-            <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" />
+            <controls:CityItem Location="{x:Bind ViewModel.CurrentCity, Mode=OneWay}" >
+                <controls:CityItem.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem
+                            x:Name="GetHistoricalWeatherItem"
+                            x:Uid="GetHistoricalWeatherItem"
+                            Click="GetHistoricalWeatherItem_Click"
+                            Icon="Download" />
+                    </MenuFlyout>
+                </controls:CityItem.ContextFlyout>
+            </controls:CityItem>
         </ListView>
         <Border Grid.Row="1" Padding="{ThemeResource CityViewMargin}">
             <TextBlock

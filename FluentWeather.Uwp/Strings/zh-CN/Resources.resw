@@ -180,6 +180,12 @@
   <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
     <value>启动时更新位置</value>
   </data>
+  <data name="AverageHighTemp.Text" xml:space="preserve">
+    <value>平均高温</value>
+  </data>
+  <data name="AverageLowTemp.Text" xml:space="preserve">
+    <value>平均低温</value>
+  </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>背景模糊半径</value>
   </data>
@@ -297,14 +303,60 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
+  <data name="GetButton.Content" xml:space="preserve">
+    <value>获取</value>
+  </data>
   <data name="GetDataFailed" xml:space="preserve">
     <value>获取数据失败</value>
+  </data>
+  <data name="GetHistoricalWeatherItem.Text" xml:space="preserve">
+    <value>获取历史天气</value>
   </data>
   <data name="HasPrecipitationText" xml:space="preserve">
     <value>未来两小时有降水</value>
   </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>最高温</value>
+  </data>
+  <data name="HistoricalHighTemp.Text" xml:space="preserve">
+    <value>历史高温</value>
+  </data>
+  <data name="HistoricalLowTemp.Text" xml:space="preserve">
+    <value>历史低温</value>
+  </data>
+  <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
+    <value>通过此功能，您可以对比过去数十年的天气数据</value>
+  </data>
+  <data name="HistoricalWeatherFeature.Text" xml:space="preserve">
+    <value>支持功能</value>
+  </data>
+  <data name="HistoricalWeatherFeatureDescription.Text" xml:space="preserve">
+    <value>每日 历史最低/最高温度
+每日 平均最低/最高温度</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Analysing" xml:space="preserve">
+    <value>分析中...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Downloading" xml:space="preserve">
+    <value>下载原始数据...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Saving" xml:space="preserve">
+    <value>保存数据...</value>
+  </data>
+  <data name="HistoricalWeatherSource.Text" xml:space="preserve">
+    <value>数据来源:</value>
+  </data>
+  <data name="HistoricalWeatherTitle.Text" xml:space="preserve">
+    <value>历史天气</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Message" xml:space="preserve">
+    <value>请勿频繁获取历史天气数据，违反使用条款可能造成您的IP被Open-Meteo封禁！</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Title" xml:space="preserve">
+    <value>警告</value>
   </data>
   <data name="HourlyForecast.Text" xml:space="preserve">
     <value>24小时预报</value>
@@ -518,6 +570,12 @@
   </data>
   <data name="Today" xml:space="preserve">
     <value>今天</value>
+  </data>
+  <data name="TodayHighTemp.Text" xml:space="preserve">
+    <value>今日高温</value>
+  </data>
+  <data name="TodayLowTemp.Text" xml:space="preserve">
+    <value>今日低温</value>
   </data>
   <data name="TodayWeather" xml:space="preserve">
     <value>今日天气</value>
