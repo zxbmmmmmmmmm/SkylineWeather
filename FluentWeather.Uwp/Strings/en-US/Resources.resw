@@ -180,6 +180,12 @@
   <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
     <value>Update locations on startup</value>
   </data>
+  <data name="AverageHighTemp.Text" xml:space="preserve">
+    <value>Lowest temp AVG</value>
+  </data>
+  <data name="AverageLowTemp.Text" xml:space="preserve">
+    <value>Highest temp AVG</value>
+  </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>Background blur radius</value>
   </data>
@@ -297,14 +303,60 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>Follow system</value>
   </data>
+  <data name="GetButton.Content" xml:space="preserve">
+    <value>Get</value>
+  </data>
   <data name="GetDataFailed" xml:space="preserve">
     <value>Failed to get data</value>
+  </data>
+  <data name="GetHistoricalWeatherItem.Text" xml:space="preserve">
+    <value>Get historical weather</value>
   </data>
   <data name="HasPrecipitationText" xml:space="preserve">
     <value>There will be precipitation in the next two hours</value>
   </data>
   <data name="HighestTemperature" xml:space="preserve">
     <value>Highest</value>
+  </data>
+  <data name="HistoricalHighTemp.Text" xml:space="preserve">
+    <value>Historical high temp</value>
+  </data>
+  <data name="HistoricalLowTemp.Text" xml:space="preserve">
+    <value>Historical low temp</value>
+  </data>
+  <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
+    <value>This feature allows you to compare weather data from past decades</value>
+  </data>
+  <data name="HistoricalWeatherFeature.Text" xml:space="preserve">
+    <value>Supported features</value>
+  </data>
+  <data name="HistoricalWeatherFeatureDescription.Text" xml:space="preserve">
+    <value>Daily historical lowest/highest temperature
+Daily average lowest/highest temperature</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Analysing" xml:space="preserve">
+    <value>Analyzing...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Downloading" xml:space="preserve">
+    <value>Downloading original data...</value>
+  </data>
+  <data name="HistoricalWeatherSetupProgress_Saving" xml:space="preserve">
+    <value>Saving data...</value>
+  </data>
+  <data name="HistoricalWeatherSource.Text" xml:space="preserve">
+    <value>Data sources:</value>
+  </data>
+  <data name="HistoricalWeatherTitle.Text" xml:space="preserve">
+    <value>Historical Weather</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Message" xml:space="preserve">
+    <value>Do not request historical weather data frequently. Violation of the terms of use may cause your IP to be blocked by Open-Meteo!</value>
+  </data>
+  <data name="HistoricalWeatherWarningInfoBar.Title" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="HourlyForecast.Text" xml:space="preserve">
     <value>24-Hour forecast</value>
@@ -518,6 +570,12 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Today</value>
+  </data>
+  <data name="TodayHighTemp.Text" xml:space="preserve">
+    <value>Today's high temp</value>
+  </data>
+  <data name="TodayLowTemp.Text" xml:space="preserve">
+    <value>Today's low temp</value>
   </data>
   <data name="TodayWeather" xml:space="preserve">
     <value>Today's Weather</value>

@@ -31,19 +31,18 @@
                 Grid.Column="1"
                 Padding="28,28,28,24"
                 Spacing="12">
-                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="历史天气" />
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" x:Uid="HistoricalWeatherTitle" />
                 <TextBlock TextWrapping="Wrap">
-                    通过此功能，您可以对比过去数十年的天气数据<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="数据来源:" /><LineBreak />
-                    Open-Meteo（ERA5 / ECMWF IFS）<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="支持功能:" />
-                    <LineBreak />
-                    每日 历史最低/最高温度<LineBreak />
-                    每日 平均最低/最高温度</TextBlock>
+                    <Run x:Uid="HistoricalWeatherDescription"/>
+                    <LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" x:Uid="HistoricalWeatherSource" /><LineBreak />
+                    Open-Meteo（ERA5 / ECMWF IFS）<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" x:Uid="HistoricalWeatherFeature" />
+                    <LineBreak /><Run x:Uid="HistoricalWeatherFeatureDescription"/>
+                </TextBlock>
                 <muxc:InfoBar
                     x:Name="WarningInfoBar"
-                    Title="警告"
+                    x:Uid="HistoricalWeatherWarningInfoBar"
                     IsClosable="False"
                     IsOpen="True"
-                    Message="请勿频繁获取历史天气数据，违反使用条款可能造成您的IP被Open-Meteo封禁！"
                     Severity="Warning" />
                 <StackPanel
                     x:Name="ProgressBarPanel"
@@ -58,23 +57,23 @@
                     Orientation="Horizontal">
                     <Button
                         x:Name="HideButton"
+                        x:Uid="CloseButton"
                         Padding="36,6"
                         Click="HideButton_Click"
-                        Content="关闭"
                         IsEnabled="{x:Bind GetHistoricalWeatherButton.IsEnabled, Mode=OneWay}" />
                     <Button
                         x:Name="GetHistoricalWeatherButton"
+                        x:Uid="GetButton"
                         Margin="12,0,0,0"
                         Padding="36,6"
                         Click="GetHistoricalWeatherButton_Click"
-                        Content="获取"
                         Style="{ThemeResource AccentButtonStyle}" />
                     <Button
                         x:Name="RestartButton"
                         Click="RestartButton_Click"
                         Margin="12,0,0,0"
                         Padding="36,6"
-                        Content="重启应用"
+                        x:Uid="RestartButton"
                         Style="{ThemeResource AccentButtonStyle}"
                         Visibility="Collapsed" />
                 </StackPanel>

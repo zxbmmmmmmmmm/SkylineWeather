@@ -891,7 +891,7 @@
                                         <TextBlock
                                             FontSize="12"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                            Text="平均低温" />
+                                            x:Uid="AverageLowTemp" />
                                         <TextBlock
                                             Margin="4,0,0,0"
                                             HorizontalAlignment="Center"
@@ -914,7 +914,7 @@
                                         <TextBlock
                                             FontSize="12"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                            Text="平均高温" />
+                                            x:Uid="AverageHighTemp"/>
                                         <TextBlock
                                             Margin="4,0,0,0"
                                             HorizontalAlignment="Center"
@@ -937,12 +937,13 @@
                                     <StackPanel>
                                         <TextBlock
                                             HorizontalAlignment="Center"
-                                            FontSize="12"
+                                            FontSize="12" 
+                                            TextWrapping="WrapWholeWords"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                             TextAlignment="Center">
                                             <Run FontSize="12" Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMinTemperatureDate.Year}" />
                                             <LineBreak />
-                                            <Run Text="历史低温" />
+                                            <Run x:Uid="HistoricalLowTemp" />
                                         </TextBlock>
                                         <TextBlock
                                             Margin="4,0,0,0"
@@ -970,7 +971,7 @@
                                             TextAlignment="Center">
                                             <Run FontSize="12" Text="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperatureDate.Year}" />
                                             <LineBreak />
-                                            <Run Text="历史高温" />
+                                            <Run x:Uid="HistoricalHighTemp"  />
                                         </TextBlock>
                                         <TextBlock
                                             Margin="4,0,0,0"
@@ -1028,7 +1029,7 @@
                                         <TextBlock
                                             FontSize="12"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                            Text="今日低温" />
+                                            x:Uid="TodayLowTemp" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -1054,7 +1055,7 @@
                                         <TextBlock
                                             FontSize="12"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                            Text="今日高温" />
+                                            x:Uid="TodayHighTemp" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>

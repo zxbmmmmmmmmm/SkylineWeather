@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
@@ -50,5 +51,19 @@ public static class Extensions
         }
 
         return val;
+    }
+}
+internal static class ResourceExtensions
+{
+    private static readonly ResourceLoader ResLoader = ResourceLoader.GetForCurrentView();
+    private static readonly ResourceLoader IndependentResLoader = ResourceLoader.GetForViewIndependentUse();
+
+    public static string GetLocalized(this string resourceKey)
+    {
+        return ResLoader.GetString(resourceKey);
+    }
+    public static string GetLocalizedIndependent(this string resourceKey)
+    {
+        return IndependentResLoader.GetString(resourceKey);
     }
 }

@@ -7,7 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="458f3e97-277b-4821-b291-da06e100aa99" name="更改" comment="" />
+    <list default="true" id="458f3e97-277b-4821-b291-da06e100aa99" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FluentWeather/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FluentWeather/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FluentWeather.Uwp/Pages/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FluentWeather.Uwp/Pages/MainPage.xaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +19,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2fhy7ZlEaBeM0c9cCLNZZzgDs2e" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,8 +30,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UWP.FluentWeather.Uwp.executor": "Run",
-    "git-widget-placeholder": "master",
+    "UWP.FluentWeather.Uwp.executor": "Debug",
+    "git-widget-placeholder": "feat/historical-weather",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -45,7 +48,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="多重启动.多重启动: FluentWeather">
+  <component name="RunManager" selected="UWP.FluentWeather.Uwp">
     <configuration name="FluentWeather.Uwp" type="UwpProject" factoryName="UWP">
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/FluentWeather.Uwp/FluentWeather.Uwp.csproj" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -80,6 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1714267439950</updated>
       <workItem from="1714267440501" duration="1168000" />
+      <workItem from="1717991214122" duration="190000" />
     </task>
     <servers />
   </component>

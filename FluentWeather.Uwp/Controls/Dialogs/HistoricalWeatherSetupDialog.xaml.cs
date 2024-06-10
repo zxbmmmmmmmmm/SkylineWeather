@@ -52,7 +52,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
         ProgressBarPanel.Visibility = Visibility.Visible;
         WarningInfoBar.Visibility = Visibility.Collapsed;
         DownloadProgressBar.Value = 0;
-        ProgressText.Text = "下载原始数据...";
+        ProgressText.Text = "HistoricalWeatherSetupProgress_Downloading".GetLocalized();
         try
         {
             await Task.Delay(500);
@@ -60,7 +60,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
             var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Location);
 
             DownloadProgressBar.Value = 50;
-            ProgressText.Text = "分析中...";
+            ProgressText.Text = "HistoricalWeatherSetupProgress_Analysing".GetLocalized();
             await Task.Delay(1000);
 
             var result = await HistoricalWeatherHelper.AnalyseHistoricalWeatherAsync(data);
@@ -68,7 +68,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
             var folder1 = await folder.GetOrCreateFolderAsync(Location.GetHashCode().ToString());
             var dic = new Dictionary<string, Dictionary<string, HistoricalDailyWeatherBase>>();
             DownloadProgressBar.Value = 75;
-            ProgressText.Text = "保存数据...";
+            ProgressText.Text = "HistoricalWeatherSetupProgress_Saving".GetLocalized();
 
             foreach (var pair in result)
             {
@@ -90,7 +90,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
             }
 
             await Task.Delay(500);
-            ProgressText.Text = "完成";
+            ProgressText.Text = "HistoricalWeatherSetupProgress_Done".GetLocalized();
             GetHistoricalWeatherButton.Visibility = Visibility.Collapsed;
             RestartButton.Visibility = Visibility.Visible;
         }

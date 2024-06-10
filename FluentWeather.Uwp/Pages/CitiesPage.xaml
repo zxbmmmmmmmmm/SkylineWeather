@@ -52,8 +52,8 @@
                     <MenuFlyout>
                         <MenuFlyoutItem
                             x:Name="GetHistoricalWeatherItem"
+                            x:Uid="GetHistoricalWeatherItem"
                             Click="GetHistoricalWeatherItem_Click"
-                            Text="获取历史天气"
                             Icon="Download" />
                     </MenuFlyout>
                 </controls:CityItem.ContextFlyout>
