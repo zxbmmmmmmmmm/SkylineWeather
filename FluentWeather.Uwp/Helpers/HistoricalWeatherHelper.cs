@@ -65,12 +65,13 @@ public class HistoricalWeatherHelper
                 double? totalPrecip = 0.0;
                 double? maxPrecip = 0.0;
                 DateTime? maxPrecipDate = DateTime.MinValue;
-                
-              
+
+                var totalWindSpeed = 0;
                 var totalMaxTemp = 0;
                 var totalMinTemp = 0;
                 double? totalPrecipHours = 0.0;
                 var weatherCodeDic = new Dictionary<WeatherCode, int>();
+                var windDirectionDic = new Dictionary<WindDirection, int>();
                 var count = 0;
                 foreach (var item in pair.Value)
                 {
@@ -89,6 +90,9 @@ public class HistoricalWeatherHelper
                         maxPrecip = item.Precipitation;
                         maxPrecipDate = item.Time;
                     }
+                    totalWindSpeed += item.WindSpeed;
+                    windDirectionDic[item.WindDirection] = windDirectionDic.GetOrCreate(item.WindDirection) + 1;
+
                     totalMaxTemp += item.MaxTemperature;
                     totalMinTemp += item.MinTemperature;
                     totalPrecipHours += item.PrecipitationHours;
@@ -99,6 +103,8 @@ public class HistoricalWeatherHelper
                 var historicalWeather = new HistoricalDailyWeatherBase
                 {
                     Date = pair.Value.First.Value.Time.Date,
+                    WindDirection = windDirectionDic.OrderBy(p => p.Value).First().Key,
+                    AverageWindSpeed = totalWindSpeed / count,
                     AverageMaxTemperature = totalMaxTemp / count,
                     AverageMinTemperature = totalMinTemp / count,
                     MaxPrecipitation = maxPrecip,
@@ -109,7 +115,7 @@ public class HistoricalWeatherHelper
                     HistoricalMaxTemperatureDate = maxTempDate,
                     HistoricalMinTemperature = minTemp,
                     HistoricalMinTemperatureDate = minTempDate,
-                    Weather = weatherCodeDic.Max(p => p).Key
+                    Weather = weatherCodeDic.OrderBy(p => p.Value).First().Key,
                 };
                 result[pair.Key] = historicalWeather;
             }

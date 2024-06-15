@@ -10,7 +10,11 @@
     RequestedTheme="{x:Bind app:Common.Settings.ApplicationTheme}"
     Style="{ThemeResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
-    <Grid Margin="-28">
+    <ContentDialog.Resources>
+        <Thickness x:Key="ContentDialogPadding">0</Thickness>
+        <Thickness x:Key="ContentDialogSeparatorThickness">0</Thickness>
+    </ContentDialog.Resources>
+    <Grid>
         <Grid ColumnSpacing="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="160" />
@@ -31,12 +35,12 @@
                 Grid.Column="1"
                 Padding="28,28,28,24"
                 Spacing="12">
-                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" x:Uid="HistoricalWeatherTitle" />
+                <TextBlock x:Uid="HistoricalWeatherTitle" Style="{ThemeResource TitleTextBlockStyle}" />
                 <TextBlock TextWrapping="Wrap">
-                    <Run x:Uid="HistoricalWeatherDescription"/>
-                    <LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" x:Uid="HistoricalWeatherSource" /><LineBreak />
-                    Open-Meteo（ERA5 / ECMWF IFS）<LineBreak /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" x:Uid="HistoricalWeatherFeature" />
-                    <LineBreak /><Run x:Uid="HistoricalWeatherFeatureDescription"/>
+                    <Run x:Uid="HistoricalWeatherDescription" />
+                    <LineBreak /><Run x:Uid="HistoricalWeatherSource" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" /><LineBreak />
+                    Open-Meteo（ERA5 / ECMWF IFS）<LineBreak /><Run x:Uid="HistoricalWeatherFeature" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                    <LineBreak /><Run x:Uid="HistoricalWeatherFeatureDescription" />
                 </TextBlock>
                 <muxc:InfoBar
                     x:Name="WarningInfoBar"
@@ -70,10 +74,10 @@
                         Style="{ThemeResource AccentButtonStyle}" />
                     <Button
                         x:Name="RestartButton"
-                        Click="RestartButton_Click"
+                        x:Uid="RestartButton"
                         Margin="12,0,0,0"
                         Padding="36,6"
-                        x:Uid="RestartButton"
+                        Click="RestartButton_Click"
                         Style="{ThemeResource AccentButtonStyle}"
                         Visibility="Collapsed" />
                 </StackPanel>

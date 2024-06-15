@@ -12,6 +12,7 @@ using FluentWeather.OpenMeteoProvider.Models;
 using OpenMeteoApi.Variables;
 using System;
 using System.Linq;
+using FluentWeather.Abstraction.Helpers;
 
 namespace FluentWeather.OpenMeteoProvider;
 
@@ -64,10 +65,10 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
 
     public async Task<List<WeatherDailyBase>> GetHistoricalDailyWeather(double lon, double lat, DateTime startTime, DateTime endTime)
     {
-        var list = new List<WeatherDailyBase>();
         var data = await Client.GetHistoricalWeatherData(lat, lon, startTime, endTime, 
-            dailyVariables: [DailyVariables.WeatherCode,DailyVariables.Temperature2mMax,DailyVariables.Temperature2mMin,DailyVariables.PrecipitationSum,DailyVariables.PrecipitationHours]
+            dailyVariables: [DailyVariables.WeatherCode,DailyVariables.Temperature2mMax,DailyVariables.Temperature2mMin,DailyVariables.PrecipitationSum,DailyVariables.PrecipitationHours,DailyVariables.WindDirection10mDominant,DailyVariables.WindSpeed10mMax]
             );
+        var list = new List<WeatherDailyBase>(data.DailyForecast!.Time!.Count());
         for (var i = 0; i < data.DailyForecast!.Time!.Count(); i++)
         {
             var item = new WeatherDailyBase
@@ -77,6 +78,8 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
                 PrecipitationHours = data.DailyForecast.PrecipitationHours![i],
                 MaxTemperature = (int)Math.Round(data.DailyForecast.Temperature2mMax![i]!.Value),
                 MinTemperature = (int)Math.Round(data.DailyForecast.Temperature2mMin![i]!.Value),
+                WindDirection = UnitConverter.GetWindDirectionFromAngle(data.DailyForecast.WindDirection10mDominant![i]!.Value),
+                WindSpeed = (int)Math.Round(data.DailyForecast.WindSpeed10mMax![i]!.Value),
             };
             list.Add(item);
         }

@@ -26,4 +26,7 @@ public class HistoricalDailyWeatherBase
 
     public DateTime? MaxPrecipitationDate { get; set; }
     public double? AveragePrecipitationHours { get; set; }
+
+    public WindDirection WindDirection { get; set; }
+    public int AverageWindSpeed { get; set; }
 }
