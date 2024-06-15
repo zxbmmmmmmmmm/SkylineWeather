@@ -870,18 +870,19 @@
                             <dv:RadLinearGauge.LabelTemplate>
                                 <DataTemplate />
                             </dv:RadLinearGauge.LabelTemplate>
+                            <!--历史最高/最低温 指示条-->
                             <dv:SegmentedLinearGaugeIndicator Value="{x:Bind ViewModel.HistoricalWeather.HistoricalMaxTemperature}">
                                 <dv:BarIndicatorSegment
                                     Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMinTemperature, ViewModel.HistoricalWeather.HistoricalMinTemperature)}"
-                                    Stroke="#1AB3B3B3"
+                                    Stroke="{ThemeResource HistoricalWeatherBaseRangeStroke}"
                                     Thickness="4" />
                                 <dv:BarIndicatorSegment
                                     Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.AverageMaxTemperature, ViewModel.HistoricalWeather.AverageMinTemperature)}"
-                                    Stroke="#80B3B3B3"
+                                    Stroke="{ThemeResource HistoricalWeatherAverageRangeStroke}"
                                     Thickness="4" />
                                 <dv:BarIndicatorSegment
                                     Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.HistoricalWeather.AverageMaxTemperature)}"
-                                    Stroke="#1AB3B3B3"
+                                    Stroke="{ThemeResource HistoricalWeatherBaseRangeStroke}"
                                     Thickness="4" />
                             </dv:SegmentedLinearGaugeIndicator>
                             <!--  平均低温  -->
@@ -902,7 +903,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FFCCCCCC" />
+                                            Fill="{ThemeResource HistoricalWeatherAveragePointFill}" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -926,7 +927,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FFCCCCCC" />
+                                            Fill="{ThemeResource HistoricalWeatherAveragePointFill}" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -955,7 +956,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FF666666" />
+                                            Fill="{ThemeResource HistoricalWeatherHighestLowestPointFill}" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -983,7 +984,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FF666666" />
+                                            Fill="{ThemeResource HistoricalWeatherHighestLowestPointFill}" />
                                     </StackPanel>
                                 </dv:MarkerGaugeIndicator.Content>
                             </dv:MarkerGaugeIndicator>
@@ -999,7 +1000,7 @@
 
                                 <dv:BarIndicatorSegment
                                     Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.WeatherToday.MaxTemperature, ViewModel.WeatherToday.MinTemperature)}"
-                                    Stroke="#66808080"
+                                    Stroke="{ThemeResource HistoricalWeatherTodayRangeStroke}"
                                     Thickness="4" />
                                 <dv:BarIndicatorSegment
                                     Length="{x:Bind converters1:ConverterMethods.Subtract(ViewModel.HistoricalWeather.HistoricalMaxTemperature, ViewModel.WeatherToday.MaxTemperature)}"
@@ -1018,7 +1019,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FF808080" />
+                                            Fill="{ThemeResource HistoricalWeatherTodayPointFill}" />
                                         <TextBlock
                                             Margin="2,0,0,0"
                                             HorizontalAlignment="Center"
@@ -1045,7 +1046,7 @@
                                             Width="8"
                                             Height="8"
                                             HorizontalAlignment="Center"
-                                            Fill="#FF808080" />
+                                            Fill="{ThemeResource HistoricalWeatherTodayPointFill}" />
                                         <TextBlock
                                             Margin="2,0,0,0"
                                             HorizontalAlignment="Center"
