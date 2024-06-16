@@ -1,0 +1,226 @@
+﻿<UserControl
+    x:Class="FluentWeather.Uwp.Controls.HistoricalWeatherGauge"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters1="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dv="using:Telerik.UI.Xaml.Controls.DataVisualization"
+    xmlns:local="using:FluentWeather.Uwp.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+
+    <Grid>
+        <dv:RadLinearGauge
+            Height="120"
+            Margin="24,0"
+            x:DefaultBindMode="OneWay"
+            LabelStep="1"
+            MaxValue="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}"
+            MinValue="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}"
+            TickStep="1">
+            <dv:RadLinearGauge.TickTemplate>
+                <DataTemplate />
+            </dv:RadLinearGauge.TickTemplate>
+            <dv:RadLinearGauge.LabelTemplate>
+                <DataTemplate />
+            </dv:RadLinearGauge.LabelTemplate>
+            <!--  历史最高/最低温 指示条  -->
+            <dv:SegmentedLinearGaugeIndicator Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.AverageMinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
+                    Stroke="{ThemeResource HistoricalWeatherBaseRangeStroke}"
+                    Thickness="4" />
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.AverageMaxTemperature, HistoricalDailyWeather.AverageMinTemperature)}"
+                    Stroke="{ThemeResource HistoricalWeatherAverageRangeStroke}"
+                    Thickness="4" />
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.HistoricalMaxTemperature, HistoricalDailyWeather.AverageMaxTemperature)}"
+                    Stroke="{ThemeResource HistoricalWeatherBaseRangeStroke}"
+                    Thickness="4" />
+            </dv:SegmentedLinearGaugeIndicator>
+            <!--  平均低温  -->
+            <dv:MarkerGaugeIndicator Margin="0,-40,0,0" Value="{x:Bind HistoricalDailyWeather.AverageMinTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel>
+                        <TextBlock
+                            x:Uid="AverageLowTemp"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                        <TextBlock
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind HistoricalDailyWeather.AverageMinTemperature}" /><Run Text="°" />
+                        </TextBlock>
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherAveragePointFill}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+            <!--  平均高温  -->
+            <dv:MarkerGaugeIndicator Margin="0,-40,0,0" Value="{x:Bind HistoricalDailyWeather.AverageMaxTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel>
+                        <TextBlock
+                            x:Uid="AverageHighTemp"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                        <TextBlock
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind HistoricalDailyWeather.AverageMaxTemperature}" /><Run Text="°" />
+
+                        </TextBlock>
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherAveragePointFill}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+            <!--  历史低温  -->
+            <dv:MarkerGaugeIndicator Margin="0,-56,0,0" Value="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords">
+                            <Run FontSize="12" Text="{x:Bind HistoricalDailyWeather.HistoricalMinTemperatureDate.Year}" />
+                            <LineBreak />
+                            <Run x:Uid="HistoricalLowTemp" />
+                        </TextBlock>
+                        <TextBlock
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}" /><Run Text="°" />
+                        </TextBlock>
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherHighestLowestPointFill}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+            <!--  历史高温  -->
+            <dv:MarkerGaugeIndicator Margin="0,-56,0,0" Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                            TextAlignment="Center">
+                            <Run FontSize="12" Text="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperatureDate.Year}" />
+                            <LineBreak />
+                            <Run x:Uid="HistoricalHighTemp" />
+                        </TextBlock>
+                        <TextBlock
+                            Margin="4,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}" /><Run Text="°" />
+                        </TextBlock>
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherHighestLowestPointFill}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+
+
+            <!--  今日天气 指示条  -->
+            <dv:SegmentedLinearGaugeIndicator dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(WeatherToday.MinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
+                    Stroke="Transparent"
+                    Thickness="4" />
+
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(WeatherToday.MaxTemperature, WeatherToday.MinTemperature)}"
+                    Stroke="{ThemeResource HistoricalWeatherTodayRangeStroke}"
+                    Thickness="4" />
+                <dv:BarIndicatorSegment
+                    Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.HistoricalMaxTemperature, WeatherToday.MaxTemperature)}"
+                    Stroke="Transparent"
+                    Thickness="4" />
+            </dv:SegmentedLinearGaugeIndicator>
+
+            <!--  今日低温  -->
+            <dv:MarkerGaugeIndicator
+                x:Name="LowestTempTodayIndicator"
+                dv:RadLinearGauge.IndicatorOffset="32"
+                Value="{x:Bind WeatherToday.MinTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherTodayPointFill}" />
+                        <TextBlock
+                            Margin="2,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind LowestTempTodayIndicator.Value}" /><Run Text="°" />
+
+                        </TextBlock>
+                        <TextBlock
+                            x:Uid="TodayLowTemp"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+            <!--  今日高温  -->
+            <dv:MarkerGaugeIndicator
+                x:Name="HighestTempTodayIndicator"
+                dv:RadLinearGauge.IndicatorOffset="32"
+                Value="{x:Bind WeatherToday.MaxTemperature}">
+                <dv:MarkerGaugeIndicator.Content>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Ellipse
+                            Width="8"
+                            Height="8"
+                            HorizontalAlignment="Center"
+                            Fill="{ThemeResource HistoricalWeatherTodayPointFill}" />
+                        <TextBlock
+                            Margin="2,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="18">
+                            <Run Text="{x:Bind HighestTempTodayIndicator.Value}" /><Run Text="°" />
+                        </TextBlock>
+                        <TextBlock
+                            x:Uid="TodayHighTemp"
+                            FontSize="12"
+                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                    </StackPanel>
+                </dv:MarkerGaugeIndicator.Content>
+            </dv:MarkerGaugeIndicator>
+
+
+
+
+        </dv:RadLinearGauge>
+
+    </Grid>
+</UserControl>
