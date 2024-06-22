@@ -35,7 +35,10 @@
                 Grid.Column="1"
                 Padding="28,28,28,24"
                 Spacing="12">
-                <TextBlock x:Uid="HistoricalWeatherTitle" Style="{ThemeResource TitleTextBlockStyle}" />
+                <TextBlock  Style="{ThemeResource TitleTextBlockStyle}" >
+                    <Run x:Uid="HistoricalWeatherTitle"/>
+                    <Run FontSize="20" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Location.Name}"/>
+                </TextBlock>
                 <TextBlock TextWrapping="Wrap">
                     <Run x:Uid="HistoricalWeatherDescription" />
                     <LineBreak /><Run x:Uid="HistoricalWeatherSource" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" /><LineBreak />

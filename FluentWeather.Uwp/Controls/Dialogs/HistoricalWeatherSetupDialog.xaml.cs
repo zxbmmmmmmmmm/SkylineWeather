@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Helpers;
+using FluentWeather.Uwp.Helpers.Analytics;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,9 +32,9 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 {
 
 
-    public Location Location
+    public GeolocationBase Location
     {
-        get => (Location)GetValue(LocationProperty);
+        get => (GeolocationBase)GetValue(LocationProperty);
         set => SetValue(LocationProperty, value);
     }
 
@@ -39,7 +42,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
         DependencyProperty.Register(nameof(LocationProperty), typeof(int), typeof(HistoricalWeatherSetupDialog), new PropertyMetadata(default));
 
 
-    public HistoricalWeatherSetupDialog(Location location)
+    public HistoricalWeatherSetupDialog(GeolocationBase location)
     {
         this.InitializeComponent();
         Location = location;
@@ -57,7 +60,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
         {
             await Task.Delay(500);
 
-            var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Location);
+            var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Location.Location);
 
             DownloadProgressBar.Value = 50;
             ProgressText.Text = "HistoricalWeatherSetupProgress_Analysing".GetLocalized();
@@ -91,6 +94,8 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 
             await Task.Delay(500);
             ProgressText.Text = "HistoricalWeatherSetupProgress_Done".GetLocalized();
+            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackHistoricalWeatherDataDownloaded(Location.Name);
+
             GetHistoricalWeatherButton.Visibility = Visibility.Collapsed;
             RestartButton.Visibility = Visibility.Visible;
         }

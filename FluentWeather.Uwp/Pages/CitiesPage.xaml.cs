@@ -88,6 +88,6 @@ public sealed partial class CitiesPage : Page
 
     private async void GetHistoricalWeatherItem_Click(object sender, RoutedEventArgs e)
     {
-        await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation.Location));
+        await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation));
     }
 }

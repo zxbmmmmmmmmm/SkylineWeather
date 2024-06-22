@@ -5,7 +5,6 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     xmlns:local="using:FluentWeather.Uwp.Themes"
-
     xmlns:models="using:FluentWeather.Abstraction.Models">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
