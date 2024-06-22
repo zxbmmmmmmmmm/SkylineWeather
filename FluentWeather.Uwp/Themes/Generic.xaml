@@ -5,6 +5,7 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     xmlns:local="using:FluentWeather.Uwp.Themes"
+
     xmlns:models="using:FluentWeather.Abstraction.Models">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
@@ -44,7 +45,6 @@
     </ResourceDictionary.ThemeDictionaries>
 
     <StaticResource x:Key="SplitViewPaneOpenedBackground" ResourceKey="SystemControlTransparentBrush" />
-
 
     <Thickness x:Key="CityViewMargin">0</Thickness>
     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
