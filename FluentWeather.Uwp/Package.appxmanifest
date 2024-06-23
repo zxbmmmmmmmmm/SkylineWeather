@@ -9,7 +9,7 @@
   <Identity
     Name="BettaFish.SkylineWeather"
     Publisher="CN=F75CF79A-52F1-4629-8214-C9C6D329E85A"
-    Version="1.1.1.0" />
+    Version="1.2.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="8b462067-d8ec-428c-a0f1-2f4fb5f9b377" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
