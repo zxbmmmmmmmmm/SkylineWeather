@@ -1,4 +1,6 @@
 ﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.Uwp.Controls.Dialogs;
+using FluentWeather.Uwp.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +47,9 @@ namespace FluentWeather.Uwp.Controls
         public static readonly DependencyProperty WeatherTodayProperty =
             DependencyProperty.Register(nameof(WeatherToday), typeof(WeatherDailyBase), typeof(HistoricalWeatherGauge), new PropertyMetadata(default));
 
-
+        private async void DownloadDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation));
+        }
     }
 }

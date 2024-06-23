@@ -163,4 +163,12 @@ public sealed partial class MainPage : Page
             return null;
         }
     }
+    public Visibility GetHistoricalWeatherVisibility(GeolocationBase currentGeolocation,GeolocationBase defaultGeolocation)
+    {
+        if(currentGeolocation?.Location == defaultGeolocation?.Location)
+        {
+            return Visibility.Visible;
+        }
+        return Visibility.Collapsed;
+    }
 }

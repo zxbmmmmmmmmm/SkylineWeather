@@ -37,7 +37,7 @@
                 Spacing="12">
                 <TextBlock  Style="{ThemeResource TitleTextBlockStyle}" >
                     <Run x:Uid="HistoricalWeatherTitle"/>
-                    <Run FontSize="20" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Location.Name}"/>
+                    <Run FontSize="20" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind Geolocation.Name}"/>
                 </TextBlock>
                 <TextBlock TextWrapping="Wrap">
                     <Run x:Uid="HistoricalWeatherDescription" />

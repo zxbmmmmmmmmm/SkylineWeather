@@ -60,7 +60,7 @@
                 <maps:MapItemsControl x:Name="MapItemsTyphoonNow" ItemsSource="{x:Bind Typhoons, Mode=OneWay}">
                     <maps:MapItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="models:TyphoonBase">
-                            <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Now.Latitude,Now.Longitude)}">
+                            <Grid Margin="-19,-32,0,0" maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Now.Latitude, Now.Longitude)}">
                                 <controls1:DropShadowPanel
                                     Margin="0,-16,0,0"
                                     HorizontalAlignment="Center"
@@ -100,7 +100,7 @@
                                 Height="20"
                                 Margin="-10,-10,0,0"
                                 Padding="0"
-                                maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Latitude,Longitude)}"
+                                maps:MapControl.Location="{x:Bind local:TyphoonDialog.GetGeoPoint(Latitude, Longitude)}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 ToolTipService.ToolTip="{x:Bind Time}">
@@ -150,8 +150,8 @@
                         Name="SegmentedControl"
                         Background="{ThemeResource ButtonAcrylic}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        SelectedItem="{x:Bind _selected,Mode=TwoWay}"
                         ItemsSource="{x:Bind Typhoons, Mode=OneWay}"
+                        SelectedItem="{x:Bind _selected, Mode=TwoWay}"
                         SelectionChanged="SegmentedControl_SelectionChanged">
                         <controls:Segmented.ItemTemplate>
                             <DataTemplate x:DataType="models:TyphoonBase">
@@ -238,13 +238,13 @@
                     </TextBlock>
                 </muxc:InfoBar>
                 <Button
+                    x:Uid="CloseButton"
                     Padding="64,8"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="{ThemeResource ButtonAcrylic}"
                     Canvas.ZIndex="1"
                     Command="{x:Bind CloseCommand}"
-                    x:Uid="CloseButton"
                     FontSize="16" />
             </Grid>
 

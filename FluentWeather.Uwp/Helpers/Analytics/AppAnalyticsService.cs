@@ -46,7 +46,7 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackHistoricalWeatherDataDownloaded(string location)
     {
-        TrackEvent("HistoricalWeatherDataDownloaded","Location",location);
+        TrackEvent("HistoricalWeatherDataDownloaded","Geolocation",location);
     }
     public virtual void TrackTokenChanged()
     {

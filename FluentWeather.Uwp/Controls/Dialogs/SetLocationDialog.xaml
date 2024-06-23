@@ -21,12 +21,15 @@
     mc:Ignorable="d">
 
     <Grid>
-        <muxc:ProgressBar VerticalAlignment="Top" Visibility="{x:Bind FindCitiesCommand.IsRunning,Mode=OneWay}" IsIndeterminate="True"/>
+        <muxc:ProgressBar
+            VerticalAlignment="Top"
+            IsIndeterminate="True"
+            Visibility="{x:Bind FindCitiesCommand.IsRunning, Mode=OneWay}" />
         <StackPanel Margin="0,2,0,0" Spacing="12">
             <AutoSuggestBox
                 x:Name="SearchBox"
-                ItemsSource="{x:Bind SuggestedCities, Mode=OneWay}"
                 ItemTemplate="{ThemeResource GeolocationSuggestTemplate}"
+                ItemsSource="{x:Bind SuggestedCities, Mode=OneWay}"
                 PlaceholderText="搜索城市..."
                 QueryIcon="Find"
                 SuggestionChosen="SearchBox_SuggestionChosen"
@@ -37,7 +40,7 @@
                 </AutoSuggestBox.Resources>
                 <i:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="QuerySubmitted">
-                        <core:InvokeCommandAction Command="{x:Bind FindCitiesCommand}"/>
+                        <core:InvokeCommandAction Command="{x:Bind FindCitiesCommand}" />
                     </core:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
             </AutoSuggestBox>

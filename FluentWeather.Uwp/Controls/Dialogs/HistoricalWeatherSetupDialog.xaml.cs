@@ -32,7 +32,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 {
 
 
-    public GeolocationBase Location
+    public GeolocationBase Geolocation
     {
         get => (GeolocationBase)GetValue(LocationProperty);
         set => SetValue(LocationProperty, value);
@@ -45,7 +45,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
     public HistoricalWeatherSetupDialog(GeolocationBase location)
     {
         this.InitializeComponent();
-        Location = location;
+        Geolocation = location;
     }
 
     private async void GetHistoricalWeatherButton_Click(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
         {
             await Task.Delay(500);
 
-            var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Location.Location);
+            var data = await HistoricalWeatherHelper.DownloadHistoricalWeatherAsync(Geolocation.Location);
 
             DownloadProgressBar.Value = 50;
             ProgressText.Text = "HistoricalWeatherSetupProgress_Analysing".GetLocalized();
@@ -68,7 +68,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 
             var result = await HistoricalWeatherHelper.AnalyseHistoricalWeatherAsync(data);
             var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
-            var folder1 = await folder.GetOrCreateFolderAsync(Location.Location.GetHashCode().ToString());
+            var folder1 = await folder.GetOrCreateFolderAsync(Geolocation.Location.GetHashCode().ToString());
             var dic = new Dictionary<string, Dictionary<string, HistoricalDailyWeatherBase>>();
             DownloadProgressBar.Value = 75;
             ProgressText.Text = "HistoricalWeatherSetupProgress_Saving".GetLocalized();
@@ -94,7 +94,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 
             await Task.Delay(500);
             ProgressText.Text = "HistoricalWeatherSetupProgress_Done".GetLocalized();
-            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackHistoricalWeatherDataDownloaded(Location.Name);
+            Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackHistoricalWeatherDataDownloaded(Geolocation.Name);
 
             GetHistoricalWeatherButton.Visibility = Visibility.Collapsed;
             RestartButton.Visibility = Visibility.Visible;

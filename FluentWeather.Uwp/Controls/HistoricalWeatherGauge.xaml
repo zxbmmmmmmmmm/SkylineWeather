@@ -13,13 +13,15 @@
 
     <Grid>
         <dv:RadLinearGauge
+            x:Name="TemperatureGauge"
             Height="120"
             Margin="24,0"
             x:DefaultBindMode="OneWay"
             LabelStep="1"
             MaxValue="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}"
             MinValue="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}"
-            TickStep="1">
+            TickStep="1"
+            Visibility="{x:Bind HistoricalDailyWeather, Converter={StaticResource NullToVisibilityConverter}}">
             <dv:RadLinearGauge.TickTemplate>
                 <DataTemplate />
             </dv:RadLinearGauge.TickTemplate>
@@ -221,6 +223,19 @@
 
 
         </dv:RadLinearGauge>
+        <Grid x:Name="NotAvailableContent" Visibility="{x:Bind TemperatureGauge.Visibility,Converter={StaticResource VisibilityInverter},Mode=OneWay}" Padding="6,0,0,12">
+            <StackPanel HorizontalAlignment="Center" Spacing="12">
+                <TextBlock
+                    FontSize="16"
+                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                    Text="下载数据以查看此位置的历史天气" />
+                <Button
+                    x:Name="DownloadDataButton"
+                    HorizontalAlignment="Center"
+                    Click="DownloadDataButton_Click"
+                    Content="下载" />
+            </StackPanel>
 
+        </Grid>
     </Grid>
 </UserControl>
