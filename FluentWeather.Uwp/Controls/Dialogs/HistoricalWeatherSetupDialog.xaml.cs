@@ -68,7 +68,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
 
             var result = await HistoricalWeatherHelper.AnalyseHistoricalWeatherAsync(data);
             var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
-            var folder1 = await folder.GetOrCreateFolderAsync(Location.GetHashCode().ToString());
+            var folder1 = await folder.GetOrCreateFolderAsync(Location.Location.GetHashCode().ToString());
             var dic = new Dictionary<string, Dictionary<string, HistoricalDailyWeatherBase>>();
             DownloadProgressBar.Value = 75;
             ProgressText.Text = "HistoricalWeatherSetupProgress_Saving".GetLocalized();
