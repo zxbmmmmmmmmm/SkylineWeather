@@ -31,9 +31,15 @@ public sealed partial class CitiesPage : Page
         this.InitializeComponent();
         this.DataContext = this;
         this.NavigationCacheMode = NavigationCacheMode.Required;
+
+    }
+
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
-        if (!App.ActiveArguments.Contains("City_"))
+        if (App.ActiveArguments is null)
         {
             SetSelectedLocation(Common.Settings.DefaultGeolocation?.Name);
             return;

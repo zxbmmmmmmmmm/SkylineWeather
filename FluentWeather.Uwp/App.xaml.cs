@@ -34,6 +34,7 @@ using FluentWeather.Uwp.Helpers.Analytics;
 using FluentWeather.Uwp.Shared.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Helpers;
+using Microsoft.Gaming.XboxGameBar;
 
 namespace FluentWeather.Uwp;
 
@@ -65,6 +66,8 @@ sealed partial class App : Application
 #endif
 
     }
+    private XboxGameBarWidget _widget = null;
+
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()
     {
@@ -105,6 +108,63 @@ sealed partial class App : Application
     }
     protected override void OnActivated(IActivatedEventArgs e)
     {
+        XboxGameBarWidgetActivatedEventArgs widgetArgs = null;
+        if (e.Kind == ActivationKind.Protocol)
+        {
+            var protocolArgs = e as IProtocolActivatedEventArgs;
+            string scheme = protocolArgs.Uri.Scheme;
+            if (scheme.Equals("ms-gamebarwidget"))
+            {
+                widgetArgs = e as XboxGameBarWidgetActivatedEventArgs;
+            }
+        }
+        if (widgetArgs != null)
+        {
+            //
+            // Activation Notes:
+            //
+            //    If IsLaunchActivation is true, this is Game Bar launching a new instance
+            // of our widget. This means we have a NEW CoreWindow with corresponding UI
+            // dispatcher, and we MUST create and hold onto a new XboxGameBarWidget.
+            //
+            // Otherwise this is a subsequent activation coming from Game Bar. We MUST
+            // continue to hold the XboxGameBarWidget created during initial activation
+            // and ignore this repeat activation, or just observe the URI command here and act 
+            // accordingly.  It is ok to perform a navigate on the root frame to switch 
+            // views/pages if needed.  Game Bar lets us control the URI for sending widget to
+            // widget commands or receiving a command from another non-widget process. 
+            //
+            // Important Cleanup Notes:
+            //    When our widget is closed--by Game Bar or us calling XboxGameBarWidget.Close()-,
+            // the CoreWindow will get a closed event.  We can register for Window.Closed
+            // event to know when our particular widget has shutdown, and cleanup accordingly.
+            //
+            // NOTE: If a widget's CoreWindow is the LAST CoreWindow being closed for the process
+            // then we won't get the Window.Closed event.  However, we will get the OnSuspending
+            // call and can use that for cleanup.
+            //
+            if (widgetArgs.IsLaunchActivation)
+            {
+                var widgetFrame = new Frame();
+                widgetFrame.NavigationFailed += OnNavigationFailed;
+                Window.Current.Content = widgetFrame;
+
+                // Create Game Bar widget object which bootstraps the connection with Game Bar
+                _widget = new XboxGameBarWidget(
+                    widgetArgs,
+                    Window.Current.CoreWindow,
+                    widgetFrame);
+                widgetFrame.Navigate(typeof(WidgetPage));
+
+                Window.Current.Closed += OnWigdetClosed; ;
+                Window.Current.Activate();
+            }
+            else
+            {
+                // You can perform whatever behavior you need based on the URI payload.
+            }
+        }
+
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
         if (rootFrame == null)
@@ -131,6 +191,12 @@ sealed partial class App : Application
         // 确保当前窗口处于活动状态
         Window.Current.Activate();
     }
+
+    private void OnWigdetClosed(object sender, Windows.UI.Core.CoreWindowEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// 在应用程序由最终用户正常启动时进行调用。
     /// 将在启动应用程序以打开特定文件等情况下使用。
