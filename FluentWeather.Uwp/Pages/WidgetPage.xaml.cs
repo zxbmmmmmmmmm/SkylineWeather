@@ -21,6 +21,7 @@ namespace FluentWeather.Uwp.Pages;
 public sealed partial class WidgetPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
+    private readonly DispatcherTimer _timer = new (){ Interval = TimeSpan.FromMinutes(20)};
 
     public WidgetPage()
     {
@@ -30,5 +31,13 @@ public sealed partial class WidgetPage : Page
     {
         base.OnNavigatedTo(e);
         ViewModel.CurrentGeolocation = Common.Settings.DefaultGeolocation!;
+
+        _timer.Tick += OnTimerTicked;
+        _timer.Start();
+    }
+
+    private async void OnTimerTicked(object sender, object e)
+    {
+        await ViewModel.RefreshCommand.ExecuteAsync(null);
     }
 }

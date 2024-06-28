@@ -73,8 +73,6 @@
                   <Size>
                     <Height>300</Height>
                     <Width>400</Width>
-                    <MinHeight>300</MinHeight>
-                    <MinWidth>500</MinWidth>
                   </Size>
                   <ResizeSupported>
                     <Horizontal>true</Horizontal>
