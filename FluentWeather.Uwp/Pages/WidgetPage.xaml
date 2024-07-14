@@ -13,13 +13,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
-
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
     <Grid Padding="12,2,0,3" x:DefaultBindMode="OneWay">
-        <Button IsEnabled="{x:Bind ViewModel.GetWeatherCommand.IsRunning,Converter={StaticResource BoolNegationConverter}}" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent">
+        <Button x:Name="WeatherButton" Click="WeatherButton_Click" IsEnabled="{x:Bind ViewModel.GetWeatherCommand.IsRunning,Converter={StaticResource BoolNegationConverter}}" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent">
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="DoubleTapped">
                     <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}"/>
@@ -41,7 +40,13 @@
                 </StackPanel>
                 
             </StackPanel>
-            
+            <Button.ContextFlyout>
+                <Flyout x:Name="DetailFlyout">
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind ViewModel.WeatherNow.Description}"/>
+                    </StackPanel>
+                </Flyout>
+            </Button.ContextFlyout>
         </Button>
     </Grid>
 </Page>

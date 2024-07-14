@@ -83,6 +83,12 @@
             </uap3:Properties>
           </uap3:AppExtension>
         </uap3:Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="weather">
+            <uap:Logo>Assets\Logo.png</uap:Logo>
+            <uap:DisplayName>ms-resource:AppDisplayName</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>

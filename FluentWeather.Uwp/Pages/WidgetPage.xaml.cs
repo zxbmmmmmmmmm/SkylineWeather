@@ -1,5 +1,6 @@
 ﻿using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
+using Microsoft.Gaming.XboxGameBar;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +23,7 @@ public sealed partial class WidgetPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
     private readonly DispatcherTimer _timer = new (){ Interval = TimeSpan.FromMinutes(20)};
+    private XboxGameBarWidget _widget;
 
     public WidgetPage()
     {
@@ -31,7 +33,7 @@ public sealed partial class WidgetPage : Page
     {
         base.OnNavigatedTo(e);
         ViewModel.CurrentGeolocation = Common.Settings.DefaultGeolocation!;
-
+        _widget = e.Parameter as XboxGameBarWidget;
         _timer.Tick += OnTimerTicked;
         _timer.Start();
     }
@@ -39,5 +41,10 @@ public sealed partial class WidgetPage : Page
     private async void OnTimerTicked(object sender, object e)
     {
         await ViewModel.RefreshCommand.ExecuteAsync(null);
+    }
+
+    private async void WeatherButton_Click(object sender, RoutedEventArgs e)
+    {
+        await _widget.LaunchUriAsync(new Uri("weather:"));
     }
 }
