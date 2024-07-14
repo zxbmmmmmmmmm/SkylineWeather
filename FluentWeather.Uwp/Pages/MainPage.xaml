@@ -70,7 +70,8 @@
         <local:DailyViewPage
             x:Name="DailyView"
             ui:VisualExtensions.NormalizedCenterPoint="0.5"
-            DailyForecasts="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
+            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"
+            DailyForecasts7D="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
             Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <i:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="CloseRequested">
@@ -126,7 +127,7 @@
 
             </animations:Implicit.ShowAnimations>
 
-        </local:DailyViewPage>
+        </local:DailyViewPage >
         <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.ShowAnimations>
                 <animations:ImplicitAnimationSet>

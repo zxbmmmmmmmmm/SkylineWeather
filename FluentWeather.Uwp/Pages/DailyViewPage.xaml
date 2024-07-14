@@ -11,18 +11,21 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:models="using:FluentWeather.Abstraction.Models"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
-    <Page.Resources>
-
-    </Page.Resources>
+    <Page.Resources />
 
     <Grid>
         <Border x:Name="PlaceholderBorder" Background="{ThemeResource SystemControlTransparentBrush}" />
 
-        <Grid MaxWidth="1100" MaxHeight="810">
+        <Grid MaxWidth="1350" MaxHeight="950">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Grid.ChildrenTransitions>
                 <TransitionCollection>
                     <RepositionThemeTransition />
@@ -40,11 +43,13 @@
             </Button>
             <Pivot
                 x:Name="MainPivot"
+                Grid.Row="0"
                 Margin="32,80,32,0"
                 x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
-                ItemsSource="{x:Bind DailyForecasts, Mode=OneWay}"
-                SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
+                ItemsSource="{x:Bind DailyForecasts7D, Mode=OneWay}"
+                SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}"
+                Visibility="Collapsed">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
                         <StackPanel Padding="8,0">
@@ -339,18 +344,254 @@
                     <StaticResource x:Key="PivotHeaderItemSelectedPipeFill" ResourceKey="SystemControlTransparentBrush" />
                 </Pivot.Resources>
             </Pivot>
+            <Grid Margin="32,150,32,40" ColumnSpacing="24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
 
+                    </Grid.RowDefinitions>
+                    <!--  表头  -->
+                    <community:UniformGrid
+                        x:Name="WeekDayNames"
+                        Grid.Row="0"
+                        Columns="7">
+                        <TextBlock
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            Text="日" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            Text="一" />
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            Text="二" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            Text="三" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            Text="四" />
+                        <TextBlock
+                            Grid.Column="5"
+                            HorizontalAlignment="Center"
+                            Text="五" />
+                        <TextBlock
+                            Grid.Column="6"
+                            HorizontalAlignment="Center"
+                            Text="六" />
+                    </community:UniformGrid>
+                    <!--  内容  -->
+                    <Grid Grid.Row="1" Margin="2,12">
+                        <GridView
+                            SelectedIndex="{x:Bind SelectedIndex,Mode=OneTime}"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{x:Bind DailyForecasts}"
+                            SelectedItem="{x:Bind SelectedDailyForecast, Mode=TwoWay}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:WeatherDailyBase">
+                                    <StackPanel Margin="0,16" Spacing="4">
+                                        <TextBlock
+                                            HorizontalAlignment="Left"
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="{x:Bind Time, Converter={StaticResource ShortDateConverter}}" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Image Height="40" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(WeatherType)}" />
+                                            <StackPanel>
+                                                <TextBlock Text="{x:Bind Description}" />
+                                                <TextBlock
+                                                    x:Name="TemperatureText"
+                                                    HorizontalAlignment="Left"
+                                                    TextAlignment="Center">
+                                                    <Run FontWeight="SemiBold" Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(MaxTemperature, x:False)}" /><Run Text="°" />
+                                                    <Run
+                                                        FontWeight="SemiBold"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(MinTemperature, x:False)}" /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="°" />
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <community:UniformGrid Columns="7" RowSpacing="12" />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </Grid>
+                </Grid>
+
+                <!--  每日详细内容  -->
+                <Grid
+                    Grid.Column="1"
+                    Width="280"
+                    Padding="16"
+                    x:DefaultBindMode="OneWay"
+                    Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource OverlayCornerRadius}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="4,0,0,12"
+                        HorizontalAlignment="Left"
+                        FontSize="16">
+                        <Run Text="{x:Bind SelectedDailyForecast.Time, Converter={StaticResource ShortDateConverter}}" />
+                        <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind SelectedDailyForecast.Time, Converter={StaticResource DateConverter}}" />
+                    </TextBlock>
+                    <Border
+                        Grid.Row="0"
+                        Margin="-16,0"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="0,0,0,1" />
+                    <StackPanel Grid.Row="1" Margin="8,16,8,0">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Image Height="64" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(SelectedDailyForecast.WeatherType)}" />
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="24"
+                                    FontWeight="SemiBold"
+                                    Text="{x:Bind SelectedDailyForecast.Description}" />
+                                <TextBlock
+                                    x:Name="TemperatureText"
+                                    HorizontalAlignment="Left"
+                                    FontSize="18"
+                                    TextAlignment="Center">
+                                    <Run FontWeight="SemiBold" Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(SelectedDailyForecast.MaxTemperature, x:False)}" /><Run Text="°" />
+                                    <Run
+                                        FontWeight="SemiBold"
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                        Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(SelectedDailyForecast.MinTemperature, x:False)}" /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="°" />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Margin="0,12,0,0">
+                        <StackPanel Spacing="12">
+                            <TextBlock Margin="0,-12,0,-6" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                <Run
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                    FontSize="14"
+                                    Text="&#xE018; " />
+                                <Run x:Uid="Sunrise" /><Run Text="{x:Bind SelectedDailyForecast.SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                <Run
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                    FontSize="14"
+                                    Text="  &#xE099; " /><Run x:Uid="Sunset" />
+                                <Run Text="{x:Bind SelectedDailyForecast.SunSet, Converter={StaticResource ToShortTimeStringConverter}}" />
+                            </TextBlock>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run Text="{x:Bind SelectedDailyForecast.WindDirectionDescription}" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.WindScale}" />
+                                    <Run x:Uid="WindScaleText" FontSize="14" />
+                                </TextBlock>
+                                <TextBlock
+                                    FontSize="14"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(SelectedDailyForecast.WindScale)}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="HumidityText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Humidity}" />
+                                    <Run FontSize="14" Text="%" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="HumidityDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="VisibilityText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Visibility}" />
+                                    <Run FontSize="14" Text="km" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="VisibilityDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="PressureText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Pressure}" />
+                                    <Run FontSize="14" Text="hPa" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="PressureDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="CloudAmountText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.CloudAmount}" />
+                                    <Run FontSize="14" Text="%" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="CloudAmountDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Grid.Row="3" Margin="-16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            HorizontalAlignment="Stretch"
+                            Content="{ui:FontIcon FontSize=18,
+                                                  Glyph=&#xE76B;}"
+                            CornerRadius="0" />
+                        <Button
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            Content="{ui:FontIcon FontSize=18,
+                                                  Glyph=&#xE76C;}"
+                            CornerRadius="0" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <community:Segmented
+                Grid.Row="1"
+                Margin="12" 
+                HorizontalAlignment="Center"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                VerticalAlignment="Bottom">
+                <community:SegmentedItem Width="128" Content="周视图" Icon="{ui:FontIcon Glyph=&#xE8BF;}" />
+                <community:SegmentedItem Width="128" Content="月视图" Icon="{ui:FontIcon Glyph=&#xE787;}" />
+            </community:Segmented>
         </Grid>
-        <community:Segmented
-            Margin="4"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom">
-            <community:SegmentedItem
-                Content="日视图"
-                Icon="{ui:FontIcon Glyph=&#xE8BF;}"
-                Style="{ThemeResource DefaultSegmentedItemStyle}" />
-            <community:SegmentedItem Content="周视图" Icon="{ui:FontIcon Glyph=&#xE787;}" />
-        </community:Segmented>
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>

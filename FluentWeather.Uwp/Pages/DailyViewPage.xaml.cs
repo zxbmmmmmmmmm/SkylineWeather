@@ -68,13 +68,22 @@ public sealed partial class DailyViewPage : Page
     public static readonly DependencyProperty DailyForecastsProperty =
         DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
 
-    public List<WeatherHourlyBase> HourlyForecasts
+    public List<WeatherDailyBase> DailyForecasts7D
     {
-        get => (List<WeatherHourlyBase>)GetValue(HourlyForecastsProperty);
-        set => SetValue(HourlyForecastsProperty, value);
+        get => (List<WeatherDailyBase>)GetValue(DailyForecasts7DProperty);
+        set => SetValue(DailyForecasts7DProperty, value);
     }
 
-    public static readonly DependencyProperty HourlyForecastsProperty =
-        DependencyProperty.Register(nameof(HourlyForecasts), typeof(List<WeatherHourlyBase>), typeof(DailyViewPage), new PropertyMetadata(default));
+    public static readonly DependencyProperty DailyForecasts7DProperty =
+        DependencyProperty.Register(nameof(DailyForecasts7D), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
+
+    public WeatherDailyBase SelectedDailyForecast
+    {
+        get => (WeatherDailyBase)GetValue(SelectedDailyForecastProperty);
+        set => SetValue(SelectedDailyForecastProperty, value);
+    }
+
+    public static readonly DependencyProperty SelectedDailyForecastProperty =
+        DependencyProperty.Register(nameof(SelectedDailyForecast), typeof(WeatherDailyBase), typeof(DailyViewPage), new PropertyMetadata(default));
 
 }
