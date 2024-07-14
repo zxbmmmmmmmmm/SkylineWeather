@@ -34,6 +34,7 @@ using FluentWeather.Uwp.Helpers.Analytics;
 using FluentWeather.Uwp.Shared.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.Helpers;
+using Microsoft.Gaming.XboxGameBar;
 
 namespace FluentWeather.Uwp;
 
@@ -65,6 +66,8 @@ sealed partial class App : Application
 #endif
 
     }
+    private XboxGameBarWidget _widget = null;
+
     public static string ActiveArguments { get; private set; }
     public static async void RegisterBackgroundTask()
     {
@@ -105,6 +108,42 @@ sealed partial class App : Application
     }
     protected override void OnActivated(IActivatedEventArgs e)
     {
+        XboxGameBarWidgetActivatedEventArgs widgetArgs = null;
+        if (e.Kind == ActivationKind.Protocol)
+        {
+            var protocolArgs = e as IProtocolActivatedEventArgs;
+            string scheme = protocolArgs.Uri.Scheme;
+            if (scheme.Equals("ms-gamebarwidget"))
+            {
+                widgetArgs = e as XboxGameBarWidgetActivatedEventArgs;
+            }
+            if (scheme.Equals("weather")){
+
+            }
+        }
+        if (widgetArgs != null)
+        {
+            if (widgetArgs.IsLaunchActivation)
+            {
+                var widgetFrame = new Frame();
+                widgetFrame.NavigationFailed += OnNavigationFailed;
+                Window.Current.Content = widgetFrame;
+
+                _widget = new XboxGameBarWidget(
+                    widgetArgs,
+                    Window.Current.CoreWindow,
+                    widgetFrame);
+                widgetFrame.Navigate(typeof(WidgetPage),_widget);
+
+                Window.Current.Closed += OnWigdetClosed; ;
+                Window.Current.Activate();
+            }
+            else
+            {
+                // You can perform whatever behavior you need based on the URI payload.
+            }
+        }
+
         Frame rootFrame = Window.Current.Content as Frame;
         RegisterBackgroundTask();
         if (rootFrame == null)
@@ -131,6 +170,12 @@ sealed partial class App : Application
         // 确保当前窗口处于活动状态
         Window.Current.Activate();
     }
+
+    private void OnWigdetClosed(object sender, Windows.UI.Core.CoreWindowEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// 在应用程序由最终用户正常启动时进行调用。
     /// 将在启动应用程序以打开特定文件等情况下使用。
