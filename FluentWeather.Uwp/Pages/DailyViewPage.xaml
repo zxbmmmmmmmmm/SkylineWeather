@@ -4,15 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:community="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
-    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FluentWeather.Abstraction.Models"
-    xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
+    <Page.Resources>
+
+    </Page.Resources>
 
     <Grid>
         <Border x:Name="PlaceholderBorder" Background="{ThemeResource SystemControlTransparentBrush}" />
@@ -38,7 +43,7 @@
                 Margin="32,80,32,0"
                 x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
-                ItemsSource="{x:Bind DailyForecasts,Mode=OneWay}"
+                ItemsSource="{x:Bind DailyForecasts, Mode=OneWay}"
                 SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
@@ -75,7 +80,7 @@
                                         MajorTickInterval="6"
                                         Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
                                     <Grid Grid.Row="1" Margin="0,16,0,0">
-                                        <controls1:AdaptiveGridView
+                                        <toolkit:AdaptiveGridView
                                             x:Name="HourlyGridView"
                                             Margin="16,16,16,0"
                                             HorizontalAlignment="Stretch"
@@ -91,7 +96,7 @@
                                                 <behaviors:ListViewScrollBehavior />
                                                 <behaviors:ListViewOpenFlyoutBehavior />
                                             </i:Interaction.Behaviors>
-                                        </controls1:AdaptiveGridView>
+                                        </toolkit:AdaptiveGridView>
                                         <Button
                                             Width="40"
                                             Height="40"
@@ -143,14 +148,14 @@
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
                                             Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                                        <Run Text="{x:Bind SunRise,Converter={StaticResource ToShortTimeStringConverter}}" />
+                                        <Run Text="{x:Bind SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
                                         <Run
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             FontSize="14"
                                             Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                                        <Run Text="{x:Bind SunSet,Converter={StaticResource ToShortTimeStringConverter}}" />
+                                        <Run Text="{x:Bind SunSet, Converter={StaticResource ToShortTimeStringConverter}}" />
                                     </TextBlock>
-                                    <controls1:AdaptiveGridView
+                                    <toolkit:AdaptiveGridView
                                         Grid.Row="3"
                                         Margin="2,0,2,0"
                                         HorizontalAlignment="Stretch"
@@ -159,7 +164,7 @@
                                         IsItemClickEnabled="True"
                                         ItemHeight="90"
                                         SelectionMode="None">
-                                        <controls1:AdaptiveGridView.Items>
+                                        <toolkit:AdaptiveGridView.Items>
                                             <GridViewItem Visibility="{x:Bind WindScale, Converter={StaticResource NullToVisibilityConverter}}">
                                                 <StackPanel x:Name="WindInfoPanel" Margin="12">
                                                     <TextBlock
@@ -306,11 +311,11 @@
                                                     </FlyoutBase.AttachedFlyout>
                                                 </StackPanel>
                                             </GridViewItem>
-                                        </controls1:AdaptiveGridView.Items>
+                                        </toolkit:AdaptiveGridView.Items>
                                         <i:Interaction.Behaviors>
                                             <behaviors:ListViewOpenFlyoutBehavior />
                                         </i:Interaction.Behaviors>
-                                    </controls1:AdaptiveGridView>
+                                    </toolkit:AdaptiveGridView>
 
                                 </Grid>
 
@@ -336,7 +341,16 @@
             </Pivot>
 
         </Grid>
-
+        <community:Segmented
+            Margin="4"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom">
+            <community:SegmentedItem
+                Content="日视图"
+                Icon="{ui:FontIcon Glyph=&#xE8BF;}"
+                Style="{ThemeResource DefaultSegmentedItemStyle}" />
+            <community:SegmentedItem Content="周视图" Icon="{ui:FontIcon Glyph=&#xE787;}" />
+        </community:Segmented>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
