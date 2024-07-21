@@ -4,25 +4,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:behaviors="using:FluentWeather.Uwp.Behaviors"
+    xmlns:community="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls="using:FluentWeather.Uwp.Controls"
-    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:models="using:FluentWeather.Abstraction.Models"
-    xmlns:converters="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d">
+    <Page.Resources />
 
     <Grid>
         <Border x:Name="PlaceholderBorder" Background="{ThemeResource SystemControlTransparentBrush}" />
 
-        <Grid MaxWidth="1100" MaxHeight="810">
-            <Grid.ChildrenTransitions>
-                <TransitionCollection>
-                    <RepositionThemeTransition />
-                </TransitionCollection>
-            </Grid.ChildrenTransitions>
+        <Grid MaxWidth="1350" MaxHeight="900">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <Button
                 x:Name="CloseButton"
                 Margin="32,40,50,0"
@@ -34,12 +37,13 @@
                 <FontIcon FontSize="28" Glyph="&#xE711;" />
             </Button>
             <Pivot
-                x:Name="MainPivot"
+                x:Name="DailyView"
+                Grid.Row="0"
                 Margin="32,80,32,0"
-                x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
-                ItemsSource="{x:Bind DailyForecasts,Mode=OneWay}"
-                SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
+                ItemsSource="{x:Bind DailyForecasts7D, Mode=OneWay}"
+                SelectedIndex="{x:Bind PivotSelectedIndex, Mode=TwoWay}"
+                Visibility="{x:Bind DailyViewSelection.IsSelected, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
                         <StackPanel Padding="8,0">
@@ -53,288 +57,537 @@
                 <Pivot.ItemTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
                         <UserControl>
-                            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                                <Grid>
-                                    <Grid.ChildrenTransitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition IsStaggeringEnabled="False" />
-                                        </TransitionCollection>
-                                    </Grid.ChildrenTransitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <controls:HourlyTemperatureChart
-                                        x:Name="HourlyTemperatureChart"
-                                        Grid.Row="0"
-                                        Height="256"
-                                        Margin="14,64,22,0"
-                                        HourlyForecasts="{x:Bind HourlyForecasts}"
-                                        MajorTickInterval="6"
-                                        Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
-                                    <Grid Grid.Row="1" Margin="0,16,0,0">
-                                        <controls1:AdaptiveGridView
-                                            x:Name="HourlyGridView"
-                                            Margin="16,16,16,0"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Stretch"
-                                            DesiredWidth="100"
-                                            IsItemClickEnabled="True"
-                                            ItemHeight="150"
-                                            ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
-                                            ItemsSource="{x:Bind HourlyForecasts}"
-                                            OneRowModeEnabled="True"
-                                            SelectionMode="None">
-                                            <i:Interaction.Behaviors>
-                                                <behaviors:ListViewScrollBehavior />
-                                                <behaviors:ListViewOpenFlyoutBehavior />
-                                            </i:Interaction.Behaviors>
-                                        </controls1:AdaptiveGridView>
-                                        <Button
-                                            Width="40"
-                                            Height="40"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center"
-                                            HorizontalContentAlignment="Stretch"
-                                            Background="Transparent"
-                                            BorderBrush="Transparent"
-                                            CornerRadius="50">
-                                            <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
-                                            <i:Interaction.Behaviors>
-                                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{Binding ElementName=HourlyGridView}" />
-                                            </i:Interaction.Behaviors>
-                                            <Button.Resources>
-                                                <ResourceDictionary>
-                                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                                </ResourceDictionary>
-                                            </Button.Resources>
-                                        </Button>
-                                        <Button
-                                            Width="40"
-                                            Height="40"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Center"
-                                            Background="Transparent"
-                                            BorderBrush="Transparent"
-                                            CornerRadius="50">
-                                            <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
-                                            <i:Interaction.Behaviors>
-                                                <behaviors:ButtonListViewScrollBehavior ListView="{Binding ElementName=HourlyGridView}" />
-                                            </i:Interaction.Behaviors>
-                                            <Button.Resources>
-                                                <ResourceDictionary>
-                                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                                </ResourceDictionary>
-                                            </Button.Resources>
-                                        </Button>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <controls:HourlyTemperatureChart
+                                    x:Name="HourlyTemperatureChart"
+                                    Grid.Row="0"
+                                    Margin="14,64,22,0"
+                                    HourlyForecasts="{x:Bind HourlyForecasts}"
+                                    MajorTickInterval="6"
+                                    Visibility="{x:Bind HourlyForecasts, Converter={StaticResource NullToVisibilityConverter}}" />
 
-                                    </Grid>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Margin="16,4,12,0"
+                                    FontSize="16"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                    <Run
+                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                        FontSize="14"
+                                        Text="&#xE018; " /><Run x:Uid="Sunrise" />
+                                    <Run Text="{x:Bind SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                    <Run
+                                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                        FontSize="14"
+                                        Text="  &#xE099; " /><Run x:Uid="Sunset" />
+                                    <Run Text="{x:Bind SunSet, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                </TextBlock>
+                                <toolkit:AdaptiveGridView
+                                    Grid.Row="2"
+                                    Margin="2,0,2,0"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Stretch"
+                                    DesiredWidth="160"
+                                    IsItemClickEnabled="True"
+                                    ItemHeight="90"
+                                    SelectionMode="None">
+                                    <toolkit:AdaptiveGridView.Items>
+                                        <GridViewItem Visibility="{x:Bind WindScale, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <StackPanel x:Name="WindInfoPanel" Margin="12">
+                                                <TextBlock
+                                                    FontSize="18"
+                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                    Text="{x:Bind WindDirectionDescription}" />
+                                                <TextBlock FontSize="25">
+                                                    <Run FontSize="25" Text="{x:Bind WindScale}" />
+                                                    <Run x:Uid="WindScaleText" FontSize="16" />
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run Text="{x:Bind WindDirectionDescription}" />
+                                                                <Run Text="-" />
+                                                                <Run Text="{x:Bind WindScale}" />
+                                                                <Run x:Uid="WindScaleText" FontSize="14" />
+                                                            </TextBlock>
+                                                            <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run Text="{x:Bind WindSpeed}" />
+                                                                <Run Text="km/h" />
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                FontSize="16"
+                                                                IsTextSelectionEnabled="True"
+                                                                Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(WindScale)}"
+                                                                TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                        </GridViewItem>
+                                        <GridViewItem Visibility="{x:Bind Humidity, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <StackPanel Margin="12">
+                                                <TextBlock
+                                                    x:Uid="HumidityText"
+                                                    FontSize="18"
+                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                                <TextBlock FontSize="25">
+                                                    <Run FontSize="25" Text="{Binding Humidity}" />
+                                                    <Run FontSize="16" Text="%" />
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run x:Uid="HumidityText" />
+                                                                <Run Text="{Binding Humidity}" />
+                                                                <Run FontSize="14" Text="%" />
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                x:Uid="HumidityDescription"
+                                                                FontSize="16"
+                                                                IsTextSelectionEnabled="True"
+                                                                TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                        </GridViewItem>
+                                        <GridViewItem Visibility="{x:Bind Pressure, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <StackPanel Margin="12">
+                                                <TextBlock
+                                                    x:Uid="PressureText"
+                                                    FontSize="18"
+                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                                <TextBlock FontSize="25">
+                                                    <Run FontSize="25" Text="{x:Bind Pressure}" />
+                                                    <Run FontSize="16" Text="hPa" />
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run x:Uid="PressureText" />
+                                                                <Run Text="-" />
+                                                                <Run Text="{x:Bind Pressure}" />
+                                                                <Run FontSize="14" Text="hPa" />
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                x:Uid="PressureDescription"
+                                                                FontSize="16"
+                                                                IsTextSelectionEnabled="True"
+                                                                TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                        </GridViewItem>
+                                        <GridViewItem Visibility="{x:Bind Visibility, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <StackPanel Margin="12">
+                                                <TextBlock
+                                                    x:Uid="VisibilityText"
+                                                    FontSize="18"
+                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                                <TextBlock FontSize="25">
+                                                    <Run FontSize="25" Text="{x:Bind Visibility}" />
+                                                    <Run FontSize="16" Text="km" />
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run x:Uid="VisibilityText" />
+                                                                <Run Text="{x:Bind Visibility}" />
+                                                                <Run FontSize="14" Text="km" />
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                x:Uid="VisibilityDescription"
+                                                                FontSize="16"
+                                                                IsTextSelectionEnabled="True"
+                                                                TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                        </GridViewItem>
+                                        <GridViewItem Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <StackPanel Margin="12">
+                                                <TextBlock
+                                                    x:Uid="CloudAmountText"
+                                                    FontSize="18"
+                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                                <TextBlock FontSize="25">
+                                                    <Run FontSize="25" Text="{x:Bind CloudAmount}" />
+                                                    <Run FontSize="16" Text="%" />
+                                                </TextBlock>
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout>
+                                                        <StackPanel MaxWidth="256">
+                                                            <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                                                <Run x:Uid="CloudAmountText" />
+                                                                <Run Text="{x:Bind CloudAmount}" />
+                                                                <Run FontSize="14" Text="%" />
+                                                            </TextBlock>
+                                                            <TextBlock
+                                                                x:Uid="CloudAmountDescription"
+                                                                FontSize="16"
+                                                                IsTextSelectionEnabled="True"
+                                                                TextWrapping="Wrap" />
+                                                        </StackPanel>
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </StackPanel>
+                                        </GridViewItem>
+                                    </toolkit:AdaptiveGridView.Items>
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:ListViewOpenFlyoutBehavior />
+                                    </i:Interaction.Behaviors>
+                                </toolkit:AdaptiveGridView>
 
-                                    <TextBlock
-                                        Grid.Row="2"
-                                        Margin="16,4,12,0"
-                                        FontSize="16"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                        <Run
-                                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                            FontSize="14"
-                                            Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                                        <Run Text="{x:Bind SunRise,Converter={StaticResource ToShortTimeStringConverter}}" />
-                                        <Run
-                                            FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                            FontSize="14"
-                                            Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                                        <Run Text="{x:Bind SunSet,Converter={StaticResource ToShortTimeStringConverter}}" />
-                                    </TextBlock>
-                                    <controls1:AdaptiveGridView
-                                        Grid.Row="3"
-                                        Margin="2,0,2,0"
-                                        HorizontalAlignment="Stretch"
-                                        HorizontalContentAlignment="Stretch"
-                                        DesiredWidth="200"
-                                        IsItemClickEnabled="True"
-                                        ItemHeight="90"
-                                        SelectionMode="None">
-                                        <controls1:AdaptiveGridView.Items>
-                                            <GridViewItem Visibility="{x:Bind WindScale, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <StackPanel x:Name="WindInfoPanel" Margin="12">
-                                                    <TextBlock
-                                                        FontSize="18"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                        Text="{x:Bind WindDirectionDescription}" />
-                                                    <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{x:Bind WindScale}" />
-                                                        <Run x:Uid="WindScaleText" FontSize="16" />
-                                                    </TextBlock>
-                                                    <FlyoutBase.AttachedFlyout>
-                                                        <Flyout>
-                                                            <StackPanel MaxWidth="256">
-                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run Text="{x:Bind WindDirectionDescription}" />
-                                                                    <Run Text="-" />
-                                                                    <Run Text="{x:Bind WindScale}" />
-                                                                    <Run x:Uid="WindScaleText" FontSize="14" />
-                                                                </TextBlock>
-                                                                <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run Text="{x:Bind WindSpeed}" />
-                                                                    <Run Text="km/h" />
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    FontSize="16"
-                                                                    IsTextSelectionEnabled="True"
-                                                                    Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(WindScale)}"
-                                                                    TextWrapping="Wrap" />
-                                                            </StackPanel>
-                                                        </Flyout>
-                                                    </FlyoutBase.AttachedFlyout>
-                                                </StackPanel>
-                                            </GridViewItem>
-                                            <GridViewItem Visibility="{x:Bind Humidity, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <StackPanel Margin="12">
-                                                    <TextBlock
-                                                        x:Uid="HumidityText"
-                                                        FontSize="18"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                                    <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{Binding Humidity}" />
-                                                        <Run FontSize="16" Text="%" />
-                                                    </TextBlock>
-                                                    <FlyoutBase.AttachedFlyout>
-                                                        <Flyout>
-                                                            <StackPanel MaxWidth="256">
-                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run x:Uid="HumidityText" />
-                                                                    <Run Text="{Binding Humidity}" />
-                                                                    <Run FontSize="14" Text="%" />
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    x:Uid="HumidityDescription"
-                                                                    FontSize="16"
-                                                                    IsTextSelectionEnabled="True"
-                                                                    TextWrapping="Wrap" />
-                                                            </StackPanel>
-                                                        </Flyout>
-                                                    </FlyoutBase.AttachedFlyout>
-                                                </StackPanel>
-                                            </GridViewItem>
-                                            <GridViewItem Visibility="{x:Bind Pressure, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <StackPanel Margin="12">
-                                                    <TextBlock
-                                                        x:Uid="PressureText"
-                                                        FontSize="18"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                                    <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{x:Bind Pressure}" />
-                                                        <Run FontSize="16" Text="hPa" />
-                                                    </TextBlock>
-                                                    <FlyoutBase.AttachedFlyout>
-                                                        <Flyout>
-                                                            <StackPanel MaxWidth="256">
-                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run x:Uid="PressureText" />
-                                                                    <Run Text="-" />
-                                                                    <Run Text="{x:Bind Pressure}" />
-                                                                    <Run FontSize="14" Text="hPa" />
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    x:Uid="PressureDescription"
-                                                                    FontSize="16"
-                                                                    IsTextSelectionEnabled="True"
-                                                                    TextWrapping="Wrap" />
-                                                            </StackPanel>
-                                                        </Flyout>
-                                                    </FlyoutBase.AttachedFlyout>
-                                                </StackPanel>
-                                            </GridViewItem>
-                                            <GridViewItem Visibility="{x:Bind Visibility, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <StackPanel Margin="12">
-                                                    <TextBlock
-                                                        x:Uid="VisibilityText"
-                                                        FontSize="18"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                                    <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{x:Bind Visibility}" />
-                                                        <Run FontSize="16" Text="km" />
-                                                    </TextBlock>
-                                                    <FlyoutBase.AttachedFlyout>
-                                                        <Flyout>
-                                                            <StackPanel MaxWidth="256">
-                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run x:Uid="VisibilityText" />
-                                                                    <Run Text="{x:Bind Visibility}" />
-                                                                    <Run FontSize="14" Text="km" />
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    x:Uid="VisibilityDescription"
-                                                                    FontSize="16"
-                                                                    IsTextSelectionEnabled="True"
-                                                                    TextWrapping="Wrap" />
-                                                            </StackPanel>
-                                                        </Flyout>
-                                                    </FlyoutBase.AttachedFlyout>
-                                                </StackPanel>
-                                            </GridViewItem>
-                                            <GridViewItem Visibility="{Binding CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
-                                                <StackPanel Margin="12">
-                                                    <TextBlock
-                                                        x:Uid="CloudAmountText"
-                                                        FontSize="18"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                                    <TextBlock FontSize="25">
-                                                        <Run FontSize="25" Text="{x:Bind CloudAmount}" />
-                                                        <Run FontSize="16" Text="%" />
-                                                    </TextBlock>
-                                                    <FlyoutBase.AttachedFlyout>
-                                                        <Flyout>
-                                                            <StackPanel MaxWidth="256">
-                                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                                    <Run x:Uid="CloudAmountText" />
-                                                                    <Run Text="{x:Bind CloudAmount}" />
-                                                                    <Run FontSize="14" Text="%" />
-                                                                </TextBlock>
-                                                                <TextBlock
-                                                                    x:Uid="CloudAmountDescription"
-                                                                    FontSize="16"
-                                                                    IsTextSelectionEnabled="True"
-                                                                    TextWrapping="Wrap" />
-                                                            </StackPanel>
-                                                        </Flyout>
-                                                    </FlyoutBase.AttachedFlyout>
-                                                </StackPanel>
-                                            </GridViewItem>
-                                        </controls1:AdaptiveGridView.Items>
-                                        <i:Interaction.Behaviors>
-                                            <behaviors:ListViewOpenFlyoutBehavior />
-                                        </i:Interaction.Behaviors>
-                                    </controls1:AdaptiveGridView>
+                            </Grid>
 
-                                </Grid>
-
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup>
-                                        <VisualState>
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="800" />
-                                            </VisualState.StateTriggers>
-                                            <VisualState.Setters>
-                                                <Setter Target="HourlyTemperatureChart.MajorTickInterval" Value="2" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                            </ScrollViewer>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup>
+                                    <VisualState>
+                                        <VisualState.StateTriggers>
+                                            <AdaptiveTrigger MinWindowWidth="800" />
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="HourlyTemperatureChart.MajorTickInterval" Value="2" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                         </UserControl>
                     </DataTemplate>
                 </Pivot.ItemTemplate>
                 <Pivot.Resources>
                     <StaticResource x:Key="PivotHeaderItemSelectedPipeFill" ResourceKey="SystemControlTransparentBrush" />
                 </Pivot.Resources>
+                <animations:Implicit.ShowAnimations>
+                    <animations:TranslationAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="-50,0,0"
+                        To="0"
+                        Duration="0:0:0.5" />
+                    <animations:OpacityAnimation
+                        From="0"
+                        To="1.0"
+                        Duration="0:0:0.4" />
+                </animations:Implicit.ShowAnimations>
             </Pivot>
+            <Grid
+                x:Name="MonthlyView"
+                Margin="32,150,32,40"
+                ColumnSpacing="24"
+                Visibility="{x:Bind MonthlyViewSelection.IsSelected, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
 
+                    </Grid.RowDefinitions>
+                    <!--  表头  -->
+                    <community:UniformGrid
+                        x:Name="WeekDayNames"
+                        Grid.Row="0"
+                        Columns="7">
+                        <TextBlock
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            Text="日" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            Text="一" />
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            Text="二" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            Text="三" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            Text="四" />
+                        <TextBlock
+                            Grid.Column="5"
+                            HorizontalAlignment="Center"
+                            Text="五" />
+                        <TextBlock
+                            Grid.Column="6"
+                            HorizontalAlignment="Center"
+                            Text="六" />
+                    </community:UniformGrid>
+                    <!--  内容  -->
+                    <Grid
+                        Grid.Row="2"
+                        Margin="2,12"
+                        DataContext="{x:Bind}">
+                        <GridView
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            ItemsSource="{x:Bind DailyForecasts}"
+                            SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:WeatherDailyBase">
+                                    <StackPanel Margin="0,16" Spacing="4">
+                                        <TextBlock
+                                            HorizontalAlignment="Left"
+                                            FontSize="12"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="{x:Bind Time, Converter={StaticResource ShortDateConverter}}" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Image Height="40" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(WeatherType)}" />
+                                            <StackPanel>
+                                                <TextBlock Text="{x:Bind Description}" />
+                                                <TextBlock
+                                                    x:Name="TemperatureText"
+                                                    HorizontalAlignment="Left"
+                                                    TextAlignment="Center">
+                                                    <Run FontWeight="SemiBold" Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(MaxTemperature, x:False)}" /><Run Text="°" />
+                                                    <Run
+                                                        FontWeight="SemiBold"
+                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                        Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(MinTemperature, x:False)}" /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="°" />
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <community:UniformGrid
+                                        Columns="7"
+                                        FirstColumn="{Binding FirstColumn}"
+                                        RowSpacing="12" />
+
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </Grid>
+                </Grid>
+
+                <!--  每日详细内容  -->
+                <Grid
+                    x:Name="DailyDetailCard"
+                    Grid.Column="1"
+                    Width="280"
+                    Padding="16"
+                    x:DefaultBindMode="OneWay"
+                    Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{ThemeResource OverlayCornerRadius}"
+                    Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Margin="4,0,0,12"
+                        HorizontalAlignment="Left"
+                        FontSize="16">
+                        <Run Text="{x:Bind SelectedDailyForecast.Time, Converter={StaticResource ShortDateConverter}}" />
+                        <Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind SelectedDailyForecast.Time, Converter={StaticResource DateConverter}}" />
+                    </TextBlock>
+                    <Border
+                        Grid.Row="0"
+                        Margin="-16,0"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{ThemeResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="0,0,0,1" />
+                    <StackPanel Grid.Row="1" Margin="8,16,8,0">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Image Height="64" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(SelectedDailyForecast.WeatherType)}" />
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="24"
+                                    FontWeight="SemiBold"
+                                    Text="{x:Bind SelectedDailyForecast.Description}" />
+                                <TextBlock
+                                    x:Name="TemperatureText"
+                                    HorizontalAlignment="Left"
+                                    FontSize="18"
+                                    TextAlignment="Center">
+                                    <Run FontWeight="SemiBold" Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(SelectedDailyForecast.MaxTemperature, x:False)}" /><Run Text="°" />
+                                    <Run
+                                        FontWeight="SemiBold"
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                        Text="{x:Bind converters:ConverterMethods.ConvertTemperatureUnit(SelectedDailyForecast.MinTemperature, x:False)}" /><Run Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="°" />
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <ScrollViewer
+                        Grid.Row="2"
+                        Margin="0,12,-16,16"
+                        Padding="0,0,16,0">
+                        <StackPanel Spacing="12">
+                            <TextBlock Margin="0,4,0,-6" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                <Run
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                    FontSize="14"
+                                    Text="&#xE018; " />
+                                <Run x:Uid="Sunrise" /><Run Text="{x:Bind SelectedDailyForecast.SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                <Run
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                    FontSize="14"
+                                    Text="  &#xE099; " /><Run x:Uid="Sunset" />
+                                <Run Text="{x:Bind SelectedDailyForecast.SunSet, Converter={StaticResource ToShortTimeStringConverter}}" />
+                            </TextBlock>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run Text="{x:Bind SelectedDailyForecast.WindDirectionDescription}" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.WindScale}" />
+                                    <Run x:Uid="WindScaleText" FontSize="14" />
+                                </TextBlock>
+                                <TextBlock
+                                    FontSize="14"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(SelectedDailyForecast.WindScale)}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="HumidityText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Humidity}" />
+                                    <Run FontSize="14" Text="%" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="HumidityDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="VisibilityText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Visibility}" />
+                                    <Run FontSize="14" Text="km" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="VisibilityDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="PressureText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.Pressure}" />
+                                    <Run FontSize="14" Text="hPa" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="PressureDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock FontSize="16">
+                                    <Run x:Uid="CloudAmountText" />
+                                    <Run Text="{x:Bind SelectedDailyForecast.CloudAmount}" />
+                                    <Run FontSize="14" Text="%" />
+                                </TextBlock>
+                                <TextBlock
+                                    x:Uid="CloudAmountDescription"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </StackPanel>
+
+
+                    </ScrollViewer>
+                    <Grid Grid.Row="3" Margin="-16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind MovePreviousCommand}"
+                            Content="{ui:FontIcon FontSize=18,
+                                                  Glyph=&#xE76B;}"
+                            CornerRadius="0"
+                            IsEnabled="{x:Bind CanMovePrevious}" />
+                        <Button
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind MoveNextCommand}"
+                            Content="{ui:FontIcon FontSize=18,
+                                                  Glyph=&#xE76C;}"
+                            CornerRadius="0"
+                            IsEnabled="{x:Bind CanMoveNext}" />
+
+                    </Grid>
+                    <animations:Implicit.ShowAnimations>
+                        <animations:TranslationAnimation
+                            EasingMode="EaseOut"
+                            EasingType="Circle"
+                            From="-50,0,0"
+                            To="0"
+                            Duration="0:0:0.5" />
+                        <animations:OpacityAnimation
+                            From="0"
+                            To="1.0"
+                            Duration="0:0:0.4" />
+                    </animations:Implicit.ShowAnimations>
+
+                </Grid>
+                <animations:Implicit.ShowAnimations>
+                    <animations:TranslationAnimation
+                        EasingMode="EaseOut"
+                        EasingType="Circle"
+                        From="50,0,0"
+                        To="0"
+                        Duration="0:0:0.5" />
+                    <animations:OpacityAnimation
+                        From="0"
+                        To="1.0"
+                        Duration="0:0:0.4" />
+                </animations:Implicit.ShowAnimations>
+            </Grid>
+            <community:Segmented
+                Grid.Row="1"
+                Margin="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                SelectedIndex="0">
+
+                <community:SegmentedItem
+                    x:Name="DailyViewSelection"
+                    Width="128"
+                    Content="日视图"
+                    Icon="{ui:FontIcon Glyph=&#xE8BF;}"
+                    IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Daily}" />
+                <community:SegmentedItem
+                    x:Name="MonthlyViewSelection"
+                    Width="128"
+                    Content="月视图"
+                    Icon="{ui:FontIcon Glyph=&#xE787;}"
+                    IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Monthly}" />
+            </community:Segmented>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
@@ -345,7 +598,20 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CloseButton.Margin" Value="32,86,50,0" />
+                        <Setter Target="DailyDetailCard.Visibility" Value="Visible" />
                     </VisualState.Setters>
+
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DailyDetailCard.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
