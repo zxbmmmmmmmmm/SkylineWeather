@@ -28,8 +28,8 @@
                 <chart:CategoricalAxis
                     x:Uid="TimeAxis"
                     LabelFormat="{}{0,0:HH:00}"
+                    MajorTickInterval="{x:Bind MajorTickInterval, Mode=OneWay}"
                     PlotMode="OnTicksPadded"
-                    MajorTickInterval="{x:Bind MajorTickInterval,Mode=OneWay}"
                     ShowLabels="{x:Bind IsHorizontalAxisVisible, Mode=OneWay}">
                     <chart:CategoricalAxis.LineStyle>
                         <Style TargetType="Line">
@@ -44,14 +44,11 @@
                 </chart:CategoricalAxis>
             </chart:RadCartesianChart.HorizontalAxis>
             <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis                   
-                    
-                    Maximum="{x:Bind MaxTemperature}"
-                    Minimum="{x:Bind MinTemperature}">
+                <chart:LinearAxis Maximum="{x:Bind ChartMaxTemperature}" Minimum="{x:Bind ChartMinTemperature}">
                     <chart:LinearAxis.LabelTemplate>
                         <DataTemplate>
                             <TextBlock>
-                                <Run Text="{Binding Converter={StaticResource ConvertTemperatureUniter},ConverterParameter=true}"/><Run Text="°"/> 
+                                <Run Text="{Binding Converter={StaticResource ConvertTemperatureUniter}, ConverterParameter=true}" /><Run Text="°" />
                             </TextBlock>
                         </DataTemplate>
                     </chart:LinearAxis.LabelTemplate>
@@ -75,31 +72,40 @@
                 ClipToPlotArea="False"
                 CombineMode="Cluster"
                 ItemsSource="{x:Bind HourlyForecasts, Mode=OneWay}"
-                Stroke="{ThemeResource SystemControlBackgroundBaseHighBrush}"
+                ShowLabels="True"
                 StrokeThickness="3">
+                <chart:SplineAreaSeries.Stroke>
+                    <SolidColorBrush Opacity="0.8" Color="{ThemeResource SystemBaseHighColor}" />
+                </chart:SplineAreaSeries.Stroke>
                 <chart:SplineAreaSeries.Fill>
-                    <LinearGradientBrush Opacity="0.4" StartPoint="0.5,0" EndPoint="0.5,1">
+                    <LinearGradientBrush Opacity="0.3" StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Offset="0" Color="{ThemeResource SystemBaseHighColor}" />
                         <GradientStop Offset="1" Color="Transparent" />
                     </LinearGradientBrush>
                 </chart:SplineAreaSeries.Fill>
                 <chart:SplineAreaSeries.LabelDefinitions>
                     <chart:ChartSeriesLabelDefinition
-                        Margin="0,8,0,0"
+                        Margin="0,14,0,0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
+                        VerticalAlignment="Top">
+                        <chart:ChartSeriesLabelDefinition.Template>
+                            <DataTemplate>
+                                <Image Height="32" Source="{Binding DataItem, Converter={StaticResource WeatherToIconConverter}}" />
+                            </DataTemplate>
+                        </chart:ChartSeriesLabelDefinition.Template>
+                    </chart:ChartSeriesLabelDefinition>
                 </chart:SplineAreaSeries.LabelDefinitions>
                 <chart:SplineAreaSeries.CategoryBinding>
                     <chart:PropertyNameDataPointBinding PropertyName="Time" />
                 </chart:SplineAreaSeries.CategoryBinding>
                 <chart:SplineAreaSeries.ValueBinding>
-                    <chart:PropertyNameDataPointBinding PropertyName="Temperature"  />
+                    <chart:PropertyNameDataPointBinding PropertyName="Temperature" />
                 </chart:SplineAreaSeries.ValueBinding>
                 <chart:SplineAreaSeries.VerticalAxis>
                     <chart:LinearAxis
                         HorizontalLocation="Right"
-                        Maximum="{x:Bind MaxTemperature}"
-                        Minimum="{x:Bind MinTemperature}"
+                        Maximum="{x:Bind ChartMaxTemperature}"
+                        Minimum="{x:Bind ChartMinTemperature}"
                         ShowLabels="False">
                         <chart:LinearAxis.LineStyle>
                             <Style TargetType="Line">
@@ -120,7 +126,7 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
                             <TextBlock>
-                                <Run Text="{Binding DataPoint.DataItem.Temperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
+                                <Run Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </StackPanel>
@@ -128,9 +134,13 @@
                 </chart:ChartTrackBallBehavior.TrackInfoTemplate>
                 <chart:ChartTrackBallBehavior.IntersectionTemplate>
                     <DataTemplate>
-                        <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                            <TextBlock Margin="6,4">
-                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature,Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
+                        <Border
+                            Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource SurfaceStrokeColorFlyoutBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource ControlCornerRadius}">
+                            <TextBlock Margin="8,6">
+                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </Border>
