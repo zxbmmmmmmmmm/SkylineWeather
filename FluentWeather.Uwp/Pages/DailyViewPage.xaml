@@ -42,14 +42,13 @@
                 <FontIcon FontSize="28" Glyph="&#xE711;" />
             </Button>
             <Pivot
-                x:Name="MainPivot"
+                x:Name="DailyView"
                 Grid.Row="0"
                 Margin="32,80,32,0"
-                x:FieldModifier="Public"
                 IsHeaderItemsCarouselEnabled="False"
                 ItemsSource="{x:Bind DailyForecasts7D, Mode=OneWay}"
-                SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}"
-                Visibility="Collapsed">
+                SelectedIndex="{x:Bind PivotSelectedIndex, Mode=TwoWay}"
+                Visibility="{x:Bind DailyViewSelection.IsSelected, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate x:DataType="models:WeatherDailyBase">
                         <StackPanel Padding="8,0">
@@ -343,8 +342,16 @@
                 <Pivot.Resources>
                     <StaticResource x:Key="PivotHeaderItemSelectedPipeFill" ResourceKey="SystemControlTransparentBrush" />
                 </Pivot.Resources>
+                <animations:Implicit.ShowAnimations>
+                    <animations:TranslationAnimation Duration="0:0:0.5" From="-50,0,0" EasingType="Circle" EasingMode="EaseOut" To="0"/>
+                    <animations:OpacityAnimation Duration="0:0:0.4" From="0" To="1.0"/>
+                </animations:Implicit.ShowAnimations>
             </Pivot>
-            <Grid Margin="32,150,32,40" ColumnSpacing="24">
+            <Grid
+                x:Name="MonthlyView"
+                Margin="32,150,32,40"
+                ColumnSpacing="24"
+                Visibility="{x:Bind MonthlyViewSelection.IsSelected, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -391,12 +398,11 @@
                             Text="六" />
                     </community:UniformGrid>
                     <!--  内容  -->
-                    <Grid Grid.Row="1" Margin="2,12">
+                    <Grid Grid.Row="1" Margin="2,12" DataContext="{x:Bind}">
                         <GridView
-                            SelectedIndex="{x:Bind SelectedIndex,Mode=OneTime}"
                             HorizontalAlignment="Stretch"
                             ItemsSource="{x:Bind DailyForecasts}"
-                            SelectedItem="{x:Bind SelectedDailyForecast, Mode=TwoWay}">
+                            SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherDailyBase">
                                     <StackPanel Margin="0,16" Spacing="4">
@@ -426,8 +432,9 @@
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <community:UniformGrid Columns="7" RowSpacing="12" />
+                                <ItemsPanelTemplate >
+                                    <community:UniformGrid Columns="7" FirstColumn="{Binding FirstColumn}" RowSpacing="12" />
+
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
                         </GridView>
@@ -571,24 +578,44 @@
                             HorizontalAlignment="Stretch"
                             Content="{ui:FontIcon FontSize=18,
                                                   Glyph=&#xE76B;}"
-                            CornerRadius="0" />
+                            CornerRadius="0"
+                            Command="{x:Bind MovePreviousCommand}"
+                            IsEnabled="{x:Bind CanMovePrevious}" />
                         <Button
                             Grid.Column="1"
                             HorizontalAlignment="Stretch"
                             Content="{ui:FontIcon FontSize=18,
                                                   Glyph=&#xE76C;}"
-                            CornerRadius="0" />
+                            CornerRadius="0"
+                            Command="{x:Bind MoveNextCommand}"
+                            IsEnabled="{x:Bind CanMoveNext}" />
                     </Grid>
                 </Grid>
+                <animations:Implicit.ShowAnimations>
+                    <animations:TranslationAnimation Duration="0:0:0.5" From="50,0,0" EasingType="Circle" EasingMode="EaseOut" To="0"/>
+                    <animations:OpacityAnimation Duration="0:0:0.4" From="0" To="1.0"/>
+                </animations:Implicit.ShowAnimations>
             </Grid>
             <community:Segmented
                 Grid.Row="1"
-                Margin="12" 
+                Margin="12"
                 HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
-                VerticalAlignment="Bottom">
-                <community:SegmentedItem Width="128" Content="周视图" Icon="{ui:FontIcon Glyph=&#xE8BF;}" />
-                <community:SegmentedItem Width="128" Content="月视图" Icon="{ui:FontIcon Glyph=&#xE787;}" />
+                SelectedIndex="0">
+
+                <community:SegmentedItem
+                    x:Name="DailyViewSelection"
+                    Width="128"
+                    Content="日视图"
+                    Icon="{ui:FontIcon Glyph=&#xE8BF;}"
+                    IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Daily}" />
+                <community:SegmentedItem
+                    x:Name="MonthlyViewSelection"
+                    Width="128"
+                    Content="月视图"
+                    Icon="{ui:FontIcon Glyph=&#xE787;}"
+                    IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Monthly}" />
             </community:Segmented>
         </Grid>
 

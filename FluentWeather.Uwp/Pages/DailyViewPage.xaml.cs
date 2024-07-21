@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using FluentWeather.Abstraction.Interfaces.Weather;
 using FluentWeather.Uwp.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Windows.UI.Xaml.Media.Imaging;
+using CommunityToolkit.Mvvm.Input;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -48,6 +50,10 @@ public sealed partial class DailyViewPage : Page
 
     public event RoutedEventHandler CloseRequested;
 
+    private bool CanMoveNext => SelectedIndex <= DailyForecasts.Count - 2;
+    private bool CanMovePrevious => SelectedIndex >= 1;
+
+    public int FirstColumn => DailyForecasts.Count > 0 ? (int)DailyForecasts.First().Time.DayOfWeek : 0;
 
     public int SelectedIndex
     {
@@ -56,8 +62,42 @@ public sealed partial class DailyViewPage : Page
     }
 
     public static readonly DependencyProperty SelectedIndexProperty =
-        DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0));
+        DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0, SelectedIndexChanged));
 
+    private int PivotSelectedIndex 
+    {
+        get => Math.Clamp(SelectedIndex,0,6);
+        set => SelectedIndex = Math.Clamp(value, 0, 6);
+    }
+
+    public WeatherDailyBase SelectedDailyForecast => DailyForecasts?[SelectedIndex];
+
+    private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var page = (DailyViewPage)d;
+        page.OnPropertyChanged(nameof(CanMovePrevious));
+        page.OnPropertyChanged(nameof(CanMoveNext));
+        page.OnPropertyChanged(nameof(SelectedDailyForecast));
+        page.OnPropertyChanged(nameof(PivotSelectedIndex));
+        
+    }
+    [RelayCommand]
+    private void MoveNext()
+    {
+        SelectedIndex += 1;
+    }
+    [RelayCommand]
+    private void MovePrevious()
+    {
+        SelectedIndex -= 1;
+    }
+
+
+    private static void DailyForecastsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var page = (DailyViewPage)d;
+        page.OnPropertyChanged(nameof(FirstColumn));
+    }
 
     public List<WeatherDailyBase> DailyForecasts
     {
@@ -66,7 +106,7 @@ public sealed partial class DailyViewPage : Page
     }
 
     public static readonly DependencyProperty DailyForecastsProperty =
-        DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
+        DependencyProperty.Register(nameof(DailyForecasts), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default, DailyForecastsChanged));
 
     public List<WeatherDailyBase> DailyForecasts7D
     {
@@ -77,13 +117,18 @@ public sealed partial class DailyViewPage : Page
     public static readonly DependencyProperty DailyForecasts7DProperty =
         DependencyProperty.Register(nameof(DailyForecasts7D), typeof(List<WeatherBase>), typeof(DailyViewPage), new PropertyMetadata(default));
 
-    public WeatherDailyBase SelectedDailyForecast
+    public DailyViewMode Mode
     {
-        get => (WeatherDailyBase)GetValue(SelectedDailyForecastProperty);
-        set => SetValue(SelectedDailyForecastProperty, value);
+        get => (DailyViewMode)GetValue(ModeProperty);
+        set => SetValue(ModeProperty, value);
     }
 
-    public static readonly DependencyProperty SelectedDailyForecastProperty =
-        DependencyProperty.Register(nameof(SelectedDailyForecast), typeof(WeatherDailyBase), typeof(DailyViewPage), new PropertyMetadata(default));
-
+    public static readonly DependencyProperty ModeProperty =
+        DependencyProperty.Register(nameof(Mode), typeof(DailyViewMode), typeof(DailyViewPage), new PropertyMetadata(DailyViewMode.Daily));
+}
+public enum DailyViewMode
+{
+    Daily,
+    Weekly,
+    Monthly
 }
