@@ -36,10 +36,10 @@
             <StaticResource x:Key="InfoBarInformationalSeverityBackgroundBrush" ResourceKey="SystemControlAcrylicElementBrush" />
             <SolidColorBrush x:Key="HistoricalWeatherAverageRangeStroke" Color="#80B3B3B3" />
             <SolidColorBrush x:Key="HistoricalWeatherBaseRangeStroke" Color="#21BFBFBF" />
-            <SolidColorBrush x:Key="HistoricalWeatherTodayRangeStroke" Color="#66808080" />
-            <SolidColorBrush x:Key="HistoricalWeatherHighestLowestPointFill" Color="#FF666666" />
+            <SolidColorBrush x:Key="HistoricalWeatherTodayRangeStroke" Color="#40BFBFBF" />
+            <SolidColorBrush x:Key="HistoricalWeatherHighestLowestPointFill" Color="#99B3B3B3" />
             <SolidColorBrush x:Key="HistoricalWeatherAveragePointFill" Color="#FFCCCCCC" />
-            <SolidColorBrush x:Key="HistoricalWeatherTodayPointFill" Color="#FF808080" />
+            <SolidColorBrush x:Key="HistoricalWeatherTodayPointFill" Color="#B3CCCCCC" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 

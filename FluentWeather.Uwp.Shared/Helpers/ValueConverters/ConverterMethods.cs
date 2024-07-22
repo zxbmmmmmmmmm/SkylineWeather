@@ -149,5 +149,14 @@ public static class ConverterMethods
     {
         return num1 - num2;
     }
+
+    public static int Max(this int num1, int num2)
+    {
+        return Math.Max(num1, num2);
+    }
+    public static int Min(this int num1, int num2)
+    {
+        return Math.Min(num1, num2);
+    }
 }
 

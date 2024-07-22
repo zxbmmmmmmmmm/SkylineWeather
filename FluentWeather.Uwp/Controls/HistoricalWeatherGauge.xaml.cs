@@ -51,5 +51,21 @@ namespace FluentWeather.Uwp.Controls
         {
             await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation));
         }
+
+        public bool IsHighTemperatureBreakRecord => WeatherToday?.MaxTemperature > HistoricalDailyWeather?.HistoricalMaxTemperature;
+        public bool IsLowTemperatureBreakRecord => WeatherToday?.MinTemperature < HistoricalDailyWeather?.HistoricalMinTemperature;
+
+        private int GetLength3High(int num1,int num2)
+        {
+            if (IsHighTemperatureBreakRecord) return 0;
+            return num1 - num2;
+        }
+
+        private int GetLength3Low(int num1, int num2)
+        {
+            if (IsLowTemperatureBreakRecord) return 0;
+            return num1 - num2;
+        }
+
     }
 }

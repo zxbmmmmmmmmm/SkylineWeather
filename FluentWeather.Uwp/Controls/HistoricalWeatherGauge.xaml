@@ -18,8 +18,8 @@
             Margin="24,0"
             x:DefaultBindMode="OneWay"
             LabelStep="1"
-            MaxValue="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}"
-            MinValue="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}"
+            MaxValue="{x:Bind converters1:ConverterMethods.Max(HistoricalDailyWeather.HistoricalMaxTemperature,WeatherToday.MaxTemperature)}"
+            MinValue="{x:Bind converters1:ConverterMethods.Min(HistoricalDailyWeather.HistoricalMinTemperature,WeatherToday.MinTemperature)}"
             TickStep="1"
             Visibility="{x:Bind HistoricalDailyWeather, Converter={StaticResource NullToVisibilityConverter}}">
             <dv:RadLinearGauge.TickTemplate>
@@ -150,9 +150,9 @@
 
 
             <!--  今日天气 指示条  -->
-            <dv:SegmentedLinearGaugeIndicator dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
+            <dv:SegmentedLinearGaugeIndicator dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind converters1:ConverterMethods.Max(WeatherToday.MaxTemperature,HistoricalDailyWeather.HistoricalMaxTemperature)}">
                 <dv:BarIndicatorSegment
-                    Length="{x:Bind converters1:ConverterMethods.Subtract(WeatherToday.MinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
+                    Length="{x:Bind GetLength3Low(WeatherToday.MinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
                     Stroke="Transparent"
                     Thickness="4" />
 
@@ -161,7 +161,7 @@
                     Stroke="{ThemeResource HistoricalWeatherTodayRangeStroke}"
                     Thickness="4" />
                 <dv:BarIndicatorSegment
-                    Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.HistoricalMaxTemperature, WeatherToday.MaxTemperature)}"
+                    Length="{x:Bind GetLength3High(HistoricalDailyWeather.HistoricalMaxTemperature, WeatherToday.MaxTemperature)}"
                     Stroke="Transparent"
                     Thickness="4" />
             </dv:SegmentedLinearGaugeIndicator>
