@@ -55,7 +55,7 @@
                             Margin="4,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind HistoricalDailyWeather.AverageMinTemperature}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(HistoricalDailyWeather.AverageMinTemperature)}" /><Run Text="°" />
                         </TextBlock>
                         <Ellipse
                             Width="8"
@@ -78,7 +78,7 @@
                             Margin="4,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind HistoricalDailyWeather.AverageMaxTemperature}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(HistoricalDailyWeather.AverageMaxTemperature)}" /><Run Text="°" />
 
                         </TextBlock>
                         <Ellipse
@@ -108,7 +108,7 @@
                             Margin="4,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind HistoricalDailyWeather.HistoricalMinTemperature}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(HistoricalDailyWeather.HistoricalMinTemperature)}" /><Run Text="°" />
                         </TextBlock>
                         <Ellipse
                             Width="8"
@@ -136,7 +136,7 @@
                             Margin="4,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(HistoricalDailyWeather.HistoricalMaxTemperature)}" /><Run Text="°" />
                         </TextBlock>
                         <Ellipse
                             Width="8"
@@ -182,7 +182,7 @@
                             Margin="2,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind LowestTempTodayIndicator.Value}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(LowestTempTodayIndicator.Value)}" /><Run Text="°" />
 
                         </TextBlock>
                         <TextBlock
@@ -209,7 +209,7 @@
                             Margin="2,0,0,0"
                             HorizontalAlignment="Center"
                             FontSize="18">
-                            <Run Text="{x:Bind HighestTempTodayIndicator.Value}" /><Run Text="°" />
+                            <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(HighestTempTodayIndicator.Value)}" /><Run Text="°" />
                         </TextBlock>
                         <TextBlock
                             x:Uid="TodayHighTemp"

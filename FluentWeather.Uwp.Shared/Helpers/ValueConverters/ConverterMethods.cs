@@ -62,7 +62,11 @@ public static class ConverterMethods
         var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.ToFahrenheit() : temp;
         return result;
     }
-
+    public static int ConvertTemperatureUnit(this double temp)
+    {
+        var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.ToFahrenheit() : temp;
+        return (int)Math.Round(result);
+    }
     public static ImageSource GetIconByWeather(this WeatherCode code)
     {
         return new BitmapImage(GetIconUriByWeather(code));
