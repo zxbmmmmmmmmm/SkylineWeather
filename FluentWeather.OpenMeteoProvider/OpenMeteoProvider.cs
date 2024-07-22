@@ -24,8 +24,9 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
     public static OpenMeteoClient Client { get; }
     static OpenMeteoProvider()
     {
-        Client = new();
+        Client = new OpenMeteoClient();
         Client.ForecastParameters.Add("forecast_minutely_15", "8");
+        Client.ForecastParameters.Add("forecast_days", "16");
     }
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
