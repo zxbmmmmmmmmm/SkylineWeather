@@ -353,7 +353,7 @@
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <Image Height="40" Width="40" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(WeatherType)}" />
                                             <StackPanel>
-                                                <TextBlock Text="{x:Bind Description}" />
+                                                <TextBlock Text="{x:Bind Description}" MaxWidth="80" TextWrapping="Wrap"/>
                                                 <TextBlock
                                                     x:Name="TemperatureText"
                                                     HorizontalAlignment="Left"
@@ -416,11 +416,11 @@
                         BorderThickness="0,0,0,1" />
                     <StackPanel Grid.Row="1" Margin="8,16,8,0">
                         <StackPanel Orientation="Horizontal" Spacing="12">
-                            <Image Height="64" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(SelectedDailyForecast.WeatherType)}" />
+                            <Image Height="60" Width="60" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(SelectedDailyForecast.WeatherType)}" />
                             <StackPanel>
                                 <TextBlock
-                                    FontSize="24"
-                                    FontWeight="SemiBold"
+                                    FontSize="20" MaxWidth="160"
+                                    FontWeight="SemiBold" TextWrapping="WrapWholeWords"
                                     Text="{x:Bind SelectedDailyForecast.Description}" />
                                 <TextBlock
                                     x:Name="TemperatureText"

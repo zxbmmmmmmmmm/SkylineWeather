@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Globalization;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Themes;
 
@@ -7,6 +8,8 @@ public sealed partial class Generic:ResourceDictionary
     public Generic()
     {
         this.InitializeComponent();
+        var isEnglish = CultureInfo.CurrentCulture.Name.Contains("en");
+        this.Add("WeatherDescriptionFontSize" , isEnglish? 16 : 18);
     }
     public static Visibility GetPrecipVisibility(int? precip)
     {

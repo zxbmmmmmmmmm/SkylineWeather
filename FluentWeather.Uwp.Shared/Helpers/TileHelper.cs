@@ -287,12 +287,13 @@ namespace FluentWeather.Uwp.Shared.Helpers
 
         public static string GetWeek(DateTime date)
         {
-            if (date.Day == DateTime.Today.Day)
+            if (date.Day == DateTime.Today.Day&& CultureInfo.CurrentCulture.Name is "zh-CN")
                 return "ms-resource:Today";
-            if (date.Day == DateTime.Today.Day + 1)
+            if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
                 return "ms-resource:Tomorrow";
-
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
+            if(CultureInfo.CurrentCulture.Name is "zh-CN")
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期","周");
+            return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
         }
 
     }

@@ -165,7 +165,7 @@
                 VerticalScrollBarVisibility="Auto">
                 <Grid
                     x:Name="ContentGrid"
-                    MaxWidth="1024"
+                    MaxWidth="1200"
                     Padding="32,40,32,32">
                     <Grid.ChildrenTransitions>
                         <TransitionCollection>
@@ -879,7 +879,7 @@
                                     <TextBlock FontSize="25" Text="{x:Bind Category}" />
                                     <FlyoutBase.AttachedFlyout>
                                         <Flyout Placement="Top">
-                                            <StackPanel MaxWidth="256" Spacing="4">
+                                            <StackPanel MaxWidth="0320" Spacing="4">
                                                 <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                                     <Run Text="{x:Bind Name}" />
                                                     <Run Text="-" />

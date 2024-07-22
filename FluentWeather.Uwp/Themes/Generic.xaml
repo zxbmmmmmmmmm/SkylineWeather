@@ -84,7 +84,6 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Margin" Value="0,0,0,20" />
     </Style>
-    <x:Double x:Key="WeatherDescriptionFontSize">18</x:Double>
     <Style
         x:Key="GridViewItemStyle"
         BasedOn="{StaticResource DefaultGridViewItemStyle}"
