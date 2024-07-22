@@ -858,7 +858,7 @@
 
                     <!--  历史天气  -->
                     <Grid Grid.Row="6" Visibility="{x:Bind GetHistoricalWeatherVisibility(ViewModel.CurrentGeolocation,app:Common.Settings.DefaultGeolocation),Mode=OneWay}" >
-                        <controls1:HistoricalWeatherGauge HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
+                        <controls1:HistoricalWeatherGauge Visibility="{x:Bind ViewModel.WeatherNow,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
                     </Grid>
                     <controls:AdaptiveGridView
                         Grid.Row="7"

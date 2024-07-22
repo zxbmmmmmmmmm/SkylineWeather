@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using FluentWeather.Abstraction.Helpers;
 using FluentWeather.Abstraction.Models;
 using static FluentWeather.Abstraction.Models.WeatherCode;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
@@ -161,6 +162,14 @@ public static class ConverterMethods
     public static int Min(this int num1, int num2)
     {
         return Math.Min(num1, num2);
+    }
+    public static Visibility BoolToVisibility(this bool value)
+    {
+        return value ? Visibility.Visible : Visibility.Collapsed;
+    }
+    public static Visibility BoolToVisibilityInverted(this bool value)
+    {
+        return value ? Visibility.Collapsed : Visibility.Visible;
     }
 }
 
