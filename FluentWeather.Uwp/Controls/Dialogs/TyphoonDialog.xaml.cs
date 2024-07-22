@@ -50,6 +50,7 @@ public sealed partial class TyphoonDialog : ContentDialog
     private ObservableCollection<TyphoonTrackBase> _tracks = new();
     [ObservableProperty]
     private ObservableCollection<TyphoonBase> _typhoons = new();
+    [ObservableProperty]
     private TyphoonBase _selected;
     public async void GetTyphoons()
     {
@@ -131,7 +132,7 @@ public sealed partial class TyphoonDialog : ContentDialog
         {
             Path = new Geopath(path),
             StrokeThickness = 2,
-            StrokeColor = Colors.Yellow,
+            StrokeColor = Color.FromArgb(160, 255, 255, 0),
         };
         TyphoonMap.MapElements.Add(line);
     }
@@ -153,7 +154,7 @@ public sealed partial class TyphoonDialog : ContentDialog
         {
             Path = new Geopath(path),
             StrokeThickness = 3,
-            StrokeColor = Colors.Red,
+            StrokeColor = Color.FromArgb(200, 255, 0, 0),
             StrokeDashed = true
         };
         TyphoonMap.MapElements.Add(line);
@@ -168,7 +169,7 @@ public sealed partial class TyphoonDialog : ContentDialog
         double longitude = originalLocation.Longitude * Math.PI / 180.0;
         // double x = radius / 3956; // Miles
         double x = radius / 6371000; // Meters 
-        for (int i = 0; i <= 360; i += 10) // <-- you can modify this incremental to adjust the polygon.
+        for (int i = 0; i <= 360; i += 3) // <-- you can modify this incremental to adjust the polygon.
         {
             double aRads = i * Math.PI / 180.0;
             double latRadians = Math.Asin(Math.Sin(latitude) * Math.Cos(x) + Math.Cos(latitude) * Math.Sin(x) * Math.Cos(aRads));
@@ -208,16 +209,16 @@ public sealed partial class TyphoonDialog : ContentDialog
         {
             Path = new Geopath(locations24),
             StrokeThickness = 2,
-            StrokeColor = Color.FromArgb(180, 255, 255, 0),
+            StrokeColor = Color.FromArgb(150, 255, 255, 0),
         }; var line48 = new MapPolyline()
         {
             Path = new Geopath(locations48),
             StrokeThickness = 2,
             StrokeDashed = true,
-            StrokeColor = Color.FromArgb(160, 255, 255, 0),
+            StrokeColor = Color.FromArgb(120, 255, 255, 0),
         };
-        var text24 = new TextBlock { TextWrapping = TextWrapping.Wrap,  Text = "24小时警戒线" ,Foreground = new SolidColorBrush(Color.FromArgb(180, 255, 255, 0)) };
-        var text48 = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = "48小时警戒线", Foreground = new SolidColorBrush(Color.FromArgb(160, 255, 255, 0)) };
+        var text24 = new TextBlock { TextWrapping = TextWrapping.Wrap,  Text = "24小时警戒线" ,Foreground = new SolidColorBrush(Color.FromArgb(150, 255, 255, 0)) };
+        var text48 = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = "48小时警戒线", Foreground = new SolidColorBrush(Color.FromArgb(120, 255, 255, 0)) };
 
         TyphoonMap.MapElements.Add(line24);
         TyphoonMap.MapElements.Add(line48);
