@@ -11,7 +11,7 @@ namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
 public static class ConverterMethods
 {
-
+    private static readonly bool IsFahrenheit = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit;
     public static string GetWindScaleDescription(string scale)
     {
         if (scale.Contains("-"))
@@ -46,7 +46,7 @@ public static class ConverterMethods
     public static double? ConvertTemperatureUnit(this double? temp,bool disableRound = false)
     {
         if (temp is null) return null;
-        var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.Value.ToFahrenheit():temp.Value;
+        var result = IsFahrenheit ? temp.Value.ToFahrenheit():temp.Value;
         return disableRound ? result : Math.Round(result);
     }
 
@@ -59,12 +59,12 @@ public static class ConverterMethods
     /// <returns></returns>
     public static int ConvertTemperatureUnit(this int temp)
     {
-        var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.ToFahrenheit() : temp;
+        var result = IsFahrenheit ? temp.ToFahrenheit() : temp;
         return result;
     }
     public static int ConvertTemperatureUnit(this double temp)
     {
-        var result = Common.Settings.TemperatureUnit is TemperatureUnit.Fahrenheit ? temp.ToFahrenheit() : temp;
+        var result = IsFahrenheit ? temp.ToFahrenheit() : temp;
         return (int)Math.Round(result);
     }
     public static ImageSource GetIconByWeather(this WeatherCode code)

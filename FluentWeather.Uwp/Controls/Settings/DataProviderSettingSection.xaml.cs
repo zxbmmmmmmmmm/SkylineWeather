@@ -42,6 +42,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         private void DataProviderSettingSection_Loaded(object sender, RoutedEventArgs e)
         {
             TempUnitComboBox.SelectedIndex = (int)Common.Settings.TemperatureUnit;
+            TempUnitComboBox.SelectionChanged += TempUnitComboBox_SelectionChanged;
         }
 
         private async void SetKeyCard_Click(object sender, RoutedEventArgs e)
@@ -59,6 +60,11 @@ namespace FluentWeather.Uwp.Controls.Settings
         {
             RestartInfoBar.IsOpen = true;
             Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackProviderChanged(Common.Settings.ProviderConfig.ToString());
+        }
+
+        private void TempUnitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RestartInfoBar.IsOpen = true;
         }
         //public static bool Equals<TKey, TValue>(IList<KeyValuePair<TKey, TValue>> x,
         //    IList<KeyValuePair<TKey, TValue>> y)

@@ -59,9 +59,9 @@
                     </toolkit:SettingsCard.HeaderIcon>
                 </toolkit:SettingsCard>
                 <toolkit:SettingsCard
-                    x:Uid="Settings_TemperatureUnitCard"
+                    x:Uid="Settings_TemperatureUnitCard"                
                     Padding="12">
-                    <ComboBox Name="TempUnitComboBox">
+                    <ComboBox Name="TempUnitComboBox" >
                         <ComboBoxItem
                             x:Uid="Settings_TemperatureUnit_CelsiusItem"
                             IsSelected="{x:Bind app:Common.Settings.TemperatureUnit, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Celsius, Mode=TwoWay}" />
