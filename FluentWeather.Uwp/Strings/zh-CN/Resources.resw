@@ -413,7 +413,7 @@
   <data name="LowestTemperature" xml:space="preserve">
     <value>最低温</value>
   </data>
-  <data name="MoreInfoText" xml:space="preserve">
+  <data name="MoreInfoText.Text" xml:space="preserve">
     <value>了解详情</value>
     <comment>警告内了解详情</comment>
   </data>
@@ -592,7 +592,7 @@
   <data name="TowHoursText.Text" xml:space="preserve">
     <value>2小时</value>
   </data>
-  <data name="TrackText" xml:space="preserve">
+  <data name="TrackText.Text" xml:space="preserve">
     <value>追踪</value>
     <comment>台风警告内快捷追踪</comment>
   </data>
