@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -181,10 +181,10 @@
     <value>Update locations on startup</value>
   </data>
   <data name="AverageHighTemp.Text" xml:space="preserve">
-    <value>Lowest temp AVG</value>
+    <value>Lowest AVG</value>
   </data>
   <data name="AverageLowTemp.Text" xml:space="preserve">
-    <value>Highest temp AVG</value>
+    <value>Highest AVG</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>Background blur radius</value>
@@ -279,6 +279,12 @@
   <data name="DewPointText.Text" xml:space="preserve">
     <value>Dew point</value>
   </data>
+  <data name="DownloadButton.Content" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadHistoricalWeatherText.Text" xml:space="preserve">
+    <value>Download data to view the historical weather of this location</value>
+  </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -316,10 +322,10 @@
     <value>Highest</value>
   </data>
   <data name="HistoricalHighTemp.Text" xml:space="preserve">
-    <value>Historical high temp</value>
+    <value>Historical high</value>
   </data>
   <data name="HistoricalLowTemp.Text" xml:space="preserve">
-    <value>Historical low temp</value>
+    <value>Historical low</value>
   </data>
   <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
     <value>This feature allows you to compare weather data from past decades</value>
@@ -575,10 +581,10 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
     <value>Today</value>
   </data>
   <data name="TodayHighTemp.Text" xml:space="preserve">
-    <value>Today's high temp</value>
+    <value>Highest today</value>
   </data>
   <data name="TodayLowTemp.Text" xml:space="preserve">
-    <value>Today's low temp</value>
+    <value>Lowest today</value>
   </data>
   <data name="TodayWeather" xml:space="preserve">
     <value>Today's Weather</value>

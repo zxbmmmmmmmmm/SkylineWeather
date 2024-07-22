@@ -228,12 +228,12 @@
                 <TextBlock
                     FontSize="16"
                     Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                    Text="下载数据以查看此位置的历史天气" />
+                    x:Uid="DownloadHistoricalWeatherText" />
                 <Button
                     x:Name="DownloadDataButton"
                     HorizontalAlignment="Center"
                     Click="DownloadDataButton_Click"
-                    Content="下载" />
+                    x:Uid="DownloadButton" />
             </StackPanel>
 
         </Grid>

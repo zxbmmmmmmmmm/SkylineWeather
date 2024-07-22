@@ -279,6 +279,12 @@
   <data name="DewPointText.Text" xml:space="preserve">
     <value>露点温度</value>
   </data>
+  <data name="DownloadButton.Content" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="DownloadHistoricalWeatherText.Text" xml:space="preserve">
+    <value>下载数据以查看此位置的历史天气</value>
+  </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>更改</value>
   </data>

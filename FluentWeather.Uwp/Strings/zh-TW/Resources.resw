@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -124,31 +124,31 @@
     <value>關於</value>
   </data>
   <data name="About_AppDescription.Text" xml:space="preserve">
-    <value>Skyline是一款开源的天气应用。</value>
+    <value>Skyline 是一款開源的天氣應用程式。</value>
   </data>
   <data name="About_HelpTranslate.Text" xml:space="preserve">
-    <value>参与翻译</value>
+    <value>參與翻譯</value>
   </data>
   <data name="About_OpenSourceLicenses.Text" xml:space="preserve">
-    <value>开放源代码许可</value>
+    <value>開放源代碼許可</value>
   </data>
   <data name="About_OpenSourceLicensesDescription.Text" xml:space="preserve">
-    <value>本应用使用以下开源库</value>
+    <value>本項目使用以下開源庫</value>
   </data>
   <data name="About_ProjectUrl.Text" xml:space="preserve">
-    <value>项目地址</value>
+    <value>項目網址</value>
   </data>
   <data name="About_Sponsor.Text" xml:space="preserve">
-    <value>赞助</value>
+    <value>贊助</value>
   </data>
   <data name="AdminDistrict2TextBox.Header" xml:space="preserve">
-    <value>行政区2</value>
+    <value>行政區2</value>
   </data>
   <data name="AdminDistrict2TextBox.PlaceholderText" xml:space="preserve">
-    <value>市/区/县</value>
+    <value>市/區/縣</value>
   </data>
   <data name="AdminDistrictTextBox.Header" xml:space="preserve">
-    <value>行政区</value>
+    <value>行政區</value>
   </data>
   <data name="AdminDistrictTextBox.PlaceholderText" xml:space="preserve">
     <value>省/州</value>
@@ -163,7 +163,7 @@
     <value>空氣品質</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>一款开源的天气应用</value>
+    <value>一款開源的天氣應用程式</value>
   </data>
   <data name="AppDisplayName" xml:space="preserve">
     <value>天氣</value>
@@ -181,10 +181,10 @@
     <value>啟動時更新位置</value>
   </data>
   <data name="AverageHighTemp.Text" xml:space="preserve">
-    <value>平均高温</value>
+    <value>平均最高氣溫</value>
   </data>
   <data name="AverageLowTemp.Text" xml:space="preserve">
-    <value>平均低温</value>
+    <value>平均最低氣溫</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>佈景模糊半徑</value>
@@ -217,10 +217,10 @@
     <value>經典</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>關閉</value>
   </data>
   <data name="CloseButton.Content" xml:space="preserve">
-    <value>关闭</value>
+    <value>關閉</value>
   </data>
   <data name="CloudAmountDescription.Text" xml:space="preserve">
     <value>天空被雲所遮蔽的比例</value>
@@ -229,10 +229,10 @@
     <value>雲量</value>
   </data>
   <data name="CountryRegionTextBox.Header" xml:space="preserve">
-    <value>国家/地区</value>
+    <value>國家/地區</value>
   </data>
   <data name="CountryRegionTextBox.PlaceholderText" xml:space="preserve">
-    <value>国家/地区</value>
+    <value>國家/地區</value>
   </data>
   <data name="CurrentLocation" xml:space="preserve">
     <value>現時位置</value>
@@ -241,7 +241,7 @@
     <value>現時位置</value>
   </data>
   <data name="CustomOptions.Text" xml:space="preserve">
-    <value>自定义选项</value>
+    <value>自訂選項</value>
   </data>
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>自訂首頁</value>
@@ -253,10 +253,10 @@
     <value>數據提供者</value>
   </data>
   <data name="DataProviderSettingsExpanderDescription.Text" xml:space="preserve">
-    <value>选择数据提供商</value>
+    <value>選擇數據提供者</value>
   </data>
   <data name="DataProviderSettingsExpanderDescription_CompareHyperlink.Text" xml:space="preserve">
-    <value>功能对照</value>
+    <value>功能對照</value>
   </data>
   <data name="DataSettingsExpander.Header" xml:space="preserve">
     <value>數據</value>
@@ -279,14 +279,20 @@
   <data name="DewPointText.Text" xml:space="preserve">
     <value>露點溫度</value>
   </data>
+  <data name="DownloadButton.Content" xml:space="preserve">
+    <value>下載</value>
+  </data>
+  <data name="DownloadHistoricalWeatherText.Text" xml:space="preserve">
+    <value>下载数据以查看此位置的历史天气</value>
+  </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>更改</value>
   </data>
   <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
-    <value>关闭</value>
+    <value>關閉</value>
   </data>
   <data name="ErrorDialog.Title" xml:space="preserve">
-    <value>错误</value>
+    <value>錯誤</value>
   </data>
   <data name="FeelsLike.Text" xml:space="preserve">
     <value>體感</value>
@@ -301,38 +307,38 @@
     <value>跟隨系統</value>
   </data>
   <data name="GetButton.Content" xml:space="preserve">
-    <value>获取</value>
+    <value>取得</value>
   </data>
   <data name="GetDataFailed" xml:space="preserve">
-    <value>获取数据失败</value>
+    <value>取得數據失敗</value>
   </data>
   <data name="GetHistoricalWeatherItem.Text" xml:space="preserve">
-    <value>获取历史天气</value>
+    <value>取得歷史天氣</value>
   </data>
   <data name="HasPrecipitationText" xml:space="preserve">
-    <value>未来两小时有降水</value>
+    <value>未來兩小時有降水</value>
   </data>
   <data name="HighestTemperature" xml:space="preserve">
-    <value>最高温</value>
+    <value>最高溫</value>
   </data>
   <data name="HistoricalHighTemp.Text" xml:space="preserve">
-    <value>历史高温</value>
+    <value>歷史最高氣溫</value>
   </data>
   <data name="HistoricalLowTemp.Text" xml:space="preserve">
-    <value>历史低温</value>
+    <value>歷史最低氣溫</value>
   </data>
   <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
-    <value>通过此功能，您可以对比过去数十年的天气数据</value>
+    <value>透過此功能，您可以對比過去數十年的天氣數據</value>
   </data>
   <data name="HistoricalWeatherFeature.Text" xml:space="preserve">
-    <value>支持功能</value>
+    <value>支援功能</value>
   </data>
   <data name="HistoricalWeatherFeatureDescription.Text" xml:space="preserve">
-    <value>每日 历史最低/最高温度
-每日 平均最低/最高温度</value>
+    <value>每日 歷史最低/最高氣溫
+每日 平均最低/最高氣溫</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Analysing" xml:space="preserve">
-    <value>分析中...</value>
+    <value>分析中</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Done" xml:space="preserve">
     <value>完成</value>
@@ -414,7 +420,7 @@
     <value>最低温</value>
   </data>
   <data name="MoreInfoText.Text" xml:space="preserve">
-    <value>深入了解</value>
+    <value>了解详情</value>
     <comment>警告内了解详情</comment>
   </data>
   <data name="NoPrecipitationText" xml:space="preserve">
@@ -593,7 +599,7 @@
     <value>2 小時</value>
   </data>
   <data name="TrackText.Text" xml:space="preserve">
-    <value>追蹤</value>
+    <value>追踪</value>
     <comment>台风警告内快捷追踪</comment>
   </data>
   <data name="TransparentTilesSettingsCard.Description" xml:space="preserve">
