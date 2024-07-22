@@ -453,7 +453,7 @@
                                     Text="  &#xE099; " /><Run x:Uid="Sunset" />
                                 <Run Text="{x:Bind SelectedDailyForecast.SunSet, Converter={StaticResource ToShortTimeStringConverter}}" />
                             </TextBlock>
-                            <StackPanel Spacing="4">
+                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.WindScale, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run Text="{x:Bind SelectedDailyForecast.WindDirectionDescription}" />
                                     <Run Text="{x:Bind SelectedDailyForecast.WindScale}" />
@@ -466,7 +466,7 @@
                                     Text="{x:Bind converters:ConverterMethods.GetWindScaleDescription(SelectedDailyForecast.WindScale)}"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Spacing="4">
+                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.Humidity, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run x:Uid="HumidityText" />
                                     <Run Text="{x:Bind SelectedDailyForecast.Humidity}" />
@@ -478,7 +478,7 @@
                                     IsTextSelectionEnabled="True"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Spacing="4">
+                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.Visibility, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run x:Uid="VisibilityText" />
                                     <Run Text="{x:Bind SelectedDailyForecast.Visibility}" />
@@ -490,7 +490,7 @@
                                     IsTextSelectionEnabled="True"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Spacing="4">
+                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.Pressure, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run x:Uid="PressureText" />
                                     <Run Text="{x:Bind SelectedDailyForecast.Pressure}" />
@@ -502,7 +502,7 @@
                                     IsTextSelectionEnabled="True"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Spacing="4">
+                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run x:Uid="CloudAmountText" />
                                     <Run Text="{x:Bind SelectedDailyForecast.CloudAmount}" />
