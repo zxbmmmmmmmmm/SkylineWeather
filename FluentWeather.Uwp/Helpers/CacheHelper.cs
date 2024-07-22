@@ -1,16 +1,9 @@
 ﻿using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.ViewModels;
-
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;

@@ -1,6 +1,4 @@
-﻿using BingMapsRESTToolkit;
-using FluentWeather.Abstraction.Interfaces.Geolocation;
-using FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Models;
 using FluentWeather.BingGeolocationProvider.Helpers;
 using FluentWeather.Uwp.Shared;
 using System;

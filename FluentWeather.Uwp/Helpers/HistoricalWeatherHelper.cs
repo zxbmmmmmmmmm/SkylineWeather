@@ -1,15 +1,9 @@
 ﻿using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
-using FluentWeather.OpenMeteoProvider;
 using Microsoft.Extensions.DependencyInjection;
-using OpenMeteoApi;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;

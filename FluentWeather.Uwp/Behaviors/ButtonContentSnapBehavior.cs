@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,7 +6,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Microsoft.Xaml.Interactivity;
-using CompositionTarget = Windows.UI.Composition.CompositionTarget;
 
 namespace FluentWeather.Uwp.Behaviors;
 #nullable enable

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FluentWeather.Abstraction.Models;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 
 namespace FluentWeather.Uwp.ViewModels;
 

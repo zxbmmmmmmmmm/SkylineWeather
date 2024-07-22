@@ -1,10 +1,7 @@
-﻿using FluentWeather.Uwp.Controls.Popups;
-using FluentWeather.Uwp.Shared;
+﻿using FluentWeather.Uwp.Shared;
 using Microsoft.Xaml.Interactivity;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace FluentWeather.Uwp.Behaviors;
 

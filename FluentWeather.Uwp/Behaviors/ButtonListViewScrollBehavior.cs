@@ -2,8 +2,6 @@
 using Windows.UI.Xaml.Controls;
 using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml.Media;
-using System.ServiceModel.Channels;
-using Microsoft.Toolkit.Uwp.UI.Converters;
 
 namespace FluentWeather.Uwp.Behaviors;
 

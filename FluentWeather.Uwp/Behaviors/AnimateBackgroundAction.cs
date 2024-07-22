@@ -1,8 +1,6 @@
 ﻿using FluentWeather.Uwp.Pages;
 using Microsoft.Toolkit.Uwp.UI.Animations;
-using Microsoft.Toolkit.Uwp.UI.Behaviors;
 using Microsoft.Xaml.Interactivity;
-using System;
 using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Behaviors;

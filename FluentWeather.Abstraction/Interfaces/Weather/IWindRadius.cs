@@ -1,8 +1,4 @@
-﻿  using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FluentWeather.Abstraction.Interfaces.Weather;
+﻿namespace FluentWeather.Abstraction.Interfaces.Weather;
 #nullable enable
 public interface IWindRadius
 {

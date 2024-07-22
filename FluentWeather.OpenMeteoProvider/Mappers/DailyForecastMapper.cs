@@ -1,5 +1,4 @@
-﻿using FluentWeather.Abstraction.Models;
-using FluentWeather.OpenMeteoProvider.Models;
+﻿using FluentWeather.OpenMeteoProvider.Models;
 using System;
 using OpenMeteoApi.Models;
 using FluentWeather.Abstraction.Helpers;

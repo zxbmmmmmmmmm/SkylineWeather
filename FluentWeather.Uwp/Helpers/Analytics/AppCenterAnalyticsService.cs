@@ -1,9 +1,5 @@
-﻿using FluentWeather.Abstraction.Interfaces.Helpers;
-using FluentWeather.Uwp.Shared;
+﻿using FluentWeather.Uwp.Shared;
 using Microsoft.AppCenter.Crashes;
-using System;
-using System.Collections.Generic;
-using Windows.ApplicationModel;
 using AppCenter = Microsoft.AppCenter.Analytics.Analytics;
 using AppCenterService = Microsoft.AppCenter.AppCenter;
 

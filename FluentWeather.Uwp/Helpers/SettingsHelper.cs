@@ -1,8 +1,6 @@
 ﻿using FluentWeather.Abstraction.Interfaces.Helpers;
-using System;
 using System.Collections;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;

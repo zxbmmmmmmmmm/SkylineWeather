@@ -1,11 +1,7 @@
-﻿using System.Threading.Tasks;
-using Windows.System;
+﻿using Windows.System;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml;
-using System;
-using MetroLog.WinRT;
 using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers;

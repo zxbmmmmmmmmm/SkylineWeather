@@ -1,7 +1,6 @@
-﻿using FluentWeather.Abstraction.Interfaces.Weather;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 namespace FluentWeather.Abstraction.Models;
 public class WeatherCacheBase
 {

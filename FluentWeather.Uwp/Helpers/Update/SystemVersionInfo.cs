@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FluentWeather.Uwp.Helpers.Update;
+﻿namespace FluentWeather.Uwp.Helpers.Update;
 
 public readonly struct SystemVersionInfo
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using Windows.UI.Xaml.Markup;
+﻿using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Helpers;

@@ -1,7 +1,6 @@
 ﻿using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared;
 using Microsoft.UI.Xaml.Controls;
-using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 

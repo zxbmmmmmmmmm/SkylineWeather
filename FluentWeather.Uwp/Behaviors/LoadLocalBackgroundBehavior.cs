@@ -1,16 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Storage;
+﻿using Windows.Storage;
 using Windows.UI.Xaml;
 using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Microsoft.Xaml.Interactivity;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.Storage.Streams;
 using Windows.ApplicationModel;
 using FluentWeather.Uwp.Helpers;
-using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.Behaviors;

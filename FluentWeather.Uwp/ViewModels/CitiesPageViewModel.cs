@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
-using FluentWeather.Abstraction.Interfaces.Helpers;
-using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Helpers;
-using Microsoft.AppCenter.Ingestion.Models;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
-using Windows.UI.Xaml;
 using FluentWeather.Uwp.Shared;
-using Microsoft.AppCenter.Analytics;
 using FluentWeather.Uwp.Helpers.Analytics;
 
 namespace FluentWeather.Uwp.ViewModels;

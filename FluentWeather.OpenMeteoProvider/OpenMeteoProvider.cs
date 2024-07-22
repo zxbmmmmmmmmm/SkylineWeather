@@ -1,14 +1,10 @@
 ﻿using FluentWeather.Abstraction;
-using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.Abstraction.Models;
-using FluentWeather.DIContainer;
 using FluentWeather.OpenMeteoProvider.Mappers;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using OpenMeteoApi;
 using System.Collections.Generic;
-using FluentWeather.OpenMeteoProvider.Models;
 using OpenMeteoApi.Variables;
 using System;
 using System.Linq;

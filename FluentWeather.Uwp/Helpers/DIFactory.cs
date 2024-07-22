@@ -2,16 +2,11 @@
 using FluentWeather.Abstraction.Interfaces.Setting;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using FluentWeather.DIContainer;
-using System;
 using Microsoft.Extensions.DependencyInjection;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
-using System.Collections.Generic;
 using FluentWeather.Uwp.Shared;
-using FluentWeather.Uwp.QWeatherProvider;
 using static FluentWeather.DIContainer.Locator;
-using Windows.Media.Protection.PlayReady;
 using FluentWeather.Uwp.Helpers.Analytics;
-using FluentWeather.BingGeolocationProvider;
 
 namespace FluentWeather.Uwp.Helpers;
 

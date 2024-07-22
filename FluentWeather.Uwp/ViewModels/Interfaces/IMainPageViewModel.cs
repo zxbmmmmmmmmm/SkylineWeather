@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace FluentWeather.Uwp.ViewModels.Interfaces;
 

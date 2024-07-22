@@ -5,13 +5,10 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.Abstraction.Models.Exceptions;
 using FluentWeather.BingGeolocationProvider.Mappers;
 using FluentWeather.Uwp.Shared;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Location = BingMapsRESTToolkit.Location;
 

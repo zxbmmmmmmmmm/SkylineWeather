@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Windows.ApplicationModel;
+﻿using Windows.ApplicationModel;
 using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Helpers.Analytics;

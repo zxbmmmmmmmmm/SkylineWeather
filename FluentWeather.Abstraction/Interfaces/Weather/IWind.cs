@@ -1,7 +1,4 @@
-﻿using FluentWeather.Abstraction.Helpers;
-using FluentWeather.Abstraction.Models;
-
-namespace FluentWeather.Abstraction.Interfaces.Weather;
+﻿namespace FluentWeather.Abstraction.Interfaces.Weather;
 
 public interface IWind
 {

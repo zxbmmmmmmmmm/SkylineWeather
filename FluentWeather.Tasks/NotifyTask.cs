@@ -1,5 +1,4 @@
-﻿using FluentWeather.Abstraction.Interfaces.Weather;
-using FluentWeather.Abstraction.Models;
+﻿using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
@@ -8,18 +7,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
-using Windows.UI.Notifications;
 using static FluentWeather.Uwp.Shared.Common;
 using FluentWeather.Uwp.QWeatherProvider;
-using FluentWeather.Abstraction;
-using FluentWeather.OpenMeteoProvider;
 using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using Windows.ApplicationModel.Resources;
-using FluentWeather.Abstraction.Strings;
-using System.Globalization;
-using System.Runtime.ConstrainedExecution;
-using Windows.Data.Xml.Dom;
-using static FluentWeather.Abstraction.Models.WeatherCode;
 using TileHelper = FluentWeather.Uwp.Shared.Helpers.TileHelper;
 using FluentWeather.Uwp.Shared.Helpers;
 

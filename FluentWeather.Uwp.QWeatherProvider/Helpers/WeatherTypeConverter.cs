@@ -1,5 +1,4 @@
 ﻿using FluentWeather.Abstraction.Models;
-using System;
 using static FluentWeather.Abstraction.Models.WeatherCode;
 namespace FluentWeather.Uwp.QWeatherProvider.Helpers;
 

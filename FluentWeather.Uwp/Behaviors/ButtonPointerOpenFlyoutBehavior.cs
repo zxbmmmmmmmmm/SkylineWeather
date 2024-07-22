@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xaml.Interactivity;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 
 namespace FluentWeather.Uwp.Behaviors;
 

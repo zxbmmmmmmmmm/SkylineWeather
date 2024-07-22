@@ -1,17 +1,10 @@
-﻿using FluentWeather.Abstraction.Interfaces.Helpers;
-using FluentWeather.DIContainer;
-using FluentWeather.Uwp.Pages;
+﻿using FluentWeather.DIContainer;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.UI.Xaml;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Shared;
-using FluentWeather.Abstraction.Models.Exceptions;
 
 namespace FluentWeather.Uwp.Helpers;
 
