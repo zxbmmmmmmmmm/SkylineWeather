@@ -172,7 +172,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public int SplitViewOpenPaneLength
     {
-        get => GetSettings(nameof(SplitViewOpenPaneLength), 296);
+        get => GetSettings(nameof(SplitViewOpenPaneLength), 270);
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(SplitViewOpenPaneLength)] = value;

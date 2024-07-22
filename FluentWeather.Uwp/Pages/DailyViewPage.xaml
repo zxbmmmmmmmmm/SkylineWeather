@@ -344,14 +344,14 @@
                             SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherDailyBase">
-                                    <StackPanel Margin="0,16" Spacing="4">
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="4">
                                         <TextBlock
                                             HorizontalAlignment="Left"
                                             FontSize="12"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                             Text="{x:Bind Time, Converter={StaticResource ShortDateConverter}}" />
                                         <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <Image Height="40" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(WeatherType)}" />
+                                            <Image Height="40" Width="40" Source="{x:Bind converters:ConverterMethods.GetIconByWeather(WeatherType)}" />
                                             <StackPanel>
                                                 <TextBlock Text="{x:Bind Description}" />
                                                 <TextBlock
