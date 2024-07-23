@@ -1,4 +1,5 @@
-﻿using FluentWeather.Abstraction.Models;
+﻿using System.Globalization;
+using FluentWeather.Abstraction.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -31,6 +32,14 @@ public sealed partial class DailyViewPage : Page
     {
         CloseRequested?.Invoke(this, e);
     }
+
+    private readonly string _sunText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Sunday);
+    private readonly string _monText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Monday);
+    private readonly string _tueText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Tuesday);
+    private readonly string _wedText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Wednesday);
+    private readonly string _thuText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Thursday);
+    private readonly string _friText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Friday);
+    private readonly string _satText = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(DayOfWeek.Saturday);
 
     public event RoutedEventHandler CloseRequested;
 

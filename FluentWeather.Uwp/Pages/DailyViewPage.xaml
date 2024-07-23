@@ -306,31 +306,31 @@
                         <TextBlock
                             Grid.Column="0"
                             HorizontalAlignment="Center"
-                            Text="日" />
+                            Text="{x:Bind _sunText}" />
                         <TextBlock
                             Grid.Column="1"
                             HorizontalAlignment="Center"
-                            Text="一" />
+                            Text="{x:Bind _monText}" />
                         <TextBlock
                             Grid.Column="2"
                             HorizontalAlignment="Center"
-                            Text="二" />
+                            Text="{x:Bind _tueText}" />
                         <TextBlock
                             Grid.Column="3"
                             HorizontalAlignment="Center"
-                            Text="三" />
+                            Text="{x:Bind _wedText}" />
                         <TextBlock
                             Grid.Column="4"
                             HorizontalAlignment="Center"
-                            Text="四" />
+                            Text="{x:Bind _thuText}" />
                         <TextBlock
                             Grid.Column="5"
                             HorizontalAlignment="Center"
-                            Text="五" />
+                            Text="{x:Bind _friText}" />
                         <TextBlock
                             Grid.Column="6"
                             HorizontalAlignment="Center"
-                            Text="六" />
+                            Text="{x:Bind _satText}" />
                     </community:UniformGrid>
                     <!--  内容  -->
                     <Grid
@@ -577,14 +577,14 @@
 
                 <community:SegmentedItem
                     x:Name="DailyViewSelection"
+                    x:Uid="DailyViewSelection"
                     Width="128"
-                    Content="日视图"
                     Icon="{ui:FontIcon Glyph=&#xE8BF;}"
                     IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Daily}" />
                 <community:SegmentedItem
                     x:Name="MonthlyViewSelection"
+                    x:Uid="MonthlyViewSelection"
                     Width="128"
-                    Content="月视图"
                     Icon="{ui:FontIcon Glyph=&#xE787;}"
                     IsSelected="{x:Bind Mode, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Monthly}" />
             </community:Segmented>

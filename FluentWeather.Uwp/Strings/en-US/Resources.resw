@@ -246,6 +246,9 @@
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>Custom main page</value>
   </data>
+  <data name="DailyViewSelection.Content" xml:space="preserve">
+    <value>Daily</value>
+  </data>
   <data name="DarkSection.Content" xml:space="preserve">
     <value>Dark</value>
   </data>
@@ -418,6 +421,9 @@ Split with "|", support Regex</value>
   </data>
   <data name="LowestTemperature" xml:space="preserve">
     <value>Lowest</value>
+  </data>
+  <data name="MonthlyViewSelection.Content" xml:space="preserve">
+    <value>Monthly</value>
   </data>
   <data name="MoreInfoText.Text" xml:space="preserve">
     <value>Learn more</value>

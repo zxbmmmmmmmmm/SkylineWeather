@@ -246,6 +246,9 @@
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
     <value>ホームをカスタマイズ</value>
   </data>
+  <data name="DailyViewSelection.Content" xml:space="preserve">
+    <value>日视图</value>
+  </data>
   <data name="DarkSection.Content" xml:space="preserve">
     <value>ダーク</value>
   </data>
@@ -417,6 +420,9 @@
   </data>
   <data name="LowestTemperature" xml:space="preserve">
     <value>最低気温</value>
+  </data>
+  <data name="MonthlyViewSelection.Content" xml:space="preserve">
+    <value>月视图</value>
   </data>
   <data name="MoreInfoText.Text" xml:space="preserve">
     <value>了解详情</value>
