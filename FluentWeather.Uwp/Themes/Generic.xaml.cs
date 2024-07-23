@@ -9,7 +9,8 @@ public sealed partial class Generic:ResourceDictionary
     {
         this.InitializeComponent();
         var isEnglish = CultureInfo.CurrentCulture.Name.Contains("en");
-        this.Add("WeatherDescriptionFontSize" , isEnglish? 16 : 18);
+        this.Add("WeatherDescriptionFontSize", isEnglish ? 16 : 18);
+        this.Add("HourlyWeatherDescriptionVisibility", isEnglish ? Visibility.Collapsed : Visibility.Visible);
     }
     public static Visibility GetPrecipVisibility(int? precip)
     {

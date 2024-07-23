@@ -446,7 +446,8 @@
                                     FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                     FontSize="14"
                                     Text="&#xE018; " />
-                                <Run x:Uid="Sunrise" /><Run Text="{x:Bind SelectedDailyForecast.SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
+                                <Run x:Uid="Sunrise" />
+                                <Run Text="{x:Bind SelectedDailyForecast.SunRise, Converter={StaticResource ToShortTimeStringConverter}}" />
                                 <Run
                                     FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                     FontSize="14"

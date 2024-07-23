@@ -1065,7 +1065,7 @@
             </TextBlock>
             <Image
                 Width="36"
-                Height="36"
+                Height="36" HorizontalAlignment="Center"
                 Stretch="Uniform">
                 <Image.Source>
                     <BitmapImage
@@ -1076,7 +1076,7 @@
             </Image>
             <TextBlock
                 FontSize="{StaticResource WeatherDescriptionFontSize}"
-                MaxLines="2"
+                MaxLines="2" Visibility="{StaticResource HourlyWeatherDescriptionVisibility}"
                 Text="{x:Bind Description}"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
