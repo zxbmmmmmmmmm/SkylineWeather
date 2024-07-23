@@ -145,7 +145,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
         if(precip.Summary is "" or null)
         {
-            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations.Sum(p => p.Precipitation)> 0 ? "HasPrecipitationText" : "NoPrecipitationText");
+            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations?.Sum(p => p.Precipitation)> 0 ? "HasPrecipitationText" : "NoPrecipitationText");
         }
         Precipitation = precip;
     }
@@ -173,37 +173,44 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         };
         try
         {
-            await Task.WhenAll(tasks.ToArray());
+            try
+            {
+                await Task.WhenAll(tasks.ToArray());
 
-            if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
-            {
-                WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
             }
-            if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
+            finally
             {
-                try
+                if (DailyForecasts[0] is ITemperatureRange currentTemperatureRange)
                 {
-                    TileHelper.UpdateForecastTile(DailyForecasts);
-                    if (Common.Settings.IsWarningNotificationEnabled && Warnings.Count > 0)
+                    WeatherDescription = $"{WeatherNow.Description} {currentTemperatureRange.MinTemperature}° / {currentTemperatureRange.MaxTemperature}°";
+                }
+                if (CurrentGeolocation.Name == Common.Settings.DefaultGeolocation?.Name)
+                {
+                    try
                     {
-                        TileHelper.UpdateWarningTile(Warnings);
-                        TileHelper.UpdateBadge(Warnings.Count);
+                        TileHelper.UpdateForecastTile(DailyForecasts);
+                        if (Common.Settings.IsWarningNotificationEnabled && Warnings.Count > 0)
+                        {
+                            TileHelper.UpdateWarningTile(Warnings);
+                            TileHelper.UpdateBadge(Warnings.Count);
+                        }
                     }
+                    catch
+                    {
+
+                    }
+
                 }
-                catch
+                foreach (var hourly in HourlyForecasts)
                 {
-
+                    var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
+                    if (daily is null) continue;
+                    daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
+                    daily.HourlyForecasts?.Add(hourly);
                 }
+                await CacheHelper.CacheAsync(this);
+            }
 
-            }
-            foreach (var hourly in HourlyForecasts)
-            {
-                var daily = DailyForecasts.Find(p => p.Time.Date == hourly.Time.Date);
-                if (daily is null) continue;
-                daily.HourlyForecasts ??= new List<WeatherHourlyBase>();
-                daily.HourlyForecasts?.Add(hourly);
-            }
-            await CacheHelper.CacheAsync(this);
         }
         catch(HttpResponseException e)
         {
