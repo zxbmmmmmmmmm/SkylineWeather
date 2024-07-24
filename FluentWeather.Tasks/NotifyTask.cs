@@ -124,7 +124,7 @@ namespace FluentWeather.Tasks
             //var group = new AdaptiveGroup();
             //TileHelper.GetGroupChildren(group, trimmed);
             var largeGroup = new AdaptiveGroup();
-            foreach (var item in data)
+            foreach (var item in trimmed)
             {
                 largeGroup.Children.Add(TileHelper.GenerateTileSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
             }
@@ -141,9 +141,9 @@ namespace FluentWeather.Tasks
         }
         private void PushTomorrow(List<WeatherDailyBase> data)
         {
-            var trimmed = (data.Count >= 7) ? data.GetRange(1, 6) : data;;
+            var trimmed = (data.Count >= 7) ? data.GetRange(1, 6) : data;
             var largeGroup = new AdaptiveGroup();
-            foreach (var item in data)
+            foreach (var item in trimmed)
             {
                 largeGroup.Children.Add(TileHelper.GenerateSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
             }
