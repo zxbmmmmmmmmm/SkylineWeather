@@ -63,7 +63,7 @@ public sealed partial class DailyViewPage : Page
         set => SelectedIndex = Math.Clamp(value, 0, 6);
     }
 
-    public WeatherDailyBase SelectedDailyForecast => DailyForecasts?[SelectedIndex];
+    public WeatherDailyBase SelectedDailyForecast => (0<= SelectedIndex && SelectedIndex < DailyForecasts?.Count -1) ? DailyForecasts?[SelectedIndex]:null;
 
     private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -90,6 +90,7 @@ public sealed partial class DailyViewPage : Page
     {
         var page = (DailyViewPage)d;
         page.OnPropertyChanged(nameof(FirstColumn));
+        page.OnPropertyChanged(nameof(SelectedDailyForecast));
     }
 
     public List<WeatherDailyBase> DailyForecasts

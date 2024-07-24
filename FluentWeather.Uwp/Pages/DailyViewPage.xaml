@@ -340,7 +340,7 @@
                         <GridView
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            ItemsSource="{x:Bind DailyForecasts}"
+                            ItemsSource="{x:Bind DailyForecasts,Mode=OneWay}"
                             SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherDailyBase">
@@ -503,7 +503,7 @@
                                     IsTextSelectionEnabled="True"
                                     TextWrapping="Wrap" />
                             </StackPanel>
-                            <StackPanel Spacing="4"  Visibility="{x:Bind SelectedDailyForecast.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
+                            <StackPanel Spacing="4" Margin="0,0,0,24" Visibility="{x:Bind SelectedDailyForecast.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
                                 <TextBlock FontSize="16">
                                     <Run x:Uid="CloudAmountText" />
                                     <Run Text="{x:Bind SelectedDailyForecast.CloudAmount}" />
