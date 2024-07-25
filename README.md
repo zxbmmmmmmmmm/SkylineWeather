@@ -14,14 +14,16 @@ Skyline is a UWP weather application.
 ## Features:
 
 - Real time weather
-- Daily forecast (7 days)
+- Daily forecast (7-30 days)
 - Hourly forecast (24 hours)
 - Minute level precipitation forecast (2 hours)
+- Historical weather
 - Weather warning
 - 14 life indices
 - Sunrise and sunset time
 - Daily weather/warning notifications
 - Live tiles
+- Game Bar widget
 - Lock screen weather
 
 ## Help us translate
