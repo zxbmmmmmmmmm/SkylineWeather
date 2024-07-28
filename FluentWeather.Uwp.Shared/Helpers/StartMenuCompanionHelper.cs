@@ -54,6 +54,14 @@ public static class StartMenuCompanionHelper
                     IsSubtle = true,
                     Size = AdaptiveTextSize.Small
                 },
+                new AdaptiveTextBlock
+                {
+                    Spacing = AdaptiveSpacing.None,
+                    Text = DateTime.Now.ToString(),
+                    HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                    IsSubtle = true,
+                    Size = AdaptiveTextSize.Small
+                },
 
                 new AdaptiveImage
                 {

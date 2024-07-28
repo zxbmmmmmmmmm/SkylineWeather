@@ -20,6 +20,7 @@ namespace FluentWeather.Tasks
     {
         private IWeatherWarningProvider _warningProvider;
         private IDailyForecastProvider _dailyForecastProvider;
+        private ICurrentWeatherProvider _currentWeatherProvider;
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -31,12 +32,14 @@ namespace FluentWeather.Tasks
             {
                 var provider = new QWeatherProvider(Settings.QWeatherToken, Settings.QWeatherDomain, null, Settings.QWeatherPublicId);
                 _warningProvider = provider;
+                _currentWeatherProvider = provider;
                 _dailyForecastProvider = provider;
             }
             else
             {
                 var provider = new OpenMeteoProvider.OpenMeteoProvider();
                 _dailyForecastProvider = provider;
+                _currentWeatherProvider = provider;
             }
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
@@ -99,25 +102,30 @@ namespace FluentWeather.Tasks
             }
 
 
-            var data = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
+            var daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
+            var current = await _currentWeatherProvider.GetCurrentWeather(lon, lat);
+            var info = new WeatherCardData { Current = current, Daily = daily ,Location = Settings.DefaultGeolocation};
+            var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
+            await card.UpdateStartMenuCompanionAsync();
             if (isTileAvailable)
             {
-                TileHelper.UpdateForecastTile(data);
+                TileHelper.UpdateForecastTile(daily);
                 LogManager.GetLogger(nameof(NotifyTask)).Info("Tile Updated");
             }
             if (DateTime.Now.Hour < 18)
             {
                 if (!isPushTodayAvailable) return;
-                PushToday(data);
+                PushToday(daily);
                 Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
             }
             else
             {
                 if (!isPushTomorrowAvailable) return;
-                PushTomorrow(data);
+                PushTomorrow(daily);
                 Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
             }
         }
+
         private void PushToday(List<WeatherDailyBase> data)
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
