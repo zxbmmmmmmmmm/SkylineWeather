@@ -7,6 +7,7 @@ using Windows.UI.Notifications;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.Toolkit.Uwp;
 
 namespace FluentWeather.Uwp.Shared.Helpers
 {
@@ -285,7 +286,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
         }
 
 
-        public static string GetWeek(DateTime date)
+        public static string GetWeek(this DateTime date)
         {
             if (date.Day == DateTime.Today.Day&& CultureInfo.CurrentCulture.Name is "zh-CN")
                 return "ms-resource:Today";
@@ -295,6 +296,15 @@ namespace FluentWeather.Uwp.Shared.Helpers
                 return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期","周");
             return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
         }
-
+        public static string GetWeek2(this DateTime date)
+        {
+            if (date.Day == DateTime.Today.Day && CultureInfo.CurrentCulture.Name is "zh-CN")
+                return "Today".GetLocalized();
+            if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
+                return "Tomorrow".GetLocalized();
+            if (CultureInfo.CurrentCulture.Name is "zh-CN")
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
+            return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+        }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using FluentWeather.Abstraction.Models;
+using System.Threading.Tasks;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Storage;
 using static FluentWeather.Abstraction.Models.WeatherCode;
 
 namespace FluentWeather.Uwp.Shared.Helpers;
 
 public static class AssetsHelper
 {
-    public static string GetWeatherIconName(WeatherCode weatherType)
+    public static string GetWeatherIconName(this WeatherCode weatherType)
     {
         return weatherType switch
         {
@@ -30,7 +34,41 @@ public static class AssetsHelper
             _ => "PartlyCloudy.png",
         };
     }
-    public static string GetBackgroundImageName(WeatherCode weather)
+
+    public static string GetBase64String(this WeatherCode weatherType)
+    {
+        return weatherType switch
+        {
+            SlightHail or ModerateOrHeavyHail => AssetBase64Resized32.BlowingHail,
+            HeavyRain => AssetBase64Resized32.HeavyRain,
+            ModerateRain => AssetBase64Resized32.LightRain,
+            SlightRain => AssetBase64Resized32.LightRain,
+            ModerateRainShowers => AssetBase64Resized32.LightRain,
+            PartlyCloudy => AssetBase64Resized32.Cloudy,
+            Overcast => AssetBase64Resized32.VeryCloudy,
+            SlightSnowFall => AssetBase64Resized32.LightSnow,
+            HeavySnowFall => AssetBase64Resized32.HeavySnow,
+            Fog => AssetBase64Resized32.Fog,
+            LightFreezingRain or HeavyFreezingRain => AssetBase64Resized32.FreezingRain,
+            SlightSleet or ModerateOrHeavySleet => AssetBase64Resized32.RainSnow,
+            ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm => AssetBase64Resized32.Thunder,
+            Clear => AssetBase64Resized32.SunnyDay,
+            Haze => AssetBase64Resized32.HazeSmoke,
+            MainlyClear => AssetBase64Resized32.MostlySunnyDay,
+            ViolentRainShowers or ViolentRainShowers or SlightRainShowers => AssetBase64Resized32.RainShowersDay,
+            SlightSnowShowers or HeavySnowShowers => AssetBase64Resized32.SnowShowersDay,
+            _ => AssetBase64Resized32.PartlyCloudyDay,
+        };
+    }
+    public static async Task<Uri> ToBase64Url(this Uri sourceUri)
+    {
+        var file = await StorageFile.GetFileFromApplicationUriAsync(sourceUri);
+        var buffer = await FileIO.ReadBufferAsync(file);
+        var bytes = buffer.ToArray();
+        var result = Convert.ToBase64String(bytes);
+        return new Uri("data:image/png;base64," + result);
+    }
+    public static string GetBackgroundImageName(this WeatherCode weather)
     {
         var code = (int)weather;
         if (code is 0)

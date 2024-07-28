@@ -73,6 +73,17 @@ public static class ConverterMethods
         return new BitmapImage(GetIconUriByWeather(code));
     }
 
+    /// <summary>
+    /// 缩短风向描述
+    /// </summary>
+    /// <param name="description"></param>
+    /// <returns></returns>
+    public static string GetShortWindDirectionDescription(this string description)
+    {
+        var index = description.IndexOf("偏", StringComparison.Ordinal);
+        if (index is -1 or 0) return description;
+        return description.AsSpan(0, index).ToString() + "风";
+    }
     public static Uri GetIconUriByWeather(this WeatherCode code)
     {
         var name = GetImageNameDay(code);

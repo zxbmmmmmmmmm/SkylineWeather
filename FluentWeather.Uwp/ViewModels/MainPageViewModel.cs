@@ -189,6 +189,11 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                     try
                     {
                         TileHelper.UpdateForecastTile(DailyForecasts);
+                        var card = await StartMenuCompanionHelper.CreateCompanionCard(
+                            new WeatherCardData()
+                            { Current = WeatherNow, Daily = DailyForecasts, Location = CurrentGeolocation }
+                            );
+                        await card.UpdateStartMenuCompanionAsync();
                         if (Common.Settings.IsWarningNotificationEnabled && Warnings.Count > 0)
                         {
                             TileHelper.UpdateWarningTile(Warnings);
