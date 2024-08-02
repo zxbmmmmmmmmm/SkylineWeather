@@ -75,7 +75,7 @@ public class WeatherToIconConverter : IValueConverter
 
 
 
-public class ConvertTemperatureUniter : IValueConverter
+public class TemperatureUnitConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
@@ -89,7 +89,7 @@ public class ConvertTemperatureUniter : IValueConverter
             result = double.Parse(str);
         }
         var round = parameter is true or "true";
-        return ConverterMethods.ConvertTemperatureUnit(result, round);
+        return result.ConvertTemperatureUnit(round);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
