@@ -106,11 +106,7 @@ namespace FluentWeather.Tasks
 
 
             var daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
-            var current = await _currentWeatherProvider.GetCurrentWeather(lon, lat);
-            var air = await _airConditionProvider.GetAirCondition(lon, lat);
-            var info = new WeatherCardData { Current = current, Daily = daily ,Location = Settings.DefaultGeolocation,AirQuality = air};
-            var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
-            await card.UpdateStartMenuCompanionAsync();
+
             if (isTileAvailable)
             {
                 TileHelper.UpdateForecastTile(daily);
@@ -120,14 +116,38 @@ namespace FluentWeather.Tasks
             {
                 if (!isPushTodayAvailable) return;
                 PushToday(daily);
-                Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+                try
+                {
+                    await PushCard(lon, lat, daily);
+                }
+                finally
+                {
+                    Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+
+                }
             }
             else
             {
                 if (!isPushTomorrowAvailable) return;
                 PushTomorrow(daily);
-                Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
+
+                try
+                {
+                    await PushCard(lon, lat, daily);
+                }
+                finally
+                {
+                    Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
+                }
             }
+        }
+
+        private async Task PushCard(double lon,double lat,List<WeatherDailyBase> daily)
+        {
+            var air = await _airConditionProvider.GetAirCondition(lon, lat);
+            var info = new WeatherCardData { Daily = daily, Location = Settings.DefaultGeolocation, AirQuality = air };
+            var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
+            await card.UpdateStartMenuCompanionAsync();
         }
 
         private void PushToday(List<WeatherDailyBase> data)
@@ -145,6 +165,7 @@ namespace FluentWeather.Tasks
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
                 .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(largeGroup);
+
             builder.Show(toast =>
             {
                 toast.ExpirationTime = DateTime.Now.AddHours(12);

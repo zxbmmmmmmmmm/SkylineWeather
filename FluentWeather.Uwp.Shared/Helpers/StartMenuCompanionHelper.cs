@@ -66,7 +66,7 @@ public static class StartMenuCompanionHelper
 
                 new AdaptiveImage
                 {
-                    Url = await new Uri("ms-appx:///Assets/Weather/" + data.Current.WeatherType.GetWeatherIconName()).ToBase64Url(),
+                    Url = await new Uri("ms-appx:///Assets/Weather/" + data.Daily[0].WeatherType.GetWeatherIconName()).ToBase64Url(),
                     HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
                     PixelHeight = 64,
                     PixelWidth = 64,
@@ -95,7 +95,7 @@ public static class StartMenuCompanionHelper
                             [
                                 new AdaptiveTextBlock
                                 {
-                                    Text = data.Current.WindDirectionDescription,
+                                    Text = data.Daily[0].WindDirectionDescription,
                                     Size = AdaptiveTextSize.Small,
                                     HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
                                     IsSubtle= true,
