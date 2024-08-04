@@ -312,6 +312,9 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>Follow system</value>
   </data>
+  <data name="Forecast" xml:space="preserve">
+    <value>Forecast</value>
+  </data>
   <data name="GetButton.Content" xml:space="preserve">
     <value>Get</value>
   </data>
@@ -649,6 +652,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="UpdateText.Text" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View details</value>
   </data>
   <data name="ViewUpdate" xml:space="preserve">
     <value>View</value>

@@ -18,6 +18,7 @@ using Windows.UI.WebUI;
 using System.Globalization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage.Streams;
+using Microsoft.Toolkit.Uwp;
 
 namespace FluentWeather.Uwp.Shared.Helpers;
 
@@ -44,7 +45,7 @@ public static class StartMenuCompanionHelper
     {
         var card = new AdaptiveCard("1.1")
         {
-            Speak = "预报",
+            Speak = "Forecast".GetLocalized(),
             Body =
             [
                 new AdaptiveTextBlock
@@ -75,7 +76,7 @@ public static class StartMenuCompanionHelper
 
                 new AdaptiveTextBlock
                 {
-                    Text = $"{data.Current.Temperature.ConvertTemperatureUnit()}° {data.Current.Description}",
+                    Text = $"{data.Daily[0].MinTemperature.ConvertTemperatureUnit()}° - {data.Daily[0].MaxTemperature.ConvertTemperatureUnit()}°",
                     HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
                     Size = AdaptiveTextSize.Large,
                     Spacing = AdaptiveSpacing.None,
@@ -94,7 +95,7 @@ public static class StartMenuCompanionHelper
                             [
                                 new AdaptiveTextBlock
                                 {
-                                    Text = data.Current.WindDirectionDescription.Replace("偏",""),
+                                    Text = data.Current.WindDirectionDescription,
                                     Size = AdaptiveTextSize.Small,
                                     HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
                                     IsSubtle= true,
@@ -102,7 +103,7 @@ public static class StartMenuCompanionHelper
                                 new AdaptiveTextBlock
                                 {
                                     HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    Text = $"{data.Current.WindScale} 级",
+                                    Text = $"{data.Daily[0].WindScale} "+ "Level".GetLocalized(),
                                     Spacing= AdaptiveSpacing.None,
                                 }
                             ]
@@ -115,7 +116,7 @@ public static class StartMenuCompanionHelper
                             [
                                 new AdaptiveTextBlock
                                 {
-                                    Text = "空气质量",
+                                    Text = data.AirQuality.AqiCategory,
                                     Size = AdaptiveTextSize.Small,
                                     HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
                                     IsSubtle= true,
@@ -123,7 +124,7 @@ public static class StartMenuCompanionHelper
                                 new AdaptiveTextBlock
                                 {
                                     HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    Text = "45 优",
+                                    Text = data.AirQuality.Aqi.ToString(),
                                     Spacing= AdaptiveSpacing.None,
                                 }
                             ]
@@ -150,11 +151,11 @@ public static class StartMenuCompanionHelper
                             {
                                 HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
                                 Color = AdaptiveTextColor.Accent,
-                                Text = "查看更多",
+                                Text = "ViewDetails".GetLocalized(),
                             }
                         ],
 
-                        SelectAction = new AdaptiveOpenUrlAction { Title = "查看更多", Url = new Uri("weather://")},
+                        SelectAction = new AdaptiveOpenUrlAction { Title = "ViewDetails".GetLocalized(), Url = new Uri("weather://")},
 
                     },],
 
@@ -371,4 +372,7 @@ public static class StartMenuCompanionHelper
 
     [JsonPropertyName("location")]
     public GeolocationBase Location { get; set; }
+
+    [JsonPropertyName("airQuality")]
+    public AirConditionBase AirQuality { get; set; }
 }

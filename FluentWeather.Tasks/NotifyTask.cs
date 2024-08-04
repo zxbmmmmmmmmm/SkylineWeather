@@ -21,6 +21,7 @@ namespace FluentWeather.Tasks
         private IWeatherWarningProvider _warningProvider;
         private IDailyForecastProvider _dailyForecastProvider;
         private ICurrentWeatherProvider _currentWeatherProvider;
+        private IAirConditionProvider _airConditionProvider;
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -34,12 +35,14 @@ namespace FluentWeather.Tasks
                 _warningProvider = provider;
                 _currentWeatherProvider = provider;
                 _dailyForecastProvider = provider;
+                _airConditionProvider = provider;
             }
             else
             {
                 var provider = new OpenMeteoProvider.OpenMeteoProvider();
                 _dailyForecastProvider = provider;
                 _currentWeatherProvider = provider;
+                _airConditionProvider = provider;
             }
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
@@ -104,7 +107,8 @@ namespace FluentWeather.Tasks
 
             var daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
             var current = await _currentWeatherProvider.GetCurrentWeather(lon, lat);
-            var info = new WeatherCardData { Current = current, Daily = daily ,Location = Settings.DefaultGeolocation};
+            var air = await _airConditionProvider.GetAirCondition(lon, lat);
+            var info = new WeatherCardData { Current = current, Daily = daily ,Location = Settings.DefaultGeolocation,AirQuality = air};
             var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
             await card.UpdateStartMenuCompanionAsync();
             if (isTileAvailable)
