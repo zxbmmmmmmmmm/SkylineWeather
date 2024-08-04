@@ -93,13 +93,10 @@
             <uap3:Properties>
               <AdaptiveCardAppDataLocalRelativePath>StartMenuCompanion.json</AdaptiveCardAppDataLocalRelativePath>
               <PlacementPreference>Right</PlacementPreference>
-              <RefreshCardLaunchUri>ms-phone:startup?ref=StartMenu</RefreshCardLaunchUri>
+              <RefreshCardLaunchUri>weather://</RefreshCardLaunchUri>
               <Icon>ms-appx:///Assets/StoreLogo.png</Icon>
               <CompanionSettingName>Skyline Weather</CompanionSettingName>
-              <CompanionSettingExtendedName>Skyline Weather Start Menu Companion</CompanionSettingExtendedName>
-              <DetailedSettingsSettingName>Report bugs</DetailedSettingsSettingName>
-              <DetailedSettingsLaunchName>GitHub</DetailedSettingsLaunchName>
-              <DetailedSettingsLaunchUri>https://github.com/zxbmmmmmmmmm/SkylineWeather</DetailedSettingsLaunchUri>
+              <CompanionSettingExtendedName>ms-resource:CompanionDescirption</CompanionSettingExtendedName>
               <DefaultState>Available</DefaultState>
             </uap3:Properties>
           </uap3:AppExtension>
