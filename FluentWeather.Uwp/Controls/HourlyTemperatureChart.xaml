@@ -48,7 +48,7 @@
                     <chart:LinearAxis.LabelTemplate>
                         <DataTemplate>
                             <TextBlock>
-                                <Run Text="{Binding Converter={StaticResource ConvertTemperatureUniter}, ConverterParameter=true}" /><Run Text="°" />
+                                <Run Text="{Binding Converter={StaticResource TemperatureUnitConverter}, ConverterParameter=true}" /><Run Text="°" />
                             </TextBlock>
                         </DataTemplate>
                     </chart:LinearAxis.LabelTemplate>
@@ -126,7 +126,7 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
                             <TextBlock>
-                                <Run Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
+                                <Run Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource TemperatureUnitConverter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </StackPanel>
@@ -140,7 +140,7 @@
                             BorderThickness="1"
                             CornerRadius="{ThemeResource ControlCornerRadius}">
                             <TextBlock Margin="8,6">
-                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource ConvertTemperatureUniter}}" /><Run Text="°" />
+                                <Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Temperature, Converter={StaticResource TemperatureUnitConverter}}" /><Run Text="°" />
                                 <Run Text="{Binding DataPoint.DataItem.Description}" />
                             </TextBlock>
                         </Border>

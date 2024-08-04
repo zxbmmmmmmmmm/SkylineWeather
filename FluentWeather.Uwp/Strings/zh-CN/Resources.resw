@@ -309,6 +309,9 @@
   <data name="FollowSystemSection.Content" xml:space="preserve">
     <value>跟随系统</value>
   </data>
+  <data name="Forecast" xml:space="preserve">
+    <value>预报</value>
+  </data>
   <data name="GetButton.Content" xml:space="preserve">
     <value>获取</value>
   </data>
@@ -646,6 +649,9 @@
   </data>
   <data name="UpdateText.Text" xml:space="preserve">
     <value>更新</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>查看更多</value>
   </data>
   <data name="ViewUpdate" xml:space="preserve">
     <value>查看</value>

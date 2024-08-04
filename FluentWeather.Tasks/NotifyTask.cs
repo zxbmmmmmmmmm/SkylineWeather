@@ -20,6 +20,8 @@ namespace FluentWeather.Tasks
     {
         private IWeatherWarningProvider _warningProvider;
         private IDailyForecastProvider _dailyForecastProvider;
+        private ICurrentWeatherProvider _currentWeatherProvider;
+        private IAirConditionProvider _airConditionProvider;
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -31,12 +33,16 @@ namespace FluentWeather.Tasks
             {
                 var provider = new QWeatherProvider(Settings.QWeatherToken, Settings.QWeatherDomain, null, Settings.QWeatherPublicId);
                 _warningProvider = provider;
+                _currentWeatherProvider = provider;
                 _dailyForecastProvider = provider;
+                _airConditionProvider = provider;
             }
             else
             {
                 var provider = new OpenMeteoProvider.OpenMeteoProvider();
                 _dailyForecastProvider = provider;
+                _currentWeatherProvider = provider;
+                _airConditionProvider = provider;
             }
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
@@ -99,25 +105,51 @@ namespace FluentWeather.Tasks
             }
 
 
-            var data = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
+            var daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
+
             if (isTileAvailable)
             {
-                TileHelper.UpdateForecastTile(data);
+                TileHelper.UpdateForecastTile(daily);
                 LogManager.GetLogger(nameof(NotifyTask)).Info("Tile Updated");
             }
             if (DateTime.Now.Hour < 18)
             {
                 if (!isPushTodayAvailable) return;
-                PushToday(data);
-                Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+                PushToday(daily);
+                try
+                {
+                    await PushCard(lon, lat, daily);
+                }
+                finally
+                {
+                    Settings.LastPushedTime = DateTime.Now.Date.DayOfYear;
+
+                }
             }
             else
             {
                 if (!isPushTomorrowAvailable) return;
-                PushTomorrow(data);
-                Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
+                PushTomorrow(daily);
+
+                try
+                {
+                    await PushCard(lon, lat, daily);
+                }
+                finally
+                {
+                    Settings.LastPushedTimeTomorrow = DateTime.Now.Date.DayOfYear;
+                }
             }
         }
+
+        private async Task PushCard(double lon,double lat,List<WeatherDailyBase> daily)
+        {
+            var air = await _airConditionProvider.GetAirCondition(lon, lat);
+            var info = new WeatherCardData { Daily = daily, Location = Settings.DefaultGeolocation, AirQuality = air };
+            var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
+            await card.UpdateStartMenuCompanionAsync();
+        }
+
         private void PushToday(List<WeatherDailyBase> data)
         {
             var trimmed = (data.Count >= 7) ? data.GetRange(0, 7) : data;
@@ -133,6 +165,7 @@ namespace FluentWeather.Tasks
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
                 .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
                 .AddVisualChild(largeGroup);
+
             builder.Show(toast =>
             {
                 toast.ExpirationTime = DateTime.Now.AddHours(12);

@@ -38,7 +38,7 @@
             <valueConverters:ToShortTimeStringConverter x:Key="ToShortTimeStringConverter" />
             <valueConverters:WindScaleToDescriptionConverter x:Key="WindScaleToDescriptionConverter" />
             <valueConverters:ListPropertyNullToVisibilityConverter x:Key="ListPropertyNullToVisibilityConverter" />
-            <valueConverters:ConvertTemperatureUniter x:Key="ConvertTemperatureUniter" />
+            <valueConverters:TemperatureUnitConverter x:Key="TemperatureUnitConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

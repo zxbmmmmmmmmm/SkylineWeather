@@ -83,6 +83,24 @@
             </uap3:Properties>
           </uap3:AppExtension>
         </uap3:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension
+            Name="com.microsoft.startmenucompanion"
+            Id="BettaFish.SkylineWeather.Companion"
+            DisplayName="Skyline Weather"
+            Description="Skyline Weather Start Menu Companion"
+            PublicFolder="public">
+            <uap3:Properties>
+              <AdaptiveCardAppDataLocalRelativePath>StartMenuCompanion.json</AdaptiveCardAppDataLocalRelativePath>
+              <PlacementPreference>Right</PlacementPreference>
+              <RefreshCardLaunchUri>weather://</RefreshCardLaunchUri>
+              <Icon>ms-appx:///Assets/StoreLogo.png</Icon>
+              <CompanionSettingName>Skyline Weather</CompanionSettingName>
+              <CompanionSettingExtendedName>ms-resource:CompanionDescirption</CompanionSettingExtendedName>
+              <DefaultState>Available</DefaultState>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="weather">
             <uap:Logo>Assets\Logo.png</uap:Logo>

@@ -189,11 +189,6 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                     try
                     {
                         TileHelper.UpdateForecastTile(DailyForecasts);
-                        if (Common.Settings.IsWarningNotificationEnabled && Warnings.Count > 0)
-                        {
-                            TileHelper.UpdateWarningTile(Warnings);
-                            TileHelper.UpdateBadge(Warnings.Count);
-                        }
                     }
                     catch
                     {
