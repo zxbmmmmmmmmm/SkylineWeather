@@ -9,6 +9,12 @@ using FluentWeather.Uwp.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using FluentWeather.Uwp.Shared;
 using FluentWeather.Uwp.Helpers.Analytics;
+using FluentWeather.Uwp.Shared.Helpers;
+using Windows.ApplicationModel;
+using Windows.UI.StartScreen;
+using Windows.Networking.Sockets;
+using FluentWeather.Tasks;
+using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -73,11 +79,19 @@ public sealed partial class CitiesPageViewModel:ObservableObject
         Query = city.Name;
         Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackCitySaved(city.Name);
     }
+
     [RelayCommand]
     public void DeleteCity(GeolocationBase item)
     {
         Cities.Remove(item);
     }
+
+    [RelayCommand]
+    public async Task PinSecondaryTileAsync(GeolocationBase item)
+    {
+        await TileHelper.PinSecondaryTileToStartAsync(item);
+    }
+
 
     public async void GetCurrentCity()
     {

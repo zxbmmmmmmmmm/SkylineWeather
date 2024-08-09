@@ -8,11 +8,57 @@ using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.Toolkit.Uwp;
+using Windows.ApplicationModel;
+using Windows.UI.Shell;
+using System.Threading.Tasks;
+using Windows.UI.StartScreen;
+using TileSize = Microsoft.Toolkit.Uwp.Notifications.TileSize;
+using System.Linq;
 
 namespace FluentWeather.Uwp.Shared.Helpers
 {
     public static class TileHelper
     {
+        public static async Task PinSecondaryTileToTaskBarAsync(GeolocationBase geolocation)
+        {
+            var access = Windows.ApplicationModel.LimitedAccessFeatures.TryUnlockFeature("com.microsoft.windows.taskbar.requestPinSecondaryTile","jf0w/jdkHVCaehrYkTQLMg==","we3nmnswjxrbg has registered their use of com.microsoft.windows.taskbar.requestPinSecondaryTile with Microsoft and agrees to the terms of use.");
+
+            if ((access.Status == LimitedAccessFeatureStatus.Available)||(access.Status == LimitedAccessFeatureStatus.AvailableWithoutToken))
+            {
+                TaskbarManager taskbarManager = TaskbarManager.GetDefault();
+
+                if (taskbarManager != null)
+                {
+                    // Initialize the tile (all properties below are required)
+                    var tile = CreateSecondaryTile(geolocation);
+                    // Pin it to the taskbar
+                    bool isPinnedToTaskBar = await taskbarManager.RequestPinSecondaryTileAsync(tile);
+                }
+            }
+        }
+        public static async Task PinSecondaryTileToStartAsync(GeolocationBase geolocation)
+        {
+            if (SecondaryTile.Exists(geolocation.Location.GetHashCode().ToString())) return;
+            // Pin it to the taskbar
+            var tile = CreateSecondaryTile(geolocation);
+            bool isPinned = await tile.RequestCreateAsync();
+        }
+
+        public static SecondaryTile CreateSecondaryTile(GeolocationBase geolocation)
+        {
+            var tile = new SecondaryTile(geolocation.Location.GetHashCode().ToString());
+            tile.DisplayName = geolocation.Name;
+            tile.Arguments = $"location={geolocation.Location.GetHashCode()}";
+            tile.VisualElements.Square44x44Logo = new Uri("ms-appx:///Assets/Square44x44Logo.png");
+            tile.VisualElements.Square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo.png");
+            tile.VisualElements.Square310x310Logo = new Uri("ms-appx:///Assets/LargeTile.png");
+            tile.VisualElements.Wide310x150Logo = new Uri("ms-appx:///Assets/Wide310x150Logo.png");
+
+            tile.VisualElements.ShowNameOnSquare150x150Logo = true;
+            tile.VisualElements.ShowNameOnWide310x150Logo = true;
+            tile.VisualElements.ShowNameOnSquare310x310Logo = true;
+            return tile;
+        }
 
         public static void UpdateBadge(int value)
         {

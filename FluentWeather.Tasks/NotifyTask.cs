@@ -13,6 +13,9 @@ using FluentWeather.Abstraction.Interfaces.WeatherProvider;
 using Windows.ApplicationModel.Resources;
 using TileHelper = FluentWeather.Uwp.Shared.Helpers.TileHelper;
 using FluentWeather.Uwp.Shared.Helpers;
+using Windows.UI.Notifications;
+using Windows.UI.StartScreen;
+using System.Linq;
 
 namespace FluentWeather.Tasks
 {
@@ -54,7 +57,7 @@ namespace FluentWeather.Tasks
 
             await PushDaily(lon,lat);
             await PushWarnings(lon, lat);
-
+            await UpdateSecondaryTiles();
 
             deferral.Complete();
         }
@@ -193,6 +196,27 @@ namespace FluentWeather.Tasks
 
         }
 
+
+
+        private async Task UpdateSecondaryTiles()
+        {
+            var tiles = await SecondaryTile.FindAllAsync();
+            foreach (var tile in tiles)
+            {
+
+                var geolocation = Settings.SavedCities.FirstOrDefault(p => p.Location.GetHashCode().ToString() == tile.TileId);
+                if (Settings.DefaultGeolocation.Location.GetHashCode().ToString() == tile.TileId)
+                {
+                    geolocation = Settings.DefaultGeolocation;
+                }
+                if (geolocation is null)
+                    continue;
+                var daily = await _dailyForecastProvider.GetDailyForecasts(geolocation.Location.Longitude, geolocation.Location.Latitude);
+                var dailyNotification= new TileNotification(TileHelper.GenerateForecastTileContent(daily).GetXml()) { Tag = "forecast" };
+                var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(tile.TileId);
+                updater.Update(dailyNotification);
+            }
+        }
     }
 
 

@@ -55,6 +55,11 @@
                             x:Uid="GetHistoricalWeatherItem"
                             Click="GetHistoricalWeatherItem_Click"
                             Icon="Download" />
+                        <MenuFlyoutItem
+                                    x:Uid="PinSecondaryTilesItem"                                   
+                                    Command="{x:Bind vm:CitiesPageViewModel.Instance.PinSecondaryTileCommand}"
+                                    CommandParameter="{x:Bind ViewModel.CurrentCity}"
+                                    Icon="Pin" />
                     </MenuFlyout>
                 </controls:CityItem.ContextFlyout>
             </controls:CityItem>
@@ -92,6 +97,11 @@
                                     Command="{x:Bind vm:CitiesPageViewModel.Instance.DeleteCityCommand}"
                                     CommandParameter="{x:Bind}"
                                     Icon="Delete" />
+                                <MenuFlyoutItem
+                                    x:Uid="PinSecondaryTilesItem"                                   
+                                    Command="{x:Bind vm:CitiesPageViewModel.Instance.PinSecondaryTileCommand}"
+                                    CommandParameter="{x:Bind}"
+                                    Icon="Pin" />
                             </MenuFlyout>
                         </controls:CityItem.ContextFlyout>
                     </controls:CityItem>
