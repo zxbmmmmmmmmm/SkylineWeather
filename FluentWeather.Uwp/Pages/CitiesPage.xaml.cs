@@ -26,25 +26,30 @@ public sealed partial class CitiesPage : Page
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
         if (App.ActiveArguments is null)
         {
-            SetSelectedLocation(Common.Settings.DefaultGeolocation?.Name);
+            SetSelectedLocation(Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString());
             return;
         }
         SetSelectedLocation(App.ActiveArguments.Replace("City_", ""));
+
+        if (MainPageViewModel.Instance.CurrentGeolocation is null)
+        {
+            CitiesPageViewModel.Instance.GetCurrentCity();
+        }
     }
 
-    public void SetSelectedLocation(string name)
+    public void SetSelectedLocation(string hash)
     {
         if (Common.Settings.DefaultGeolocation?.Name is null)
         {
             CurrentCityView.SelectedIndex = 0;
             return;
         }
-        if (ViewModel.CurrentCity is null || name == ViewModel.CurrentCity.Name)
-        {
-            CurrentCityView.SelectedIndex = 0;
-            return;
-        }
-        var location = ViewModel.Cities.FirstOrDefault(p => p.Name == name);
+        //if (ViewModel.CurrentCity is null || hash == ViewModel.CurrentCity.Location.GetHashCode().ToString())
+        //{
+        //    CurrentCityView.SelectedIndex = 0;
+        //    return;
+        //}
+        var location = ViewModel.Cities.FirstOrDefault(p => p.Location.GetHashCode().ToString() == hash);
         if (location is null) return;
         var index = ViewModel.Cities.IndexOf(location);
         CitiesView.SelectedIndex = index;
@@ -55,25 +60,25 @@ public sealed partial class CitiesPage : Page
         ((Frame)Parent)?.Navigate(typeof(SettingsPage),null,Theme.GetSplitPaneNavigationTransition());
     }
 
-    private void CitiesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CitiesView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (CitiesView.SelectedIndex == -1) return;
         CurrentCityView.SelectedIndex = -1;
         MainPageViewModel.Instance.CurrentGeolocation = CitiesPageViewModel.Instance.Cities[CitiesView.SelectedIndex];
         if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
-            CitiesPageViewModel.Instance.GetCurrentCity();
+            await CitiesPageViewModel.Instance.GetCurrentCity();
         }
     }
 
-    private void CurrentCityView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void CurrentCityView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (CurrentCityView.SelectedIndex != 0) return;
         MainPageViewModel.Instance.CurrentGeolocation = CitiesPageViewModel.Instance.CurrentCity;
         CitiesView.SelectedIndex = -1;
         if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
-            CitiesPageViewModel.Instance.GetCurrentCity();
+            await CitiesPageViewModel.Instance.GetCurrentCity();
         }
     }
 

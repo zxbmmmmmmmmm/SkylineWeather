@@ -93,7 +93,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     }
 
 
-    public async void GetCurrentCity()
+    public async Task GetCurrentCity()
     {
         var location = await LocationHelper.GetGeolocation();
         if (Common.Settings.DefaultGeolocation?.Name is null)

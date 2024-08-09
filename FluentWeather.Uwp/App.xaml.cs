@@ -14,6 +14,7 @@ using FluentWeather.Uwp.Helpers.Analytics;
 using FluentWeather.Uwp.Shared.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Gaming.XboxGameBar;
+using FluentWeather.Uwp.ViewModels;
 
 namespace FluentWeather.Uwp;
 
@@ -96,7 +97,8 @@ sealed partial class App : Application
             {
                 widgetArgs = e as XboxGameBarWidgetActivatedEventArgs;
             }
-            if (scheme.Equals("weather")){
+            if (scheme.Equals("weather"))
+            {
 
             }
         }
@@ -202,6 +204,11 @@ sealed partial class App : Application
             Window.Current.Activate();
         }
         ActiveArguments = e.Arguments;
+
+        if(e.TileId is not null or "")
+        {
+            ActiveArguments = e.TileId;
+        }
 
         if(Common.Settings.IsAnalyticsEnabled)
         {

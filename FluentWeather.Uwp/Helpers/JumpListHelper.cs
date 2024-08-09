@@ -20,14 +20,14 @@ public static class JumpListHelper
     }
     private static JumpListItem CreateDefaultItem(GeolocationBase geolocation)
     {
-        var item = JumpListItem.CreateWithArguments("City_" + geolocation.Name,geolocation.Name);
+        var item = JumpListItem.CreateWithArguments(geolocation.Location.GetHashCode().ToString(),geolocation.Name);
         item.GroupName = ResourceLoader.GetForCurrentView().GetString("CurrentLocation");
         item.Logo = new Uri("ms-appx:///Assets/Icons/CurrentLocation.png");
         return item;
     }
     private static JumpListItem CreateItem(GeolocationBase geolocation)
     {
-        var item = JumpListItem.CreateWithArguments("City_" + geolocation.Name, geolocation.Name);
+        var item = JumpListItem.CreateWithArguments(geolocation.Location.GetHashCode().ToString(), geolocation.Name);
         item.GroupName = ResourceLoader.GetForCurrentView().GetString("SavedLocations");
         item.Logo = new Uri("ms-appx:///Assets/Icons/SavedCity.png");
         return item;
