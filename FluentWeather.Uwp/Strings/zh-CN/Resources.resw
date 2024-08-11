@@ -462,6 +462,9 @@
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>个性化</value>
   </data>
+  <data name="PinSecondaryTilesItem.Text" xml:space="preserve">
+    <value>固定到开始菜单</value>
+  </data>
   <data name="Pressure" xml:space="preserve">
     <value>气压</value>
   </data>

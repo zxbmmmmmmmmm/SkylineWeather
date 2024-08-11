@@ -465,6 +465,9 @@ Split with "|", support Regex</value>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>Personalization</value>
   </data>
+  <data name="PinSecondaryTilesItem.Text" xml:space="preserve">
+    <value>Pin to Start</value>
+  </data>
   <data name="Pressure" xml:space="preserve">
     <value>Pressure</value>
   </data>

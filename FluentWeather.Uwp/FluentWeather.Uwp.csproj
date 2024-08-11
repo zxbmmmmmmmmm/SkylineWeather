@@ -4,7 +4,7 @@
   <PropertyGroup>
     <LangVersion>latestMajor</LangVersion>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>273B17C3FD4B2E52382899B29331EFADCD351294</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>E39CF1FCA51EDC5BD1FCA218F4565B737622C059</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -226,6 +226,7 @@
     <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\FeatureTokenGenerator.cs" />
     <Compile Include="Helpers\HistoricalWeatherHelper.cs" />
     <Compile Include="Helpers\InfoBarHelper.cs" />
     <Compile Include="Helpers\JumpListHelper.cs" />
@@ -444,6 +445,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="FluentWeather.Uwp_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -695,7 +697,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_TemporaryKey.pfx" />
     <None Include="settings.xamlstyler" />
     <PRIResource Include="Strings\zh-TW\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
