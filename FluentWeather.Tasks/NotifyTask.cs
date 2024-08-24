@@ -17,6 +17,7 @@ using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 using System.Linq;
 using Microsoft.Toolkit.Uwp;
+using FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
 namespace FluentWeather.Tasks
 {
@@ -168,9 +169,9 @@ namespace FluentWeather.Tasks
             var largeGroup = new AdaptiveGroup();
             foreach (var item in trimmed)
             {
-                largeGroup.Children.Add(TileHelper.GenerateTileSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
+                largeGroup.Children.Add(TileHelper.GenerateTileSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature.ConvertTemperatureUnit(), item.MinTemperature.ConvertTemperatureUnit()));
             }
-            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description,trimmed[0].MaxTemperature, trimmed[0].MinTemperature);
+            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description,trimmed[0].MaxTemperature.ConvertTemperatureUnit(), trimmed[0].MinTemperature.ConvertTemperatureUnit());
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) +".png"))
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
@@ -190,9 +191,9 @@ namespace FluentWeather.Tasks
             var largeGroup = new AdaptiveGroup();
             foreach (var item in trimmed)
             {
-                largeGroup.Children.Add(TileHelper.GenerateSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
+                largeGroup.Children.Add(TileHelper.GenerateSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature.ConvertTemperatureUnit(), item.MinTemperature.ConvertTemperatureUnit()));
             }
-            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description, trimmed[0].MaxTemperature, trimmed[0].MinTemperature);
+            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description, trimmed[0].MaxTemperature.ConvertTemperatureUnit(), trimmed[0].MinTemperature.ConvertTemperatureUnit());
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) + ".png"))
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("TomorrowWeather"))

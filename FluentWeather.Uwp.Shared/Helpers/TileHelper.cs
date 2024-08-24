@@ -141,7 +141,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
             var tempStr = "";
             if (CultureInfo.CurrentCulture.Name is "zh-CN")
             {
-                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
             }
             else
             {
@@ -294,7 +294,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
             var tempStr = "";
             if (CultureInfo.CurrentCulture.Name is "zh-CN")
             {
-                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
             }
             else
             {
