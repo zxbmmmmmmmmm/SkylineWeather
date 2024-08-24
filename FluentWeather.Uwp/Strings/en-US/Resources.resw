@@ -294,6 +294,9 @@
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditDefaultPositionItem.Text" xml:space="preserve">
+    <value>Edit default location</value>
+  </data>
   <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
     <value>Close</value>
   </data>

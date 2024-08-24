@@ -291,6 +291,9 @@
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>更改</value>
   </data>
+  <data name="EditDefaultPositionItem.Text" xml:space="preserve">
+    <value>更改默认位置</value>
+  </data>
   <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
     <value>关闭</value>
   </data>

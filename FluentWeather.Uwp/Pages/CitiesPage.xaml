@@ -51,15 +51,14 @@
                 <controls:CityItem.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem
+                                    x:Uid="EditDefaultPositionItem"                                   
+                                    Command="{x:Bind vm:CitiesPageViewModel.Instance.EditDefaultLocationCommand}"
+                                    Icon="Edit" />
+                        <MenuFlyoutItem
                             x:Name="GetHistoricalWeatherItem"
                             x:Uid="GetHistoricalWeatherItem"
                             Click="GetHistoricalWeatherItem_Click"
                             Icon="Download" />
-                        <MenuFlyoutItem
-                                    x:Uid="PinSecondaryTilesItem"                                   
-                                    Command="{x:Bind vm:CitiesPageViewModel.Instance.PinSecondaryTileCommand}"
-                                    CommandParameter="{x:Bind ViewModel.CurrentCity}"
-                                    Icon="Pin" />
                     </MenuFlyout>
                 </controls:CityItem.ContextFlyout>
             </controls:CityItem>

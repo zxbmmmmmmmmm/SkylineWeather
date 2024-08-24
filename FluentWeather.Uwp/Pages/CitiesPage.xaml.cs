@@ -24,7 +24,7 @@ public sealed partial class CitiesPage : Page
         base.OnNavigatedTo(e);
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
-        if (App.ActiveArguments is null or "App")
+        if (App.ActiveArguments is null or "" or "App")
         {
             SetSelectedLocation(Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString());
         }
