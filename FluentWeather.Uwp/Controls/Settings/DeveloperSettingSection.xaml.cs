@@ -30,5 +30,11 @@ namespace FluentWeather.Uwp.Controls.Settings
             var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("MetroLog");
             await Launcher.LaunchFolderAsync(folder);
         }
+
+        private void CleanAnnouncementsVisibility_Click(object sender, RoutedEventArgs e)
+        {
+            Common.Settings.ClosedAnnouncements = new();
+            Common.Settings.ViewedAnnouncements = new();
+        }
     }
 }

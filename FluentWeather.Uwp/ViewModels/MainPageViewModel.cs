@@ -57,6 +57,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     private List<IndicesBase> _indices;
 
     [ObservableProperty]
+    private List<Announcement> _announcements = Announcement.GetAvailableAnnouncements().Where(p => !Common.Settings.ClosedAnnouncements.Contains(p.Name)).ToList();
+
+    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalPrecipitation))]
     [NotifyPropertyChangedFor(nameof(HasPrecipitation))]
     private PrecipitationBase _precipitation;

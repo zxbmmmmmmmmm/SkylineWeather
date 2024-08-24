@@ -38,6 +38,24 @@ public static class Common
 }
 public sealed class Settings : INotifyPropertyChanged
 {
+    public List<string> ViewedAnnouncements
+    {
+        get => GetSettingsWithClass(nameof(ViewedAnnouncements), new List<string>());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(ViewedAnnouncements)] = JsonSerializer.Serialize(value);
+            OnPropertyChanged();
+        }
+    }
+    public List<string> ClosedAnnouncements
+    {
+        get => GetSettingsWithClass(nameof(ClosedAnnouncements), new List<string>());
+        set
+        {
+            ApplicationData.Current.LocalSettings.Values[nameof(ClosedAnnouncements)] = JsonSerializer.Serialize(value);
+            OnPropertyChanged();
+        }
+    }
     public string IgnoreWarningWords
     {
         get => GetSettings(nameof(IgnoreWarningWords), "");

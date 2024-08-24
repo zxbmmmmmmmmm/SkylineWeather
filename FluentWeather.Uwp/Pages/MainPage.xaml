@@ -182,6 +182,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!--  当前天气  -->
                     <Grid
@@ -900,6 +901,14 @@
                             <behaviors:ListViewOpenFlyoutBehavior />
                         </i:Interaction.Behaviors>
                     </controls:AdaptiveGridView>
+                    <ListView Grid.Row="8" Padding="0,16,0,0" ItemsSource="{x:Bind ViewModel.Announcements,Mode=OneWay}" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Announcement">
+                                <controls1:AnnouncementItem HorizontalAlignment="Center" Announcement="{x:Bind}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
                 </Grid>
             </ScrollViewer>
         </RefreshContainer>

@@ -30,6 +30,9 @@
                 Click="OOBECard_Click"
                 Header="Enter OOBE"
                 IsClickEnabled="True" />
+            <controls:SettingsCard x:Name="CleanAnnouncementsVisibility"
+                                   Header="Clean announcements view history" IsClickEnabled="True" Padding="12"
+                                   Click="CleanAnnouncementsVisibility_Click"/>
             <controls:SettingsCard Padding="12" Header="Set Language">
                 <TextBox Text="{x:Bind app:Common.Settings.Language,Mode=TwoWay}" />
             </controls:SettingsCard>

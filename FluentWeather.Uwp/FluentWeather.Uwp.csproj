@@ -145,6 +145,9 @@
     <Compile Include="Behaviors\ButtonListViewScrollBehavior.cs" />
     <Compile Include="Behaviors\LoadLocalBackgroundBehavior.cs" />
     <Compile Include="Behaviors\SetParallaxViewSourceBehavior.cs" />
+    <Compile Include="Controls\AnnouncementItem.xaml.cs">
+      <DependentUpon>AnnouncementItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CityItem.xaml.cs">
       <DependentUpon>CityItem.xaml</DependentUpon>
     </Compile>
@@ -461,6 +464,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AnnouncementItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CityItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
