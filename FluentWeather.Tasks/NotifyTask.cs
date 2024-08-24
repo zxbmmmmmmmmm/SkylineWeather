@@ -35,7 +35,7 @@ namespace FluentWeather.Tasks
 
             if(Settings.ProviderConfig is Uwp.Shared.ProviderConfig.QWeather)
             {
-                var provider = new QWeatherProvider(Settings.QWeatherToken, Settings.QWeatherDomain, null, Settings.QWeatherPublicId);
+                var provider = new QWeatherProvider();
                 _warningProvider = provider;
                 _currentWeatherProvider = provider;
                 _dailyForecastProvider = provider;
