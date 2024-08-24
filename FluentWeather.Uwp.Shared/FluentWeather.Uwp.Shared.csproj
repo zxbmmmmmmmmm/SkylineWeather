@@ -135,6 +135,7 @@
     <Compile Include="Helpers\ValueConverters\DataConverters.cs" />
     <Compile Include="Helpers\ValueConverters\DateConverter.cs" />
     <Compile Include="Helpers\ValueConverters\ListPropertyNullToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\ListViewSelectionParameterConverter.cs" />
     <Compile Include="Helpers\ValueConverters\VisibilityInverter.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Helpers\ThemeHelper.cs" />
@@ -175,7 +176,6 @@
       <Name>FluentWeather.OpenMeteoProvider</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

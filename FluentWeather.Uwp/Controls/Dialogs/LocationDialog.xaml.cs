@@ -60,6 +60,7 @@ public sealed partial class LocationDialog : ContentDialog
     [RelayCommand]
     private void SelectSuggestedCities(GeolocationBase location)
     {
+        if(location is null) return;
         Query = location.Name;
         Name = location.Name;
         Latitude = location.Location.Latitude.ToString(CultureInfo.InvariantCulture);

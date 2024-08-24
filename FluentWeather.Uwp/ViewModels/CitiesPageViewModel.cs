@@ -16,6 +16,7 @@ using Windows.Networking.Sockets;
 using FluentWeather.Tasks;
 using Windows.UI.Xaml;
 using System.ComponentModel;
+using Windows.ApplicationModel.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -45,7 +46,18 @@ public sealed partial class CitiesPageViewModel:ObservableObject
     [RelayCommand]
     public async Task EditDefaultLocation()
     {
-        await DialogManager.OpenDialogAsync(new LocationDialog());
+        var dialog = new LocationDialog();
+        await DialogManager.OpenDialogAsync(dialog);
+        if (dialog.Result is null) return;
+        Common.Settings.DefaultGeolocation = dialog.Result;
+        try
+        {
+            await CacheHelper.DeleteUnused();
+        }
+        finally
+        {
+            await CoreApplication.RequestRestartAsync(string.Empty);
+        }
     }
 
     [RelayCommand]

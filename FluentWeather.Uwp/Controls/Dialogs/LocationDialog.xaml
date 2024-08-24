@@ -8,7 +8,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:local="using:FluentWeather.Uwp.Controls.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls" xmlns:models="using:FluentWeather.Abstraction.Models"
     x:Uid="LocationDialog"
     Closing="ContentDialog_Closing"
     DefaultButton="Primary"
@@ -24,7 +24,6 @@
                 x:Name="SearchLocationBox"
                 x:Uid="SearchAutoSuggestBox"
                 ItemTemplate="{ThemeResource GeolocationSuggestTemplate}"
-                ItemsSource="{x:Bind SuggestedCities, Mode=OneWay}"
                 QueryIcon="Find"
                 Text="{x:Bind Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 UpdateTextOnSelect="False">
@@ -40,6 +39,27 @@
                     </core:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
             </AutoSuggestBox>
+            <muxc:ProgressBar IsIndeterminate="True" Visibility="{x:Bind FindCitiesCommand.IsRunning,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,2,0,0"/>
+            <ListView Margin="-4,4,-4,0" ItemsSource="{x:Bind SuggestedCities,Mode=OneWay}" MaxHeight="165">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:GeolocationBase">
+                        <StackPanel Padding="0,8">
+                            <TextBlock Text="{x:Bind Name}" />
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                <Run Text="{x:Bind Country}" />
+                                <Run Text="{x:Bind AdmDistrict}" />
+                                <Run Text="{x:Bind AdmDistrict2}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+                <i:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{x:Bind SelectSuggestedCitiesCommand}" InputConverter="{StaticResource ListViewSelectionParameterConverter}" />
+                    </core:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </ListView>
             <Button
                 x:Name="ShowCustomLocationButton"
                 Margin="0,12,0,0"
@@ -57,8 +77,7 @@
                 Margin="0,12,0,0"
                 Spacing="12"
                 Visibility="Collapsed">
-                <TextBox x:Uid="LocationNameTextBox"
-                    Text="{x:Bind Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Uid="LocationNameTextBox" Text="{x:Bind Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <muxc:NumberBox
                         x:Uid="LongitudeNumberBox"
@@ -77,16 +96,16 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <TextBox
-                        MinWidth="100"
                         x:Uid="CountryRegionTextBox"
+                        MinWidth="100"
                         Text="{x:Bind Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
-                        MinWidth="100"
                         x:Uid="AdminDistrictTextBox"
+                        MinWidth="100"
                         Text="{x:Bind AdmDistrict, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
-                        MinWidth="100"
                         x:Uid="AdminDistrict2TextBox"
+                        MinWidth="100"
                         Text="{x:Bind AdmDistrict2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
