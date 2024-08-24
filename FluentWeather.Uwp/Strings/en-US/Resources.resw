@@ -389,6 +389,9 @@ Split with "|", support Regex</value>
   <data name="IgnoreWarningButton.Content" xml:space="preserve">
     <value>Set block word</value>
   </data>
+  <data name="LargeTileFormat" xml:space="preserve">
+    <value />
+  </data>
   <data name="LatestVersion" xml:space="preserve">
     <value>You're up-to-date!</value>
   </data>
@@ -437,6 +440,9 @@ Split with "|", support Regex</value>
   </data>
   <data name="NoPrecipitationText" xml:space="preserve">
     <value>No Precipitation for the next two hours</value>
+  </data>
+  <data name="NotificationFormat" xml:space="preserve">
+    <value>{0}, highest {1}°, lowest {2}°</value>
   </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>Notification</value>
@@ -706,6 +712,9 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
     <value>We recommend using Open-Meteo data provider</value>
+  </data>
+  <data name="WideTileFormat" xml:space="preserve">
+    <value>Humidity: {0}%, pressure: {1}hPa</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Override the Mica backdrop on Windows 11.

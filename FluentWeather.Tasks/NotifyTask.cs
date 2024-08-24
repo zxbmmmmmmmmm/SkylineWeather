@@ -16,6 +16,7 @@ using FluentWeather.Uwp.Shared.Helpers;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 using System.Linq;
+using Microsoft.Toolkit.Uwp;
 
 namespace FluentWeather.Tasks
 {
@@ -106,9 +107,15 @@ namespace FluentWeather.Tasks
                 isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
                 if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
             }
+            var daily = new List<WeatherDailyBase>();
+            try
+            {
+                daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
 
+            }
+            catch (Exception ex) { 
+            }
 
-            var daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
 
             if (isTileAvailable)
             {
@@ -163,10 +170,12 @@ namespace FluentWeather.Tasks
             {
                 largeGroup.Children.Add(TileHelper.GenerateTileSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
             }
+            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description,trimmed[0].MaxTemperature, trimmed[0].MinTemperature);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) +".png"))
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
-                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
+                .AddText(description)
+                //.AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}°")
                 .AddVisualChild(largeGroup);
 
             builder.Show(toast =>
@@ -183,10 +192,11 @@ namespace FluentWeather.Tasks
             {
                 largeGroup.Children.Add(TileHelper.GenerateSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature, item.MinTemperature));
             }
+            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description, trimmed[0].MaxTemperature, trimmed[0].MinTemperature);
             var builder = new ToastContentBuilder()
                 .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) + ".png"))
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("TomorrowWeather"))
-                .AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}{(trimmed[0]).MaxTemperature}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}{(trimmed[0]).MinTemperature}°")
+                .AddText(description)
                 .AddVisualChild(largeGroup);
             builder.Show(toast =>
             {

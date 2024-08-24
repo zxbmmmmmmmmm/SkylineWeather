@@ -435,6 +435,9 @@
   <data name="NoPrecipitationText" xml:space="preserve">
     <value>未来两小时无降水</value>
   </data>
+  <data name="NotificationFormat" xml:space="preserve">
+    <value>{0}, 最高 {1}°, 最低 {2}°</value>
+  </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>通知</value>
   </data>
@@ -703,6 +706,9 @@
   </data>
   <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
     <value>对于中国大陆的用户，推荐使用和风天气以获得更精确的数据</value>
+  </data>
+  <data name="WideTileFormat" xml:space="preserve">
+    <value>湿度:{0}%  气压:{1}hPa</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Win11下将覆盖Mica

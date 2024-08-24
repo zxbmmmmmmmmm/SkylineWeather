@@ -138,7 +138,15 @@ namespace FluentWeather.Uwp.Shared.Helpers
                 .AddAdaptiveTileVisualChild(new AdaptiveImage { Source = "Assets/Weather/Resized/24/" + AssetsHelper.GetWeatherIconName(daily[0].WeatherType), HintAlign = AdaptiveImageAlign.Center })
                 .SetTextStacking(TileTextStacking.Center);
 
-
+            var tempStr = "";
+            if (CultureInfo.CurrentCulture.Name is "zh-CN")
+            {
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+            }
+            else
+            {
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindSpeed}km/h";
+            }
             //var mediumGroup = new AdaptiveGroup();
             //GetGroupChildren(mediumGroup, daily.GetRange(0, 2));
 
@@ -151,15 +159,20 @@ namespace FluentWeather.Uwp.Shared.Helpers
                 .SetTextStacking(TileTextStacking.Center)
                 .SetBranding(TileBranding.Name)
                 .SetDisplayName(daily[0].Description, TileSize.Medium);
-
             // Wide Tile
             builder.AddTile(TileSize.Wide)
                 .AddText($"{daily[0].Description}", TileSize.Wide, AdaptiveTextStyle.Title)
-                .AddText($"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}", TileSize.Wide, AdaptiveTextStyle.Body)
-                .AddText($"{ResourceLoader.GetForViewIndependentUse().GetString("Humidity")}:{daily[0].Humidity}% {ResourceLoader.GetForViewIndependentUse().GetString("Pressure")}:{daily[0].Pressure}hPa", TileSize.Wide, AdaptiveTextStyle.CaptionSubtle)
-                .SetBranding(TileBranding.Auto, TileSize.Wide)
-                .SetTextStacking(TileTextStacking.Center);
+                .AddText(tempStr, TileSize.Wide, AdaptiveTextStyle.Body);
 
+            //.AddText($"{ResourceLoader.GetForViewIndependentUse().GetString("Humidity")}:{daily[0].Humidity}% {ResourceLoader.GetForViewIndependentUse().GetString("Pressure")}:{daily[0].Pressure}hPa", TileSize.Wide, AdaptiveTextStyle.CaptionSubtle)              
+
+            if (daily[0].Humidity is not null)
+            {
+                builder.AddText(string.Format("WideTileFormat".GetLocalized(), daily[0].Humidity, daily[0].Pressure), TileSize.Wide, AdaptiveTextStyle.CaptionSubtle);
+            }
+
+            builder.SetBranding(TileBranding.Auto, TileSize.Wide)
+                .SetTextStacking(TileTextStacking.Center);
             // Large tile
             builder.AddTile(TileSize.Large, GenerateLargeTileContent(daily))
 
@@ -177,7 +190,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
             //builder.Content.Visual.BaseUri = new Uri("Assets/", UriKind.Relative);
 
             builder.Content.Visual.LockDetailedStatus1 = daily[0].Description;
-            builder.Content.Visual.LockDetailedStatus2 = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+            builder.Content.Visual.LockDetailedStatus2 = tempStr;
 
 
             return builder.Content;
@@ -278,6 +291,15 @@ namespace FluentWeather.Uwp.Shared.Helpers
 
         public static TileBindingContentAdaptive GenerateLargeTileContent(List<WeatherDailyBase> daily)
         {
+            var tempStr = "";
+            if (CultureInfo.CurrentCulture.Name is "zh-CN")
+            {
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindDirectionDescription} {daily[0].WindScale}{ResourceLoader.GetForViewIndependentUse().GetString("Level")}";
+            }
+            else
+            {
+                tempStr = $"{daily[0].MaxTemperature.ConvertTemperatureUnit()}° / {daily[0].MinTemperature.ConvertTemperatureUnit()}° {daily[0].WindDirectionDescription} {daily[0].WindSpeed}km/h";
+            }
             var content = new TileBindingContentAdaptive()
             {
                 Children =
@@ -308,7 +330,7 @@ namespace FluentWeather.Uwp.Shared.Helpers
 
                                     new AdaptiveText()
                                     {
-                                        Text = (daily[0]).MaxTemperature.ConvertTemperatureUnit() + "° / " +daily[0].MinTemperature.ConvertTemperatureUnit() + "° " +(daily[0]).WindDirectionDescription  + (daily[0]).WindScale + ResourceLoader.GetForViewIndependentUse().GetString("Level")
+                                        Text = tempStr
                                     },
                                 },
                                 HintTextStacking = AdaptiveSubgroupTextStacking.Center,

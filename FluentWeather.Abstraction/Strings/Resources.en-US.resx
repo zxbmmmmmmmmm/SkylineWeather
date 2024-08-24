@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -223,57 +223,57 @@
     <value>Unknown</value>
   </data>
   <data name="WindDirection_East" xml:space="preserve">
-    <value>East wind</value>
+    <value>E</value>
   </data>
   <data name="WindDirection_EastNorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
+    <value>NNE</value>
   </data>
   <data name="WindDirection_EastSouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
+    <value>ESE</value>
   </data>
   <data name="WindDirection_None" xml:space="preserve">
     <value>No sustainable wind direction</value>
   </data>
   <data name="WindDirection_North" xml:space="preserve">
-    <value>North wind</value>
+    <value>N</value>
   </data>
   <data name="WindDirection_NorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
+    <value>NE</value>
   </data>
   <data name="WindDirection_NorthNorthEast" xml:space="preserve">
-    <value>Northeast wind</value>
+    <value>NNE</value>
   </data>
   <data name="WindDirection_NorthNorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
+    <value>NNW</value>
   </data>
   <data name="WindDirection_NorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
+    <value>NW</value>
   </data>
   <data name="WindDirection_Rotational" xml:space="preserve">
-    <value>Rotational wind</value>
+    <value>Rotational</value>
   </data>
   <data name="WindDirection_South" xml:space="preserve">
-    <value>South wind</value>
+    <value>S</value>
   </data>
   <data name="WindDirection_SouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
+    <value>SE</value>
   </data>
   <data name="WindDirection_SouthSouthEast" xml:space="preserve">
-    <value>Southeast wind</value>
+    <value>SSE</value>
   </data>
   <data name="WindDirection_SouthSouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
+    <value>SSW</value>
   </data>
   <data name="WindDirection_SouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
+    <value>SW</value>
   </data>
   <data name="WindDirection_West" xml:space="preserve">
-    <value>West wind</value>
+    <value>W</value>
   </data>
   <data name="WindDirection_WestNorthWest" xml:space="preserve">
-    <value>Northwest wind</value>
+    <value>WNW</value>
   </data>
   <data name="WindDirection_WestSouthWest" xml:space="preserve">
-    <value>Southwest wind</value>
+    <value>WSW</value>
   </data>
 </root>
