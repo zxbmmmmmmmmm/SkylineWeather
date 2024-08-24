@@ -24,7 +24,7 @@ public sealed partial class CitiesPage : Page
         base.OnNavigatedTo(e);
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
-        if (App.ActiveArguments is null)
+        if (App.ActiveArguments is null or "App")
         {
             SetSelectedLocation(Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString());
         }
@@ -41,7 +41,7 @@ public sealed partial class CitiesPage : Page
 
     public void SetSelectedLocation(string hash)
     {
-        if (Common.Settings.DefaultGeolocation?.Name is null)
+        if ( Common.Settings.DefaultGeolocation?.Name is null || hash == Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString())
         {
             CurrentCityView.SelectedIndex = 0;
             return;

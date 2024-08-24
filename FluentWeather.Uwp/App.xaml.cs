@@ -205,7 +205,7 @@ sealed partial class App : Application
         }
         ActiveArguments = e.Arguments;
 
-        if(e.TileId is not null or "")
+        if(e.TileId is not null && e.TileId != "" && e.TileId != "App")
         {
             ActiveArguments = e.TileId;
         }
