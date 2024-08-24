@@ -19,7 +19,7 @@ public sealed partial class CitiesPage : Page
 
     }
 
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected async override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
@@ -27,13 +27,15 @@ public sealed partial class CitiesPage : Page
         if (App.ActiveArguments is null)
         {
             SetSelectedLocation(Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString());
-            return;
         }
-        SetSelectedLocation(App.ActiveArguments.Replace("City_", ""));
+        else
+        {
+            SetSelectedLocation(App.ActiveArguments.Replace("City_", ""));
+        }
 
         if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
-            CitiesPageViewModel.Instance.GetCurrentCity();
+            await CitiesPageViewModel.Instance.GetCurrentCity();
         }
     }
 
