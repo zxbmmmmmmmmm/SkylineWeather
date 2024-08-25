@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 
 namespace FluentWeather.Abstraction.Models;
-public class Announcement
+public class Announcement(int id,string name)
 {
-    public required int Id { get; set; }
-    public required string Name { get; set; }
+    public int Id { get; set; } = id;
+    public string Name { get; set; } = name;
     public bool IsAvailable => DateTime.Now <= ExpiredAt && AvailableRegions.Contains(RegionInfo.CurrentRegion.Name);
     public bool IsVisible { get; set; }
     public bool CloseWhenView { get; set; }
@@ -24,14 +24,14 @@ public class Announcement
     public DateTime ExpiredAt { get; set; }
     public string LinkText { get; set; } = "View more";
 
+    
+
     public static List<Announcement> GetAllAnnouncements()
     {
         return [
-            new Announcement
+            new Announcement(0,"ms-awards-2024_zh")
             {
-                Id = 0,
                 IsVisible = true,
-                Name = "ms-awards-2024_zh",
                 Title = "喜欢此应用?",
                 Content = "在微软商店年度应用评选上为我们投票！",
                 LinkText = "详情",
