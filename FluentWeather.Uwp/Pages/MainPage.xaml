@@ -66,7 +66,7 @@
                     Duration="0:0:0.8" />
             </animations:Implicit.ShowAnimations>
         </Border>
-        <!--每日详情-->
+        <!--每日详情-->       
         <local:DailyViewPage
             x:Name="DailyView"
             ui:VisualExtensions.NormalizedCenterPoint="0.5"
@@ -158,7 +158,7 @@
                 </core:EventTriggerBehavior>
                 <behaviors:SetParallaxViewSourceBehavior VerticalShift="64" />
             </i:Interaction.Behaviors>
-            <ScrollViewer
+            <ScrollViewer Margin="0,50,0,0"
                 x:Name="MainScrollViewer"
                 x:FieldModifier="Public"
                 Canvas.ZIndex="1"
@@ -166,7 +166,7 @@
                 <Grid
                     x:Name="ContentGrid"
                     MaxWidth="1200"
-                    Padding="32,40,32,32">
+                    Padding="32,0,32,32">
                     <Grid.ChildrenTransitions>
                         <TransitionCollection>
                             <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
@@ -926,13 +926,26 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1600" />
+                        <AdaptiveTrigger MinWindowWidth="1400" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="WeatherNowGrid.Margin" Value="0,40,0,12" />
                         <Setter Target="TemperatureChart.Visibility" Value="Visible" />
                         <Setter Target="DailyItemsView.Margin" Value="-32,0" />
                         <Setter Target="DailyItemsView.ItemHeight" Value="150" />
+                        <Setter Target="MainScrollViewer.Margin" Value="0" />
+                        <Setter Target="WeatherNowGrid.Margin" Value="0,50,0,12" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="WeatherNowGrid.Margin" Value="0,80,0,12" />
+                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
+                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
+                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
+                        <Setter Target="MainScrollViewer.Margin" Value="0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
