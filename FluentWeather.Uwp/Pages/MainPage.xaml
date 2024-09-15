@@ -42,914 +42,182 @@
         </MenuFlyout>
     </Page.ContextFlyout>
     <Grid>
-        <Border
-            Background="{ThemeResource LayerFillColorDefaultBrush}"
-            Canvas.ZIndex="2"
-            Visibility="{x:Bind ViewModel.GetWeatherNowCommand.IsRunning, Mode=OneWay}">
-            <muxc:ProgressRing Width="100" Height="100" />
-        </Border>
-        <Border Background="{ThemeResource LayerFillColorDefaultBrush}" Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
-            <animations:Implicit.HideAnimations>
-                <animations:OpacityAnimation
-                    EasingMode="EaseOut"
-                    EasingType="Circle"
-                    From="1"
-                    To="0"
-                    Duration="0:0:0.4" />
-            </animations:Implicit.HideAnimations>
-            <animations:Implicit.ShowAnimations>
-                <animations:OpacityAnimation
-                    EasingMode="EaseOut"
-                    EasingType="Circle"
-                    From="0"
-                    To="1"
-                    Duration="0:0:0.8" />
-            </animations:Implicit.ShowAnimations>
-        </Border>
-        <!--每日详情-->       
-        <local:DailyViewPage
-            x:Name="DailyView"
-            ui:VisualExtensions.NormalizedCenterPoint="0.5"
-            DailyForecasts="{x:Bind ViewModel.DailyForecasts, Mode=OneWay}"
-            DailyForecasts7D="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
-            Visibility="{x:Bind MainContentContainer.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
-            <i:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="CloseRequested">
-                    <core:ChangePropertyAction
-                        PropertyName="Visibility"
-                        TargetObject="{x:Bind MainContentContainer}"
-                        Value="Visible" />
-                    <behaviors:AnimateBackgroundAction>
-                        <behaviors:AnimateBackgroundAction.Animation>
-                            <animations:AnimationSet x:Name="ScaleAnimationLeave" x:FieldModifier="Public">
-                                <animations:ScaleAnimation
-                                    EasingMode="EaseOut"
-                                    EasingType="Circle"
-                                    From="1.2"
-                                    To="1"
-                                    Duration="0:0:0.4" />
-                            </animations:AnimationSet>
-                        </behaviors:AnimateBackgroundAction.Animation>
-                    </behaviors:AnimateBackgroundAction>
-                </core:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-            <animations:Implicit.HideAnimations>
-                <animations:ImplicitAnimationSet x:Name="LeaveAnimation">
-                    <animations:OpacityAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="1"
-                        To="0"
-                        Duration="0:0:0.4" />
-                    <animations:ScaleAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="1"
-                        To="0.6"
-                        Duration="0:0:0.4" />
-                </animations:ImplicitAnimationSet>
-            </animations:Implicit.HideAnimations>
-            <animations:Implicit.ShowAnimations>
-                <animations:ImplicitAnimationSet x:Name="EnterAnimation">
-                    <animations:OpacityAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="0"
-                        To="1"
-                        Duration="0:0:0.6" />
-                    <animations:ScaleAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="0.4"
-                        To="1"
-                        Duration="0:0:0.6" />
-                </animations:ImplicitAnimationSet>
-
-            </animations:Implicit.ShowAnimations>
-
-        </local:DailyViewPage >
-        <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
-            <animations:Implicit.ShowAnimations>
-                <animations:ImplicitAnimationSet>
-                    <animations:OpacityAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="0"
-                        To="1"
-                        Duration="0:0:0.6" />
-                    <animations:ScaleAnimation
-                        EasingMode="EaseOut"
-                        EasingType="Circle"
-                        From="1.2"
-                        To="1"
-                        Duration="0:0:0.6" />
-                </animations:ImplicitAnimationSet>
-            </animations:Implicit.ShowAnimations>
-            <RefreshContainer.Visualizer>
-                <RefreshVisualizer>
-                    <RefreshVisualizer.Content>
-                        <SymbolIcon Margin="0,0,0,-64" Symbol="Refresh" />
-                    </RefreshVisualizer.Content>
-                </RefreshVisualizer>
-            </RefreshContainer.Visualizer>
-            <i:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="RefreshRequested">
-                    <core:InvokeCommandAction Command="{x:Bind ViewModel.RefreshCommand}" />
-                </core:EventTriggerBehavior>
-                <behaviors:SetParallaxViewSourceBehavior VerticalShift="64" />
-            </i:Interaction.Behaviors>
-            <ScrollViewer Margin="0,50,0,0"
-                x:Name="MainScrollViewer"
-                x:FieldModifier="Public"
-                Canvas.ZIndex="1"
-                VerticalScrollBarVisibility="Auto">
-                <Grid
-                    x:Name="ContentGrid"
-                    MaxWidth="1200"
-                    Padding="32,0,32,32">
-                    <Grid.ChildrenTransitions>
-                        <TransitionCollection>
-                            <EntranceThemeTransition FromVerticalOffset="50" IsStaggeringEnabled="True" />
-                            <RepositionThemeTransition IsStaggeringEnabled="False" />
-                        </TransitionCollection>
-                    </Grid.ChildrenTransitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <!--  当前天气  -->
-                    <Grid
-                        x:Name="WeatherNowGrid"
-                        Margin="0,0,0,12"
-                        x:DefaultBindMode="OneWay">
-                        <StackPanel>
-                            <StackPanel Opacity="0.95" Orientation="Horizontal">
-                                <TextBlock
-                                    x:Name="TemperatureText"
-                                    Style="{ThemeResource TemperatureTextStyle}"
-                                    Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(ViewModel.WeatherNow.Temperature, x:False)}">
-                                    <i:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="DoubleTapped">
-                                            <core:InvokeCommandAction Command="{x:Bind ViewModel.SpeechWeatherCommand}" />
-                                        </core:EventTriggerBehavior>
-                                    </i:Interaction.Behaviors>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <Grid x:DefaultBindMode="OneWay" Margin="80">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Current weather-->
+                <StackPanel>
+                    <TextBlock x:Name="TemperatureText" FontSize="110" >
+                        <Run Text="{x:Bind ViewModel.WeatherNow.Temperature,Mode=OneWay}"/><Run Text="°"/>
+                    </TextBlock>
+                    <TextBlock FontSize="24" >
+                        <Run Text="{x:Bind ViewModel.WeatherNow.Description}"/>
+                        <Run Text=" 最高"/><Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}"/><Run Text="°"/>
+                        <Run Text="最低"/><Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}"/><Run Text="°"/>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Spacing="12">
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE8BE;"  FontSize="16"/>
+                                <TextBlock FontSize="14">
+                                    <Run Text="{x:Bind ViewModel.AirCondition.Aqi}"/>                                    
+                                    <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}"/>
                                 </TextBlock>
-
-                                <Grid Margin="4,26,0,0">
-                                    <TextBlock
-                                        Margin="2,-16,0,0"
-                                        Style="{ThemeResource TemperatureUnitTextStyle}"
-                                        Text="°" />
-                                    <TextBlock
-                                        VerticalAlignment="Bottom"
-                                        Style="{StaticResource WeatherNowDescriptionTextStyle}"
-                                        Text="{x:Bind ViewModel.WeatherNow.Description}" />
-                                </Grid>
                             </StackPanel>
-                            <StackPanel Margin="0,-8,0,0" Orientation="Horizontal">
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                    <Run x:Uid="FeelsLike" />
-                                    <Run Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(ViewModel.WeatherNow.ApparentTemperature, x:False)}" /><Run Text="°" />
+                        </Button>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xEBE6;" RenderTransformOrigin="0.7,0.6" FontSize="14">
+                                    <FontIcon.RenderTransform>
+                                        <RotateTransform Angle="45" />
+                                    </FontIcon.RenderTransform>
+                                </FontIcon>
+                                <TextBlock FontSize="14">
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}"/><Run Text="级"/>
                                 </TextBlock>
-                                <Button
-                                    Margin="12,0,0,0"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter}}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                            <Run x:Uid="AirCondition" />
-                                            <Run Text="-" />
-                                            <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
-                                        </TextBlock>
-                                        <FontIcon
-                                            FontSize="14"
-                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                            Glyph="&#xE00F;" />
-                                    </StackPanel>
-                                    <Button.Resources>
-                                        <ResourceDictionary>
-                                            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                        </ResourceDictionary>
-                                    </Button.Resources>
-                                    <i:Interaction.Behaviors>
-                                        <behaviors:ButtonContentSnapBehavior SnapType="Left" />
-                                    </i:Interaction.Behaviors>
-                                    <Button.Flyout>
-                                        <Flyout Placement="BottomEdgeAlignedLeft">
-                                            <Grid>
-                                                <StackPanel Spacing="8">
-                                                    <TextBlock>
-                                                        <Run
-                                                            FontSize="34"
-                                                            FontWeight="SemiBold"
-                                                            Text="{x:Bind ViewModel.AirCondition.Aqi}" />
-                                                        <Run FontSize="16" Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
-                                                    </TextBlock>
-                                                    <StackPanel
-                                                        Margin="0,0,8,0"
-                                                        Orientation="Horizontal"
-                                                        Spacing="20">
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.PM25}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="PM2.5" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.PM10}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="PM10" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.SO2}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="SO₂" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.NO2}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="NO₂" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.O3}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="O₃" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.CO}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="CO" />
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                    <TextBlock
-                                                        x:Uid="AirConditionUnit"
-                                                        Margin="0,0,4,0"
-                                                        HorizontalAlignment="Right"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-
-                                                </StackPanel>
-                                            </Grid>
-                                        </Flyout>
-                                    </Button.Flyout>
-                                </Button>
                             </StackPanel>
-                            <Border Visibility="{x:Bind ViewModel.Precipitation.Precipitations, Converter={StaticResource NullToVisibilityConverter}}">
-                                <TextBlock
-                                    FontSize="17"
-                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                    Text="{x:Bind ViewModel.Precipitation.Summary}"
-                                    Visibility="{x:Bind PrecipGrid.Visibility, Converter={StaticResource VisibilityInverter}}" />
-                            </Border>
-                        </StackPanel>
-                    </Grid>
+                        </Button>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock FontSize="14">
+                                    <Run Text="体感"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.ApparentTemperature}"/><Run Text="°"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Spacing="12">
 
-                    <!--  降水概率  -->
-                    <Grid
-                        x:Name="PrecipGrid"
-                        Grid.Row="1"
-                        Visibility="{x:Bind GetPrecipChartVisibility(ViewModel.Precipitation), Mode=OneWay}">
-                        <muxc:Expander HorizontalAlignment="Stretch" Header="{x:Bind ViewModel.Precipitation.Summary, Mode=OneWay}">
-                            <controls1:PrecipitationChart Height="200" Precipitations="{x:Bind ViewModel.Precipitation.Precipitations, Mode=OneWay}" />
-                        </muxc:Expander>
-                    </Grid>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock FontSize="14">
+                                    <Run Text="能见度"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}"/><Run Text="km"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock FontSize="14">
+                                    <Run Text="湿度"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}"/><Run Text="%"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock FontSize="14">
+                                    <Run Text="气压"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}"/><Run Text="hPa"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock FontSize="14">
+                                    <Run Text="云量"/>                                    
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}"/><Run Text="%"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <!--Daily Forecast-->
+                <Grid Grid.Row="1" Margin="0,24,0,0" CornerRadius="8" BorderBrush="#1AFFFFFF" BorderThickness="0,0,0,1" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" MinWidth="360" MaxWidth="500"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid BorderThickness="0,0,1,0" Padding="8,12" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Margin="12,0,0,0" Background="Transparent" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock FontSize="18" Text="每日"/>
+                                <FontIcon
+                                FontSize="18"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE00F;" />
 
-                    <!--  预警  -->
-                    <Grid Grid.Row="2" Margin="-12,4,-12,0">
-                        <ListView
-                            HorizontalContentAlignment="Stretch"
-                            ItemsSource="{x:Bind ViewModel.Warnings, Mode=OneWay}"
-                            SelectionMode="None">
+                            </StackPanel>
+                            <i:Interaction.Behaviors>
+                                <behaviors:ButtonContentSnapBehavior SnapType="Left" />
+                            </i:Interaction.Behaviors>
+                        </Button>
+                        <Button Margin="0,0,12,0" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <FontIcon Glyph="&#xE9D2;" FontSize="14"/>
+                                <TextBlock Text="波动较大"/>
+                            </StackPanel>
+                        </Button>
+                        <ListView Grid.Row="1"  ItemsSource="{x:Bind ViewModel.DailyForecasts7D}">
                             <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="models:WeatherWarningBase">
-                                    <controls1:WarningItem Margin="0,4" Warning="{x:Bind}" />
+                                <DataTemplate x:DataType="models:WeatherDailyBase">
+                                    <Grid Margin="0,8,4,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" VerticalAlignment="Center" Text="{x:Bind Time,Converter={StaticResource ShortestDayNameConverter}}"/>
+                                        <Image Margin="12,0,0,0" Grid.Column="1" Height="32" Width="32" Source="{x:Bind converters1:ConverterMethods.GetIconByWeather(WeatherType)}" />
+                                        <TextBlock Grid.Column="2" Margin="12,0,0,0" VerticalAlignment="Center" FontSize="16" Text="{x:Bind Description}"/>
+                                        <StackPanel Spacing="12" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3">
+                                            <TextBlock  Width="24" FontSize="16" >
+                                                <Run Text="{x:Bind MinTemperature}"/>°
+                                            </TextBlock>
+                                            <Border Margin="0,4,0,0" Background="{ThemeResource ControlFillColorDefaultBrush}" CornerRadius="4" Height="10" Width="100"/>
+                                            <TextBlock Width="24" FontSize="16" FontWeight="SemiBold">
+                                                <Run Text="{x:Bind MaxTemperature}"/>°
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                    
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="Transitions">
-                                        <Setter.Value>
-                                            <TransitionCollection>
-                                                <RepositionThemeTransition IsStaggeringEnabled="False" />
-                                            </TransitionCollection>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
                         </ListView>
-
                     </Grid>
-
-                    <!--  7天天气预报  -->
-                    <Grid Grid.Row="3" Margin="0,0,0,0">
+                    <Grid Grid.Column="1" Padding="8,12">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <toolkit:AdaptiveGridView
-                            x:Name="DailyItemsView"
-                            Margin="0,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            DesiredWidth="120"
-                            IsItemClickEnabled="True"
-                            ItemHeight="190"
-                            ItemTemplate="{StaticResource WeatherForecastTemplate}"
-                            ItemsSource="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}"
-                            OneRowModeEnabled="True"
-                            SelectionMode="None">
+                        <Button Margin="12,0,0,0" Background="Transparent" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock FontSize="18" Text="每小时"/>
+                                <FontIcon
+                                FontSize="18"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE00F;" />
+
+                            </StackPanel>
                             <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollBehavior />
-                                <core:EventTriggerBehavior EventName="ItemClick">
-                                    <behaviors:AnimateBackgroundAction>
-                                        <behaviors:AnimateBackgroundAction.Animation>
-                                            <animations:AnimationSet x:Name="ScaleAnimationEnter" x:FieldModifier="Public">
-                                                <animations:ScaleAnimation
-                                                    EasingMode="EaseOut"
-                                                    EasingType="Circle"
-                                                    From="1"
-                                                    To="1.2"
-                                                    Duration="0:0:0.8" />
-                                            </animations:AnimationSet>
-                                        </behaviors:AnimateBackgroundAction.Animation>
-                                    </behaviors:AnimateBackgroundAction>
-                                    <core:ChangePropertyAction
-                                        PropertyName="Visibility"
-                                        TargetObject="{x:Bind MainContentContainer}"
-                                        Value="Collapsed" />
-                                </core:EventTriggerBehavior>
+                                <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                             </i:Interaction.Behaviors>
-                        </toolkit:AdaptiveGridView>
-                        <Button
-                            Grid.Row="0"
-                            Width="40"
-                            Height="40"
-                            Margin="-20,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Stretch"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            CornerRadius="50">
-                            <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{x:Bind DailyItemsView}" />
-                            </i:Interaction.Behaviors>
-                            <Button.Resources>
-                                <ResourceDictionary>
-                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                </ResourceDictionary>
-                            </Button.Resources>
                         </Button>
-                        <Button
-                            Grid.Row="0"
-                            Width="40"
-                            Height="40"
-                            Margin="0,0,-20,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            CornerRadius="50">
-                            <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonListViewScrollBehavior ListView="{x:Bind DailyItemsView}" />
-                            </i:Interaction.Behaviors>
-                            <Button.Resources>
-                                <ResourceDictionary>
-                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                </ResourceDictionary>
-                            </Button.Resources>
-                        </Button>
-                        <controls1:TemperatureChart
-                            x:Name="TemperatureChart"
-                            Grid.Row="1"
-                            Height="200"
-                            Margin="-32,0,-28,0"
-                            Visibility="Collapsed"
-                            WeatherForecasts="{x:Bind ViewModel.DailyForecasts7D, Mode=OneWay}" />
+                        <controls1:HourlyTemperatureChart Margin="12"
+                                   x:Name="HourlyTemperatureChart"
+                                   Grid.Row="1"
+                                   HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                                   MajorTickInterval="6" />
                     </Grid>
-
-                    <!--  每小时预报  -->
-                    <Grid Grid.Row="4" Margin="0,12,0,0">
-                        <toolkit:AdaptiveGridView
-                            x:Name="HourlyGridView"
-                            Margin="0,16,0,0"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            DesiredWidth="100"
-                            IsItemClickEnabled="True"
-                            ItemHeight="150"
-                            ItemTemplate="{StaticResource WeatherHourlyForecastTemplate}"
-                            ItemsSource="{x:Bind ViewModel.HourlyForecasts24H, Mode=OneWay}"
-                            OneRowModeEnabled="True"
-                            SelectionMode="None">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ListViewScrollBehavior />
-                                <behaviors:ListViewOpenFlyoutBehavior />
-                            </i:Interaction.Behaviors>
-                        </toolkit:AdaptiveGridView>
-                        <Button
-                            Width="40"
-                            Height="40"
-                            Margin="-20,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            HorizontalContentAlignment="Stretch"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            CornerRadius="50">
-                            <FontIcon Margin="-3,0,0,0" Glyph="&#xE00E;" />
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonListViewScrollBehavior IsRight="False" ListView="{x:Bind HourlyGridView}" />
-                            </i:Interaction.Behaviors>
-                            <Button.Resources>
-                                <ResourceDictionary>
-                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                </ResourceDictionary>
-                            </Button.Resources>
-                        </Button>
-                        <Button
-                            Width="40"
-                            Height="40"
-                            Margin="0,0,-20,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            CornerRadius="50">
-                            <FontIcon Margin="-1,0,0,0" Glyph="&#xE00F;" />
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonListViewScrollBehavior ListView="{x:Bind HourlyGridView}" />
-                            </i:Interaction.Behaviors>
-                            <Button.Resources>
-                                <ResourceDictionary>
-                                    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0000" />
-                                    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#0000" />
-                                </ResourceDictionary>
-                            </Button.Resources>
-                        </Button>
-
-                    </Grid>
-
-                    <!--  其他信息  -->
-                    <Grid Grid.Row="5" Margin="0,24,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <!--  日出日落  -->
-                        <TextBlock
-                            Margin="12,0,0,0"
-                            FontSize="16"
-                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                            <Run
-                                FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                FontSize="14"
-                                Text="&#xE018; " /><Run x:Uid="Sunrise" />
-                            <Run Text="{x:Bind ViewModel.SunRise, Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
-                            <Run
-                                FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                FontSize="14"
-                                Text="  &#xE099; " /><Run x:Uid="Sunset" />
-                            <Run Text="{x:Bind ViewModel.SunSet, Converter={StaticResource ToShortTimeStringConverter}, Mode=OneWay}" />
-                        </TextBlock>
-                        <!--  风力、能见度、云量等  -->
-                        <controls:AdaptiveGridView
-                            Grid.Row="1"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            x:DefaultBindMode="OneWay"
-                            DesiredWidth="200"
-                            IsItemClickEnabled="True"
-                            ItemHeight="90"
-                            SelectionMode="None">
-                            <controls:AdaptiveGridView.Items>
-                                <StackPanel x:Name="WindInfoPanel" Margin="12">
-                                    <TextBlock
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}" />
-                                    <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
-                                        <Run x:Uid="WindScaleText" FontSize="16" />
-                                    </TextBlock>
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="420">
-                                                <controls1:HourlyDataChart
-                                                    Height="200"
-                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                                    Maximum="40"
-                                                    PropertyName="WindSpeed">
-                                                    <controls1:HourlyDataChart.TrackInfoTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel
-                                                                Margin="4"
-                                                                HorizontalAlignment="Center"
-                                                                Orientation="Horizontal">
-                                                                <TextBlock>
-                                                                    <Run Text="{Binding DataPoint.DataItem.WindSpeed}" /><Run Text=" km/h" />
-                                                                </TextBlock>
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.TrackInfoTemplate>
-                                                    <controls1:HourlyDataChart.IntersectionTemplate>
-                                                        <DataTemplate>
-                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                                                                <TextBlock Margin="6,4">
-                                                                    <Run
-                                                                        FontWeight="SemiBold"
-                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
-                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.WindSpeed}" /><Run Text=" km/h" />
-                                                                    <LineBreak /><Run Text="{Binding DataPoint.DataItem.WindScale}" /><Run x:Uid="WindScaleText" FontSize="14" />
-                                                                    <Run Text="{Binding DataPoint.DataItem.WindDirectionDescription}" />
-                                                                </TextBlock>
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.IntersectionTemplate>
-                                                </controls1:HourlyDataChart>
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}" />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" />
-                                                    <Run x:Uid="WindScaleText" FontSize="14" />
-                                                </TextBlock>
-                                                <TextBlock FontSize="14" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindSpeed}" />
-                                                    <Run Text="km/h" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    Text="{x:Bind converters1:ConverterMethods.GetWindScaleDescription(ViewModel.WeatherNow.WindScale)}"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-                                <StackPanel Margin="12">
-                                    <TextBlock
-                                        x:Uid="HumidityText"
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                    <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
-                                        <Run FontSize="16" Text="%" />
-                                    </TextBlock>
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="420">
-                                                <controls1:HourlyDataChart
-                                                    Height="200"
-                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                                    LabelFormat="{}{0}"
-                                                    MajorStep="25"
-                                                    Maximum="100"
-                                                    PropertyName="Humidity">
-                                                    <controls1:HourlyDataChart.IntersectionTemplate>
-                                                        <DataTemplate>
-                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                                                                <TextBlock Margin="6,4">
-                                                                    <Run
-                                                                        FontWeight="SemiBold"
-                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
-                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Humidity}" /><Run Text="%" />
-                                                                </TextBlock>
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.IntersectionTemplate>
-                                                </controls1:HourlyDataChart>
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run x:Uid="HumidityText" /><Run Text=" " />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}" />
-                                                    <Run FontSize="14" Text="%" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    x:Uid="HumidityDescription"
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap" />
-                                                <TextBlock
-                                                    Margin="0,8,0,0"
-                                                    FontSize="18"
-                                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run x:Uid="DewPointText" />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.DewPointTemperature}" /><Run Text="°" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    x:Uid="DewPointDescription"
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-
-                                <StackPanel Margin="12">
-                                    <TextBlock
-                                        x:Uid="PressureText"
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                    <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
-                                        <Run FontSize="16" Text="hPa" />
-                                    </TextBlock>
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="420">
-                                                <controls1:HourlyDataChart
-                                                    Height="200"
-                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                                    PropertyName="Pressure">
-
-                                                    <controls1:HourlyDataChart.IntersectionTemplate>
-                                                        <DataTemplate>
-                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                                                                <TextBlock Margin="6,4">
-                                                                    <Run
-                                                                        FontWeight="SemiBold"
-                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
-                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Pressure}" /><Run Text="hPa" />
-                                                                </TextBlock>
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.IntersectionTemplate>
-                                                </controls1:HourlyDataChart>
-
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run x:Uid="PressureText" />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}" />
-                                                    <Run FontSize="14" Text="hPa" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    x:Uid="PressureDescription"
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-                                <StackPanel Margin="12">
-                                    <TextBlock
-                                        x:Uid="VisibilityText"
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                    <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
-                                        <Run FontSize="16" Text="km" />
-                                    </TextBlock>
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="420">
-                                                <controls1:HourlyDataChart
-                                                    Height="200"
-                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                                    PropertyName="Visibility"
-                                                    Visibility="{x:Bind ViewModel.HourlyForecasts24H, Converter={StaticResource ListPropertyNullToVisibilityConverter}, ConverterParameter=Visibility}">
-                                                    <controls1:HourlyDataChart.TrackInfoTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel
-                                                                Margin="4"
-                                                                HorizontalAlignment="Center"
-                                                                Orientation="Horizontal">
-                                                                <TextBlock>
-                                                                    <Run Text="{Binding DataPoint.DataItem.Visibility}" /><Run Text=" km" />
-                                                                </TextBlock>
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.TrackInfoTemplate>
-                                                    <controls1:HourlyDataChart.IntersectionTemplate>
-                                                        <DataTemplate>
-                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                                                                <TextBlock Margin="6,4">
-                                                                    <Run
-                                                                        FontWeight="SemiBold"
-                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
-                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.Visibility}" /><Run Text="km" />
-                                                                </TextBlock>
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.IntersectionTemplate>
-                                                </controls1:HourlyDataChart>
-
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run x:Uid="VisibilityText" />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" />
-                                                    <Run FontSize="14" Text="km" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    x:Uid="VisibilityDescription"
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-                                <StackPanel Margin="12" Visibility="{x:Bind ViewModel.WeatherNow.CloudAmount, Converter={StaticResource NullToVisibilityConverter}}">
-                                    <TextBlock
-                                        x:Uid="CloudAmountText"
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
-                                    <TextBlock FontSize="25">
-                                        <Run FontSize="25" Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
-                                        <Run FontSize="16" Text="%" />
-                                    </TextBlock>
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout>
-                                            <StackPanel MaxWidth="420">
-                                                <controls1:HourlyDataChart
-                                                    Height="200"
-                                                    HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                                    LabelFormat="{}{0}"
-                                                    MajorStep="25"
-                                                    Maximum="100"
-                                                    PropertyName="CloudAmount">
-                                                    <controls1:HourlyDataChart.IntersectionTemplate>
-                                                        <DataTemplate>
-                                                            <Border Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}">
-                                                                <TextBlock Margin="6,4">
-                                                                    <Run
-                                                                        FontWeight="SemiBold"
-                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                        Text="{Binding DataPoint.DataItem.Time, Converter={StaticResource ToShortTimeStringConverter}}" />
-                                                                    <LineBreak /><Run FontWeight="SemiBold" Text="{Binding DataPoint.DataItem.CloudAmount}" /><Run Text="%" />
-                                                                </TextBlock>
-                                                            </Border>
-                                                        </DataTemplate>
-                                                    </controls1:HourlyDataChart.IntersectionTemplate>
-                                                </controls1:HourlyDataChart>
-
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run x:Uid="CloudAmountText" />
-                                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" />
-                                                    <Run FontSize="14" Text="%" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    x:Uid="CloudAmountDescription"
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-                            </controls:AdaptiveGridView.Items>
-                            <i:Interaction.Behaviors>
-                                <behaviors:ListViewOpenFlyoutBehavior />
-                            </i:Interaction.Behaviors>
-                        </controls:AdaptiveGridView>
-
-                    </Grid>
-
-
-
-                    <!--  历史天气  -->
-                    <Grid Grid.Row="6" Visibility="{x:Bind GetHistoricalWeatherVisibility(ViewModel.CurrentGeolocation,app:Common.Settings.DefaultGeolocation),Mode=OneWay}" >
-                        <controls1:HistoricalWeatherGauge Visibility="{x:Bind ViewModel.WeatherNow,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
-                    </Grid>
-                    <controls:AdaptiveGridView
-                        Grid.Row="7"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        DesiredWidth="200"
-                        IsItemClickEnabled="True"
-                        ItemHeight="90"
-                        ItemsSource="{x:Bind ViewModel.Indices, Mode=OneWay}"
-                        SelectionMode="None">
-                        <controls:AdaptiveGridView.ItemTemplate>
-                            <DataTemplate x:DataType="models:IndicesBase">
-                                <StackPanel Margin="12" HorizontalAlignment="Stretch">
-                                    <TextBlock
-                                        FontSize="18"
-                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                        Text="{x:Bind Name}" />
-                                    <TextBlock FontSize="25" Text="{x:Bind Category}" />
-                                    <FlyoutBase.AttachedFlyout>
-                                        <Flyout Placement="Top">
-                                            <StackPanel MaxWidth="0320" Spacing="4">
-                                                <TextBlock FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
-                                                    <Run Text="{x:Bind Name}" />
-                                                    <Run Text="-" />
-                                                    <Run Text="{x:Bind Category}" />
-                                                </TextBlock>
-                                                <TextBlock
-                                                    FontSize="16"
-                                                    IsTextSelectionEnabled="True"
-                                                    Text="{x:Bind Description}"
-                                                    TextWrapping="Wrap" />
-                                            </StackPanel>
-                                        </Flyout>
-                                    </FlyoutBase.AttachedFlyout>
-                                </StackPanel>
-                            </DataTemplate>
-                        </controls:AdaptiveGridView.ItemTemplate>
-                        <i:Interaction.Behaviors>
-                            <behaviors:ListViewOpenFlyoutBehavior />
-                        </i:Interaction.Behaviors>
-                    </controls:AdaptiveGridView>
-                    <ListView Grid.Row="8" Padding="0,16,0,0" ItemsSource="{x:Bind ViewModel.Announcements,Mode=OneWay}" SelectionMode="None">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Announcement">
-                                <controls1:AnnouncementItem HorizontalAlignment="Center" Announcement="{x:Bind}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
                 </Grid>
-            </ScrollViewer>
-        </RefreshContainer>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1102" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
-                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
-                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1400" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
-                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
-                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
-                        <Setter Target="MainScrollViewer.Margin" Value="0" />
-                        <Setter Target="WeatherNowGrid.Margin" Value="0,50,0,12" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1600" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="WeatherNowGrid.Margin" Value="0,80,0,12" />
-                        <Setter Target="TemperatureChart.Visibility" Value="Visible" />
-                        <Setter Target="DailyItemsView.Margin" Value="-32,0" />
-                        <Setter Target="DailyItemsView.ItemHeight" Value="150" />
-                        <Setter Target="MainScrollViewer.Margin" Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+                <Grid BorderThickness="0,0,0,1" Grid.Row="2" Margin="0,12,0,0" CornerRadius="8" BorderBrush="#1AFFFFFF" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
+                    <controls1:HistoricalWeatherGauge Margin="16" Visibility="{x:Bind ViewModel.WeatherNow,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
 </Page>

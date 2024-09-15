@@ -604,11 +604,17 @@
   <data name="TodayLowTemp.Text" xml:space="preserve">
     <value>今日低温</value>
   </data>
+  <data name="TodayShort" xml:space="preserve">
+    <value>今</value>
+  </data>
   <data name="TodayWeather" xml:space="preserve">
     <value>今日天气</value>
   </data>
   <data name="Tomorrow" xml:space="preserve">
     <value>明天</value>
+  </data>
+  <data name="TomorrowShort" xml:space="preserve">
+    <value>明</value>
   </data>
   <data name="TomorrowWeather" xml:space="preserve">
     <value>明日天气</value>

@@ -27,7 +27,24 @@ public sealed class DateConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+public sealed class ShortestDayNameConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        if (value is not DateTime date)
+            return value;
+        if (date.Day == DateTime.Today.Day)
+            return ResourceLoader.GetForCurrentView().GetString("TodayShort");
+        if (date.Day == DateTime.Today.Day + 1)
+            return ResourceLoader.GetForCurrentView().GetString("TomorrowShort");
 
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, string language)
+    {
+        throw new NotImplementedException();
+    }
+}
 public class ShortDateConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
