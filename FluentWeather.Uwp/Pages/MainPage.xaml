@@ -28,6 +28,16 @@
     xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Name="CardGridStyle" TargetType="Grid">
+            <Style.Setters>
+                <Setter Property="Background" Value="{ThemeResource AcrylicInAppFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush" Value="#1AFFFFFF" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+            </Style.Setters>
+        </Style>
+    </Page.Resources>
     <Page.ContextFlyout>
         <MenuFlyout Placement="BottomEdgeAlignedLeft">
             <MenuFlyoutItem
@@ -40,181 +50,362 @@
                 </MenuFlyoutItem.Icon>
             </MenuFlyoutItem>
         </MenuFlyout>
+
     </Page.ContextFlyout>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <Grid x:DefaultBindMode="OneWay" Margin="80">
+            <Grid
+                MaxWidth="1800"
+                Margin="80"
+                x:DefaultBindMode="OneWay">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <!--Current weather-->
-                <StackPanel>
-                    <TextBlock x:Name="TemperatureText" FontSize="110" >
-                        <Run Text="{x:Bind ViewModel.WeatherNow.Temperature,Mode=OneWay}"/><Run Text="°"/>
+                <!--  Current weather  -->
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock x:Name="TemperatureText" FontSize="110">
+                        <Run Text="{x:Bind ViewModel.WeatherNow.Temperature, Mode=OneWay}" /><Run Text="°" />
                     </TextBlock>
-                    <TextBlock FontSize="24" >
-                        <Run Text="{x:Bind ViewModel.WeatherNow.Description}"/>
-                        <Run Text=" 最高"/><Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}"/><Run Text="°"/>
-                        <Run Text="最低"/><Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}"/><Run Text="°"/>
+                    <TextBlock FontSize="24">
+                        <Run Text="{x:Bind ViewModel.WeatherNow.Description}" />
+                        <Run Text=" 最高" /><Run Text="{x:Bind ViewModel.WeatherToday.MaxTemperature}" /><Run Text="°" />
+                        <Run Text="最低" /><Run Text="{x:Bind ViewModel.WeatherToday.MinTemperature}" /><Run Text="°" />
                     </TextBlock>
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Spacing="12">
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}" CornerRadius="16" FontSize="16">
+                    <StackPanel
+                        Margin="0,12,0,0"
+                        Orientation="Horizontal"
+                        Spacing="12">
+                        <Button
+                            Background="{ThemeResource SystemFillColorSuccessBackgroundBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <FontIcon Glyph="&#xE8BE;"  FontSize="16"/>
+                                <FontIcon FontSize="16" Glyph="&#xE8BE;" />
                                 <TextBlock FontSize="14">
-                                    <Run Text="{x:Bind ViewModel.AirCondition.Aqi}"/>                                    
-                                    <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}"/>
+                                    <Run Text="{x:Bind ViewModel.AirCondition.Aqi}" />
+                                    <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <FontIcon Glyph="&#xEBE6;" RenderTransformOrigin="0.7,0.6" FontSize="14">
+                                <FontIcon
+                                    FontSize="14"
+                                    Glyph="&#xEBE6;"
+                                    RenderTransformOrigin="0.7,0.6">
                                     <FontIcon.RenderTransform>
                                         <RotateTransform Angle="45" />
                                     </FontIcon.RenderTransform>
                                 </FontIcon>
                                 <TextBlock FontSize="14">
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}"/><Run Text="级"/>
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindDirectionDescription}" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.WindScale}" /><Run Text="级" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock FontSize="14">
-                                    <Run Text="体感"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.ApparentTemperature}"/><Run Text="°"/>
+                                    <Run Text="体感" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.ApparentTemperature}" /><Run Text="°" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Spacing="12">
+                    <StackPanel
+                        Margin="0,12,0,0"
+                        Orientation="Horizontal"
+                        Spacing="12">
 
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock FontSize="14">
-                                    <Run Text="能见度"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}"/><Run Text="km"/>
+                                    <Run Text="能见度" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Visibility}" /><Run Text="km" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock FontSize="14">
-                                    <Run Text="湿度"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}"/><Run Text="%"/>
+                                    <Run Text="湿度" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Humidity}" /><Run Text="%" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock FontSize="14">
-                                    <Run Text="气压"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}"/><Run Text="hPa"/>
+                                    <Run Text="气压" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.Pressure}" /><Run Text="hPa" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="16" FontSize="16">
+                        <Button
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="16"
+                            FontSize="16">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock FontSize="14">
-                                    <Run Text="云量"/>                                    
-                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}"/><Run Text="%"/>
+                                    <Run Text="云量" />
+                                    <Run Text="{x:Bind ViewModel.WeatherNow.CloudAmount}" /><Run Text="%" />
                                 </TextBlock>
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <!--Daily Forecast-->
-                <Grid Grid.Row="1" Margin="0,24,0,0" CornerRadius="8" BorderBrush="#1AFFFFFF" BorderThickness="0,0,0,1" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
+                <!--  Warnings  -->
+                <ListView
+                    Grid.Row="1"
+                    Margin="-16,0,-12,0"
+                    ItemsSource="{x:Bind ViewModel.Warnings}"
+                    SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:WeatherWarningBase">
+                            <Grid Padding="16,12" Style="{StaticResource CardGridStyle}">
+                                <StackPanel Spacing="4">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <Ellipse
+                                            Width="6"
+                                            Height="6"
+                                            Margin="4,0,0,0"
+                                            Fill="{x:Bind converters1:ConverterMethods.SeverityColorToColor(SeverityColor)}"
+                                            Visibility="{x:Bind SeverityColor, Converter={StaticResource NullToVisibilityConverter}}" />
+                                        <TextBlock FontSize="18" Text="{x:Bind ShortTitle}" />
+
+                                    </StackPanel>
+                                    <TextBlock
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                        Text="{x:Bind Description}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--  Daily Forecast  -->
+                <Grid
+                    Grid.Row="2"
+                    Margin="0,12,0,0"
+                    Style="{ThemeResource CardGridStyle}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" MinWidth="360" MaxWidth="500"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition
+                            Width="1*"
+                            MinWidth="360"
+                            MaxWidth="400" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <Grid BorderThickness="0,0,1,0" Padding="8,12" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                    <Grid
+                        Padding="8,12"
+                        Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="0,0,1,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Button Margin="12,0,0,0" Background="Transparent" BorderBrush="Transparent">
+                        <Button
+                            Margin="12,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="Transparent">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock FontSize="18" Text="每日"/>
+                                <TextBlock FontSize="18" Text="每日" />
                                 <FontIcon
-                                FontSize="18"
-                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                Glyph="&#xE00F;" />
+                                    FontSize="18"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    Glyph="&#xE00F;" />
 
                             </StackPanel>
                             <i:Interaction.Behaviors>
                                 <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                             </i:Interaction.Behaviors>
                         </Button>
-                        <Button Margin="0,0,12,0" HorizontalAlignment="Right">
+                        <Button
+                            Margin="0,0,12,0"
+                            HorizontalAlignment="Right"
+                            Background="#4D1696FF"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                             <StackPanel Orientation="Horizontal" Spacing="12">
-                                <FontIcon Glyph="&#xE9D2;" FontSize="14"/>
-                                <TextBlock Text="波动较大"/>
+                                <FontIcon FontSize="14" Glyph="&#xEF42;" />
+                                <TextBlock Text="降温" />
                             </StackPanel>
                         </Button>
-                        <ListView Grid.Row="1"  ItemsSource="{x:Bind ViewModel.DailyForecasts7D}">
+                        <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.DailyForecasts7D}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherDailyBase">
                                     <Grid Margin="0,8,4,8">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
 
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock FontSize="16" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" VerticalAlignment="Center" Text="{x:Bind Time,Converter={StaticResource ShortestDayNameConverter}}"/>
-                                        <Image Margin="12,0,0,0" Grid.Column="1" Height="32" Width="32" Source="{x:Bind converters1:ConverterMethods.GetIconByWeather(WeatherType)}" />
-                                        <TextBlock Grid.Column="2" Margin="12,0,0,0" VerticalAlignment="Center" FontSize="16" Text="{x:Bind Description}"/>
-                                        <StackPanel Spacing="12" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="3">
-                                            <TextBlock  Width="24" FontSize="16" >
-                                                <Run Text="{x:Bind MinTemperature}"/>°
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="16"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="{x:Bind Time, Converter={StaticResource ShortestDayNameConverter}}" />
+                                        <Image
+                                            Grid.Column="1"
+                                            Width="32"
+                                            Height="32"
+                                            Margin="12,0,0,0"
+                                            Source="{x:Bind converters1:ConverterMethods.GetIconByWeather(WeatherType)}" />
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            Width="70"
+                                            Margin="12,0,0,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="16"
+                                            Text="{x:Bind Description}" />
+                                        <Grid
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Width="24" FontSize="16">
+                                                <Run Text="{x:Bind MinTemperature}" /><Run Text="°" />
                                             </TextBlock>
-                                            <Border Margin="0,4,0,0" Background="{ThemeResource ControlFillColorDefaultBrush}" CornerRadius="4" Height="10" Width="100"/>
-                                            <TextBlock Width="24" FontSize="16" FontWeight="SemiBold">
-                                                <Run Text="{x:Bind MaxTemperature}"/>°
+                                            <Border
+                                                Grid.Column="1"
+                                                Height="10"
+                                                Margin="12,4,12,0"
+                                                Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                                CornerRadius="4" />
+                                            <TextBlock
+                                                Grid.Column="2"
+                                                Width="24"
+                                                FontSize="16"
+                                                FontWeight="SemiBold">
+                                                <Run Text="{x:Bind MaxTemperature}" /><Run Text="°" />
                                             </TextBlock>
-                                        </StackPanel>
+                                        </Grid>
                                     </Grid>
-                                    
+
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
                     <Grid Grid.Column="1" Padding="8,12">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Button Margin="12,0,0,0" Background="Transparent" BorderBrush="Transparent">
+                        <Button
+                            Margin="12,0,0,0"
+                            Background="Transparent"
+                            BorderBrush="Transparent">
                             <StackPanel Orientation="Horizontal" Spacing="4">
-                                <TextBlock FontSize="18" Text="每小时"/>
+                                <TextBlock FontSize="18" Text="每小时" />
                                 <FontIcon
-                                FontSize="18"
-                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                Glyph="&#xE00F;" />
+                                    FontSize="18"
+                                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                    Glyph="&#xE00F;" />
 
                             </StackPanel>
                             <i:Interaction.Behaviors>
                                 <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                             </i:Interaction.Behaviors>
                         </Button>
-                        <controls1:HourlyTemperatureChart Margin="12"
-                                   x:Name="HourlyTemperatureChart"
-                                   Grid.Row="1"
-                                   HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
-                                   MajorTickInterval="6" />
+                        <Button Grid.Row="0"
+                            Margin="0,0,12,0"
+                            HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock Text="{x:Bind ViewModel.Precipitation.Summary}" />
+                            </StackPanel>
+                        </Button>
+                        <controls1:HourlyTemperatureChart
+                            x:Name="HourlyTemperatureChart"
+                            Grid.Row="1"
+                            Margin="12"
+                            HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                            MajorTickInterval="6" />
                     </Grid>
                 </Grid>
-                <Grid BorderThickness="0,0,0,1" Grid.Row="2" Margin="0,12,0,0" CornerRadius="8" BorderBrush="#1AFFFFFF" Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
-                    <controls1:HistoricalWeatherGauge Margin="16" Visibility="{x:Bind ViewModel.WeatherNow,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
+                <Grid
+                    Grid.Row="3"
+                    Margin="0,12,0,0"
+                    Style="{ThemeResource CardGridStyle}">
+                    <controls1:HistoricalWeatherGauge
+                        Margin="16"
+                        HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather, Mode=OneWay}"
+                        Visibility="{x:Bind ViewModel.WeatherNow, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}"
+                        WeatherToday="{x:Bind ViewModel.WeatherToday, Mode=OneWay}" />
+                </Grid>
+
+                <Grid Grid.Row="4" Margin="-16,12,-12,0">
+                    <ListView ItemsSource="{x:Bind ViewModel.Indices}" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:IndicesBase">
+                                <Grid Style="{ThemeResource CardGridStyle}">
+                                    <Grid Margin="12">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock
+                                            FontSize="20"
+                                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                            Text="{x:Bind Name}" />
+
+
+                                        <TextBlock
+                                            Grid.Row="1"
+                                            FontSize="26"
+                                            Text="{x:Bind Category}" />
+                                        <TextBlock
+                                            Grid.Row="2"
+                                            Margin="0,2,0,0"
+                                            Text="{x:Bind Description}"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                    <FontIcon
+                                        Grid.Row="0"
+                                        Margin="24,16"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        FontFamily="Assets/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid"
+                                        FontSize="45"
+                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                        Glyph="{x:Bind converters1:ConverterMethods.GetIndexIcon(Name)}"
+                                        Opacity="0.3" />
+                                </Grid>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <controls:StaggeredPanel RowSpacing="12" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
                 </Grid>
             </Grid>
         </ScrollViewer>

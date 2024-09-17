@@ -182,5 +182,32 @@ public static class ConverterMethods
     {
         return value ? Visibility.Collapsed : Visibility.Visible;
     }
+
+    /// <summary>
+    /// 获取指数对应的图标
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static string GetIndexIcon(string name)
+    {
+        return name switch
+        {
+            "运动" => "\uF44B",
+            "穿衣" => "\uF553",
+            "太阳镜" => "\uF530",
+            "交通" => "\uF1B9",
+            "感冒" => "\uF2DC",
+            "空气污染扩散条件" => "\uF72E",
+            "空调开启" => "\uF011",
+            "过敏" => "\uE061",
+            "旅游" => "\uF57D",
+            "洗车" => "\uF2CC",
+            "钓鱼" => "\uF578",
+            "紫外线" => "\uF185",
+            "舒适度" => "\uF236",
+            _ => null,
+        };
+
+    }
 }
 

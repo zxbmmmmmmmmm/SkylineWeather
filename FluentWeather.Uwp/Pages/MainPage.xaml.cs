@@ -11,6 +11,7 @@ using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Helpers.Analytics;
 using Microsoft.Extensions.DependencyInjection;
+using CommunityToolkit.WinUI.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -150,4 +151,6 @@ public sealed partial class MainPage : Page
         }
         return Visibility.Collapsed;
     }
+
+
 }
