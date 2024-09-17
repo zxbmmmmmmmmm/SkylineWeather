@@ -1,6 +1,7 @@
 ﻿using FluentWeather.Abstraction.Models;
 using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Shared;
+using FluentWeather.Uwp.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -37,7 +38,7 @@ namespace FluentWeather.Uwp.Controls
 
         private async void DownloadDataButton_Click(object sender, RoutedEventArgs e)
         {
-            await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(Common.Settings.DefaultGeolocation));
+            await DialogManager.OpenDialogAsync(new HistoricalWeatherSetupDialog(MainPageViewModel.Instance.CurrentGeolocation));
         }
 
         public bool IsHighTemperatureBreakRecord => WeatherToday?.MaxTemperature > HistoricalDailyWeather?.HistoricalMaxTemperature;
