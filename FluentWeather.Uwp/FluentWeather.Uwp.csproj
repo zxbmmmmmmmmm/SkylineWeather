@@ -184,6 +184,8 @@
     <Compile Include="Controls\HourlyTemperatureChart.xaml.cs">
       <DependentUpon>HourlyTemperatureChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LinearGauge\LinearGauge.cs" />
+    <Compile Include="Controls\LinearGauge\LinearGauge.Properties.cs" />
     <Compile Include="Controls\Popups\ContentPopup.xaml.cs">
       <DependentUpon>ContentPopup.xaml</DependentUpon>
     </Compile>
@@ -514,6 +516,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\HourlyTemperatureChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LinearGauge\LinearGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
