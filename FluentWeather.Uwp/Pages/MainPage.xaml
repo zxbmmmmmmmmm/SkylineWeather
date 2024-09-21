@@ -201,7 +201,8 @@
 
                                     <TextBlock FontSize="16">
                                         <Run Text="{x:Bind StartTime.TimeOfDay}" />
-                                        -<Run Text="{x:Bind EndTime.TimeOfDay}" />
+                                        -
+                                        <Run Text="{x:Bind EndTime.TimeOfDay}"  />
                                     </TextBlock>
                                     <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                         <Run Text="{x:Bind Sender}" />
@@ -319,13 +320,14 @@
                                                 Grid.Column="1"
                                                 Height="8"
                                                 CornerRadius="4"
-                                                Maximum="100"
+                                                Maximum="{x:Bind viewmodels:MainPageViewModel.Instance.MaxTemperature7D}"
                                                 Margin="8,2,8,0"
-                                                Minimum="0" 
+                                                Minimum="{x:Bind viewmodels:MainPageViewModel.Instance.MinTemperature7D}" 
                                                 Background="{ThemeResource ControlFillColorDefaultBrush}"
                                                 VerticalAlignment="Center"
-                                                RangeEnd="60"
-                                                RangeStart="20" />
+                                                Foreground="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"
+                                                RangeEnd="{x:Bind MaxTemperature}"
+                                                RangeStart="{x:Bind MinTemperature}" />
 
                                             <TextBlock
                                                 Grid.Column="2"

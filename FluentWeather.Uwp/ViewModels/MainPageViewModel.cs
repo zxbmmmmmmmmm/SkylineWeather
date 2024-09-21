@@ -17,10 +17,11 @@ namespace FluentWeather.Uwp.ViewModels;
 public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewModel
 {
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(MaxTemperature7D))]
+    [NotifyPropertyChangedFor(nameof(MinTemperature7D))]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
     [NotifyPropertyChangedFor(nameof(WeatherToday))]
     private List<WeatherDailyBase> _dailyForecasts =[];
-
     public List<WeatherDailyBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
@@ -70,6 +71,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
     public double? TotalPrecipitation => Precipitation?.Precipitations?.Sum(p => p.Precipitation);
     public bool HasPrecipitation => TotalPrecipitation > 0;
     public static MainPageViewModel Instance{ get; private set; }
+
+    public int MaxTemperature7D => DailyForecasts7D.Max(p => p.MaxTemperature);
+    public int MinTemperature7D => DailyForecasts7D.Min(p => p.MinTemperature);
     public MainPageViewModel()
     {
         Instance = this;
