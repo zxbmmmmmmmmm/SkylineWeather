@@ -210,11 +210,12 @@
                                     </TextBlock>
                                 </StackPanel>
                                 <FontIcon
-                                    Margin="0,0,-28,-48"
                                     HorizontalAlignment="Right"
-                                    FontFamily="Assets/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid"
-                                    FontSize="100"
-                                    Glyph="&#xF071;"
+                                    FontFamily="{ThemeResource QWeatherIcons}"
+                                    FontSize="90"
+                                    FontWeight="SemiBold"
+                                    Margin="0,-4,-20,-30"
+                                    Glyph="{x:Bind converters1:ConverterMethods.GetWarningIcon(WarningType)}"
                                     Opacity="0.15" />
                             </Grid>
                         </DataTemplate>
@@ -426,7 +427,7 @@
                                         Margin="24,16"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Top"
-                                        FontFamily="Assets/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid"
+                                        FontFamily="{ThemeResource FontAwesomeIcons}"
                                         FontSize="45"
                                         Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                         Glyph="{x:Bind converters1:ConverterMethods.GetIndexIcon(Name)}"

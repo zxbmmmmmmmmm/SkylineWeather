@@ -1,12 +1,12 @@
-﻿using System;
+﻿using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Models;
+using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using FluentWeather.Abstraction.Helpers;
-using FluentWeather.Abstraction.Models;
 using static FluentWeather.Abstraction.Models.WeatherCode;
-using Windows.UI.Xaml;
 
 namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
@@ -207,6 +207,21 @@ public static class ConverterMethods
             "舒适度" => "\uF236",
             _ => null,
         };
+
+    }
+    /// <summary>
+    /// 获取预警对应的图标
+    ///仅支持和风天气
+    /// </summary>
+    /// <param name="warningType"></param>
+    /// <returns></returns>
+    public static string GetWarningIcon(string warningType)
+    {
+        if (int.TryParse(warningType,out var result))
+        {
+            return ((char)(result + 60766)).ToString();
+        }
+        return "\uF1CB";
 
     }
 }

@@ -42,7 +42,8 @@
             <SolidColorBrush x:Key="HistoricalWeatherTodayPointFill" Color="#B3CCCCCC" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-
+    <FontFamily x:Key="FontAwesomeIcons" >Assets/Fonts/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>
+    <FontFamily x:Key="QWeatherIcons" >Assets/Fonts/qweather-icons.ttf#qweather-icons</FontFamily>
     <StaticResource x:Key="SplitViewPaneOpenedBackground" ResourceKey="SystemControlTransparentBrush" />
 
     <Thickness x:Key="CityViewMargin">0</Thickness>
