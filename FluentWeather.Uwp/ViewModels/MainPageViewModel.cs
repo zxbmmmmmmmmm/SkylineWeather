@@ -81,6 +81,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     public int MaxTemperature7D => DailyForecasts7D.Max(p => p.MaxTemperature);
     public int MinTemperature7D => DailyForecasts7D.Min(p => p.MinTemperature);
+
+    [ObservableProperty]
+    private WeatherTrend _dailyTrend;
     public MainPageViewModel()
     {
         Instance = this;
@@ -101,6 +104,37 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         {
             SunRise = astronomic.SunRise;
             SunSet = astronomic.SunSet;
+        }
+        var isDropping = false;
+        var isRising = false;
+        for (var i = 0; i < DailyForecasts7D.Count - 1; i++)
+        {
+            //降温
+            if (DailyForecasts7D[i + 1].MaxTemperature - DailyForecasts7D[i].MaxTemperature <= -5)
+            {
+                isDropping = true;
+            }
+            //升温
+            if (DailyForecasts7D[i + 1].MaxTemperature - DailyForecasts7D[i].MaxTemperature >= 5)
+            {
+                isRising = true;
+            }
+        }
+        if (isDropping&&isRising)
+        {
+            DailyTrend = WeatherTrend.Fluctuating;
+        }
+        else if (isDropping)
+        {
+            DailyTrend = WeatherTrend.Dropping;
+        }
+        else if (isRising)
+        {
+            DailyTrend = WeatherTrend.Rising;
+        }
+        else
+        {
+            DailyTrend = WeatherTrend.Stable;
         }
     }
 
@@ -243,6 +277,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             Precipitation = cacheData.Precipitation!;
             Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
+            DailyTrend = cacheData.DailyTrend;
         }
         else
         {

@@ -26,6 +26,7 @@ public sealed class CacheHelper
             WeatherNow = viewModel.WeatherNow,
             SunRise = viewModel.SunRise,
             SunSet = viewModel.SunSet,
+            DailyTrend = viewModel.DailyTrend,
         };
         await FileIO.WriteTextAsync(item,"");
         using var stream = await item.OpenStreamForWriteAsync();

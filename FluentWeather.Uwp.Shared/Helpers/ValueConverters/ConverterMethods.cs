@@ -6,6 +6,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 using static FluentWeather.Abstraction.Models.WeatherCode;
 
 namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
@@ -211,7 +212,7 @@ public static class ConverterMethods
     }
     /// <summary>
     /// 获取预警对应的图标
-    ///仅支持和风天气
+    /// 仅支持和风天气
     /// </summary>
     /// <param name="warningType"></param>
     /// <returns></returns>
@@ -222,7 +223,35 @@ public static class ConverterMethods
             return ((char)(result + 60766)).ToString();
         }
         return "\uF1CB";
+    }
 
+    public static string GetTrendIcon(WeatherTrend trend)
+    {
+        return trend switch
+        {
+            WeatherTrend.Stable => "\uE738",
+            WeatherTrend.Fluctuating => "\uE9D2",
+            WeatherTrend.Rising => "\uEAFC",
+            WeatherTrend.Dropping => "\uEF42",
+            _ => "",
+        };
+    }
+
+    public static Color GetTrendColor(WeatherTrend trend)
+    {
+        return trend switch
+        {
+            WeatherTrend.Stable => Color.FromArgb(77,32,255,50),
+            WeatherTrend.Fluctuating => Color.FromArgb(77, 155, 32, 255),
+            WeatherTrend.Rising => Color.FromArgb(77, 255, 255, 32),
+            WeatherTrend.Dropping => Color.FromArgb(77, 24, 150, 255),
+            _ => Color.FromArgb(77, 32, 255, 50),
+        };
+    }
+
+    public static string GetTrendText(WeatherTrend trend)
+    {
+        return ResourceLoader.GetForCurrentView().GetString("WeatherTrend_" + trend);
     }
 }
 

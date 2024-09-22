@@ -262,14 +262,16 @@
                                 <behaviors:ButtonContentSnapBehavior SnapType="Left" />
                             </i:Interaction.Behaviors>
                         </Button>
-                        <Button
+                        <Button Grid.Row="0"
                             Margin="0,0,12,0"
                             HorizontalAlignment="Right"
-                            Background="#4D1696FF"
                             BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                            <Button.Background>
+                                <SolidColorBrush Color="{x:Bind converters1:ConverterMethods.GetTrendColor(ViewModel.DailyTrend)}"/>
+                            </Button.Background>
                             <StackPanel Orientation="Horizontal" Spacing="12">
-                                <FontIcon FontSize="14" Glyph="&#xEF42;" />
-                                <TextBlock Text="降温" />
+                                <FontIcon FontSize="14" Glyph="{x:Bind converters1:ConverterMethods.GetTrendIcon(ViewModel.DailyTrend)}" />
+                                <TextBlock Text="{x:Bind converters1:ConverterMethods.GetTrendText(ViewModel.DailyTrend)}" />
                             </StackPanel>
                         </Button>
                         <ListView

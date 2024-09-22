@@ -15,4 +15,5 @@ public class WeatherCacheBase
     public virtual PrecipitationBase? Precipitation { get; set; }
     public virtual AirConditionBase? AirCondition { get; set; }
     public virtual DateTime UpdatedTime { get; set; }
+    public virtual WeatherTrend DailyTrend { get; set; }
 }

@@ -704,6 +704,18 @@
   <data name="WeatherTomorrow.Header" xml:space="preserve">
     <value>明日天气</value>
   </data>
+  <data name="WeatherTrend_Dropping" xml:space="preserve">
+    <value>降温</value>
+  </data>
+  <data name="WeatherTrend_Fluctuating" xml:space="preserve">
+    <value>波动</value>
+  </data>
+  <data name="WeatherTrend_Rising" xml:space="preserve">
+    <value>升温</value>
+  </data>
+  <data name="WeatherTrend_Stable" xml:space="preserve">
+    <value>稳定</value>
+  </data>
   <data name="WeeklyForecast.Text" xml:space="preserve">
     <value>7日预报</value>
   </data>
