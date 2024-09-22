@@ -26,10 +26,17 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
+    [NotifyPropertyChangedFor(nameof(SelectedHourlyForecasts))]
     private List<WeatherHourlyBase> _hourlyForecasts = [];
 
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
 
+    public List<WeatherHourlyBase> SelectedHourlyForecasts =>  SelectedDailyWeather is null || DailyForecasts.IndexOf(SelectedDailyWeather) is 0 
+        ? HourlyForecasts24H : SelectedDailyWeather.HourlyForecasts;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SelectedHourlyForecasts))]
+    private WeatherDailyBase _selectedDailyWeather;
     public WeatherDailyBase WeatherToday => DailyForecasts.FirstOrDefault();
 
     [ObservableProperty]
@@ -242,6 +249,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             await Refresh();
         }
         await GetHistoricalWeather(CurrentGeolocation.Location);
+        SelectedDailyWeather = DailyForecasts.First();
     }
     [RelayCommand]
     public async Task GetHistoricalWeather(Location location)

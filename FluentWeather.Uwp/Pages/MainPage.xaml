@@ -201,20 +201,19 @@
 
                                     <TextBlock FontSize="16">
                                         <Run Text="{x:Bind StartTime.TimeOfDay}" />
-                                        -
-                                        <Run Text="{x:Bind EndTime.TimeOfDay}"  />
+                                        -<Run Text="{x:Bind EndTime.TimeOfDay}" />
                                     </TextBlock>
-                                    <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
+                                    <TextBlock TextTrimming="CharacterEllipsis" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                         <Run Text="{x:Bind Sender}" />
                                         发布于<Run Text="{x:Bind PublishTime}" />
                                     </TextBlock>
                                 </StackPanel>
                                 <FontIcon
+                                    Margin="0,-4,-20,-30"
                                     HorizontalAlignment="Right"
                                     FontFamily="{ThemeResource QWeatherIcons}"
                                     FontSize="90"
                                     FontWeight="SemiBold"
-                                    Margin="0,-4,-20,-30"
                                     Glyph="{x:Bind converters1:ConverterMethods.GetWarningIcon(WarningType)}"
                                     Opacity="0.15" />
                             </Grid>
@@ -276,6 +275,7 @@
                         <ListView
                             Grid.Row="1"
                             ItemsSource="{x:Bind ViewModel.DailyForecasts7D}"
+                            SelectedItem="{x:Bind ViewModel.SelectedDailyWeather,Mode=TwoWay}"
                             SelectedIndex="0">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="models:WeatherDailyBase">
@@ -320,13 +320,13 @@
                                             <controls1:LinearGauge
                                                 Grid.Column="1"
                                                 Height="8"
-                                                CornerRadius="4"
-                                                Maximum="{x:Bind viewmodels:MainPageViewModel.Instance.MaxTemperature7D}"
                                                 Margin="8,2,8,0"
-                                                Minimum="{x:Bind viewmodels:MainPageViewModel.Instance.MinTemperature7D}" 
-                                                Background="{ThemeResource ControlFillColorDefaultBrush}"
                                                 VerticalAlignment="Center"
+                                                Background="{ThemeResource ControlFillColorDefaultBrush}"
+                                                CornerRadius="4"
                                                 Foreground="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"
+                                                Maximum="{x:Bind viewmodels:MainPageViewModel.Instance.MaxTemperature7D}"
+                                                Minimum="{x:Bind viewmodels:MainPageViewModel.Instance.MinTemperature7D}"
                                                 RangeEnd="{x:Bind MaxTemperature}"
                                                 RangeStart="{x:Bind MinTemperature}" />
 
@@ -377,7 +377,7 @@
                             x:Name="HourlyTemperatureChart"
                             Grid.Row="1"
                             Margin="12"
-                            HourlyForecasts="{x:Bind ViewModel.HourlyForecasts24H}"
+                            HourlyForecasts="{x:Bind ViewModel.SelectedHourlyForecasts}"
                             MajorTickInterval="3" />
                     </Grid>
                 </Grid>
