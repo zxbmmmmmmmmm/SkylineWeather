@@ -16,7 +16,7 @@
     </ResourceDictionary.ThemeDictionaries>
     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
-    <contract13NotPresent:Style BasedOn="{StaticResource Win11ListViewItemStyle}" TargetType="ListViewItem" />
+    <Style BasedOn="{StaticResource Win11ListViewItemStyle}" TargetType="ListViewItem" />
     <Style x:Key="Win11ListViewItemStyle"  TargetType="ListViewItem">
         <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
         <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
