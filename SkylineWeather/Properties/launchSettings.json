@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SkylineWeather (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SkylineWeather (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
