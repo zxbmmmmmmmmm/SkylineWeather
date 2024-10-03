@@ -1,0 +1,10 @@
+﻿namespace SkylineWeather.Abstractions.Models.Weather;
+
+public class CurrentWeather : Weather
+{
+    public double Temperature { get; set; }
+    public Wind? Wind { get; set; }
+    public double? Visibility { get; set; }
+    public double? CloudAmount { get; set; }
+    public double? Humidity { get; set; }
+}
