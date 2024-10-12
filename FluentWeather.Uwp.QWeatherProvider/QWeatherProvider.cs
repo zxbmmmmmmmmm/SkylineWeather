@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -67,13 +68,15 @@ public sealed class QWeatherProvider : ProviderBase,
         Option.Domain = Common.Settings.QWeatherDomain;
         Option.PublicId = Common.Settings.QWeatherPublicId;
         var language = Common.Settings.Language;
-        if (language.Contains("-") && !language.Contains("zh-hant"))
+        
+        if (language.Contains("-") && !language.Contains("zh-hant") && !language.Contains("zh-TW"))
         {
-            Option.Language = language.Remove(language.IndexOf("-", StringComparison.Ordinal));
+            var info = new RegionInfo(language);
+            Option.Language = info.Name.ToLower();
         }
         else
         {
-            Option.Language = language;
+            Option.Language = language.Replace("zh-TW","zh-hant").Replace("zh-HK", "zh-hant");
         }
     }
 
