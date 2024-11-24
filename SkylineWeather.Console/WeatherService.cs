@@ -46,7 +46,7 @@ public class WeatherService : IHostedService
         AnsiConsole.Clear();
         await feature.RunAsync().ConfigureAwait(false);
     }
-    private IFeatureModule       GetOrCreateFeature(FeatureType type)
+    private IFeatureModule GetOrCreateFeature(FeatureType type)
     {
         if (!_features.TryGetValue(type, out var feature))
         {

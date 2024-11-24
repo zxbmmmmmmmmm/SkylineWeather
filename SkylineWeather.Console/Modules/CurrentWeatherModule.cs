@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
 using Spectre.Console;
+using UnitsNet;
 
 namespace SkylineWeather.Console.Modules;
 
@@ -44,7 +45,7 @@ public class CurrentWeatherModule(
             table.AddColumn("数据");
 
             table.AddRow("天气类型", current.WeatherCode.ToString());
-            table.AddRow("温度", current.Temperature.ToString("0.00"));
+            table.AddRow("温度", current.Temperature.ToString());
             AnsiConsole.Write(table);
         });
 

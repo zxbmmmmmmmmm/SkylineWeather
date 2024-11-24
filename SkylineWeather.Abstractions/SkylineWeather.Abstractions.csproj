@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
+    <PackageReference Include="UnitsNet" Version="5.60.0" />
   </ItemGroup>
 
 </Project>

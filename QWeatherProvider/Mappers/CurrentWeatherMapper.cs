@@ -2,6 +2,7 @@
 using QWeatherProvider.Helpers;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Models.Weather;
+using UnitsNet;
 using static QWeatherApi.ApiContracts.WeatherNowResponse;
 
 namespace QWeatherProvider.Mappers;
@@ -12,16 +13,16 @@ public static class CurrentWeatherMapper
     {
         return new CurrentWeather
         {
-            Temperature = current.Temp,
+            Temperature = Temperature.FromDegreesCelsius(current.Temp),
             WeatherCode = WeatherTypeHelper.GetWeatherTypeByIcon(int.Parse(current.Icon)),
             Wind = new Wind
             {
-                Speed = current.WindSpeed,
+                Speed = Speed.FromKilometersPerHour(current.WindSpeed),
                 Direction = WindDirectionExtensions.GetWindDirectionFromAngle(current.Wind360)
             },
             Humidity = current.Humidity,
             CloudAmount = current.Cloud,
             Visibility = current.Vis,      
-        };
+        };     
     }
 }
