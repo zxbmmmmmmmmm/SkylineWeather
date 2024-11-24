@@ -14,18 +14,18 @@ using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewModel
+public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewModel
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyForecasts7D))]
     [NotifyPropertyChangedFor(nameof(WeatherToday))]
-    private List<WeatherDailyBase> _dailyForecasts =[];
+    public partial List<WeatherDailyBase> DailyForecasts { get; set; } = new();
 
-    public List<WeatherDailyBase> DailyForecasts7D =>(DailyForecasts.Count <7)? DailyForecasts.GetRange(0,DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
+    public List<WeatherDailyBase> DailyForecasts7D => (DailyForecasts.Count < 7) ? DailyForecasts.GetRange(0, DailyForecasts.Count) : DailyForecasts.GetRange(0, 7);
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HourlyForecasts24H))]
-    private List<WeatherHourlyBase> _hourlyForecasts = [];
+    public partial List<WeatherHourlyBase> HourlyForecasts { get; set; } = new();
 
     public List<WeatherHourlyBase> HourlyForecasts24H => (HourlyForecasts.Count < 24) ? HourlyForecasts.GetRange(0, HourlyForecasts.Count) : HourlyForecasts.GetRange(0, 24);
 
@@ -33,43 +33,43 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(WeatherToday))]
-    private HistoricalDailyWeatherBase _historicalWeather;
+    public partial HistoricalDailyWeatherBase HistoricalWeather { get; set; }
 
     [ObservableProperty]
-    private List<WeatherWarningBase> _warnings ;
+    public partial List<WeatherWarningBase> Warnings { get; set; }
 
     [ObservableProperty]
-    private WeatherNowBase _weatherNow;
+    public partial WeatherNowBase WeatherNow { get; set; }
 
     [ObservableProperty]
-    private string _weatherDescription;
+    public partial string WeatherDescription { get; set; }
 
     [ObservableProperty]
-    private DateTime? _sunRise;
+    public partial DateTime? SunRise { get; set; }
 
     [ObservableProperty]
-    private DateTime? _sunSet;
+    public partial DateTime? SunSet { get; set; }
 
     [ObservableProperty]
-    private GeolocationBase _currentGeolocation;
+    public partial GeolocationBase CurrentGeolocation { get; set; }
 
     [ObservableProperty]
-    private List<IndicesBase> _indices;
+    public partial List<IndicesBase> Indices { get; set; }
 
     [ObservableProperty]
-    private List<Announcement> _announcements = Announcement.GetAvailableAnnouncements().Where(p => !Common.Settings.ClosedAnnouncements.Contains(p.Name)).ToList();
+    public partial List<Announcement> Announcements { get; set; } = Announcement.GetAvailableAnnouncements().Where(p => !Common.Settings.ClosedAnnouncements.Contains(p.Name)).ToList();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TotalPrecipitation))]
     [NotifyPropertyChangedFor(nameof(HasPrecipitation))]
-    private PrecipitationBase _precipitation;
+    public partial PrecipitationBase Precipitation { get; set; }
 
     [ObservableProperty]
-    private AirConditionBase _airCondition;
+    public partial AirConditionBase AirCondition { get; set; }
 
     public double? TotalPrecipitation => Precipitation?.Precipitations?.Sum(p => p.Precipitation);
     public bool HasPrecipitation => TotalPrecipitation > 0;
-    public static MainPageViewModel Instance{ get; private set; }
+    public static MainPageViewModel Instance { get; private set; }
     public MainPageViewModel()
     {
         Instance = this;
@@ -100,11 +100,11 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         if (hourlyProvider is null) return;
         var hourlyForecasts = await hourlyProvider.GetHourlyForecasts(location.Longitude, location.Latitude);
 
-        foreach ( var forecast in hourlyForecasts )
+        foreach (var forecast in hourlyForecasts)
         {
             if (CurrentGeolocation.UtcOffset is not null)
             {
-                if(forecast.Time.Kind is not DateTimeKind.Utc)
+                if (forecast.Time.Kind is not DateTimeKind.Utc)
                 {
                     forecast.Time = forecast.Time.ToUniversalTime();
                 }
@@ -146,9 +146,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
         if (precipProvider is null) return;
         var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
-        if(precip.Summary is "" or null)
+        if (precip.Summary is "" or null)
         {
-            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations?.Sum(p => p.Precipitation)> 0 ? "HasPrecipitationText" : "NoPrecipitationText");
+            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations?.Sum(p => p.Precipitation) > 0 ? "HasPrecipitationText" : "NoPrecipitationText");
         }
         Precipitation = precip;
     }
@@ -179,7 +179,6 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
             try
             {
                 await Task.WhenAll(tasks.ToArray());
-
             }
             finally
             {
@@ -195,9 +194,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                     }
                     catch
                     {
-
                     }
-
                 }
                 foreach (var hourly in HourlyForecasts)
                 {
@@ -208,13 +205,11 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
                 }
                 await CacheHelper.CacheAsync(this);
             }
-
         }
-        catch(HttpResponseException e)
+        catch (HttpResponseException e)
         {
-            InfoBarHelper.Error(ResourceLoader.GetForCurrentView().GetString("GetDataFailed"),e.Message);
+            InfoBarHelper.Error(ResourceLoader.GetForCurrentView().GetString("GetDataFailed"), e.Message);
         }
-
     }
 
     [RelayCommand]
@@ -239,6 +234,7 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         }
         await GetHistoricalWeather(CurrentGeolocation.Location);
     }
+
     [RelayCommand]
     public async Task GetHistoricalWeather(Location location)
     {
@@ -251,9 +247,9 @@ public sealed partial class MainPageViewModel : ObservableObject,IMainPageViewMo
         var loader = ResourceLoader.GetForCurrentView();
         var text = $"{CurrentGeolocation.Name},{DailyForecasts[0].Description},{loader.GetString("HighestTemperature")}:{DailyForecasts[0].MaxTemperature}°,{loader.GetString("LowestTemperature")}:{DailyForecasts[0].MinTemperature}°";
         text += $",{loader.GetString("AirQuality")}:{AirCondition.AqiCategory}";
-        if(!TTSHelper.IsPlaying)
+        if (!TTSHelper.IsPlaying)
         {
-            InfoBarHelper.Info(loader.GetString("SpeechWeather"), text, 9000 , false);
+            InfoBarHelper.Info(loader.GetString("SpeechWeather"), text, 9000, false);
         }
         TTSHelper.Speech(text);
     }

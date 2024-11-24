@@ -6,13 +6,13 @@ namespace FluentWeather.Uwp.ViewModels;
 public sealed partial class DailyViewViewModel : ObservableObject
 {
     [ObservableProperty]
-    private List<WeatherBase> _dailyForecasts;
+    private partial List<WeatherBase> DailyForecasts { get; set; }
 
     [ObservableProperty]
-    private List<WeatherBase> _hourlyForecasts;
+    private partial List<WeatherBase> HourlyForecasts { get; set; }
 
     [ObservableProperty]
-    private WeatherBase _selected;
+    private partial WeatherBase Selected { get; set; }
     public DailyViewViewModel(List<WeatherBase> daily,List<WeatherBase> hourly)
     {
         DailyForecasts = daily;

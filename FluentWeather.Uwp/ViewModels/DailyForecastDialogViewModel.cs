@@ -7,18 +7,18 @@ namespace FluentWeather.Uwp.ViewModels;
 public sealed partial class DailyForecastDialogViewModel:ObservableObject
 {
     [ObservableProperty]
-    List<WeatherDailyBase> _dailyForecasts = new();
+    public partial List<WeatherDailyBase> DailyForecasts { get; set; } = new();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(SunRise))]
     [NotifyPropertyChangedFor(nameof(SunSet))]
-    WeatherDailyBase _selected;
+    public partial WeatherDailyBase Selected { get; set; }
 
     public DateTime? SunRise => ((IAstronomic)Selected).SunRise;
 
     public DateTime? SunSet => ((IAstronomic)Selected).SunSet;
 
     [ObservableProperty]
-    List<WeatherHourlyBase> _hourlyForecasts = new();
+    public partial List<WeatherHourlyBase> HourlyForecasts { get; set; } = new();
 
 }
