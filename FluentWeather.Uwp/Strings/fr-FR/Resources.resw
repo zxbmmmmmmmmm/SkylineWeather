@@ -181,10 +181,10 @@
     <value>Mettre à jour la localisation au démarrage</value>
   </data>
   <data name="AverageHighTemp.Text" xml:space="preserve">
-    <value>AVG le plus bas</value>
+    <value>AVG le plus élevé</value>
   </data>
   <data name="AverageLowTemp.Text" xml:space="preserve">
-    <value>AVG le plus élevé</value>
+    <value>AVG le plus bas</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
     <value>Rayon de flou d'arrière-plan</value>
@@ -294,6 +294,9 @@
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
     <value>Éditer</value>
   </data>
+  <data name="EditDefaultPositionItem.Text" xml:space="preserve">
+    <value>Modifier l'emplacement par défaut</value>
+  </data>
   <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
     <value>Fermer</value>
   </data>
@@ -388,6 +391,9 @@ Température journalière la plus bas/la plus élevée</value>
   <data name="IgnoreWarningButton.Content" xml:space="preserve">
     <value>Définir le mot de bloc</value>
   </data>
+  <data name="LargeTileFormat" xml:space="preserve">
+    <value/>
+  </data>
   <data name="LatestVersion" xml:space="preserve">
     <value>Vous êtes à jour !</value>
   </data>
@@ -437,6 +443,9 @@ Température journalière la plus bas/la plus élevée</value>
   <data name="NoPrecipitationText" xml:space="preserve">
     <value>Pas de précipitation pour les deux prochaines heures</value>
   </data>
+  <data name="NotificationFormat" xml:space="preserve">
+    <value>{0}, {1}°, {1} °, plus bas {2}°</value>
+  </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
     <value>Notification</value>
   </data>
@@ -463,6 +472,9 @@ Température journalière la plus bas/la plus élevée</value>
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
     <value>Personnalisation</value>
+  </data>
+  <data name="PinSecondaryTilesItem.Text" xml:space="preserve">
+    <value>Épingler pour démarrer</value>
   </data>
   <data name="Pressure" xml:space="preserve">
     <value>Pression</value>
@@ -702,6 +714,9 @@ Veuillez changer cette option pour api.qweather.com si vous utilisez un KEY paya
   </data>
   <data name="WelcomePage_Suggestion.Text" xml:space="preserve">
     <value>Nous recommandons d'utiliser le fournisseur de données Open-Météo</value>
+  </data>
+  <data name="WideTileFormat" xml:space="preserve">
+    <value>Humidité : {0}%, pression : {1}hPa</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Remplacer l'arrière-plan Mica sous Windows 11.
