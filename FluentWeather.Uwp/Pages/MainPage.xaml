@@ -191,9 +191,14 @@
                         Margin="0,0,0,12"
                         x:DefaultBindMode="OneWay">
                         <StackPanel>
-                            <StackPanel Opacity="0.95" Orientation="Horizontal">
+                            <Grid ColumnSpacing="8" Opacity="0.95">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <TextBlock
                                     x:Name="TemperatureText"
+                                    Height="{StaticResource TemperatureTextHeight}"
                                     Style="{ThemeResource TemperatureTextStyle}"
                                     Text="{x:Bind converters1:ConverterMethods.ConvertTemperatureUnit(ViewModel.WeatherNow.Temperature, x:False)}">
                                     <i:Interaction.Behaviors>
@@ -202,19 +207,18 @@
                                         </core:EventTriggerBehavior>
                                     </i:Interaction.Behaviors>
                                 </TextBlock>
-
-                                <Grid Margin="4,26,0,0">
-                                    <TextBlock
-                                        Margin="2,-16,0,0"
-                                        Style="{ThemeResource TemperatureUnitTextStyle}"
-                                        Text="°" />
-                                    <TextBlock
-                                        VerticalAlignment="Bottom"
-                                        Style="{StaticResource WeatherNowDescriptionTextStyle}"
-                                        Text="{x:Bind ViewModel.WeatherNow.Description}" />
-                                </Grid>
-                            </StackPanel>
-                            <StackPanel Margin="0,-8,0,0" Orientation="Horizontal">
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Margin="0,8,0,0"
+                                    Style="{ThemeResource TemperatureUnitTextStyle}"
+                                    Text="°" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Bottom"
+                                    Style="{StaticResource WeatherNowDescriptionTextStyle}"
+                                    Text="{x:Bind ViewModel.WeatherNow.Description}" />
+                            </Grid>
+                            <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
                                 <TextBlock
                                     VerticalAlignment="Center"
                                     FontSize="18"
@@ -232,8 +236,9 @@
                                             Width="8"
                                             Height="8"
                                             Margin="0,2,4,0"
-                                            Visibility="{x:Bind ViewModel.AirCondition.AqiLevel,Converter={StaticResource NullToVisibilityConverter}}"
-                                            Fill="{x:Bind converters1:ConverterMethods.AqiLevelToColor(ViewModel.AirCondition.AqiLevel)}" Opacity="0.8"/>
+                                            Fill="{x:Bind converters1:ConverterMethods.AqiLevelToColor(ViewModel.AirCondition.AqiLevel)}"
+                                            Opacity="0.8"
+                                            Visibility="{x:Bind ViewModel.AirCondition.AqiLevel, Converter={StaticResource NullToVisibilityConverter}}" />
                                         <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                             <Run x:Uid="AirCondition" />
                                             <Run Text="-" />
@@ -403,6 +408,7 @@
                             Margin="0,0,0,0"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="{StaticResource DailyWeatherItemVerticalContentAlignment}"
                             DesiredWidth="120"
                             IsItemClickEnabled="True"
                             ItemHeight="190"

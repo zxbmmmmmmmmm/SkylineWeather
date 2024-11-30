@@ -58,6 +58,7 @@
     <x:Double x:Key="ContentDialogMaxWidth">548</x:Double>
     <x:Double x:Key="ContentDialogMinHeight">184</x:Double>
     <x:Double x:Key="ContentDialogMaxHeight">756</x:Double>
+    <x:Double x:Key="TemperatureTextHeight">102</x:Double>
 
     <GridLength x:Key="ContentDialogButtonSpacing">8</GridLength>
     <Thickness x:Key="ContentDialogTitleMargin">0,0,0,12</Thickness>
@@ -82,7 +83,6 @@
         TargetType="TextBlock">
         <Setter Property="FontSize" Value="32" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Margin" Value="0,0,0,20" />
     </Style>
     <Style
         x:Key="GridViewItemStyle"
@@ -1003,8 +1003,8 @@
 
     <DataTemplate x:Key="WeatherForecastTemplate" x:DataType="models:WeatherDailyBase">
         <UserControl>
-            <StackPanel VerticalAlignment="Center" Spacing="4">
-                <TextBlock
+            <StackPanel Spacing="4">
+                <TextBlock Margin="0,4,0,0"
                     HorizontalAlignment="Center"
                     FontSize="17"
                     Text="{x:Bind Time, Converter={StaticResource DateConverter}}" />
