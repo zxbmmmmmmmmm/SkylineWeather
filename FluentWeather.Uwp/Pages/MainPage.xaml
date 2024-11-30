@@ -66,7 +66,7 @@
                     Duration="0:0:0.8" />
             </animations:Implicit.ShowAnimations>
         </Border>
-        <!--每日详情-->       
+        <!--  每日详情  -->
         <local:DailyViewPage
             x:Name="DailyView"
             ui:VisualExtensions.NormalizedCenterPoint="0.5"
@@ -127,7 +127,7 @@
 
             </animations:Implicit.ShowAnimations>
 
-        </local:DailyViewPage >
+        </local:DailyViewPage>
         <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.ShowAnimations>
                 <animations:ImplicitAnimationSet>
@@ -158,8 +158,9 @@
                 </core:EventTriggerBehavior>
                 <behaviors:SetParallaxViewSourceBehavior VerticalShift="64" />
             </i:Interaction.Behaviors>
-            <ScrollViewer Margin="0,50,0,0"
+            <ScrollViewer
                 x:Name="MainScrollViewer"
+                Margin="0,50,0,0"
                 x:FieldModifier="Public"
                 Canvas.ZIndex="1"
                 VerticalScrollBarVisibility="Auto">
@@ -227,11 +228,18 @@
                                     BorderBrush="Transparent"
                                     Visibility="{x:Bind ViewModel.AirCondition, Converter={StaticResource NullToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="8"
+                                            Height="8"
+                                            Margin="0,2,4,0"
+                                            Visibility="{x:Bind ViewModel.AirCondition.AqiLevel,Converter={StaticResource NullToVisibilityConverter}}"
+                                            Fill="{x:Bind converters1:ConverterMethods.AqiLevelToColor(ViewModel.AirCondition.AqiLevel)}" Opacity="0.8"/>
                                         <TextBlock FontSize="17" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}">
                                             <Run x:Uid="AirCondition" />
                                             <Run Text="-" />
                                             <Run Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                         </TextBlock>
+
                                         <FontIcon
                                             FontSize="14"
                                             Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
@@ -858,8 +866,11 @@
 
 
                     <!--  历史天气  -->
-                    <Grid Grid.Row="6" Visibility="{x:Bind GetHistoricalWeatherVisibility(ViewModel.CurrentGeolocation,app:Common.Settings.DefaultGeolocation),Mode=OneWay}" >
-                        <controls1:HistoricalWeatherGauge Visibility="{x:Bind ViewModel.WeatherNow,Mode=OneWay,Converter={StaticResource NullToVisibilityConverter}}" HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather,Mode=OneWay}" WeatherToday="{x:Bind ViewModel.WeatherToday,Mode=OneWay}"/>
+                    <Grid Grid.Row="6" Visibility="{x:Bind GetHistoricalWeatherVisibility(ViewModel.CurrentGeolocation, app:Common.Settings.DefaultGeolocation), Mode=OneWay}">
+                        <controls1:HistoricalWeatherGauge
+                            HistoricalDailyWeather="{x:Bind ViewModel.HistoricalWeather, Mode=OneWay}"
+                            Visibility="{x:Bind ViewModel.WeatherNow, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}"
+                            WeatherToday="{x:Bind ViewModel.WeatherToday, Mode=OneWay}" />
                     </Grid>
                     <controls:AdaptiveGridView
                         Grid.Row="7"
@@ -901,10 +912,14 @@
                             <behaviors:ListViewOpenFlyoutBehavior />
                         </i:Interaction.Behaviors>
                     </controls:AdaptiveGridView>
-                    <ListView Grid.Row="8" Padding="0,16,0,0" ItemsSource="{x:Bind ViewModel.Announcements,Mode=OneWay}" SelectionMode="None">
+                    <ListView
+                        Grid.Row="8"
+                        Padding="0,16,0,0"
+                        ItemsSource="{x:Bind ViewModel.Announcements, Mode=OneWay}"
+                        SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:Announcement">
-                                <controls1:AnnouncementItem HorizontalAlignment="Center" Announcement="{x:Bind}"/>
+                                <controls1:AnnouncementItem HorizontalAlignment="Center" Announcement="{x:Bind}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

@@ -8,7 +8,7 @@ public static class AirConditionMapper
 {
     public static OpenMeteoAirCondition MapToOpenMeteoWeatherNow(this AirQualityItem item)
     {
-        return new OpenMeteoAirCondition
+        var airCondition = new OpenMeteoAirCondition
         {
             CO = Math.Round((double)item.CarbonMonoxide!,2),
             NO2 = Math.Round((double)item.CarbonMonoxide!,2),
@@ -18,6 +18,16 @@ public static class AirConditionMapper
             SO2 = Math.Round((double)item.SulphurDioxide!, 2),
             O3 = Math.Round((double)item.Ozone!, 2),            
         };
+        airCondition.AqiLevel = airCondition.Aqi switch
+        {
+            <= 50 => 0,
+            <= 100 => 1,
+            <= 150 => 2,
+            <= 200 => 3,
+            <= 300 => 4,
+            _ => 5,
+        };
+        return airCondition;
     }
 
 }

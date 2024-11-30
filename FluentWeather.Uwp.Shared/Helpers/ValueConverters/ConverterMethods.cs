@@ -36,7 +36,19 @@ public static class ConverterMethods
             _ => new SolidColorBrush(Colors.Red)
         };
     }
-
+    public static Brush AqiLevelToColor(int? level)
+    {
+        return level switch
+        {
+            0 => new SolidColorBrush(Colors.LawnGreen),
+            1 => new SolidColorBrush(Colors.Yellow),
+            2 => new SolidColorBrush(Colors.Orange),
+            3 => new SolidColorBrush(Colors.Red),
+            4 => new SolidColorBrush(Colors.Purple),
+            5 => new SolidColorBrush(Colors.DarkRed),
+            _ => new SolidColorBrush(Colors.Transparent)
+        };
+    }
     /// <summary>
     /// 根据应用设置自动转换温度
     /// 此转换仅在UI层进行
