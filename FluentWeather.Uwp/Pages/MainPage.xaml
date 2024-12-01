@@ -28,19 +28,6 @@
     xmlns:viewmodels="using:FluentWeather.Uwp.ViewModels"
     d:RequestedTheme="Dark"
     mc:Ignorable="d">
-    <Page.ContextFlyout>
-        <MenuFlyout Placement="BottomEdgeAlignedLeft">
-            <MenuFlyoutItem
-                x:Uid="RefreshMenuItem"
-                Command="{x:Bind ViewModel.RefreshCommand}"
-                Icon="Refresh" />
-            <MenuFlyoutItem x:Uid="SpeechMenuItem" Command="{x:Bind ViewModel.SpeechWeatherCommand}">
-                <MenuFlyoutItem.Icon>
-                    <FontIcon Glyph="&#xF83B;" />
-                </MenuFlyoutItem.Icon>
-            </MenuFlyoutItem>
-        </MenuFlyout>
-    </Page.ContextFlyout>
     <Grid>
         <Border
             Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -126,7 +113,6 @@
                 </animations:ImplicitAnimationSet>
 
             </animations:Implicit.ShowAnimations>
-
         </local:DailyViewPage>
         <RefreshContainer x:Name="MainContentContainer" ui:VisualExtensions.NormalizedCenterPoint="0.5">
             <animations:Implicit.ShowAnimations>
@@ -929,9 +915,21 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-
                 </Grid>
             </ScrollViewer>
+            <RefreshContainer.ContextFlyout>
+                <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                    <MenuFlyoutItem
+                        x:Uid="RefreshMenuItem"
+                        Command="{x:Bind ViewModel.RefreshCommand}"
+                        Icon="Refresh" />
+                    <MenuFlyoutItem x:Uid="SpeechMenuItem" Command="{x:Bind ViewModel.SpeechWeatherCommand}">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF83B;" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+                </RefreshContainer.ContextFlyout>
         </RefreshContainer>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

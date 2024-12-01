@@ -1004,7 +1004,8 @@
     <DataTemplate x:Key="WeatherForecastTemplate" x:DataType="models:WeatherDailyBase">
         <UserControl>
             <StackPanel Spacing="4">
-                <TextBlock Margin="0,4,0,0"
+                <TextBlock
+                    Margin="0,4,0,0"
                     HorizontalAlignment="Center"
                     FontSize="17"
                     Text="{x:Bind Time, Converter={StaticResource DateConverter}}" />
