@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Hosting;
 using SkylineWeather.Abstractions.Provider.Interfaces;
 using SkylineWeather.Console.Modules;
+using SkylineWeather.DataAnalyzer.Models;
 using Spectre.Console;
 using System.Threading;
+using UnitsNet;
 
 namespace SkylineWeather.Console;
 
@@ -54,6 +56,7 @@ public class WeatherService : IHostedService
             {
                 FeatureType.Daily => new DailyWeatherModule(
                     Program.AppHost.Services.GetService<IDailyWeatherProvider>()!,
+                    Program.AppHost.Services.GetService<ITrendAnalyzer<Temperature,TemperatureTrend>>()!,
                     BackToFeatureSelectionAsync,
                     _cancellationToken),
                 FeatureType.Current => new CurrentWeatherModule(

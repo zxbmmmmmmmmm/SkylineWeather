@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMeteoProvider", "OpenMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QWeatherProvider", "QWeatherProvider\QWeatherProvider.csproj", "{3A882FB7-6E10-4F28-A15D-924DCDE81E47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeatherMapProvider", "OpenWeatherMapProvider\OpenWeatherMapProvider.csproj", "{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkylineWeather.DataAnalyzer", "SkylineWeather.DataAnalyzer\SkylineWeather.DataAnalyzer.csproj", "{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +137,38 @@ Global
 		{3A882FB7-6E10-4F28-A15D-924DCDE81E47}.Release|x64.Build.0 = Release|Any CPU
 		{3A882FB7-6E10-4F28-A15D-924DCDE81E47}.Release|x86.ActiveCfg = Release|Any CPU
 		{3A882FB7-6E10-4F28-A15D-924DCDE81E47}.Release|x86.Build.0 = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|x64.Build.0 = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Debug|x86.Build.0 = Debug|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|ARM64.Build.0 = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|x64.ActiveCfg = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|x64.Build.0 = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|x86.ActiveCfg = Release|Any CPU
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE}.Release|x86.Build.0 = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|ARM64.Build.0 = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|x64.Build.0 = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE6C2F2D-B64B-421D-AD49-D8B668C10CF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +176,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B3B2A6DB-2F4B-45AB-ABBF-F7CF4D1DD87D} = {5195B8A6-A013-4E2A-9D5D-AF87EAEEF8E6}
 		{3A882FB7-6E10-4F28-A15D-924DCDE81E47} = {5195B8A6-A013-4E2A-9D5D-AF87EAEEF8E6}
+		{70DB5FBE-1B61-4E45-A028-5F93B28D6CFE} = {5195B8A6-A013-4E2A-9D5D-AF87EAEEF8E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {989B29EA-8BF8-4FD5-ABC7-5BC026BF3CEE}
