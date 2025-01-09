@@ -929,7 +929,7 @@
                         </MenuFlyoutItem.Icon>
                     </MenuFlyoutItem>
                 </MenuFlyout>
-                </RefreshContainer.ContextFlyout>
+            </RefreshContainer.ContextFlyout>
         </RefreshContainer>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

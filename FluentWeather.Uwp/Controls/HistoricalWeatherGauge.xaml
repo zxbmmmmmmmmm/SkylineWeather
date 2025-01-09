@@ -12,6 +12,7 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Border Height="8" Margin="20" CornerRadius="4" Background="{ThemeResource HistoricalWeatherBaseRangeStroke}"/>
         <dv:RadLinearGauge
             x:Name="TemperatureGauge"
             Height="120"
@@ -29,7 +30,7 @@
                 <DataTemplate />
             </dv:RadLinearGauge.LabelTemplate>
             <!--  历史最高/最低温 指示条  -->
-            <dv:SegmentedLinearGaugeIndicator Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
+            <dv:SegmentedLinearGaugeIndicator Visibility="Collapsed" Value="{x:Bind HistoricalDailyWeather.HistoricalMaxTemperature}">
                 <dv:BarIndicatorSegment
                     Length="{x:Bind converters1:ConverterMethods.Subtract(HistoricalDailyWeather.AverageMinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
                     Stroke="{ThemeResource HistoricalWeatherBaseRangeStroke}"
@@ -150,7 +151,7 @@
 
 
             <!--  今日天气 指示条  -->
-            <dv:SegmentedLinearGaugeIndicator dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind converters1:ConverterMethods.Max(WeatherToday.MaxTemperature,HistoricalDailyWeather.HistoricalMaxTemperature)}">
+            <dv:SegmentedLinearGaugeIndicator Visibility="Collapsed" dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind converters1:ConverterMethods.Max(WeatherToday.MaxTemperature,HistoricalDailyWeather.HistoricalMaxTemperature)}">
                 <dv:BarIndicatorSegment
                     Length="{x:Bind GetLength3Low(WeatherToday.MinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
                     Stroke="Transparent"
