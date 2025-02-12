@@ -226,6 +226,7 @@
     <Compile Include="GlobalUsings.cs" />
     <Compile Include="Helpers\Analytics\AppAnalyticsService.cs" />
     <Compile Include="Helpers\Analytics\AppCenterAnalyticsService.cs" />
+    <Compile Include="Helpers\Analytics\StoreAnalyticsService.cs" />
     <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\DIFactory.cs" />
     <Compile Include="Helpers\Extensions.cs" />
@@ -743,7 +744,11 @@
       <Name>FluentWeather.Uwp.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
+      <Name>Microsoft Engagement Framework</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
