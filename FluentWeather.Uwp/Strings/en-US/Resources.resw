@@ -226,7 +226,7 @@
     <value>Percentage of the sky covered by cloud</value>
   </data>
   <data name="CloudAmountText.Text" xml:space="preserve">
-    <value>Cloud amount</value>
+    <value>Cloud Cover</value>
   </data>
   <data name="CompanionDescirption" xml:space="preserve">
     <value>Skyline Weather Start Menu Companion (BETA)</value>
@@ -542,7 +542,7 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
     <value>Saved</value>
   </data>
   <data name="SearchAutoSuggestBox.PlaceholderText" xml:space="preserve">
-    <value>Search a place...</value>
+    <value>Search City or Location</value>
   </data>
   <data name="SelectButton.Content" xml:space="preserve">
     <value>Select</value>
@@ -633,7 +633,7 @@ Please change this option to api.qweather.com if you use a paid KEY.</value>
     <value>Transparent tiles</value>
   </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
-    <value>Typhoon</value>
+    <value>Typhoon Tracking</value>
   </data>
   <data name="TyphoonServiceWarning.Title" xml:space="preserve">
     <value>Typhoon Tracking Service is currently unavailable</value>
@@ -727,16 +727,16 @@ Set the background transparency to 100% to preview.</value>
     <value>Background Acrylic</value>
   </data>
   <data name="WindScaleDescription_0" xml:space="preserve">
-    <value>Smoke rises vertically</value>
+    <value>Calm; smoke rises vertically</value>
   </data>
   <data name="WindScaleDescription_1" xml:space="preserve">
-    <value>Direction shown by smoke drift but not by wind vanes</value>
+    <value>Direction of wind shown by smoke drift, but not by wind vanes</value>
   </data>
   <data name="WindScaleDescription_10" xml:space="preserve">
-    <value>Seldom experienced inland; trees uprooted; considerable structural damage</value>
+    <value>Seldom experienced inland; trees uprooted; considerable structural damage occurs</value>
   </data>
   <data name="WindScaleDescription_11" xml:space="preserve">
-    <value>Very rarely experienced; accompanied by widespread damage</value>
+    <value>Very rarely experienced; accompanied by wide-spread damage</value>
   </data>
   <data name="WindScaleDescription_12" xml:space="preserve">
     <value>Devastation</value>
@@ -757,13 +757,13 @@ Set the background transparency to 100% to preview.</value>
     <value>Devastation</value>
   </data>
   <data name="WindScaleDescription_2" xml:space="preserve">
-    <value>Wind felt on face; leaves rustle; wind vane moved by wind</value>
+    <value>Wind felt on face; leaves rustle; ordinary vanes moved by wind</value>
   </data>
   <data name="WindScaleDescription_3" xml:space="preserve">
-    <value>Leaves and small twigs in constant motion; light flags extended</value>
+    <value>Leaves and small twigs in constant motion; wind extends light flag</value>
   </data>
   <data name="WindScaleDescription_4" xml:space="preserve">
-    <value>Raises dust and loose paper; small branches moved</value>
+    <value>Raises dust and loose paper; small branches are moved</value>
   </data>
   <data name="WindScaleDescription_5" xml:space="preserve">
     <value>Small trees in leaf begin to sway; crested wavelets form on inland waters</value>
@@ -775,10 +775,10 @@ Set the background transparency to 100% to preview.</value>
     <value>Whole trees in motion; inconvenience felt when walking against the wind</value>
   </data>
   <data name="WindScaleDescription_8" xml:space="preserve">
-    <value>Twigs break off trees; generally impedes progress</value>
+    <value>Breaks twigs off trees; generally impedes progress</value>
   </data>
   <data name="WindScaleDescription_9" xml:space="preserve">
-    <value>Slight structural damage (chimney pots and slates removed)</value>
+    <value>Slight structural damage occurs (chimney-pots and slates removed)</value>
   </data>
   <data name="WindScaleDescription_&gt;17" xml:space="preserve">
     <value>Devastation</value>
