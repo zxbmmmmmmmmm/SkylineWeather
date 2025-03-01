@@ -68,16 +68,43 @@ public sealed class QWeatherProvider : ProviderBase,
         Option.Domain = Common.Settings.QWeatherDomain;
         Option.PublicId = Common.Settings.QWeatherPublicId;
         var language = Common.Settings.Language;
-        
-        if (language.Contains("-") && !language.Contains("zh-hant") && !language.Contains("zh-TW"))
+        Option.Language = ConvertToApiCode(language);
+    }
+    public static string ConvertToApiCode(string cultureName)
+    {
+        var parts = cultureName.Split('-');
+        var languageCode = parts[0].ToLowerInvariant();
+        var regionCode = parts.Length > 1 ? parts[1].ToUpperInvariant() : null;
+
+        switch (languageCode)
         {
-            var info = new RegionInfo(language);
-            Option.Language = info.Name.ToLower();
+            // 处理中文变体
+            case "zh":
+                return regionCode switch
+                {
+                    "CN" or "SG" => "zh",
+                    "TW" or "HK" or "MO" => "zh-hant",
+                    _ => "zh"
+                };
+            // 处理挪威语（no -> nb）
+            case "no":
+                return "nb";
         }
-        else
-        {
-            Option.Language = language.Replace("zh-TW","zh-hant").Replace("zh-HK", "zh-hant");
-        }
+        return languageCode;
+
+        //// 验证其他语言代码是否在支持的列表中
+        //var supportedCodes = new HashSet<string>
+        //{
+        //    "en", "de", "es", "fr", "it", "ja", "ko", "ru",
+        //    "hi", "th", "ar", "pt", "bn", "ms", "nl", "el",
+        //    "la", "sv", "id", "pl", "tr", "cs", "et", "vi",
+        //    "fil", "fi", "he", "is", "nb"
+        //};
+
+        //if (supportedCodes.Contains(languageCode))
+        //    return languageCode;
+
+        //throw new NotSupportedException($"Unsupported culture code: {cultureName}");
     }
 
     public async Task<WeatherNowBase> GetCurrentWeather(double lon,double lat)
