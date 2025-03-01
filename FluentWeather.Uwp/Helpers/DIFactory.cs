@@ -15,7 +15,8 @@ public static class DIFactory
     public static void RegisterRequiredServices()
     {
         ServiceDescriptors.AddSingleton(typeof(ISettingsHelper), typeof(SettingsHelper));
-        ServiceDescriptors.AddSingleton(typeof(AppAnalyticsService), typeof(AppCenterAnalyticsService));
+        //ServiceDescriptors.AddSingleton(typeof(AppAnalyticsService), typeof(AppCenterAnalyticsService));
+        ServiceDescriptors.AddSingleton(typeof(AppAnalyticsService), typeof(StoreAnalyticsService));
 
         switch (Common.Settings.ProviderConfig)
         {

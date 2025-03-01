@@ -12,15 +12,20 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Border Height="8" Margin="20" CornerRadius="4" Background="{ThemeResource HistoricalWeatherBaseRangeStroke}"/>
+        <Border
+            Height="8"
+            Margin="20"
+            Background="{ThemeResource HistoricalWeatherBaseRangeStroke}"
+            CornerRadius="4"
+            Visibility="{x:Bind HistoricalDailyWeather, Converter={StaticResource NullToVisibilityConverter}}" />
         <dv:RadLinearGauge
             x:Name="TemperatureGauge"
             Height="120"
             Margin="24,0"
             x:DefaultBindMode="OneWay"
             LabelStep="1"
-            MaxValue="{x:Bind converters1:ConverterMethods.Max(HistoricalDailyWeather.HistoricalMaxTemperature,WeatherToday.MaxTemperature)}"
-            MinValue="{x:Bind converters1:ConverterMethods.Min(HistoricalDailyWeather.HistoricalMinTemperature,WeatherToday.MinTemperature)}"
+            MaxValue="{x:Bind converters1:ConverterMethods.Max(HistoricalDailyWeather.HistoricalMaxTemperature, WeatherToday.MaxTemperature)}"
+            MinValue="{x:Bind converters1:ConverterMethods.Min(HistoricalDailyWeather.HistoricalMinTemperature, WeatherToday.MinTemperature)}"
             TickStep="1"
             Visibility="{x:Bind HistoricalDailyWeather, Converter={StaticResource NullToVisibilityConverter}}">
             <dv:RadLinearGauge.TickTemplate>
@@ -151,7 +156,10 @@
 
 
             <!--  今日天气 指示条  -->
-            <dv:SegmentedLinearGaugeIndicator Visibility="Collapsed" dv:RadLinearGauge.IndicatorOffset="12" Value="{x:Bind converters1:ConverterMethods.Max(WeatherToday.MaxTemperature,HistoricalDailyWeather.HistoricalMaxTemperature)}">
+            <dv:SegmentedLinearGaugeIndicator
+                dv:RadLinearGauge.IndicatorOffset="12"
+                Visibility="Collapsed"
+                Value="{x:Bind converters1:ConverterMethods.Max(WeatherToday.MaxTemperature, HistoricalDailyWeather.HistoricalMaxTemperature)}">
                 <dv:BarIndicatorSegment
                     Length="{x:Bind GetLength3Low(WeatherToday.MinTemperature, HistoricalDailyWeather.HistoricalMinTemperature)}"
                     Stroke="Transparent"
@@ -224,17 +232,20 @@
 
 
         </dv:RadLinearGauge>
-        <Grid x:Name="NotAvailableContent" Visibility="{x:Bind TemperatureGauge.Visibility,Converter={StaticResource VisibilityInverter},Mode=OneWay}" Padding="6,0,0,12">
+        <Grid
+            x:Name="NotAvailableContent"
+            Padding="6,0,0,12"
+            Visibility="{x:Bind TemperatureGauge.Visibility, Converter={StaticResource VisibilityInverter}, Mode=OneWay}">
             <StackPanel HorizontalAlignment="Center" Spacing="12">
                 <TextBlock
+                    x:Uid="DownloadHistoricalWeatherText"
                     FontSize="16"
-                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                    x:Uid="DownloadHistoricalWeatherText" />
+                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                 <Button
                     x:Name="DownloadDataButton"
+                    x:Uid="DownloadButton"
                     HorizontalAlignment="Center"
-                    Click="DownloadDataButton_Click"
-                    x:Uid="DownloadButton" />
+                    Click="DownloadDataButton_Click" />
             </StackPanel>
 
         </Grid>
