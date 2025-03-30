@@ -27,6 +27,8 @@ public sealed partial class MainPage : Page
 
     private RootPage _rootPage = RootPage.Instance;
 
+    private DispatcherTimer _timer = new DispatcherTimer();
+
     public MainPage()
     {
         this.DataContext = ViewModel;
@@ -47,6 +49,12 @@ public sealed partial class MainPage : Page
         {
             if (e.PropertyName is not "CurrentGeolocation" || _dailyViewPage is null) return;
             _mainContentContainer.Visibility = Visibility.Visible;
+        };
+        _timer.Interval = TimeSpan.FromMinutes(15);
+        _timer.Start();
+        _timer.Tick += async (s, e) =>
+        {
+            await ViewModel.Refresh();
         };
     }
 

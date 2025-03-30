@@ -170,6 +170,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!--  当前天气  -->
                     <Grid
@@ -915,6 +916,22 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Button
+                        Grid.Row="9"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        Command="{x:Bind ViewModel.RefreshCommand}"
+                        BorderBrush="Transparent">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                Glyph="&#xE72C;" />
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"  >
+                                <Run Text="{x:Bind ViewModel.UpdateTime.Hour, Mode=OneWay}" />:<Run Text="{x:Bind ViewModel.UpdateTime.Minute, Mode=OneWay}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </ScrollViewer>
             <RefreshContainer.ContextFlyout>

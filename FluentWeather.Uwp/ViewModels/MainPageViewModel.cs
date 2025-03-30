@@ -70,6 +70,10 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
     public double? TotalPrecipitation => Precipitation?.Precipitations?.Sum(p => p.Precipitation);
     public bool HasPrecipitation => TotalPrecipitation > 0;
     public static MainPageViewModel Instance { get; private set; }
+
+    [ObservableProperty]
+    public partial DateTimeOffset UpdateTime { get; private set; }
+
     public MainPageViewModel()
     {
         Instance = this;
@@ -205,6 +209,7 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
                 }
                 await CacheHelper.CacheAsync(this);
             }
+            UpdateTime = DateTimeOffset.Now;
         }
         catch (HttpResponseException e)
         {
@@ -227,6 +232,7 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
             Precipitation = cacheData.Precipitation!;
             Warnings = cacheData.Warnings!;
             WeatherNow = cacheData.WeatherNow;
+            UpdateTime = cacheData.UpdatedTime;
         }
         else
         {
