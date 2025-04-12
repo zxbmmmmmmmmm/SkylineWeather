@@ -2,7 +2,7 @@
 
 namespace SkylineWeather.Abstractions.Models.Weather;
 
-public class HourlyWeather : Weather
+public record HourlyWeather : Weather
 {
     public DateTimeOffset Time { get; set; }
     public Temperature Temperature { get; set; }

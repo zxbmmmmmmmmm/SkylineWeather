@@ -2,7 +2,7 @@
 
 namespace SkylineWeather.Abstractions.Models.Weather;
 
-public class DailyWeather : Weather
+public record DailyWeather : Weather
 {
     public DateOnly Date { get; set; }
     public Temperature HighTemperature { get; set; }

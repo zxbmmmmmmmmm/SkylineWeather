@@ -1,6 +1,6 @@
 ﻿namespace SkylineWeather.Abstractions.Models.Alert;
 
-public class Alert
+public record Alert
 {
     public required string Title {  get; set; }
     public required string Description { get; set; }

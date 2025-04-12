@@ -1,6 +1,6 @@
 ﻿namespace SkylineWeather.Abstractions.Models.AirQuality;
 
-public class AirQuality
+public record AirQuality
 {
     public double? PM25 { get; set; }
     public double? PM10 { get; set; }

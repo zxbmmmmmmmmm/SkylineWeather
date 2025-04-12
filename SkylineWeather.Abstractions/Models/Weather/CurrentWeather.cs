@@ -1,7 +1,7 @@
 ﻿using UnitsNet;
 namespace SkylineWeather.Abstractions.Models.Weather;
 
-public class CurrentWeather : Weather
+public record CurrentWeather : Weather
 {
     public Temperature Temperature { get; set; }
     public Wind? Wind { get; set; }

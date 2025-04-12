@@ -2,7 +2,7 @@
 
 namespace SkylineWeather.Abstractions.Models;
 
-public class Geolocation
+public record Geolocation
 {
     public required string Name { get; set; }
     public required Location Location { get; set; }

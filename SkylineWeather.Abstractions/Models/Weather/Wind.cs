@@ -2,7 +2,7 @@
 
 namespace SkylineWeather.Abstractions.Models.Weather;
 
-public class Wind
+public record Wind
 {
     public Speed? Speed { get; set; }
     public Angle? Angle { get; set; }
