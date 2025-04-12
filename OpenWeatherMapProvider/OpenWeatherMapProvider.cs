@@ -21,5 +21,6 @@ public class OpenWeatherMapProvider : ProviderBase,ICurrentWeatherProvider
     {
         var query = new OpenWeatherMap.Cache.Models.Location(location.Latitude, location.Longitude);
         var result = await _client.GetReadingsAsync(query);
+        throw new NotImplementedException();
     }
 }

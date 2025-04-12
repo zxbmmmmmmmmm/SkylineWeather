@@ -7,5 +7,5 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface IAlertProvider
 {
-    public Task<Result<List<Alert>>> GetAlertsAsync(Location location);
+    public Task<Result<IReadOnlyList<Alert>>> GetAlertsAsync(Location location);
 }

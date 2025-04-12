@@ -35,25 +35,25 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
         return result.WeatherNow.MapToCurrentWeather();
     }
 
-    public async Task<Result<List<DailyWeather>>> GetDailyWeatherAsync(Location location)
+    public async Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location)
     {
         var result = await _handler.RequestAsync(QWeatherApis.WeatherDailyApi, new QWeatherRequest(location.Longitude, location.Latitude), _option);
         return result.DailyForecasts.ConvertAll(p => p.MapToDailyWeather());
     }
 
-    public async Task<Result<List<HourlyWeather>>> GetHourlyWeatherAsync(Location location)
+    public async Task<Result<IReadOnlyList<HourlyWeather>>> GetHourlyWeatherAsync(Location location)
     {
         var result = await _handler.RequestAsync(QWeatherApis.WeatherHourlyApi, new QWeatherRequest(location.Longitude, location.Latitude), _option);
         return result.HourlyForecasts.ConvertAll(p => p.MapToHourlyWeather());
     }
 
-    public async Task<Result<List<Alert>>> GetAlertsAsync(Location location)
+    public async Task<Result<IReadOnlyList<Alert>>> GetAlertsAsync(Location location)
     {
         var result = await _handler.RequestAsync(QWeatherApis.WeatherWarningApi, new QWeatherRequest(location.Longitude, location.Latitude), _option);
         return result.Warnings.ConvertAll(p => p.MapToAlert());
     }
 
-    public async Task<Result<List<Geolocation>>> GetGeolocationsAsync(Location location)
+    public async Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(Location location)
     {
         var result = await _handler.RequestAsync(
             new GeolocationApi<QGeolocationResponse>(), 
@@ -62,7 +62,7 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
         return result.Locations.ConvertAll(p => p.MapToGeolocation());
     }
 
-    public async Task<Result<List<Geolocation>>> GetGeolocationsAsync(string name)
+    public async Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(string name)
     {
         var result = await _handler.RequestAsync(
             new GeolocationApi<QGeolocationResponse>(),

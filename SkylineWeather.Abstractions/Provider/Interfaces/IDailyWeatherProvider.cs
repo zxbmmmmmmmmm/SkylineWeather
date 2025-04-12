@@ -6,6 +6,6 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface IDailyWeatherProvider
 {
-    public Task<Result<List<DailyWeather>>> GetDailyWeatherAsync(Location location);
+    public Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location);
 
 }

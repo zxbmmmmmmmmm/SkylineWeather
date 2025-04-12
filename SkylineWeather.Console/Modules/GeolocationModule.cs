@@ -5,6 +5,7 @@ using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
 using SkylineWeather.Abstractions.Services;
 using Spectre.Console;
+using System.Collections.Generic;
 
 namespace SkylineWeather.Console.Modules;
 
@@ -55,28 +56,28 @@ public class GeolocationModule(
                 .UseConverter(p => p.Name));
         _settings.DefaultGeolocation = selected;
     }
-    private async Task<List<Geolocation>> Geolocation()
+    private async Task<IReadOnlyList<Geolocation>> Geolocation()
     {
         throw new NotImplementedException();
     }
-    private async Task<List<Geolocation>> Search()
+    private async Task<IReadOnlyList<Geolocation>> Search()
     {
         var name = AnsiConsole.Ask<string>("名称: ");
         var result = await _provider.GetGeolocationsAsync(name);
-        var geolocations = new List<Geolocation>();
+        IReadOnlyList<Geolocation>? geolocations = null;
         result.IfSucc(geo =>
         {
             geolocations = geo;
         });
         return geolocations ?? throw new ResultIsNullException();
     }
-    private async Task<List<Geolocation>> ReverseSearch()
+    private async Task<IReadOnlyList<Geolocation>> ReverseSearch()
     {
         var latitude = AnsiConsole.Ask<double>("纬度: ");
         var longitude = AnsiConsole.Ask<double>("经度: ");
         var location = new Location(latitude, longitude);
         var result = await _provider.GetGeolocationsAsync(location);
-        var geolocations = new List<Geolocation>();
+        IReadOnlyList<Geolocation>? geolocations = null;
         result.IfSucc(geo =>
         {
             geolocations = geo;
