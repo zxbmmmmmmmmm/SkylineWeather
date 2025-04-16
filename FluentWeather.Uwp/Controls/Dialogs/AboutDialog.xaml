@@ -139,7 +139,7 @@
                             </Flyout>
                         </Button.Flyout>
                     </Button>
-                    <Button Background="Transparent" BorderBrush="Transparent" Visibility="Collapsed">
+                    <Button Background="Transparent" BorderBrush="Transparent">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Uid="About_Sponsor" />
                             <FontIcon
