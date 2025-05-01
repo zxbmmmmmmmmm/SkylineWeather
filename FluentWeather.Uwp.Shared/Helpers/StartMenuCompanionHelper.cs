@@ -19,21 +19,38 @@ using System.Globalization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage.Streams;
 using Microsoft.Toolkit.Uwp;
+using Microsoft.MarkedNet;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FluentWeather.Uwp.Shared.Helpers;
 
 public static class StartMenuCompanionHelper
 {
+    private static async Task<StorageFolder> GetOrCreateFolderAsync(this StorageFolder folder, string name)
+    {
+        var item = await folder.TryGetItemAsync(name) as StorageFolder;
+        item ??= await folder.CreateFolderAsync(name);
+        return item;
+    }
     public static async Task UpdateStartMenuCompanionAsync(this AdaptiveCard adaptiveCard, string fileName = "StartMenuCompanion.json")
     {
         try
         {
-            StorageFile file = await StorageFileHelper.WriteTextToLocalFileAsync(adaptiveCard.ToJson(), fileName).ConfigureAwait(false);
-            FileInfo info = new(file.Path);
-            FileSecurity security = info.GetAccessControl();
-            // Add Shell Experience Capability SID
-            security.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier("S-1-15-3-1024-3167453650-624722384-889205278-321484983-714554697-3592933102-807660695-1632717421"), FileSystemRights.ReadAndExecute, InheritanceFlags.None, PropagationFlags.None, AccessControlType.Allow));
-            info.SetAccessControl(security);
+            var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("StartMenu");
+            if (await folder.TryGetItemAsync(fileName) is StorageFile file)
+            {
+                File.WriteAllText(file.Path, adaptiveCard.ToJson());
+            }
+            else
+            {
+                StorageFile newFile = await folder.WriteTextToFileAsync(adaptiveCard.ToJson(), fileName).ConfigureAwait(false);
+                DirectoryInfo info = new(folder.Path);
+                var security = info.GetAccessControl();
+                // Add Shell Experience Capability SID
+                security.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier("S-1-15-3-1024-3167453650-624722384-889205278-321484983-714554697-3592933102-807660695-1632717421"), FileSystemRights.ReadAndExecute, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow));
+                info.SetAccessControl(security);
+            }
+
         }
         catch (Exception ex)
         {

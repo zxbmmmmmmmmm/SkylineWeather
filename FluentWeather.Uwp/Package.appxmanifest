@@ -91,7 +91,7 @@
             Description="Skyline Weather Start Menu Companion"
             PublicFolder="public">
             <uap3:Properties>
-              <AdaptiveCardAppDataLocalRelativePath>StartMenuCompanion.json</AdaptiveCardAppDataLocalRelativePath>
+              <AdaptiveCardAppDataLocalRelativePath>StartMenu\StartMenuCompanion.json</AdaptiveCardAppDataLocalRelativePath>
               <PlacementPreference>Right</PlacementPreference>
               <RefreshCardLaunchUri>weather://</RefreshCardLaunchUri>
               <Icon>ms-appx:///Assets/StoreLogo.png</Icon>
