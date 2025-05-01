@@ -72,15 +72,16 @@ public static class StartMenuCompanionHelper
                     IsSubtle = true,
                     Size = AdaptiveTextSize.Small
                 },
-                new AdaptiveTextBlock
-                {
-                    Spacing = AdaptiveSpacing.None,
-                    Text = DateTime.Now.ToString(),
-                    HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
-                    IsSubtle = true,
-                    Size = AdaptiveTextSize.Small
-                },
-
+//#if DEBUG
+//                new AdaptiveTextBlock
+//                {
+//                    Spacing = AdaptiveSpacing.None,
+//                    Text = DateTime.Now.ToString(),
+//                    HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+//                    IsSubtle = true,
+//                    Size = AdaptiveTextSize.Small
+//                },
+//#endif
                 new AdaptiveImage
                 {
                     Url = await new Uri("ms-appx:///Assets/Weather/" + data.Daily[0].WeatherType.GetWeatherIconName()).ToBase64Url(),
@@ -154,32 +155,34 @@ public static class StartMenuCompanionHelper
                 await CreateDailyColumnSet(data.Daily[3]),
                 await CreateDailyColumnSet(data.Daily[4]),
                 await CreateDailyColumnSet(data.Daily[5]),
-                await CreateDailyColumnSet(data.Daily[6]),
-                new AdaptiveColumnSet(),
-                new AdaptiveColumnSet{
-                    Spacing = AdaptiveSpacing.Medium,
-                    Columns = [
-                        new AdaptiveColumn
-                    {
-                        Width = AdaptiveColumnWidth.Stretch,
-                        Items =
-                        [
-                            new AdaptiveTextBlock
-                            {
-                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
-                                Color = AdaptiveTextColor.Accent,
-                                Text = "ViewDetails".GetLocalized(),
-                            }
-                        ],
-
-                        SelectAction = new AdaptiveOpenUrlAction { Title = "ViewDetails".GetLocalized(), Url = new Uri("weather://")},
-
-                    },],
-
-                }
-                ],
-
+                await CreateDailyColumnSet(data.Daily[6]),]
         };
+
+        card.AdditionalProperties.Add("companionActions",
+            new List<object>
+            {
+                new Dictionary<string, string>
+                {
+                    {"type", "Action.OpenUrl" },
+                    {"title", "ViewDetails".GetLocalized() },
+                    {"url", "weather://" },
+                    {"category", "primary" },
+                    {"glyph", "\uE8A7" },
+                    {"fontFamily", "Segoe Fluent Icons" },
+                },
+                new Dictionary<string, string>
+                {
+                    {"type", "Action.OpenUrl" },
+                    {"title", "Settings"},
+                    {"url", "ms-settings:personalization-start-companions" },
+                    {"category", "primary" },
+                    {"glyph", "\ue713" },
+                    {"fontFamily", "Segoe Fluent Icons" },
+                }
+            }
+
+            );
+
         return card;
     }
 
@@ -333,7 +336,8 @@ public static class StartMenuCompanionHelper
                         //}
                     ]
                 }
-            ]
+            ],
+
         };
 
         return card;

@@ -11,6 +11,7 @@ using FluentWeather.Uwp.ViewModels.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.ApplicationModel.Resources;
 using FluentWeather.Uwp.Shared.Helpers;
+using Telerik.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
@@ -195,6 +196,10 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
                     try
                     {
                         TileHelper.UpdateForecastTile(DailyForecasts);
+                        var info = new WeatherCardData { Daily = DailyForecasts, Location = CurrentGeolocation, AirQuality = AirCondition };
+
+                        var card = await StartMenuCompanionHelper.CreateCompanionCard(info);
+                        await card.UpdateStartMenuCompanionAsync();
                     }
                     catch
                     {
