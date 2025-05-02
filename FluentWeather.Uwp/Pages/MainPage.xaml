@@ -927,8 +927,8 @@
                                 FontSize="14"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                 Glyph="&#xE72C;" />
-                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"  >
-                                <Run Text="{x:Bind ViewModel.UpdateTime.Hour, Mode=OneWay}" />:<Run Text="{x:Bind ViewModel.UpdateTime.Minute, Mode=OneWay}" />
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" 
+                                       Text="{x:Bind DateTimeToString(ViewModel.UpdateTime,'HH\\\\:mm'),Mode=OneWay}" >
                             </TextBlock>
                         </StackPanel>
                     </Button>

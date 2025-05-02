@@ -72,6 +72,7 @@ public sealed partial class MainPage : Page
         if (precipList.Count is 0) return Visibility.Collapsed;
         return precipList.Sum(p => p.Precipitation) == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
+    private string DateTimeToString(DateTimeOffset dateTime, string format) => dateTime.ToString(format);
 
     private async void LoadElements()
     {
