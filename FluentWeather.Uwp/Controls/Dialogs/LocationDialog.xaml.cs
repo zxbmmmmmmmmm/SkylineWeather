@@ -70,7 +70,14 @@ public sealed partial class LocationDialog : ContentDialog
         Country = location.Country;
         if (location.TimeZone is not null)
         {
-            TimeZone = TimeZoneInfo.FindSystemTimeZoneById(location.TimeZone);
+            try
+            {
+                TimeZone = TimeZoneInfo.FindSystemTimeZoneById(location.TimeZone);
+            }
+            catch
+            {
+                TimeZone = GetTimeZoneFromLocation(location.Location.Longitude);
+            }
         }
         else if(location.UtcOffset is not null)
         {

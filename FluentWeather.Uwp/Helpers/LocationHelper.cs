@@ -12,19 +12,26 @@ public sealed class LocationHelper
 {
     public static async Task<(double lon,double lat)> UpdatePosition()
     {
-        var accessStatus = await Geolocator.RequestAccessAsync();
-        switch (accessStatus)
+        try
         {
-            case GeolocationAccessStatus.Allowed:
+            var accessStatus = await Geolocator.RequestAccessAsync();
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
 
-                var geolocator = new Geolocator { DesiredAccuracyInMeters = 10 };
-                var pos = await geolocator.GetGeopositionAsync();
-                return (pos.Coordinate.Point.Position.Longitude, pos.Coordinate.Point.Position.Latitude);
+                    var geolocator = new Geolocator { DesiredAccuracyInMeters = 10 };
+                    var pos = await geolocator.GetGeopositionAsync();
+                    return (pos.Coordinate.Point.Position.Longitude, pos.Coordinate.Point.Position.Latitude);
 
-            case GeolocationAccessStatus.Unspecified:
-            case GeolocationAccessStatus.Denied:
-            default:
-                return (-1, -1);
+                case GeolocationAccessStatus.Unspecified:
+                case GeolocationAccessStatus.Denied:
+                default:
+                    return (-1, -1);
+            }
+        }
+        catch
+        {
+            return (-1, -1);
         }
     }
     public static async Task<GeolocationBase> GetGeolocation()
@@ -45,15 +52,27 @@ public sealed class LocationHelper
                 Common.Settings.DefaultGeolocation = dialog.Result;
                 return dialog.Result;
             }
-            var city = await service.GetCitiesGeolocationByLocation(lat, lon);
-            if (city.Count is 0)//根据经纬度获取城市失败
+
+            try
+            {
+                var city = await service.GetCitiesGeolocationByLocation(lat, lon);
+                if (city.Count is 0)//根据经纬度获取城市失败
+                {
+                    var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
+                    await DialogManager.OpenDialogAsync(dialog);
+                    Common.Settings.DefaultGeolocation = dialog.Result;
+                    return dialog.Result;
+                }
+                return city.First();
+            }
+            catch
             {
                 var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
                 await DialogManager.OpenDialogAsync(dialog);
                 Common.Settings.DefaultGeolocation = dialog.Result;
                 return dialog.Result;
             }
-            return city.First();
+
         }
 
         if (!Common.Settings.UpdateLocationOnStartup)//不更新位置

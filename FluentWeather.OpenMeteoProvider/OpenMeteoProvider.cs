@@ -9,10 +9,19 @@ using OpenMeteoApi.Variables;
 using System;
 using System.Linq;
 using FluentWeather.Abstraction.Helpers;
+using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 
 namespace FluentWeather.OpenMeteoProvider;
 
-public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, IAirConditionProvider, IDailyForecastProvider, IHourlyForecastProvider, IPrecipitationProvider, IHistoricalWeatherProvider
+public sealed class OpenMeteoProvider : 
+    ProviderBase,
+    ICurrentWeatherProvider, 
+    IAirConditionProvider,
+    IDailyForecastProvider,
+    IHourlyForecastProvider,
+    IPrecipitationProvider, 
+    IHistoricalWeatherProvider,
+    IGeolocationProvider
 {
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
@@ -81,5 +90,16 @@ public sealed class OpenMeteoProvider : ProviderBase, ICurrentWeatherProvider, I
             list.Add(item);
         }
         return list;
+    }
+
+    public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
+    {
+        var data = await Client.GetLocationsByName(name);
+        return data.ConvertAll(p => p.MapToGeolocationBase());
+    }
+
+    public Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon)
+    {
+        throw new NotImplementedException();
     }
 }
