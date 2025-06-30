@@ -52,9 +52,17 @@ public sealed partial class LocationDialog : ContentDialog
     public async Task FindCities()
     {
         SuggestedCities.Clear();
-        var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        var result = await service.GetCitiesGeolocationByName(Query);
-        result?.ForEach(SuggestedCities.Add);
+        try
+        {
+            var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
+            var result = await service.GetCitiesGeolocationByName(Query);
+            result?.ForEach(SuggestedCities.Add);
+        }
+        catch
+        {
+            ShowCustomLocationButton.Visibility = Visibility.Collapsed;
+            CustomLocationPanel.Visibility = Visibility.Visible;
+        }
     }
 
     [RelayCommand]
