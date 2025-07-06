@@ -96,6 +96,12 @@ public sealed partial class LocationDialog : ContentDialog
             TimeZone = GetTimeZoneFromLocation(location.Location.Longitude);
         }
         IsDaylightSavingTime = location.IsDaylightSavingTime;
+
+        if (ShowCustomLocationButton.Visibility is Visibility.Visible)
+        {
+            CustomLocationPanel.Visibility = Visibility.Visible;
+            ShowCustomLocationButton.Visibility = Visibility.Collapsed;
+        }
     }
 
     private bool CanContinue
