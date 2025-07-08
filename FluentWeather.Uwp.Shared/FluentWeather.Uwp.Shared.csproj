@@ -124,7 +124,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssetBase64.cs" />
-    <Compile Include="Constants.Secret.cs" />
     <Compile Include="Helpers\AssetsHelper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Helpers\DataProviderHelper.cs" />
