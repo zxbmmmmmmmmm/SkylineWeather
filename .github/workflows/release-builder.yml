@@ -105,6 +105,17 @@ jobs:
         asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_ARM64.msix
         asset_content_type: application/octet-stream
 
+    - name: Update x64 release msixupload asset
+      id: upload-release-msixupload-asset-x64
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: C:\Package\x64\FluentWeather.Uwp_${{github.event.inputs.version}}_x64.msixupload
+        asset_name: FluentWeather.Uwp_${{github.event.inputs.version}}_x64.msixupload
+        asset_content_type: application/octet-stream
+
     - name: Update certificate
       id: upload-release-asset-cert
       uses: actions/upload-release-asset@v1
