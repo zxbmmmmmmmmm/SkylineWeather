@@ -150,12 +150,22 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
     {
         var precipProvider = Locator.ServiceProvider.GetService<IPrecipitationProvider>();
         if (precipProvider is null) return;
-        var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
-        if (precip.Summary is "" or null)
+        try
         {
-            precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations?.Sum(p => p.Precipitation) > 0 ? "HasPrecipitationText" : "NoPrecipitationText");
+            var precip = await precipProvider.GetPrecipitations(location.Longitude, location.Latitude);
+            if (precip.Summary is "" or null)
+            {
+                precip.Summary = ResourceLoader.GetForCurrentView().GetString(precip?.Precipitations?.Sum(p => p.Precipitation) > 0 ? "HasPrecipitationText" : "NoPrecipitationText");
+            }
+            Precipitation = precip;
         }
-        Precipitation = precip;
+        catch(HttpResponseException ex)
+        {
+            if(ex.Code != System.Net.HttpStatusCode.NotFound)
+            {
+                throw;
+            }
+        }
     }
 
     [RelayCommand]
@@ -163,7 +173,17 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
     {
         var airConditionProvider = Locator.ServiceProvider.GetService<IAirConditionProvider>();
         if (airConditionProvider is null) return;
-        AirCondition = await airConditionProvider.GetAirCondition(location.Longitude, location.Latitude);
+        try
+        {
+            AirCondition = await airConditionProvider.GetAirCondition(location.Longitude, location.Latitude);
+        }
+        catch (HttpResponseException ex)
+        {
+            if (ex.Code != System.Net.HttpStatusCode.NotFound)
+            {
+                throw;
+            }
+        }
     }
 
     [RelayCommand]

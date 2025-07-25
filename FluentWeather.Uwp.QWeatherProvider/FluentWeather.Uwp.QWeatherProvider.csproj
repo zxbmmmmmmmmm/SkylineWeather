@@ -159,7 +159,7 @@
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="QWeather">
-      <Version>1.2.2</Version>
+      <Version>1.3.1</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.5</Version>
@@ -182,9 +182,7 @@
       <Name>FluentWeather.Uwp.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\SetTokenDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
