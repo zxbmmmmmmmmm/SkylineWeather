@@ -60,6 +60,60 @@ public static class StartMenuCompanionHelper
 
     public static async Task<AdaptiveCard> CreateCompanionCard(WeatherCardData data)
     {
+
+
+        var columnSet = new AdaptiveColumnSet
+        {
+            Spacing = AdaptiveSpacing.Medium,
+            Columns =
+                    [
+                        new AdaptiveColumn
+                        {
+                            Width = AdaptiveColumnWidth.Stretch,
+                            Items =
+                            [
+                                new AdaptiveTextBlock
+                                {
+                                    Text = data.Daily[0].WindDirectionDescription,
+                                    Size = AdaptiveTextSize.Small,
+                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
+                                    IsSubtle= true,
+                                },
+                                new AdaptiveTextBlock
+                                {
+                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
+                                    Text = $"{data.Daily[0].WindScale} "+ "Level".GetLocalized(),
+                                    Spacing= AdaptiveSpacing.None,
+                                }
+                            ]
+                        }
+
+
+                        ]
+        };
+        if(data.AirQuality is not null)
+        {
+            columnSet.Add(new AdaptiveColumn
+            {
+                Width = AdaptiveColumnWidth.Stretch,
+                Items =
+                [
+                    new AdaptiveTextBlock
+                    {
+                        Text = data.AirQuality.AqiCategory,
+                        Size = AdaptiveTextSize.Small,
+                        HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
+                        IsSubtle= true,
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
+                        Text = data.AirQuality.Aqi.ToString(),
+                        Spacing= AdaptiveSpacing.None,
+                    }
+                ]
+            });
+        }
         var card = new AdaptiveCard("1.1")
         {
             Speak = "Forecast".GetLocalized(),
@@ -100,64 +154,15 @@ public static class StartMenuCompanionHelper
                     Spacing = AdaptiveSpacing.None,
                     Weight = AdaptiveTextWeight.Bolder,
                 },
-
-                new AdaptiveColumnSet
-                {
-                    Spacing = AdaptiveSpacing.Medium,
-                    Columns =
-                    [
-                        new AdaptiveColumn
-                        {
-                            Width = AdaptiveColumnWidth.Stretch,
-                            Items =
-                            [
-                                new AdaptiveTextBlock
-                                {
-                                    Text = data.Daily[0].WindDirectionDescription,
-                                    Size = AdaptiveTextSize.Small,
-                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    IsSubtle= true,
-                                },
-                                new AdaptiveTextBlock
-                                {
-                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    Text = $"{data.Daily[0].WindScale} "+ "Level".GetLocalized(),
-                                    Spacing= AdaptiveSpacing.None,
-                                }
-                            ]
-                        },
-
-                        new AdaptiveColumn
-                        {
-                            Width = AdaptiveColumnWidth.Stretch,
-                            Items =
-                            [
-                                new AdaptiveTextBlock
-                                {
-                                    Text = data.AirQuality.AqiCategory,
-                                    Size = AdaptiveTextSize.Small,
-                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    IsSubtle= true,
-                                },
-                                new AdaptiveTextBlock
-                                {
-                                    HorizontalAlignment= AdaptiveHorizontalAlignment.Center,
-                                    Text = data.AirQuality.Aqi.ToString(),
-                                    Spacing= AdaptiveSpacing.None,
-                                }
-                            ]
-                        }
-                        ]
-                },
+                columnSet,
                 await CreateDailyColumnSet(data.Daily[0]),
                 await CreateDailyColumnSet(data.Daily[1]),
                 await CreateDailyColumnSet(data.Daily[2]),
                 await CreateDailyColumnSet(data.Daily[3]),
                 await CreateDailyColumnSet(data.Daily[4]),
                 await CreateDailyColumnSet(data.Daily[5]),
-                await CreateDailyColumnSet(data.Daily[6]),]
+                await CreateDailyColumnSet(data.Daily[6])]
         };
-
         card.AdditionalProperties.Add("companionActions",
             new List<object>
             {
