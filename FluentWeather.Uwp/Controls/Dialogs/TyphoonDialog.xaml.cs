@@ -25,11 +25,6 @@ public sealed partial class TyphoonDialog : ContentDialog
     public TyphoonDialog()
     {
         this.InitializeComponent();
-        GetTyphoons();
-        ShowWarningLines();
-        TyphoonMap.MapServiceToken = Constants.BingMapsKey;
-        DataContext = this;
-        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackTyphoonDialogOpened();
     }
     public const string MapStyleSheetJson = "{\"version\":\"1.*\",\"settings\":{},\"elements\":{\"transportation\":{\"visible\":false},\"road\":{\"labelVisible\":false}}}";
     [ObservableProperty]
@@ -239,5 +234,14 @@ public sealed partial class TyphoonDialog : ContentDialog
             TyphoonType.SuperTY => "超强台风",
             _ => "未知强度"
         };
+    }
+
+    private void ContentDialog_Loaded(object sender, RoutedEventArgs e)
+    {
+        GetTyphoons();
+        ShowWarningLines();
+        TyphoonMap.MapServiceToken = Constants.BingMapsKey;
+        DataContext = this;
+        Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackTyphoonDialogOpened();
     }
 }
