@@ -16,10 +16,13 @@ namespace FluentWeather.Uwp.QWeatherProvider.Views;
 public sealed partial class SetTokenDialog : ContentDialog
 {
     [ObservableProperty]
-    private string key;
-    [ObservableProperty]
-    private string publicId;
+    private partial string Key { get; set; }
 
+    [ObservableProperty]
+    private partial string PublicId { get; set; }
+
+    [ObservableProperty]
+    private partial string Domain { get; set; }
     public SetTokenDialog()
     {
         this.InitializeComponent();
@@ -29,42 +32,25 @@ public sealed partial class SetTokenDialog : ContentDialog
     {
         try
         {
-            var domain = await CheckKey(Key);
+            await CheckKey(Key);
             Common.Settings.QWeatherToken = Key;
-            Common.Settings.QWeatherDomain = domain;
-            Common.Settings.QWeatherPublicId = PublicId;
+            Common.Settings.QWeatherDomain = Domain;
+            Common.Settings.QWeatherPublicId = "";
             Common.Settings.OOBECompleted = true;
             Hide();
             await CoreApplication.RequestRestartAsync(string.Empty);
         }
-        catch(HttpResponseException e)
+        catch(Exception e)
         {
             ErrorTextblock.Visibility = Visibility.Visible;
-            if(PublicId != "")
-            {
-                ErrorTextblock.Text = $"认证失败({(int)e.Code}-{e.Code})" + Environment.NewLine + "请检查Public Id与KEY是否对应";
-            }
-            else
-            {
-                ErrorTextblock.Text = $"此KEY不可用，请重试({(int)e.Code}-{e.Code})";
-            }
+            ErrorTextblock.Text = e.Message;         
         }
 
     }
-    private async Task<string> CheckKey(string token)
+    private async Task CheckKey(string token)
     {
-        var client = new QWeatherProvider(token, "api.qweather.com",null,PublicId);
-        try
-        {
-            await client.GetCurrentWeather(116.39,39.9);
-        }
-        catch
-        {
-            client.SetDomain("devapi.qweather.com");
-            await client.GetCurrentWeather(116.39, 39.9);
-            return "devapi.qweather.com";
-        }
-        return "api.qweather.com";
+        var client = new QWeatherProvider(token, Domain, null, PublicId);
+        await client.GetCurrentWeather(116.39, 39.9);
     }
 
     private async void KeyBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -81,6 +67,14 @@ public sealed partial class SetTokenDialog : ContentDialog
         if (!con.Contains(StandardDataFormats.Text)) return;
         var str = await con.GetTextAsync();
         PublicId = str;
+    }
+
+    private async void DomainBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        var con = Clipboard.GetContent();
+        if (!con.Contains(StandardDataFormats.Text)) return;
+        var str = await con.GetTextAsync();
+        Domain = str;
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)

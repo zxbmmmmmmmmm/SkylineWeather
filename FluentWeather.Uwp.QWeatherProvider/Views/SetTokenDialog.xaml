@@ -29,13 +29,24 @@
                 QueryIcon="Paste"
                 QuerySubmitted="KeyBox_QuerySubmitted"
                 Text="{x:Bind Key, Mode=TwoWay}" />
+
             <AutoSuggestBox
+                x:Name="DomainBoxBox"
+                x:Uid="DomainBoxBox"
+                Margin="0,12,0,0"
+                QueryIcon="Paste"
+                PlaceholderText="API Host"
+                QuerySubmitted="DomainBox_QuerySubmitted"
+                Text="{x:Bind Domain, Mode=TwoWay}" />
+
+            <AutoSuggestBox Visibility="Collapsed"
                 x:Name="PublicIdBox"
                 x:Uid="PublicIdBox"
                 Margin="0,12,0,0"
                 QueryIcon="Paste"
                 QuerySubmitted="PublicIdBox_QuerySubmitted"
                 Text="{x:Bind PublicId, Mode=TwoWay}" />
+
             <StackPanel
                 Margin="0,12,0,0"
                 Orientation="Horizontal"

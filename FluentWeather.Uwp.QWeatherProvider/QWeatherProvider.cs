@@ -193,7 +193,7 @@ public sealed class QWeatherProvider : ProviderBase,
     {
         var handler = new QWeatherApiHandler();
         var response = await handler.RequestAsync(contract, request, Option);
-        if (!response.Code.StartsWith("2"))
+        if (response.Code is not null && !response.Code.StartsWith("2"))
         {
             if(response.Code is "401" or "402" or "403")
             {
