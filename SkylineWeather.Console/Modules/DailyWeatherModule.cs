@@ -14,14 +14,14 @@ namespace SkylineWeather.Console.Modules;
 
 public class DailyWeatherModule(
     IDailyWeatherProvider provider,   
-    ITrendAnalyzer<Temperature,TemperatureTrend> temperatureAnalyzer,
+    ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend> temperatureAnalyzer,
     Func<string, Task> backFunc,
     CancellationToken cancellationToken) : IFeatureModule
 {
     private readonly IDailyWeatherProvider _provider = provider;
     private readonly CancellationToken _cancellationToken = cancellationToken;
     private readonly Func<string, Task> _backFunc = backFunc;
-    private readonly ITrendAnalyzer<Temperature, TemperatureTrend> _temperatureAnalyzer = temperatureAnalyzer;
+    private readonly ITrendAnalyzer<(Temperature,Temperature), TemperatureTrend> _temperatureAnalyzer = temperatureAnalyzer;
     public async Task RunAsync()
     {
         var config = Program.AppHost.Services.GetRequiredService<IConfiguration>();
@@ -59,24 +59,17 @@ public class DailyWeatherModule(
                     Markup.Escape(daily.LowTemperature.ToString("0.0")));
             }
             AnsiConsole.Write(dailyTable);
-            var highTrend = _temperatureAnalyzer.GetTrend(forecasts.Select(p => p.HighTemperature));
+            var trend = _temperatureAnalyzer.GetTrend(forecasts.Select(p => (p.LowTemperature, p.HighTemperature)));
             var trendTable = new Table();
             trendTable.AddColumn("");
             trendTable.AddColumn("趋势");
             trendTable.AddColumn("斜率");
             trendTable.AddColumn("相关系数");
             trendTable.AddRow(
-                "最高温",
-                Markup.Escape(highTrend.Type.ToString()),
-                Markup.Escape(highTrend.Slope.ToString("0.0")),
-                Markup.Escape(highTrend.CorrelationCoefficient.ToString("0.0")));
-
-            var minTrend = _temperatureAnalyzer.GetTrend(forecasts.Select(p => p.LowTemperature));
-            trendTable.AddRow(
-                "最低温",
-                Markup.Escape(minTrend.Type.ToString()),
-                Markup.Escape(minTrend.Slope.ToString("0.0")),
-                Markup.Escape(minTrend.CorrelationCoefficient.ToString("0.0")));
+                "温度",
+                Markup.Escape(trend.Type.ToString()),
+                Markup.Escape(trend.Slope.ToString("0.0")),
+                Markup.Escape(trend.CorrelationCoefficient.ToString("0.0")));
             AnsiConsole.Write(trendTable);
         });
 

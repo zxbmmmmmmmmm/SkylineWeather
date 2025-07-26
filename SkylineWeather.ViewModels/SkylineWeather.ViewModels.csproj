@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SkylineWeather.Abstractions\SkylineWeather.Abstractions.csproj" />
+    <ProjectReference Include="..\SkylineWeather.DataAnalyzer\SkylineWeather.DataAnalyzer.csproj" />
   </ItemGroup>
 
 </Project>

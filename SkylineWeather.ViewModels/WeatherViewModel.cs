@@ -6,6 +6,9 @@ using SkylineWeather.Abstractions.Models.AirQuality;
 using SkylineWeather.Abstractions.Models.Alert;
 using SkylineWeather.Abstractions.Models.Weather;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using SkylineWeather.DataAnalyzer.Analyzers;
+using SkylineWeather.DataAnalyzer.Models;
+using UnitsNet;
 
 namespace SkylineWeather.ViewModels;
 
@@ -14,8 +17,10 @@ public partial class WeatherViewModel(
     IWeatherProvider weatherProvider,
     IAlertProvider alertProvider,
     IAirQualityProvider airQualityProvider,
+    ITrendAnalyzer<(Temperature min,Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
     ILogger logger) : ObservableObject
 {
+    public Geolocation Geolocation { get; init; } = geolocation;
 
     [ObservableProperty]
     public partial IReadOnlyList<DailyWeather>? Dailies { get; set; }
@@ -32,7 +37,8 @@ public partial class WeatherViewModel(
     [ObservableProperty]
     public partial AirQuality? AirQuality { get; set; }
 
-    public Geolocation Geolocation { get; init; } = geolocation;
+    public TemperatureTrend? DailyTemperatureTrend =>
+        Dailies is null ? null : temperatureTrendAnalyzer.GetTrend(Dailies.Select(p => (p.LowTemperature, p.HighTemperature)));
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Loaded))]
@@ -50,6 +56,7 @@ public partial class WeatherViewModel(
             GetAlertsAsync(),
             GetAirQualityAsync());
         RefreshedTime = DateTimeOffset.Now;
+
     }
 
     [RelayCommand]

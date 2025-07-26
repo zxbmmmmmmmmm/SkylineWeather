@@ -1,16 +1,24 @@
 ﻿using SkylineWeather.DataAnalyzer.Models;
 using UnitsNet;
 
-namespace SkylineWeather.DataAnalyzer;
+namespace SkylineWeather.DataAnalyzer.Analyzers;
 
-public class TemperatureTrendAnalyzer : ITrendAnalyzer<Temperature,TemperatureTrend>
+public class SingleTemperatureTrendAnalyzer : ITrendAnalyzer<Temperature, TemperatureTrend>
 {
+    private const double SignificantSlope = 0.5;
+    private const double WeakCorrelation = 0.7;
+    public static SingleTemperatureTrendAnalyzer Instance { get; } = new();
     public TemperatureTrend GetTrend(IEnumerable<Temperature> data)
     {
-        //使用最小二乘法计算温度趋势
-        var x = data.Select((t, i) => (double)i).ToArray();
-        var y = data.Select(t => t.DegreesCelsius).ToArray();
-        var n = x.Length;
+        // 使用最小二乘法计算温度趋势
+        var arr = data.ToArray();
+        if (arr.Length < 2)
+        {
+            return new TemperatureTrend { Type = TemperatureTrendType.Steady };
+        }
+        var x = arr.Select((__, i) => (double)i).ToArray();
+        var y = arr.Select(t => t.DegreesCelsius).ToArray();
+        var n = arr.Length;
         var sumX = x.Sum();
         var sumY = y.Sum();
         var sumX2 = x.Select(xx => xx * xx).Sum();
@@ -26,7 +34,7 @@ public class TemperatureTrendAnalyzer : ITrendAnalyzer<Temperature,TemperatureTr
             CorrelationCoefficient = r
         };
 
-        if (Math.Abs(trend.CorrelationCoefficient) <= 0.7)
+        if (Math.Abs(trend.CorrelationCoefficient) <= WeakCorrelation)
         {
             trend.Type = TemperatureTrendType.Fluctuating;
         }
@@ -34,8 +42,8 @@ public class TemperatureTrendAnalyzer : ITrendAnalyzer<Temperature,TemperatureTr
         {
             trend.Type = trend.Slope switch
             {
-                >= 0.5 => TemperatureTrendType.Increasing,
-                <= -0.5 => TemperatureTrendType.Decreasing,
+                >= SignificantSlope => TemperatureTrendType.Increasing,
+                <= -SignificantSlope => TemperatureTrendType.Decreasing,
                 _ => TemperatureTrendType.Steady
             };
         }
@@ -43,3 +51,4 @@ public class TemperatureTrendAnalyzer : ITrendAnalyzer<Temperature,TemperatureTr
         return trend;
     }
 }
+

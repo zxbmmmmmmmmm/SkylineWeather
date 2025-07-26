@@ -56,7 +56,7 @@ public class WeatherService : IHostedService
             {
                 FeatureType.Daily => new DailyWeatherModule(
                     Program.AppHost.Services.GetService<IDailyWeatherProvider>()!,
-                    Program.AppHost.Services.GetService<ITrendAnalyzer<Temperature,TemperatureTrend>>()!,
+                    Program.AppHost.Services.GetService<ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend>>()!,
                     BackToFeatureSelectionAsync,
                     _cancellationToken),
                 FeatureType.Current => new CurrentWeatherModule(

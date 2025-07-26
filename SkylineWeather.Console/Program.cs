@@ -7,7 +7,7 @@ using SkylineWeather.Abstractions.Provider.Interfaces;
 using SkylineWeather.Abstractions.Services;
 using SkylineWeather.Console;
 using SkylineWeather.Console.Modules;
-using SkylineWeather.DataAnalyzer;
+using SkylineWeather.DataAnalyzer.Analyzers;
 using SkylineWeather.DataAnalyzer.Models;
 using System.Runtime.CompilerServices;
 using UnitsNet;
@@ -38,14 +38,15 @@ internal static class BuilderExtensions
     public static IServiceCollection AddProviders(this IServiceCollection services)
     {
         return services.AddSingleton<IDailyWeatherProvider, OpenMeteoProvider.OpenMeteoProvider>()
-        .AddSingleton<IHourlyWeatherProvider, OpenMeteoProvider.OpenMeteoProvider>()
-        .AddSingleton<ICurrentWeatherProvider, OpenMeteoProvider.OpenMeteoProvider>()
-        .AddSingleton<IHourlyWeatherProvider, QWeatherProvider.QWeatherProvider>()
-        .AddSingleton<IAlertProvider, QWeatherProvider.QWeatherProvider>()
-        .AddSingleton<IGeolocationProvider, QWeatherProvider.QWeatherProvider>();
+            .AddSingleton<IHourlyWeatherProvider, OpenMeteoProvider.OpenMeteoProvider>()
+            .AddSingleton<ICurrentWeatherProvider, OpenMeteoProvider.OpenMeteoProvider>()
+            .AddSingleton<IHourlyWeatherProvider, QWeatherProvider.QWeatherProvider>()
+            .AddSingleton<IAlertProvider, QWeatherProvider.QWeatherProvider>()
+            .AddSingleton<IGeolocationProvider, QWeatherProvider.QWeatherProvider>();
     }
     public static IServiceCollection AddDataAnalyzers(this IServiceCollection services)
     {
-        return services.AddSingleton<ITrendAnalyzer<Temperature,TemperatureTrend>, TemperatureTrendAnalyzer>();
+        return services.AddSingleton<ITrendAnalyzer<Temperature, TemperatureTrend>, SingleTemperatureTrendAnalyzer>()
+            .AddSingleton<ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend>, CompositeTemperatureTrendAnalyzer>();
     }
 }

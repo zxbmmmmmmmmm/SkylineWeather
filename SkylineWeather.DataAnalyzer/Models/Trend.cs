@@ -1,6 +1,6 @@
 ﻿namespace SkylineWeather.DataAnalyzer.Models;
 
-public interface ITrend
+public record Trend
 {
     public double Slope { get; set; }
     public double Intercept { get; set; }
