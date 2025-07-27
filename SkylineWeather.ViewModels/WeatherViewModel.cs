@@ -23,6 +23,7 @@ public partial class WeatherViewModel(
     public Geolocation Geolocation { get; init; } = geolocation;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(DailyTemperatureTrend))]
     public partial IReadOnlyList<DailyWeather>? Dailies { get; set; }
 
     [ObservableProperty]
@@ -56,7 +57,6 @@ public partial class WeatherViewModel(
             GetAlertsAsync(),
             GetAirQualityAsync());
         RefreshedTime = DateTimeOffset.Now;
-
     }
 
     [RelayCommand]
