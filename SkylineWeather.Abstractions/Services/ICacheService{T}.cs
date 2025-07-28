@@ -1,8 +1,10 @@
-﻿namespace SkylineWeather.Abstractions.Services;
+﻿using LanguageExt.Common;
+
+namespace SkylineWeather.Abstractions.Services;
 
 public interface ICacheService
 {
-    public Task<T> GetCacheAsync<T>(string key);
+    Task<Result<T>> GetOrCreateAsync<T>(string key, Func<Task<Result<T>>> factory, TimeSpan? expiration = null);
 
-    public Task CacheAsync<T>(string key, T value);
+    Task InvalidateAsync(string key);
 }

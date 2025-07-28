@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using SkylineWeather.Abstractions.Services;
 using SkylineWeather.DataAnalyzer.Models;
 using UnitsNet;
 
@@ -11,6 +12,7 @@ public class WeatherViewModelFactory(
     IAlertProvider alertProvider,
     IAirQualityProvider airQualityProvider,
     ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
+    ICacheService cacheService,
     ILogger logger)
 {
     public WeatherViewModel Create(Geolocation geolocation)
@@ -21,6 +23,7 @@ public class WeatherViewModelFactory(
             alertProvider,
             airQualityProvider,
             temperatureTrendAnalyzer,
+            cacheService,
             logger);
     }
 }

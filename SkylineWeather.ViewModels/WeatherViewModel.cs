@@ -1,26 +1,58 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LanguageExt.Common;
 using Microsoft.Extensions.Logging;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Models.AirQuality;
 using SkylineWeather.Abstractions.Models.Alert;
 using SkylineWeather.Abstractions.Models.Weather;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using SkylineWeather.Abstractions.Services;
 using SkylineWeather.DataAnalyzer.Analyzers;
 using SkylineWeather.DataAnalyzer.Models;
+using System.Collections.Concurrent;
 using UnitsNet;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkylineWeather.ViewModels;
 
-public partial class WeatherViewModel(
-    Geolocation geolocation,
-    IWeatherProvider weatherProvider,
-    IAlertProvider alertProvider,
-    IAirQualityProvider airQualityProvider,
-    ITrendAnalyzer<(Temperature min,Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
-    ILogger logger) : ObservableObject
+public partial class WeatherViewModel : ObservableObject
 {
-    public Geolocation Geolocation { get; init; } = geolocation;
+    public WeatherViewModel(Geolocation geolocation,
+        IWeatherProvider weatherProvider,
+        IAlertProvider alertProvider,
+        IAirQualityProvider airQualityProvider, 
+        ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer, 
+        ICacheService cacheService,
+        ILogger logger)
+    {
+        _weatherProvider = weatherProvider;
+        _alertProvider = alertProvider;
+        _airQualityProvider = airQualityProvider;
+        _cacheService = cacheService;
+        _temperatureTrendAnalyzer = temperatureTrendAnalyzer;
+        _logger = logger;
+        Geolocation = geolocation;
+
+        _refreshJobs = new Dictionary<string, IRefreshJob>
+        {
+            [nameof(Dailies)] = new RefreshJob<IReadOnlyList<DailyWeather>>(nameof(Dailies), TimeSpan.FromHours(6), () => _weatherProvider.GetDailyWeatherAsync(Geolocation.Location), value => Dailies = value, this),
+            [nameof(Hourlies)] = new RefreshJob<IReadOnlyList<HourlyWeather>>(nameof(Hourlies), TimeSpan.FromHours(1), () => _weatherProvider.GetHourlyWeatherAsync(Geolocation.Location), value => Hourlies = value, this),
+            [nameof(Current)] = new RefreshJob<CurrentWeather>(nameof(Current), TimeSpan.FromMinutes(30), () => _weatherProvider.GetCurrentWeatherAsync(Geolocation.Location), value => Current = value, this),
+            [nameof(Alerts)] = new RefreshJob<IReadOnlyList<Alert>>(nameof(Alerts), TimeSpan.FromMinutes(15), () => _alertProvider.GetAlertsAsync(Geolocation.Location), value => Alerts = value, this),
+            [nameof(AirQuality)] = new RefreshJob<AirQuality>(nameof(AirQuality), TimeSpan.FromHours(1), () => _airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location), value => AirQuality = value, this),
+        };
+
+    }
+
+    public Geolocation Geolocation { get; init; }
+
+    private readonly IWeatherProvider _weatherProvider;
+    private readonly IAlertProvider _alertProvider;
+    private readonly IAirQualityProvider _airQualityProvider;
+    private readonly ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> _temperatureTrendAnalyzer;
+    private readonly ICacheService _cacheService;
+    private readonly ILogger _logger;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DailyTemperatureTrend))]
@@ -39,7 +71,7 @@ public partial class WeatherViewModel(
     public partial AirQuality? AirQuality { get; set; }
 
     public TemperatureTrend? DailyTemperatureTrend =>
-        Dailies is null ? null : temperatureTrendAnalyzer.GetTrend(Dailies.Select(p => (p.LowTemperature, p.HighTemperature)));
+        Dailies is null ? null : _temperatureTrendAnalyzer.GetTrend(Dailies.Select(p => (p.LowTemperature, p.HighTemperature)));
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Loaded))]
@@ -47,83 +79,98 @@ public partial class WeatherViewModel(
 
     public bool Loaded => RefreshedTime is not null;
 
-    [RelayCommand]
-    public async Task RefreshAsync()
+
+    private readonly Dictionary<string, IRefreshJob> _refreshJobs;
+
+    private class RefreshJob<T>(
+        string dataType,
+        TimeSpan expiration,
+        Func<Task<Result<T>>> dataProvider,
+        Action<T> successAction,
+        WeatherViewModel viewModel)
+        : IRefreshJob
     {
-        await Task.WhenAll(
-            GetDailiesAsync(),
-            GetHourliesAsync(),
-            GetCurrentAsync(),
-            GetAlertsAsync(),
-            GetAirQualityAsync());
+        public string DataType { get; } = dataType;
+
+        public TimeSpan Expiration { get; } = expiration;
+
+        public DateTimeOffset? LastRefreshTime { get; set; }
+
+        public async Task RefreshAsync()
+        {
+            var cacheKey = $"{viewModel.Geolocation.Name}_{DataType}";
+            var result = await viewModel._cacheService.GetOrCreateAsync(cacheKey, dataProvider, Expiration);
+
+            result.IfSucc(value =>
+            {
+                successAction(value);
+                LastRefreshTime = DateTimeOffset.UtcNow;
+            });
+
+            result.IfFail(error => LogDataFetchError(viewModel._logger, error, DataType, viewModel.Geolocation.Location));
+        }
+    }
+
+    // 基接口，用于在列表中存储不同类型的刷新任务
+    private interface IRefreshJob
+    {
+        string DataType { get; }
+        TimeSpan Expiration { get; }
+        DateTimeOffset? LastRefreshTime { get; set; }
+        Task RefreshAsync();
+    }
+
+
+    [LoggerMessage(
+        EventId = 1,
+        Level = LogLevel.Error,
+        Message = "Failed to get {DataType} for {Location}")]
+    static partial void LogDataFetchError(ILogger logger, Exception error, string dataType, Location location);
+
+    [RelayCommand]
+    public async Task RefreshAllAsync()
+    {
+        var invalidationTasks = _refreshJobs.Keys.Select(dataType =>
+            _cacheService.InvalidateAsync($"{Geolocation.Name}_{dataType}"));
+        
+        await Task.WhenAll(invalidationTasks);
+
+        await Task.WhenAll(_refreshJobs.Values.Select(job => job.RefreshAsync()));
         RefreshedTime = DateTimeOffset.Now;
     }
 
     [RelayCommand]
-    public async Task GetDailiesAsync()
+    public async Task RefreshIfNeededAsync()
     {
-        var result = await weatherProvider.GetDailyWeatherAsync(Geolocation.Location);
-        result.IfSucc(f => 
+        var now = DateTimeOffset.UtcNow;
+        var tasksToRun = new List<Task>();
+
+        foreach (var job in _refreshJobs.Values)
         {
-            Dailies = f;
-        });
-        result.IfFail(f =>
+            if (job.LastRefreshTime is null || (job.LastRefreshTime.Value + job.Expiration < now))
+            {
+                tasksToRun.Add(job.RefreshAsync());
+            }
+        }
+
+        if (tasksToRun.Count > 0)
         {
-            logger.LogError(f, "Failed to get daily weather for {Location}", Geolocation.Location);
-        });
+            await Task.WhenAll(tasksToRun);
+        }
     }
 
     [RelayCommand]
-    public async Task GetHourliesAsync()
-    {
-        var result = await weatherProvider.GetHourlyWeatherAsync(Geolocation.Location);
-        result.IfSucc(f =>
-        {
-            Hourlies = f;
-        });
-        result.IfFail(f =>
-        {
-            logger.LogError(f, "Failed to get hourly weather for {Location}", Geolocation.Location);
-        });
-    }
+    public Task GetDailiesAsync() => _refreshJobs[nameof(Dailies)].RefreshAsync();
 
     [RelayCommand]
-    public async Task GetCurrentAsync()
-    {
-        var result = await weatherProvider.GetCurrentWeatherAsync(Geolocation.Location);
-        result.IfSucc(f =>
-        {
-            Current = f;
-        });
-        result.IfFail(f =>
-        {
-            logger.LogError(f, "Failed to get current weather for {Location}", Geolocation.Location);
-        });
-    }
+    public Task GetHourliesAsync() => _refreshJobs[nameof(Hourlies)].RefreshAsync();
 
-    public async Task GetAlertsAsync()
-    {
-        var result = await alertProvider.GetAlertsAsync(Geolocation.Location);
-        result.IfSucc(f =>
-        {
-            Alerts = f;
-        });
-        result.IfFail(f =>
-        {
-            logger.LogError(f, "Failed to get alerts for {Location}", Geolocation.Location);
-        });
-    }
+    [RelayCommand]
+    public Task GetCurrentAsync() => _refreshJobs[nameof(Current)].RefreshAsync();
 
-    public async Task GetAirQualityAsync()
-    {
-        var result = await airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location);
-        result.IfSucc(f =>
-        {
-            AirQuality = f;
-        });
-        result.IfFail(f =>
-        {
-            logger.LogError(f, "Failed to get air quality for {Location}", Geolocation.Location);
-        });
-    }
+    [RelayCommand]
+    public Task GetAlertsAsync() => _refreshJobs[nameof(Alerts)].RefreshAsync();
+
+    [RelayCommand]
+    public Task GetAirQualityAsync() => _refreshJobs[nameof(AirQuality)].RefreshAsync();
 }

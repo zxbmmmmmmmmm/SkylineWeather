@@ -7,10 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace SkylineWeather.ViewModels;
 
-public partial class RootViewModel(
-    Geolocation defaultGeolocation,
-    ICacheService cacheService,
-    WeatherViewModelFactory weatherViewModelFactory) : ObservableObject
+public partial class RootViewModel : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableCollection<WeatherViewModel>? WeatherViewModels { get; private set; }
@@ -18,16 +15,31 @@ public partial class RootViewModel(
     [ObservableProperty]
     public partial WeatherViewModel? Selected { get; private set; }
 
-    private async Task LoadAsync()
+    private readonly WeatherViewModelFactory _weatherViewModelFactory;
+
+    public RootViewModel(IReadOnlyCollection<Geolocation> geolocations, WeatherViewModelFactory weatherViewModelFactory)
     {
-        WeatherViewModels = await cacheService.GetCacheAsync<ObservableCollection<WeatherViewModel>>("WeatherViewModels");
-        WeatherViewModels ??= [weatherViewModelFactory.Create(defaultGeolocation)];
+        _weatherViewModelFactory = weatherViewModelFactory;
+        WeatherViewModels = new ObservableCollection<WeatherViewModel>(geolocations.Select(p => _weatherViewModelFactory.Create(p)));
+    }
+
+    /// <summary>
+    /// 获取所有城市当前的天气数据
+    /// </summary>
+    /// <returns></returns>
+    [RelayCommand]
+    public async Task UpdateAllCurrentAsync()
+    {
+        var tasks = WeatherViewModels?.Select(p => p.GetCurrentAsync());
+        if (tasks is null)
+            return;
+        await Task.WhenAll(tasks);
     }
 
     [RelayCommand]
     public void AddCity(Geolocation geolocation)
     {
-        WeatherViewModels?.Add(weatherViewModelFactory.Create(geolocation));
+        WeatherViewModels?.Add(_weatherViewModelFactory.Create(geolocation));
     }
 
     [RelayCommand]
