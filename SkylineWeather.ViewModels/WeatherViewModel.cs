@@ -147,6 +147,12 @@ public partial class WeatherViewModel : ObservableObject
         Message = "Failed to get {DataType} for {Location}")]
     static partial void LogDataFetchError(ILogger logger, Exception error, string dataType, Location location);
 
+
+
+
+
+
+
     [RelayCommand]
     public async Task RefreshAllAsync()
     {
@@ -163,15 +169,11 @@ public partial class WeatherViewModel : ObservableObject
     public async Task RefreshIfNeededAsync()
     {
         var now = DateTimeOffset.UtcNow;
-        var tasksToRun = new List<Task>();
 
-        foreach (var job in _refreshJobs.Values)
-        {
-            if (job.LastRefreshTime is null || (job.LastRefreshTime.Value + job.Expiration < now))
-            {
-                tasksToRun.Add(job.RefreshAsync(Geolocation, _cacheService, _logger));
-            }
-        }
+        var tasksToRun = _refreshJobs.Values
+            .Where(p => p.LastRefreshTime is null || (p.LastRefreshTime.Value + p.Expiration < now))
+            .Select(p => p.RefreshAsync(Geolocation, _cacheService, _logger))
+            .ToList();   
 
         if (tasksToRun.Count > 0)
         {
