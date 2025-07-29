@@ -7,5 +7,5 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface IAirQualityProvider
 {
-    public Task<Result<AirQuality>> GetCurrentAirQualityAsync(Location location);
+    public Task<Result<AirQuality>> GetCurrentAirQualityAsync(Location location, CancellationToken cancellationToken = default);
 }

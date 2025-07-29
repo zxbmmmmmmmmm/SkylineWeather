@@ -6,5 +6,5 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface ICurrentWeatherProvider
 {
-    public Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location);
+    public Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location, CancellationToken cancellationToken = default);
 }

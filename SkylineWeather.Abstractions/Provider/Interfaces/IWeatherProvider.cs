@@ -3,7 +3,4 @@
 public interface IWeatherProvider:
     ICurrentWeatherProvider,
     IDailyWeatherProvider,
-    IHourlyWeatherProvider
-{
-    
-}
+    IHourlyWeatherProvider;

@@ -6,6 +6,6 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface IGeolocationProvider
 {
-    public Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(Location location);
-    public Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(string name);
+    public Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(Location location, CancellationToken cancellationToken = default);
+    public Task<Result<IReadOnlyList<Geolocation>>> GetGeolocationsAsync(string name, CancellationToken cancellationToken = default);
 }

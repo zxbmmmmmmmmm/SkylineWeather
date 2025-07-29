@@ -6,5 +6,5 @@ namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
 public interface IHourlyWeatherProvider
 {
-    public Task<Result<IReadOnlyList<HourlyWeather>>> GetHourlyWeatherAsync(Location location);
+    public Task<Result<IReadOnlyList<HourlyWeather>>> GetHourlyWeatherAsync(Location location, CancellationToken cancellationToken = default);
 }

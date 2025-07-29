@@ -17,19 +17,19 @@ public sealed class OpenMeteoProvider(OpenMeteoProviderConfig? config = null) :
     public override string Name => "OpenMeteo";
     public override string Id => "open-meteo";
 
-    public async Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location)
+    public async Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location, CancellationToken cancellationToken = default)
     {
         var data = await _client.GetDailyForecasts(location.Latitude, location.Longitude);
         return data.ConvertAll(p => p.MapToDailyWeather());
     }
 
-    public async Task<Result<IReadOnlyList<HourlyWeather>>> GetHourlyWeatherAsync(Location location)
+    public async Task<Result<IReadOnlyList<HourlyWeather>>> GetHourlyWeatherAsync(Location location, CancellationToken cancellationToken = default)
     {
         var data = await _client.GetHourlyForecasts(location.Latitude, location.Longitude);
         return data.ConvertAll(p => p.MapToHourlyWeather());
     }
 
-    public async Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location)
+    public async Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location, CancellationToken cancellationToken = default)
     {
         var data = await _client.GetCurrentWeather(location.Latitude, location.Longitude);
         return data.MapToCurrentWeather();
