@@ -2,7 +2,13 @@
 
 namespace SkylineWeather.Abstractions.Services;
 
+public interface ISettingsService2
+{
+    Geolocation DefaultGeolocation { get; set; }
+}
 public interface ISettingsService
 {
-    public Geolocation DefaultGeolocation { get; set; }
+    T GetOrCreateValue<T>(string key, T? defaultValue = default);
+
+    void SetValue<T>(string key, T value);
 }

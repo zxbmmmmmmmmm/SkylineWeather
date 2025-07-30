@@ -3,7 +3,7 @@ using SkylineWeather.Abstractions.Services;
 
 namespace SkylineWeather.Console;
 
-public class FileSettingsService : ISettingsService
+public class FileSettingsService : ISettingsService2
 {
     public Geolocation DefaultGeolocation { get; set; } = null!;
 }

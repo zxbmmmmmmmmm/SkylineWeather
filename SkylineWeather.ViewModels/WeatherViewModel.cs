@@ -147,12 +147,6 @@ public partial class WeatherViewModel : ObservableObject
         Message = "Failed to get {DataType} for {Location}")]
     static partial void LogDataFetchError(ILogger logger, Exception error, string dataType, Location location);
 
-
-
-
-
-
-
     [RelayCommand]
     public async Task RefreshAllAsync()
     {

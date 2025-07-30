@@ -17,7 +17,7 @@ public class GeolocationModule(
     private readonly IGeolocationProvider _provider = provider;
     private readonly CancellationToken _cancellationToken = cancellationToken;
     private readonly Func<string, Task> _backFunc = backFunc;
-    private ISettingsService _settings = Program.AppHost.Services.GetRequiredService<IConfiguration>().Get<FileSettingsService>();
+    private ISettingsService2 _settings = Program.AppHost.Services.GetRequiredService<IConfiguration>().Get<FileSettingsService>();
     public async Task RunAsync()
     {
         var features = Enum.GetValues<GeolocationFeatureType>();

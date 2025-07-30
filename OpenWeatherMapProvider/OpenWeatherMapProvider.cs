@@ -10,17 +10,17 @@ namespace OpenWeatherMapProvider;
 public class OpenWeatherMapProvider : ProviderBase,ICurrentWeatherProvider
 {
     public override string Name => "OpenWeatherMap";
-    public override string Id => "openweathermap";
-    private OpenWeatherMapCache _client { get; init; }
+    public override string Id => "open-weather-map";
+    private OpenWeatherMapCache Client { get; init; }
     public OpenWeatherMapProvider()
     {
-        _client = new OpenWeatherMapCache("", 9_500, Enums.FetchMode.AlwaysUseLastFetchedValue);
+        Client = new OpenWeatherMapCache("", 9_500, Enums.FetchMode.AlwaysUseLastFetchedValue);
     }
 
-    public async Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location)
+    public async Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location, CancellationToken cancellationToken = default)
     {
         var query = new OpenWeatherMap.Cache.Models.Location(location.Latitude, location.Longitude);
-        var result = await _client.GetReadingsAsync(query);
+        var result = await Client.GetReadingsAsync(query, cancellationToken);
         throw new NotImplementedException();
     }
 }
