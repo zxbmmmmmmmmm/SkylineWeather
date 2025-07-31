@@ -18,8 +18,9 @@ public partial class WeatherViewModel : ObservableObject
     public WeatherViewModel(Geolocation geolocation,
         IWeatherProvider weatherProvider,
         IAlertProvider alertProvider,
-        IAirQualityProvider airQualityProvider, 
-        ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer, 
+        IAirQualityProvider airQualityProvider,
+        ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
+        //TODO: ICacheService可更改为获取当前容器，即当前位置下使用单独一个文件进行缓存
         ICacheService cacheService,
         ILogger logger)
     {
@@ -35,32 +36,32 @@ public partial class WeatherViewModel : ObservableObject
         {
             [nameof(Dailies)] = new RefreshJob<IReadOnlyList<DailyWeather>>(
                 nameof(Dailies),
-                TimeSpan.FromHours(6), 
-                () => _weatherProvider.GetDailyWeatherAsync(Geolocation.Location),
+                TimeSpan.FromHours(6),
+                cancellationToken => _weatherProvider.GetDailyWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Dailies = value),
 
             [nameof(Hourlies)] = new RefreshJob<IReadOnlyList<HourlyWeather>>(
                 nameof(Hourlies),
-                TimeSpan.FromHours(1), 
-                () => _weatherProvider.GetHourlyWeatherAsync(Geolocation.Location), 
+                TimeSpan.FromHours(1),
+                cancellationToken => _weatherProvider.GetHourlyWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Hourlies = value),
 
             [nameof(Current)] = new RefreshJob<CurrentWeather>(
                 nameof(Current),
                 TimeSpan.FromMinutes(1),
-                () => _weatherProvider.GetCurrentWeatherAsync(Geolocation.Location),
+                cancellationToken => _weatherProvider.GetCurrentWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Current = value),
 
             [nameof(Alerts)] = new RefreshJob<IReadOnlyList<Alert>>(
-                nameof(Alerts), 
+                nameof(Alerts),
                 TimeSpan.FromMinutes(15),
-                () => _alertProvider.GetAlertsAsync(Geolocation.Location), 
+                cancellationToken => _alertProvider.GetAlertsAsync(Geolocation.Location, cancellationToken),
                 value => Alerts = value),
 
             [nameof(AirQuality)] = new RefreshJob<AirQuality>(
                 nameof(AirQuality),
                 TimeSpan.FromHours(1),
-                () => _airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location),
+                cancellationToken => _airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location, cancellationToken),
                 value => AirQuality = value),
         };
 
@@ -86,7 +87,7 @@ public partial class WeatherViewModel : ObservableObject
     public partial CurrentWeather? Current { get; set; }
 
     [ObservableProperty]
-    public partial IReadOnlyList<Alert>? Alerts { get; set; }   
+    public partial IReadOnlyList<Alert>? Alerts { get; set; }
 
     [ObservableProperty]
     public partial AirQuality? AirQuality { get; set; }
@@ -106,7 +107,7 @@ public partial class WeatherViewModel : ObservableObject
     private class RefreshJob<T>(
         string dataType,
         TimeSpan expiration,
-        Func<Task<Result<T>>> dataProvider,
+        Func<CancellationToken, Task<Result<T>>> dataProvider,
         Action<T> successAction)
         : IRefreshJob
     {
@@ -116,10 +117,10 @@ public partial class WeatherViewModel : ObservableObject
 
         public DateTimeOffset? LastRefreshTime { get; set; }
 
-        public async Task RefreshAsync(Geolocation geolocation, ICacheService cacheService, ILogger logger)
+        public async Task RefreshAsync(Geolocation geolocation, ICacheService cacheService, ILogger logger, CancellationToken cancellationToken)
         {
             var cacheKey = $"{geolocation.Name}_{DataType}";
-            var result = await cacheService.GetOrCreateAsync(cacheKey, dataProvider, Expiration);
+            var result = await cacheService.GetOrCreateAsync(cacheKey, dataProvider, Expiration, cancellationToken);
 
             result.IfSucc(value =>
             {
@@ -127,7 +128,13 @@ public partial class WeatherViewModel : ObservableObject
                 LastRefreshTime = DateTimeOffset.UtcNow;
             });
 
-            result.IfFail(error => LogDataFetchError(logger, error, DataType, geolocation.Location));
+            result.IfFail(error =>
+            {
+                if (error is not OperationCanceledException)
+                {
+                    LogDataFetchError(logger, error, DataType, geolocation.Location);
+                }
+            });
         }
     }
 
@@ -137,7 +144,7 @@ public partial class WeatherViewModel : ObservableObject
         string DataType { get; }
         TimeSpan Expiration { get; }
         DateTimeOffset? LastRefreshTime { get; set; }
-        Task RefreshAsync(Geolocation geolocation, ICacheService cacheService, ILogger logger);
+        Task RefreshAsync(Geolocation geolocation, ICacheService cacheService, ILogger logger, CancellationToken cancellationToken);
     }
 
 
@@ -147,27 +154,27 @@ public partial class WeatherViewModel : ObservableObject
         Message = "Failed to get {DataType} for {Location}")]
     static partial void LogDataFetchError(ILogger logger, Exception error, string dataType, Location location);
 
-    [RelayCommand]
-    public async Task RefreshAllAsync()
+    [RelayCommand(IncludeCancelCommand = true)]
+    public async Task RefreshAllAsync(CancellationToken cancellationToken = default)
     {
         var invalidationTasks = _refreshJobs.Keys.Select(dataType =>
-            _cacheService.InvalidateAsync($"{Geolocation.Name}_{dataType}"));
-        
+            _cacheService.InvalidateAsync($"{Geolocation.Name}_{dataType}", cancellationToken));
         await Task.WhenAll(invalidationTasks);
-
-        await Task.WhenAll(_refreshJobs.Values.Select(job => job.RefreshAsync(Geolocation, _cacheService, _logger)));
+        await Task.WhenAll(_refreshJobs.Values.Select(job => job.RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken)));
         RefreshedTime = DateTimeOffset.UtcNow;
     }
 
-    [RelayCommand]
-    public async Task RefreshIfNeededAsync()
+
+
+    [RelayCommand(IncludeCancelCommand = true)]
+    public async Task RefreshIfNeededAsync(CancellationToken cancellationToken = default)
     {
         var now = DateTimeOffset.UtcNow;
 
         var tasksToRun = _refreshJobs.Values
             .Where(p => p.LastRefreshTime is null || (p.LastRefreshTime.Value + p.Expiration < now))
-            .Select(p => p.RefreshAsync(Geolocation, _cacheService, _logger))
-            .ToList();   
+            .Select(p => p.RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken))
+            .ToList();
 
         if (tasksToRun.Count > 0)
         {
@@ -175,18 +182,23 @@ public partial class WeatherViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
-    public Task GetDailiesAsync() => _refreshJobs[nameof(Dailies)].RefreshAsync(Geolocation, _cacheService, _logger);
+    [RelayCommand(IncludeCancelCommand = true)]
+    public Task GetDailiesAsync(CancellationToken cancellationToken = default)
+        => _refreshJobs[nameof(Dailies)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
 
-    [RelayCommand]
-    public Task GetHourliesAsync() => _refreshJobs[nameof(Hourlies)].RefreshAsync(Geolocation, _cacheService, _logger);
+    [RelayCommand(IncludeCancelCommand = true)]
+    public Task GetHourliesAsync(CancellationToken cancellationToken = default)
+        => _refreshJobs[nameof(Hourlies)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
 
-    [RelayCommand]
-    public Task GetCurrentAsync() => _refreshJobs[nameof(Current)].RefreshAsync(Geolocation, _cacheService, _logger);
+    [RelayCommand(IncludeCancelCommand = true)]
+    public Task GetCurrentAsync(CancellationToken cancellationToken = default)
+        => _refreshJobs[nameof(Current)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
 
-    [RelayCommand]
-    public Task GetAlertsAsync() => _refreshJobs[nameof(Alerts)].RefreshAsync(Geolocation, _cacheService, _logger);
+    [RelayCommand(IncludeCancelCommand = true)]
+    public Task GetAlertsAsync(CancellationToken cancellationToken = default)
+        => _refreshJobs[nameof(Alerts)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
 
-    [RelayCommand]
-    public Task GetAirQualityAsync() => _refreshJobs[nameof(AirQuality)].RefreshAsync(Geolocation, _cacheService, _logger);
+    [RelayCommand(IncludeCancelCommand = true)]
+    public Task GetAirQualityAsync(CancellationToken cancellationToken = default)
+        => _refreshJobs[nameof(AirQuality)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
 }

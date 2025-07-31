@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SkylineWeather.SDK.Services;
@@ -36,7 +37,7 @@ public class PersistentCacheService : ICacheService
         };
     }
 
-    public async Task<Result<T>> GetOrCreateAsync<T>(string key, Func<Task<Result<T>>> factory, TimeSpan? absoluteExpirationRelativeToNow = null)
+    public async Task<Result<T>> GetOrCreateAsync<T>(string key, Func<CancellationToken, Task<Result<T>>> factory, TimeSpan? absoluteExpirationRelativeToNow = null, CancellationToken cancellationToken = default)
     {
         var filePath = GetFilePath(key);
 
@@ -44,13 +45,19 @@ public class PersistentCacheService : ICacheService
         {
             try
             {
-                var fileJson = await File.ReadAllTextAsync(filePath);
+                var fileJson = await File.ReadAllTextAsync(filePath, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var cachedItem = JsonSerializer.Deserialize<CacheItem<T>>(fileJson, _serializerOptions);
 
                 if (cachedItem is not null && cachedItem.Expiration > DateTimeOffset.UtcNow)
                 {
                     return new Result<T>(cachedItem.Data);
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                throw; // 重新抛出取消异常
             }
             catch (Exception ex)
             {
@@ -59,7 +66,10 @@ public class PersistentCacheService : ICacheService
             }
         }
 
-        var result = await factory();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var result = await factory(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
 
         await result.Match(
             async succ =>
@@ -69,15 +79,16 @@ public class PersistentCacheService : ICacheService
                     : DateTimeOffset.MaxValue;
                 var itemToCache = new CacheItem<T>(expiration, succ);
                 var json = JsonSerializer.Serialize(itemToCache, _serializerOptions);
-                await File.WriteAllTextAsync(filePath, json);
+                await File.WriteAllTextAsync(filePath, json, cancellationToken);
             },
             fail => Task.CompletedTask);
 
         return result;
     }
 
-    public Task InvalidateAsync(string key)
+    public Task InvalidateAsync(string key, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         var filePath = GetFilePath(key);
         if (File.Exists(filePath))
         {
