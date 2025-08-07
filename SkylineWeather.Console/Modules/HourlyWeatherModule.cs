@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using SkylineWeather.SDK;
 using Spectre.Console;
 
 namespace SkylineWeather.Console.Modules;
@@ -16,8 +17,7 @@ public class HourlyWeatherModule(
     private readonly Func<string, Task> _backFunc = backFunc;
     public async Task RunAsync()
     {
-        var config = Program.AppHost.Services.GetRequiredService<IConfiguration>();
-        var settings = config.Get<FileSettingsService>();
+        var settings = Program.AppHost.Services.GetService<CommonSettings>();
         Location location;
 
         if (settings is not null)
@@ -30,7 +30,7 @@ public class HourlyWeatherModule(
             var longitude = AnsiConsole.Ask<double>("经度: ");
             location = new Location(latitude, longitude);
         }
-        var result = await _provider.GetHourlyWeatherAsync(location);
+        var result = await _provider.GetHourlyWeatherAsync(location, _cancellationToken);
 
         result.IfSucc(forecasts =>
         {

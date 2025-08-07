@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
 using SkylineWeather.Abstractions.Services;
+using SkylineWeather.SDK;
 using Spectre.Console;
 using System.Collections.Generic;
 
@@ -17,7 +18,7 @@ public class GeolocationModule(
     private readonly IGeolocationProvider _provider = provider;
     private readonly CancellationToken _cancellationToken = cancellationToken;
     private readonly Func<string, Task> _backFunc = backFunc;
-    private ISettingsService2 _settings = Program.AppHost.Services.GetRequiredService<IConfiguration>().Get<FileSettingsService>();
+    private CommonSettings _settings = Program.AppHost.Services.GetService<CommonSettings>()!;
     public async Task RunAsync()
     {
         var features = Enum.GetValues<GeolocationFeatureType>();

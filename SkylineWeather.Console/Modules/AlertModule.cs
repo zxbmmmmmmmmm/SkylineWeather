@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using SkylineWeather.SDK;
 using Spectre.Console;
 
 namespace SkylineWeather.Console.Modules;
@@ -17,7 +18,7 @@ public class AlertModule(
     public async Task RunAsync()
     {
         var config = Program.AppHost.Services.GetRequiredService<IConfiguration>();
-        var settings = config.Get<FileSettingsService>();
+        var settings = config.Get<CommonSettings>();
         Location location;
 
         if (settings is not null)

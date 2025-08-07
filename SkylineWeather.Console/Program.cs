@@ -9,6 +9,7 @@ using SkylineWeather.Console;
 using SkylineWeather.Console.Modules;
 using SkylineWeather.DataAnalyzer.Analyzers;
 using SkylineWeather.DataAnalyzer.Models;
+using SkylineWeather.SDK;
 using System.Runtime.CompilerServices;
 using UnitsNet;
 
@@ -25,14 +26,19 @@ builder.Services.AddSingleton(qWeatherConfig);
 builder.Services.AddHostedService<WeatherService>();
 
 builder.Configuration.AddJsonFile("appsettings.json", false, true);
+builder.Services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
+builder.Services.AddSingleton<CommonSettings>();
 builder.Services.AddProviders();
 builder.Services.AddDataAnalyzers();
 AppHost = builder.Build();
 await AppHost.RunAsync().ConfigureAwait(false);
+
+
 public static partial class Program
 {
     public static IHost AppHost { get; set; } = null!;
 }
+
 internal static class BuilderExtensions
 {
     public static IServiceCollection AddProviders(this IServiceCollection services)

@@ -21,6 +21,7 @@
     <ProjectReference Include="..\QWeatherProvider\QWeatherProvider.csproj" />
     <ProjectReference Include="..\SkylineWeather.Abstractions\SkylineWeather.Abstractions.csproj" />
     <ProjectReference Include="..\SkylineWeather.DataAnalyzer\SkylineWeather.DataAnalyzer.csproj" />
+    <ProjectReference Include="..\SkylineWeather.SDK\SkylineWeather.SDK.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SkylineWeather.Abstractions.Services;
 using SkylineWeather.DataAnalyzer.Models;
 using UnitsNet;
+using SkylineWeather.SDK;
 
 namespace SkylineWeather.Console.Modules;
 
@@ -24,8 +25,7 @@ public class DailyWeatherModule(
     private readonly ITrendAnalyzer<(Temperature,Temperature), TemperatureTrend> _temperatureAnalyzer = temperatureAnalyzer;
     public async Task RunAsync()
     {
-        var config = Program.AppHost.Services.GetRequiredService<IConfiguration>();
-        var settings = config.Get<FileSettingsService>();
+        var settings = Program.AppHost.Services.GetService<CommonSettings>();
         Location location;
 
         if(settings is not null)
