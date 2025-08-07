@@ -30,7 +30,7 @@ public partial class RootViewModel : ObservableObject
     [RelayCommand]
     public async Task UpdateAllCurrentAsync()
     {
-        var tasks = WeatherViewModels?.Select(p => p.GetCurrentAsync());
+        var tasks = WeatherViewModels?.Select(p => p.RefreshIfNeededAsync(nameof(WeatherViewModel.Current)));
         if (tasks is null)
             return;
         await Task.WhenAll(tasks);

@@ -182,6 +182,12 @@ public partial class WeatherViewModel : ObservableObject
         }
     }
 
+    public async Task RefreshIfNeededAsync(string dataType, CancellationToken cancellationToken = default)
+    {
+        var tasksToRun = _refreshJobs[dataType];
+        await tasksToRun.RefreshAsync(Geolocation,_cacheService, _logger, cancellationToken);
+    }
+
     [RelayCommand(IncludeCancelCommand = true)]
     public Task GetDailiesAsync(CancellationToken cancellationToken = default)
         => _refreshJobs[nameof(Dailies)].RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken);
