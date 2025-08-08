@@ -20,7 +20,6 @@ public partial class WeatherViewModel : ObservableObject
         IAlertProvider alertProvider,
         IAirQualityProvider airQualityProvider,
         ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
-        //TODO: ICacheService可更改为获取当前容器，即当前位置下使用单独一个文件进行缓存
         ICacheService cacheService,
         ILogger logger)
     {
@@ -119,8 +118,7 @@ public partial class WeatherViewModel : ObservableObject
 
         public async Task RefreshAsync(Geolocation geolocation, ICacheService cacheService, ILogger logger, CancellationToken cancellationToken)
         {
-            var cacheKey = $"{geolocation.Name}_{DataType}";
-            var result = await cacheService.GetOrCreateAsync(cacheKey, dataProvider, Expiration, cancellationToken);
+            var result = await cacheService.GetOrCreateAsync(DataType, dataProvider, Expiration, cancellationToken);
 
             result.IfSucc(value =>
             {
@@ -158,7 +156,7 @@ public partial class WeatherViewModel : ObservableObject
     public async Task RefreshAllAsync(CancellationToken cancellationToken = default)
     {
         var invalidationTasks = _refreshJobs.Keys.Select(dataType =>
-            _cacheService.InvalidateAsync($"{Geolocation.Name}_{dataType}", cancellationToken));
+            _cacheService.InvalidateAsync(dataType, cancellationToken));
         await Task.WhenAll(invalidationTasks);
         await Task.WhenAll(_refreshJobs.Values.Select(job => job.RefreshAsync(Geolocation, _cacheService, _logger, cancellationToken)));
         RefreshedTime = DateTimeOffset.UtcNow;
