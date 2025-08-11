@@ -7,10 +7,10 @@ using SkylineWeather.Abstractions.Provider.Interfaces;
 
 namespace OpenWeatherMapProvider;
 
-public class OpenWeatherMapProvider : ProviderBase,ICurrentWeatherProvider
+[Provider("open-weather-map")]
+public class OpenWeatherMapProvider : ProviderBase, ICurrentWeatherProvider
 {
     public override string Name => "OpenWeatherMap";
-    public override string Id => "open-weather-map";
     private OpenWeatherMapCache Client { get; init; }
     public OpenWeatherMapProvider()
     {

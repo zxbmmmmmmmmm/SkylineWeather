@@ -5,7 +5,7 @@ using SkylineWeather.Abstractions.Models.Alert;
 
 namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
-public interface IAlertProvider
+public interface IAlertProvider : IProvider
 {
     public Task<Result<IReadOnlyList<Alert>>> GetAlertsAsync(Location location, CancellationToken cancellationToken = default);
 }

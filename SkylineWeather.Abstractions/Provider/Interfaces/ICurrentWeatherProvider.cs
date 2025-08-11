@@ -4,7 +4,7 @@ using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Models.Weather;
 namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
-public interface ICurrentWeatherProvider
+public interface ICurrentWeatherProvider : IProvider
 {
     public Task<Result<CurrentWeather>> GetCurrentWeatherAsync(Location location, CancellationToken cancellationToken = default);
 }

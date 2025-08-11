@@ -12,6 +12,8 @@ using SkylineWeather.Abstractions.Provider.Interfaces;
 
 namespace QWeatherProvider;
 
+[Provider("qweather")]
+[ProviderConfiguration(typeof(QWeatherProviderConfig))]
 public class QWeatherProvider(QWeatherProviderConfig config) :
     ProviderBase,
     IWeatherProvider,
@@ -20,7 +22,7 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
 {
     public override string Name => "QWeather";
 
-    public override string Id => "qweather";
+
     private readonly QWeatherApiHandler _handler = new();
     private readonly ApiHandlerOption _option = new()
     {

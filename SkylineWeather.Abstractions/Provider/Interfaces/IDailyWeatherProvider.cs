@@ -4,7 +4,7 @@ using SkylineWeather.Abstractions.Models.Weather;
 
 namespace SkylineWeather.Abstractions.Provider.Interfaces;
 
-public interface IDailyWeatherProvider
+public interface IDailyWeatherProvider : IProvider
 {
     public Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location, CancellationToken cancellationToken = default);
 

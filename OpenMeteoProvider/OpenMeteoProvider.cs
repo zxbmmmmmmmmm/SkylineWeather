@@ -8,6 +8,8 @@ using SkylineWeather.Abstractions.Provider.Interfaces;
 
 namespace OpenMeteoProvider;
 
+[Provider("open-meteo")]
+[ProviderConfiguration(typeof(OpenMeteoProviderConfig))]
 public sealed class OpenMeteoProvider(OpenMeteoProviderConfig? config = null) :
     ProviderBase,
     IWeatherProvider
@@ -15,7 +17,6 @@ public sealed class OpenMeteoProvider(OpenMeteoProviderConfig? config = null) :
     private readonly OpenMeteoClient _client = new();
     public OpenMeteoProviderConfig Config { get; set; } = config ?? OpenMeteoProviderConfig.Default;
     public override string Name => "OpenMeteo";
-    public override string Id => "open-meteo";
 
     public async Task<Result<IReadOnlyList<DailyWeather>>> GetDailyWeatherAsync(Location location, CancellationToken cancellationToken = default)
     {
