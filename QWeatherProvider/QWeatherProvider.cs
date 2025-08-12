@@ -16,7 +16,9 @@ namespace QWeatherProvider;
 [ProviderConfiguration(typeof(QWeatherProviderConfig))]
 public class QWeatherProvider(QWeatherProviderConfig config) :
     ProviderBase,
-    IWeatherProvider,
+    ICurrentWeatherProvider,
+    IDailyWeatherProvider,
+    IHourlyWeatherProvider,
     IAlertProvider,
     IGeolocationProvider
 {

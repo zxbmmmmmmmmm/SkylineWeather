@@ -12,7 +12,9 @@ namespace OpenMeteoProvider;
 [ProviderConfiguration(typeof(OpenMeteoProviderConfig))]
 public sealed class OpenMeteoProvider(OpenMeteoProviderConfig? config = null) :
     ProviderBase,
-    IWeatherProvider
+    ICurrentWeatherProvider,
+    IDailyWeatherProvider,
+    IHourlyWeatherProvider
 {
     private readonly OpenMeteoClient _client = new();
     public OpenMeteoProviderConfig Config { get; set; } = config ?? OpenMeteoProviderConfig.Default;

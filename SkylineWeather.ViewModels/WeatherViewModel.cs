@@ -16,16 +16,15 @@ namespace SkylineWeather.ViewModels;
 public partial class WeatherViewModel : ObservableObject
 {
     public WeatherViewModel(Geolocation geolocation,
-        IWeatherProvider weatherProvider,
+        ICurrentWeatherProvider currentWeatherProvider,
+        IDailyWeatherProvider dailyWeatherProvider,
+        IHourlyWeatherProvider hourlyWeatherProvider,
         IAlertProvider alertProvider,
         IAirQualityProvider airQualityProvider,
         ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
         ICacheService cacheService,
         ILogger logger)
     {
-        _weatherProvider = weatherProvider;
-        _alertProvider = alertProvider;
-        _airQualityProvider = airQualityProvider;
         _cacheService = cacheService;
         _temperatureTrendAnalyzer = temperatureTrendAnalyzer;
         _logger = logger;
@@ -36,31 +35,31 @@ public partial class WeatherViewModel : ObservableObject
             [nameof(Dailies)] = new RefreshJob<IReadOnlyList<DailyWeather>>(
                 nameof(Dailies),
                 TimeSpan.FromHours(6),
-                cancellationToken => _weatherProvider.GetDailyWeatherAsync(Geolocation.Location, cancellationToken),
+                cancellationToken => dailyWeatherProvider.GetDailyWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Dailies = value),
 
             [nameof(Hourlies)] = new RefreshJob<IReadOnlyList<HourlyWeather>>(
                 nameof(Hourlies),
                 TimeSpan.FromHours(1),
-                cancellationToken => _weatherProvider.GetHourlyWeatherAsync(Geolocation.Location, cancellationToken),
+                cancellationToken => hourlyWeatherProvider.GetHourlyWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Hourlies = value),
 
             [nameof(Current)] = new RefreshJob<CurrentWeather>(
                 nameof(Current),
                 TimeSpan.FromMinutes(1),
-                cancellationToken => _weatherProvider.GetCurrentWeatherAsync(Geolocation.Location, cancellationToken),
+                cancellationToken => currentWeatherProvider.GetCurrentWeatherAsync(Geolocation.Location, cancellationToken),
                 value => Current = value),
 
             [nameof(Alerts)] = new RefreshJob<IReadOnlyList<Alert>>(
                 nameof(Alerts),
                 TimeSpan.FromMinutes(15),
-                cancellationToken => _alertProvider.GetAlertsAsync(Geolocation.Location, cancellationToken),
+                cancellationToken => alertProvider.GetAlertsAsync(Geolocation.Location, cancellationToken),
                 value => Alerts = value),
 
             [nameof(AirQuality)] = new RefreshJob<AirQuality>(
                 nameof(AirQuality),
                 TimeSpan.FromHours(1),
-                cancellationToken => _airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location, cancellationToken),
+                cancellationToken => airQualityProvider.GetCurrentAirQualityAsync(Geolocation.Location, cancellationToken),
                 value => AirQuality = value),
         };
 
@@ -68,9 +67,6 @@ public partial class WeatherViewModel : ObservableObject
 
     public Geolocation Geolocation { get; init; }
 
-    private readonly IWeatherProvider _weatherProvider;
-    private readonly IAlertProvider _alertProvider;
-    private readonly IAirQualityProvider _airQualityProvider;
     private readonly ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> _temperatureTrendAnalyzer;
     private readonly ICacheService _cacheService;
     private readonly ILogger _logger;

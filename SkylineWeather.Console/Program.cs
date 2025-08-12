@@ -66,7 +66,9 @@ internal static class BuilderExtensions
         }
 
         // 3. 将无键接口映射到配置中指定的有键服务
-        MapProvider<IWeatherProvider>(services, settings);
+        MapProvider<ICurrentWeatherProvider>(services, settings);
+        MapProvider<IDailyWeatherProvider>(services, settings);
+        MapProvider<IHourlyWeatherProvider>(services, settings);
         MapProvider<IAlertProvider>(services, settings);
         MapProvider<IGeolocationProvider>(services, settings);
         MapProvider<IAirQualityProvider>(services, settings);

@@ -8,7 +8,9 @@ using UnitsNet;
 namespace SkylineWeather.ViewModels;
 
 public class WeatherViewModelFactory(
-    IWeatherProvider weatherProvider,
+    ICurrentWeatherProvider currentWeatherProvider,
+    IDailyWeatherProvider dailyWeatherProvider,
+    IHourlyWeatherProvider hourlyWeatherProvider,
     IAlertProvider alertProvider,
     IAirQualityProvider airQualityProvider,
     ITrendAnalyzer<(Temperature min, Temperature max), TemperatureTrend> temperatureTrendAnalyzer,
@@ -19,7 +21,9 @@ public class WeatherViewModelFactory(
     {
         return new WeatherViewModel(
             geolocation,
-            weatherProvider,
+            currentWeatherProvider,
+            dailyWeatherProvider,
+            hourlyWeatherProvider,
             alertProvider,
             airQualityProvider,
             temperatureTrendAnalyzer,
