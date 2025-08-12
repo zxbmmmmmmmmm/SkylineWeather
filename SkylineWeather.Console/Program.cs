@@ -16,26 +16,24 @@ using UnitsNet;
 
 Console.WriteLine("Welcome to Skyline Weather Console!");
 
-var builder = Host.CreateApplicationBuilder(args);
-builder.Environment.ContentRootPath = AppDomain.CurrentDomain.BaseDirectory;
+var builder = Host.CreateDefaultBuilder(args)
+    .UseContentRoot(Directory.GetCurrentDirectory())
+    .ConfigureAppConfiguration(config =>
+    {
+        config.AddJsonFile("appsettings.json", false, true);
+    })
+    .ConfigureServices((context, services) => {
+        services.AddHostedService<WeatherService>();
+        services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
+        services.AddOptions<CommonSettings>()
+            .Bind(context.Configuration);
+        services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);
+        var settingsForConfiguration = new CommonSettings();
+        context.Configuration.Bind(settingsForConfiguration);
+        services.AddProviders(settingsForConfiguration);
+        services.AddDataAnalyzers();
+    });
 
-builder.Services.AddHostedService<WeatherService>();
-
-builder.Configuration.AddJsonFile("appsettings.json", false, true);
-builder.Services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
-
-// 1. 为应用程序的运行时注册标准的 IOptions<CommonSettings>
-builder.Services.AddOptions<CommonSettings>()
-    .Bind(builder.Configuration);
-builder.Services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);
-
-// 2. 在 Build() 之前，手动创建一个临时的 settings 实例，仅用于配置服务
-var settingsForConfiguration = new CommonSettings();
-builder.Configuration.Bind(settingsForConfiguration);
-
-// 3. 将这个临时的、已填充的实例传递给服务注册方法
-builder.Services.AddProviders(settingsForConfiguration);
-builder.Services.AddDataAnalyzers();
 
 Program.AppHost = builder.Build();
 await Program.AppHost.RunAsync().ConfigureAwait(false);
