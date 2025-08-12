@@ -24,10 +24,19 @@ builder.Services.AddHostedService<WeatherService>();
 builder.Configuration.AddJsonFile("appsettings.json", false, true);
 builder.Services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
 
-builder.Services.AddSingleton<CommonSettings>();
+// 1. 为应用程序的运行时注册标准的 IOptions<CommonSettings>
+builder.Services.AddOptions<CommonSettings>()
+    .Bind(builder.Configuration);
+builder.Services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);
 
-builder.Services.AddProviders(builder.Configuration);
+// 2. 在 Build() 之前，手动创建一个临时的 settings 实例，仅用于配置服务
+var settingsForConfiguration = new CommonSettings();
+builder.Configuration.Bind(settingsForConfiguration);
+
+// 3. 将这个临时的、已填充的实例传递给服务注册方法
+builder.Services.AddProviders(settingsForConfiguration);
 builder.Services.AddDataAnalyzers();
+
 Program.AppHost = builder.Build();
 await Program.AppHost.RunAsync().ConfigureAwait(false);
 
@@ -39,33 +48,28 @@ public static partial class Program
 
 internal static class BuilderExtensions
 {
-    public static IServiceCollection AddProviders(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddProviders(this IServiceCollection services, CommonSettings settings)
     {
-        var settings = config.GetSection("CommonSettings").Get<CommonSettings>() ?? new CommonSettings(new ConfigurationSettingsService(config));
-        var mappings = settings.ProviderMappings;
-        List<Type> builtinProviders = [typeof(QWeatherProvider.QWeatherProvider), typeof(OpenMeteoProvider.OpenMeteoProvider) ];
+        // 在这里定义所有可用的提供程序类型
+        List<Type> builtinProviders = [typeof(QWeatherProvider.QWeatherProvider), typeof(OpenMeteoProvider.OpenMeteoProvider)];
 
-        // 注册内置的天气提供程序
         foreach (var providerType in builtinProviders)
         {
-            if (providerType.GetCustomAttributes(typeof(ProviderAttribute), false)
-                    .FirstOrDefault() is not ProviderAttribute providerAttribute) continue;
-            RegisterKeyedProvider(providerType, services, providerAttribute.Id);
-            RegisterProviderConfiguration(providerType, services, settings, providerAttribute.Id);
+            var providerAttr = providerType.GetCustomAttribute<ProviderAttribute>();
+            if (providerAttr is null) continue;
 
+            // 1. 注册有键的接口实现
+            RegisterKeyedProvider(providerType, services, providerAttr.Id);
+
+            // 2. 自动注册该提供程序所需的配置
+            RegisterProviderConfiguration(providerType, services, settings, providerAttr.Id);
         }
 
-        MapProvider<ICurrentWeatherProvider>(services, settings);
-        MapProvider<IDailyWeatherProvider>(services, settings);
-        MapProvider<IHourlyWeatherProvider>(services, settings);
+        // 3. 将无键接口映射到配置中指定的有键服务
+        MapProvider<IWeatherProvider>(services, settings);
         MapProvider<IAlertProvider>(services, settings);
         MapProvider<IGeolocationProvider>(services, settings);
         MapProvider<IAirQualityProvider>(services, settings);
-
-        foreach(var providerConfig in settings.ProviderConfigurations)
-        {
-            services.AddKeyedSingleton(providerConfig.Key, (object)providerConfig.Value);
-        }
 
         return services;
     }
@@ -76,14 +80,15 @@ internal static class BuilderExtensions
         if (configAttr is null) return;
 
         var configType = configAttr.ConfigurationType;
-        var providerConfigData = settings.ProviderConfigurations
-            .FirstOrDefault(p => p.Key.Equals(providerId, StringComparison.OrdinalIgnoreCase));
-
-        var configObject = JsonSerializer.Deserialize(providerConfigData.Value.ToString(), configType);
-        if (configObject != null)
+        if (settings.ProviderConfigurations.TryGetValue(providerId, out var configValue))
         {
-            // 将具体类型的配置对象注册到DI容器
-            services.AddSingleton(configType, configObject);
+            var json = JsonSerializer.Serialize(configValue);
+            var configObject = JsonSerializer.Deserialize(json, configType);
+
+            if (configObject != null)
+            {
+                services.AddSingleton(configType, configObject);
+            }
         }
     }
 
@@ -96,7 +101,6 @@ internal static class BuilderExtensions
         foreach (var interfaceType in providerInterfaces)
         {
             // 将每个接口都用同一个 key 指向该实现
-            // DI 容器会自动处理 TImplementation 的单例生命周期
             services.AddKeyedSingleton(interfaceType, key, implementationType);
         }
     }
@@ -105,11 +109,13 @@ internal static class BuilderExtensions
         var providerId = settings.ProviderMappings.GetValueOrDefault(typeof(T).Name);
         if (string.IsNullOrEmpty(providerId))
         {
-            throw new InvalidOperationException($"Provider mapping for interface {typeof(T).Name} not found in settings.");
+            // 如果接口未在配置中映射，则不进行注册
+            return;
         }
 
         // 将接口的默认实现（无key）指向有key的实现
-        services.AddTransient<T>(sp => sp.GetRequiredKeyedService<T>(providerId));
+        services.AddTransient<T>(sp =>
+        sp.GetRequiredKeyedService<T>(providerId));
     }
     public static IServiceCollection AddDataAnalyzers(this IServiceCollection services)
     {

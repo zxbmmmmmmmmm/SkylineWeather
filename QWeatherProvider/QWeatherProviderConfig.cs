@@ -1,8 +1,8 @@
 ﻿namespace QWeatherProvider;
 
-public class QWeatherProviderConfig(string key)
+public class QWeatherProviderConfig
 {
-    public string Token { get; set; } = key;
+    public required string Token { get; set; }
     public string? Language { get; set; }
     public string Domain { get; set; } = "devapi.qweather.com";
 }
