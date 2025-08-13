@@ -75,6 +75,10 @@ public class WeatherService : IHostedService
                     Program.AppHost.Services.GetService<IGeolocationProvider>()!,
                     BackToFeatureSelectionAsync,
                     _cancellationToken),
+                FeatureType.AirQuality => new AirQuailtyModule(
+                    Program.AppHost.Services.GetService<IAirQualityProvider>()!,
+                    BackToFeatureSelectionAsync,
+                    _cancellationToken),
                 _ => throw new NotSupportedException(),
             };
 

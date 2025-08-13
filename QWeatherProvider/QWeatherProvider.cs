@@ -5,10 +5,13 @@ using QWeatherApi.ApiContracts;
 using QWeatherApi.Bases;
 using QWeatherProvider.Mappers;
 using SkylineWeather.Abstractions.Models;
+using SkylineWeather.Abstractions.Models.AirQuality;
 using SkylineWeather.Abstractions.Models.Alert;
 using SkylineWeather.Abstractions.Models.Weather;
 using SkylineWeather.Abstractions.Provider;
 using SkylineWeather.Abstractions.Provider.Interfaces;
+using System.Xml.Linq;
+using UnitsNet;
 
 namespace QWeatherProvider;
 
@@ -20,7 +23,8 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
     IDailyWeatherProvider,
     IHourlyWeatherProvider,
     IAlertProvider,
-    IGeolocationProvider
+    IGeolocationProvider,
+    IAirQualityProvider
 {
     public override string Name => "QWeather";
 
@@ -73,5 +77,32 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
             new QGeolocationRequestByName { Name = name },
             _option);
         return result.Locations.ConvertAll(p => p.MapToGeolocation());
+    }
+
+    public async Task<Result<AirQuality>> GetCurrentAirQualityAsync(Location location, CancellationToken cancellationToken = default)
+    {
+        var result = await _handler.RequestAsync(
+            QWeatherApis.AirConditionApi, 
+            new QWeatherRequest(location.Longitude, location.Latitude),
+            _option);
+        return new AirQuality
+        {
+            CO = Density.FromMilligramsPerCubicMeter(result.AirConditionNow.Co),
+            NO2 = Density.FromMicrogramsPerCubicMeter(result.AirConditionNow.No2),
+            SO2 = Density.FromMicrogramsPerCubicMeter(result.AirConditionNow.So2),
+            O3 = Density.FromMicrogramsPerCubicMeter(result.AirConditionNow.O3),
+            PM10 = Density.FromMicrogramsPerCubicMeter(result.AirConditionNow.Pm10),
+            PM25 = Density.FromMicrogramsPerCubicMeter(result.AirConditionNow.Pm2p5),
+            Aqi = new Aqi
+            {
+                Value = result.AirConditionNow.Aqi,
+                Standard = AqiStandard.China,
+                LevelDescriptor = new AqiLevelDescriptor
+                {
+                    Level = result.AirConditionNow.Level,
+                    Category = result.AirConditionNow.Category,
+                }
+            }
+        };
     }
 }

@@ -1,12 +1,20 @@
-﻿namespace SkylineWeather.Abstractions.Models.AirQuality;
+﻿using UnitsNet;
+
+namespace SkylineWeather.Abstractions.Models.AirQuality;
 
 public record AirQuality
 {
-    public double? PM25 { get; set; }
-    public double? PM10 { get; set; }
-    public double? SO2 { get; set; }
-    public double? NO2 { get; set; }
-    public double? O3 { get; set; }
-    public double? CO { get; set; }
-    public IAqi? Aqi { get; set; }
+    public Density? PM25 { get; set; }
+
+    public Density? PM10 { get; set; }
+
+    public Density? SO2 { get; set; }
+
+    public Density? NO2 { get; set; }
+
+    public Density? O3 { get; set; }
+
+    public Density? CO { get; set; }
+
+    public Aqi? Aqi { get; set; }
 }

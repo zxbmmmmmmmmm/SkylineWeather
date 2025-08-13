@@ -120,6 +120,9 @@ internal static class BuilderExtensions
     public static IServiceCollection AddDataAnalyzers(this IServiceCollection services)
     {
         return services.AddSingleton<ITrendAnalyzer<Temperature, TemperatureTrend>, SingleTemperatureTrendAnalyzer>()
-            .AddSingleton<ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend>, CompositeTemperatureTrendAnalyzer>();
+            .AddSingleton<ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend>, CompositeTemperatureTrendAnalyzer>()
+            .AddSingleton<IAqiAnalyzer, ChinaAqiAnalyzer>()
+            .AddSingleton<IAqiAnalyzer, UsaAqiAnalyzer>()
+            .AddSingleton<IAqiAnalyzer, EuropeAqiAnalyzer>();
     }
 }
