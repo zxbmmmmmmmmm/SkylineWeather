@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SkylineWeather.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SkylineWeather.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
