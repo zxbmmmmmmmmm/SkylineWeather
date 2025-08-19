@@ -72,6 +72,9 @@ namespace FluentWeather.Tasks
             var warnings = await _warningProvider.GetWeatherWarnings(lon, lat);
             settingContainer.Values["PushedWarnings"] ??= JsonSerializer.Serialize(new Dictionary<string,DateTime>());
             var pushed = JsonSerializer.Deserialize<Dictionary<string, DateTime>>((string)settingContainer.Values["PushedWarnings"]);
+            pushed = pushed
+                .Where(p => p.Value > DateTime.Now.AddDays(-3))
+                .ToDictionary(p => p.Key, p => p.Value); // 清理过期的推送
             foreach (var warning in warnings)
             {               
                 if (!Settings.NotificationsDebugMode&&pushed.ContainsKey(warning.Id)) continue; //未被推送过
@@ -86,6 +89,7 @@ namespace FluentWeather.Tasks
                 });
                 if (Settings.NotificationsDebugMode) continue;
                 pushed.Add(warning.Id,warning.PublishTime);
+
             }
             if (Settings.IsDailyNotificationTileEnabled)
             {
