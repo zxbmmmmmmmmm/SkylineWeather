@@ -83,7 +83,8 @@ public static class AssetsHelper
             return "Fog";
         if (70 <= code && code <= 79)
             return "Snow";
-
+        if (weather is ThunderstormWithHeavyHail or SlightOrModerateThunderstorm or ThunderstormWithSlightHail or HeavyThunderStorm)
+            return "Thundery";
         return "All";
     }
 }
