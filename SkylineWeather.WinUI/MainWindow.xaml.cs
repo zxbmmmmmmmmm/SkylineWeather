@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,6 +27,26 @@ namespace SkylineWeather.WinUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async Task GetSampleData()
+        {
+            var provider = new OpenMeteoProvider.OpenMeteoProvider();
+            var data = await provider.GetHourlyWeatherAsync(new Abstractions.Models.Location(28, 119));
+            data.IfSucc(result =>
+            {
+                Chart.Data = result.Take(24).ToList();
+            });
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            await GetSampleData();
+        }
+
+        private async void Button_Loaded(object sender, RoutedEventArgs e)
+        {
+            await GetSampleData();
         }
     }
 }

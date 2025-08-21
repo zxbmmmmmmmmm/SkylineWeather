@@ -3,6 +3,8 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
+using Microsoft.Graphics.Canvas.UI;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,6 +29,9 @@ using UnitsNet.Units;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using DataPoint = (SkylineWeather.Abstractions.Models.Weather.HourlyWeather Data,System.Numerics.Vector2 Point);
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,23 +40,72 @@ namespace SkylineWeather.WinUI.Controls.Charts
 {
     public sealed partial class HourlyChart : UserControl
     {
+
+        private readonly ThicknessF InnerPadding = new(12, 12, 12, 72);
+
         public HourlyChart()
         {
             InitializeComponent();
+            RenderCanvas.CreateResources += OnRenderCanvasCreateResources;
             RenderCanvas.Draw += OnRenderCanvasDraw;
-            Data = SampleData.GetHourlyWeather();
+            //RenderCanvas.PointerWheelChanged += OnRenderCanvasPointerWheelChanged;
         }
 
-        private readonly ThicknessF InnerPadding = new(24,12,12,72);
 
-        private void OnRenderCanvasDraw(Microsoft.Graphics.Canvas.UI.Xaml.CanvasControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasDrawEventArgs args)
+        [GeneratedDependencyProperty]
+        public partial IReadOnlyList<HourlyWeather> Data { get; set; }
+
+        [GeneratedDependencyProperty(DefaultValue = 3f)]
+        public partial float LineStrokeWidth { get; set; }
+
+        [GeneratedDependencyProperty(DefaultValue = 0.5f)]
+        public partial float GridStrokeWidth { get; set; }
+
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(HorizontalGridLineColorDefaultValue))]
+        public partial Color HorizontalGridLineColor { get; set; }       
+        private static object HorizontalGridLineColorDefaultValue() => Color.FromArgb(32, 255, 255, 255);
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(HorizontalGridLineDashStyleDefaultValue))]
+        public partial float[] HorizontalGridLineDashStyle { get; set; }
+        private static object HorizontalGridLineDashStyleDefaultValue() => new float[] { 8, 8 };
+
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(VerticalGridLineColorDefaultValue))]
+        public partial Color VerticalGridLineColor { get; set; }
+        private static object VerticalGridLineColorDefaultValue() => Color.FromArgb(96, 255, 255, 255);
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(VerticalGridLineDashStyleDefaultValue))]
+        public partial float[] VerticalGridLineDashStyle { get; set; }
+        private static object VerticalGridLineDashStyleDefaultValue() => new float[] { 6, 4, 2 ,4 };
+
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(TextColorDefaultValue))]
+        public partial Color TextColor { get; set; }
+        private static object TextColorDefaultValue() => Color.FromArgb(128, 255, 255, 255);
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(LineColorDefaultValue))]
+        public partial Color LineColor { get; set; }
+        private static object LineColorDefaultValue() => Colors.White;
+
+        [GeneratedDependencyProperty(DefaultValueCallback = nameof(FillColorDefaultValue))]
+        public partial Color FillColor { get; set; }
+        private static object FillColorDefaultValue() => Color.FromArgb(64, 255, 255, 255);
+
+        partial void OnPropertyChanged(DependencyPropertyChangedEventArgs e) => RenderCanvas.Invalidate();
+        //private void OnRenderCanvasPointerWheelChanged(object sender, PointerRoutedEventArgs e) => e.Handled = true;
+        private void OnRenderCanvasCreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
+        {
+            
+        }
+
+        private void OnRenderCanvasDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (Data == null || !Data.Any()) return;
 
             var max = Data.Max(p => p.Temperature.DegreesCelsius);
             var min = Data.Min(p => p.Temperature.DegreesCelsius);
             var gap = max - min;
-            var innerPadding = InnerPadding;
             var padding = new ThicknessF
             {
                 Bottom = (float)Padding.Bottom,
@@ -59,15 +113,15 @@ namespace SkylineWeather.WinUI.Controls.Charts
                 Right = (float)Padding.Right,
                 Top = (float)Padding.Top
             };
-            var combinedPadding = innerPadding + padding;
+            var combinedPadding = InnerPadding + padding;
             var height = (float)sender.ActualHeight - padding.Top - padding.Bottom;
             var width = (float)sender.ActualWidth - padding.Left - padding.Right;
             var innerHeight = (float)sender.ActualHeight - combinedPadding.Top - combinedPadding.Bottom;
             var innerWidth = (float)sender.ActualWidth - combinedPadding.Left - combinedPadding.Right;
-            var count = Data.Count();
+            var count = Data.Count;
 
             // 1.生成点位
-            var points = new List<Vector2>(count);
+            var points = new List<DataPoint>(count);
             var horizontalSpacing = innerWidth / (count - 1); // count - 1为间隔
             for (var i = 0; i < count; i++)
             {
@@ -75,134 +129,138 @@ namespace SkylineWeather.WinUI.Controls.Charts
                 var percent = gap == 0 ? 0.5 : (item.Temperature.DegreesCelsius - min) / gap;
                 var y = innerHeight + combinedPadding.Top - (percent * innerHeight);
                 var x = combinedPadding.Left + i * horizontalSpacing;
-                points.Add(new Vector2(x, (float)y));
+                points.Add((item,new Vector2(x, (float)y)));
             }
-            
             if (points.Count < 2) return;
-
+            var drawingData = new DrawingData(points, combinedPadding.Left, combinedPadding.Top, innerHeight, innerWidth, innerWidth/count);
 
             // 2.绘制贝塞尔曲线
-            DrawLine(sender, args.DrawingSession, points, combinedPadding.Left, combinedPadding.Top, innerHeight, innerWidth);
+            DrawLine(sender, args.DrawingSession, drawingData);
 
             // 3.绘制点位
-            foreach (var point in points)
-            {
-                args.DrawingSession.FillCircle(point, 4, Colors.Black);
-                args.DrawingSession.DrawCircle(point, 4, Colors.White, 3);
-            }
+            DrawPoints(args.DrawingSession, drawingData.DataPoints);
 
             // 4.绘制坐标轴
-            DrawAxis(sender, args.DrawingSession, Data, combinedPadding.Left, height + padding.Top, innerWidth);
-            DrawWeatherAxis(sender, args.DrawingSession, Data, combinedPadding.Left, height + padding.Top - 36, innerWidth, 16);
-            DrawGrid(sender, args.DrawingSession, points, (int)max, (int)min);
+            DrawHorizontalAxis(sender, args.DrawingSession, drawingData);
+            DrawGrid(sender, args.DrawingSession, points);
         }
 
-
-        private void DrawLine(ICanvasResourceCreator canvasResourceCreator,CanvasDrawingSession session, IList<Vector2> points, float x, float y, float height, float width)
+        private void DrawPoints(CanvasDrawingSession session, IEnumerable<DataPoint> dataPoints)
         {
-            var (controlPoints1, controlPoints2) = GetControlPoints(points);
+            var fontSize = (float)FontSize;
+            var textColor = TextColor;
+            foreach (var dataPoint in dataPoints)
+            {
+                //session.FillCircle(dataPoint.Point, 4, Colors.Black);
+                //session.DrawCircle(dataPoint.Point, 4, Colors.White, 3);
+                session.DrawCenteredTextLayout(
+                    new CanvasTextLayout(session, dataPoint.Data.Temperature.DegreesCelsius.ToString("0.0"), 
+                        new CanvasTextFormat { FontSize = fontSize }, 100, 20), 
+                    dataPoint.Point.X, dataPoint.Point.Y - 16, textColor);
+            }
+        }
+
+        private void DrawLine(ICanvasResourceCreator canvasResourceCreator,CanvasDrawingSession session, DrawingData data)
+        {
+            var (controlPoints1, controlPoints2) = GetControlPoints(data.DataPoints.Select(p => p.Point).ToList());
             using (var path = new CanvasPathBuilder(canvasResourceCreator))
             {
                 using var fillPath = new CanvasPathBuilder(canvasResourceCreator);
-                fillPath.BeginFigure(points[0]);
-                path.BeginFigure(points[0]);
+                fillPath.BeginFigure(data.DataPoints[0].Point);
+                path.BeginFigure(data.DataPoints[0].Point);
 
-                for (var i = 0; i < points.Count - 1; i++)
+                for (var i = 0; i < data.DataPoints.Count - 1; i++)
                 {
-                    path.AddCubicBezier(controlPoints1[i], controlPoints2[i], points[i + 1]);
-                    fillPath.AddCubicBezier(controlPoints1[i], controlPoints2[i], points[i + 1]);
+                    path.AddCubicBezier(controlPoints1[i], controlPoints2[i], data.DataPoints[i + 1].Point);
+                    fillPath.AddCubicBezier(controlPoints1[i], controlPoints2[i], data.DataPoints[i + 1].Point);
                 }
                 path.EndFigure(CanvasFigureLoop.Open);
-                fillPath.AddLine(x + width, y + height + InnerPadding.Bottom);
-                fillPath.AddLine(x, y + height + InnerPadding.Bottom);
+                fillPath.AddLine(data.X + data.Width, data.Y + data.Height + InnerPadding.Bottom);
+                fillPath.AddLine(data.X, data.Y + data.Height + InnerPadding.Bottom);
                 fillPath.EndFigure(CanvasFigureLoop.Closed);
 
                 using var geometry = CanvasGeometry.CreatePath(path);
                 using var fillGeometry = CanvasGeometry.CreatePath(fillPath);
 
                 using var brush = new CanvasLinearGradientBrush(canvasResourceCreator, [
-                    new CanvasGradientStop { Position = 0.0f, Color = Color.FromArgb(64,255,255,255) },
+                    new CanvasGradientStop { Position = 0.0f, Color = FillColor },
                     new CanvasGradientStop { Position = 1.0f, Color = Colors.Transparent }
                 ]);
 
-                brush.StartPoint = new Vector2(x, y);
-                brush.EndPoint = new Vector2(x, y + height + InnerPadding.Bottom);
+                brush.StartPoint = new Vector2(data.X, data.Y);
+                brush.EndPoint = new Vector2(data.X, data.Y + data.Height + InnerPadding.Bottom);
                 
-                session.DrawGeometry(geometry, Colors.White, StrokeWidth);
+                session.DrawGeometry(geometry, LineColor, LineStrokeWidth);
                 session.FillGeometry(fillGeometry, brush);
             }
         }
 
-        private void DrawAxis(ICanvasResourceCreator canvasResourceCreator, CanvasDrawingSession session, IReadOnlyList<HourlyWeather> data, float x, float y, float width)
+        private void DrawHorizontalAxis(
+            ICanvasResourceCreator canvasResourceCreator,
+            CanvasDrawingSession session, DrawingData data)
         {
-            //session.DrawLine(new Vector2(x, y), new Vector2(x + width, y), Colors.White);
-            var spacing = width / (data.Count - 1);
-            var lastWeather = data[0].WeatherCode;
-            for (var i = 0; i < data.Count; i++)
-            {
-                if (i == 0 || i == data.Count - 1 || lastWeather != data[i].WeatherCode)
-                {
-                    var text = data[i].Time.Hour.ToString();
-                    var textLayout = new CanvasTextLayout(canvasResourceCreator, text, new CanvasTextFormat { FontSize = 14 }, spacing, float.MaxValue);
-                    var regions = textLayout.GetCharacterRegions(0, text.Length);
-                    var textHeight = (float)regions[0].LayoutBounds.Height;
-                    var textWidth = (float)regions.Sum(p => p.LayoutBounds.Width);
-                    session.DrawTextLayout(textLayout, new Vector2(x - textWidth / 2, y - textHeight), Color.FromArgb(128, 255, 255, 255));
-                }
-                lastWeather = data[i].WeatherCode;
-                x += spacing;
-            }
-        }
+            var dataPoints = data.DataPoints;
+            var last = dataPoints[0];
+            var fontSize =(float) FontSize;
+            var textColor = TextColor;
+            using var brush = new CanvasLinearGradientBrush(canvasResourceCreator, [
+                new CanvasGradientStop { Position = 0.0f, Color = VerticalGridLineColor },
+                new CanvasGradientStop { Position = 1.0f, Color = Colors.Transparent }
+            ]);
+            var style = new CanvasStrokeStyle { CustomDashStyle = VerticalGridLineDashStyle };
 
-        private void DrawWeatherAxis(ICanvasResourceCreator canvasResourceCreator, CanvasDrawingSession session, IReadOnlyList<HourlyWeather> data, float x, float y, float width, float height)
-        {
-            var spacing = width / (data.Count - 1);
-            var lastWeather = data[0].WeatherCode;
-            var lastDrawnPosition = x;
-            for (var i = 0; i < data.Count; i++)
+            for (var i = 0; i < dataPoints.Count; i++)
             {
-                if (i == 0 || i == data.Count - 1 || lastWeather != data[i].WeatherCode)
+                if (i == 0 || i == dataPoints.Count -1 || last.Data.WeatherCode != dataPoints[i].Data.WeatherCode)
                 {
-                    if (i != 0)
+                    if(i != 0)
                     {
-                        //TODO: 修改为天气图标
-                        var weatherWidth = x - lastDrawnPosition;
-                        var text = data[i - 1].WeatherCode.ToString();
-                        var textLayout = new CanvasTextLayout(canvasResourceCreator, text, new CanvasTextFormat { FontSize = 14 }, spacing, float.MaxValue);
-                        var regions = textLayout.GetCharacterRegions(0, text.Length);
-                        var textHeight = (float)regions[0].LayoutBounds.Height;
-                        var textWidth = (float)regions.Sum(p => p.LayoutBounds.Width);
-                        session.DrawTextLayout(textLayout, lastDrawnPosition + (weatherWidth / 2) - (textWidth / 2), y, Color.FromArgb(128, 255, 255, 255));
+                        var spacing = dataPoints[i].Point.X - last.Point.X;
+                        var weatherTextLayout = 
+                            new CanvasTextLayout(
+                                canvasResourceCreator, ((int)last.Data.WeatherCode).ToString(),
+                                new CanvasTextFormat{ HorizontalAlignment = CanvasHorizontalAlignment.Center },
+                                spacing, 1000);
+                        session.DrawTextLayout(weatherTextLayout, last.Point.X, data.Y + data.Height, textColor);
                     }
-                    session.DrawLine(x, y, x, y + height, Colors.White);
-                    lastDrawnPosition = x;
 
+                    last = dataPoints[i];
+
+                    var axisPoint = new Vector2(dataPoints[i].Point.X, data.Y + data.Height + InnerPadding.Bottom);
+                    brush.StartPoint = dataPoints[i].Point;
+                    brush.EndPoint = axisPoint;
+                    var textLayout = new CanvasTextLayout(canvasResourceCreator, last.Data.Time.Hour.ToString(), new CanvasTextFormat { FontSize = fontSize }, 50, 50);
+                    session.DrawCenteredTextLayout(textLayout, axisPoint.X, axisPoint.Y, textColor);
+                    session.DrawLine(dataPoints[i].Point, axisPoint, brush,1.5f , style);
                 }
-                lastWeather = data[i].WeatherCode;
-                x += spacing;
             }
         }
 
         private void DrawGrid(ICanvasResourceCreator canvasResourceCreator, 
             CanvasDrawingSession session,
-            IReadOnlyList<Vector2> points,
-            int max,int min)
+            IReadOnlyList<DataPoint> dataPoints)
         {
-            var gap = max - min;
-            var bottomY = points.Max(p => p.Y);
-            var topY = points.Min(p => p.Y);
+            var highest = dataPoints.MinBy(p => p.Point.Y);// Y坐标越大温度越低
+            var lowest = dataPoints.MaxBy(p => p.Point.Y);
+            var gap = (int)highest.Data.Temperature.DegreesCelsius - (int)lowest.Data.Temperature.DegreesCelsius;
+            var bottomY = lowest.Point.Y;
+            var topY = highest.Point.Y;
             var height = bottomY - topY;
             var spacing = height / gap;
-            var leftX = points[0].X;
-            var rightX = points[^1].X;
+            var leftX = dataPoints[0].Point.X;
+            var rightX = dataPoints[^1].Point.X;
             var style = new CanvasStrokeStyle { CustomDashStyle = [8,8] };
+            var gridStrokeWidth = GridStrokeWidth;
+            var gridLineColor = HorizontalGridLineColor;
+
             for (var i = 0; i <= gap; i++)
             {
-                session.DrawLine(leftX, topY + spacing * i, rightX, topY + spacing*i, Color.FromArgb(32,255,255,255),0.5f , style);
+                var y = topY + spacing * i;
+                session.DrawLine(leftX, y, rightX, y, gridLineColor, gridStrokeWidth, style);
             }
         }
 
-        private (Vector2[] p1, Vector2[] p2) GetControlPoints(IList<Vector2> knots)
+        private static (Vector2[] p1, Vector2[] p2) GetControlPoints(IList<Vector2> knots)
         {
             int n = knots.Count - 1;
             var p1 = new Vector2[n];
@@ -255,12 +313,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
             return (p1, p2);
         }
 
-
-        [GeneratedDependencyProperty]
-        public partial IReadOnlyList<HourlyWeather> Data { get; set; }
-
-        [GeneratedDependencyProperty(DefaultValue = 3f)]
-        public partial float StrokeWidth { get; set; }
+        private record DrawingData(List<DataPoint> DataPoints,float X,float Y, float Height, float Width, float spacing);
 
         private struct ThicknessF
         {
@@ -348,6 +401,17 @@ namespace SkylineWeather.WinUI.Controls.Charts
 
             public static bool operator !=(ThicknessF t1, ThicknessF t2) => !(t1 == t2);
         }
+    }
+}
+
+
+public static class CanvasExtensions
+{
+    public static void DrawCenteredTextLayout(this CanvasDrawingSession session, CanvasTextLayout textLayout, float x, float y, Color color)
+    {
+        var textHeight = (float)textLayout.DrawBounds.Height;
+        var textWidth = (float)textLayout.DrawBounds.Width;
+        session.DrawTextLayout(textLayout, new Vector2(x - textWidth / 2, y - textHeight), color);
     }
 }
 

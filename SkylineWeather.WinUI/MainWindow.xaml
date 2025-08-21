@@ -14,7 +14,15 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid RequestedTheme="Dark">
-        <charts:HourlyChart Padding="0,12" />
+    <Grid x:Name="MainGrid" RequestedTheme="Dark">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Get data" Loaded="Button_Loaded" Click="Button_Click"/>
+        <ScrollViewer VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
+            <charts:HourlyChart MinWidth="1000" Grid.Row="1" x:Name="Chart" Padding="0,12" />
+            
+        </ScrollViewer>
     </Grid>
 </Window>

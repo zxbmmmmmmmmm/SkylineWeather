@@ -45,6 +45,13 @@ namespace SkylineWeather.WinUI
         {
             _window = new MainWindow();
             _window.Activate();
+            this.UnhandledException +=(sender, e) =>
+            {
+                // Handle unhandled exceptions here
+                // For example, log the exception or show a message to the user
+                System.Diagnostics.Debug.WriteLine($"Unhandled exception: {e.Exception.Message}");
+                e.Handled = true; // Prevents the app from crashing
+            };
         }
     }
 }
