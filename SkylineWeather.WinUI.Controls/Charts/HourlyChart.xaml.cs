@@ -24,6 +24,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading.Tasks;
 using UnitsNet;
 using UnitsNet.Units;
 using Windows.Foundation;
@@ -42,6 +43,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
     {
 
         private readonly ThicknessF InnerPadding = new(12, 12, 12, 72);
+        private readonly Dictionary<WeatherCode, CanvasBitmap> _iconCache = new();
 
         public HourlyChart()
         {
@@ -92,11 +94,33 @@ namespace SkylineWeather.WinUI.Controls.Charts
         public partial Color FillColor { get; set; }
         private static object FillColorDefaultValue() => Color.FromArgb(64, 255, 255, 255);
 
+        [GeneratedDependencyProperty]
+        public partial Func<WeatherCode, string> IconMapper { get; set; }
+
         partial void OnPropertyChanged(DependencyPropertyChangedEventArgs e) => RenderCanvas.Invalidate();
         //private void OnRenderCanvasPointerWheelChanged(object sender, PointerRoutedEventArgs e) => e.Handled = true;
         private void OnRenderCanvasCreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
         {
             
+        }
+        partial void OnDataChanged(IReadOnlyList<HourlyWeather> newValue)
+        {
+            ReloadIconsAsync();
+        }
+        partial void OnIconMapperChanged(Func<WeatherCode, string> newValue)
+        {
+            ReloadIconsAsync();
+        }
+
+        private async void ReloadIconsAsync()
+        {
+            if (Data is null || IconMapper is null) return;
+            var tasks = Data
+                .Select(p => p.WeatherCode).Distinct()
+                .Where(p => !_iconCache.ContainsKey(p))
+                .ToList()
+                .ConvertAll(p => CanvasBitmap.LoadAsync(RenderCanvas, IconMapper(p)).AsTask());
+            await Task.WhenAll(tasks);
         }
 
         private void OnRenderCanvasDraw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -216,12 +240,23 @@ namespace SkylineWeather.WinUI.Controls.Charts
                     if(i != 0)
                     {
                         var spacing = dataPoints[i].Point.X - last.Point.X;
-                        var weatherTextLayout = 
-                            new CanvasTextLayout(
-                                canvasResourceCreator, ((int)last.Data.WeatherCode).ToString(),
-                                new CanvasTextFormat{ HorizontalAlignment = CanvasHorizontalAlignment.Center },
-                                spacing, 1000);
-                        session.DrawTextLayout(weatherTextLayout, last.Point.X, data.Y + data.Height, textColor);
+                        // 绘制天气图标（无图标时绘制文字）
+                        if (_iconCache.TryGetValue(last.Data.WeatherCode, out var icon))
+                        {
+                            session.DrawImage(icon, new Rect(
+                                last.Point.X - spacing / 2, data.Y + data.Height,
+                                spacing, spacing), 
+                                new Rect(0,0,icon.SizeInPixels.Width, icon.SizeInPixels.Height));
+                        }
+                        else
+                        {
+                            var weatherTextLayout =
+                                new CanvasTextLayout(
+                                    canvasResourceCreator, last.Data.WeatherCode.ToString(),
+                                    new CanvasTextFormat { HorizontalAlignment = CanvasHorizontalAlignment.Center },
+                                    spacing, 1000);
+                            session.DrawTextLayout(weatherTextLayout, last.Point.X, data.Y + data.Height, textColor);
+                        }
                     }
 
                     last = dataPoints[i];
@@ -415,7 +450,7 @@ public static class CanvasExtensions
     }
 }
 
-public static class SampleData
+internal static class SampleData
 {
     public static List<HourlyWeather> GetHourlyWeather()
     {
