@@ -19,10 +19,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Button Content="Get data" Loaded="Button_Loaded" Click="Button_Click"/>
-        <ScrollViewer VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
-            <charts:HourlyChart MinWidth="1000" Grid.Row="1" x:Name="Chart" Padding="0,12" />
-            
+        <ScrollViewer Grid.Column="0" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
+            <charts:HourlyChart MinWidth="1000" Grid.Row="1" x:Name="HourlyChart" Padding="0,12" />
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="1" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
+            <charts:DailyChart MaxHeight="360" MinWidth="1000" Grid.Row="1" x:Name="DailyChart" Padding="48" />
         </ScrollViewer>
     </Grid>
 </Window>

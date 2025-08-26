@@ -32,10 +32,16 @@ namespace SkylineWeather.WinUI
         private async Task GetSampleData()
         {
             var provider = new OpenMeteoProvider.OpenMeteoProvider();
-            var data = await provider.GetHourlyWeatherAsync(new Abstractions.Models.Location(28, 119));
-            data.IfSucc(result =>
+            var hourly = await provider.GetHourlyWeatherAsync(new Abstractions.Models.Location(28, 119));
+            hourly.IfSucc(result =>
             {
-                Chart.Data = result.Take(24).ToList();
+                HourlyChart.Data = result.Take(24).ToList();
+            });
+
+            var daily = await provider.GetDailyWeatherAsync(new Abstractions.Models.Location(28, 119));
+            daily.IfSucc(result =>
+            {
+                DailyChart.Data = result;
             });
         }
 

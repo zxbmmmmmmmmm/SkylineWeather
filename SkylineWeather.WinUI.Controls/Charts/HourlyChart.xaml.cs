@@ -30,6 +30,7 @@ using UnitsNet.Units;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using SkylineWeather.WinUI.Controls.Helpers;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DataPoint = (SkylineWeather.Abstractions.Models.Weather.HourlyWeather Data,System.Numerics.Vector2 Point);
@@ -126,30 +127,24 @@ namespace SkylineWeather.WinUI.Controls.Charts
         private void OnRenderCanvasDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (Data == null || !Data.Any()) return;
-
             var max = Data.Max(p => p.Temperature.DegreesCelsius);
             var min = Data.Min(p => p.Temperature.DegreesCelsius);
             var gap = max - min;
-            var padding = new ThicknessF
-            {
-                Bottom = (float)Padding.Bottom,
-                Left = (float)Padding.Left,
-                Right = (float)Padding.Right,
-                Top = (float)Padding.Top
-            };
+            var padding = (ThicknessF)Padding;
             var combinedPadding = InnerPadding + padding;
             var height = (float)sender.ActualHeight - padding.Top - padding.Bottom;
             var width = (float)sender.ActualWidth - padding.Left - padding.Right;
             var innerHeight = (float)sender.ActualHeight - combinedPadding.Top - combinedPadding.Bottom;
             var innerWidth = (float)sender.ActualWidth - combinedPadding.Left - combinedPadding.Right;
-            var count = Data.Count;
+            var data = Data;
+            var count = data.Count;
 
             // 1.生成点位
             var points = new List<DataPoint>(count);
             var horizontalSpacing = innerWidth / (count - 1); // count - 1为间隔
             for (var i = 0; i < count; i++)
             {
-                var item = Data.ElementAt(i);
+                var item = data.ElementAt(i);
                 var percent = gap == 0 ? 0.5 : (item.Temperature.DegreesCelsius - min) / gap;
                 var y = innerHeight + combinedPadding.Top - (percent * innerHeight);
                 var x = combinedPadding.Left + i * horizontalSpacing;
@@ -162,7 +157,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
             DrawLine(sender, args.DrawingSession, drawingData);
 
             // 3.绘制点位
-            DrawPoints(args.DrawingSession, drawingData.DataPoints);
+            DrawPoints(args.DrawingSession, points);
 
             // 4.绘制坐标轴
             DrawHorizontalAxis(sender, args.DrawingSession, drawingData);
@@ -350,151 +345,5 @@ namespace SkylineWeather.WinUI.Controls.Charts
 
         private record DrawingData(List<DataPoint> DataPoints,float X,float Y, float Height, float Width, float spacing);
 
-        private struct ThicknessF
-        {
-            private float _Left;
-            private float _Top;
-            private float _Right;
-            private float _Bottom;
-
-            public ThicknessF(float uniformLength)
-            {
-                this._Left = this._Top = this._Right = this._Bottom = uniformLength;
-            }
-
-            public ThicknessF(float left, float top, float right, float bottom)
-            {
-                this._Left = left;
-                this._Top = top;
-                this._Right = right;
-                this._Bottom = bottom;
-            }
-
-            public float Left
-            {
-                get => this._Left;
-                set => this._Left = value;
-            }
-
-            public float Top
-            {
-                get => this._Top;
-                set => this._Top = value;
-            }
-
-            public float Right
-            {
-                get => this._Right;
-                set => this._Right = value;
-            }
-
-            public float Bottom
-            {
-                get => this._Bottom;
-                set => this._Bottom = value;
-            }
-
-            public override string ToString() => this.ToString(CultureInfo.InvariantCulture);
-
-            internal string ToString(CultureInfo cultureInfo)
-            {
-                char numericListSeparator = TokenizerHelper.GetNumericListSeparator((IFormatProvider)cultureInfo);
-                StringBuilder stringBuilder = new StringBuilder(64 /*0x40*/);
-                stringBuilder.Append(this.InternalToString(this._Left, cultureInfo));
-                stringBuilder.Append(numericListSeparator);
-                stringBuilder.Append(this.InternalToString(this._Top, cultureInfo));
-                stringBuilder.Append(numericListSeparator);
-                stringBuilder.Append(this.InternalToString(this._Right, cultureInfo));
-                stringBuilder.Append(numericListSeparator);
-                stringBuilder.Append(this.InternalToString(this._Bottom, cultureInfo));
-                return stringBuilder.ToString();
-            }
-
-            internal string InternalToString(float l, CultureInfo cultureInfo)
-            {
-                return float.IsNaN(l) ? "Auto" : Convert.ToString(l, (IFormatProvider)cultureInfo);
-            }
-
-            public override bool Equals(object obj) => obj is ThicknessF thickness && this == thickness;
-
-            public bool Equals(ThicknessF thickness) => this == thickness;
-
-            public override int GetHashCode()
-            {
-                return this._Left.GetHashCode() ^ this._Top.GetHashCode() ^ this._Right.GetHashCode() ^ this._Bottom.GetHashCode();
-            }
-
-            public static bool operator ==(ThicknessF t1, ThicknessF t2)
-            {
-                return t1._Left == t2._Left && t1._Top == t2._Top && t1._Right == t2._Right && t1._Bottom == t2._Bottom;
-            }
-
-            public static ThicknessF operator +(ThicknessF t1, ThicknessF t2)
-            {
-                return new ThicknessF(t1._Left + t2._Left, t1._Top + t2._Top, t1._Right + t2._Right, t1._Bottom + t2._Bottom);
-            }
-
-            public static bool operator !=(ThicknessF t1, ThicknessF t2) => !(t1 == t2);
-        }
-    }
-}
-
-
-public static class CanvasExtensions
-{
-    public static void DrawCenteredTextLayout(this CanvasDrawingSession session, CanvasTextLayout textLayout, float x, float y, Color color)
-    {
-        var textHeight = (float)textLayout.DrawBounds.Height;
-        var textWidth = (float)textLayout.DrawBounds.Width;
-        session.DrawTextLayout(textLayout, new Vector2(x - textWidth / 2, y - textHeight), color);
-    }
-}
-
-internal static class SampleData
-{
-    public static List<HourlyWeather> GetHourlyWeather()
-    {
-        var data = new List<HourlyWeather>();
-        var now = DateTimeOffset.Now;
-
-        for (int i = 0; i < 24; i++)
-        {
-            var time = now.AddHours(i);
-            var weather = new HourlyWeather
-            {
-                Time = time,
-                Temperature = new Temperature((int)(15 + 5 * Math.Sin(i * Math.PI / 12) + Random.Shared.Next(2)), TemperatureUnit.DegreeCelsius),
-                WeatherCode = GetWeatherCodeForHour(i),
-                Wind = new Wind
-                {
-                    Speed = new Speed(10 + i % 5, SpeedUnit.KilometerPerHour),
-                    Angle = new Angle(i * 15, AngleUnit.Degree),
-                    Direction = (WindDirection)(i % 16)
-                },
-                CloudAmount = (i % 24 < 6 || i % 24 > 18) ? 20.0 : 60.0, // 夜间云少，白天云多
-                Humidity = 50 + 10 * Math.Cos(i * Math.PI / 12),
-                Visibility = new Length(20 - i % 10, LengthUnit.Kilometer),
-                Pressure = new Pressure(1010 + i % 5, PressureUnit.Hectopascal)
-            };
-            data.Add(weather);
-        }
-        return data;
-    }
-
-    private static WeatherCode GetWeatherCodeForHour(int hour)
-    {
-        // 模拟天气变化
-        if (hour > 18 || hour < 6)
-        {
-            return hour % 5 == 0 ? WeatherCode.PartlyCloudy : WeatherCode.Clear;
-        }
-        else if (hour > 12 && hour < 18)
-        {
-            return hour % 6 == 0 ? WeatherCode.LightDrizzle : WeatherCode.PartlyCloudy;
-        }
-        else
-        {
-            return WeatherCode.Clear;
-        }
     }
 }
