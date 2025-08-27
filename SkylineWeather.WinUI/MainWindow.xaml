@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SkylineWeather.WinUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="SkylineWeather.WinUI" 
+    Title="SkylineWeather.WinUI"
     mc:Ignorable="d">
 
     <Window.SystemBackdrop>
@@ -16,19 +16,41 @@
 
     <Grid x:Name="MainGrid" RequestedTheme="Dark">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Content="Get data" Loaded="Button_Loaded" Click="Button_Click"/>
-        <ScrollViewer Grid.Column="0" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
-            <charts:HourlyChart MinWidth="1000" Grid.Row="1" x:Name="HourlyChart" Padding="0,12" />
+        <Button
+            Click="Button_Click"
+            Content="Get data"
+            Loaded="Button_Loaded" />
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalScrollBarVisibility="Visible"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollMode="Disabled">
+            <charts:HourlyChart
+                x:Name="HourlyChart"
+                Grid.Row="1"
+                MinWidth="1000"
+                Padding="0,12" />
         </ScrollViewer>
-        <ScrollViewer Grid.Column="1" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Visible" HorizontalScrollMode="Enabled" Grid.Row="1">
-            <charts:DailyChart MaxHeight="360" MinWidth="1000" Grid.Row="1" x:Name="DailyChart" Padding="48" />
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalScrollBarVisibility="Visible"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollMode="Disabled">
+            <charts:DailyChart 
+                x:Name="DailyChart"
+                Grid.Row="1"
+                MinWidth="1000"
+                Padding="48" />
         </ScrollViewer>
     </Grid>
 </Window>
+ 

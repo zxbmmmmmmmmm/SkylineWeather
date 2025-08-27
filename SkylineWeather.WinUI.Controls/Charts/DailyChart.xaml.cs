@@ -47,6 +47,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
             InitializeComponent();
             RenderCanvas.CreateResources += OnRenderCanvasCreateResources;
             RenderCanvas.Draw += OnRenderCanvasDraw;
+            FontSize = 24;
         }
 
         [GeneratedDependencyProperty]
@@ -57,7 +58,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
 
         [GeneratedDependencyProperty(DefaultValueCallback = nameof(TextColorDefaultValue))]
         public partial Color TextColor { get; set; }
-        private static object TextColorDefaultValue() => Color.FromArgb(128, 255, 255, 255);
+        private static object TextColorDefaultValue() => Colors.White;
 
         [GeneratedDependencyProperty(DefaultValueCallback = nameof(LineColorDefaultValue))]
         public partial Color LineColor { get; set; }
@@ -111,6 +112,7 @@ namespace SkylineWeather.WinUI.Controls.Charts
             var innerWidth = (float)sender.ActualWidth - combinedPadding.Left - combinedPadding.Right;
             var count = Data.Count;
             var data = Data;
+            args.DrawingSession.Blend = CanvasBlend.Copy;
 
             // 1.生成点位
             var highPoints = GetPoints(p => p.HighTemperature);
@@ -119,14 +121,13 @@ namespace SkylineWeather.WinUI.Controls.Charts
 
             var highData = new DrawingData(highPoints, combinedPadding.Left, combinedPadding.Top, innerHeight, innerWidth, innerWidth / count);
             var lowData = new DrawingData(lowPoints, combinedPadding.Left, combinedPadding.Top, innerHeight, innerWidth, innerWidth / count);
-
             // 2.绘制折线
             DrawLine(sender, args.DrawingSession, highData);
             DrawLine(sender, args.DrawingSession, lowData);
 
             // 3.绘制点位
-            DrawPoints(args.DrawingSession, highPoints);
-            DrawPoints(args.DrawingSession, lowPoints);
+            DrawPoints(args.DrawingSession, highPoints, p => p.HighTemperature, -24);
+            DrawPoints(args.DrawingSession, lowPoints, p => p.LowTemperature, 24);
 
             return;
 
@@ -148,14 +149,21 @@ namespace SkylineWeather.WinUI.Controls.Charts
 
 
 
-        private void DrawPoints(CanvasDrawingSession session, IEnumerable<DataPoint> dataPoints)
+        private void DrawPoints(
+            CanvasDrawingSession session,
+            IEnumerable<DataPoint> dataPoints,
+            Func<DailyWeather, Temperature> selector,
+            float textOffset)
         {
             var fontSize = (float)FontSize;
             var textColor = TextColor;
             foreach (var dataPoint in dataPoints)
             {
-                session.FillCircle(dataPoint.Point, 4, Colors.Black);
-                session.DrawCircle(dataPoint.Point, 4, Colors.White, 3);
+                session.DrawCenteredTextLayout(
+                    new CanvasTextLayout(session, selector(dataPoint.Data).Value.ToString("0°"),
+                        new CanvasTextFormat { FontSize = fontSize }, 100, 20),
+                    dataPoint.Point.X, dataPoint.Point.Y + textOffset, textColor); session.FillCircle(dataPoint.Point, 8, Colors.White);
+                session.FillCircle(dataPoint.Point, 4, Colors.Transparent);
             }
         }
 
