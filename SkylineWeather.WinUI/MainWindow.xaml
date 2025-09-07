@@ -16,19 +16,16 @@
 
     <Grid x:Name="MainGrid" RequestedTheme="Dark">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button
-            Click="Button_Click"
-            Content="Get data"
-            Loaded="Button_Loaded" />
+        <charts:HistoricalWeatherGauge x:Name="HistoricalChart" Grid.Row="0" Grid.Column="1"/>
         <ScrollViewer
-            Grid.Row="1"
+            Grid.Row="0" Grid.RowSpan="2"
             Grid.Column="0"
             HorizontalScrollBarVisibility="Visible"
             HorizontalScrollMode="Enabled"

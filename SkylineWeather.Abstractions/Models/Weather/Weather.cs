@@ -2,5 +2,6 @@
 
 public record Weather
 {
-    public required WeatherCode WeatherCode { get; set; }
+    // required
+    public WeatherCode WeatherCode { get; set; }
 }

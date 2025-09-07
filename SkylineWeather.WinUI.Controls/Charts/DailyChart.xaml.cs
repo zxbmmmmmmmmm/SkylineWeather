@@ -162,7 +162,8 @@ namespace SkylineWeather.WinUI.Controls.Charts
                 session.DrawCenteredTextLayout(
                     new CanvasTextLayout(session, selector(dataPoint.Data).Value.ToString("0бу"),
                         new CanvasTextFormat { FontSize = fontSize }, 100, 20),
-                    dataPoint.Point.X, dataPoint.Point.Y + textOffset, textColor); session.FillCircle(dataPoint.Point, 8, Colors.White);
+                    dataPoint.Point.X, dataPoint.Point.Y + textOffset, textColor); 
+                session.FillCircle(dataPoint.Point, 8, Colors.White);
                 session.FillCircle(dataPoint.Point, 4, Colors.Transparent);
             }
         }

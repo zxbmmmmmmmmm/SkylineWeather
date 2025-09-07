@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Charts\DailyChart.xaml" />
+    <None Remove="Charts\HistoricalWeatherGauge.xaml" />
     <None Remove="Charts\HourlyChart.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkylineWeather.Abstractions\SkylineWeather.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Charts\HistoricalWeatherGauge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Charts\DailyChart.xaml">
