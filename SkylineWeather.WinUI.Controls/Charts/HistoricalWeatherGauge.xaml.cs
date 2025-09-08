@@ -77,23 +77,23 @@ public sealed partial class HistoricalWeatherGauge : UserControl
         session.FillRoundedRectangle(new Rect(combinedPadding.Left, y, innerWidth, gaugeHeight), 4, 4, brush);
 
 
-        List<RenderPoint> renderPoints = 
+        List<RenderPoint> renderPoints =
         [
-            new(TemperatureType.Highest,historical.HighestTemperature,historical.HighestTemperatureDate),
-            new(TemperatureType.Lowest,historical.LowestTemperature,historical.LowestTemperatureDate),
-            new(TemperatureType.AverageHigh,historical.AverageHighTemperature,null),
-            new(TemperatureType.AverageLow,historical.AverageLowTemperature,null),
+            new(TemperatureType.Highest, historical.HighestTemperature, TextPosition.Top, historical.HighestTemperatureDate),
+            new(TemperatureType.Lowest, historical.LowestTemperature, TextPosition.Top, historical.LowestTemperatureDate),
+            new(TemperatureType.AverageHigh, historical.AverageHighTemperature, TextPosition.Top, null),
+            new(TemperatureType.AverageLow, historical.AverageLowTemperature, TextPosition.Top, null),
         ];
 
         if (today is not null)
         {
-            renderPoints.Add(new RenderPoint(TemperatureType.TodayHigh,today.HighTemperature, DateOnly.FromDateTime(DateTime.Today)));
-            renderPoints.Add(new RenderPoint(TemperatureType.TodayLow,today.LowTemperature, DateOnly.FromDateTime(DateTime.Today)));
+            renderPoints.Add(new RenderPoint(TemperatureType.TodayHigh, today.HighTemperature, TextPosition.Bottom, null));
+            renderPoints.Add(new RenderPoint(TemperatureType.TodayLow, today.LowTemperature, TextPosition.Bottom, null));
         }
 
         if (current is not null)
         {
-            renderPoints.Add(new RenderPoint(TemperatureType.Current,current.Temperature, DateOnly.FromDateTime(DateTime.Today)));
+            renderPoints.Add(new RenderPoint(TemperatureType.Current, current.Temperature, TextPosition.Bottom, null));
         }
 
         renderPoints = renderPoints.OrderBy(p => p.Temperature).ToList();
@@ -107,8 +107,25 @@ public sealed partial class HistoricalWeatherGauge : UserControl
             var x = combinedPadding.Left + (float)(percent * innerWidth);
             session.FillCircle(x, y + 4, 8, Colors.White);
             session.FillCircle(x, y + 4, 4, Colors.Transparent);
-            var textLayout = new CanvasTextLayout(session, point.Type.ToString(),new CanvasTextFormat(), 500, 20);
-            session.DrawCenteredTextLayout(textLayout, x, y - 24, Colors.White);
+            var typeTextLayout = new CanvasTextLayout(session, point.Type.ToString(),new CanvasTextFormat(), 500, 20);
+            var temperatureTextLayout = new CanvasTextLayout(session, point.Temperature.ToString(),new CanvasTextFormat(), 500, 20);
+            var offset = 0;
+            if(point.TextPosition is TextPosition.Top)
+            {
+                offset = -24;
+            }
+            else
+            {
+                offset = 24;
+            }
+            session.DrawCenteredTextLayout(typeTextLayout, x, y + offset, Colors.White);
+            session.DrawCenteredTextLayout(temperatureTextLayout, x, y - offset, Colors.White);
+
+            if (point.Date is not null)
+            {
+                var dateTextLayout = new CanvasTextLayout(session, point.Date.Value.Year.ToString(), new CanvasTextFormat(), 500, 20);
+                session.DrawCenteredTextLayout(dateTextLayout, x, y + offset*2, Colors.White);
+            }
         }
     }
 
@@ -120,6 +137,7 @@ public sealed partial class HistoricalWeatherGauge : UserControl
     private record RenderPoint(
         TemperatureType Type,
         Temperature Temperature,
+        TextPosition TextPosition,
         DateOnly? Date);
 
     private enum TemperatureType 

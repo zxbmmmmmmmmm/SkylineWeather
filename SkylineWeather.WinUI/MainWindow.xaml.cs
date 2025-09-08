@@ -41,8 +41,8 @@ namespace SkylineWeather.WinUI
                 AverageLowTemperature = Temperature.FromDegreesCelsius(20),
                 HighestTemperature = Temperature.FromDegreesCelsius(35),
                 LowestTemperature = Temperature.FromDegreesCelsius(15),
-                HighestTemperatureDate = DateOnly.FromDateTime(DateTime.Today),
-                LowestTemperatureDate = DateOnly.FromDateTime(DateTime.Today),
+                HighestTemperatureDate = DateOnly.FromDateTime(DateTime.MinValue),
+                LowestTemperatureDate = DateOnly.FromDateTime(DateTime.MaxValue),
             };
             HistoricalChart.Current = new CurrentWeather()
             {
