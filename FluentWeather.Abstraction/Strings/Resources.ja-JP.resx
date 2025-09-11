@@ -117,110 +117,128 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="USAQI_Good" xml:space="preserve">
+    <value>良い</value>
+  </data>
+  <data name="USAQI_Hazardous" xml:space="preserve">
+    <value>危ない</value>
+  </data>
+  <data name="USAQI_Moderate" xml:space="preserve">
+    <value>適度</value>
+  </data>
+  <data name="USAQI_Unhealthy" xml:space="preserve">
+    <value>不健康</value>
+  </data>
+  <data name="USAQI_UnhealthyForSensitiveGroups" xml:space="preserve">
+    <value>敏感な人には不健康な状態です</value>
+  </data>
+  <data name="USAQI_VeryUnhealthy" xml:space="preserve">
+    <value>極めて不健康</value>
+  </data>
   <data name="WeatherCode_0" xml:space="preserve">
-    <value>晴れ</value>
+    <value>晴れやかな空</value>
   </data>
   <data name="WeatherCode_1" xml:space="preserve">
-    <value>ほぼ晴れ</value>
+    <value>主に晴れ</value>
   </data>
   <data name="WeatherCode_2" xml:space="preserve">
-    <value>曇り</value>
+    <value>一部曇り</value>
   </data>
   <data name="WeatherCode_3" xml:space="preserve">
-    <value>曇天</value>
+    <value>曇り空</value>
   </data>
   <data name="WeatherCode_45" xml:space="preserve">
     <value>霧</value>
   </data>
   <data name="WeatherCode_48" xml:space="preserve">
-    <value>もや</value>
+    <value>Depositing rime Fog</value>
   </data>
   <data name="WeatherCode_51" xml:space="preserve">
-    <value>小雨</value>
+    <value>Light drizzle</value>
   </data>
   <data name="WeatherCode_53" xml:space="preserve">
-    <value>中雨</value>
+    <value>Moderate drizzle</value>
   </data>
   <data name="WeatherCode_55" xml:space="preserve">
-    <value>大雨</value>
+    <value>Dense drizzle</value>
   </data>
   <data name="WeatherCode_56" xml:space="preserve">
-    <value>雨氷</value>
+    <value>Light freezing drizzle</value>
   </data>
   <data name="WeatherCode_57" xml:space="preserve">
-    <value>激しい氷雨</value>
+    <value>Dense freezing drizzle</value>
   </data>
   <data name="WeatherCode_61" xml:space="preserve">
-    <value>小雨</value>
+    <value>Slight rain</value>
   </data>
   <data name="WeatherCode_63" xml:space="preserve">
-    <value>中雨</value>
+    <value>Moderate rain</value>
   </data>
   <data name="WeatherCode_65" xml:space="preserve">
-    <value>大雨</value>
+    <value>Heavy rain</value>
   </data>
   <data name="WeatherCode_66" xml:space="preserve">
-    <value>雨氷</value>
+    <value>Light freezing rain</value>
   </data>
   <data name="WeatherCode_67" xml:space="preserve">
-    <value>激しい氷雨</value>
+    <value>Heavy freezing rain</value>
   </data>
   <data name="WeatherCode_71" xml:space="preserve">
-    <value>小雪</value>
+    <value>Slight snow fall</value>
   </data>
   <data name="WeatherCode_73" xml:space="preserve">
-    <value>中雪</value>
+    <value>Moderate snow fall</value>
   </data>
   <data name="WeatherCode_75" xml:space="preserve">
-    <value>大雪</value>
+    <value>Heavy snow fall</value>
   </data>
   <data name="WeatherCode_77" xml:space="preserve">
-    <value>雪塊</value>
+    <value>Snow grains</value>
   </data>
   <data name="WeatherCode_80" xml:space="preserve">
-    <value>ところによりわか雨</value>
+    <value>Slight rain showers</value>
   </data>
   <data name="WeatherCode_81" xml:space="preserve">
-    <value>ところにわか雨</value>
+    <value>Moderate rain showers</value>
   </data>
   <data name="WeatherCode_82" xml:space="preserve">
-    <value>大雨</value>
+    <value>Violent rain showers</value>
   </data>
   <data name="WeatherCode_85" xml:space="preserve">
-    <value>弱いにわか雪</value>
+    <value>Slight snow showers</value>
   </data>
   <data name="WeatherCode_86" xml:space="preserve">
-    <value>大雪</value>
+    <value>Heavy snow showers</value>
   </data>
   <data name="WeatherCode_95" xml:space="preserve">
-    <value>激しい雷雨</value>
+    <value>Thunderstorm</value>
   </data>
   <data name="WeatherCode_96" xml:space="preserve">
-    <value>雷雨を伴うひょう</value>
+    <value>Thunderstorm with light hail</value>
   </data>
   <data name="WeatherCode_99" xml:space="preserve">
-    <value>雷雨を伴うみぞれ</value>
+    <value>Thunderstorm with heavy hail</value>
   </data>
   <data name="WeatherCode_Unknown" xml:space="preserve">
-    <value>不明</value>
+    <value>Unknown</value>
   </data>
   <data name="WindDirection_East" xml:space="preserve">
-    <value>東風</value>
+    <value>東</value>
   </data>
   <data name="WindDirection_EastNorthEast" xml:space="preserve">
-    <value>北東風</value>
+    <value>北北東</value>
   </data>
   <data name="WindDirection_EastSouthEast" xml:space="preserve">
-    <value>南東風</value>
+    <value>東南東</value>
   </data>
   <data name="WindDirection_None" xml:space="preserve">
-    <value>風向きなし</value>
+    <value>No sustainable wind direction</value>
   </data>
   <data name="WindDirection_North" xml:space="preserve">
-    <value>北風</value>
+    <value>北</value>
   </data>
   <data name="WindDirection_NorthEast" xml:space="preserve">
-    <value>北東風</value>
+    <value>北東</value>
   </data>
   <data name="WindDirection_NorthNorthEast" xml:space="preserve">
     <value>北北東</value>
@@ -232,10 +250,10 @@
     <value>北西</value>
   </data>
   <data name="WindDirection_Rotational" xml:space="preserve">
-    <value>回転する風向き</value>
+    <value>Rotational</value>
   </data>
   <data name="WindDirection_South" xml:space="preserve">
-    <value>南風</value>
+    <value>南</value>
   </data>
   <data name="WindDirection_SouthEast" xml:space="preserve">
     <value>南東</value>

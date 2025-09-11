@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CancelButton.Content" xml:space="preserve">
-    <value>取り消す</value>
+    <value>Cancel</value>
   </data>
   <data name="ConfirmAndRestartButton.Content" xml:space="preserve">
     <value>Confirm &amp; Restart App</value>
   </data>
   <data name="GetFreeKeyHyperlink.Content" xml:space="preserve">
-    <value>APIキーを取得</value>
+    <value>Get free KEY</value>
   </data>
   <data name="PublicIdBox.PlaceholderText" xml:space="preserve">
     <value>Public ID (optional)</value>
   </data>
   <data name="SetTokenDialog.Title" xml:space="preserve">
-    <value>APIキーを入</value>
+    <value>Set KEY</value>
   </data>
 </root>

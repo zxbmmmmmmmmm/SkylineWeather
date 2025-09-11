@@ -117,19 +117,163 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelButton.Content" xml:space="preserve">
-    <value>取り消す</value>
+  <data name="USAQI_Good" xml:space="preserve">
+    <value>Good</value>
   </data>
-  <data name="ConfirmAndRestartButton.Content" xml:space="preserve">
-    <value>Confirm &amp; Restart App</value>
+  <data name="USAQI_Hazardous" xml:space="preserve">
+    <value>Hazardous</value>
   </data>
-  <data name="GetFreeKeyHyperlink.Content" xml:space="preserve">
-    <value>APIキーを取得</value>
+  <data name="USAQI_Moderate" xml:space="preserve">
+    <value>Moderate</value>
   </data>
-  <data name="PublicIdBox.PlaceholderText" xml:space="preserve">
-    <value>Public ID (optional)</value>
+  <data name="USAQI_Unhealthy" xml:space="preserve">
+    <value>Unhealthy</value>
   </data>
-  <data name="SetTokenDialog.Title" xml:space="preserve">
-    <value>APIキーを入</value>
+  <data name="USAQI_UnhealthyForSensitiveGroups" xml:space="preserve">
+    <value>Unhealthy for sensitive groups</value>
+  </data>
+  <data name="USAQI_VeryUnhealthy" xml:space="preserve">
+    <value>Very unhealthy</value>
+  </data>
+  <data name="WeatherCode_0" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="WeatherCode_1" xml:space="preserve">
+    <value>Mainly clear</value>
+  </data>
+  <data name="WeatherCode_2" xml:space="preserve">
+    <value>Partly cloudy</value>
+  </data>
+  <data name="WeatherCode_3" xml:space="preserve">
+    <value>Overcast</value>
+  </data>
+  <data name="WeatherCode_45" xml:space="preserve">
+    <value>Fog</value>
+  </data>
+  <data name="WeatherCode_48" xml:space="preserve">
+    <value>Depositing rime Fog</value>
+  </data>
+  <data name="WeatherCode_51" xml:space="preserve">
+    <value>Light drizzle</value>
+  </data>
+  <data name="WeatherCode_53" xml:space="preserve">
+    <value>Moderate drizzle</value>
+  </data>
+  <data name="WeatherCode_55" xml:space="preserve">
+    <value>Dense drizzle</value>
+  </data>
+  <data name="WeatherCode_56" xml:space="preserve">
+    <value>Light freezing drizzle</value>
+  </data>
+  <data name="WeatherCode_57" xml:space="preserve">
+    <value>Dense freezing drizzle</value>
+  </data>
+  <data name="WeatherCode_61" xml:space="preserve">
+    <value>Slight rain</value>
+  </data>
+  <data name="WeatherCode_63" xml:space="preserve">
+    <value>Moderate rain</value>
+  </data>
+  <data name="WeatherCode_65" xml:space="preserve">
+    <value>Heavy rain</value>
+  </data>
+  <data name="WeatherCode_66" xml:space="preserve">
+    <value>Light freezing rain</value>
+  </data>
+  <data name="WeatherCode_67" xml:space="preserve">
+    <value>Heavy freezing rain</value>
+  </data>
+  <data name="WeatherCode_71" xml:space="preserve">
+    <value>Slight snow fall</value>
+  </data>
+  <data name="WeatherCode_73" xml:space="preserve">
+    <value>Moderate snow fall</value>
+  </data>
+  <data name="WeatherCode_75" xml:space="preserve">
+    <value>Heavy snow fall</value>
+  </data>
+  <data name="WeatherCode_77" xml:space="preserve">
+    <value>Snow grains</value>
+  </data>
+  <data name="WeatherCode_80" xml:space="preserve">
+    <value>Slight rain showers</value>
+  </data>
+  <data name="WeatherCode_81" xml:space="preserve">
+    <value>Moderate rain showers</value>
+  </data>
+  <data name="WeatherCode_82" xml:space="preserve">
+    <value>Violent rain showers</value>
+  </data>
+  <data name="WeatherCode_85" xml:space="preserve">
+    <value>Slight snow showers</value>
+  </data>
+  <data name="WeatherCode_86" xml:space="preserve">
+    <value>Heavy snow showers</value>
+  </data>
+  <data name="WeatherCode_95" xml:space="preserve">
+    <value>Thunderstorm</value>
+  </data>
+  <data name="WeatherCode_96" xml:space="preserve">
+    <value>Thunderstorm with light hail</value>
+  </data>
+  <data name="WeatherCode_99" xml:space="preserve">
+    <value>Thunderstorm with heavy hail</value>
+  </data>
+  <data name="WeatherCode_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="WindDirection_East" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="WindDirection_EastNorthEast" xml:space="preserve">
+    <value>NNE</value>
+  </data>
+  <data name="WindDirection_EastSouthEast" xml:space="preserve">
+    <value>ESE</value>
+  </data>
+  <data name="WindDirection_None" xml:space="preserve">
+    <value>No sustainable wind direction</value>
+  </data>
+  <data name="WindDirection_North" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="WindDirection_NorthEast" xml:space="preserve">
+    <value>NE</value>
+  </data>
+  <data name="WindDirection_NorthNorthEast" xml:space="preserve">
+    <value>NNE</value>
+  </data>
+  <data name="WindDirection_NorthNorthWest" xml:space="preserve">
+    <value>NNW</value>
+  </data>
+  <data name="WindDirection_NorthWest" xml:space="preserve">
+    <value>NW</value>
+  </data>
+  <data name="WindDirection_Rotational" xml:space="preserve">
+    <value>Rotational</value>
+  </data>
+  <data name="WindDirection_South" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="WindDirection_SouthEast" xml:space="preserve">
+    <value>SE</value>
+  </data>
+  <data name="WindDirection_SouthSouthEast" xml:space="preserve">
+    <value>SSE</value>
+  </data>
+  <data name="WindDirection_SouthSouthWest" xml:space="preserve">
+    <value>SSW</value>
+  </data>
+  <data name="WindDirection_SouthWest" xml:space="preserve">
+    <value>SW</value>
+  </data>
+  <data name="WindDirection_West" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="WindDirection_WestNorthWest" xml:space="preserve">
+    <value>WNW</value>
+  </data>
+  <data name="WindDirection_WestSouthWest" xml:space="preserve">
+    <value>WSW</value>
   </data>
 </root>

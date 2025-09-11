@@ -118,193 +118,193 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.Text" xml:space="preserve">
-    <value>このアプリについて</value>
+    <value>О программе</value>
   </data>
   <data name="AboutAppBarButton.Label" xml:space="preserve">
-    <value>このアプリについて</value>
+    <value>О программе</value>
   </data>
   <data name="About_AppDescription.Text" xml:space="preserve">
-    <value>Skylineはオープンソースの天気アプリです。</value>
+    <value>Skyline это приложение с открытым исходным кодом.</value>
   </data>
   <data name="About_HelpTranslate.Text" xml:space="preserve">
-    <value>翻訳に貢献</value>
+    <value>Помочь с переводом</value>
   </data>
   <data name="About_OpenSourceLicenses.Text" xml:space="preserve">
-    <value>オープンソース ライセンス</value>
+    <value>Открыть лицензию</value>
   </data>
   <data name="About_OpenSourceLicensesDescription.Text" xml:space="preserve">
-    <value>このアプリは以下のオープンソースライブラリを使用しています</value>
+    <value>Приложение использует библиотеки с открытым исходным кодом</value>
   </data>
   <data name="About_ProjectUrl.Text" xml:space="preserve">
-    <value>プロジェクト URL</value>
+    <value>Исходный код</value>
   </data>
   <data name="About_Sponsor.Text" xml:space="preserve">
-    <value>寄付する</value>
+    <value>Поддержать</value>
   </data>
   <data name="AdminDistrict2TextBox.Header" xml:space="preserve">
-    <value>行政区画2</value>
+    <value>Административный округ 2</value>
   </data>
   <data name="AdminDistrict2TextBox.PlaceholderText" xml:space="preserve">
-    <value>市区町村</value>
+    <value>Город/Область/Страна</value>
   </data>
   <data name="AdminDistrictTextBox.Header" xml:space="preserve">
-    <value>行政区</value>
+    <value>Административный округ</value>
   </data>
   <data name="AdminDistrictTextBox.PlaceholderText" xml:space="preserve">
-    <value>都道府県</value>
+    <value>Область</value>
   </data>
   <data name="AirCondition.Text" xml:space="preserve">
-    <value>空気質</value>
+    <value>Качество воздуха</value>
   </data>
   <data name="AirConditionUnit.Text" xml:space="preserve">
-    <value>单位:μg/m³</value>
+    <value>Единица:μg/m3</value>
   </data>
   <data name="AirQuality" xml:space="preserve">
-    <value>空気質</value>
+    <value>Качество воздуха</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>オープンソースの天気アプリ</value>
+    <value>Приложение для погоды с открытым исходным кодом</value>
   </data>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>天気</value>
+    <value>Погода</value>
   </data>
   <data name="ApplyButton.Content" xml:space="preserve">
-    <value>適用</value>
+    <value>Применить</value>
   </data>
   <data name="AutoCheckUpdatesSettingsCard.Header" xml:space="preserve">
-    <value>自動的に更新を確認する</value>
+    <value>Проверять обновление автоматически</value>
   </data>
   <data name="AutoPositioningSettingsCard.Description" xml:space="preserve">
-    <value>位置情報の許可が必要なので、起動速度が遅くなる可能性があります。デスクトップ コンピューターでこれを有効にすることはお勧めできません。</value>
+    <value>Location permission is required. This may slow startup speed, and we do not recommend desktop devices to turn on this feature.</value>
   </data>
   <data name="AutoPositioningSettingsCard.Header" xml:space="preserve">
-    <value>起動時に場所を更新する</value>
+    <value>Обновление местоположения при запуске</value>
   </data>
   <data name="AverageHighTemp.Text" xml:space="preserve">
-    <value>最低 AVG</value>
+    <value>Наивысший AVG</value>
   </data>
   <data name="AverageLowTemp.Text" xml:space="preserve">
-    <value>最高 AVG</value>
+    <value>Наименьшее AVG</value>
   </data>
   <data name="BackgroundBlurSettingsCard.Header" xml:space="preserve">
-    <value>背景のぼかし半径</value>
+    <value>Радиус размытия фонового изображения</value>
   </data>
   <data name="BackgroundImageDescription.Text" xml:space="preserve">
     <value>You can also use different background\r\n\r\nmethods depending on weather: click \"Open Background Folder\", copy background image **(PNG)** to the folder, rename the images according to the following format:\r\n\r\n| Weather | File naming |\r\n| ----------|-------------------- |\r\n| sunny | Clear |\r\n| clouds | PartlyCloudy |\r\n| Cloudy |\r\n| Heavy rain | HeavyRain |\r\n| Light rains/rain | LightRain |\r\n| HeavySnow |\r\n| Light snow | Light snow | LightsSnow |\r\n| ThunderyShowers |\r\n| ThunderyHeavyRain |\r\n| Fog</value>
   </data>
   <data name="BackgroundImageText.Text" xml:space="preserve">
-    <value>背景画像</value>
+    <value>Фоновое изображение</value>
   </data>
   <data name="BackgroundSettingsCard.Description" xml:space="preserve">
-    <value>アプリの背景設定</value>
+    <value>Применить настройки фона</value>
   </data>
   <data name="BackgroundTransparencySettingsCard.Header" xml:space="preserve">
-    <value>背景の透明度</value>
+    <value>Прозрачность фона</value>
   </data>
   <data name="CancelButton.Content" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>Отменить</value>
   </data>
   <data name="CheckUpdateButton.Content" xml:space="preserve">
-    <value>チェック</value>
+    <value>Проверить</value>
   </data>
   <data name="CheckUpdateSettingsCard.Description" xml:space="preserve">
-    <value>GitHub からの更新を確認する</value>
+    <value>Проверить наличие обновлений на GitHub</value>
   </data>
   <data name="CheckUpdateSettingsCard.Header" xml:space="preserve">
-    <value>アップデートの確認</value>
+    <value>Проверить наличие обновлений</value>
   </data>
   <data name="ClassicThemeSection.Content" xml:space="preserve">
-    <value>クラシック</value>
+    <value>Классика</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>閉じる</value>
+    <value>Закрыть</value>
   </data>
   <data name="CloseButton.Content" xml:space="preserve">
-    <value>閉じる</value>
+    <value>Закрыть</value>
   </data>
   <data name="CloudAmountDescription.Text" xml:space="preserve">
-    <value>雲に覆われた空の割合</value>
+    <value>Процент неба покрытого облаком</value>
   </data>
   <data name="CloudAmountText.Text" xml:space="preserve">
-    <value>雲量</value>
+    <value>Количество облаков</value>
   </data>
   <data name="CompanionDescirption" xml:space="preserve">
-    <value>Skyline Weatherスタートメニューコンパニオン（ベータ）</value>
+    <value>Skyline Weather компаньон стартового меню</value>
   </data>
   <data name="CountryRegionTextBox.Header" xml:space="preserve">
-    <value>国/地域</value>
+    <value>Страна/Регион</value>
   </data>
   <data name="CountryRegionTextBox.PlaceholderText" xml:space="preserve">
-    <value>国/地域</value>
+    <value>Страна/Регион</value>
   </data>
   <data name="CurrentLocation" xml:space="preserve">
-    <value>現在地</value>
+    <value>Текущее место</value>
   </data>
   <data name="CurrentLocationText.Text" xml:space="preserve">
-    <value>現在地</value>
+    <value>Текущее место</value>
   </data>
   <data name="CustomOptions.Text" xml:space="preserve">
-    <value>カスタムオプション</value>
+    <value>Пользовательские настройки</value>
   </data>
   <data name="CustomPagesSettingsCard.Header" xml:space="preserve">
-    <value>ホームをカスタマイズ</value>
+    <value>Пользовательская главная страница</value>
   </data>
   <data name="DailyViewSelection.Content" xml:space="preserve">
-    <value>毎日</value>
+    <value>Ежедневно</value>
   </data>
   <data name="DarkSection.Content" xml:space="preserve">
-    <value>ダーク</value>
+    <value>Тёмная</value>
   </data>
   <data name="DataProviderSettingsCard.Header" xml:space="preserve">
-    <value>データプロバイダー</value>
+    <value>Поставщик данных</value>
   </data>
   <data name="DataProviderSettingsExpanderDescription.Text" xml:space="preserve">
-    <value>データプロバイダの選択</value>
+    <value>Выберите поставщика данных</value>
   </data>
   <data name="DataProviderSettingsExpanderDescription_CompareHyperlink.Text" xml:space="preserve">
-    <value>機能の説明</value>
+    <value>Сравнение функций</value>
   </data>
   <data name="DataSettingsExpander.Header" xml:space="preserve">
-    <value>データ</value>
+    <value>Данные</value>
   </data>
   <data name="DefaultPositionSettingsCard.Description" xml:space="preserve">
-    <value>この場所を現在の場所として使用します (再起動すると有効になります)</value>
+    <value>Использовать эту позицию как текущее местоположение (требуется перезапуск приложения)</value>
   </data>
   <data name="DefaultPositionSettingsCard.Header" xml:space="preserve">
-    <value>既定の場所</value>
+    <value>Позиция по умолчанию</value>
   </data>
   <data name="DeleteMenuItem.Text" xml:space="preserve">
-    <value>削除</value>
+    <value>Удалить</value>
   </data>
   <data name="DeveloperMenu.Text" xml:space="preserve">
-    <value>開発者向けオプション</value>
+    <value>Для разработчиков</value>
   </data>
   <data name="DewPointDescription.Text" xml:space="preserve">
-    <value>空気中の水分を減らして液体の水 (露など) に凝縮するのに必要な温度。露点温度が高いほど「蒸し暑い」と感じます。</value>
+    <value>Температура, требуемая для образования воды (например, росы в воздухе). Чем выше температура точки росы, тем больше ощущение жары и духоты.</value>
   </data>
   <data name="DewPointText.Text" xml:space="preserve">
-    <value>露点温度</value>
+    <value>Точка росы</value>
   </data>
   <data name="DownloadButton.Content" xml:space="preserve">
-    <value>ダウンロード</value>
+    <value>Скачать</value>
   </data>
   <data name="DownloadHistoricalWeatherText.Text" xml:space="preserve">
-    <value>このロケーションの過去の天気を表示するには、データをダウンロードしてください</value>
+    <value>Загрузите данные для просмотра исторической погоды этого местоположения</value>
   </data>
   <data name="EditDefaultPositionButton.Content" xml:space="preserve">
-    <value>更新</value>
+    <value>Редактировать</value>
   </data>
   <data name="EditDefaultPositionItem.Text" xml:space="preserve">
-    <value>既定の場所を編集</value>
+    <value>Изменить местоположение по умолчанию</value>
   </data>
   <data name="ErrorDialog.PrimaryButtonText" xml:space="preserve">
-    <value>閉じる</value>
+    <value>Закрыть</value>
   </data>
   <data name="ErrorDialog.Title" xml:space="preserve">
-    <value>エラー</value>
+    <value>Ошибка</value>
   </data>
   <data name="FeelsLike.Text" xml:space="preserve">
-    <value>体感温度</value>
+    <value>Ощущается как</value>
   </data>
   <data name="Fluent2017ThemeSection.Content" xml:space="preserve">
     <value>Windows 10</value>
@@ -313,401 +313,402 @@
     <value>Windows 11</value>
   </data>
   <data name="FollowSystemSection.Content" xml:space="preserve">
-    <value>システム既定</value>
+    <value>Как в системе</value>
   </data>
   <data name="Forecast" xml:space="preserve">
-    <value>フォーキャスト</value>
+    <value>Прогноз</value>
   </data>
   <data name="GetButton.Content" xml:space="preserve">
-    <value>取得</value>
+    <value>Получить</value>
   </data>
   <data name="GetDataFailed" xml:space="preserve">
-    <value>データの取得に失敗しました</value>
+    <value>Не удалось получить данные</value>
   </data>
   <data name="GetHistoricalWeatherItem.Text" xml:space="preserve">
-    <value>過去の天気を取得</value>
+    <value>Получить историческую погоду</value>
   </data>
   <data name="HasPrecipitationText" xml:space="preserve">
-    <value>今後2時間以内に雨が降るでしょう</value>
+    <value>В течение следующих двух часов будут наблюдаться осадки</value>
   </data>
   <data name="HighestTemperature" xml:space="preserve">
-    <value>最高温度</value>
+    <value>Наивысший</value>
   </data>
   <data name="HistoricalHighTemp.Text" xml:space="preserve">
-    <value>史上最高気温</value>
+    <value>Исторически высокий</value>
   </data>
   <data name="HistoricalLowTemp.Text" xml:space="preserve">
-    <value>史上最低気温</value>
+    <value>Исторически низкий</value>
   </data>
   <data name="HistoricalWeatherDescription.Text" xml:space="preserve">
-    <value>この機能を使用すると、過去数十年の天気データを比較できます</value>
+    <value>Эта функция позволяет сравнивать погодные данные за последние десятилетия</value>
   </data>
   <data name="HistoricalWeatherFeature.Text" xml:space="preserve">
-    <value>サポートされている機能</value>
+    <value>Поддерживаемые функции</value>
   </data>
   <data name="HistoricalWeatherFeatureDescription.Text" xml:space="preserve">
-    <value>毎日の最低気温/最高気温
-毎日の平均最低気温/最高温度</value>
+    <value>Daily historical lowest/highest temperature
+Daily average lowest/highest temperature</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Analysing" xml:space="preserve">
-    <value>分析中...</value>
+    <value>Анализ...</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Done" xml:space="preserve">
-    <value>完了</value>
+    <value>Готово</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Downloading" xml:space="preserve">
-    <value>元のデータをダウンロードしています...</value>
+    <value>Загрузка исходных данных...</value>
   </data>
   <data name="HistoricalWeatherSetupProgress_Saving" xml:space="preserve">
-    <value>データを保存しています...</value>
+    <value>Сохранение данных...</value>
   </data>
   <data name="HistoricalWeatherSource.Text" xml:space="preserve">
-    <value>データ元:</value>
+    <value>Data sources</value>
   </data>
   <data name="HistoricalWeatherTitle.Text" xml:space="preserve">
-    <value>過去の天気</value>
+    <value>Историческая погода</value>
   </data>
   <data name="HistoricalWeatherWarningInfoBar.Message" xml:space="preserve">
-    <value>過去の気象データを頻繁に要求しないでください。利用規約に違反すると、あなたの IP が Open-Meteo によってブロックされる可能性があります！</value>
+    <value>Не запрашивайте часто исторические данные о погоде. Нарушение условий использования может привести к блокировке вашего IP адреса через OpenMeteo!</value>
   </data>
   <data name="HistoricalWeatherWarningInfoBar.Title" xml:space="preserve">
-    <value>注意</value>
+    <value>Внимание</value>
   </data>
   <data name="HourlyForecast.Text" xml:space="preserve">
-    <value>24時間予報</value>
+    <value>Прогноз 24 часа</value>
   </data>
   <data name="Humidity" xml:space="preserve">
-    <value>湿度</value>
+    <value>Влажность</value>
   </data>
   <data name="HumidityDescription.Text" xml:space="preserve">
-    <value>現在の温度で空気が含むことができる最大水分量に対する空気中に存在する水分量</value>
+    <value>Концентрация водяных паров в воздухе</value>
   </data>
   <data name="HumidityText.Text" xml:space="preserve">
-    <value>湿度</value>
+    <value>Влажность</value>
   </data>
   <data name="IgnoreWarning.Text" xml:space="preserve">
-    <value>不必要な警告を無視 (海上警報など) をブロックできます。| で分割、正規表現をサポート</value>
+    <value>You can ignore some unnecessary warning push (e.g. sea warning)
+Split with "|", support Regex</value>
   </data>
   <data name="IgnoreWarningButton.Content" xml:space="preserve">
-    <value>ブロックワードを設定する</value>
+    <value>Задать блок слова</value>
   </data>
   <data name="LargeTileFormat" xml:space="preserve">
     <value/>
   </data>
   <data name="LatestVersion" xml:space="preserve">
-    <value>アプリは最新バージョンです</value>
+    <value>У вас последняя версия!</value>
   </data>
   <data name="LatitudeNumberBox.Header" xml:space="preserve">
-    <value>緯度*</value>
+    <value>Latitude*</value>
   </data>
   <data name="LatitudeNumberBox.PlaceholderText" xml:space="preserve">
-    <value>緯度</value>
+    <value>Latitude</value>
   </data>
   <data name="Level" xml:space="preserve">
-    <value>レベル</value>
+    <value>Level</value>
   </data>
   <data name="LightSection.Content" xml:space="preserve">
-    <value>ライトテーマ</value>
+    <value>Light</value>
   </data>
   <data name="LocationDialog.PrimaryButtonText" xml:space="preserve">
-    <value>OK</value>
+    <value>Confirm</value>
   </data>
   <data name="LocationDialog.Title" xml:space="preserve">
-    <value>場所の選択</value>
+    <value>Select Location</value>
   </data>
   <data name="LocationNameTextBox.Header" xml:space="preserve">
-    <value>名前*</value>
+    <value>Name*</value>
   </data>
   <data name="LocationNameTextBox.PlaceholderText" xml:space="preserve">
-    <value>位置の名前</value>
+    <value>Location name</value>
   </data>
   <data name="LocationSettingsExpander.Header" xml:space="preserve">
-    <value>位置</value>
+    <value>Location</value>
   </data>
   <data name="LongitudeNumberBox.Header" xml:space="preserve">
-    <value>経度*</value>
+    <value>Longitude*</value>
   </data>
   <data name="LongitudeNumberBox.PlaceholderText" xml:space="preserve">
-    <value>経度</value>
+    <value>Longitude</value>
   </data>
   <data name="LowestTemperature" xml:space="preserve">
-    <value>最低気温</value>
+    <value>Lowest</value>
   </data>
   <data name="MonthlyViewSelection.Content" xml:space="preserve">
-    <value>毎月</value>
+    <value>Monthly</value>
   </data>
   <data name="MoreInfoText.Text" xml:space="preserve">
-    <value>さらに詳しく</value>
+    <value>Learn more</value>
     <comment>警告内了解详情</comment>
   </data>
   <data name="NoPrecipitationText" xml:space="preserve">
-    <value>今後2時間以内に降水はありません</value>
+    <value>No Precipitation for the next two hours</value>
   </data>
   <data name="NotificationFormat" xml:space="preserve">
-    <value>{0}, 最高 {1}°, 最低 {2}°</value>
+    <value>{0}, наивысший {1}градусов ниже {2}°</value>
   </data>
   <data name="NotificationSettingsExpander.Header" xml:space="preserve">
-    <value>お知らせ</value>
+    <value>Notification</value>
   </data>
   <data name="NowText.Text" xml:space="preserve">
-    <value>現在</value>
+    <value>Now</value>
   </data>
   <data name="OfficialWebsite.Text" xml:space="preserve">
-    <value>公式サイト</value>
+    <value>Official Website</value>
   </data>
   <data name="OneHourText.Text" xml:space="preserve">
-    <value>1時間</value>
+    <value>1h</value>
   </data>
   <data name="OpenBackgroundFolderButton.Content" xml:space="preserve">
-    <value>背景フォルダーを開く</value>
+    <value>Open background folder</value>
   </data>
   <data name="OpenMeteoSection.Content" xml:space="preserve">
     <value>Open-Meteo</value>
   </data>
   <data name="OpenMeteoWelcomeCard.Description" xml:space="preserve">
-    <value>無料の天気データ</value>
+    <value>Free weather data source</value>
   </data>
   <data name="OpenMeteoWelcomeCard.Header" xml:space="preserve">
     <value>Open-Meteo</value>
   </data>
   <data name="PersonalizationSettingsExpander.Header" xml:space="preserve">
-    <value>個人用設定</value>
+    <value>Personalization</value>
   </data>
   <data name="PinSecondaryTilesItem.Text" xml:space="preserve">
-    <value>スタートにピン留めする</value>
+    <value>Закрепить для начала</value>
   </data>
   <data name="Pressure" xml:space="preserve">
-    <value>大気圧</value>
+    <value>Pressure</value>
   </data>
   <data name="PressureDescription.Text" xml:space="preserve">
-    <value>大気中の空気の重さ。通常、気圧が高いと晴天、気圧が低いと荒天と関連付けられます。</value>
+    <value>The gravity of the air in the atmosphere. Higher air pressure is usually associated with a bright weather, lower air pressure is related to storm weather</value>
   </data>
   <data name="PressureText.Text" xml:space="preserve">
-    <value>大気圧</value>
+    <value>Pressure</value>
   </data>
   <data name="QGeolocationTokenSettingsCard.Description" xml:space="preserve">
-    <value>QGeoApi の KEY はコンソールで確認できます</value>
+    <value>QGeoApi's KEY, available in console</value>
   </data>
   <data name="QGeolocationTokenSettingsCard.Header" xml:space="preserve">
     <value>GeoApi KEY</value>
   </data>
   <data name="QWeatherDomainSettingsCard.Description" xml:space="preserve">
-    <value>Zefeng Weather API によってリクエストされたドメイン名
-有料の KEY を使用する場合は、このオプションを api.qweather.com に変更してください。</value>
+    <value>The domain QWeather API uses.
+Please change this option to api.qweather.com if you use a paid KEY.</value>
   </data>
   <data name="QWeatherDomainSettingsCard.Header" xml:space="preserve">
-    <value>ドメイン名</value>
+    <value>Domain</value>
   </data>
   <data name="QWeatherSection.Content" xml:space="preserve">
-    <value>穏やかな天気</value>
+    <value>QWeather</value>
   </data>
   <data name="QWeatherSettingsCard.Description" xml:space="preserve">
-    <value>KEYのカスタマイズ</value>
+    <value>Custom KEY</value>
   </data>
   <data name="QWeatherSettingsCard.Header" xml:space="preserve">
-    <value>穏やかな天気</value>
+    <value>QWeather</value>
   </data>
   <data name="QWeatherSettingsExpander.Header" xml:space="preserve">
-    <value>穏やかな天気</value>
+    <value>QWeather</value>
   </data>
   <data name="QWeatherTokenSettingsCard.Description" xml:space="preserve">
-    <value>QWeatherのキーはコンソールにあります</value>
+    <value>QWeather's KEY, can be found in the console</value>
   </data>
   <data name="QWeatherTokenSettingsCard.Header" xml:space="preserve">
-    <value>キー</value>
+    <value>KEY</value>
   </data>
   <data name="QWeatherWelcomeCard.Description" xml:space="preserve">
-    <value>鍵には自己登録が必要です</value>
+    <value>Для получения ключа требуется самостоятельная регистрация</value>
   </data>
   <data name="QWeatherWelcomeCard.Header" xml:space="preserve">
     <value>QWeather</value>
   </data>
   <data name="QWeather_GetFreeKeyHyperlink.Content" xml:space="preserve">
-    <value>無料のKEYを入手する</value>
+    <value>Получить ключ</value>
   </data>
   <data name="QWeather_PublicIdBox.PlaceholderText" xml:space="preserve">
-    <value>Public ID (任意)</value>
+    <value>Публичный ID (опционально)</value>
   </data>
   <data name="RefreshMenuItem.Text" xml:space="preserve">
-    <value>更新</value>
+    <value>Обновить</value>
   </data>
   <data name="RestartButton.Content" xml:space="preserve">
-    <value>アプリを再起動</value>
+    <value>Перезапустите приложение</value>
   </data>
   <data name="RestartInfoBar.Title" xml:space="preserve">
-    <value>再起動して設定を適用する</value>
+    <value>Перезапустите, чтобы применить настройки</value>
   </data>
   <data name="SavedLocations" xml:space="preserve">
-    <value>保存しました</value>
+    <value>Сохранено</value>
   </data>
   <data name="SearchAutoSuggestBox.PlaceholderText" xml:space="preserve">
-    <value>地域を検索する...</value>
+    <value>Поиск места...</value>
   </data>
   <data name="SelectButton.Content" xml:space="preserve">
-    <value>選択</value>
+    <value>Выбрать</value>
   </data>
   <data name="SelectPageFileButton.Content" xml:space="preserve">
-    <value>ファイルの選択</value>
+    <value>Select File</value>
   </data>
   <data name="SelectProviderToContinue.Text" xml:space="preserve">
-    <value>続行するデータプロバイダを選択してください</value>
+    <value>Select a data provider to continue</value>
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
-    <value>設定</value>
+    <value>Settings</value>
   </data>
   <data name="Settings_CustomPagesSettingsCard_Description.Text" xml:space="preserve">
-    <value>メインページをカスタマイズ</value>
+    <value>Customize your main page</value>
   </data>
   <data name="Settings_CustomPagesSettingsCard_Get.Text" xml:space="preserve">
-    <value>取得</value>
+    <value>Get</value>
   </data>
   <data name="Settings_TemperatureUnitCard.Header" xml:space="preserve">
-    <value>気温の単位</value>
+    <value>Temperature unit</value>
   </data>
   <data name="Settings_TemperatureUnit_CelsiusItem.Content" xml:space="preserve">
-    <value>摂氏</value>
+    <value>Celsius</value>
   </data>
   <data name="Settings_TemperatureUnit_FahrenheitItem.Content" xml:space="preserve">
-    <value>華氏</value>
+    <value>Fahrenheit</value>
   </data>
   <data name="SpeechMenuItem.Text" xml:space="preserve">
-    <value>天気をブロードキャストする</value>
+    <value>Broadcast weather</value>
   </data>
   <data name="SpeechWeather" xml:space="preserve">
-    <value>気象情報</value>
+    <value>Weather Report</value>
   </data>
   <data name="Sunrise.Text" xml:space="preserve">
-    <value>日の出</value>
+    <value>Sunrise</value>
   </data>
   <data name="Sunset.Text" xml:space="preserve">
-    <value>日の入り</value>
+    <value>Sunset</value>
   </data>
   <data name="ThemeColorSettingsCard.Description" xml:space="preserve">
-    <value>決めるテームカラー</value>
+    <value>Set theme color</value>
   </data>
   <data name="ThemeColorSettingsCard.Header" xml:space="preserve">
-    <value>カラー</value>
+    <value>Colors</value>
   </data>
   <data name="ThemeSettingsCard.Description" xml:space="preserve">
-    <value>決めるアプリテーム（再スタートが必要です）</value>
+    <value>Set App Theme (Requires Restart)</value>
   </data>
   <data name="ThemeSettingsCard.Header" xml:space="preserve">
-    <value>テーム</value>
+    <value>Theme</value>
   </data>
   <data name="TimeZoneComboBox.Header" xml:space="preserve">
-    <value>タイムゾーン</value>
+    <value>Time zone*</value>
   </data>
   <data name="TimeZoneComboBox.PlaceholderText" xml:space="preserve">
-    <value>タイムゾーン</value>
+    <value>Time zone</value>
   </data>
   <data name="Today" xml:space="preserve">
-    <value>今日</value>
+    <value>Today</value>
   </data>
   <data name="TodayHighTemp.Text" xml:space="preserve">
-    <value>今日の最高気温</value>
+    <value>Highest today</value>
   </data>
   <data name="TodayLowTemp.Text" xml:space="preserve">
-    <value>今日の最低気温</value>
+    <value>Lowest today</value>
   </data>
   <data name="TodayWeather" xml:space="preserve">
-    <value>今日のウェザー</value>
+    <value>Today's Weather</value>
   </data>
   <data name="Tomorrow" xml:space="preserve">
-    <value>明日</value>
+    <value>Tomorrow</value>
   </data>
   <data name="TomorrowWeather" xml:space="preserve">
-    <value>明日のウェザー</value>
+    <value>Tomorrow's Weather</value>
   </data>
   <data name="TowHoursText.Text" xml:space="preserve">
-    <value>2時間</value>
+    <value>2h</value>
   </data>
   <data name="TrackText.Text" xml:space="preserve">
-    <value>トラック</value>
+    <value>Track</value>
     <comment>台风警告内快捷追踪</comment>
   </data>
   <data name="TransparentTilesSettingsCard.Description" xml:space="preserve">
-    <value>広くて大きいタイルを透明にする</value>
+    <value>Make wide and large tiles transparent</value>
   </data>
   <data name="TransparentTilesSettingsCard.Header" xml:space="preserve">
-    <value>透明タイル</value>
+    <value>Transparent tiles</value>
   </data>
   <data name="TyphoonAppBarButton.Label" xml:space="preserve">
-    <value>台風</value>
+    <value>Typhoon</value>
   </data>
   <data name="TyphoonServiceWarning.Title" xml:space="preserve">
-    <value>台風追跡サービスは今のところ利用できません</value>
+    <value>Typhoon Tracking Service is currently unavailable</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
-    <value>不詳エラー</value>
+    <value>Unknown error</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>アップデートできる</value>
+    <value>Updates Available</value>
   </data>
   <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>アップデートが見つからない</value>
+    <value>Failed to check updates</value>
   </data>
   <data name="UpdateCheckFailedDescription" xml:space="preserve">
     <value>Please try again later or try to turn on your network agent</value>
   </data>
   <data name="UpdateDialog.CloseButtonText" xml:space="preserve">
-    <value>取り消す</value>
+    <value>Cancel</value>
   </data>
   <data name="UpdateDialog.PrimaryButtonText" xml:space="preserve">
-    <value>ダウンロード</value>
+    <value>Download</value>
   </data>
   <data name="UpdateDialog.SecondaryButtonText" xml:space="preserve">
     <value>View Details</value>
   </data>
   <data name="UpdateSettingsExpander.Header" xml:space="preserve">
-    <value>アップデート</value>
+    <value>Update</value>
   </data>
   <data name="UpdateText.Text" xml:space="preserve">
-    <value>アップデート</value>
+    <value>Update</value>
   </data>
   <data name="ViewDetails" xml:space="preserve">
-    <value>ディテールを見る</value>
+    <value>View details</value>
   </data>
   <data name="ViewUpdate" xml:space="preserve">
-    <value>見る</value>
+    <value>View</value>
   </data>
   <data name="VisibilityDescription.Text" xml:space="preserve">
     <value>The measure of the distance at which an object or light can be clearly discerned</value>
   </data>
   <data name="VisibilityText.Text" xml:space="preserve">
-    <value>可視</value>
+    <value>Visibility</value>
   </data>
   <data name="WaringNotificationSettingsCard.Description" xml:space="preserve">
     <value>Check and push alerts on time</value>
   </data>
   <data name="WaringNotificationSettingsCard.Header" xml:space="preserve">
-    <value>アラート</value>
+    <value>Alerts</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>警告</value>
+    <value>Warning</value>
   </data>
   <data name="WeatherTileSettingCard.Description" xml:space="preserve">
     <value>Display daily weather on tiles (Windows 10 only)</value>
   </data>
   <data name="WeatherTileSettingCard.Header" xml:space="preserve">
-    <value>タイル</value>
+    <value>Tiles</value>
   </data>
   <data name="WeatherTodaySettingsCard.Description" xml:space="preserve">
     <value>Push today's weather forecast in the morning</value>
   </data>
   <data name="WeatherTodaySettingsCard.Header" xml:space="preserve">
-    <value>今日のウエザー</value>
+    <value>Today's Weather</value>
   </data>
   <data name="WeatherTomorrow.Description" xml:space="preserve">
     <value>Push tomorrow's weather forecast at night</value>
   </data>
   <data name="WeatherTomorrow.Header" xml:space="preserve">
-    <value>明日のウエザー</value>
+    <value>Weather Tomorrow</value>
   </data>
   <data name="WeeklyForecast.Text" xml:space="preserve">
-    <value>7日フォーキャスト</value>
+    <value>7-Day forecast</value>
   </data>
   <data name="Welcome.Text" xml:space="preserve">
-    <value>ようくそ</value>
+    <value>Welcome</value>
   </data>
   <data name="WelcomePage_CompareHyperlink.Content" xml:space="preserve">
     <value>Data Source Feature Comparison</value>
@@ -716,7 +717,7 @@
     <value>We recommend using Open-Meteo data provider</value>
   </data>
   <data name="WideTileFormat" xml:space="preserve">
-    <value>湿度: {0}%, 圧力: {1}hPA</value>
+    <value>Влажность: {0}%, давление: {1}hPa</value>
   </data>
   <data name="WindowBackdropSettingsCard.Description" xml:space="preserve">
     <value>Override the Mica backdrop on Windows 11.
@@ -726,34 +727,34 @@ Set the background transparency to 100% to preview.</value>
     <value>Background Acrylic</value>
   </data>
   <data name="WindScaleDescription_0" xml:space="preserve">
-    <value>Smoke rises vertically</value>
+    <value>Дым повышается по вертикали</value>
   </data>
   <data name="WindScaleDescription_1" xml:space="preserve">
-    <value>Direction shown by smoke drift but not by wind vanes</value>
+    <value>Направление, показываемое на основе дымового дрейфа, но не ветровыми лозами</value>
   </data>
   <data name="WindScaleDescription_10" xml:space="preserve">
-    <value>Seldom experienced inland; trees uprooted; considerable structural damage</value>
+    <value>Нередко происходило внутреннее хозяйство; выкорчевывало; значительный ущерб конструкции</value>
   </data>
   <data name="WindScaleDescription_11" xml:space="preserve">
-    <value>Very rarely experienced; accompanied by widespread damage</value>
+    <value>Очень редко переживается; сопровождается широкомасштабным ущербом</value>
   </data>
   <data name="WindScaleDescription_12" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_13" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_14" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_15" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_16" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_17" xml:space="preserve">
-    <value>Devastation</value>
+    <value>Опустошение</value>
   </data>
   <data name="WindScaleDescription_2" xml:space="preserve">
     <value>Wind felt on face; leaves rustle; wind vane moved by wind</value>
