@@ -70,6 +70,7 @@ internal static class BuilderExtensions
         MapProvider<IAlertProvider>(services, settings);
         MapProvider<IGeolocationProvider>(services, settings);
         MapProvider<IAirQualityProvider>(services, settings);
+        MapProvider<IPrecipitationProvider>(services, settings);
 
         return services;
     }

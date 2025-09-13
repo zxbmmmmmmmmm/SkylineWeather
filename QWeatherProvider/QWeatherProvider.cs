@@ -24,7 +24,8 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
     IHourlyWeatherProvider,
     IAlertProvider,
     IGeolocationProvider,
-    IAirQualityProvider
+    IAirQualityProvider,
+    IPrecipitationProvider
 {
     public override string Name => "QWeather";
 
@@ -104,5 +105,14 @@ public class QWeatherProvider(QWeatherProviderConfig config) :
                 }
             }
         };
+    }
+
+    public async Task<Result<IReadOnlyList<Precipitation>>> GetPrecipitationAsync(Location location, CancellationToken cancellationToken = default)
+    {
+        var result = await _handler.RequestAsync(
+            QWeatherApis.PrecipitationApi,
+            new QWeatherRequest(location.Longitude, location.Latitude),
+            _option);
+        return result.MinutelyPrecipitations.ConvertAll(p => p.MapToPrecipitation());
     }
 }

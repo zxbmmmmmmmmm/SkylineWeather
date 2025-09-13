@@ -37,6 +37,7 @@ public class WeatherService : IHostedService
                 FeatureType.AirQuality => "空气质量",
                 FeatureType.Geocoding => "地理位置",
                 FeatureType.Alerts => "预警",
+                FeatureType.Precipitation => "降水",
                 _ => throw new NotSupportedException(),
             };
         }
@@ -79,6 +80,10 @@ public class WeatherService : IHostedService
                     Program.AppHost.Services.GetService<IAirQualityProvider>()!,
                     BackToFeatureSelectionAsync,
                     _cancellationToken),
+                FeatureType.Precipitation => new PrecipitationModule(
+                    Program.AppHost.Services.GetService<IPrecipitationProvider>()!,
+                    BackToFeatureSelectionAsync,
+                    _cancellationToken),
                 _ => throw new NotSupportedException(),
             };
 
@@ -116,5 +121,6 @@ internal enum FeatureType
     Hourly,
     AirQuality,
     Alerts,
+    Precipitation,
     Geocoding,
 }
