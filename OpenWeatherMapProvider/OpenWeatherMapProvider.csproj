@@ -1,17 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="OpenWeatherMap.Cache" Version="1.12.2" />
+    <PackageReference Include="OpenWeatherMap.Cache" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SkylineWeather.Abstractions\SkylineWeather.Abstractions.csproj" />
   </ItemGroup>
-
 </Project>
