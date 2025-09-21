@@ -10,7 +10,7 @@ using Spectre.Console;
 
 namespace SkylineWeather.Console.Modules;
 
-public class AirQuailtyModule(
+public class AirQualityModule(
     IAirQualityProvider provider,
     Func<string, Task> backFunc,
     CancellationToken cancellationToken) : IFeatureModule
@@ -26,7 +26,7 @@ public class AirQuailtyModule(
 
         if (settings is not null)
         {
-            location = settings.DefaultGeolocation.Location;
+            location = settings.DefaultGeolocation!.Location;
         }
         else
         {

@@ -2,9 +2,9 @@
 using SkylineWeather.Abstractions.Services;
 using System.Text.Json;
 
-namespace SkylineWeather.Console;
+namespace SkylineWeather.SDK.Services;
 
-internal class ConfigurationSettingsService(IConfiguration configuration) : ISettingsService
+public class ConfigurationSettingsService(IConfiguration configuration) : ISettingsService
 {
     public T? GetOrCreateValue<T>(string key, T? defaultValue = default)
     {

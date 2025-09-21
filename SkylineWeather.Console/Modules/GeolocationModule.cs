@@ -57,7 +57,7 @@ public class GeolocationModule(
                 .UseConverter(p => p.Name));
         _settings.DefaultGeolocation = selected;
     }
-    private async Task<IReadOnlyList<Geolocation>> Geolocation()
+    private Task<IReadOnlyList<Geolocation>> Geolocation()
     {
         throw new NotImplementedException();
     }

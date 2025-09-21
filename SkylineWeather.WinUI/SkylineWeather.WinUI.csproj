@@ -11,6 +11,7 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
+		<LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -33,6 +34,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Graphics.Win2D" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
@@ -46,6 +48,11 @@
     <ProjectReference Include="..\SkylineWeather.SDK\SkylineWeather.SDK.csproj" />
     <ProjectReference Include="..\SkylineWeather.ViewModels\SkylineWeather.ViewModels.csproj" />
     <ProjectReference Include="..\SkylineWeather.WinUI.Controls\SkylineWeather.WinUI.Controls.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution

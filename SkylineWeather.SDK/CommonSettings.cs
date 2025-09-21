@@ -16,7 +16,7 @@ public partial class CommonSettings : ObservableObject
     public partial Geolocation? DefaultGeolocation { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<Geolocation> SavedCities { get; set; } = [];
+    public partial ObservableCollection<Geolocation> SavedGeolocations { get; set; } = [];
 
     [ObservableProperty]
     public partial Dictionary<string, Dictionary<string, object>> ProviderConfigurations { get; set; } = [];

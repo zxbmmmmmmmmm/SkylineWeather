@@ -23,7 +23,7 @@ public class CurrentWeatherModule(
 
         if (settings is not null)
         {
-            location = settings.DefaultGeolocation.Location;
+            location = settings.DefaultGeolocation!.Location;
         }
         else
         {

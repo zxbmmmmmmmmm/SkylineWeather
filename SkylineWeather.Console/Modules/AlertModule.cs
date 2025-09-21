@@ -23,7 +23,7 @@ public class AlertModule(
 
         if (settings is not null)
         {
-            location = settings.DefaultGeolocation.Location;
+            location = settings.DefaultGeolocation!.Location;
         }
         else
         {

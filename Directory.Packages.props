@@ -8,9 +8,11 @@
     <PackageVersion Include="CommunityToolkit.Labs.WinUI.DependencyPropertyGenerator" Version="0.1.250811-build.2202" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="LanguageExt.Core" Version="4.4.9" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4654" />
