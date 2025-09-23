@@ -48,7 +48,6 @@ namespace SkylineWeather.WinUI
                 config.AddJsonFile("appsettings.json", false, true);
             })
             .ConfigureServices((context, services) => {
-                services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
                 services.AddOptions<CommonSettings>()
                     .Bind(context.Configuration);
                 services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);

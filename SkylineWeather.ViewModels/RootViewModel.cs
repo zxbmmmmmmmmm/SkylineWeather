@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SkylineWeather.Abstractions.Models;
 using SkylineWeather.Abstractions.Services;
+using SkylineWeather.SDK;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
 
@@ -17,10 +18,13 @@ public partial class RootViewModel : ObservableObject
 
     private readonly WeatherViewModelFactory _weatherViewModelFactory;
 
-    public RootViewModel(IReadOnlyCollection<Geolocation> geolocations, WeatherViewModelFactory weatherViewModelFactory)
+    private readonly CommonSettings _settings;
+
+    public RootViewModel(CommonSettings settings, WeatherViewModelFactory weatherViewModelFactory)
     {
+        _settings = settings;
         _weatherViewModelFactory = weatherViewModelFactory;
-        WeatherViewModels = new ObservableCollection<WeatherViewModel>(geolocations.Select(p => _weatherViewModelFactory.Create(p)));
+        WeatherViewModels = new ObservableCollection<WeatherViewModel>(settings.SavedGeolocations.Select(p => _weatherViewModelFactory.Create(p)));
     }
 
     /// <summary>
@@ -46,5 +50,6 @@ public partial class RootViewModel : ObservableObject
     public void RemoveCity(WeatherViewModel viewModel)
     {
         WeatherViewModels?.Remove(viewModel);
+
     }
 }

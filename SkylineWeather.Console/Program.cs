@@ -26,7 +26,6 @@ var builder = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) => {
         services.AddHostedService<WeatherService>();
-        services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
         services.AddOptions<CommonSettings>()
             .Bind(context.Configuration);
         services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);
