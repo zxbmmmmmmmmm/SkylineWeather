@@ -15,6 +15,18 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SkylineWeather.Abstractions.Services;
+using SkylineWeather.DataAnalyzer.Analyzers;
+using SkylineWeather.DataAnalyzer.Models;
+using SkylineWeather.SDK;
+using SkylineWeather.SDK.Services;
+using SkylineWeather.SDK.Utilities;
+using SkylineWeather.ViewModels;
+using UnitsNet;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,6 +39,37 @@ namespace SkylineWeather.WinUI
     public partial class App : Application
     {
         private Window? _window;
+
+        private static readonly IHost _host = Host
+            .CreateDefaultBuilder()
+            .UseContentRoot(ApplicationData.Current.LocalFolder.Path)
+            .ConfigureAppConfiguration(config =>
+            {
+                config.AddJsonFile("appsettings.json", false, true);
+            })
+            .ConfigureServices((context, services) => {
+                services.AddSingleton<ISettingsService, ConfigurationSettingsService>();
+                services.AddOptions<CommonSettings>()
+                    .Bind(context.Configuration);
+                services.AddSingleton(sp => sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<CommonSettings>>().Value);
+                var settingsForConfiguration = new CommonSettings();
+                context.Configuration.Bind(settingsForConfiguration);
+                services.AddProviders(settingsForConfiguration, typeof(QWeatherProvider.QWeatherProvider), typeof(OpenMeteoProvider.OpenMeteoProvider));
+                services.AddSingleton<ITrendAnalyzer<Temperature, TemperatureTrend>, SingleTemperatureTrendAnalyzer>()
+                    .AddSingleton<ITrendAnalyzer<(Temperature, Temperature), TemperatureTrend>, CompositeTemperatureTrendAnalyzer>()
+                    .AddSingleton<IAqiAnalyzer, ChinaAqiAnalyzer>()
+                    .AddSingleton<IAqiAnalyzer, UsaAqiAnalyzer>()
+                    .AddSingleton<IAqiAnalyzer, EuropeAqiAnalyzer>();
+                services.AddSingleton<RootViewModel>()
+                    .AddSingleton<WeatherViewModelFactory>();
+            })
+            .Build();
+
+        public static T GetService<T>()
+            where T : class
+        {
+            return (_host.Services.GetService(typeof(T)) as T) ?? throw new Exception("Cannot find service of specified type");
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
