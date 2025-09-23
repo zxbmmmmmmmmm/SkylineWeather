@@ -38,7 +38,6 @@ var builder = Host.CreateDefaultBuilder(args)
             .AddSingleton<IAqiAnalyzer, ChinaAqiAnalyzer>()
             .AddSingleton<IAqiAnalyzer, UsaAqiAnalyzer>()
             .AddSingleton<IAqiAnalyzer, EuropeAqiAnalyzer>();
-        services.AddSingleton<>();
     });
 
 
