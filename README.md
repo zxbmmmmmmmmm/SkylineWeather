@@ -1,3 +1,5 @@
+[简体中文](README_CN.md) | English
+
 # Skyline Weather
 
 Skyline is a UWP weather application.
@@ -19,7 +21,7 @@ Skyline is a UWP weather application.
 - Minute level precipitation forecast (2 hours)
 - Historical weather
 - Weather warning
-- 14 life indices
+- 14 life indices (only qweather)
 - Sunrise and sunset time
 - Daily weather/warning notifications
 - Live tiles
@@ -27,8 +29,8 @@ Skyline is a UWP weather application.
 - Lock screen weather
 
 ## Help us translate
-[![Crowdin](https://badges.crowdin.net/fluent-weather/localized.svg)](https://crowdin.com/project/fluent-weather)
+[![Crowdin](https://badges.crowdin.net/fluent-weather/localized.svg)]
 
 You can help us translate here:
 
-https://crowdin.com/project/fluent-weather
+[![Crowdin](https://img.shields.io/badge/Crowdin-2E3340.svg?style=plastic&logo=Crowdin&logoColor=white)](https://crowdin.com/project/fluent-weather)
