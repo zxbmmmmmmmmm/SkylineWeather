@@ -33,4 +33,4 @@ Skyline 是一款UWP天气应用程序
 
 你可以在这里翻译:
 
-[![Crowdin](https://img.shields.io/badge/Crowdin-2E3340.svg?style=plastic&logo=Crowdin&logoColor=white)](https://crowdin.com/project/fluent-weather)
+[![Crowdin](https://img.shields.io/badge/Crowdin-2E3340.svg?style=plastic&logo=Crowdin&logoColor=white)](https://zh.crowdin.com/project/fluent-weather)
