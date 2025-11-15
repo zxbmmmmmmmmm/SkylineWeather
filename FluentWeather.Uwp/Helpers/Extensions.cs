@@ -8,37 +8,51 @@ namespace FluentWeather.Uwp.Helpers;
 
 public static class Extensions
 {
-    public static T Merge<T>(this T dictionary, ResourceDictionary d) where T : ResourceDictionary
+    extension<T>(T dictionary) where T : ResourceDictionary
     {
-        dictionary.MergedDictionaries.Add(d);
-        return dictionary;
+        public T Merge(ResourceDictionary d)
+        {
+            dictionary.MergedDictionaries.Add(d);
+            return dictionary;
+        }
+
+        public T Merge(string source)
+        {
+            dictionary.MergedDictionaries.Add(new() { Source = new Uri(source) });
+            return dictionary;
+        }
+        public T MergeMUXC(ControlsResourcesVersion version)
+        {
+            dictionary.MergedDictionaries.Add(new XamlControlsResources { ControlsResourcesVersion = version });
+            return dictionary;
+        }
     }
-    public static T Merge<T>(this T dictionary, string source) where T : ResourceDictionary
+
+    extension<T>(IEnumerable<T> enumerable)
     {
-        dictionary.MergedDictionaries.Add(new() { Source = new Uri(source) });
-        return dictionary;
+        public ObservableCollection<T> ToObservableCollection()
+        {
+            return new ObservableCollection<T>(enumerable);
+        }
     }
-    public static T MergeMUXC<T>(this T dictionary, ControlsResourcesVersion version) where T : ResourceDictionary
+
+    extension(StorageFolder folder)
     {
-        dictionary.MergedDictionaries.Add(new XamlControlsResources { ControlsResourcesVersion = version });
-        return dictionary;
+        public async Task<StorageFile> GetOrCreateFileAsync(string name)
+        {
+            var item = await folder.TryGetItemAsync(name) as StorageFile;
+            item ??= await folder.CreateFileAsync(name);
+            return item;
+        }
+
+        public async Task<StorageFolder> GetOrCreateFolderAsync(string name)
+        {
+            var item = await folder.TryGetItemAsync(name) as StorageFolder;
+            item ??= await folder.CreateFolderAsync(name);
+            return item;
+        }
     }
-    public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable)
-    {
-        return new ObservableCollection<T>(enumerable);
-    }
-    public static async Task<StorageFile> GetOrCreateFileAsync(this StorageFolder folder,string name)
-    {
-        var item = await folder.TryGetItemAsync(name) as StorageFile;
-        item ??= await folder.CreateFileAsync(name);
-        return item;
-    }
-    public static async Task<StorageFolder> GetOrCreateFolderAsync(this StorageFolder folder, string name)
-    {
-        var item = await folder.TryGetItemAsync(name) as StorageFolder;
-        item ??= await folder.CreateFolderAsync(name);
-        return item;
-    }
+
     public static TValue GetOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
     {
         if (!dict.TryGetValue(key, out TValue val))
@@ -55,12 +69,16 @@ internal static class ResourceExtensions
     private static readonly ResourceLoader ResLoader = ResourceLoader.GetForCurrentView();
     private static readonly ResourceLoader IndependentResLoader = ResourceLoader.GetForViewIndependentUse();
 
-    public static string GetLocalized(this string resourceKey)
+    extension(string resourceKey)
     {
-        return ResLoader.GetString(resourceKey);
-    }
-    public static string GetLocalizedIndependent(this string resourceKey)
-    {
-        return IndependentResLoader.GetString(resourceKey);
+        public string GetLocalized()
+        {
+            return ResLoader.GetString(resourceKey);
+        }
+
+        public string GetLocalizedIndependent()
+        {
+            return IndependentResLoader.GetString(resourceKey);
+        }
     }
 }
