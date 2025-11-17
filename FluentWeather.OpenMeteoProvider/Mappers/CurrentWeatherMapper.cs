@@ -7,29 +7,32 @@ namespace FluentWeather.OpenMeteoProvider.Mappers;
 
 public static class CurrentWeatherMapper
 {
-    public static OpenMeteoWeatherNow MapToOpenMeteoWeatherNow(this CurrentWeather item)
+    extension(CurrentWeather item)
     {
-        return new OpenMeteoWeatherNow
+        public OpenMeteoWeatherNow MapToOpenMeteoWeatherNow()
         {
-            //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
-            WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
-            WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
-            WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!.Value).ToString(),
-            WindSpeed = (int)item.WindSpeed10m,
-            ApparentTemperature = (int)item.ApparentTemperature!.Value,
-            Humidity = item.RelativeHumidity2m!.Value,
-            Temperature = (int)Math.Round(item.Temperature2m!.Value),
-            Pressure = item.SurfacePressure is null ? null : (int)Math.Round(item.SurfacePressure.Value),
-            //Visibility = int.Parse(item.),
-            CloudAmount = item.CloudCover
+            return new OpenMeteoWeatherNow
+            {
+                //Description = WeatherCodeHelper.GetWeatherDescription(item.WeatherCode!.Value),
+                WeatherType = WeatherCodeHelper.GetWeatherType(item.WeatherCode!.Value),
+                WindDirection = UnitConverter.GetWindDirectionFromAngle(item.WindDirection10m!.Value),
+                WindScale = UnitConverter.GetWindScaleFromKM((int)item.WindSpeed10m!.Value).ToString(),
+                WindSpeed = (int)item.WindSpeed10m,
+                ApparentTemperature = (int)item.ApparentTemperature!.Value,
+                Humidity = item.RelativeHumidity2m!.Value,
+                Temperature = (int)Math.Round(item.Temperature2m!.Value),
+                Pressure = item.SurfacePressure is null ? null : (int)Math.Round(item.SurfacePressure.Value),
+                //Visibility = int.Parse(item.),
+                CloudAmount = item.CloudCover
 
-            //WeatherNight = new WeatherBase
-            //{
-            //    Description = item.TextNight,
-            //    WindDirection = item.WindDirNight,
-            //    WindScale = item.WindScaleNight,
-            //    WindSpeed = int.Parse(item.WindSpeedNight),
-            //}
-        };
+                //WeatherNight = new WeatherBase
+                //{
+                //    Description = item.TextNight,
+                //    WindDirection = item.WindDirNight,
+                //    WindScale = item.WindScaleNight,
+                //    WindSpeed = int.Parse(item.WindSpeedNight),
+                //}
+            };
+        }
     }
 }

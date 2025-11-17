@@ -5,16 +5,19 @@ namespace FluentWeather.OpenMeteoProvider.Mappers;
 
 public static class GeolocationMapper
 {
-    public static GeolocationBase MapToGeolocationBase(this Geolocation geolocation)
+    extension(Geolocation geolocation)
     {
-        return new GeolocationBase()
+        public GeolocationBase MapToGeolocationBase()
         {
-            Location = new Location(geolocation.Latitude, geolocation.Longitude),
-            AdmDistrict = geolocation.Admin1,
-            AdmDistrict2 = geolocation.Admin2,
-            Country = geolocation.Country,
-            Name = geolocation.Name,
-            TimeZone = geolocation.Timezone,
-        };
+            return new GeolocationBase()
+            {
+                Location = new Location(geolocation.Latitude, geolocation.Longitude),
+                AdmDistrict = geolocation.Admin1,
+                AdmDistrict2 = geolocation.Admin2,
+                Country = geolocation.Country,
+                Name = geolocation.Name,
+                TimeZone = geolocation.Timezone,
+            };
+        }
     }
 }

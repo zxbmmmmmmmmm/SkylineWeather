@@ -74,12 +74,19 @@ public static class UnitConverter
         return Resources.ResourceManager.GetString("USAQI_Hazardous")!;
     }
 
-    public static double ToFahrenheit(this double celsiusTemperature)
+    extension(double celsiusTemperature)
     {
-        return celsiusTemperature * 9 / 5 + 32;
+        public double ToFahrenheit()
+        {
+            return celsiusTemperature * 9 / 5 + 32;
+        }
     }
-    public static int ToFahrenheit(this int celsiusTemperature)
+
+    extension(int celsiusTemperature)
     {
-        return celsiusTemperature * 9 / 5 + 32;
+        public int ToFahrenheit()
+        {
+            return celsiusTemperature * 9 / 5 + 32;
+        }
     }
 }

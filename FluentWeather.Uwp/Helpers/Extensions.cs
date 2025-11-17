@@ -53,15 +53,18 @@ public static class Extensions
         }
     }
 
-    public static TValue GetOrCreate<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key)
+    extension<TKey, TValue>(IDictionary<TKey, TValue> dict)
     {
-        if (!dict.TryGetValue(key, out TValue val))
+        public TValue GetOrCreate(TKey key)
         {
-            val = default;
-            dict.Add(key, val);
-        }
+            if (!dict.TryGetValue(key, out TValue val))
+            {
+                val = default;
+                dict.Add(key, val);
+            }
 
-        return val;
+            return val;
+        }
     }
 }
 internal static class ResourceExtensions

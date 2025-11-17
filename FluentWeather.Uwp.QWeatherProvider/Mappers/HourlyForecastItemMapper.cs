@@ -7,22 +7,25 @@ namespace FluentWeather.Uwp.QWeatherProvider.Mappers;
 
 public static class HourlyForecastItemMapper
 {
-    public static WeatherHourlyBase MapToHourlyForecast(this WeatherHourlyResponse.HourlyForecastItem item)
+    extension(WeatherHourlyResponse.HourlyForecastItem item)
     {
-        return new WeatherHourlyBase
+        public WeatherHourlyBase MapToHourlyForecast()
         {
-            WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.Icon)),
-            WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
-            Description = item.Text,
-            WindDirectionDescription = item.WindDir,
-            WindScale = item.WindScale,
-            WindSpeed = item.WindSpeed,
-            Humidity = item.Humidity,
-            Pressure = item.Pressure,
-            Temperature = item.Temp,
-            Time = item.FxTime,
-            PrecipitationProbability = item.Pop,
-            CloudAmount = item.Cloud,          
-        };
+            return new WeatherHourlyBase
+            {
+                WeatherType = WeatherTypeConverter.GetWeatherTypeByIcon(int.Parse(item.Icon)),
+                WindDirection = UnitConverter.GetWindDirectionFromAngle(item.Wind360),
+                Description = item.Text,
+                WindDirectionDescription = item.WindDir,
+                WindScale = item.WindScale,
+                WindSpeed = item.WindSpeed,
+                Humidity = item.Humidity,
+                Pressure = item.Pressure,
+                Temperature = item.Temp,
+                Time = item.FxTime,
+                PrecipitationProbability = item.Pop,
+                CloudAmount = item.Cloud,
+            };
+        }
     }
 }

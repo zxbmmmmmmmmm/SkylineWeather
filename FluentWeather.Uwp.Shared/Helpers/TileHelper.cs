@@ -354,25 +354,28 @@ namespace FluentWeather.Uwp.Shared.Helpers
         }
 
 
-        public static string GetWeek(this DateTime date)
+        extension(DateTime date)
         {
-            if (date.Day == DateTime.Today.Day&& CultureInfo.CurrentCulture.Name is "zh-CN")
-                return "ms-resource:Today";
-            if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
-                return "ms-resource:Tomorrow";
-            if(CultureInfo.CurrentCulture.Name is "zh-CN")
-                return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期","周");
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
-        }
-        public static string GetWeek2(this DateTime date)
-        {
-            if (date.Day == DateTime.Today.Day && CultureInfo.CurrentCulture.Name is "zh-CN")
-                return "Today".GetLocalized();
-            if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
-                return "Tomorrow".GetLocalized();
-            if (CultureInfo.CurrentCulture.Name is "zh-CN")
-                return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+            public string GetWeek()
+            {
+                if (date.Day == DateTime.Today.Day && CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return "ms-resource:Today";
+                if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return "ms-resource:Tomorrow";
+                if (CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+            }
+            public string GetWeek2()
+            {
+                if (date.Day == DateTime.Today.Day && CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return "Today".GetLocalized();
+                if (date.Day == DateTime.Today.Day + 1 && CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return "Tomorrow".GetLocalized();
+                if (CultureInfo.CurrentCulture.Name is "zh-CN")
+                    return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
+                return CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+            }
         }
     }
 }
