@@ -19,7 +19,7 @@ public class WeatherNowBase : WeatherBase, IWind, ITemperature, IPressure, IHumi
     public string? WindScale { get; set; }
     public int WindSpeed { get; set; }
     public int Temperature { get; set; }
-    public  WindDirection WindDirection { get; set; }
+    public WindDirection WindDirection { get; set; }
     public int? ApparentTemperature { get; set; }
     public int? Visibility { get; set; }
     public int? CloudAmount { get; set; }

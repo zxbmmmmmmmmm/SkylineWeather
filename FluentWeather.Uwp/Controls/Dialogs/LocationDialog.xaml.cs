@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
 namespace FluentWeather.Uwp.Controls.Dialogs;
+
 [ObservableObject]
 public sealed partial class LocationDialog : ContentDialog
 {
@@ -68,7 +69,7 @@ public sealed partial class LocationDialog : ContentDialog
     [RelayCommand]
     private void SelectSuggestedCities(GeolocationBase location)
     {
-        if(location is null) return;
+        if (location is null) return;
         Query = location.Name;
         Name = location.Name;
         Latitude = location.Location.Latitude.ToString(CultureInfo.InvariantCulture);
@@ -87,7 +88,7 @@ public sealed partial class LocationDialog : ContentDialog
                 TimeZone = GetTimeZoneFromLocation(location.Location.Longitude);
             }
         }
-        else if(location.UtcOffset is not null)
+        else if (location.UtcOffset is not null)
         {
             TimeZone = TimeZones.First(p => p.BaseUtcOffset == location.UtcOffset);
         }
@@ -109,16 +110,16 @@ public sealed partial class LocationDialog : ContentDialog
         get
         {
             if (Name is null or "") return false;
-            if (Latitude is null or ""||!Latitude.IsDecimal()) return false;
+            if (Latitude is null or "" || !Latitude.IsDecimal()) return false;
             if (Longitude is null or "" || !Longitude.IsDecimal()) return false;
-            if (_timeZone is null) return false;
+            if (TimeZone is null) return false;
             return true;
         }
     }
     [RelayCommand]
     public void Continue()
     {
-        if (double.Parse(Latitude) > 90 || double.Parse(Latitude)<-90)
+        if (double.Parse(Latitude) > 90 || double.Parse(Latitude) < -90)
         {
             Latitude = "";
             return;
@@ -150,7 +151,7 @@ public sealed partial class LocationDialog : ContentDialog
             timeZone = quotient + (longitude > 0 ? 1 : -1);
         }
 
-        return TimeZones.FirstOrDefault(p => p.BaseUtcOffset == TimeSpan.FromHours(1)* timeZone);
+        return TimeZones.FirstOrDefault(p => p.BaseUtcOffset == TimeSpan.FromHours(1) * timeZone);
     }
 
     [ObservableProperty]
@@ -173,7 +174,7 @@ public sealed partial class LocationDialog : ContentDialog
 
     [ObservableProperty]
     private string _country;
-    
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanContinue))]
     private TimeZoneInfo _timeZone;

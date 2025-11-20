@@ -8,12 +8,12 @@ namespace FluentWeather.Abstraction.Models;
 public class TyphoonBase
 {
     public string Name { get; set; }
-    public bool IsActive { get;set; }
+    public bool IsActive { get; set; }
     public List<TyphoonTrackBase>? History { get; set; }
     public TyphoonTrackBase? Now { get; set; }
     public List<TyphoonTrackBase>? Forecast { get; set; }
 }
-public class TyphoonTrackBase:IPressure,ITime
+public class TyphoonTrackBase : IPressure, ITime
 {
     /// <summary>
     /// 经度
@@ -24,7 +24,7 @@ public class TyphoonTrackBase:IPressure,ITime
     /// </summary>
     public double Latitude { get; set; }
     public TyphoonType Type { get; set; }
-    public int? Pressure { get ; set; }
+    public int? Pressure { get; set; }
     public int? WindSpeed { get; set; }
     public int? MoveSpeed { get; set; }
     public DateTime Time { get; set; }

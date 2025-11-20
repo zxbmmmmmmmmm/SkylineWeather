@@ -8,9 +8,9 @@ namespace FluentWeather.Uwp.Controls
 {
     public sealed partial class HourlyTemperatureChart : UserControl
     {
-        private int ChartMaxTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Max(p => p.Temperature)+1 : 45;
+        private int ChartMaxTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Max(p => p.Temperature) + 1 : 45;
 
-        private int ChartMinTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Min(p => p.Temperature) -1 : 0;
+        private int ChartMinTemperature => HourlyForecasts is not null && HourlyForecasts.Count != 0 ? HourlyForecasts.Min(p => p.Temperature) - 1 : 0;
         public HourlyTemperatureChart()
         {
             this.InitializeComponent();

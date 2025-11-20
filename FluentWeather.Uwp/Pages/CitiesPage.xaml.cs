@@ -8,9 +8,10 @@ using FluentWeather.Uwp.Controls.Dialogs;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 namespace FluentWeather.Uwp.Pages;
+
 public sealed partial class CitiesPage : Page
 {
-    public CitiesPageViewModel ViewModel { get; set; } = new(); 
+    public CitiesPageViewModel ViewModel { get; set; } = new();
     public CitiesPage()
     {
         this.InitializeComponent();
@@ -41,7 +42,7 @@ public sealed partial class CitiesPage : Page
 
     public void SetSelectedLocation(string hash)
     {
-        if ( Common.Settings.DefaultGeolocation?.Name is null || hash == Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString())
+        if (Common.Settings.DefaultGeolocation?.Name is null || hash == Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString())
         {
             CurrentCityView.SelectedIndex = 0;
             return;
@@ -59,7 +60,7 @@ public sealed partial class CitiesPage : Page
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
-        ((Frame)Parent)?.Navigate(typeof(SettingsPage),null,Theme.GetSplitPaneNavigationTransition());
+        ((Frame)Parent)?.Navigate(typeof(SettingsPage), null, Theme.GetSplitPaneNavigationTransition());
     }
 
     private async void CitiesView_SelectionChanged(object sender, SelectionChangedEventArgs e)

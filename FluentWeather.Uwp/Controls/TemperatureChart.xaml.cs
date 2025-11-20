@@ -28,12 +28,12 @@ public sealed partial class TemperatureChart : UserControl
         set => SetValue(WeatherForecastsProperty, value);
     }
     public static readonly DependencyProperty WeatherForecastsProperty =
-        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherDailyBase>), typeof(TemperatureChart), new PropertyMetadata(default,OnPropertyChanged));
+        DependencyProperty.Register(nameof(WeatherForecasts), typeof(List<WeatherDailyBase>), typeof(TemperatureChart), new PropertyMetadata(default, OnPropertyChanged));
 
     private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var chart = (TemperatureChart)d;
-        chart.Bindings.Update();   
+        chart.Bindings.Update();
     }
     public static Brush DataPointToBrush(IElementPresenter presenter)
     {
@@ -61,13 +61,13 @@ public sealed partial class TemperatureChart : UserControl
     public List<WeatherDailyBase> GetCoolingData(IList<WeatherDailyBase> weatherForecasts)
     {
         var list = new List<WeatherDailyBase>();
-        for (var i = 0; i < weatherForecasts.Count-1; i++)
+        for (var i = 0; i < weatherForecasts.Count - 1; i++)
         {
-            if (weatherForecasts[i+1].MaxTemperature - weatherForecasts[i].MaxTemperature <= -5)
+            if (weatherForecasts[i + 1].MaxTemperature - weatherForecasts[i].MaxTemperature <= -5)
             {
-                if(!list.Contains(weatherForecasts[i]))
+                if (!list.Contains(weatherForecasts[i]))
                     list.Add(weatherForecasts[i]);
-                if (!list.Contains(weatherForecasts[i+1]))
+                if (!list.Contains(weatherForecasts[i + 1]))
                     list.Add(weatherForecasts[i + 1]);
                 break;
             }

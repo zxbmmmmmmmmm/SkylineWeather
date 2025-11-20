@@ -18,7 +18,7 @@ namespace FluentWeather.Uwp.Controls.Popups
                 ShouldConstrainToRootBounds = true,
             };
         }
-        public void Show(Type pageType,object parameter= null,string title = "")
+        public void Show(Type pageType, object parameter = null, string title = "")
         {
             this.Width = Window.Current.Bounds.Width;
             this.Height = Window.Current.Bounds.Height;

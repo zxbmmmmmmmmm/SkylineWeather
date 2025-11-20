@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ListViewScrollBehavior:Behavior<ListViewBase>
+public class ListViewScrollBehavior : Behavior<ListViewBase>
 {
     protected override void OnAttached()
     {

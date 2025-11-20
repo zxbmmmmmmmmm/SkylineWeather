@@ -22,10 +22,10 @@ public class HistoricalWeatherHelper
 
         var service = Locator.ServiceProvider.GetService<IHistoricalWeatherProvider>();
         service ??= new OpenMeteoProvider.OpenMeteoProvider();
-        var data = await service.GetHistoricalDailyWeather(location.Longitude, location.Latitude,DateTime.Parse("1940-01-01"), DateTime.Parse($"{DateTime.Now.Year}-01-01"));
+        var data = await service.GetHistoricalDailyWeather(location.Longitude, location.Latitude, DateTime.Parse("1940-01-01"), DateTime.Parse($"{DateTime.Now.Year}-01-01"));
 
         //保存原始数据
-        var file =await folder1.GetOrCreateFileAsync("data");
+        var file = await folder1.GetOrCreateFileAsync("data");
         using var stream = await file.OpenStreamForWriteAsync();
         await JsonSerializer.SerializeAsync(stream, data, new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default });
         await stream.FlushAsync();
@@ -128,7 +128,7 @@ public class HistoricalWeatherHelper
     {
 
     }
-    public static async Task<HistoricalDailyWeatherBase> GetHistoricalWeatherAsync(Location location,DateTime date)
+    public static async Task<HistoricalDailyWeatherBase> GetHistoricalWeatherAsync(Location location, DateTime date)
     {
         var folder = await ApplicationData.Current.LocalFolder.GetOrCreateFolderAsync("HistoricalWeather");
         var folderItem = await folder.TryGetItemAsync(location.GetHashCode().ToString());

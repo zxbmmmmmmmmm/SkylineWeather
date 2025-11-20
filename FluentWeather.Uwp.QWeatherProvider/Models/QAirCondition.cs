@@ -3,8 +3,8 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.Uwp.QWeatherProvider.Models
 {
-    public sealed class QAirCondition:AirConditionBase,IAirPollutants
+    public sealed class QAirCondition : AirConditionBase, IAirPollutants
     {
-        public string Link{ get; set; }
+        public string Link { get; set; }
     }
 }

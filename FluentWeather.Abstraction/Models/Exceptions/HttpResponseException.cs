@@ -12,7 +12,7 @@ public class HttpResponseException : Exception
     {
         Code = code;
     }
-    public HttpResponseException(string message, HttpStatusCode code) :base(message)
+    public HttpResponseException(string message, HttpStatusCode code) : base(message)
     {
         Code = code;
     }

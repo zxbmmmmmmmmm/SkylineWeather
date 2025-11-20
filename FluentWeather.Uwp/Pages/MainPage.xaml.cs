@@ -15,10 +15,11 @@ using Microsoft.Extensions.DependencyInjection;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace FluentWeather.Uwp.Pages;
+
 public sealed partial class MainPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
-    public static MainPage Instance ;
+    public static MainPage Instance;
     private XamlRenderService _xamlRenderer = new XamlRenderService();
 
     private ListViewBase _dailyItemsView;
@@ -97,9 +98,9 @@ public sealed partial class MainPage : Page
         ((FrameworkElement)this.Content).Loaded += OnLoaded;
     }
 
-    
 
-    private T FindChildControl<T>(DependencyObject control, string ctrlName) where T: DependencyObject
+
+    private T FindChildControl<T>(DependencyObject control, string ctrlName) where T : DependencyObject
     {
         int childNumber = VisualTreeHelper.GetChildrenCount(control);
         for (int i = 0; i < childNumber; i++)
@@ -151,9 +152,9 @@ public sealed partial class MainPage : Page
             return null;
         }
     }
-    public Visibility GetHistoricalWeatherVisibility(GeolocationBase currentGeolocation,GeolocationBase defaultGeolocation)
+    public Visibility GetHistoricalWeatherVisibility(GeolocationBase currentGeolocation, GeolocationBase defaultGeolocation)
     {
-        if(currentGeolocation?.Location == defaultGeolocation?.Location)
+        if (currentGeolocation?.Location == defaultGeolocation?.Location)
         {
             return Visibility.Visible;
         }

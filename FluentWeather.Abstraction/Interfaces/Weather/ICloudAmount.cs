@@ -5,5 +5,5 @@ public interface ICloudAmount
     /// <summary>
     /// 云量
     /// </summary>
-    int? CloudAmount{ get; set; }
+    int? CloudAmount { get; set; }
 }

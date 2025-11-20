@@ -3,6 +3,7 @@ using FluentWeather.Abstraction.Models;
 using static QWeatherApi.ApiContracts.QGeolocationResponse;
 
 namespace FluentWeather.Uwp.QWeatherProvider.Mappers;
+
 public static class GeolocationMapper
 {
     extension(QGeolocationItem item)

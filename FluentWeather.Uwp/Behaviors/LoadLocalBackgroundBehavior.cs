@@ -10,7 +10,7 @@ using FluentWeather.Uwp.Shared.Helpers;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
+public class LoadLocalBackgroundBehavior : Behavior<ImageEx>
 {
     public static LoadLocalBackgroundBehavior Instance;
     public LoadLocalBackgroundBehavior()
@@ -23,9 +23,9 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
         set => SetValue(WeatherTypeProperty, value);
     }
     public static readonly DependencyProperty WeatherTypeProperty =
-        DependencyProperty.Register(nameof(WeatherType), typeof(WeatherCode), 
-            typeof(LoadLocalBackgroundBehavior), 
-            new PropertyMetadata(WeatherCode.Unknown,WeatherTypeUpdated));
+        DependencyProperty.Register(nameof(WeatherType), typeof(WeatherCode),
+            typeof(LoadLocalBackgroundBehavior),
+            new PropertyMetadata(WeatherCode.Unknown, WeatherTypeUpdated));
     private static void WeatherTypeUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var b = d as LoadLocalBackgroundBehavior;
@@ -49,7 +49,7 @@ public class LoadLocalBackgroundBehavior:Behavior<ImageEx>
     }
 
 
-    
+
     private async Task<BitmapImage> GetImage(StorageFolder folder, string name)
     {
         var item = await folder.TryGetItemAsync(name + ".png");

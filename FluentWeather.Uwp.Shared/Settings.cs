@@ -263,7 +263,7 @@ public sealed class Settings : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    
+
     public string QGeolocationToken
     {
         get => GetSettings("qgeoapi." + "Token", Constants.QGeolocationToken);
@@ -295,7 +295,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public string QWeatherDomain
     {
-        get => GetSettings("qweather." + "Domain", Constants.QWeatherDomain??"devapi.qweather.com");
+        get => GetSettings("qweather." + "Domain", Constants.QWeatherDomain ?? "devapi.qweather.com");
         set
         {
             ApplicationData.Current.LocalSettings.Values["qweather." + "Domain"] = value;
@@ -366,7 +366,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public bool OOBECompleted
     {
-        get => GetSettings(nameof(OOBECompleted), (Common.Settings.QWeatherToken != null && Common.Settings.QWeatherToken != "" ));
+        get => GetSettings(nameof(OOBECompleted), (Common.Settings.QWeatherToken != null && Common.Settings.QWeatherToken != ""));
         set
         {
             ApplicationData.Current.LocalSettings.Values[nameof(OOBECompleted)] = value;

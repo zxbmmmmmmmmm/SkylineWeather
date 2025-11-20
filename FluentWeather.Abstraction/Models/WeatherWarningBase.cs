@@ -4,9 +4,9 @@ namespace FluentWeather.Abstraction.Models;
 
 public class WeatherWarningBase
 {
-    public string? Id{ get; set; }
+    public string? Id { get; set; }
     public string? Sender { get; set; }
-    public  DateTime PublishTime { get; set; }
+    public DateTime PublishTime { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime StartTime { get; set; }
@@ -23,7 +23,7 @@ public class WeatherWarningBase
             index += 2;
             return Title?.Substring(index.Value);
         }
-    } 
+    }
 }
 public enum SeverityColor
 {

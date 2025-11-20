@@ -5,5 +5,5 @@ public interface IHumidity
     /// <summary>
     /// 湿度(百分比数值)
     /// </summary>
-    int? Humidity{ get; set; }
+    int? Humidity { get; set; }
 }

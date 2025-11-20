@@ -3,13 +3,13 @@ using System;
 
 namespace FluentWeather.Abstraction.Models;
 
-public class GeolocationBase:ITimeZone
+public class GeolocationBase : ITimeZone
 {
     /// <summary>
     /// 地区名
     /// </summary>
     public string Name { get; set; }
-    
+
     public Location Location { get; set; }
 
     /// <summary>
@@ -25,9 +25,9 @@ public class GeolocationBase:ITimeZone
     /// </summary>
     public string? Country { get; set; }
 
-    public string? TimeZone { get ; set; }
-    public TimeSpan? UtcOffset { get ; set  ; }
-    public bool? IsDaylightSavingTime { get ; set ; }
+    public string? TimeZone { get; set; }
+    public TimeSpan? UtcOffset { get; set; }
+    public bool? IsDaylightSavingTime { get; set; }
 
     public override string ToString()
     {
@@ -40,6 +40,6 @@ public class GeolocationBase:ITimeZone
     }
     public GeolocationBase()
     {
-          
+
     }
 }

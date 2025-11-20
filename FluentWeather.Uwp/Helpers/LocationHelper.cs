@@ -10,7 +10,7 @@ namespace FluentWeather.Uwp.Helpers;
 
 public sealed class LocationHelper
 {
-    public static async Task<(double lon,double lat)> UpdatePosition()
+    public static async Task<(double lon, double lat)> UpdatePosition()
     {
         try
         {

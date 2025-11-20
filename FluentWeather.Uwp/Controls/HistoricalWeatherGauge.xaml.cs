@@ -43,7 +43,7 @@ namespace FluentWeather.Uwp.Controls
         public bool IsHighTemperatureBreakRecord => WeatherToday?.MaxTemperature > HistoricalDailyWeather?.HistoricalMaxTemperature;
         public bool IsLowTemperatureBreakRecord => WeatherToday?.MinTemperature < HistoricalDailyWeather?.HistoricalMinTemperature;
 
-        private int GetLength3High(int num1,int num2)
+        private int GetLength3High(int num1, int num2)
         {
             if (IsHighTemperatureBreakRecord) return 0;
             return num1 - num2;

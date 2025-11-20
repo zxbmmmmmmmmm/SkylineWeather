@@ -86,7 +86,7 @@ public sealed partial class HistoricalWeatherSetupDialog : ContentDialog
             GetHistoricalWeatherButton.Visibility = Visibility.Collapsed;
             RestartButton.Visibility = Visibility.Visible;
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             DownloadProgressBar.ShowError = true;
             ProgressText.Text = ex.Message;

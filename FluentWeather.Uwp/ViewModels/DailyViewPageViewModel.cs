@@ -13,7 +13,7 @@ public sealed partial class DailyViewViewModel : ObservableObject
 
     [ObservableProperty]
     private partial WeatherBase Selected { get; set; }
-    public DailyViewViewModel(List<WeatherBase> daily,List<WeatherBase> hourly)
+    public DailyViewViewModel(List<WeatherBase> daily, List<WeatherBase> hourly)
     {
         DailyForecasts = daily;
         HourlyForecasts = hourly;

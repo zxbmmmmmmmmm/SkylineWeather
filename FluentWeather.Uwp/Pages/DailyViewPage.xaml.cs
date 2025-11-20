@@ -57,13 +57,13 @@ public sealed partial class DailyViewPage : Page
     public static readonly DependencyProperty SelectedIndexProperty =
         DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(DailyViewPage), new PropertyMetadata(0, SelectedIndexChanged));
 
-    private int PivotSelectedIndex 
+    private int PivotSelectedIndex
     {
-        get => Math.Clamp(SelectedIndex,0,6);
+        get => Math.Clamp(SelectedIndex, 0, 6);
         set => SelectedIndex = Math.Clamp(value, 0, 6);
     }
 
-    public WeatherDailyBase SelectedDailyForecast => (0<= SelectedIndex && SelectedIndex < DailyForecasts?.Count -1) ? DailyForecasts?[SelectedIndex]:null;
+    public WeatherDailyBase SelectedDailyForecast => (0 <= SelectedIndex && SelectedIndex < DailyForecasts?.Count - 1) ? DailyForecasts?[SelectedIndex] : null;
 
     private static void SelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -72,7 +72,7 @@ public sealed partial class DailyViewPage : Page
         page.OnPropertyChanged(nameof(CanMoveNext));
         page.OnPropertyChanged(nameof(SelectedDailyForecast));
         page.OnPropertyChanged(nameof(PivotSelectedIndex));
-        
+
     }
     [RelayCommand]
     private void MoveNext()

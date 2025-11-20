@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ListViewOpenContentDialogBehavior:Behavior<ListViewBase>
+public class ListViewOpenContentDialogBehavior : Behavior<ListViewBase>
 {
     protected override void OnAttached()
     {
@@ -41,12 +41,12 @@ public class ListViewOpenContentDialogBehavior:Behavior<ListViewBase>
     private async void ListItemClicked(object sender, ItemClickEventArgs e)
     {
         ContentDialog dialog;
-        if(UseArguments)
-        { 
-            dialog = Activator.CreateInstance(DialogType,AssociatedObject,e.ClickedItem) as ContentDialog;
+        if (UseArguments)
+        {
+            dialog = Activator.CreateInstance(DialogType, AssociatedObject, e.ClickedItem) as ContentDialog;
         }
         else
-        { 
+        {
             dialog = Activator.CreateInstance(DialogType) as ContentDialog;
         }
         await DialogManager.OpenDialogAsync(dialog);

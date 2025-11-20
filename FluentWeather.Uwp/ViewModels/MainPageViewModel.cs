@@ -159,9 +159,9 @@ public sealed partial class MainPageViewModel : ObservableObject, IMainPageViewM
             }
             Precipitation = precip;
         }
-        catch(HttpResponseException ex)
+        catch (HttpResponseException ex)
         {
-            if(ex.Code != System.Net.HttpStatusCode.NotFound)
+            if (ex.Code != System.Net.HttpStatusCode.NotFound)
             {
                 throw;
             }

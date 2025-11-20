@@ -34,7 +34,7 @@ namespace FluentWeather.Uwp.Controls
             DependencyProperty.Register(nameof(Announcement), typeof(Announcement), typeof(Announcement), new PropertyMetadata(default));
         public AnnouncementItem()
         {
-            this.InitializeComponent();       
+            this.InitializeComponent();
             this.Loaded += AnnouncementItem_Loaded;
             this.Unloaded += AnnouncementItem_Unloaded;
         }
@@ -79,7 +79,7 @@ namespace FluentWeather.Uwp.Controls
         private void MainInfoBar_Closed(Microsoft.UI.Xaml.Controls.InfoBar sender, Microsoft.UI.Xaml.Controls.InfoBarClosedEventArgs args)
         {
             var service = Locator.ServiceProvider.GetService<AppAnalyticsService>();
-            service.TrackAnnouncementClosed(Announcement.Name,_isViewed);
+            service.TrackAnnouncementClosed(Announcement.Name, _isViewed);
 
             var closed = Common.Settings.ClosedAnnouncements;
             closed.Add(Announcement.Name);

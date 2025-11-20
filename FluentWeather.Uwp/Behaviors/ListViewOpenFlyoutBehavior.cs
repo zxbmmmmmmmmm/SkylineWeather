@@ -15,11 +15,11 @@ public class ListViewOpenFlyoutBehavior : Behavior<ListViewBase>
 
     private void ListItemClicked(object sender, ItemClickEventArgs e)
     {
-        var container =AssociatedObject.ContainerFromItem(e.ClickedItem);
+        var container = AssociatedObject.ContainerFromItem(e.ClickedItem);
 
         var item = container as SelectorItem;
         var content = item?.ContentTemplateRoot as FrameworkElement;
-        if (content is null && e.ClickedItem is FrameworkElement element) 
+        if (content is null && e.ClickedItem is FrameworkElement element)
         {
             FlyoutBase.ShowAttachedFlyout(element);
         }

@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace FluentWeather.Uwp.Themes;
 
-public sealed partial class Theme:ResourceDictionary
+public sealed partial class Theme : ResourceDictionary
 {
     public Theme()
     {

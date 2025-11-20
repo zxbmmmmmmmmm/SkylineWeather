@@ -51,7 +51,7 @@ public struct Location
             _longitude = value switch
             {
                 > 180 => value - 360,
-                < -180 => value +360,
+                < -180 => value + 360,
                 _ => value
             };
         }

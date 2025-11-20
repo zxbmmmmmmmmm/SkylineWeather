@@ -6,13 +6,13 @@ namespace FluentWeather.Uwp.Helpers;
 
 public static class JumpListHelper
 {
-    public static async Task SetJumpList(GeolocationBase defaultLocation,IEnumerable<GeolocationBase> locations)
+    public static async Task SetJumpList(GeolocationBase defaultLocation, IEnumerable<GeolocationBase> locations)
     {
         if (!JumpList.IsSupported()) return;
         var jumpList = await JumpList.LoadCurrentAsync();
         jumpList.Items.Clear();
         jumpList.Items.Add(CreateDefaultItem(defaultLocation));
-        foreach(var location in locations)
+        foreach (var location in locations)
         {
             jumpList.Items.Add(CreateItem(location));
         }
@@ -20,7 +20,7 @@ public static class JumpListHelper
     }
     private static JumpListItem CreateDefaultItem(GeolocationBase geolocation)
     {
-        var item = JumpListItem.CreateWithArguments(geolocation.Location.GetHashCode().ToString(),geolocation.Name);
+        var item = JumpListItem.CreateWithArguments(geolocation.Location.GetHashCode().ToString(), geolocation.Name);
         item.GroupName = ResourceLoader.GetForCurrentView().GetString("CurrentLocation");
         item.Logo = new Uri("ms-appx:///Assets/Icons/CurrentLocation.png");
         return item;

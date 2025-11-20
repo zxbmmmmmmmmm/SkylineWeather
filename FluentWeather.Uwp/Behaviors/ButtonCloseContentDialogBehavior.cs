@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonCloseContentDialogBehavior:Behavior<ButtonBase>
+public class ButtonCloseContentDialogBehavior : Behavior<ButtonBase>
 {
     protected override void OnAttached()
     {

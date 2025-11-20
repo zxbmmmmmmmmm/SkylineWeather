@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ListViewOpenContentPopupBehavior:Behavior<ListViewBase>
+public class ListViewOpenContentPopupBehavior : Behavior<ListViewBase>
 {
     protected override void OnAttached()
     {

@@ -10,7 +10,7 @@ public class WeatherBase
 
     public string Description
     {
-        get => _description??ResourcesHelper.GetWeatherDescription((int)WeatherType);
+        get => _description ?? ResourcesHelper.GetWeatherDescription((int)WeatherType);
         set => _description = value;
     }
 }

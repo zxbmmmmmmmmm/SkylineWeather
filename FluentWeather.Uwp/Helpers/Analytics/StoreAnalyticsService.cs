@@ -2,7 +2,7 @@
 using Microsoft.Services.Store.Engagement;
 namespace FluentWeather.Uwp.Helpers.Analytics;
 
-public class StoreAnalyticsService: AppAnalyticsService
+public class StoreAnalyticsService : AppAnalyticsService
 {
     public override void TrackEvent(string name, IDictionary<string, string> properties = null, bool addDefaultProperties = true)
     {

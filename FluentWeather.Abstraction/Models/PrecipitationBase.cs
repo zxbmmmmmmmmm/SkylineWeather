@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace FluentWeather.Abstraction.Models
 {
-    
+
     /// <summary>
     /// 降水概率
     /// </summary>
-    public class PrecipitationBase:ISummary
+    public class PrecipitationBase : ISummary
     {
         public List<PrecipitationItemBase> Precipitations { get; set; }
         public string? Summary { get; set; }
@@ -19,9 +19,9 @@ namespace FluentWeather.Abstraction.Models
         /// 降水量，单位毫米
         /// </summary>
         public double Precipitation { get; set; }
-        public DateTime Time { get; set; }  
+        public DateTime Time { get; set; }
         public bool IsSnow { get; set; }
-        public PrecipitationItemBase(DateTime time,double precipitation,bool isSnow=false)
+        public PrecipitationItemBase(DateTime time, double precipitation, bool isSnow = false)
         {
             Precipitation = precipitation;
             Time = time;

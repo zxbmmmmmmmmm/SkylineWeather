@@ -8,8 +8,8 @@ public class WeatherHourlyBase : WeatherBase, ITemperature, ITime, IWind, IHumid
 {
     public int? Humidity { get; set; }
     public int? Pressure { get; set; }
-    public  int Temperature { get; set; }
-    public  DateTime Time { get; set; }
+    public int Temperature { get; set; }
+    public DateTime Time { get; set; }
 
     private string? _windDirectionDescription;
 
@@ -20,9 +20,9 @@ public class WeatherHourlyBase : WeatherBase, ITemperature, ITime, IWind, IHumid
     }
 
     public string? WindScale { get; set; }
-    public  int WindSpeed { get; set; }
+    public int WindSpeed { get; set; }
     public int? PrecipitationProbability { get; set; }
-    public  WindDirection WindDirection { get; set; }
-    public int? CloudAmount { get ; set ; }
-    public int? Visibility { get ; set ; }
+    public WindDirection WindDirection { get; set; }
+    public int? CloudAmount { get; set; }
+    public int? Visibility { get; set; }
 }

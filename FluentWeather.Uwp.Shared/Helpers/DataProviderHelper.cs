@@ -50,5 +50,5 @@ public static class DataProviderHelper
     //    //    _ => typeof(QWeatherProvider)
     //    //};
     //}
-   
+
 }

@@ -6,14 +6,14 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonOpenContentPopupBehavior:Behavior<ButtonBase>
+public class ButtonOpenContentPopupBehavior : Behavior<ButtonBase>
 {
     protected override void OnAttached()
     {
         base.OnAttached();
         AssociatedObject.Click += ButtonClicked;
     }
-    
+
     public Type PageType
     {
         get => (Type)GetValue(PageTypeProperty);

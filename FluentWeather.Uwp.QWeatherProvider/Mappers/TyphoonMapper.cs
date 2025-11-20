@@ -6,6 +6,7 @@ using QWeatherApi.ApiContracts;
 using static QWeatherApi.ApiContracts.TyphoonTrackItem;
 
 namespace FluentWeather.Uwp.QWeatherProvider.Mappers;
+
 public static class TyphoonMapper
 {
     extension(TyphoonTrackResponse item)

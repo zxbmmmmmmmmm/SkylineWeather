@@ -12,7 +12,7 @@ public static class UnitConverter
     /// <returns></returns>
     public static int GetWindScaleFromKM(int speed)
     {
-        if(speed <= 2)return 0;
+        if (speed <= 2) return 0;
         if (speed <= 6) return 1;
         if (speed <= 12) return 2;
         if (speed <= 19) return 3;
@@ -40,7 +40,7 @@ public static class UnitConverter
     /// <returns></returns>
     public static WindDirection GetWindDirectionFromAngle(int angle)
     {
-        if ((348.75 <= angle && angle <= 360)|| (0<=angle && angle <= 11.25)) return WindDirection.North;
+        if ((348.75 <= angle && angle <= 360) || (0 <= angle && angle <= 11.25)) return WindDirection.North;
         if (11.25 < angle && angle <= 33.75) return WindDirection.NorthNorthEast;
         if (33.75 < angle && angle <= 56.25) return WindDirection.NorthEast;
         if (56.25 < angle && angle <= 78.75) return WindDirection.EastNorthEast;

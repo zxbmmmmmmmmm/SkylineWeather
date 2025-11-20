@@ -33,11 +33,11 @@ sealed partial class App : Application
         this.Suspending += OnSuspending;
         this.UnhandledException += OnUnhandledException;
         DIFactory.RegisterRequiredServices();
-        if(Common.Settings.ApplicationTheme is ElementTheme.Light) 
+        if (Common.Settings.ApplicationTheme is ElementTheme.Light)
         {
             this.RequestedTheme = ApplicationTheme.Light;
         }
-        else if(Common.Settings.ApplicationTheme is ElementTheme.Dark)
+        else if (Common.Settings.ApplicationTheme is ElementTheme.Dark)
         {
             this.RequestedTheme = ApplicationTheme.Dark;
         }
@@ -74,7 +74,7 @@ sealed partial class App : Application
     private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
     {
         e.Handled = true;
-        if(Crashes.Instance.InstanceEnabled)
+        if (Crashes.Instance.InstanceEnabled)
             Crashes.TrackError(e.Exception);
         Common.LogManager.GetLogger("Unhandled Exception - Application").Error(e.Exception.Message, e.Exception);
         try
@@ -114,7 +114,7 @@ sealed partial class App : Application
                     widgetArgs,
                     Window.Current.CoreWindow,
                     widgetFrame);
-                widgetFrame.Navigate(typeof(WidgetPage),_widget);
+                widgetFrame.Navigate(typeof(WidgetPage), _widget);
 
                 Window.Current.Closed += OnWigdetClosed; ;
                 Window.Current.Activate();
@@ -139,7 +139,7 @@ sealed partial class App : Application
         {
             // 当导航堆栈尚未还原时，导航到第一页，
             // 并通过将所需信息作为导航参数传入来配置
-            if(Common.Settings.OOBECompleted)
+            if (Common.Settings.OOBECompleted)
             {
                 rootFrame.Navigate(typeof(RootPage), Theme.GetNavigationTransition());
             }
@@ -205,12 +205,12 @@ sealed partial class App : Application
         }
         ActiveArguments = e.Arguments;
 
-        if(e.TileId is not null && e.TileId != "" && e.TileId != "App")
+        if (e.TileId is not null && e.TileId != "" && e.TileId != "App")
         {
             ActiveArguments = e.TileId;
         }
 
-        if(Common.Settings.IsAnalyticsEnabled)
+        if (Common.Settings.IsAnalyticsEnabled)
         {
             var service = DIContainer.Locator.ServiceProvider.GetService<AppAnalyticsService>();
             service.Start();

@@ -11,8 +11,8 @@ public sealed partial class ErrorDialog : ContentDialog
 
     public IList<Exception> Exceptions
     {
-        get => (IList<Exception>)GetValue(ExceptionsProperty); 
-        set => SetValue(ExceptionsProperty, value); 
+        get => (IList<Exception>)GetValue(ExceptionsProperty);
+        set => SetValue(ExceptionsProperty, value);
     }
 
     public static readonly DependencyProperty ExceptionsProperty =

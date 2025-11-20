@@ -27,9 +27,9 @@ public sealed class CacheHelper
             SunRise = viewModel.SunRise,
             SunSet = viewModel.SunSet,
         };
-        await FileIO.WriteTextAsync(item,"");
+        await FileIO.WriteTextAsync(item, "");
         using var stream = await item.OpenStreamForWriteAsync();
-        
+
         var options = new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default, };
 
         await JsonSerializer.SerializeAsync(stream, cache, options);
@@ -38,7 +38,7 @@ public sealed class CacheHelper
     public static async Task<WeatherCacheBase> GetCacheAsync(GeolocationBase location)
     {
         var item = await ApplicationData.Current.LocalCacheFolder.GetOrCreateFileAsync(location.Location.GetHashCode().ToString());
-        
+
         if (DateTimeOffset.Now - (await item.GetBasicPropertiesAsync()).DateModified > TimeSpan.FromMinutes(15))
             return null;
         try
@@ -46,8 +46,8 @@ public sealed class CacheHelper
             //读取文件
             using var stream = await item.OpenStreamForReadAsync();
             if (stream.Length == 0) return null;
-            var options = new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default};
-            var result = await JsonSerializer.DeserializeAsync<WeatherCacheBase>(stream,options);
+            var options = new JsonSerializerOptions { TypeInfoResolver = SourceGenerationContext.Default };
+            var result = await JsonSerializer.DeserializeAsync<WeatherCacheBase>(stream, options);
             return result;
         }
         catch
@@ -100,7 +100,7 @@ public sealed class CacheHelper
 [JsonSerializable(typeof(PrecipitationBase))]
 [JsonSerializable(typeof(PrecipitationItemBase))]
 [JsonSerializable(typeof(HistoricalDailyWeatherBase))]
-[JsonSerializable(typeof(Dictionary<string,HistoricalDailyWeatherBase>))]
+[JsonSerializable(typeof(Dictionary<string, HistoricalDailyWeatherBase>))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }

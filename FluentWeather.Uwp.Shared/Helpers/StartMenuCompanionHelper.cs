@@ -97,7 +97,7 @@ public static class StartMenuCompanionHelper
 
                         ]
         };
-        if(data.AirQuality is not null)
+        if (data.AirQuality is not null)
         {
             columnSet.Add(new AdaptiveColumn
             {
@@ -249,7 +249,7 @@ public static class StartMenuCompanionHelper
         var card = new AdaptiveCard("1.1")
         {
             Speak = "预报",
-           
+
             Body =
             [
                 new AdaptiveColumnSet()
@@ -394,7 +394,7 @@ public static class StartMenuCompanionHelper
     }
 
 }
-    public sealed class WeatherCardData 
+public sealed class WeatherCardData
 {
     [JsonPropertyName("daily")]
     public List<WeatherDailyBase> Daily { get; set; }

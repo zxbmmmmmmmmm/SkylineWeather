@@ -8,12 +8,12 @@ namespace FluentWeather.Uwp.Helpers;
 public static class TTSHelper
 {
     public static MediaPlayer MediaPlayer;
-    public static bool IsPlaying => MediaPlayer is null? false : MediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing;
+    public static bool IsPlaying => MediaPlayer is null ? false : MediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing;
 
     public static async void Speech(string text)
     {
         MediaPlayer ??= new();
-        if(MediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
+        if (MediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing)
         {
             MediaPlayer.Pause();
             return;

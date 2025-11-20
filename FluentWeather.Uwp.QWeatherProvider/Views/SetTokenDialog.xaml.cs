@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“内容对话框”项模板
 
 namespace FluentWeather.Uwp.QWeatherProvider.Views;
+
 [ObservableObject]
 public sealed partial class SetTokenDialog : ContentDialog
 {
@@ -40,10 +41,10 @@ public sealed partial class SetTokenDialog : ContentDialog
             Hide();
             await CoreApplication.RequestRestartAsync(string.Empty);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             ErrorTextblock.Visibility = Visibility.Visible;
-            ErrorTextblock.Text = e.Message;         
+            ErrorTextblock.Text = e.Message;
         }
 
     }

@@ -6,7 +6,7 @@ using FluentWeather.Uwp.Shared;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonOpenContentDialogBehavior:Behavior<ButtonBase>
+public class ButtonOpenContentDialogBehavior : Behavior<ButtonBase>
 {
     protected override void OnAttached()
     {

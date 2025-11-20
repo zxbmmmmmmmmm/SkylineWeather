@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
-public class ListPropertyNullToVisibilityConverter:IValueConverter
+public class ListPropertyNullToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
@@ -14,9 +14,9 @@ public class ListPropertyNullToVisibilityConverter:IValueConverter
         var first = list[0];
         var type = first.GetType();
         var prop = type.GetProperty(parameter.ToString());
-        if(prop is null)return Visibility.Collapsed;
+        if (prop is null) return Visibility.Collapsed;
         var result = prop.GetValue(first);
-        return result is null? Visibility.Collapsed:Visibility.Visible;
+        return result is null ? Visibility.Collapsed : Visibility.Visible;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

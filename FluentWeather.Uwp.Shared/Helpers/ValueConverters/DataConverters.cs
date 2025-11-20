@@ -80,11 +80,11 @@ public class TemperatureUnitConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         double? result = null;
-        if(value is int num)
+        if (value is int num)
         {
             result = num;
         }
-        else if(value is string str)
+        else if (value is string str)
         {
             result = double.Parse(str);
         }

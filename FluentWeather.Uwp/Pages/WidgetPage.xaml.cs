@@ -11,7 +11,7 @@ namespace FluentWeather.Uwp.Pages;
 public sealed partial class WidgetPage : Page
 {
     public MainPageViewModel ViewModel { get; set; } = new();
-    private readonly DispatcherTimer _timer = new (){ Interval = TimeSpan.FromMinutes(20)};
+    private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromMinutes(20) };
     private XboxGameBarWidget _widget;
 
     public WidgetPage()

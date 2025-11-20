@@ -5,7 +5,7 @@ using Windows.Storage;
 
 namespace FluentWeather.Uwp.Helpers;
 
-public sealed class SettingsHelper:ISettingsHelper
+public sealed class SettingsHelper : ISettingsHelper
 {
     public T ReadLocalSetting<T>(string settingName, T defaultValue)
     {
@@ -19,7 +19,7 @@ public sealed class SettingsHelper:ISettingsHelper
                 Enum.TryParse(typeof(T), tempValue, out var result);
                 return (T)result;
             }
-            if(defaultValue is IList)
+            if (defaultValue is IList)
             {
                 var tempValue = settingContainer.Values[settingName].ToString();
                 return JsonSerializer.Deserialize<T>(tempValue);
@@ -38,7 +38,7 @@ public sealed class SettingsHelper:ISettingsHelper
         {
             settingContainer.Values[settingName] = value.ToString();
         }
-        else if(value is IList)
+        else if (value is IList)
         {
             settingContainer.Values[settingName] = JsonSerializer.Serialize(value);
         }

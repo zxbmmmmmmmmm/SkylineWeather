@@ -22,7 +22,7 @@ public sealed partial class WelcomePage : Page
     {
         this.InitializeComponent();
         SetTitleBar();
-        if(CultureInfo.CurrentCulture.Name is "zh-CN")
+        if (CultureInfo.CurrentCulture.Name is "zh-CN")
         {
             WelcomeSuggestion.Visibility = Visibility.Visible;
         }

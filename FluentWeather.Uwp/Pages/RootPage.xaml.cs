@@ -63,7 +63,7 @@ public sealed partial class RootPage : Page
                 Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackUpdateViewed(info.TagName);
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Common.LogManager.GetLogger("UpdateHelper").Error("检查更新失败", ex);
         }
@@ -80,13 +80,13 @@ public sealed partial class RootPage : Page
         titleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.InactiveBackgroundColor = Windows.UI.Colors.Transparent;
         titleBar.ButtonInactiveBackgroundColor = Windows.UI.Colors.Transparent;
-        titleBar.ButtonHoverBackgroundColor = Color.FromArgb(40,128,128,128);
+        titleBar.ButtonHoverBackgroundColor = Color.FromArgb(40, 128, 128, 128);
         ThemeHelper.SetTitleBarColor(Common.Settings.ApplicationTheme);
     }
 
     [ObservableProperty]
     private bool _canGoBack;
-    
+
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
         if (!CanGoBack) return;

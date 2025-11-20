@@ -1,7 +1,7 @@
 ﻿namespace FluentWeather.Abstraction.Interfaces.Weather;
 
 public interface IAirCondition
-{ 
+{
     /// <summary>
     /// 空气质量指数
     /// </summary>

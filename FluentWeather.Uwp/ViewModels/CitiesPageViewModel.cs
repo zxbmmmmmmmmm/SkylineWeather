@@ -20,7 +20,7 @@ using Windows.ApplicationModel.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public sealed partial class CitiesPageViewModel:ObservableObject
+public sealed partial class CitiesPageViewModel : ObservableObject
 {
     [ObservableProperty]
     public partial ObservableCollection<GeolocationBase> Cities { get; set; }
@@ -40,7 +40,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
         Cities.CollectionChanged += async (_, _) =>
         {
             Common.Settings.SavedCities = Cities;
-            await JumpListHelper.SetJumpList(CurrentCity,Cities);
+            await JumpListHelper.SetJumpList(CurrentCity, Cities);
             await CacheHelper.DeleteUnused();
         };
         Instance = this;
@@ -78,7 +78,7 @@ public sealed partial class CitiesPageViewModel:ObservableObject
             await AddCustomLocation();
             return;
         }
-        if(SuggestedCities.Count == 0)
+        if (SuggestedCities.Count == 0)
         {
             await AddCustomLocation();
         }

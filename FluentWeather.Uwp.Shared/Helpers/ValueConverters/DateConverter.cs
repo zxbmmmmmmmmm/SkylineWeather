@@ -17,10 +17,10 @@ public sealed class DateConverter : IValueConverter
         if (date.Day == DateTime.Today.Day + 1)
             return ResourceLoader.GetForCurrentView().GetString("Tomorrow");
 
-        return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期","周");
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(date.DayOfWeek).Replace("星期", "周");
     }
 
-     
+
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
     {

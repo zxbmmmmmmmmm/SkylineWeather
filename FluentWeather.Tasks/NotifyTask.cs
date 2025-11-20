@@ -21,7 +21,7 @@ using FluentWeather.Uwp.Shared.Helpers.ValueConverters;
 
 namespace FluentWeather.Tasks
 {
-    public sealed class NotifyTask :IBackgroundTask
+    public sealed class NotifyTask : IBackgroundTask
     {
         private IWeatherWarningProvider _warningProvider;
         private IDailyForecastProvider _dailyForecastProvider;
@@ -34,7 +34,7 @@ namespace FluentWeather.Tasks
 
             LogManager.GetLogger(nameof(NotifyTask)).Info("NotifyTask Started");
 
-            if(Settings.ProviderConfig is Uwp.Shared.ProviderConfig.QWeather)
+            if (Settings.ProviderConfig is Uwp.Shared.ProviderConfig.QWeather)
             {
                 var provider = new QWeatherProvider();
                 _warningProvider = provider;
@@ -51,13 +51,13 @@ namespace FluentWeather.Tasks
             }
             var lat = Settings.Latitude;
             var lon = Settings.Longitude;
-            if(lat is -1 || lon is -1)
+            if (lat is -1 || lon is -1)
             {
                 deferral.Complete();
                 return;
             }
 
-            await PushDaily(lon,lat);
+            await PushDaily(lon, lat);
             await PushWarnings(lon, lat);
             await UpdateSecondaryTiles();
 
@@ -70,15 +70,15 @@ namespace FluentWeather.Tasks
             var isWarningNotificationEnabled = Settings.IsWarningNotificationEnabled;
             if (!isWarningNotificationEnabled) return;
             var warnings = await _warningProvider.GetWeatherWarnings(lon, lat);
-            settingContainer.Values["PushedWarnings"] ??= JsonSerializer.Serialize(new Dictionary<string,DateTime>());
+            settingContainer.Values["PushedWarnings"] ??= JsonSerializer.Serialize(new Dictionary<string, DateTime>());
             var pushed = JsonSerializer.Deserialize<Dictionary<string, DateTime>>((string)settingContainer.Values["PushedWarnings"]);
             pushed = pushed
                 .Where(p => p.Value > DateTime.Now.AddDays(-3))
                 .ToDictionary(p => p.Key, p => p.Value); // 清理过期的推送
             foreach (var warning in warnings)
-            {               
-                if (!Settings.NotificationsDebugMode&&pushed.ContainsKey(warning.Id)) continue; //未被推送过
-                if (Settings.IgnoreWarningWords != "" && Regex.IsMatch(warning.Title,Settings.IgnoreWarningWords)) continue;//匹配屏蔽词
+            {
+                if (!Settings.NotificationsDebugMode && pushed.ContainsKey(warning.Id)) continue; //未被推送过
+                if (Settings.IgnoreWarningWords != "" && Regex.IsMatch(warning.Title, Settings.IgnoreWarningWords)) continue;//匹配屏蔽词
                 var builder = new ToastContentBuilder()
                     .AddText(warning.Title)
                     .AddText(warning.Description)
@@ -88,7 +88,7 @@ namespace FluentWeather.Tasks
                     toast.ExpirationTime = DateTime.Now.AddHours(16);
                 });
                 if (Settings.NotificationsDebugMode) continue;
-                pushed.Add(warning.Id,warning.PublishTime);
+                pushed.Add(warning.Id, warning.PublishTime);
 
             }
             if (Settings.IsDailyNotificationTileEnabled)
@@ -118,7 +118,8 @@ namespace FluentWeather.Tasks
                 daily = await _dailyForecastProvider.GetDailyForecasts(lon, lat);
 
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
             }
 
 
@@ -157,7 +158,7 @@ namespace FluentWeather.Tasks
             }
         }
 
-        private async Task PushCard(double lon,double lat,List<WeatherDailyBase> daily)
+        private async Task PushCard(double lon, double lat, List<WeatherDailyBase> daily)
         {
             var air = await _airConditionProvider.GetAirCondition(lon, lat);
             var info = new WeatherCardData { Daily = daily, Location = Settings.DefaultGeolocation, AirQuality = air };
@@ -175,9 +176,9 @@ namespace FluentWeather.Tasks
             {
                 largeGroup.Children.Add(TileHelper.GenerateTileSubgroup(TileHelper.GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature.ConvertTemperatureUnit(), item.MinTemperature.ConvertTemperatureUnit()));
             }
-            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description,trimmed[0].MaxTemperature.ConvertTemperatureUnit(), trimmed[0].MinTemperature.ConvertTemperatureUnit());
+            var description = string.Format("NotificationFormat".GetLocalized(), trimmed[0].Description, trimmed[0].MaxTemperature.ConvertTemperatureUnit(), trimmed[0].MinTemperature.ConvertTemperatureUnit());
             var builder = new ToastContentBuilder()
-                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) +".png"))
+                .AddHeroImage(new Uri("ms-appx:///Assets/Backgrounds/" + AssetsHelper.GetBackgroundImageName(data[0].WeatherType) + ".png"))
                 .AddAttributionText(ResourceLoader.GetForViewIndependentUse().GetString("ToadyWeather"))
                 .AddText(description)
                 //.AddText($"{trimmed[0].Description}  {ResourceLoader.GetForViewIndependentUse().GetString("HighestTemperature")}°,{ResourceLoader.GetForViewIndependentUse().GetString("LowestTemperature")}°")
@@ -207,7 +208,7 @@ namespace FluentWeather.Tasks
             {
                 toast.ExpirationTime = DateTime.Now.AddHours(12);
             });
-               LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
+            LogManager.GetLogger(nameof(NotifyTask)).Info("Notification Pushed(Tomorrow)");
 
         }
 
@@ -227,7 +228,7 @@ namespace FluentWeather.Tasks
                 if (geolocation is null)
                     continue;
                 var daily = await _dailyForecastProvider.GetDailyForecasts(geolocation.Location.Longitude, geolocation.Location.Latitude);
-                var dailyNotification= new TileNotification(TileHelper.GenerateForecastTileContent(daily).GetXml()) { Tag = "forecast" };
+                var dailyNotification = new TileNotification(TileHelper.GenerateForecastTileContent(daily).GetXml()) { Tag = "forecast" };
                 var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(tile.TileId);
                 updater.Update(dailyNotification);
             }

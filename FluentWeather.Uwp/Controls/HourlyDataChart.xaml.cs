@@ -94,8 +94,8 @@ namespace FluentWeather.Uwp.Controls
             var chart = (HourlyDataChart)d;
             //chart.Bindings.Update();
             if (e.NewValue is default(double)) return;
-            if(e.Property == MinimumProperty)
-            {               
+            if (e.Property == MinimumProperty)
+            {
                 chart.VerticalLinearAxis.Minimum = (double)e.NewValue;
             }
             if (e.Property == MaximumProperty)

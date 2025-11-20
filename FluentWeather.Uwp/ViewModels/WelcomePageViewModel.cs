@@ -6,12 +6,12 @@ using Windows.ApplicationModel.Core;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public partial class WelcomePageViewModel:ObservableObject
+public partial class WelcomePageViewModel : ObservableObject
 {
     [RelayCommand]
     public async Task SetProvider(string providerId)
     {
-        if(providerId is "qweather")
+        if (providerId is "qweather")
         {
             Common.Settings.ProviderConfig = ProviderConfig.QWeather;
             await DialogManager.OpenDialogAsync(new SetTokenDialog());

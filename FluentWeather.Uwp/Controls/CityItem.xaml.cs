@@ -25,7 +25,7 @@ public sealed partial class CityItem : UserControl
     // Using a DependencyProperty as the backing store for Location.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty LocationProperty =
         DependencyProperty.Register(nameof(Location), typeof(GeolocationBase), typeof(CityItem), new PropertyMetadata(default));
-    
+
 
 
 

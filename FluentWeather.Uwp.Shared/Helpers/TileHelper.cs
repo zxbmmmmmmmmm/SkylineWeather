@@ -21,9 +21,9 @@ namespace FluentWeather.Uwp.Shared.Helpers
     {
         public static async Task PinSecondaryTileToTaskBarAsync(GeolocationBase geolocation)
         {
-            var access = Windows.ApplicationModel.LimitedAccessFeatures.TryUnlockFeature("com.microsoft.windows.taskbar.requestPinSecondaryTile","jf0w/jdkHVCaehrYkTQLMg==","we3nmnswjxrbg has registered their use of com.microsoft.windows.taskbar.requestPinSecondaryTile with Microsoft and agrees to the terms of use.");
+            var access = Windows.ApplicationModel.LimitedAccessFeatures.TryUnlockFeature("com.microsoft.windows.taskbar.requestPinSecondaryTile", "jf0w/jdkHVCaehrYkTQLMg==", "we3nmnswjxrbg has registered their use of com.microsoft.windows.taskbar.requestPinSecondaryTile with Microsoft and agrees to the terms of use.");
 
-            if ((access.Status == LimitedAccessFeatureStatus.Available)||(access.Status == LimitedAccessFeatureStatus.AvailableWithoutToken))
+            if ((access.Status == LimitedAccessFeatureStatus.Available) || (access.Status == LimitedAccessFeatureStatus.AvailableWithoutToken))
             {
                 TaskbarManager taskbarManager = TaskbarManager.GetDefault();
 
@@ -112,12 +112,12 @@ namespace FluentWeather.Uwp.Shared.Helpers
             {
                 builder.AddText(item.ShortTitle, size: TileSize.Medium, hintStyle: AdaptiveTextStyle.Caption, hintWrap: true, hintMaxLines: 2);
                 builder.AddText(item.ShortTitle, size: TileSize.Wide, hintStyle: AdaptiveTextStyle.Body, hintWrap: true, hintMaxLines: 2);
-                if(warnings.Count == 1)
+                if (warnings.Count == 1)
                 {
                     builder.AddText(item.Description, size: TileSize.Wide, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 3);
-                }   
+                }
                 builder.AddText(item.ShortTitle, size: TileSize.Large, hintStyle: AdaptiveTextStyle.Base);
-                if(warnings.Count == 1)
+                if (warnings.Count == 1)
                 {
                     builder.AddText(item.Description, size: TileSize.Large, hintStyle: AdaptiveTextStyle.CaptionSubtle, hintWrap: true, hintMaxLines: 10);
                 }
@@ -345,8 +345,8 @@ namespace FluentWeather.Uwp.Shared.Helpers
                 }
             };
             var largeGroup = new AdaptiveGroup();
-            foreach (var item in daily.GetRange(1,5))
-            {                
+            foreach (var item in daily.GetRange(1, 5))
+            {
                 largeGroup.Children.Add(GenerateTileSubgroup(GetWeek(item.Time), $"Assets/Weather/Resized/32/{AssetsHelper.GetWeatherIconName(item.WeatherType)}", item.MaxTemperature.ConvertTemperatureUnit(), item.MinTemperature.ConvertTemperatureUnit()));
             }
             content.Children.Add(largeGroup);

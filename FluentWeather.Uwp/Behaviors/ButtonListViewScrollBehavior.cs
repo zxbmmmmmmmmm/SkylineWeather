@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Media;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonListViewScrollBehavior: Behavior<Button>
+public class ButtonListViewScrollBehavior : Behavior<Button>
 {
 
 
@@ -45,7 +45,7 @@ public class ButtonListViewScrollBehavior: Behavior<Button>
 
     private void ButtonClicked(object sender, RoutedEventArgs e)
     {
-        if(IsRight)
+        if (IsRight)
         {
             _listScrollViewer?.ChangeView(_listScrollViewer.HorizontalOffset + ListView.ActualWidth, 0, 1);
         }
@@ -57,7 +57,7 @@ public class ButtonListViewScrollBehavior: Behavior<Button>
 
     private void OnScrollViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
     {
-        if(AssociatedObject is null) return;
+        if (AssociatedObject is null) return;
         AssociatedObject.Visibility = (_listScrollViewer.ScrollableWidth > 0) ? Visibility.Visible : Visibility.Collapsed;
 
         AssociatedObject.IsEnabled = CanScroll(_listScrollViewer);
@@ -79,7 +79,7 @@ public class ButtonListViewScrollBehavior: Behavior<Button>
 
     protected override void OnDetaching()
     {
-        base.OnDetaching(); 
+        base.OnDetaching();
         AssociatedObject.Click -= ButtonClicked;
         _listScrollViewer.ViewChanged -= OnScrollViewChanged;
         _listScrollViewer.LayoutUpdated -= (s, e) => OnScrollViewChanged(null, null);

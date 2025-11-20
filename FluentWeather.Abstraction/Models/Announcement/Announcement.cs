@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 
 namespace FluentWeather.Abstraction.Models;
-public class Announcement(int id,string name)
+
+public class Announcement(int id, string name)
 {
     public int Id { get; set; } = id;
     public string Name { get; set; } = name;
@@ -24,7 +25,7 @@ public class Announcement(int id,string name)
     public DateTime ExpiredAt { get; set; }
     public string LinkText { get; set; } = "View more";
 
-    
+
 
     public static List<Announcement> GetAllAnnouncements()
     {

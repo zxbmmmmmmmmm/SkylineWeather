@@ -47,13 +47,13 @@ public abstract class AppAnalyticsService
     {
         TrackEvent($"{name} Viewed");
     }
-    public virtual void TrackAnnouncementClosed(string name,bool isViewed)
+    public virtual void TrackAnnouncementClosed(string name, bool isViewed)
     {
-        TrackEvent($"{name} Closed","IsViewed",isViewed.ToString());
+        TrackEvent($"{name} Closed", "IsViewed", isViewed.ToString());
     }
     public virtual void TrackHistoricalWeatherDataDownloaded(string location)
     {
-        TrackEvent("HistoricalWeatherDataDownloaded","Geolocation",location);
+        TrackEvent("HistoricalWeatherDataDownloaded", "Geolocation", location);
     }
     public virtual void TrackTokenChanged()
     {
@@ -69,11 +69,11 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackProviderChanged(string providerName)
     {
-        TrackEvent("ProviderChanged","ProviderName",providerName,false);
+        TrackEvent("ProviderChanged", "ProviderName", providerName, false);
     }
     public virtual void TrackThemeChanged(string themeName)
     {
-        TrackEvent("ThemeChanged","ThemeName",themeName);
+        TrackEvent("ThemeChanged", "ThemeName", themeName);
     }
     public virtual void TrackMainPageChanged(string fileName)
     {
@@ -93,11 +93,11 @@ public abstract class AppAnalyticsService
     }
     public virtual void TrackUpdateViewed(string updateVersion)
     {
-        TrackEvent("UpdateViewed","UpdateVersion",updateVersion);
+        TrackEvent("UpdateViewed", "UpdateVersion", updateVersion);
     }
     public virtual void TrackCitySaved(string cityName)
     {
-        TrackEvent("CitySaved", "CityName",cityName);
+        TrackEvent("CitySaved", "CityName", cityName);
     }
     public virtual void TrackDefaultLocationChanged(string cityName)
     {

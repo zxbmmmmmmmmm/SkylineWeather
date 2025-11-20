@@ -22,11 +22,11 @@ internal static class InfoBarHelper
         infoBar.IsOpen = false;
         _container?.Children.Remove(infoBar);
     }
-    public static void Error(string title, string message, int delay = 5000,bool isClosable = true)
+    public static void Error(string title, string message, int delay = 5000, bool isClosable = true)
     {
         AddToContainer(InfoBarSeverity.Error, title, message, delay, isClosable);
     }
-    public static void Info(string title, string message, int delay = 5000, bool isClosable = true ,string buttonContent = null, Action action = null)
+    public static void Info(string title, string message, int delay = 5000, bool isClosable = true, string buttonContent = null, Action action = null)
     {
         DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
         {
@@ -36,7 +36,7 @@ internal static class InfoBarHelper
                 Title = title,
                 Message = message,
                 IsOpen = true,
-                IsClosable = isClosable,           
+                IsClosable = isClosable,
             };
             if (action is not null)
             {
@@ -117,7 +117,7 @@ internal static class InfoBarHelper
     {
         AddToContainer(InfoBarSeverity.Warning, title, message, delay, isClosable);
     }
-    private static void AddToContainer(InfoBarSeverity severity,string title,string message,int delay, bool isClosable)
+    private static void AddToContainer(InfoBarSeverity severity, string title, string message, int delay, bool isClosable)
     {
         DispatcherQueue.GetForCurrentThread().TryEnqueue(async () =>
         {

@@ -34,7 +34,7 @@ namespace FluentWeather.Uwp.Controls.Settings
                 await ApplicationData.Current.LocalFolder.CreateFolderAsync("Backgrounds");
             }
             var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("Backgrounds");
-            if(await folder.TryGetItemAsync(type + ".png") is StorageFile file)
+            if (await folder.TryGetItemAsync(type + ".png") is StorageFile file)
             {
                 await file.DeleteAsync();
             }
@@ -58,7 +58,7 @@ namespace FluentWeather.Uwp.Controls.Settings
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
             StorageFile file = await picker.PickSingleFileAsync();
-            
+
             return file;
         }
 
@@ -86,7 +86,7 @@ namespace FluentWeather.Uwp.Controls.Settings
         }
 
         private void ThemeStyleButtons_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {             
+        {
             RestartInfoBar.IsOpen = true;
             Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackThemeChanged(Common.Settings.Theme.ToString());
         }
@@ -103,7 +103,7 @@ namespace FluentWeather.Uwp.Controls.Settings
                 ViewMode = PickerViewMode.List,
             };
             picker.FileTypeFilter.Add(".xaml");
-            var file = await picker.PickSingleFileAsync(); 
+            var file = await picker.PickSingleFileAsync();
             if (file is null) return;
             if ((await ApplicationData.Current.LocalFolder.TryGetItemAsync("CustomPages")) is null)
             {
@@ -114,7 +114,7 @@ namespace FluentWeather.Uwp.Controls.Settings
             {
                 await file1.DeleteAsync();
             }
-            await file.CopyAsync(folder,"MainPage.xaml");
+            await file.CopyAsync(folder, "MainPage.xaml");
             RestartInfoBar.IsOpen = true;
             Common.Settings.EnableCustomPage = true;
             Locator.ServiceProvider.GetService<AppAnalyticsService>()?.TrackMainPageChanged(file.Name);

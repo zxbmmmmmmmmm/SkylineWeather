@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace FluentWeather.Uwp.Behaviors;
 
-public class ButtonPointerOpenFlyoutBehavior:Behavior<Button>
+public class ButtonPointerOpenFlyoutBehavior : Behavior<Button>
 {
     protected override void OnAttached()
     {

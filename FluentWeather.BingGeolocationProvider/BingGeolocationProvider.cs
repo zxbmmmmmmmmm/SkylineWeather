@@ -14,12 +14,12 @@ using Location = BingMapsRESTToolkit.Location;
 
 namespace FluentWeather.BingGeolocationProvider;
 
-public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
+public class BingGeolocationProvider : ProviderBase, IGeolocationProvider
 {
     public override string Name => "BingMapsGeolocation";
 
     public override string Id => "bingmaps";
-    
+
     public async Task<List<GeolocationBase>> GetCitiesGeolocationByLocation(double lat, double lon)
     {
         var request = new ReverseGeocodeRequest()
@@ -39,7 +39,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
         {
             return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
         }
-        throw new HttpResponseException(response.ErrorDetails[0],(HttpStatusCode)response.StatusCode);
+        throw new HttpResponseException(response.ErrorDetails[0], (HttpStatusCode)response.StatusCode);
     }
 
     public async Task<List<GeolocationBase>> GetCitiesGeolocationByName(string name)
@@ -59,7 +59,7 @@ public class BingGeolocationProvider : ProviderBase,IGeolocationProvider
 
         if (response is { ResourceSets.Length: > 0 })
         {
-            if(response.ResourceSets[0].Resources is { Length: > 0 })
+            if (response.ResourceSets[0].Resources is { Length: > 0 })
             {
                 return response.ResourceSets[0].Resources.Cast<Location>().ToList().ConvertAll(p => p.MapToGeolocation());
             }

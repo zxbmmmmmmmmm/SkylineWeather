@@ -13,13 +13,13 @@ using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 
 namespace FluentWeather.OpenMeteoProvider;
 
-public sealed class OpenMeteoProvider : 
+public sealed class OpenMeteoProvider :
     ProviderBase,
-    ICurrentWeatherProvider, 
+    ICurrentWeatherProvider,
     IAirConditionProvider,
     IDailyForecastProvider,
     IHourlyForecastProvider,
-    IPrecipitationProvider, 
+    IPrecipitationProvider,
     IHistoricalWeatherProvider,
     IGeolocationProvider
 {
@@ -35,10 +35,10 @@ public sealed class OpenMeteoProvider :
     }
     public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
-        var result = await Client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables:new[]{ HourlyVariables.Visibility, "dew_point_2m" });
+        var result = await Client.GetWeatherForecastData(lat, lon, currentVariables: CurrentVariables.All, hourlyVariables: new[] { HourlyVariables.Visibility, "dew_point_2m" });
         var now = result.CurrentWeather!.MapToOpenMeteoWeatherNow();
         now.DewPointTemperature = (int)result.HourlyForecast?.DewPoint2m?[0]!;
-        now.Visibility = (int)(result.HourlyForecast?.Visibility?[0]!/1000);
+        now.Visibility = (int)(result.HourlyForecast?.Visibility?[0]! / 1000);
         return now;
     }
     public async Task<AirConditionBase> GetAirCondition(double lon, double lat)
@@ -64,15 +64,15 @@ public sealed class OpenMeteoProvider :
         var result = await Client.GetMinutelyForecasts(lat, lon);
         var precip = new PrecipitationBase
         {
-            Precipitations = result.ConvertAll(p  => new PrecipitationItemBase(DateTime.Parse(p.Time),p.Precipitation!.Value)),
+            Precipitations = result.ConvertAll(p => new PrecipitationItemBase(DateTime.Parse(p.Time), p.Precipitation!.Value)),
         };
         return precip;
     }
 
     public async Task<List<WeatherDailyBase>> GetHistoricalDailyWeather(double lon, double lat, DateTime startTime, DateTime endTime)
     {
-        var data = await Client.GetHistoricalWeatherData(lat, lon, startTime, endTime, 
-            dailyVariables: [DailyVariables.WeatherCode,DailyVariables.Temperature2mMax,DailyVariables.Temperature2mMin,DailyVariables.PrecipitationSum,DailyVariables.PrecipitationHours,DailyVariables.WindDirection10mDominant,DailyVariables.WindSpeed10mMax]
+        var data = await Client.GetHistoricalWeatherData(lat, lon, startTime, endTime,
+            dailyVariables: [DailyVariables.WeatherCode, DailyVariables.Temperature2mMax, DailyVariables.Temperature2mMin, DailyVariables.PrecipitationSum, DailyVariables.PrecipitationHours, DailyVariables.WindDirection10mDominant, DailyVariables.WindSpeed10mMax]
             );
         var list = new List<WeatherDailyBase>(data.DailyForecast!.Time!.Count());
         for (var i = 0; i < data.DailyForecast!.Time!.Count(); i++)

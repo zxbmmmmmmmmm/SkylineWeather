@@ -4,7 +4,7 @@ using FluentWeather.Abstraction.Models;
 
 namespace FluentWeather.Uwp.ViewModels;
 
-public sealed partial class DailyForecastDialogViewModel:ObservableObject
+public sealed partial class DailyForecastDialogViewModel : ObservableObject
 {
     [ObservableProperty]
     public partial List<WeatherDailyBase> DailyForecasts { get; set; } = new();

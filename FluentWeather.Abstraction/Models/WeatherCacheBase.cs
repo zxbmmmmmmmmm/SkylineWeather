@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace FluentWeather.Abstraction.Models;
+
 public class WeatherCacheBase
 {
     public virtual List<WeatherDailyBase> DailyForecasts { get; set; }

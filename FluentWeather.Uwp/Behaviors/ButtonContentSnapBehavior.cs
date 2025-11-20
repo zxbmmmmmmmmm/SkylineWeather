@@ -25,7 +25,7 @@ public class ButtonContentSnapBehavior : Behavior<ButtonBase>
     private Vector3KeyFrameAnimation _translationAnimation1;
     private Vector3KeyFrameAnimation _translationAnimation2;
 
-    
+
 
     public ButtonContentSnapType SnapType
     {

@@ -5,7 +5,7 @@ public interface IWind
     /// <summary>
     /// 风向
     /// </summary>
-    string WindDirectionDescription{ get; set; }
+    string WindDirectionDescription { get; set; }
 
     /// <summary>
     /// 风力等级

@@ -35,14 +35,14 @@ public sealed partial class TyphoonDialog : ContentDialog
     private TyphoonBase _selected;
     public async void GetTyphoons()
     {
-        if(Common.Settings.QWeatherDomain is "devapi.qweather.com")
+        if (Common.Settings.QWeatherDomain is "devapi.qweather.com")
         {
             ServiceWarning.Visibility = Visibility.Visible;
             return;
         }
         var provider = Locator.ServiceProvider.GetService<ITyphoonProvider>();
         var data = await provider.GetActiveTyphoons();
-        if(data.Count is 0)
+        if (data.Count is 0)
         {
             NoTyphoonInfo.Visibility = Visibility.Visible;
             return;
@@ -85,9 +85,9 @@ public sealed partial class TyphoonDialog : ContentDialog
     public void ShowTyphoon(TyphoonBase typhoon)
     {
         var now = new BasicGeoposition { Latitude = typhoon.Now.Latitude, Longitude = typhoon.Now.Longitude };
-            
+
         if (((IWindRadius)typhoon.Now).WindRadius7 is { } radius7)
-            TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius7), Color.FromArgb(64,0,128,255), Color.FromArgb(100, 0, 128, 255)));
+            TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius7), Color.FromArgb(64, 0, 128, 255), Color.FromArgb(100, 0, 128, 255)));
 
         if (((IWindRadius)typhoon.Now).WindRadius10 is { } radius10)
             TyphoonMap.MapElements.Add(GetCircleMapPolygon(now, GetRadius(radius10), Color.FromArgb(32, 255, 255, 0), Colors.Yellow));
@@ -105,11 +105,11 @@ public sealed partial class TyphoonDialog : ContentDialog
         var path = new List<BasicGeoposition>();
         foreach (var item in typhoon.History)
         {
-            var point = new BasicGeoposition{ Latitude = item.Latitude, Longitude = item.Longitude };
+            var point = new BasicGeoposition { Latitude = item.Latitude, Longitude = item.Longitude };
             path.Add(point);
         }
         path.Add(endLocation);
-        var  line = new MapPolyline()
+        var line = new MapPolyline()
         {
             Path = new Geopath(path),
             StrokeThickness = 2,
@@ -128,7 +128,7 @@ public sealed partial class TyphoonDialog : ContentDialog
         };
         foreach (var item in typhoon.Forecast)
         {
-            var point = new BasicGeoposition{ Latitude = item.Latitude, Longitude = item.Longitude };
+            var point = new BasicGeoposition { Latitude = item.Latitude, Longitude = item.Longitude };
             path.Add(point);
         }
         var line = new MapPolyline()
@@ -141,7 +141,7 @@ public sealed partial class TyphoonDialog : ContentDialog
         TyphoonMap.MapElements.Add(line);
     }
 
-    public MapPolygon GetCircleMapPolygon(BasicGeoposition originalLocation, double radius,Color fill,Color stroke)
+    public MapPolygon GetCircleMapPolygon(BasicGeoposition originalLocation, double radius, Color fill, Color stroke)
     {
         MapPolygon retVal = new MapPolygon();
 
@@ -162,7 +162,7 @@ public sealed partial class TyphoonDialog : ContentDialog
 
         retVal.Path = new Geopath(locations);
         retVal.FillColor = fill;
-        retVal.StrokeColor =stroke;
+        retVal.StrokeColor = stroke;
         retVal.StrokeThickness = 2;
 
         return retVal;
@@ -198,7 +198,7 @@ public sealed partial class TyphoonDialog : ContentDialog
             StrokeDashed = true,
             StrokeColor = Color.FromArgb(120, 255, 255, 0),
         };
-        var text24 = new TextBlock { TextWrapping = TextWrapping.Wrap,  Text = "24小时警戒线" ,Foreground = new SolidColorBrush(Color.FromArgb(150, 255, 255, 0)) };
+        var text24 = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = "24小时警戒线", Foreground = new SolidColorBrush(Color.FromArgb(150, 255, 255, 0)) };
         var text48 = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = "48小时警戒线", Foreground = new SolidColorBrush(Color.FromArgb(120, 255, 255, 0)) };
 
         TyphoonMap.MapElements.Add(line24);

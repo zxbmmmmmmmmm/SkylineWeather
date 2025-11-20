@@ -42,7 +42,7 @@ public sealed class QWeatherProvider : ProviderBase,
         Instance = this;
         GetSettings();
     }
-    public QWeatherProvider(string token,string domain,string language = null,string publicKey = null)
+    public QWeatherProvider(string token, string domain, string language = null, string publicKey = null)
     {
         Instance = this;
         Option.Token = token;
@@ -107,7 +107,7 @@ public sealed class QWeatherProvider : ProviderBase,
         //throw new NotSupportedException($"Unsupported culture code: {cultureName}");
     }
 
-    public async Task<WeatherNowBase> GetCurrentWeather(double lon,double lat)
+    public async Task<WeatherNowBase> GetCurrentWeather(double lon, double lat)
     {
         var result = await RequestAsync(QWeatherApis.WeatherNowApi, new QWeatherRequest(lon, lat));
         return result.WeatherNow.MapToQweatherNow();
@@ -151,7 +151,7 @@ public sealed class QWeatherProvider : ProviderBase,
     {
         var result = await RequestAsync(QWeatherApis.AirConditionApi, new QWeatherRequest(lon, lat));
         var res = result.AirConditionNow?.MapToQAirCondition();
-        if(res is not null)res.Link = result.FxLink;
+        if (res is not null) res.Link = result.FxLink;
         return res;
     }
 
@@ -162,16 +162,16 @@ public sealed class QWeatherProvider : ProviderBase,
         List<Task> tasks = new List<Task>();
         foreach (var item in active)
         {
-            tasks.Add(GetTyphoon(item.Id, item.Name));         
+            tasks.Add(GetTyphoon(item.Id, item.Name));
         }
         await Task.WhenAll(tasks);
         return tasks.ConvertAll(p => ((Task<TyphoonBase>)p).Result);
     }
-    public async Task<TyphoonBase> GetTyphoon (string id,string name)
+    public async Task<TyphoonBase> GetTyphoon(string id, string name)
     {
         var typ = await RequestAsync(QWeatherApis.TyphoonTrackApi, new TyphoonTrackRequest { TyphoonId = id });
         var qtyp = typ.MapToTyphoonBase(name);
-        var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id});
+        var forecast = await RequestAsync(QWeatherApis.TyphoonForecastApi, new TyphoonForecastRequest { TyphoonId = id });
         var qfor = forecast.Forecasts.ConvertAll(p => p.MapToQTyphoonTrack());
         qtyp.Forecast = qfor;
         return qtyp;
@@ -195,7 +195,7 @@ public sealed class QWeatherProvider : ProviderBase,
         var response = await handler.RequestAsync(contract, request, Option);
         if (response.Code is not null && !response.Code.StartsWith("2"))
         {
-            if(response.Code is "401" or "402" or "403")
+            if (response.Code is "401" or "402" or "403")
             {
                 await DialogManager.OpenDialogAsync(new SetTokenDialog(), DialogShowingOption.ShowIfNoActive);
             }

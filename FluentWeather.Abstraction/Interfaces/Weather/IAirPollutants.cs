@@ -8,7 +8,7 @@ public interface IAirPollutants
     /// <summary>
     /// PM2.5
     /// </summary>
-    double PM25{ get; set; }
+    double PM25 { get; set; }
     /// <summary>
     /// PM10
     /// </summary>
