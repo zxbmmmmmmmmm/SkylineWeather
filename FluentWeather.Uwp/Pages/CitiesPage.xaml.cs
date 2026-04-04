@@ -25,6 +25,7 @@ public sealed partial class CitiesPage : Page
         base.OnNavigatedTo(e);
         CurrentCityView.SelectionChanged += CurrentCityView_SelectionChanged;
         CitiesView.SelectionChanged += CitiesView_SelectionChanged;
+        ViewModel.UseDefaultLocation();
         if (App.ActiveArguments is null or "" or "App")
         {
             SetSelectedLocation(Common.Settings.DefaultGeolocation?.Location.GetHashCode().ToString());
@@ -36,8 +37,10 @@ public sealed partial class CitiesPage : Page
 
         if (MainPageViewModel.Instance.CurrentGeolocation is null)
         {
-            await CitiesPageViewModel.Instance.GetCurrentCity();
+            ViewModel.UseDefaultLocation();
         }
+
+        await ViewModel.RefreshCurrentLocationOnStartupAsync();
     }
 
     public void SetSelectedLocation(string hash)

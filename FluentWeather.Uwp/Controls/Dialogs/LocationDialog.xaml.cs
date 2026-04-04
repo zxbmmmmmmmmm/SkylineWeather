@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Models;
 using FluentWeather.DIContainer;
+using FluentWeather.Uwp.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -41,6 +42,11 @@ public sealed partial class LocationDialog : ContentDialog
         {
             SecondaryButtonText = ResourceLoader.GetForCurrentView().GetString("Close");
         }
+        if ((options & LocationDialogOptions.CustomLocationExpanded) is LocationDialogOptions.CustomLocationExpanded)
+        {
+            CustomLocationPanel.Visibility = Visibility.Visible;
+            ShowCustomLocationButton.Visibility = Visibility.Collapsed;
+        }
     }
 
     [ObservableProperty]
@@ -58,11 +64,14 @@ public sealed partial class LocationDialog : ContentDialog
             var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
             var result = await service.GetCitiesGeolocationByName(Query);
             result?.ForEach(SuggestedCities.Add);
+            if (SuggestedCities.Count is 0)
+            {
+                ExpandCustomLocationPanel();
+            }
         }
         catch
         {
-            ShowCustomLocationButton.Visibility = Visibility.Collapsed;
-            CustomLocationPanel.Visibility = Visibility.Visible;
+            ExpandCustomLocationPanel();
         }
     }
 
@@ -85,7 +94,7 @@ public sealed partial class LocationDialog : ContentDialog
             }
             catch
             {
-                TimeZone = GetTimeZoneFromLocation(location.Location.Longitude);
+                TimeZone = TimeZoneHelper.GetTimeZoneFromLocation(location.Location.Longitude);
             }
         }
         else if (location.UtcOffset is not null)
@@ -94,7 +103,7 @@ public sealed partial class LocationDialog : ContentDialog
         }
         else
         {
-            TimeZone = GetTimeZoneFromLocation(location.Location.Longitude);
+            TimeZone = TimeZoneHelper.GetTimeZoneFromLocation(location.Location.Longitude);
         }
         IsDaylightSavingTime = location.IsDaylightSavingTime;
 
@@ -136,23 +145,7 @@ public sealed partial class LocationDialog : ContentDialog
         };
         Hide();
     }
-    public TimeZoneInfo GetTimeZoneFromLocation(double longitude)
-    {
-        var timeZone = 0;
-
-        var quotient = (int)(longitude / 15);
-        var remainder = Math.Abs(longitude % 15);
-        if (remainder <= 7.5)
-        {
-            timeZone = quotient;
-        }
-        else
-        {
-            timeZone = quotient + (longitude > 0 ? 1 : -1);
-        }
-
-        return TimeZones.FirstOrDefault(p => p.BaseUtcOffset == TimeSpan.FromHours(1) * timeZone);
-    }
+  
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanContinue))]
@@ -187,6 +180,11 @@ public sealed partial class LocationDialog : ContentDialog
 
     private void ShowCustomLocationButton_Click(object sender, RoutedEventArgs e)
     {
+        ExpandCustomLocationPanel();
+    }
+
+    private void ExpandCustomLocationPanel()
+    {
         CustomLocationPanel.Visibility = Visibility.Visible;
         ShowCustomLocationButton.Visibility = Visibility.Collapsed;
     }
@@ -218,4 +216,9 @@ public enum LocationDialogOptions
     /// 隐藏关闭按钮
     /// </summary>
     HideCancelButton = 4,
+
+    /// <summary>
+    /// 展开自定义位置
+    /// </summary>
+    CustomLocationExpanded = 8,
 }

@@ -1,15 +1,18 @@
-﻿using FluentWeather.DIContainer;
-using Microsoft.Extensions.DependencyInjection;
-using Windows.Devices.Geolocation;
-using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
+﻿using FluentWeather.Abstraction.Interfaces.GeolocationProvider;
 using FluentWeather.Abstraction.Models;
+using FluentWeather.DIContainer;
 using FluentWeather.Uwp.Controls.Dialogs;
 using FluentWeather.Uwp.Shared;
+using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
+using System.Linq;
+using Windows.Devices.Geolocation;
 
 namespace FluentWeather.Uwp.Helpers;
 
 public sealed class LocationHelper
 {
+    private const double LocationChangedTolerance = 0.001;
     public static async Task<(double lon, double lat)> UpdatePosition()
     {
         try
@@ -18,7 +21,6 @@ public sealed class LocationHelper
             switch (accessStatus)
             {
                 case GeolocationAccessStatus.Allowed:
-
                     var geolocator = new Geolocator { DesiredAccuracyInMeters = 10 };
                     var pos = await geolocator.GetGeopositionAsync();
                     return (pos.Coordinate.Point.Position.Longitude, pos.Coordinate.Point.Position.Latitude);
@@ -34,58 +36,143 @@ public sealed class LocationHelper
             return (-1, -1);
         }
     }
-    public static async Task<GeolocationBase> GetGeolocation()
+
+    public static async Task<GeolocationBase?> EnsureDefaultGeolocationAsync()
     {
-        //尝试获取位置
-        //获取失败且默认位置未设置:弹出对话框，将默认位置作为当前位置
-        //获取失败但默认位置已设置：将默认位置作为当前位置
-        //获取成功:设置位置，并将当前位置设置为默认位置
-
-        var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
-        if (Common.Settings.DefaultGeolocation?.Name is null)//默认位置未设置
-        {
-            var (lon, lat) = await LocationHelper.UpdatePosition();
-            if (lon is -1 || lat is -1)//获取位置失败
-            {
-                var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
-                await DialogManager.OpenDialogAsync(dialog);
-                Common.Settings.DefaultGeolocation = dialog.Result;
-                return dialog.Result;
-            }
-
-            try
-            {
-                var city = await service.GetCitiesGeolocationByLocation(lat, lon);
-                if (city.Count is 0)//根据经纬度获取城市失败
-                {
-                    var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
-                    await DialogManager.OpenDialogAsync(dialog);
-                    Common.Settings.DefaultGeolocation = dialog.Result;
-                    return dialog.Result;
-                }
-                return city.First();
-            }
-            catch
-            {
-                var dialog = new LocationDialog(LocationDialogOptions.HideCancelButton);
-                await DialogManager.OpenDialogAsync(dialog);
-                Common.Settings.DefaultGeolocation = dialog.Result;
-                return dialog.Result;
-            }
-
-        }
-
-        if (!Common.Settings.UpdateLocationOnStartup)//不更新位置
-            return Common.Settings.DefaultGeolocation;
-
-        //默认位置已设置但需要更新位置
-        var (lo, la) = await LocationHelper.UpdatePosition();
-        if (lo is -1 || la is -1)//检查失败
+        if (Common.Settings.DefaultGeolocation?.Name is not null)
         {
             return Common.Settings.DefaultGeolocation;
         }
-        var c = await service.GetCitiesGeolocationByLocation(la, lo);
-        return c.Count is 0 ? Common.Settings.DefaultGeolocation : c.First();//若定位失败仍然使用默认位置
+
+        var (lon, lat) = await UpdatePosition();
+        if (!IsValidPosition(lon, lat))
+        {
+            return await RequestLocationAsync(LocationDialogOptions.HideCancelButton);
+        }
+
+        var city = await TryResolveCityAsync(lat, lon);
+        if (city is not null)
+        {
+            SaveDefaultLocation(city);
+            return city;
+        }
+
+        return await RequestLocationAsync(
+            LocationDialogOptions.HideCancelButton | LocationDialogOptions.CustomLocationExpanded,
+            lon,
+            lat);
     }
 
+    public static async Task<GeolocationBase?> GetGeolocation()
+    {
+        var defaultLocation = await EnsureDefaultGeolocationAsync();
+        if (defaultLocation?.Name is null)
+        {
+            return null;
+        }
+
+        if (!Common.Settings.UpdateLocationOnStartup)
+        {
+            return defaultLocation;
+        }
+
+        var updatedLocation = await RefreshCurrentLocationAsync();
+        return updatedLocation ?? defaultLocation;
+    }
+
+    public static async Task<GeolocationBase?> RefreshCurrentLocationAsync()
+    {
+        if (Common.Settings.DefaultGeolocation?.Name is null)
+        {
+            return await EnsureDefaultGeolocationAsync();
+        }
+
+        var (lon, lat) = await UpdatePosition();
+        if (!IsValidPosition(lon, lat) || !HasLocationChanged(lat, lon))
+        {
+            return null;
+        }
+
+        SaveLastPosition(lat, lon);
+        return await TryResolveCityAsync(lat, lon) ?? CreateCurrentLocation(lat, lon);
+    }
+
+    private static bool IsValidPosition(double lon, double lat)
+    {
+        return lon is not -1 && lat is not -1;
+    }
+
+    private static bool HasLocationChanged(double lat, double lon)
+    {
+        if (Common.Settings.Latitude < 0 || Common.Settings.Longitude < 0)
+        {
+            return true;
+        }
+
+        return Math.Abs(Common.Settings.Latitude - lat) > LocationChangedTolerance ||
+               Math.Abs(Common.Settings.Longitude - lon) > LocationChangedTolerance;
+    }
+
+    private static async Task<GeolocationBase?> TryResolveCityAsync(double lat, double lon)
+    {
+        var service = Locator.ServiceProvider.GetService<IGeolocationProvider>();
+        if (service is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            return (await service.GetCitiesGeolocationByLocation(lat, lon)).FirstOrDefault();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static async Task<GeolocationBase?> RequestLocationAsync(LocationDialogOptions options, double? lon = null, double? lat = null)
+    {
+        var dialog = new LocationDialog(options);
+        if (lon.HasValue && lat.HasValue)
+        {
+            dialog.Longitude = lon.Value.ToString(CultureInfo.InvariantCulture);
+            dialog.Latitude = lat.Value.ToString(CultureInfo.InvariantCulture);
+            dialog.TimeZone = TimeZoneHelper.GetTimeZoneFromLocation(lon.Value);
+            dialog.Name = "CurrentLocation".GetLocalized();
+        }
+
+        await DialogManager.OpenDialogAsync(dialog);
+        if (dialog.Result is null)
+        {
+            return null;
+        }
+
+        SaveDefaultLocation(dialog.Result);
+        return dialog.Result;
+    }
+
+    private static void SaveDefaultLocation(GeolocationBase location)
+    {
+        Common.Settings.DefaultGeolocation = location;
+        SaveLastPosition(location.Location.Latitude, location.Location.Longitude);
+    }
+
+    private static void SaveLastPosition(double lat, double lon)
+    {
+        Common.Settings.Latitude = lat;
+        Common.Settings.Longitude = lon;
+    }
+
+    private static GeolocationBase CreateCurrentLocation(double lat, double lon)
+    {
+        var timeZone = TimeZoneHelper.GetTimeZoneFromLocation(lon);
+        return new GeolocationBase
+        {
+            Name = "CurrentLocation".GetLocalized(),
+            Location = new(lat, lon),
+            TimeZone = timeZone.Id,
+            UtcOffset = timeZone.BaseUtcOffset
+        };
+    }
 }

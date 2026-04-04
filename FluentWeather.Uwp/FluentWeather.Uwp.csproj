@@ -236,6 +236,7 @@
     <Compile Include="Helpers\JumpListHelper.cs" />
     <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="Helpers\TimeZoneHelper.cs" />
     <Compile Include="Helpers\TTSHelper.cs" />
     <Compile Include="Helpers\Update\SystemVersionInfo.cs" />
     <Compile Include="Helpers\Update\UpdateHelper.cs" />

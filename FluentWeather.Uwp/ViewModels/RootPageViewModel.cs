@@ -8,6 +8,9 @@ public sealed partial class RootPageViewModel : ObservableObject
     [ObservableProperty]
     public partial bool IsPaneOpen { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsStartupLocationReady { get; set; }
+
     [RelayCommand]
     private void TogglePane()
     {

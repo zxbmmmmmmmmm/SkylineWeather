@@ -40,12 +40,48 @@ public sealed partial class RootPage : Page
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        PaneFrame.Navigate(typeof(CitiesPage), Theme.GetSplitPaneNavigationTransition());
+        _ = InitializeAsync();
+    }
+
+    private async Task InitializeAsync()
+    {
         InfoBarHelper.Initialize(InfoBarContainer);
+        if (!await EnsureStartupLocationAsync())
+        {
+            return;
+        }
+
+        if (PaneFrame.Content is null)
+        {
+            PaneFrame.Navigate(typeof(CitiesPage), Theme.GetSplitPaneNavigationTransition());
+        }
+
+        ViewModel.IsStartupLocationReady = true;
         if (Common.Settings.AutoCheckUpdates)
         {
             CheckUpdate();
         }
+    }
+
+    private static async Task<bool> EnsureStartupLocationAsync()
+    {
+        if (Common.Settings.DefaultGeolocation?.Name is not null)
+        {
+            if (MainPageViewModel.Instance.CurrentGeolocation is null)
+            {
+                MainPageViewModel.Instance.CurrentGeolocation = Common.Settings.DefaultGeolocation;
+            }
+            return true;
+        }
+
+        var location = await LocationHelper.EnsureDefaultGeolocationAsync();
+        if (location?.Name is null)
+        {
+            return false;
+        }
+
+        MainPageViewModel.Instance.CurrentGeolocation = location;
+        return true;
     }
 
     public static async void CheckUpdate()
@@ -98,7 +134,7 @@ public sealed partial class RootPage : Page
     {
         CanGoBack = PaneFrame.CanGoBack;
     }
-    private static double GetTransparency(int value)
+    private double GetTransparency(int value)
     {
         return 1 - ((double)value / 100);
     }

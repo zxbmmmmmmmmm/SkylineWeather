@@ -22,6 +22,8 @@ namespace FluentWeather.Uwp.ViewModels;
 
 public sealed partial class CitiesPageViewModel : ObservableObject
 {
+    private bool _startupLocationUpdated;
+
     [ObservableProperty]
     public partial ObservableCollection<GeolocationBase> Cities { get; set; }
 
@@ -37,6 +39,9 @@ public sealed partial class CitiesPageViewModel : ObservableObject
     public CitiesPageViewModel()
     {
         Cities = Common.Settings.SavedCities;
+        CurrentCity = Common.Settings.DefaultGeolocation;
+        SuggestedCities = new();
+        Query = string.Empty;
         Cities.CollectionChanged += async (_, _) =>
         {
             Common.Settings.SavedCities = Cities;
@@ -118,13 +123,49 @@ public sealed partial class CitiesPageViewModel : ObservableObject
     public async Task GetCurrentCity()
     {
         var location = await LocationHelper.GetGeolocation();
-        if (Common.Settings.DefaultGeolocation?.Name is null)
-            Common.Settings.DefaultGeolocation = location;
-        Common.Settings.Latitude = location.Location.Latitude;
-        Common.Settings.Longitude = location.Location.Longitude;
-        CitiesPageViewModel.Instance.CurrentCity = location;
-        MainPageViewModel.Instance.CurrentGeolocation = location;
-        await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation, Common.Settings.SavedCities);
+        await ApplyCurrentCityAsync(location);
+    }
+
+    public void UseDefaultLocation()
+    {
+        var defaultLocation = Common.Settings.DefaultGeolocation;
+        if (defaultLocation?.Name is null)
+        {
+            return;
+        }
+
+        CurrentCity ??= defaultLocation;
+        if (MainPageViewModel.Instance.CurrentGeolocation is null)
+        {
+            MainPageViewModel.Instance.CurrentGeolocation = defaultLocation;
+        }
+    }
+
+    public async Task RefreshCurrentLocationOnStartupAsync()
+    {
+        if (_startupLocationUpdated || !Common.Settings.UpdateLocationOnStartup)
+        {
+            return;
+        }
+
+        _startupLocationUpdated = true;
+        var location = await LocationHelper.RefreshCurrentLocationAsync();
+        await ApplyCurrentCityAsync(location);
+    }
+
+    private async Task ApplyCurrentCityAsync(GeolocationBase location)
+    {
+        if (location is null)
+        {
+            return;
+        }
+
+        CurrentCity = location;
+        if (MainPageViewModel.Instance is not null)
+        {
+            MainPageViewModel.Instance.CurrentGeolocation = location;
+        }
+        await JumpListHelper.SetJumpList(Common.Settings.DefaultGeolocation ?? location, Common.Settings.SavedCities);
     }
 
 

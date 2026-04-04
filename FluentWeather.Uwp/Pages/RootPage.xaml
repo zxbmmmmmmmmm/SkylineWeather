@@ -18,6 +18,7 @@
     xmlns:toolkitBehaviors="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     xmlns:vm="using:FluentWeather.Uwp.ViewModels"
+    xmlns:conv="using:FluentWeather.Uwp.Shared.Helpers.ValueConverters"
     muxc:BackdropMaterial.ApplyToRootOrPageBackground="True"
     mc:Ignorable="d">
 
@@ -37,9 +38,15 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
         </StackPanel>
+        <muxc:ProgressRing Height="64"
+                           Width="64"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="{x:Bind conv:ConverterMethods.BoolToVisibilityInverted(ViewModel.IsStartupLocationReady), Mode=OneWay}"/>
         <Grid
             x:Name="TitleGrid"
             VerticalAlignment="Top"
+            Visibility="{x:Bind ViewModel.IsStartupLocationReady, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
             Canvas.ZIndex="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -123,6 +130,7 @@
             DisplayMode="Overlay"
             IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
             OpenPaneLength="{x:Bind app:Common.Settings.SplitViewOpenPaneLength, Mode=OneWay}"
+            Visibility="{x:Bind ViewModel.IsStartupLocationReady, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
             PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
             <SplitView.Pane>
                 <Frame
@@ -147,7 +155,7 @@
                     x:Name="BackgroundImage"
                     ui:VisualExtensions.NormalizedCenterPoint="0.5"
                     x:FieldModifier="Public"
-                    Opacity="{x:Bind local:RootPage.GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
+                    Opacity="{x:Bind GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
                     Stretch="UniformToFill">
                     <i:Interaction.Behaviors>
                         <behaviors:LoadLocalBackgroundBehavior WeatherType="{x:Bind vm:MainPageViewModel.Instance.WeatherNow.WeatherType, Mode=OneWay}" />
@@ -168,7 +176,7 @@
                                     Duration="0:0:1.2" />
                                 <animations:OpacityAnimation
                                     From="0"
-                                    To="{x:Bind local:RootPage.GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
+                                    To="{x:Bind GetTransparency(app:Common.Settings.BackgroundTransparency),Mode=OneWay}"
                                     Duration="0:0:1.5" />
                             </animations:AnimationScope>
                         </animations:AnimationSet>
