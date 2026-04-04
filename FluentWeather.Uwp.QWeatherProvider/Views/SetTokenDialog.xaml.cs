@@ -17,18 +17,23 @@ namespace FluentWeather.Uwp.QWeatherProvider.Views;
 public sealed partial class SetTokenDialog : ContentDialog
 {
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ConfirmCommand))]
     private partial string Key { get; set; }
 
     [ObservableProperty]
     private partial string PublicId { get; set; }
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ConfirmCommand))]
     private partial string Domain { get; set; }
+    
+    private bool CanConfirm => !string.IsNullOrEmpty(Key) && !string.IsNullOrEmpty(Domain);
+
     public SetTokenDialog()
     {
         this.InitializeComponent();
     }
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanConfirm))]
     private async Task Confirm()
     {
         try
