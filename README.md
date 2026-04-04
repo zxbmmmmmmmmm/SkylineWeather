@@ -28,6 +28,27 @@ Skyline is a UWP weather application.
 - Game Bar widget
 - Lock screen weather
 
+## Local Build
+
+You can build release packages locally on Windows using the provided PowerShell script:
+
+```powershell
+# Build all architectures (x86, x64, ARM64) with a specific version
+.\scripts\build-release.ps1 -Version 1.0.0.0
+
+# Build only x64 and ARM64
+.\scripts\build-release.ps1 -Version 1.0.0.0 -Architectures x64,ARM64
+
+# Build all architectures without changing the manifest version
+.\scripts\build-release.ps1
+```
+
+**Requirements:**
+- Windows with Visual Studio 2022 (or 2019) installed, including the **Universal Windows Platform development** workload.
+- `msbuild` available on `PATH` (e.g. open a *Developer PowerShell for VS*), or installed at the default Visual Studio location.
+
+Output packages are placed under `Package\<arch>\` in the repository root.
+
 ## Help us translate
 ![Crowdin](https://badges.crowdin.net/fluent-weather/localized.svg)
 

@@ -28,6 +28,27 @@ Skyline 是一款UWP天气应用程序
 - 游戏栏小组件
 - 锁屏天气
 
+## 本地构建
+
+你可以在 Windows 上使用提供的 PowerShell 脚本在本地构建发布包：
+
+```powershell
+# 构建所有架构（x86、x64、ARM64），并指定版本号
+.\scripts\build-release.ps1 -Version 1.0.0.0
+
+# 仅构建 x64 和 ARM64
+.\scripts\build-release.ps1 -Version 1.0.0.0 -Architectures x64,ARM64
+
+# 不修改 manifest 版本，构建所有架构
+.\scripts\build-release.ps1
+```
+
+**环境要求：**
+- Windows，已安装 Visual Studio 2022（或 2019），并包含**通用 Windows 平台开发**工作负荷。
+- `msbuild` 已加入 `PATH`（例如在 *Visual Studio 开发者 PowerShell* 中运行），或安装在 Visual Studio 默认路径下。
+
+输出包位于仓库根目录下的 `Package\<arch>\`。
+
 ## 帮助我们翻译
 ![Crowdin](https://badges.crowdin.net/fluent-weather/localized.svg)
 
