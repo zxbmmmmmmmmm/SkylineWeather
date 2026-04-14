@@ -1,0 +1,50 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="README_CN.md" />
+  </Folder>
+  <Project Path="FluentWeather.Abstraction/FluentWeather.Abstraction.csproj" />
+  <Project Path="FluentWeather.BingGeolocationProvider/FluentWeather.BingGeolocationProvider.csproj" Id="d48c0130-53b3-4c1d-8d03-45cb5bcbbbcc">
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="FluentWeather.DIContainer/FluentWeather.DIContainer.csproj" />
+  <Project Path="FluentWeather.OpenMeteoProvider/FluentWeather.OpenMeteoProvider.csproj" />
+  <Project Path="FluentWeather.Tasks/FluentWeather.Tasks.csproj" Id="1d5d0620-541d-44ae-8206-90cb899ccf8c">
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="FluentWeather.Uwp.QWeatherProvider/FluentWeather.Uwp.QWeatherProvider.csproj" Id="47f2b7fc-1b81-4d69-b5ba-d1160532ed63">
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="FluentWeather.Uwp.Shared/FluentWeather.Uwp.Shared.csproj" Id="23269c7b-0343-48b6-9909-505d667b0dbf">
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="FluentWeather.Uwp/FluentWeather.Uwp.csproj" Id="990f1a08-8b42-4b0d-8042-daf2644481ad">
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
+</Solution>
