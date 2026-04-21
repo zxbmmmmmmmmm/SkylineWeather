@@ -43,7 +43,7 @@ public sealed class OpenMeteoProvider :
     }
     public async Task<AirConditionBase> GetAirCondition(double lon, double lat)
     {
-        var result = await Client.GetCurrentAirQuality(lat, lon);
+        var result = await Client.GetAirQualityData(lat, lon, currentVariables: CurrentAirQualityVariables.Standard);
         return result.MapToOpenMeteoWeatherNow();
     }
 

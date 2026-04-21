@@ -257,79 +257,33 @@
                                                             Text="{x:Bind ViewModel.AirCondition.Aqi}" />
                                                         <Run FontSize="16" Text="{x:Bind ViewModel.AirCondition.AqiCategory}" />
                                                     </TextBlock>
-                                                    <StackPanel
-                                                        Margin="0,0,8,0"
-                                                        Orientation="Horizontal"
-                                                        Spacing="20">
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.PM25}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="PM2.5" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.PM10}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="PM10" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.SO2}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="SO₂" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.NO2}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="NO₂" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                Margin="0,0,4,0"
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.O3}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="O₃" />
-                                                        </StackPanel>
-                                                        <StackPanel>
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                FontSize="26"
-                                                                Text="{x:Bind ViewModel.AirCondition.CO}" />
-                                                            <TextBlock
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                                                Text="CO" />
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                    <TextBlock
-                                                        x:Uid="AirConditionUnit"
-                                                        Margin="0,0,4,0"
-                                                        HorizontalAlignment="Right"
-                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                                    <muxc:ItemsRepeater Margin="0,0,8,0" ItemsSource="{x:Bind ViewModel.AirCondition.Pollutants}">
+                                                        <muxc:ItemsRepeater.Layout>
+                                                            <muxc:StackLayout Orientation="Horizontal" Spacing="24" />
+                                                        </muxc:ItemsRepeater.Layout>
+                                                        <muxc:ItemsRepeater.ItemTemplate>
+                                                            <DataTemplate x:DataType="models:Pollutant">
+                                                                <StackPanel Spacing="2">
+                                                                    <TextBlock
+                                                                        HorizontalAlignment="Center"
+                                                                        FontSize="13"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Text="{x:Bind Name}" />
+                                                                    <TextBlock
+                                                                        HorizontalAlignment="Center"
+                                                                        FontSize="22"
+                                                                        FontWeight="SemiBold"
+                                                                        Text="{x:Bind DisplayValue}" />
+                                                                    <TextBlock
+                                                                        HorizontalAlignment="Center"
+                                                                        FontSize="12"
+                                                                        Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                                        Opacity="0.8"
+                                                                        Text="{x:Bind Unit}" />
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </muxc:ItemsRepeater.ItemTemplate>
+                                                    </muxc:ItemsRepeater>
 
                                                 </StackPanel>
                                             </Grid>
@@ -920,16 +874,14 @@
                         Grid.Row="9"
                         HorizontalAlignment="Center"
                         Background="Transparent"
-                        Command="{x:Bind ViewModel.RefreshCommand}"
-                        BorderBrush="Transparent">
+                        BorderBrush="Transparent"
+                        Command="{x:Bind ViewModel.RefreshCommand}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon
                                 FontSize="14"
                                 Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                                 Glyph="&#xE72C;" />
-                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" 
-                                       Text="{x:Bind DateTimeToString(ViewModel.UpdateTime,'HH\\\\:mm'),Mode=OneWay}" >
-                            </TextBlock>
+                            <TextBlock Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" Text="{x:Bind DateTimeToString(ViewModel.UpdateTime,'HH\\\\:mm'),Mode=OneWay}" />
                         </StackPanel>
                     </Button>
                 </Grid>
