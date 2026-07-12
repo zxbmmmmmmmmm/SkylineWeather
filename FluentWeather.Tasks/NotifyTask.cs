@@ -1,4 +1,4 @@
-﻿using FluentWeather.Abstraction.Models;
+using FluentWeather.Abstraction.Models;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
@@ -109,7 +109,7 @@ namespace FluentWeather.Tasks
                 if (_dailyForecastProvider is null) return;
                 isPushTodayAvailable = Settings.IsDailyNotificationEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
                 isPushTomorrowAvailable = Settings.IsTomorrowNotificationEnabled && Settings.LastPushedTimeTomorrow != DateTime.Now.Date.DayOfYear;
-                isTileAvailable = Settings.IsDailyNotificationTileEnabled && Settings.LastPushedTime != DateTime.Now.Date.DayOfYear;
+                isTileAvailable = Settings.IsDailyNotificationTileEnabled;
                 if (!isPushTodayAvailable && !isPushTomorrowAvailable && !isTileAvailable) return;
             }
             var daily = new List<WeatherDailyBase>();
