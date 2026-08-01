@@ -81,6 +81,41 @@ public static class AssetsHelper
 
     extension(WeatherCode weather)
     {
+        /// <summary>
+        /// Gets the file name used for a user-provided background.
+        ///
+        /// The background setting documents a small set of stable names (for
+        /// example, Cloudy and LightRain), while the weather provider exposes
+        /// the more granular WMO weather codes. Keep that translation here so
+        /// every provider uses the same custom-background naming convention.
+        /// </summary>
+        public string GetCustomBackgroundImageName()
+        {
+            return weather switch
+            {
+                Clear => "Clear",
+                MainlyClear or PartlyCloudy => "PartlyCloudy",
+                Overcast => "Cloudy",
+
+                HeavyRain or ViolentRainShowers or HeavyFreezingRain => "HeavyRain",
+                LightDrizzle or ModerateDrizzle or DenseDrizzle or
+                    LightFreezingDrizzle or DenseFreezingDrizzle or
+                    SlightRain or ModerateRain or LightFreezingRain or
+                    SlightRainShowers or ModerateRainShowers => "LightRain",
+
+                HeavySnowFall or HeavySnowShowers => "HeavySnow",
+                SlightSnowFall or ModerateSnowFall or SnowGrains or SlightSnowShowers or
+                    SlightSleet or ModerateOrHeavySleet => "LightSnow",
+
+                SlightOrModerateThunderstorm or ThunderstormWithSlightHail => "ThunderyShowers",
+                HeavyThunderStorm or ThunderstormWithHeavyHail => "ThunderyHeavyRain",
+
+                Mist or Fog or DepositingRimeFog or Haze or Dust => "Fog",
+                SlightHail or ModerateOrHeavyHail => "HeavyRain",
+                _ => weather.ToString(),
+            };
+        }
+
         public string GetBackgroundImageName()
         {
             var code = (int)weather;

@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.ApplicationModel;
 using FluentWeather.Uwp.Helpers;
 using FluentWeather.Uwp.Shared.Helpers;
+using System.Linq;
 
 namespace FluentWeather.Uwp.Behaviors;
 
@@ -42,8 +43,21 @@ public class LoadLocalBackgroundBehavior : Behavior<ImageEx>
         var assetsFolder = await Package.Current.InstalledLocation.GetOrCreateFolderAsync("Assets");
         assetsFolder = await assetsFolder.GetOrCreateFolderAsync("Backgrounds");
 
-        var image = await GetImage(folder, WeatherType.ToString());
-        image ??= await GetImage(folder, AssetsHelper.GetBackgroundImageName(WeatherType));
+        var image = default(BitmapImage);
+        // Check the documented custom name as well as the legacy enum name.
+        // This keeps existing custom files working while allowing, for
+        // example, Overcast to use the documented Cloudy.png file.
+        foreach (var name in new[]
+        {
+            WeatherType.ToString(),
+            AssetsHelper.GetCustomBackgroundImageName(WeatherType),
+            AssetsHelper.GetBackgroundImageName(WeatherType),
+        }.Distinct(StringComparer.Ordinal))
+        {
+            image = await GetImage(folder, name);
+            if (image is not null) break;
+        }
+
         image ??= await GetImage(assetsFolder, AssetsHelper.GetBackgroundImageName(WeatherType));
         AssociatedObject.Source = image;
     }
